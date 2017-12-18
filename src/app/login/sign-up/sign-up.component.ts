@@ -400,7 +400,6 @@ export class SignUpComponent {
     self.service.createStore(this.storeForm.value).then((data)=>{
       self.userService.getUser().then((data) => {
         self.userService.addUser(data);
-        self.userService.addStore(data.store[0]);
         if(data.isInvite) {
           self.router.navigate(['shop/dashboard']);
         } else {

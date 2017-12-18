@@ -107,7 +107,6 @@ export class LoginComponent implements OnInit {
         self.userService.addUser(data);
         self.auth.inviteToken(data.isInvite);
         if(data && data.store && data.store.length>0) {
-          self.userService.addStore(data.store[0]);
           if(data && data.isInvite) {
             self.router.navigate(['/shop/dashboard']);
           } else {
@@ -147,7 +146,6 @@ export class LoginComponent implements OnInit {
                 self.router.navigate(['/account/signup'], {queryParams:{tab: 'settingProfile'}});
               } else {
                 if(res.user && res.user.store && res.user.store.length>0) {
-                  self.userService.addStore(res.user.store[0]);
 
                   if(res.user && res.user.isInvite) {
                     self.router.navigate(['/shop/dashboard']);
@@ -190,7 +188,6 @@ export class LoginComponent implements OnInit {
                   self.router.navigate(['/account/signup'], {queryParams:{tab: 'settingProfile'}});
                 } else {
                   if(res.user && res.user.store && res.user.store.length>0) {
-                    self.userService.addStore(res.user.store[0]);
 
                     if(res.user && res.user.isInvite) {
                       self.router.navigate(['/shop/dashboard']);

@@ -25,7 +25,6 @@ export class AppComponent {
         if( data == null ) {
           self.userService.getUser().then((data) => {
             self.userService.addUser(data);
-            self.userService.addStore(data.store[0]);
             self.authenticationService.inviteToken(data.isInvite);
           }).catch((data) => {
             self.authenticationService.inviteToken(false);

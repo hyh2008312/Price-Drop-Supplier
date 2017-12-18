@@ -13,13 +13,6 @@ const routes: Routes = [
         path: 'account',
         loadChildren: 'app/login/login.module#LoginModule'
       }, {
-        path: 'shop',
-        canActivate: [ ProtectedGuard ],
-        loadChildren: 'app/shop/shop.module#ShopModule'
-      }, {
-        path: 'store',
-        loadChildren: 'app/store/store.module#StoreModule'
-      }, {
         path: '',
         loadChildren: 'app/landing-page/landing-page.module#LandingPageModule'
       }, {
