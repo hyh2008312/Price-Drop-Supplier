@@ -1,0 +1,28 @@
+<div class="xb-store-template__collection-bottom"
+     appViewObjectScroll (onScrollChange)="scrollChange($event)"
+     [selector]="'xb-store-template__collection-bg'">
+  <div class="xb-store-template__collection-container xb-store-template__collection-bg">
+    <div class="xb-store-template__collection-title" fxShow.xs="false">
+      COLLECTIONS
+    </div>
+    <app-store-template-3-category [(category)]="category" [categories]="categories" (categoryChange)="changeCategory()"></app-store-template-3-category>
+  </div>
+  <div class="xb-store-template__collection-fixed" *ngIf="showButton" fxHide.gt-xs >
+    <div class="xb-store-template__collection-title" fxShow.xs="false">
+      COLLECTIONS
+    </div>
+    <app-store-template-3-category [(category)]="category" [categories]="categories" (categoryChange)="changeCategory()"></app-store-template-3-category>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutWrap>
+    <app-store-item-card *ngFor="let item of product"
+                         fxFlex="49" fxFlex.xs="100"
+                         [product]="item" [status]="1"></app-store-item-card>
+    <div fxFlex="49" fxFlex.xs="100"></div>
+  </div>
+  <div class="xb-store-template__buttons-bg" fxLaout="row" fxLayoutAlign="center center"
+       (click)="jumpList()" *ngIf="nextPage && product.length > 0">
+    <div>
+      SEE MORE
+    </div>
+  </div>
+</div>
