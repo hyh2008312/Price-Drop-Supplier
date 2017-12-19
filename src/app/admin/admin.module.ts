@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { MainComponent } from './main/main.component';
+import { TopNavigationComponent } from './top-navigation/top-navigation.component';
 
 import { AdminRoutingModule } from './admin.routes.module';
 
@@ -16,7 +17,8 @@ import { SharedModule } from '../shared/shared.module';
   ],
   exports: [],
   declarations: [
-    MainComponent
+    MainComponent,
+    TopNavigationComponent
   ],
   entryComponents: [
 
@@ -26,5 +28,5 @@ import { SharedModule } from '../shared/shared.module';
     AuthenticationService
   ]
 })
-export class ShopModule { }
+export class AdminModule { }
 

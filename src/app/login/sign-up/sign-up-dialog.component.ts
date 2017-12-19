@@ -408,7 +408,7 @@ export class SignUpDialogComponent {
         self.userService.addUser(data);
         if(data.isInvite) {
           self.close();
-          self.router.navigate(['shop/dashboard']);
+          self.router.navigate(['/admin']);
         } else {
           self.step = 2;
           self.angulartics2GoogleTagManager.pageTrack('/signup/complete');

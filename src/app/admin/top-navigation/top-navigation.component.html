@@ -1,0 +1,10 @@
+<div class="sc-navigation" >
+  <div class="container ">
+    <div class="sc-navigation__scroll"  fxLayout="row" fxLayoutAlign="start center">
+      <div class="sc-navigation__buttons" [ngClass]="{'active': content.isActive}" *ngFor="let content of contents; let i = index;"
+         (click)="changeSlide(content,i)" fxFlex="none">
+        {{ content.text }}
+      </div>
+    </div>
+  </div>
+</div>

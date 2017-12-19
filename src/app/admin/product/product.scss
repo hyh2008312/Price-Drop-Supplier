@@ -1,0 +1,174 @@
+@import "../../styles/utils/_index";
+@import "../../styles/_variables";
+
+.sc-product{
+
+  &__container{
+    padding: 0 16px;
+  }
+  &__product{
+    position: relative;
+
+    &-sort{
+      width: 140px;
+      text-align: center;
+    }
+
+    &-navigation{
+      height: 64px;
+      background-color: $whiteColor;
+      padding: 0 16px;
+      border-radius: 2px;
+    }
+
+    &-bg{
+      padding: 0;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    &-image{
+      width: 120px;
+      height: 120px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-right: 16px;
+      position: relative;
+      border: 1px solid rgba(0,0,0,.12);
+
+      >img{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        @include transform(translate(-50%, -50%));
+      }
+    }
+    &-width{
+      width: 120px;
+      margin-right: 16px;
+    }
+
+    &-id{
+      text-align: center;
+    }
+
+    &-time{
+      text-align: center;
+    }
+
+    &-title{
+      font-size: 14px;
+      line-height: 24px;
+      max-height: 48px;
+      overflow: hidden;
+    }
+
+    &-title-1{
+      font-size: 16px;
+      @include media();
+      color: rgba(0,0,0,.87);
+    }
+
+    &-margin-left{
+      margin-left: 12px;
+    }
+
+    &-price{
+      text-align: center;
+      &-sale{
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 24px;
+      }
+    }
+
+    &-category{
+      line-height: 28px;
+      border-radius: 2px;
+      text-align: center;
+    }
+
+    &-item{
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0,0,0,.12);
+    }
+    &-list{
+      padding: 0 16px;
+      background-color: $whiteColor;
+    }
+
+    &-none{
+      padding: 96px 0;
+      background-color: $whiteColor;
+      border-radius: 4px;
+      span{
+        margin-top: 16px;
+        @include media();
+      }
+    }
+
+    &-buttons {
+      position: absolute;
+      right: 16px;
+      top: 24px;
+      z-index: 10;
+    }
+
+    &-button-list{
+      width: 210px;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background-color: $lightWhiteColor;
+      @include media();
+      @include resetBorder();
+
+      >a{
+        height: 56px;
+        color: rgba(0,0,0,.87);
+        &:hover{
+          background-color: rgba(0,0,0,.12);
+        }
+      }
+    }
+  }
+
+  &__search{
+    border-bottom: 1px solid $blackColor;
+    height: 32px;
+    margin: 16px 0;
+    position: relative;
+
+    >i{
+      margin: 0 16px 0 0;
+      color: $blackColor;
+    }
+
+    >input{
+      border: none;
+      background-color: transparent;
+      width: 250px;
+    }
+
+    &-close{
+      position: absolute;
+      cursor: pointer;
+      right: 0;
+      top: 50%;
+      @include transform(translateY(-50%));
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      background-color: rgba(0,0,0,.54);
+      >i{
+        font-size: 12px;
+        line-height: 12px;
+        color: $whiteColor;
+      }
+    }
+
+    &-result{
+      color: $primaryColor;
+    }
+  }
+}

@@ -6,6 +6,12 @@ import {MainComponent} from './main/main.component';
 const routes: Routes = [
   {
     path: '', component: MainComponent,
+    children: [
+      {
+        path: 'product',
+        loadChildren: 'app/admin//product/product.module#ProductModule'
+      }
+    ]
   }, {
     path: '',
     redirectTo: '',

@@ -1,0 +1,197 @@
+<div class="container">
+  <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
+    <div class="sc-product__header"></div>
+    <div class="sc-product__product-buttons md-padding-bottom-1">
+      <button mat-raised-button color="primary" (click)="openToggle()">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <i class="material-icons">add</i>
+          <span class="md-margin-left-1">Add Product</span>
+        </div>
+      </button>
+    </div>
+    <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
+      <mat-tab label="Published">
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div>Sort by</div>
+          <div class="md-margin-left-2">
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [(ngModel)]="publishedSorted" name="sort">
+                <mat-option class="md-align-center" *ngFor="let item of publishedSortList" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+            <form class="sc-product__search" [formGroup]="searchForm"
+                  fxLayout="row" fxLayoutAlign="start center" >
+              <i class="material-icons">search</i>
+              <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                     placeholder="Search by product title or SKU"
+                     (keyup.enter)="getProductList(isSearch)"/>
+              <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                   *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div>
+          <app-product-title [status]="0" ></app-product-title>
+        </div>
+        <div class="sc-product__product-bg" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of [0,1,2,3,4];let i = index;">
+            <app-product-item [status]="0" [index]="i" (productChange)="productChange($event)"></app-product-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 0)"
+                         *ngIf="productPublished && productPublished.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <img src="https://media.xberts.com/collector/source/web/pic/pic-no-product.png">
+              <div class="sc-product__product-title-1 md-margin-top-4">No products found</div>
+              <span>You can find orders by changing your search or filtering options.</span>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Pending">
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div>Filter by status</div>
+          <div class="md-margin-left-2">
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [(ngModel)]="pendingSorted" name="filter">
+                <mat-option class="md-align-center" *ngFor="let item of pendingSortList" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+            <form class="sc-product__search" [formGroup]="searchForm"
+                  fxLayout="row" fxLayoutAlign="start center" >
+              <i class="material-icons">search</i>
+              <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                     placeholder="Search by product title or SKU"
+                     (keyup.enter)="getProductList(isSearch)"/>
+              <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                   *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div>
+          <app-product-title [status]="1" ></app-product-title>
+        </div>
+        <div class="sc-product__product-bg" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of [0,1,2,3,4];let i = index;">
+            <app-product-item [status]="1" [index]="i" (productChange)="productChange($event)"></app-product-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 1)"
+                         *ngIf="productDraft && productDraft.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <img src="https://media.xberts.com/collector/source/web/pic/pic-no-product.png">
+              <div class="sc-product__product-title-1 md-margin-top-4">No products found</div>
+              <span>You can find orders by changing your search or filtering options.</span>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Unpublished">
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div>Sort by </div>
+          <div class="md-margin-left-2">
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [(ngModel)]="unpublishedSorted" name="sort">
+                <mat-option class="md-align-center" *ngFor="let item of unpublishedSortList" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+            <form class="sc-product__search" [formGroup]="searchForm"
+                  fxLayout="row" fxLayoutAlign="start center" >
+              <i class="material-icons">search</i>
+              <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                     placeholder="Search by product title or SKU"
+                     (keyup.enter)="getProductList(isSearch)"/>
+              <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                   *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div>
+          <app-product-title [status]="2" ></app-product-title>
+        </div>
+        <div class="sc-product__product-bg" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of [0,1,2,3,4];let i = index;" >
+            <app-product-item [status]="2" [index]="i" (productChange)="productChange($event)"></app-product-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 2)"
+                         *ngIf="productUnpublished && productUnpublished.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <img src="https://media.xberts.com/collector/source/web/pic/pic-no-product.png">
+              <div class="sc-product__product-title-1 md-margin-top-4">No products found</div>
+              <span>You can find orders by changing your search or filtering options.</span>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Drafts">
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+            <form class="sc-product__search" [formGroup]="searchForm"
+                  fxLayout="row" fxLayoutAlign="start center" >
+              <i class="material-icons">search</i>
+              <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                     placeholder="Search by product title or SKU"
+                     (keyup.enter)="getProductList(isSearch)"/>
+              <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                   *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div>
+          <app-product-title [status]="3" ></app-product-title>
+        </div>
+        <div class="sc-product__product-bg" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of [0,1,2,3,4];let i = index;">
+            <app-product-item [status]="3" [index]="i" (productChange)="productChange($event)"></app-product-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 1)"
+                         *ngIf="productDraft && productDraft.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <img src="https://media.xberts.com/collector/source/web/pic/pic-no-product.png">
+              <div class="sc-product__product-title-1 md-margin-top-4">No products found</div>
+              <span>You can find orders by changing your search or filtering options.</span>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
