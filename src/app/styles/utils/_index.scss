@@ -12,10 +12,6 @@ $warn: mat-palette($mat-red, 500);
 $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
 
-.unicorn-dark-theme {
-
-}
-
 .mat-raised-button:not([class*=mat-elevation-z]){
   @include box-shadow(none);
 }
@@ -82,11 +78,11 @@ $theme: mat-light-theme($primary, $accent, $warn);
   .mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
     color: #000;
   }
-  .mat-option.mat-active{
-    background-color: rgba(0,0,0,.12) !important;
-  }
 }
 
+.mat-option.mat-active{
+  background-color: rgba(0,0,0,.12) !important;
+}
 
 .mat-tab-body-content{
   height: auto !important;
