@@ -74,9 +74,7 @@ import {
   MatSidenavModule
 } from '@angular/material';
 
-
 import { GoogleClientId, FacebookClientId } from '../config/app.api';
-import {ImageUploadPreviewTwoTemplateComponent} from './components/image-upload-preview-two-template/image-upload-preview-two-template.component';
 
 let providers = {
   "google": {
@@ -146,10 +144,7 @@ let providers = {
     SignUpDialogComponent,
     ResetPasswordComponent,
     ResetPasswordConfirmComponent,
-    InviteCodeComponent,
-    ImageUploadPreviewTwoTemplateComponent
-
-
+    InviteCodeComponent
   ],
   exports: [
     SafeHtmlPipe,
@@ -173,7 +168,6 @@ let providers = {
     ImageUploadHeaderComponent,
     ImagePreviewLoadingComponent,
     ImageUploadPreviewBlogComponent,
-    ImageUploadPreviewTwoTemplateComponent,
     LeftProductsImageComponent,
     ShareButtonComponent,
     ShareButtonRowComponent,

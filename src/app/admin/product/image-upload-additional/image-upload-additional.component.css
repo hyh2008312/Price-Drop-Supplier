@@ -1544,38 +1544,40 @@ textarea.mat-input-element {
   margin: 0 8px 3px 0 !important; }
 
 .preview-label {
-  left: 0;
-  top: 0;
   width: 100%;
-  height: 100%;
-  position: absolute;
+  padding-bottom: 100%;
+  position: relative;
   overflow: hidden;
-  display: block;
-  background-color: #fff; }
+  cursor: pointer; }
   .preview-label__not-upload {
+    background-color: rgba(0, 0, 0, 0.12);
+    color: #fff; }
+  .preview-label input {
+    display: none; }
+  .preview-label__margin-left {
+    margin-left: 32px; }
+  .preview-label__text {
+    font-size: 14px;
+    line-height: 24px; }
+  .preview-label__button {
+    margin-top: 12px;
+    width: 100%;
+    display: block;
+    line-height: 32px;
+    text-align: center;
+    color: #fff;
+    background-color: #222;
+    border-radius: 4px;
     cursor: pointer; }
-    .preview-label__not-upload i {
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      font-size: 40px;
-      text-align: center;
-      color: rgba(0, 0, 0, 0.54); }
-    .preview-label__not-upload span {
-      margin-left: 12px;
-      color: rgba(0, 0, 0, 0.54); }
-    .preview-label__not-upload > img {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      -moz-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      -o-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-      height: 100%;
-      max-width: none; }
-  .preview-label__upload > img {
+    .preview-label__button > input {
+      display: none; }
+  .preview-label img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; }
+  .preview-label i {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -1583,31 +1585,6 @@ textarea.mat-input-element {
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    height: 100%;
-    max-width: none; }
-  .preview-label input {
-    display: none; }
-  .preview-label .popup-mask {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0; }
-    .preview-label .popup-mask .material-icons {
-      margin-right: 8px;
-      margin-top: 8px;
-      color: #fff; }
-    .preview-label .popup-mask__bg {
-      position: relative;
-      z-index: 99999; }
-  .preview-label__hide {
-    visibility: hidden;
-    width: 0;
-    height: 0; }
-  .preview-label__visible {
-    visibility: visible;
-    width: auto;
-    height: 300px; }
+    transform: translate(-50%, -50%); }
 
-/*# sourceMappingURL=image-upload-preview-two-template.component.css.map */
+/*# sourceMappingURL=image-upload-additional.component.css.map */

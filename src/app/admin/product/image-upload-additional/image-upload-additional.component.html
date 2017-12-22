@@ -1,0 +1,15 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <div *ngFor="let src of previewImgSrcs; let i = index;" fxFlex="16" fxLayoutAlgin="column">
+    <label class="preview-label" fxLayout="row" fxLayoutAlign="center center"
+      [ngClass]="{'preview-label__not-upload': !upload[i]}">
+      <input type="file" (change)="previewPic($event, i)" >
+      <i class="material-icons" *ngIf="!upload[i]">photo_camera</i>
+      <img src="{{src}}" *ngIf="upload[i]">
+      <app-image-preview-loading [percent]="loading[i]" *ngIf="!closeAnimate[i] && !closeLoading[i]"
+                                 (loadingChange)="loadingChange($event, i)"></app-image-preview-loading>
+    </label>
+    <label class="preview-label__button">
+      <input type="file" (change)="previewPic($event, i)" >UPLOAD
+    </label>
+  </div>
+</div>

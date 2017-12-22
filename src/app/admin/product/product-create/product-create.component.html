@@ -1,6 +1,6 @@
 <div class="sc-product__create-container">
   <div class="md-margin-top-4 sc-product__create-text">
-    <span class="md-dark-secondary">产品</span> <span class="md-dark-secondary">></span> <span class="xb-bold">添加新产品</span>
+    <span class="md-dark-secondary xb-pointer" (click)="openLeaveDialog()">产品</span> <span class="md-dark-secondary">></span> <span class="xb-bold">添加新产品</span>
   </div>
   <div class="md-margin-top-3 sc-product__create-navigation-bg" fxLayout="row" fxLayoutAlign="start center">
     <div class="sc-product__create-navigation" fxFlex="50"
@@ -218,21 +218,21 @@
               </div>
               <mat-radio-group class="md-margin-top-2"
                              fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="shippingTime">
-              <mat-radio-button fxFlex="25" class="sc-product__create-height" *ngFor="let value of shippingTimeList;let i = index;" [value]="value" color="primary">
-                <div fxLayout="row" fxLayoutAlign="start center">
-                  {{ value }}
-                  <div *ngIf="i == 5 && p.value.shippingTime == 'other'" class="md-margin-left-4" fxLayout="row" fxLayoutAlign="start center">
-                    <mat-form-field class="sc-product__create-width">
-                      <input class="md-align-center" type="text" matInput placeholder="Min" formControlName="minTime">
-                    </mat-form-field>
-                    <div class="md-margin-left-2 md-margin-right-2">-</div>
-                    <mat-form-field class="sc-product__create-width">
-                      <input class="md-align-center" type="text" matInput placeholder="Max" formControlName="maxTime">
-                    </mat-form-field>
+                <mat-radio-button fxFlex="25" class="sc-product__create-height" *ngFor="let value of shippingTimeList;let i = index;" [value]="value" color="primary">
+                  <div fxLayout="row" fxLayoutAlign="start center">
+                    {{ value }}
+                    <div *ngIf="i == 5 && p.value.shippingTime == 'other'" class="md-margin-left-4" fxLayout="row" fxLayoutAlign="start center">
+                      <mat-form-field class="sc-product__create-width">
+                        <input class="md-align-center" type="text" matInput placeholder="Min" formControlName="minTime">
+                      </mat-form-field>
+                      <div class="md-margin-left-2 md-margin-right-2">-</div>
+                      <mat-form-field class="sc-product__create-width">
+                        <input class="md-align-center" type="text" matInput placeholder="Max" formControlName="maxTime">
+                      </mat-form-field>
+                    </div>
                   </div>
-                </div>
-              </mat-radio-button>
-            </mat-radio-group>
+                </mat-radio-button>
+              </mat-radio-group>
             </div>
           </div>
         </div>
@@ -294,7 +294,133 @@
             </mat-form-field>
           </div>
         </div>
-
+        <div class="sc-product__create-title-1 md-margin-top-2">
+          Main Image
+        </div>
+        <div class="md-margin-top-2">
+          <app-product-image-upload-main [(previewImgFile)]="previewImgFile" [(previewImgSrcs)]="previewImgSrcs"></app-product-image-upload-main>
+        </div>
+        <div class="sc-product__create-title-1 md-margin-top-2">
+          Additional Images
+        </div>
+        <div class="md-margin-top-2">
+          <app-product-image-upload-additional [(previewImgFile)]="additionalList" [(previewImgSrcs)]="additionalSrcs"></app-product-image-upload-additional>
+        </div>
+        <div class="sc-product__create-text-1 md-margin-top-4">Products with high quality images can get the most sales.</div>
+      </div>
+      <div class="sc-product__create-container-1">
+        <div class="sc-product__create-title">
+          Logistics Information
+        </div>
+        <div formGroupName="package">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Package length</div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <mat-form-field fxFlex>
+                <input type="text" matInput formControlName="length">
+              </mat-form-field>
+            </div>
+            <div>cm</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Package Width</div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <mat-form-field fxFlex>
+                <input type="text" matInput formControlName="width">
+              </mat-form-field>
+            </div>
+            <div>cm</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Package Height</div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <mat-form-field fxFlex>
+                <input type="text" matInput formControlName="height">
+              </mat-form-field>
+            </div>
+            <div>cm</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Package Weight</div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <mat-form-field fxFlex>
+                <input type="text" matInput formControlName="weight">
+              </mat-form-field>
+            </div>
+            <div>g</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Custom Declared Value</div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <div class="sc-product__create-margin-right-2">$</div>
+              <mat-form-field fxFlex>
+                <input type="text" matInput formControlName="declaredValue">
+              </mat-form-field>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Country of Origin</div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <mat-form-field fxFlex>
+                <mat-select name="country" placeholder="Select a Country Code"
+                            formControlName="country">
+                  <mat-option *ngFor="let item of countries" [value]="item.code">
+                    {{ item.code }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>g</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Contains Powder</div>
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="powder">
+                <mat-radio-button class="sc-product__create-height sc-product__create-margin-right-4" *ngFor="let value of YesOrNo;let i = index;"
+                                  [value]="value" color="primary">
+                  {{ value }}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Contains Liquid</div>
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="powder">
+                <mat-radio-button class="sc-product__create-height sc-product__create-margin-right-4" *ngFor="let value of YesOrNo;let i = index;"
+                                  [value]="value" color="primary">
+                  {{ value }}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Contains Battery</div>
+            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="powder">
+                <mat-radio-button class="sc-product__create-height sc-product__create-margin-right-4" *ngFor="let value of YesOrNo;let i = index;"
+                                  [value]="value" color="primary">
+                  {{ value }}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sc-product__create-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex>
+          <div class="xb-bold md-margin-left-2"><< Back</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <button mat-raised-button color="primary" type="button">
+            PUZBLISH
+          </button>
+          <div class="md-margin-left-2">
+            <button mat-button color="primary" type="button">
+              SAVE DRAFT
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </form>

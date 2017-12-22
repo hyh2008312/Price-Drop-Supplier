@@ -1,24 +1,19 @@
-import {Component, EventEmitter, Input, OnInit, Output, OnChanges} from '@angular/core';
-import { ImageUploadPreviewService } from "../image-upload-preview/image-upload-preview.service";
-import { S3UploaderService } from "../../services/s3-upload/s3-upload.service";
+import {Component, EventEmitter, Input, OnInit, Output,OnChanges} from '@angular/core';
+import { ImageUploadPreviewService } from "../../../shared/components/image-upload-preview/image-upload-preview.service";
+import { S3UploaderService } from "../../../shared/services/s3-upload/s3-upload.service";
 
-import { HttpEventType, HttpResponse } from "@angular/common/http";
+import { HttpEventType, HttpResponse} from "@angular/common/http";
 
 @Component({
-  selector: 'app-image-upload-preview-two-template',
-  templateUrl: './image-upload-preview-two-template.component.html',
-  styleUrls: ['./image-upload-preview-two-template.component.css'],
-  providers: [S3UploaderService]
+  selector: 'app-product-image-upload-main',
+  templateUrl: './image-upload-main.component.html',
+  styleUrls: ['./image-upload-main.component.css']
 })
-export class ImageUploadPreviewTwoTemplateComponent implements OnInit {
+export class ImageUploadMainComponent implements OnInit {
 
-  @Input() previewImgFile: any;
-  @Output() previewImgFileChange: EventEmitter<any[]> = new EventEmitter();
-
-  @Input() previewImgSrc: any;
-
-
-  @Input() type: string = 'COLLECTOR_BLOG_COVER';
+  @Input() previewImgFile;
+  @Output() previewImgFileChange: EventEmitter<string> = new EventEmitter();
+  @Input() previewImgSrcs: any = null;
 
   loading: number = 0;
 
@@ -30,7 +25,7 @@ export class ImageUploadPreviewTwoTemplateComponent implements OnInit {
 
   constructor(
     public previewImageService: ImageUploadPreviewService,
-    public s3UploaderService: S3UploaderService
+    private s3UploaderService: S3UploaderService
   ) {
 
   }
@@ -40,23 +35,28 @@ export class ImageUploadPreviewTwoTemplateComponent implements OnInit {
   }
 
   ngOnChanges() {
-    if(this.previewImgSrc && this.previewImgSrc != '') {
+    if(this.previewImgSrcs) {
       this.upload = true;
     }
   }
 
   previewPic(event) {
+    this.previewImgSrcs = {};
+    this.previewImgFile = {};
+
+    this.upload = false;
+
     if(!event.target.files[0]) {
       return;
     }
     let that = this;
     that.loading = 0;
-    that.closeLoading = false;
     that.closeAnimate = false;
+    that.closeLoading = false;
 
-    this.previewImageService.readAsDataUrl(event.target.files[0]).then(function(result) {
+    this.previewImageService.readAsDataUrl(event.target.files[0]).then((result) => {
 
-      that.previewImgSrc = result;
+      that.previewImgSrcs = result;
       let file = event.target.files[0];
 
       let image = new Image();
@@ -65,14 +65,13 @@ export class ImageUploadPreviewTwoTemplateComponent implements OnInit {
         let height = image.height;
 
         that.s3UploaderService.upload({
-          type: that.type,
+          type: 'COLLECTOR_USER_AVATAR',
           fileName: file.name,
-          use: 'cover',
+          use: 'avatar',
           width: width,
           height: height
         }).then((data) => {
-          let src = data.url + '/' + data.key;
-
+          that.previewImgFile = data.url + '/' + data.key;
           that.s3UploaderService.uploadToS3(file, data).subscribe((event) => {
             // Via this API, you get access to the raw event stream.
             // Look for upload progress events.
@@ -80,7 +79,6 @@ export class ImageUploadPreviewTwoTemplateComponent implements OnInit {
               // This is an upload progress event. Compute and show the % done:
               that.loading = Math.round(100 * event.loaded / event.total);
             } else if (event instanceof HttpResponse) {
-              that.previewImgFile = src;
               that.previewImgFileChange.emit(that.previewImgFile);
 
             }
@@ -88,17 +86,12 @@ export class ImageUploadPreviewTwoTemplateComponent implements OnInit {
         });
       };
       image.src = window.URL.createObjectURL(file);
+
       that.upload = true;
     })
 
   }
 
-  remove(i) {
-    this.previewImgSrc = false;
-    this.previewImgFile = false;
-
-    this.upload = false;
-  }
 
   loadingChange(event) {
     if(event) {
@@ -106,5 +99,6 @@ export class ImageUploadPreviewTwoTemplateComponent implements OnInit {
       this.closeLoading = true;
     }
   }
+
 
 }

@@ -1,15 +1,16 @@
 import { Component, OnInit, OnDestroy, Inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators , FormArray } from '@angular/forms';
-import { Router,NavigationStart, ActivatedRoute} from '@angular/router';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
+import { Router, ActivatedRoute} from '@angular/router';
+import { MatDialog } from '@angular/material';
 
 import { AdminService } from '../../admin.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 import { ConstantService } from  '../../../shared/services/constant/constant.service';
 
-import {MatChipInputEvent} from '@angular/material';
-import {ENTER} from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material';
+import { ENTER } from '@angular/cdk/keycodes';
+
+import { SaveProductDialogComponent } from '../save-product-dialog/save-product-dialog.component';
 
 @Component({
   selector: 'app-product-create',
@@ -27,6 +28,8 @@ export class ProductCreateComponent implements OnInit {
 
   shippingTimeList = ['5 - 10 days','7 - 14 days','10 - 15 days','14 - 21 days','21 - 28 days','other'];
 
+  YesOrNo = ["Yes", 'No'];
+
   variantList = ['Color','Size', 'Material', 'Other'];
 
   isProductListShow: boolean = false;
@@ -40,12 +43,19 @@ export class ProductCreateComponent implements OnInit {
   // Enter, comma
   separatorKeysCodes = [ENTER, 188];
 
+  previewImgFile: any;
+  previewImgSrcs: any;
+
+  additionalList: any[] = new Array(5);
+  additionalSrcs: any[] = new Array(5);
+
   get product() { return this.productForm.get('product') as FormArray; }
   get shipping() { return this.productForm.get('shipping') as FormArray; }
 
   constructor(
     private constantService: ConstantService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {
     this.countries = this.constantService.getCountries();
 
@@ -57,7 +67,18 @@ export class ProductCreateComponent implements OnInit {
       shipping: this.fb.array([]),
       commission: ['', Validators.required],
       brand: [''],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      package: this.fb.group({
+        length: ['', Validators.required],
+        width: ['', Validators.required],
+        height: ['', Validators.required],
+        weight: ['', Validators.required],
+        declaredValue: ['', Validators.required],
+        country: ['', Validators.required],
+        powder: ['', Validators.required],
+        liquid: ['', Validators.required],
+        battery: ['', Validators.required]
+      })
     });
 
     this.addProductList();
@@ -207,7 +228,16 @@ export class ProductCreateComponent implements OnInit {
 
   ngOnInit():void {
 
+  }
 
+  openLeaveDialog() {
+    let dialogRef = this.dialog.open(SaveProductDialogComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
   }
 
 }
