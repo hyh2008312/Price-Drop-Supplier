@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { ProductMainComponent } from './product-main/product-main.component';
+import { ProductCreateComponent } from './product-create/product-create.component';
 
 import { ProductItemComponent } from './product-item/product-item.component';
 import { ProductTitleComponent } from './product-title/product-title.component';
@@ -16,6 +17,7 @@ import { SharedModule } from '../../shared/shared.module';
   exports: [],
   declarations: [
     ProductMainComponent,
+    ProductCreateComponent,
     ProductItemComponent,
     ProductTitleComponent
   ],

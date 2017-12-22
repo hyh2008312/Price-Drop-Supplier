@@ -1,0 +1,301 @@
+<div class="sc-product__create-container">
+  <div class="md-margin-top-4 sc-product__create-text">
+    <span class="md-dark-secondary">产品</span> <span class="md-dark-secondary">></span> <span class="xb-bold">添加新产品</span>
+  </div>
+  <div class="md-margin-top-3 sc-product__create-navigation-bg" fxLayout="row" fxLayoutAlign="start center">
+    <div class="sc-product__create-navigation" fxFlex="50"
+      fxLayout="row" fxLayoutAlign="center center"
+         [ngClass]="{'sc-product__create-navigation-active':step==0}">
+      1.Edit Basic Information
+      <div class="sc-product__create-tri"></div>
+    </div>
+    <div class="sc-product__create-navigation" fxFlex="50"
+      fxLayout="row" fxLayoutAlign="center center"
+      [ngClass]="{'sc-product__create-navigation-active':step==1}">2.Add Product Details</div>
+  </div>
+  <form [formGroup]="productForm" novalidate>
+    <div>
+      <div class="sc-product__create-container-1">
+        <div class="sc-product__create-title">
+          Basic Product Information
+        </div>
+        <div class="md-margin-top-2" fxLayout="column">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <input type="text" matInput placeholder="Product Name" formControlName="name">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+              <mat-form-field fxFlex>
+                <mat-select name="category" placeholder="Select a Category" formControlName="category">
+                  <mat-option class="md-align-center" *ngFor="let item of category" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="sc-product__create-title-1 md-margin-top-1">
+          Variant
+        </div>
+        <div class="md-margin-top-2" *ngIf="variantAddedList.length == 0">
+          <button mat-raised-button color="primary" type="button" (click)="addVariantList()">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <i class="material-icons">add</i>
+              <span class="md-margin-left-1">Add Variant</span>
+            </div>
+          </button>
+          <div class="sc-product__create-text-1 md-margin-top-2">Add variants if this product has different sizes, colors, etc.</div>
+        </div>
+        <div class="md-margin-top-2" *ngIf="variantAddedList.length > 0">
+          <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let p of variantAddedList; let i = index">
+            <div class="sc-product__create-margin-right-1" fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
+              <mat-form-field fxFlex>
+                <mat-select name="option" placeholder="Option Name" [value]="p.option" (valueChange)="optionChange($event, p)">
+                  <mat-option *ngFor="let item of variantList" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="sc-product__create-margin-right-2" fxFlex="60" fxLayout="row" fxLayoutAlign="start center" *ngIf="p.isValue">
+              <mat-form-field fxFlex>
+                <mat-chip-list #chipList>
+                  <mat-chip *ngFor="let item of p.value" [selectable]="p.selectable"
+                            [removable]="p.removable" (remove)="remove(item, p)">
+                    {{item}}
+                    <mat-icon matChipRemove *ngIf="p.removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input placeholder=""
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="p.addOnBlur"
+                         (matChipInputTokenEnd)="add($event, p)" />
+                </mat-chip-list>
+              </mat-form-field>
+            </div>
+            <div *ngIf="p.isValue">
+              <i class="material-icons md-dark-secondary" (click)="deleteVariant(i)">delete</i>
+            </div>
+          </div>
+          <div class="md-margin-top-2">
+            <button mat-raised-button color="primary" type="button" (click)="addVariantList()">
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <i class="material-icons">add</i>
+                <span class="md-margin-left-1">Add Another Option</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="sc-product__create-container-1">
+        <div class="sc-product__create-title">
+          Inventory & Pricing
+        </div>
+        <div class="md-margin-top-2" *ngIf="!isProductListShow">
+          <div formArrayName="product" >
+            <div *ngFor="let p of product.controls; let i = index">
+              <div [formGroupName]="i" fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field fxFlex>
+                      <input type="text" matInput placeholder="SKU" formControlName="SKU">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field fxFlex>
+                      <input type="text" matInput placeholder="Quantity" formControlName="quantity">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                  <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="md-margin-right-2 sc-product__create-title">$</div>
+                    <mat-form-field fxFlex>
+                      <input type="text" matInput placeholder="Sale Price" formControlName="price">
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="md-margin-right-2 sc-product__create-title">$</div>
+                    <mat-form-field fxFlex>
+                      <input type="text" matInput placeholder="Original Price" formControlName="MSRP">
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="md-margin-top-2" *ngIf="isProductListShow">
+          <div formArrayName="product" >
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <div class="sc-product__create-margin-right-1 sc-product__create-width-1 md-dark-secondary xb-bold"
+                   fxFlex="none" fxLayout="row" fxLayoutAlign="center center">
+                Variants
+              </div>
+              <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold"
+                   fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+                SKU
+              </div>
+              <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
+                   fxFlex="10" fxLayout="row" fxLayoutAlign="center center">
+                Quantity
+              </div>
+              <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
+                   fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
+                Sale Price
+              </div>
+              <div class="md-dark-secondary xb-bold"
+                   fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
+                Original Price
+              </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start stretch" *ngFor="let p of product.controls; let i = index">
+              <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-1 sc-product__create-width-1 sc-product__create-text-2" fxFlex="none">
+                  {{p.value.variant}}
+                </div>
+                <div class="sc-product__create-margin-right-1" fxFlex="20" fxLayout="row" fxLayoutAlign="start center">
+                  <mat-form-field class="sc-product__create-width-100">
+                    <input type="text" matInput formControlName="quantity">
+                  </mat-form-field>
+                </div>
+                <div class="sc-product__create-margin-right-3" fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
+                  <mat-form-field class="sc-product__create-width-100">
+                    <input type="text" matInput formControlName="SKU">
+                  </mat-form-field>
+                </div>
+                <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                  <div class="md-margin-right-2 sc-product__create-title">$</div>
+                  <mat-form-field class="sc-product__create-width-100">
+                    <input type="text" matInput formControlName="price">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                  <div class="md-margin-right-2 sc-product__create-title">$</div>
+                  <mat-form-field class="sc-product__create-width-100">
+                    <input type="text" matInput formControlName="MSRP">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-product__create-text-1 md-margin-top-2">A competitive price can boost your sales conversion.</div>
+      </div>
+      <div class="sc-product__create-container-1">
+        <div class="sc-product__create-title">
+          Shipping
+        </div>
+        <div class="md-margin-top-2" formArrayName="shipping">
+          <div class="sc-product__create-list" fxLayout="column" *ngFor="let p of shipping.controls; let i = index">
+            <div [formGroupName]="i">
+              <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                  <mat-form-field fxFlex>
+                    <mat-select name="country" placeholder="Shipping Country"
+                                formControlName="country">
+                      <mat-option class="md-align-center" *ngFor="let item of countries" [value]="item.code">
+                        {{ item.code }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                  <div class="md-margin-right-2 sc-product__create-title">$</div>
+                  <mat-form-field fxFlex>
+                    <input type="text" matInput placeholder="Shipping Charge"
+                           formControlName="charge" >
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="sc-product__create-title-1 md-margin-top-2">
+                Shipping Time
+              </div>
+              <mat-radio-group class="md-margin-top-2"
+                             fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="shippingTime">
+              <mat-radio-button fxFlex="25" class="sc-product__create-height" *ngFor="let value of shippingTimeList;let i = index;" [value]="value" color="primary">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  {{ value }}
+                  <div *ngIf="i == 5 && p.value.shippingTime == 'other'" class="md-margin-left-4" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="sc-product__create-width">
+                      <input class="md-align-center" type="text" matInput placeholder="Min" formControlName="minTime">
+                    </mat-form-field>
+                    <div class="md-margin-left-2 md-margin-right-2">-</div>
+                    <mat-form-field class="sc-product__create-width">
+                      <input class="md-align-center" type="text" matInput placeholder="Max" formControlName="maxTime">
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-radio-button>
+            </mat-radio-group>
+            </div>
+          </div>
+        </div>
+        <div class="md-margin-top-2">
+          <button type="button" mat-raised-button color="primary" (click)="addShippingList()">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <i class="material-icons">add</i>
+              <span class="md-margin-left-1">Add Another Shipping Country</span>
+            </div>
+          </button>
+        </div>
+      </div>
+      <div class="sc-product__create-container-1">
+        <div class="sc-product__create-title">
+          Commission Settings
+        </div>
+        <div class="md-margin-top-2" fxLayout="column">
+          <div fxFlex="46" fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+              <mat-form-field fxFlex>
+                <input type="text" matInput placeholder="Set Your Affiliate Sales Commission Rate" formControlName="commission">
+              </mat-form-field>
+              <div class="md-margin-right-2 sc-product__create-title">%</div>
+            </div>
+          </div>
+          <div class="sc-product__create-text-1 md-margin-top-2">- Your commission is set to reward your affiliate
+            partners on SocialCommer.</div>
+          <div class="sc-product__create-text-1 md-margin-top-2">- Commission will be charged when a customer purchases
+            your product successfully.</div>
+          <div class="sc-product__create-text-1 md-margin-top-2">- The commission is calculated based on your product
+            and shipping price.</div>
+          <div class="sc-product__create-text-1 md-margin-top-2">- A high commission rate can attract more affiliate
+            partners(e.g > 20%).</div>
+        </div>
+      </div>
+      <div class="sc-product__create-margin-top" fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" type="button">
+          SAVE & CONTINUE
+        </button>
+      </div>
+    </div>
+    <div>
+      <div class="sc-product__create-container-1">
+        <div class="sc-product__create-title">
+          Product Details
+        </div>
+        <div class="md-margin-top-4" fxLayout="row" fxLayoutAlign="start center">
+          <div class="md-dark-secondary md-margin-right-3">Product Name</div><div>XXXXXXXXXX</div>
+        </div>
+        <div class="md-margin-top-2" fxLayout="column">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <input type="text" matInput placeholder="Brand Name(Optional)" formControlName="brand">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <textarea matInput placeholder="Product Description" formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>

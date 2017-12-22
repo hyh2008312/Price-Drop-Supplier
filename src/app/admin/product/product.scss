@@ -171,4 +171,129 @@
       color: $primaryColor;
     }
   }
+
+  &__create{
+    &-text{
+      span{
+        font-family: 'San Francisco', Helvetica;
+      }
+    }
+
+    &-text-1{
+      font-style: oblique;
+    }
+
+    &-text-2{
+      font-size: 12px;
+      font-family: 'San Francisco', Helvetica;
+    }
+
+    &-container{
+      max-width: 800px;
+      margin: auto;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    &-container-1{
+      margin-top: 16px;
+      padding: 28px 40px 40px;
+      background-color: $whiteColor;
+      border-radius: 4px;
+    }
+
+    $parent: &;
+
+    &-navigation{
+      position: relative;
+      height: 54px;
+      font-size: 16px;
+      background-color: $whiteColor;
+      @include media();
+
+      &-bg{
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      &-active{
+        background-color: $blackColor;
+        color: $whiteColor;
+        #{$parent}-tri{
+          border-left: 16px solid $blackColor;
+        }
+      }
+    }
+
+    &-tri{
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 100%;
+      width: 0;
+      height: 0;
+      border-top: 27px solid transparent;
+      border-left: 16px solid $whiteColor;
+      border-bottom: 27px solid transparent;
+    }
+
+    &-title{
+      font-size: 16px;
+      @include media();
+    }
+
+    &-title-1{
+      font-size: 14px;
+      @include media();
+    }
+
+    &-margin-top{
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    &-margin-right{
+      margin-left: 64px;
+    }
+
+    &-margin-right-1{
+      margin-right: 32px;
+    }
+
+    &-margin-right-2{
+      margin-right: 12px;
+    }
+
+    &-margin-right-3{
+      margin-right: 24px;
+    }
+
+    &-width{
+      width: 54px;
+    }
+
+    &-width-1{
+      width: 140px;
+      white-space: normal;
+    }
+
+    &-width-100{
+      width: 100%;
+    }
+
+    &-height{
+      height: 57px;
+      line-height: 57px;
+    }
+
+    &-list{
+      padding-top: 16px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(0,0,0,.12);
+      &:last-child{
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+    }
+  }
 }

@@ -1540,8 +1540,8 @@ textarea.mat-input-element {
   .cdk-overlay-pane {
     min-width: 100vw; } }
 
-.mat-chip:not(.mat-basic-chip) + .mat-chip:not(.mat-basic-chip) {
-  margin: 0 8px 3px 0; }
+.mat-chip:not(.mat-basic-chip) {
+  margin: 0 8px 3px 0 !important; }
 
 .sc-product__container {
   padding: 0 16px; }
@@ -1670,5 +1670,80 @@ textarea.mat-input-element {
       color: #fff; }
   .sc-product__search-result {
     color: #00bdd6; }
+.sc-product__create-text span {
+  font-family: 'San Francisco', Helvetica; }
+.sc-product__create-text-1 {
+  font-style: oblique; }
+.sc-product__create-text-2 {
+  font-size: 12px;
+  font-family: 'San Francisco', Helvetica; }
+.sc-product__create-container {
+  max-width: 800px;
+  margin: auto;
+  width: 100%;
+  overflow: hidden; }
+.sc-product__create-container-1 {
+  margin-top: 16px;
+  padding: 28px 40px 40px;
+  background-color: #fff;
+  border-radius: 4px; }
+.sc-product__create-navigation {
+  position: relative;
+  height: 54px;
+  font-size: 16px;
+  background-color: #fff;
+  font-weight: 600; }
+  .sc-product__create-navigation-bg {
+    border-radius: 4px;
+    overflow: hidden; }
+  .sc-product__create-navigation-active {
+    background-color: #222;
+    color: #fff; }
+    .sc-product__create-navigation-active .sc-product__create-tri {
+      border-left: 16px solid #222; }
+.sc-product__create-tri {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 100%;
+  width: 0;
+  height: 0;
+  border-top: 27px solid transparent;
+  border-left: 16px solid #fff;
+  border-bottom: 27px solid transparent; }
+.sc-product__create-title {
+  font-size: 16px;
+  font-weight: 600; }
+.sc-product__create-title-1 {
+  font-size: 14px;
+  font-weight: 600; }
+.sc-product__create-margin-top {
+  margin-top: 40px;
+  margin-bottom: 40px; }
+.sc-product__create-margin-right {
+  margin-left: 64px; }
+.sc-product__create-margin-right-1 {
+  margin-right: 32px; }
+.sc-product__create-margin-right-2 {
+  margin-right: 12px; }
+.sc-product__create-margin-right-3 {
+  margin-right: 24px; }
+.sc-product__create-width {
+  width: 54px; }
+.sc-product__create-width-1 {
+  width: 140px;
+  white-space: normal; }
+.sc-product__create-width-100 {
+  width: 100%; }
+.sc-product__create-height {
+  height: 57px;
+  line-height: 57px; }
+.sc-product__create-list {
+  padding-top: 16px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12); }
+  .sc-product__create-list:last-child {
+    border-bottom: none;
+    padding-bottom: 0; }
 
 /*# sourceMappingURL=product.css.map */
