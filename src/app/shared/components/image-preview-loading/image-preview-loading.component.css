@@ -1494,9 +1494,10 @@ input.mat-input-element {
   color: #222;
   opacity: 1;
   justify-content: flex-start;
-  padding: 0 16px;
+  padding: 0 40px 0 16px;
   font-size: 16px;
-  font-weight: 400; }
+  font-weight: 400;
+  min-width: 0; }
   .unicorn-dark-theme .mat-tab-label.mat-tab-label-active {
     font-weight: 600;
     opacity: 1; }
@@ -1540,7 +1541,7 @@ textarea.mat-input-element {
   .cdk-overlay-pane {
     min-width: 100vw; } }
 
-.mat-chip:not(.mat-basic-chip) + .mat-chip:not(.mat-basic-chip) {
+.mat-chip:not(.mat-basic-chip) {
   margin: 0 8px 3px 0 !important; }
 
 .xb-loading__bg {

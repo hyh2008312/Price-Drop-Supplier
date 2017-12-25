@@ -57,9 +57,10 @@ $theme: mat-light-theme($primary, $accent, $warn);
     color: $blackColor;
     opacity: 1;
     justify-content: flex-start;
-    padding: 0 16px;
+    padding: 0 40px 0 16px;
     font-size: 16px;
     @include regular();
+    min-width: 0;
     &.mat-tab-label-active{
       @include media();
       opacity: 1;
