@@ -105,6 +105,11 @@
         margin-top: 16px;
         @include media();
       }
+      i{
+        font-size: 96px;
+        line-height: 96px;
+        color: rgba(0,0,0,.38);
+      }
     }
 
     &-buttons {

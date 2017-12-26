@@ -1,0 +1,75 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status <= 2">
+  <div class="sc-order__product-height" fxLayout="row" fxLayoutAlign="start center" >
+    <div class="xb-bold">
+      Oct 14, 2017
+    </div>
+    <div class="md-margin-left-3" fxFlex>Order #: 201700231478</div>
+    <div class="text-underline xb-bold md-margin-right-2" >View Details</div>
+  </div>
+  <div class="sc-order__product-item-1" fxLayout="row" fxLayoutAlign="start start">
+    <div fxLayout="column" fxFlex="75" fxLayoutAlign="start stretch">
+      <div class="sc-order__product-item" fxLayout="row" fxLayoutAlign="start center" *ngFor="let value of [1,2,3]">
+        <div class="sc-order__product-width sc-order__product-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
+          <div class="sc-order__product-image" fxFlex="none">
+            <img [src]="product.imageUrl">
+          </div>
+          <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
+            <div class="sc-order__product-title" >{{product.title}}</div>
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <div>Black</div><div class="sc-order__product-margin-left">L</div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-order__product-margin-right" fxFlex="25"
+             fxLayout="column" fxLayoutAlign="center center">Fulfilled</div>
+        <div class="sc-order__product-margin-right" fxFlex="25"
+             fxLayout="column" fxLayoutAlign="center center">
+          Paid
+        </div>
+        <div fxFlex="15"
+             fxLayout="column" fxLayoutAlign="center center">20</div>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" fxFlex="25">
+      <div class="md-margin-right-2 sc-order__product-height-1 xb-bold" fxFlex="55"
+           fxLayout="column" fxLayoutAlign="center center">
+        Steven Wong
+      </div>
+      <div class="sc-order__product-height-1 xb-bold" fxFlex="45"
+           fxLayout="column" fxLayoutAlign="center center">
+        $ 60
+      </div>
+    </div>
+  </div>
+</div>
+<div fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status == 3">
+  <div class="sc-order__product-height" fxLayout="row" fxLayoutAlign="start center" >
+    <div fxFlex>Order #: 201700231478</div>
+    <div class="text-underline xb-bold md-margin-right-2" >View Details</div>
+  </div>
+  <div class="sc-order__product-item-2" fxLayout="row" fxLayoutAlign="start stretch">
+    <div class="sc-order__product-width sc-order__product-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
+      <div class="sc-order__product-image" fxFlex="none">
+        <img [src]="product.imageUrl">
+      </div>
+      <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
+        <div class="sc-order__product-title" >{{product.title}}</div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div>Black</div><div class="sc-order__product-margin-left">L</div>
+        </div>
+      </div>
+    </div>
+    <div class="sc-order__product-margin-right" fxFlex="20"
+         fxLayout="column" fxLayoutAlign="center center"> Oct 14, 2017</div>
+    <div class="sc-order__product-margin-right" fxFlex="20"
+         fxLayout="column" fxLayoutAlign="center center">
+      Steven Wong
+    </div>
+    <div class="sc-order__product-margin-right" fxFlex="15"
+         fxLayout="column" fxLayoutAlign="center center">Exchange</div>
+    <div fxFlex="15"
+         fxLayout="column" fxLayoutAlign="center center">
+      Pending
+    </div>
+  </div>
+</div>

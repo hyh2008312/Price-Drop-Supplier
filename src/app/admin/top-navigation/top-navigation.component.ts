@@ -28,6 +28,7 @@ export class TopNavigationComponent implements OnInit {
   }, {
     id: 3,
     text: '订单',
+    router: './order',
     isActive: false
   }, {
     id: 4,

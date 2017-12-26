@@ -9,7 +9,10 @@ const routes: Routes = [
     children: [
       {
         path: 'product',
-        loadChildren: 'app/admin//product/product.module#ProductModule'
+        loadChildren: 'app/admin/product/product.module#ProductModule'
+      }, {
+        path: 'order',
+        loadChildren: 'app/admin/order/order.module#OrderModule'
       }
     ]
   }, {
