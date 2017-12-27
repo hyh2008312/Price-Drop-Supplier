@@ -30,8 +30,8 @@ export class OrderMainComponent implements OnInit {
   requestTypeSorted = 'All';
   returnStatusSorted = 'All';
   sortList = ['All', 'Paid', 'Refunded'];
-  requestTypeList = ['All', 'Exchanged', 'Refund'];
-  returnStatusList = ['All', 'Pending', 'Authorized', 'Exchanged','Refunded', 'Partially', 'Partially Refunded', 'Denied'];
+  requestTypeList = ['All', 'Exchange', 'Refund'];
+  returnStatusList = ['All', 'Pending', 'Authorized', 'Exchanged','Refunded', 'Partially Refunded', 'Denied'];
 
   selectedIndex: number = 0;
   subscription: any;

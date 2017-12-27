@@ -4,16 +4,7 @@
     <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
       <mat-tab label="Unfulfilled">
         <div class="sc-order__container" fxLayout="row" fxLayoutAlign="start center">
-          <div>Sort by</div>
-          <div class="md-margin-left-2 unicorn-dark-theme">
-            <mat-form-field class="sc-order__product-sort">
-              <mat-select [(ngModel)]="unfulfilledSorted" name="filter">
-                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+          <div fxFlex></div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-order__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >
@@ -52,16 +43,7 @@
       </mat-tab>
       <mat-tab label="Fulfilled">
         <div class="sc-order__container" fxLayout="row" fxLayoutAlign="start center">
-          <div>Sort by </div>
-          <div class="md-margin-left-2 unicorn-dark-theme">
-            <mat-form-field class="sc-order__product-sort">
-              <mat-select [(ngModel)]="fulfilledSorted" name="sort">
-                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+          <div fxFlex></div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-order__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >
@@ -100,16 +82,7 @@
       </mat-tab>
       <mat-tab label="Canceled">
         <div class="sc-order__container" fxLayout="row" fxLayoutAlign="start center">
-          <div>Sort by </div>
-          <div class="md-margin-left-2 unicorn-dark-theme">
-            <mat-form-field class="sc-order__product-sort">
-              <mat-select [(ngModel)]="canceledSorted" name="sort">
-                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+          <div fxFlex></div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-order__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >
