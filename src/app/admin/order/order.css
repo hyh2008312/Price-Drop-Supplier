@@ -1578,8 +1578,7 @@ textarea.mat-input-element {
       -o-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%); }
   .sc-order__product-width {
-    width: 288px;
-    margin-right: 24px; }
+    width: 400px; }
   .sc-order__product-height {
     padding: 0 16px;
     height: 56px;
