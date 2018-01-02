@@ -1494,7 +1494,7 @@ input.mat-input-element {
   color: #222;
   opacity: 1;
   justify-content: flex-start;
-  padding: 0 40px 0 1;
+  padding: 0 40px 0 16px;
   font-size: 16px;
   font-weight: 400;
   min-width: 0; }

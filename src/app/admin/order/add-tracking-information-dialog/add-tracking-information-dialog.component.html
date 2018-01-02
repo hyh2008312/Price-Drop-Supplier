@@ -1,0 +1,46 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-order-dialog__title">
+    Add Tracking Information
+  </div>
+  <div class="sc-order-dialog__content">
+    This tracking information will be sent to your customer via email.
+  </div>
+  <div class="md-margin-top-2 sc-order__detail-border-bottom">
+    <app-order-detail-title [status]="2"></app-order-detail-title>
+  </div>
+  <div>
+    <app-order-detail-item [status]="2"></app-order-detail-item>
+  </div>
+  <form class="md-margin-top-3" [formGroup]="trackingForm" novalidate>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <mat-select name="carrier" placeholder="Shipping Carrier" formControlName="carrier">
+            <mat-option class="md-align-center" *ngFor="let item of shippingCarrier" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="46">
+        <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="Tracking Number" formControlName="trackingName">
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="Tracking URL" formControlName="trackingURL">
+      </mat-form-field>
+    </div>
+  </form>
+  <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary">SAVE</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">CANCEL</button>
+    </div>
+  </div>
+</div>

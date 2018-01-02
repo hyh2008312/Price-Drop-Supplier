@@ -43,6 +43,7 @@
         @include transform(translate(-50%, -50%));
       }
     }
+
     &-width{
       width: 400px;
     }
@@ -70,6 +71,14 @@
       font-size: 16px;
       @include media();
       color: rgba(0,0,0,.87);
+    }
+
+
+    &-title-2{
+      font-size: 14px;
+      line-height: 24px;
+      max-height: 72px;
+      overflow: hidden;
     }
 
     &-margin-left{
@@ -169,5 +178,177 @@
     }
   }
 
+  &__detail{
+
+    &-image{
+      width: 120px;
+      height: 120px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-right: 16px;
+      position: relative;
+      border: 1px solid rgba(0,0,0,.12);
+
+      >img{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        @include transform(translate(-50%, -50%));
+      }
+    }
+
+    &-border-bottom{
+      border-bottom: 1px solid rgba(0,0,0,.12);
+    }
+
+    &-container{
+      padding: 32px 16px 48px;
+      background-color: $whiteColor;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    &-container-padding{
+      padding: 32px 16px 0;
+      background-color: $whiteColor;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    &-container-1{
+      padding: 0 8px;
+    }
+
+    &-container-2{
+      max-width: 800px;
+      border-bottom: 1px solid rgba(0,0,0,.12);
+      padding-right: 16px;
+    }
+
+    &-container-3{
+      height: 64px;
+      padding: 0 16px;
+    }
+
+    &-container-4{
+      height: 56px;
+    }
+
+    &-title{
+      font-size: 24px;
+      @include media();
+    }
+
+    &-title-1{
+      font-size: 16px;
+      @include media();
+    }
+
+    &-title-2{
+      font-size: 16px;
+    }
+
+    &-margin-top{
+      margin-top: 32px;
+    }
+
+    &-margin-top-1{
+      margin-top: 24px;
+    }
+
+    &-bill-left{
+      width: 165px;
+      margin-right: 32px;
+      text-align: right;
+      @include media();
+    }
+
+    &-tracking-left{
+      width: 135px;
+      margin-right: 32px;
+      text-align: right;
+      @include media();
+    }
+
+    &-margin-right{
+      margin-right: 16px;
+    }
+
+    &-margin-left{
+      margin-left: 48px;
+    }
+
+    &-margin-left-1{
+      margin-left: 8px;
+    }
+
+    &-margin-bottom{
+      margin-bottom: 48px;
+    }
+
+    &-color{
+      color: $orangeColor;
+    }
+
+    &-width{
+      width: 288px;
+    }
+
+    &-width-1{
+      width: 180px;
+    }
+
+    &-width-2{
+      width: 80px;
+    }
+
+    &-item{
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0,0,0,.12);
+    }
+  }
 }
 
+.sc-order-dialog{
+
+  padding: 40px 40px 48px;
+  max-width: 660px;
+  position: relative;
+  background-color: $whiteColor;
+  border-radius: 4px;
+  @include xb-xs-screen{
+    padding: 40px 16px;
+  }
+
+  &__close{
+    position: absolute;
+    left: calc(100% - 36px);
+    top: 12px;
+    color: $blackColor;
+    cursor: pointer;
+    i{
+      font-size: 24px;
+      line-height: 24px;
+      @include media();
+    }
+  }
+
+  &__title{
+    font-size: 24px;
+    line-height: 32px;
+    @include media();
+  }
+
+  &__content{
+    margin-top: 24px;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: left;
+    @include regular();
+  }
+
+  &__margin-top{
+    margin-top: 24px;
+  }
+
+}
