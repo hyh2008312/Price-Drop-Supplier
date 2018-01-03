@@ -12,6 +12,15 @@ $warn: mat-palette($mat-red, 500);
 $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
 
+.sc__accent-dark{
+  $darkTheme: mat-dark-theme($primary, $accent, $warn);
+  @include angular-material-theme($darkTheme);
+
+  .mat-raised-button{
+    line-height: 32px;
+  }
+}
+
 .mat-raised-button:not([class*=mat-elevation-z]){
   @include box-shadow(none);
 }

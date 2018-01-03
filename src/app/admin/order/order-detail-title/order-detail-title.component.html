@@ -2,7 +2,7 @@
   <div class="sc-order__detail-width sc-order__product-title-1 sc-order__detail-margin-right" fxFlex="none">
     Product
   </div>
-  <div class="sc-order__product-title-1 sc-order__detail-margin-right md-align-center" fxFlex="20"
+  <div class="sc-order__product-title-1 sc-order__detail-margin-right md-align-center" fxFlex="15"
        fxLayout="column" fxLayoutAlign="center center">Quantity</div>
   <div class="sc-order__product-title-1 sc-order__detail-margin-right" fxFlex="20"
        fxLayout="column" fxLayoutAlign="center center">Order Price</div>
@@ -23,4 +23,17 @@
        fxLayout="column" fxLayoutAlign="center center">Shipping Method</div>
   <div class="xb-bold" fxFlex="30"
        fxLayout="column" fxLayoutAlign="center center">Shipping Time</div>
+</div>
+<div class="sc-order__detail-container-4" fxLayout="row" fxLayoutAlign="start center" *ngIf="status >= 3">
+  <div class="sc-order__detail-width sc-order__product-title-1 sc-order__detail-margin-right" fxFlex="none">
+    Product
+  </div>
+  <div class="sc-order__product-title-1 sc-order__detail-margin-right md-align-center" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="center center">Quantity</div>
+  <div class="sc-order__product-title-1 sc-order__detail-margin-right" fxFlex="25"
+       fxLayout="column" fxLayoutAlign="center center">Order Price</div>
+  <div class="sc-order__product-title-1 sc-order__detail-margin-right md-align-center" fxFlex="20"
+       fxLayout="column" fxLayoutAlign="center center">Return Status</div>
+  <div class="sc-order__product-title-1" fxFlex="14"
+       fxLayout="column" fxLayoutAlign="center center">Action</div>
 </div>

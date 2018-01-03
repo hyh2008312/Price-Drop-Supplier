@@ -11,6 +11,10 @@ import { OrderDetailTrackingItemComponent } from './order-detail-tracking-item/o
 import { AddTrackingInformationDialogComponent } from './add-tracking-information-dialog/add-tracking-information-dialog.component';
 import { CancelOrderDialogComponent } from './cancel-order-dialog/cancel-order-dialog.component';
 import { CancelFulfillmentDialogComponent } from './cancel-fulfillment-dialog/cancel-fulfillment-dialog.component';
+import { DenyRequestDialogComponent } from './deny-request-dialog/deny-request-dialog.component';
+import { AuthorizeReturnDialogComponent } from './authorize-return-dialog/authorize-return-dialog.component';
+import { ShipExchangeItemDialogComponent } from './ship-exchange-item-dialog/ship-exchange-item-dialog.component';
+import { IssueRefundDialogComponent } from './issue-refund-dialog/issue-refund-dialog.component';
 
 import { OrderRoutingModule } from './order.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -31,12 +35,20 @@ import { SharedModule } from '../../shared/shared.module';
     OrderDetailTrackingItemComponent,
     AddTrackingInformationDialogComponent,
     CancelOrderDialogComponent,
-    CancelFulfillmentDialogComponent
+    CancelFulfillmentDialogComponent,
+    DenyRequestDialogComponent,
+    AuthorizeReturnDialogComponent,
+    ShipExchangeItemDialogComponent,
+    IssueRefundDialogComponent
   ],
   entryComponents: [
     AddTrackingInformationDialogComponent,
     CancelOrderDialogComponent,
-    CancelFulfillmentDialogComponent
+    CancelFulfillmentDialogComponent,
+    DenyRequestDialogComponent,
+    AuthorizeReturnDialogComponent,
+    ShipExchangeItemDialogComponent,
+    IssueRefundDialogComponent
   ],
   providers: []
 })

@@ -32,7 +32,86 @@
     <div></div>
   </div>
   <div class="sc-order__detail-container md-margin-top-2">
+    <div class="sc-order__detail-title sc-order__detail-margin-left-1">Return for Item Exchange</div>
+    <div class="sc-order__detail-container-1">
+      <div class="sc-order__detail-margin-top-1" fxLayout="column" >
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+            Request Date
+          </div>
+          <div>
+            Oct 10, 2017
+          </div>
+        </div>
+        <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+          <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+            Return Reason
+          </div>
+          <div>
+            Package arrived damaged
+          </div>
+        </div>
+        <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+          <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+            Comments
+          </div>
+          <div>
+            ABC
+          </div>
+        </div>
+        <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+          <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+            Attachment
+          </div>
+          <div class="sc__accent-dark" fxLayout="row" fxLayoutAlign="start center">
+            ScreenShot.png <div class="md-margin-left-2"><button mat-raised-button color="primary">Download</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sc-order__detail-container md-margin-top-2">
+    <div class="sc-order__detail-title sc-order__detail-margin-left-1">Return for a Refund</div>
+    <div class="sc-order__detail-container-1">
+      <div class="sc-order__detail-margin-top-1" fxLayout="column" >
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+            Request Date
+          </div>
+          <div>
+            Oct 10, 2017
+          </div>
+        </div>
+        <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+          <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+            Return Reason
+          </div>
+          <div>
+            Package arrived damaged
+          </div>
+        </div>
+        <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+          <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+            Comments
+          </div>
+          <div>
+            ABC
+          </div>
+        </div>
+        <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+          <div class="md-dark-secondary sc-order__detail-bill-left" fxFlex="none">
+            Attachment
+          </div>
+          <div class="sc__accent-dark" fxLayout="row" fxLayoutAlign="start center">
+            ScreenShot.png <div class="md-margin-left-2"><button mat-raised-button color="primary">Download</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sc-order__detail-container md-margin-top-2">
     <div class="sc-order__detail-title sc-order__detail-margin-left-1">Order Details</div>
+    <div class="sc-order__detail-title sc-order__detail-margin-left-1">Returned Product & Order Infomation</div>
     <div class="sc-order__detail-margin-left-1 md-margin-top-3" fxLayout="row" fxLayoutAlign="start center">
       <div class="xb-bold">Order Number</div>
       <div class="md-margin-left-2">
@@ -49,6 +128,18 @@
     <div>
       <app-order-detail-item [status]="0"></app-order-detail-item>
       <app-order-detail-item [status]="1"></app-order-detail-item>
+    </div>
+    <div class="md-margin-top-3 sc-order__detail-border-bottom">
+      <app-order-detail-title [status]="3"></app-order-detail-title>
+    </div>
+    <div>
+      <app-order-detail-item [status]="3"></app-order-detail-item>
+    </div>
+    <div class="md-margin-top-3 sc-order__detail-border-bottom">
+      <app-order-detail-title [status]="4"></app-order-detail-title>
+    </div>
+    <div>
+      <app-order-detail-item [status]="4"></app-order-detail-item>
     </div>
     <div class="sc-order__detail-container-1">
       <div class="sc-order__detail-title-1 sc-order__detail-margin-top">

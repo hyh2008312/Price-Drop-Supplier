@@ -263,8 +263,22 @@
       @include media();
     }
 
+    &-bill-left-1{
+      width: 185px;
+      margin-right: 32px;
+      text-align: right;
+      @include media();
+    }
+
     &-tracking-left{
       width: 135px;
+      margin-right: 32px;
+      text-align: right;
+      @include media();
+    }
+
+    &-tracking-left-1{
+      width: 120px;
       margin-right: 32px;
       text-align: right;
       @include media();
@@ -302,6 +316,10 @@
       width: 80px;
     }
 
+    &-height{
+      height: 80px;
+    }
+
     &-item{
       padding: 16px 0;
       border-bottom: 1px solid rgba(0,0,0,.12);
@@ -313,6 +331,8 @@
 
   padding: 40px 40px 48px;
   max-width: 660px;
+  max-height: 100vh;
+  overflow-y: scroll;
   position: relative;
   background-color: $whiteColor;
   border-radius: 4px;
@@ -331,6 +351,10 @@
       line-height: 24px;
       @include media();
     }
+  }
+
+  &__icons{
+    font-size: 24px;
   }
 
   &__title{

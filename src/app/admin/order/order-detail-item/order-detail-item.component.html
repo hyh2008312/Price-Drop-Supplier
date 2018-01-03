@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status < 2">
+<div class="sc__accent-dark" fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status < 2">
   <div class="sc-order__detail-item" fxLayout="row" fxLayoutAlign="start stretch">
     <div class="sc-order__detail-width sc-order__detail-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
       <div class="sc-order__detail-image" fxFlex="none">
@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div class="sc-order__detail-margin-right" fxFlex="20"
+    <div class="sc-order__detail-margin-right" fxFlex="15"
          fxLayout="column" fxLayoutAlign="center center"> 2</div>
     <div class="sc-order__detail-margin-right" fxFlex="20"
          fxLayout="column" fxLayoutAlign="center center">
@@ -35,17 +35,17 @@
     <div class="sc-order__detail-margin-right" fxFlex="15"
          fxLayout="column" fxLayoutAlign="center center">{{order.paymentStatus}}</div>
     <div fxFlex="15" *ngIf="order.fulfillmentStatus=='Unfulfilled' && order.paymentStatus == 'Paid'"
-         fxLayout="column" fxLayoutAlign="center center">
-      <button mat-button color="primary" (click)="editTracking()">Fulfill Order</button>
-      <div class="md-margin-top-1">
-        <button mat-button color="primary" (click)="cancelOrder()">Cancel Order</button>
+         fxLayout="column" fxLayoutAlign="center stretch">
+      <button mat-raised-button color="accent" (click)="editTracking()">Fulfill Order</button>
+      <div class="md-margin-top-1" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="cancelOrder()">Cancel Order</button>
       </div>
     </div>
     <div fxFlex="15" *ngIf="order.fulfillmentStatus == 'Fulfilled' && order.paymentStatus == 'Refunded'"
-         fxLayout="column" fxLayoutAlign="center center">
-      <button mat-button color="primary" (click)="editTracking()">Edit Tracking</button>
-      <div class="md-margin-top-1">
-        <button mat-button color="primary" (click)="cancelFulfillment()">Cancel Fulfillment</button>
+         fxLayout="column" fxLayoutAlign="center stretch">
+      <button mat-raised-button color="accent" (click)="editTracking()">Edit Tracking</button>
+      <div class="md-margin-top-1" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="cancelFulfillment()">Cancel Fulfillment</button>
       </div>
     </div>
     <div fxFlex="15" *ngIf="order.fulfillmentStatus == 'Unfulfilled' && order.paymentStatus == 'Refunded' && status == 0"
@@ -71,5 +71,106 @@
     </div>
     <div fxFlex="30"
          fxLayout="column" fxLayoutAlign="center center">3 - 5 Days</div>
+  </div>
+</div>
+<div class="sc__accent-dark" fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status == 3">
+  <div class="sc-order__detail-item" fxLayout="row" fxLayoutAlign="start start">
+    <div class="sc-order__detail-width sc-order__detail-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
+      <div class="sc-order__detail-image" fxFlex="none">
+        <img [src]="order.imageUrl">
+      </div>
+      <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
+        <div class="sc-order__product-title-2" >{{order.title}}</div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div>SKU: 201778903</div>
+        </div>
+      </div>
+    </div>
+    <div class="sc-order__detail-margin-right sc-order__detail-height" fxFlex="15"
+         fxLayout="column" fxLayoutAlign="center center"> 2</div>
+    <div class="sc-order__detail-margin-right" fxFlex="25"
+         fxLayout="column" fxLayoutAlign="start center">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="sc-order__detail-width-2">
+          <div>Subtotal:&nbsp;</div>
+          <div class="md-margin-top-1">Shipping:&nbsp;</div>
+          <div class="md-margin-top-1">Tax:&nbsp;</div>
+          <div class="md-margin-top-1">Total:&nbsp;</div>
+        </div>
+        <div>
+          <div>$ {{order.productAmount}}</div>
+          <div class="md-margin-top-1">$ {{order.shippingAmount}}</div>
+          <div class="md-margin-top-1">$ {{order.taxAmount}}</div>
+          <div class="md-margin-top-1">$ {{order.totalAmount}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="sc-order__detail-margin-right sc-order__detail-height" fxFlex="20"
+         fxLayout="column" fxLayoutAlign="center center">{{order.returnStatus}}</div>
+    <div fxFlex="14"
+         fxLayout="column" fxLayoutAlign="center stretch">
+      <button mat-raised-button color="primary">Contact Customer</button>
+      <div class="md-margin-top-2" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="authorizeReturn()">Authorize Return</button>
+      </div>
+      <div class="md-margin-top-1" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="shipExchangeItem()">Ship Exchange Item</button>
+      </div>
+      <div class="md-margin-top-1" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="issueRefund()">Issue Refund</button>
+      </div>
+      <div class="md-margin-top-1" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="denyRequest()">Deny Request</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="sc__accent-dark" fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status == 4">
+  <div class="sc-order__detail-item" fxLayout="row" fxLayoutAlign="start start">
+    <div class="sc-order__detail-width sc-order__detail-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
+      <div class="sc-order__detail-image" fxFlex="none">
+        <img [src]="order.imageUrl">
+      </div>
+      <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
+        <div class="sc-order__product-title-2" >{{order.title}}</div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div>SKU: 201778903</div>
+        </div>
+      </div>
+    </div>
+    <div class="sc-order__detail-margin-right sc-order__detail-height" fxFlex="15"
+         fxLayout="column" fxLayoutAlign="center center"> 2</div>
+    <div class="sc-order__detail-margin-right" fxFlex="25"
+         fxLayout="column" fxLayoutAlign="start center">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="sc-order__detail-width-2">
+          <div>Subtotal:&nbsp;</div>
+          <div class="md-margin-top-1">Shipping:&nbsp;</div>
+          <div class="md-margin-top-1">Tax:&nbsp;</div>
+          <div class="md-margin-top-1">Total:&nbsp;</div>
+        </div>
+        <div>
+          <div>$ {{order.productAmount}}</div>
+          <div class="md-margin-top-1">$ {{order.shippingAmount}}</div>
+          <div class="md-margin-top-1">$ {{order.taxAmount}}</div>
+          <div class="md-margin-top-1">$ {{order.totalAmount}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="sc-order__detail-margin-right sc-order__detail-height" fxFlex="20"
+         fxLayout="column" fxLayoutAlign="center center">{{order.returnStatus}}</div>
+    <div fxFlex="14"
+         fxLayout="column" fxLayoutAlign="center stretch">
+      <button mat-raised-button color="primary">Contact Customer</button>
+      <div class="md-margin-top-2" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="authorizeReturn()">Authorize Return</button>
+      </div>
+      <div class="md-margin-top-1" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="issueRefund()">Issue Refund</button>
+      </div>
+      <div class="md-margin-top-1" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="denyRequest()">Deny Request</button>
+      </div>
+    </div>
   </div>
 </div>

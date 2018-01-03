@@ -8,6 +8,10 @@ import { UserService } from  '../../../shared/services/user/user.service';
 import { AddTrackingInformationDialogComponent } from '../add-tracking-information-dialog/add-tracking-information-dialog.component';
 import { CancelOrderDialogComponent } from '../cancel-order-dialog/cancel-order-dialog.component';
 import { CancelFulfillmentDialogComponent } from '../cancel-fulfillment-dialog/cancel-fulfillment-dialog.component';
+import { DenyRequestDialogComponent } from '../deny-request-dialog/deny-request-dialog.component';
+import { AuthorizeReturnDialogComponent } from '../authorize-return-dialog/authorize-return-dialog.component';
+import { ShipExchangeItemDialogComponent } from '../ship-exchange-item-dialog/ship-exchange-item-dialog.component';
+import { IssueRefundDialogComponent } from '../issue-refund-dialog/issue-refund-dialog.component';
 
 @Component({
   selector: 'app-order-detail-item',
@@ -46,6 +50,9 @@ export class OrderDetailItemComponent implements OnInit {
       this.order.fulfillmentStatus = 'Fulfilled';
       this.order.paymentStatus = 'Refunded';
     }
+    if(this.status >= 3) {
+      this.order.returnStatus = 'Pending';
+    }
   }
 
   editTracking() {
@@ -70,6 +77,46 @@ export class OrderDetailItemComponent implements OnInit {
 
   cancelFulfillment() {
     let dialogRef = this.dialog.open(CancelFulfillmentDialogComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+  }
+
+  denyRequest() {
+    let dialogRef = this.dialog.open(DenyRequestDialogComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+  }
+
+  authorizeReturn() {
+    let dialogRef = this.dialog.open(AuthorizeReturnDialogComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+  }
+
+  shipExchangeItem() {
+    let dialogRef = this.dialog.open(ShipExchangeItemDialogComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+  }
+
+  issueRefund() {
+    let dialogRef = this.dialog.open(IssueRefundDialogComponent, {
       data: {}
     });
 

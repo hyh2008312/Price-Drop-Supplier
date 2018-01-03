@@ -1,0 +1,55 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div [hidden]="modified">
+    <div class="sc-order-dialog__title">
+      Edit Your Tracking Information for Exchanged Item
+    </div>
+    <div class="sc-order__detail-margin-top-1" fxLayout="column" >
+      <div fxLayout="row" fxLayoutAlign="start start">
+        <div class="md-dark-secondary sc-order__detail-bill-left-1" fxFlex="none">
+          Total Available to Refunded
+        </div>
+        <div>
+          $ 57
+        </div>
+      </div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
+        <div class="md-dark-secondary sc-order__detail-bill-left-1" fxFlex="none">
+          Already Refunded
+        </div>
+        <div>
+          $ 0
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="md-dark-secondary sc-order__detail-bill-left-1" fxFlex="none">
+          Refund Payment
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          $
+          <div class="md-margin-left-1">
+            <mat-form-field>
+              <input type="text" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary" (click)="close()">CANCEL</button>
+      <div class="md-margin-left-2">
+        <button mat-button color="primary">REFUND</button>
+      </div>
+    </div>
+  </div>
+  <div [hidden]="">
+    <div class="sc-order-dialog__title" fxLayout="row" fxLayoutAlign="start start">
+      <i class="iconfontXberts icon-pic-finish sc-order-dialog__icons"></i> <div class="md-margin-left-2">The payment has been refunded to your customer!</div>
+    </div>
+    <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary" (click)="close()">OK</button>
+    </div>
+  </div>
+</div>

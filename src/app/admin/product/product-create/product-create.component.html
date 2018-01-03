@@ -205,7 +205,19 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between center">
                 <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                  <mat-form-field fxFlex>
+                    <mat-select name="method" placeholder="Choose a Shipping Carrier"
+                                formControlName="method" (ngModelChange)="changeShippingPrice($event, p)">
+                      <mat-option class="md-align-center" *ngFor="let item of shippingMethodList" [value]="item">
+                        {{ item }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center" *ngIf="p.value.method != 0">
                   <div class="md-margin-right-2 sc-product__create-title">$</div>
                   <mat-form-field fxFlex>
                     <input type="text" matInput placeholder="Shipping Charge"
@@ -213,10 +225,10 @@
                   </mat-form-field>
                 </div>
               </div>
-              <div class="sc-product__create-title-1 md-margin-top-2">
+              <div class="sc-product__create-title-1 md-margin-top-2" *ngIf="p.value.method != 0">
                 Shipping Time
               </div>
-              <mat-radio-group class="md-margin-top-2"
+              <mat-radio-group class="md-margin-top-2" *ngIf="p.value.method != 0"
                              fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="shippingTime">
                 <mat-radio-button fxFlex="25" class="sc-product__create-height" *ngFor="let value of shippingTimeList;let i = index;" [value]="value" color="primary">
                   <div fxLayout="row" fxLayoutAlign="start center">
@@ -240,14 +252,14 @@
           <button type="button" mat-raised-button color="primary" (click)="addShippingList()">
             <div fxLayout="row" fxLayoutAlign="start center">
               <i class="material-icons">add</i>
-              <span class="md-margin-left-1">Add Another Shipping Country</span>
+              <span class="md-margin-left-1">Add Another Shipping Method</span>
             </div>
           </button>
         </div>
       </div>
       <div class="sc-product__create-container-1">
         <div class="sc-product__create-title">
-          Commission Settings
+          Affiliate Commission Settings
         </div>
         <div class="md-margin-top-2" fxLayout="column">
           <div fxFlex="46" fxLayout="row" fxLayoutAlign="space-between center">

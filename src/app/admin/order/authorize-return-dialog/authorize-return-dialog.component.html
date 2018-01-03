@@ -1,0 +1,98 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div [hidden]="modified">
+    <div class="sc-order-dialog__title">
+      Edit Your RAN & Shipping Information for Product Return
+    </div>
+    <form [formGroup]="shippingForm" novalidate>
+      <div class="sc-order__detail-title-1 sc-order__detail-margin-top-1">Return Authorization Number(RAN)</div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="Enter a unique RAN for this Item" formControlName="RAN">
+        </mat-form-field>
+      </div>
+      <div class="sc-order__detail-title-1 md-margin-top-2">Return Shipping Address</div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="Recipient or Company Name" formControlName="company">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="Address Line1" formControlName="addressLine1">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="Address Line2" formControlName="addressLine2">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="46">
+          <mat-form-field fxFlex>
+            <input type="text" matInput placeholder="City" formControlName="city">
+          </mat-form-field>
+        </div>
+        <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field fxFlex>
+            <mat-select name="country" placeholder="Country" formControlName="country">
+              <mat-option class="md-align-center" *ngFor="let item of countries" [value]="item.code">
+                {{ item.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field fxFlex>
+            <mat-select name="state" placeholder="State / Province / Region" formControlName="state">
+              <mat-option class="md-align-center" *ngFor="let item of states" [value]="item.code">
+                {{ item.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field fxFlex>
+            <input type="text" matInput placeholder="Postal / ZIP Code" formControlName="code">
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <input type="text" matInput placeholder="Phone Number" formControlName="phone">
+        </mat-form-field>
+      </div>
+      <div class="xb-italic">Note: If you don't need your products to be refunded, please SKIP this step.</div>
+    </form>
+    <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary">SAVE</button>
+      <div class="md-margin-left-2">
+        <button mat-button color="primary" (click)="close()">CANCEL</button>
+      </div>
+    </div>
+  </div>
+  <div [hidden]="!modified">
+    <div class="sc-order-dialog__title">
+      Product Return Information
+    </div>
+    <div class="sc-order__detail-title-1 sc-order__detail-margin-top-1">Return Authorization Number(RAN)</div>
+    <div class="md-margin-top-2">e9891889898989897</div>
+    <div class="sc-order__detail-title-1 sc-order__detail-margin-top-1">Return Shipping Address</div>
+    <div class="md-margin-top-2">Xberts,Inc</div>
+    <div class="md-margin-top-2">2089 University Avenue</div>
+    <div class="md-margin-top-2">101 Apt</div>
+    <div class="md-margin-top-2">San Francisco, CA, 54402</div>
+    <div class="md-margin-top-2">United States</div>
+    <div>Phone Number:10 328-398988</div>
+    <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary" (click)="close()">CANCEL</button>
+      <div class="md-margin-left-2">
+        <button mat-button color="primary" >MODIFY</button>
+      </div>
+    </div>
+  </div>
+</div>

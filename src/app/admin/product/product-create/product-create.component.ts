@@ -26,6 +26,8 @@ export class ProductCreateComponent implements OnInit {
 
   category = ['Date', 'Most Views', 'Most Orders', 'Highest Conversion'];
 
+  shippingMethodList = ['EMS','DHL'];
+
   shippingTimeList = ['5 - 10 days','7 - 14 days','10 - 15 days','14 - 21 days','21 - 28 days','other'];
 
   YesOrNo = ["Yes", 'No'];
@@ -90,11 +92,22 @@ export class ProductCreateComponent implements OnInit {
 
     this.shipping.push(this.fb.group({
       country: ['', Validators.required],
+      method: ['', Validators.required],
       charge: ['', Validators.required],
       shippingTime: ['', Validators.required],
       minTime: [''],
       maxTime: ['']
     }));
+  }
+
+  changeShippingPrice($event, p) {
+
+    p.patchValue({
+      charge: 0,
+      shippingTime: '',
+      minTime: '',
+      maxTime: ''
+    })
   }
 
   add(event: MatChipInputEvent, list: any): void {
