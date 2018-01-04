@@ -54,5 +54,10 @@
     top: 50%;
     @include transform(translate(-50%,-50%));
   }
+
+  &__icons{
+    font-size: 40px;
+    color: rgba(0,0,0,.54);
+  }
 }
 
