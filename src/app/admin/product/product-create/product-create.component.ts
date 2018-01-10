@@ -118,7 +118,7 @@ export class ProductCreateComponent implements OnInit {
     this.shipping.push(this.fb.group({
       countryId: ['', Validators.required],
       id: ['', Validators.required],
-      price: ['', Validators.required],
+      price: [0, Validators.required],
       checked: [false, Validators.required],
       shippingTime: ['', Validators.required],
       min: [0, Validators.required],
@@ -185,6 +185,10 @@ export class ProductCreateComponent implements OnInit {
     this.addProductList(true);
   }
 
+  deleteVariantObject(i) {
+    this.product.removeAt(i)
+  }
+
   addVariantList() {
     let option = {
       option: '',
@@ -231,7 +235,7 @@ export class ProductCreateComponent implements OnInit {
 
           this.product.push(this.fb.group({
             variant: [item],
-            attributes: [item],
+            attributes: [newArr],
             sku: ['', Validators.required],
             stock: ['', Validators.required],
             saleUnitPrice: ['', Validators.required],
@@ -341,18 +345,18 @@ export class ProductCreateComponent implements OnInit {
   continue() {
     let product = this.productForm.value;
     this.adminService.productCreate(product).then((data) => {
-      console.log(data);
       this.productId = data.id;
       this.step = 1;
     });
   }
 
   publish() {
-    let product = {};
-    //this.adminService.productCreate(product).then((data) => {
-    //  console.log(data);
-    //});
-    this.openPendingProductDialog();
+    let product = this.productForm1.value;
+    product.id = this.productId;
+    this.adminService.addProduct(product).then((data) => {
+      this.openPendingProductDialog();
+      console.log(data);
+    });
   }
 
   openPendingProductDialog() {
