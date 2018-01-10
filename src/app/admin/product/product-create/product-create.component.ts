@@ -51,7 +51,13 @@ export class ProductCreateComponent implements OnInit {
     text: 'other'
   }];
 
-  YesOrNo = ["Yes", 'No'];
+  YesOrNo = [{
+    text: "Yes",
+    value: true
+  }, {
+    text: 'No',
+    value: false
+  }];
 
   variantList = ['Color','Size', 'Material', 'Other'];
 
@@ -111,6 +117,10 @@ export class ProductCreateComponent implements OnInit {
     this.addProductList();
     this.addShippingList();
     this.addCategory();
+  }
+
+  changeStep(index) {
+    this.step = index;
   }
 
   addShippingList() {
@@ -245,6 +255,7 @@ export class ProductCreateComponent implements OnInit {
       } else {
         this.isProductListShow = false;
         this.product.push(this.fb.group({
+          attributes: [[]],
           sku: ['', Validators.required],
           stock: ['', Validators.required],
           saleUnitPrice: ['', Validators.required],
@@ -255,6 +266,7 @@ export class ProductCreateComponent implements OnInit {
 
     } else {
       this.product.push(this.fb.group({
+        attributes: [[]],
         sku: ['', Validators.required],
         stock: ['', Validators.required],
         saleUnitPrice: ['', Validators.required],
@@ -355,7 +367,6 @@ export class ProductCreateComponent implements OnInit {
     product.id = this.productId;
     this.adminService.addProduct(product).then((data) => {
       this.openPendingProductDialog();
-      console.log(data);
     });
   }
 

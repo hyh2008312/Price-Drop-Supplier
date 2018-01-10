@@ -87,7 +87,7 @@ export class AdminService {
 
     const url = `${this.baseUrl.url}product/add/${product.id}/`;
 
-    return this.http.post(url, product, options)
+    return this.http.put(url, product, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
@@ -104,7 +104,7 @@ export class AdminService {
 
     const url = `${this.baseUrl.url}product/draft/add/${product.id}/`;
 
-    return this.http.post(url, product, options)
+    return this.http.put(url, product, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);

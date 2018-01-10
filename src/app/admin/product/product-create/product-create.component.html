@@ -3,15 +3,27 @@
     <span class="md-dark-secondary xb-pointer" (click)="openLeaveDialog()">产品</span> <span class="md-dark-secondary">></span> <span class="xb-bold">添加新产品</span>
   </div>
   <div class="md-margin-top-3 sc-product__create-navigation-bg" fxLayout="row" fxLayoutAlign="start center">
-    <div class="sc-product__create-navigation" fxFlex="50"
-      fxLayout="row" fxLayoutAlign="center center"
+    <div class="sc-product__create-navigation xb-pointer" fxFlex="50" *ngIf="step == 1 && productId"
+      fxLayout="row" fxLayoutAlign="center center" (click)="changeStep(0)"
          [ngClass]="{'sc-product__create-navigation-active':step==0}">
       1.Edit Basic Information
       <div class="sc-product__create-tri"></div>
     </div>
-    <div class="sc-product__create-navigation" fxFlex="50"
-      fxLayout="row" fxLayoutAlign="center center"
+    <div class="sc-product__create-navigation" fxFlex="50" *ngIf="!productId || step == 0"
+         fxLayout="row" fxLayoutAlign="center center"
+         [ngClass]="{'sc-product__create-navigation-active':step==0}">
+      1.Edit Basic Information
+      <div class="sc-product__create-tri"></div>
+    </div>
+    <div class="sc-product__create-navigation xb-pointer" fxFlex="50" *ngIf="step == 0 && productId"
+      fxLayout="row" fxLayoutAlign="center center" (click)="changeStep(1)"
       [ngClass]="{'sc-product__create-navigation-active':step==1}">2.Add Product Details</div>
+    <div class="sc-product__create-navigation" fxFlex="50" *ngIf="step == 1 && productId"
+         fxLayout="row" fxLayoutAlign="center center"
+         [ngClass]="{'sc-product__create-navigation-active':step==1}">2.Add Product Details</div>
+    <div class="sc-product__create-navigation md-dark-secondary" fxFlex="50" *ngIf="!productId"
+         fxLayout="row" fxLayoutAlign="center center"
+         [ngClass]="{'sc-product__create-navigation-active':step==1}">2.Add Product Details</div>
   </div>
   <form [formGroup]="productForm" novalidate *ngIf="step == 0">
     <div>
@@ -402,8 +414,8 @@
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
               <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="isPowder">
                 <mat-radio-button class="sc-product__create-height sc-product__create-margin-right-4" *ngFor="let value of YesOrNo;let i = index;"
-                                  [value]="value" color="primary">
-                  {{ value }}
+                                  [value]="value.value" color="primary">
+                  {{ value.text }}
                 </mat-radio-button>
               </mat-radio-group>
             </div>
@@ -413,8 +425,8 @@
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
               <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="isLiquid">
                 <mat-radio-button class="sc-product__create-height sc-product__create-margin-right-4" *ngFor="let value of YesOrNo;let i = index;"
-                                  [value]="value" color="primary">
-                  {{ value }}
+                                  [value]="value.value" color="primary">
+                  {{ value.text }}
                 </mat-radio-button>
               </mat-radio-group>
             </div>
@@ -424,8 +436,8 @@
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
               <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="isBattery">
                 <mat-radio-button class="sc-product__create-height sc-product__create-margin-right-4" *ngFor="let value of YesOrNo;let i = index;"
-                                  [value]="value" color="primary">
-                  {{ value }}
+                                  [value]="value.value" color="primary">
+                  {{ value.text }}
                 </mat-radio-button>
               </mat-radio-group>
             </div>
@@ -434,7 +446,7 @@
       </div>
       <div class="sc-product__create-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
         <div fxFlex>
-          <div class="xb-bold md-margin-left-2"><< Back</div>
+          <div class="xb-bold md-margin-left-2 xb-pointer" (click)="changeStep(0)"><< Back</div>
         </div>
         <div fxLayout="row" fxLayoutAlign="start center">
           <button mat-raised-button color="primary" type="button" (click)="publish()">
