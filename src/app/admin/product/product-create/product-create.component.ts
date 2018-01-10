@@ -11,6 +11,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { ENTER } from '@angular/cdk/keycodes';
 
 import { SaveProductDialogComponent } from '../save-product-dialog/save-product-dialog.component';
+import { PendingProductDialogComponent } from '../pending-product-dialog/pending-product-dialog.component';
 
 @Component({
   selector: 'app-product-create',
@@ -22,13 +23,33 @@ export class ProductCreateComponent implements OnInit {
 
   step: number = 0;
 
+  productId: any;
+
   isFirstStepFinished: boolean = false;
 
-  category = ['Date', 'Most Views', 'Most Orders', 'Highest Conversion'];
+  categoryList:any;
 
   shippingMethodList = ['EMS','DHL'];
 
-  shippingTimeList = ['5 - 10 days','7 - 14 days','10 - 15 days','14 - 21 days','21 - 28 days','other'];
+  shippingTimeList = [{
+    value: [5, 10],
+    text: '5 - 10 days'
+  }, {
+    value: [7, 14],
+    text: '7 - 14 days'
+  }, {
+    value: [10, 15],
+    text: '10 - 15 days'
+  }, {
+    value: [14, 21],
+    text:'14 - 21 days'
+  },{
+    value: [21, 28],
+    text: '21 - 28 days'
+  },{
+    value: [0, 0],
+    text: 'other'
+  }];
 
   YesOrNo = ["Yes", 'No'];
 
@@ -39,6 +60,7 @@ export class ProductCreateComponent implements OnInit {
   variantAddedList: any[] = [];
 
   productForm : FormGroup;
+  productForm1: FormGroup;
 
   countries: Object[];
 
@@ -51,63 +73,80 @@ export class ProductCreateComponent implements OnInit {
   additionalList: any[] = new Array(5);
   additionalSrcs: any[] = new Array(5);
 
-  get product() { return this.productForm.get('product') as FormArray; }
+  get product() { return this.productForm.get('variants') as FormArray; }
   get shipping() { return this.productForm.get('shipping') as FormArray; }
+  get categories() { return this.productForm.get('categories') as FormArray; }
 
   constructor(
     private constantService: ConstantService,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private adminService: AdminService
   ) {
     this.countries = this.constantService.getCountries();
 
     this.productForm = this.fb.group({
-      name: ['', Validators.required],
-      category: ['', Validators.required],
+      title: ['', Validators.required],
+      categories: this.fb.array([]),
       variant: this.fb.array([]),
-      product: this.fb.array([]),
+      variants: this.fb.array([]),
       shipping: this.fb.array([]),
       commission: ['', Validators.required],
-      brand: [''],
+    });
+
+    this.productForm1 = this.fb.group({
+      brandName: [''],
       description: ['', Validators.required],
-      package: this.fb.group({
-        length: ['', Validators.required],
-        width: ['', Validators.required],
-        height: ['', Validators.required],
-        weight: ['', Validators.required],
-        declaredValue: ['', Validators.required],
-        country: ['', Validators.required],
-        powder: ['', Validators.required],
-        liquid: ['', Validators.required],
-        battery: ['', Validators.required]
-      })
+      length: ['', Validators.required],
+      width: ['', Validators.required],
+      height: ['', Validators.required],
+      weight: ['', Validators.required],
+      customsDeclaredCharge: ['', Validators.required],
+      originCountryId: ['', Validators.required],
+      isPowder: ['', Validators.required],
+      isLiquid: ['', Validators.required],
+      isBattery: ['', Validators.required]
     });
 
     this.addProductList();
     this.addShippingList();
-
+    this.addCategory();
   }
 
   addShippingList() {
 
     this.shipping.push(this.fb.group({
-      country: ['', Validators.required],
-      method: ['', Validators.required],
-      charge: ['', Validators.required],
+      countryId: ['', Validators.required],
+      id: ['', Validators.required],
+      price: ['', Validators.required],
+      checked: [false, Validators.required],
       shippingTime: ['', Validators.required],
-      minTime: [''],
-      maxTime: ['']
+      min: [0, Validators.required],
+      max: [0, Validators.required]
     }));
+  }
+
+  addCategory() {
+    this.categories.push(this.fb.group({
+      id: ['', Validators.required]
+    }));
+  }
+
+  changeShippingMethod($event, p) {
+    this.adminService.getShippingList($event).then((data) => {
+      p.shippingMethodList = data;
+    });
   }
 
   changeShippingPrice($event, p) {
 
     p.patchValue({
-      charge: 0,
+      price: 0,
       shippingTime: '',
-      minTime: '',
-      maxTime: ''
-    })
+      checked: false,
+      min: 0,
+      max: 0
+    });
   }
 
   add(event: MatChipInputEvent, list: any): void {
@@ -116,7 +155,10 @@ export class ProductCreateComponent implements OnInit {
 
     // Add our fruit
     if ((value || '').trim()) {
-      list.value.push(value.trim());
+      list.value.push({
+        id: list.option,
+        value: value.trim()
+      });
       this.addProductList(true);
     }
 
@@ -178,31 +220,41 @@ export class ProductCreateComponent implements OnInit {
 
       if(newArr.length > 0) {
         for(let item of newArr) {
+          let idArr = item.id.toString().split(',');
+          let valueArr = item.value.toString().split(',');
+          let newArr = new Array(idArr.length);
+          for(let i = 0; i < newArr.length; i++) {
+            newArr[i] = {};
+            newArr[i].id = parseInt(idArr[i]);
+            newArr[i].value = valueArr[i];
+          }
+
           this.product.push(this.fb.group({
             variant: [item],
-            SKU: ['', Validators.required],
-            quantity: ['', Validators.required],
-            price: ['', Validators.required],
-            MSRP: ['']
+            attributes: [item],
+            sku: ['', Validators.required],
+            stock: ['', Validators.required],
+            saleUnitPrice: ['', Validators.required],
+            unitPrice: ['']
           }));
         }
       } else {
         this.isProductListShow = false;
         this.product.push(this.fb.group({
-          SKU: ['', Validators.required],
-          quantity: ['', Validators.required],
-          price: ['', Validators.required],
-          MSRP: ['']
+          sku: ['', Validators.required],
+          stock: ['', Validators.required],
+          saleUnitPrice: ['', Validators.required],
+          unitPrice: ['']
         }));
       }
 
 
     } else {
       this.product.push(this.fb.group({
-        SKU: ['', Validators.required],
-        quantity: ['', Validators.required],
-        price: ['', Validators.required],
-        MSRP: ['']
+        sku: ['', Validators.required],
+        stock: ['', Validators.required],
+        saleUnitPrice: ['', Validators.required],
+        unitPrice: ['']
       }));
     }
 
@@ -218,7 +270,9 @@ export class ProductCreateComponent implements OnInit {
       let index = 0;
       for (let i = 0; i < len1; i++) {
         for (let j = 0; j < len2; j++) {
-          temp[index] = doubleArrays[0][i] + ', ' + doubleArrays[1][j];
+          temp[index] = {};
+          temp[index].id = doubleArrays[0][i].id + ',' + doubleArrays[1][j].id;
+          temp[index].value = doubleArrays[0][i].value + ', ' + doubleArrays[1][j].value;
           index++;
         }
       }
@@ -239,12 +293,70 @@ export class ProductCreateComponent implements OnInit {
     item.isValue = true;
   }
 
+  changeShippingTime($event, item, index) {
+    let shippingTime = item.value.shippingTime;
+    shippingTime[index] = $event;
+    item.patchValue({
+      shipTime: shippingTime
+    });
+  }
+
+  showMinAndMaxTime($event, index, item) {
+    if(index == 5) {
+      item.patchValue({
+        checked: true
+      });
+    } else {
+      item.patchValue({
+        checked: false
+      });
+    }
+  }
+
   ngOnInit():void {
+    this.adminService.getCategoryList().then((data) => {
+      this.categoryList = data;
+    });
+
+    this.adminService.getVariantList().then((data) => {
+      this.variantList = data;
+    });
+
+    this.adminService.getCountryList().then((data) => {
+      this.countries = data;
+    });
 
   }
 
   openLeaveDialog() {
     let dialogRef = this.dialog.open(SaveProductDialogComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+  }
+
+  continue() {
+    let product = this.productForm.value;
+    this.adminService.productCreate(product).then((data) => {
+      console.log(data);
+      this.productId = data.id;
+      this.step = 1;
+    });
+  }
+
+  publish() {
+    let product = {};
+    //this.adminService.productCreate(product).then((data) => {
+    //  console.log(data);
+    //});
+    this.openPendingProductDialog();
+  }
+
+  openPendingProductDialog() {
+    let dialogRef = this.dialog.open(PendingProductDialogComponent, {
       data: {}
     });
 

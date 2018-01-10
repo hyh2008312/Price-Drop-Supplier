@@ -11,6 +11,7 @@ import { ImageUploadMainComponent } from './image-upload-main/image-upload-main.
 import { ImageUploadAdditionalComponent } from './image-upload-additional/image-upload-additional.component';
 
 import { SaveProductDialogComponent } from './save-product-dialog/save-product-dialog.component';
+import { PendingProductDialogComponent } from './pending-product-dialog/pending-product-dialog.component';
 
 import { ProductRoutingModule } from './product.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -29,10 +30,12 @@ import { SharedModule } from '../../shared/shared.module';
     ProductTitleComponent,
     ImageUploadMainComponent,
     ImageUploadAdditionalComponent,
-    SaveProductDialogComponent
+    SaveProductDialogComponent,
+    PendingProductDialogComponent
   ],
   entryComponents: [
-    SaveProductDialogComponent
+    SaveProductDialogComponent,
+    PendingProductDialogComponent
   ],
   providers: []
 })

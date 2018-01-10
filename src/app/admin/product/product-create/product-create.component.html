@@ -13,7 +13,7 @@
       fxLayout="row" fxLayoutAlign="center center"
       [ngClass]="{'sc-product__create-navigation-active':step==1}">2.Add Product Details</div>
   </div>
-  <form [formGroup]="productForm" novalidate>
+  <form [formGroup]="productForm" novalidate *ngIf="step == 0">
     <div>
       <div class="sc-product__create-container-1">
         <div class="sc-product__create-title">
@@ -22,18 +22,24 @@
         <div class="md-margin-top-2" fxLayout="column">
           <div fxLayout="row" fxLayoutAlign="start center">
             <mat-form-field fxFlex>
-              <input type="text" matInput placeholder="Product Name" formControlName="name">
+              <input type="text" matInput placeholder="Product Name" formControlName="title">
             </mat-form-field>
           </div>
-          <div fxLayout="row" fxLayoutAlign="space-between center">
-            <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
-              <mat-form-field fxFlex>
-                <mat-select name="category" placeholder="Select a Category" formControlName="category">
-                  <mat-option class="md-align-center" *ngFor="let item of category" [value]="item">
-                    {{ item }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+          <div formArrayName="categories">
+            <div *ngFor="let p of categories.controls; let i = index;">
+              <div [formGroupName]="i">
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                  <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field fxFlex>
+                      <mat-select name="category" placeholder="Select a Category" formControlName="id">
+                        <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+                          {{ item.name }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -54,8 +60,8 @@
             <div class="sc-product__create-margin-right-1" fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
                 <mat-select name="option" placeholder="Option Name" [value]="p.option" (valueChange)="optionChange($event, p)">
-                  <mat-option *ngFor="let item of variantList" [value]="item">
-                    {{ item }}
+                  <mat-option *ngFor="let item of variantList" [value]="item.id">
+                    {{ item.name }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -65,7 +71,7 @@
                 <mat-chip-list #chipList>
                   <mat-chip *ngFor="let item of p.value" [selectable]="p.selectable"
                             [removable]="p.removable" (remove)="remove(item, p)">
-                    {{item}}
+                    {{item.value}}
                     <mat-icon matChipRemove *ngIf="p.removable">cancel</mat-icon>
                   </mat-chip>
                   <input placeholder=""
@@ -95,20 +101,20 @@
           Inventory & Pricing
         </div>
         <div class="md-margin-top-2" *ngIf="!isProductListShow">
-          <div formArrayName="product" >
+          <div formArrayName="variants" >
             <div *ngFor="let p of product.controls; let i = index">
               <div [formGroupName]="i" fxLayout="column">
                 <div fxLayout="row" fxLayoutAlign="start center">
                   <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                     <mat-form-field fxFlex>
-                      <input type="text" matInput placeholder="SKU" formControlName="SKU">
+                      <input type="text" matInput placeholder="SKU" formControlName="sku">
                     </mat-form-field>
                   </div>
                 </div>
                 <div fxLayout="row" fxLayoutAlign="start center">
                   <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                     <mat-form-field fxFlex>
-                      <input type="text" matInput placeholder="Quantity" formControlName="quantity">
+                      <input type="text" matInput placeholder="Quantity" formControlName="stock">
                     </mat-form-field>
                   </div>
                 </div>
@@ -116,13 +122,13 @@
                   <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                     <div class="md-margin-right-2 sc-product__create-title">$</div>
                     <mat-form-field fxFlex>
-                      <input type="text" matInput placeholder="Sale Price" formControlName="price">
+                      <input type="text" matInput placeholder="Sale Price" formControlName="saleUnitPrice">
                     </mat-form-field>
                   </div>
                   <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                     <div class="md-margin-right-2 sc-product__create-title">$</div>
                     <mat-form-field fxFlex>
-                      <input type="text" matInput placeholder="Original Price" formControlName="MSRP">
+                      <input type="text" matInput placeholder="Original Price" formControlName="unitPrice">
                     </mat-form-field>
                   </div>
                 </div>
@@ -131,7 +137,7 @@
           </div>
         </div>
         <div class="md-margin-top-2" *ngIf="isProductListShow">
-          <div formArrayName="product" >
+          <div formArrayName="variants" >
             <div fxLayout="row" fxLayoutAlign="start center">
               <div class="sc-product__create-margin-right-1 sc-product__create-width-1 md-dark-secondary xb-bold"
                    fxFlex="none" fxLayout="row" fxLayoutAlign="center center">
@@ -154,31 +160,31 @@
                 Original Price
               </div>
             </div>
-            <div fxLayout="column" fxLayoutAlign="start stretch" *ngFor="let p of product.controls; let i = index">
+            <div fxLayout="column" fxLayoutAlign="start stretch" *ngFor="let p of product.controls; let i = index;">
               <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">
                 <div class="sc-product__create-margin-right-1 sc-product__create-width-1 sc-product__create-text-2" fxFlex="none">
-                  {{p.value.variant}}
+                  {{p.value.attributes.value}}
                 </div>
                 <div class="sc-product__create-margin-right-1" fxFlex="20" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field class="sc-product__create-width-100">
-                    <input type="text" matInput formControlName="quantity">
+                    <input type="text" matInput formControlName="stock">
                   </mat-form-field>
                 </div>
                 <div class="sc-product__create-margin-right-3" fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field class="sc-product__create-width-100">
-                    <input type="text" matInput formControlName="SKU">
+                    <input type="text" matInput formControlName="sku">
                   </mat-form-field>
                 </div>
                 <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                   <div class="md-margin-right-2 sc-product__create-title">$</div>
                   <mat-form-field class="sc-product__create-width-100">
-                    <input type="text" matInput formControlName="price">
+                    <input type="text" matInput formControlName="saleUnitPrice">
                   </mat-form-field>
                 </div>
                 <div fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                   <div class="md-margin-right-2 sc-product__create-title">$</div>
                   <mat-form-field class="sc-product__create-width-100">
-                    <input type="text" matInput formControlName="MSRP">
+                    <input type="text" matInput formControlName="unitPrice">
                   </mat-form-field>
                 </div>
               </div>
@@ -198,48 +204,51 @@
                 <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field fxFlex>
                     <mat-select name="country" placeholder="Shipping Country"
-                                formControlName="country">
-                      <mat-option class="md-align-center" *ngFor="let item of countries" [value]="item.code">
+                                formControlName="countryId" (ngModelChange)="changeShippingMethod($event, p)">
+                      <mat-option class="md-align-center" *ngFor="let item of countries" [value]="item.id">
                         {{ item.code }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
               </div>
-              <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="p.shippingMethodList && p.shippingMethodList.length > 0">
                 <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field fxFlex>
                     <mat-select name="method" placeholder="Choose a Shipping Carrier"
-                                formControlName="method" (ngModelChange)="changeShippingPrice($event, p)">
-                      <mat-option class="md-align-center" *ngFor="let item of shippingMethodList" [value]="item">
-                        {{ item }}
+                                formControlName="id" (ngModelChange)="changeShippingPrice($event, p)">
+                      <mat-option class="md-align-center" *ngFor="let item of p.shippingMethodList" [value]="item.id">
+                        {{ item.shippingProvider }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
-                <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center" *ngIf="p.value.method != 0">
+                <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center" *ngIf="p.value.id != ''">
                   <div class="md-margin-right-2 sc-product__create-title">$</div>
                   <mat-form-field fxFlex>
                     <input type="text" matInput placeholder="Shipping Charge"
-                           formControlName="charge" >
+                           formControlName="price" >
                   </mat-form-field>
                 </div>
               </div>
-              <div class="sc-product__create-title-1 md-margin-top-2" *ngIf="p.value.method != 0">
+              <div class="sc-product__create-title-1 md-margin-top-2" *ngIf="p.value.id != ''">
                 Shipping Time
               </div>
-              <mat-radio-group class="md-margin-top-2" *ngIf="p.value.method != 0"
+              <mat-radio-group class="md-margin-top-2" *ngIf="p.value.id != ''"
                              fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="shippingTime">
-                <mat-radio-button fxFlex="25" class="sc-product__create-height" *ngFor="let value of shippingTimeList;let i = index;" [value]="value" color="primary">
+                <mat-radio-button fxFlex="25" class="sc-product__create-height" *ngFor="let value of shippingTimeList;let i = index;"
+                                  [value]="value.value" color="primary" (change)="showMinAndMaxTime($event, i, p)">
                   <div fxLayout="row" fxLayoutAlign="start center">
-                    {{ value }}
-                    <div *ngIf="i == 5 && p.value.shippingTime == 'other'" class="md-margin-left-4" fxLayout="row" fxLayoutAlign="start center">
+                    {{ value.text }}
+                    <div *ngIf="i == 5 && p.value.checked" class="md-margin-left-4" fxLayout="row" fxLayoutAlign="start center">
                       <mat-form-field class="sc-product__create-width">
-                        <input class="md-align-center" type="text" matInput placeholder="Min" formControlName="minTime">
+                        <input class="md-align-center" type="number" matInput placeholder="Min" formControlName="min"
+                               (ngModelChange)="changeShippingTime($event, p, 0)">
                       </mat-form-field>
                       <div class="md-margin-left-2 md-margin-right-2">-</div>
                       <mat-form-field class="sc-product__create-width">
-                        <input class="md-align-center" type="text" matInput placeholder="Max" formControlName="maxTime">
+                        <input class="md-align-center" type="number" matInput placeholder="Max" formControlName="max"
+                               (ngModelChange)="changeShippingTime($event, p, 1)">
                       </mat-form-field>
                     </div>
                   </div>
@@ -281,11 +290,13 @@
         </div>
       </div>
       <div class="sc-product__create-margin-top" fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button color="primary" type="button">
+        <button mat-raised-button color="primary" type="button" (click)="continue()">
           SAVE & CONTINUE
         </button>
       </div>
     </div>
+  </form>
+  <form [formGroup]="productForm1" novalidate *ngIf="step == 1">
     <div>
       <div class="sc-product__create-container-1">
         <div class="sc-product__create-title">
@@ -297,7 +308,7 @@
         <div class="md-margin-top-2" fxLayout="column">
           <div fxLayout="row" fxLayoutAlign="start center">
             <mat-form-field fxFlex>
-              <input type="text" matInput placeholder="Brand Name(Optional)" formControlName="brand">
+              <input type="text" matInput placeholder="Brand Name(Optional)" formControlName="brandName">
             </mat-form-field>
           </div>
           <div fxLayout="row" fxLayoutAlign="start center">
@@ -324,7 +335,7 @@
         <div class="sc-product__create-title">
           Logistics Information
         </div>
-        <div formGroupName="package">
+        <div>
           <div fxLayout="row" fxLayoutAlign="start center">
             <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Package length</div>
             <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
@@ -366,7 +377,7 @@
             <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
               <div class="sc-product__create-margin-right-2">$</div>
               <mat-form-field fxFlex>
-                <input type="text" matInput formControlName="declaredValue">
+                <input type="text" matInput formControlName="customsDeclaredCharge">
               </mat-form-field>
             </div>
           </div>
@@ -374,20 +385,19 @@
             <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Country of Origin</div>
             <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
               <mat-form-field fxFlex>
-                <mat-select name="country" placeholder="Select a Country Code"
-                            formControlName="country">
-                  <mat-option *ngFor="let item of countries" [value]="item.code">
+                <mat-select name="originCountryId" placeholder="Select a Country Code"
+                            formControlName="originCountryId">
+                  <mat-option *ngFor="let item of countries" [value]="item.id">
                     {{ item.code }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
-            <div>g</div>
           </div>
           <div fxLayout="row" fxLayoutAlign="start center">
             <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Contains Powder</div>
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
-              <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="powder">
+              <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="isPowder">
                 <mat-radio-button class="sc-product__create-height sc-product__create-margin-right-4" *ngFor="let value of YesOrNo;let i = index;"
                                   [value]="value" color="primary">
                   {{ value }}
@@ -398,7 +408,7 @@
           <div fxLayout="row" fxLayoutAlign="start center">
             <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Contains Liquid</div>
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
-              <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="powder">
+              <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="isLiquid">
                 <mat-radio-button class="sc-product__create-height sc-product__create-margin-right-4" *ngFor="let value of YesOrNo;let i = index;"
                                   [value]="value" color="primary">
                   {{ value }}
@@ -409,7 +419,7 @@
           <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Contains Battery</div>
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
-              <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="powder">
+              <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="isBattery">
                 <mat-radio-button class="sc-product__create-height sc-product__create-margin-right-4" *ngFor="let value of YesOrNo;let i = index;"
                                   [value]="value" color="primary">
                   {{ value }}
@@ -424,8 +434,8 @@
           <div class="xb-bold md-margin-left-2"><< Back</div>
         </div>
         <div fxLayout="row" fxLayoutAlign="start center">
-          <button mat-raised-button color="primary" type="button">
-            PUZBLISH
+          <button mat-raised-button color="primary" type="button" (click)="publish()">
+            PUBLISH
           </button>
           <div class="md-margin-left-2">
             <button mat-button color="primary" type="button">

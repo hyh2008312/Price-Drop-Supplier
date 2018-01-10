@@ -106,15 +106,7 @@ export class LoginComponent implements OnInit {
       self.userService.getUser().then((data) => {
         self.userService.addUser(data);
         self.auth.inviteToken(data.isInvite);
-        if(data && data.store && data.store.length>0) {
-          if(data && data.isInvite) {
-            self.router.navigate(['/admin']);
-          } else {
-            self.router.navigate(['/account/invitation']);
-          }
-        } else {
-          self.router.navigate(['/account/signup'], {queryParams: {step: 1}});
-        }
+        self.router.navigate(['/admin']);
 
       });
     }).catch((data) => {
