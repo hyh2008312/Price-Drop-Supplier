@@ -81,8 +81,7 @@ export class ProductCreateComponent implements OnInit {
   additionalSrcs: any[] = new Array(5);
 
   get product() { return this.productForm.get('variants') as FormArray; }
-  get shipping() { return this.productForm.get('shipping') as FormArray; }
-  get categories() { return this.productForm.get('categories') as FormArray; }
+  get shipping() { return this.productForm.get('shippings') as FormArray; }
   get productTitle() { return this.productForm.get('title'); }
 
   constructor(
@@ -97,10 +96,10 @@ export class ProductCreateComponent implements OnInit {
 
     this.productForm = this.fb.group({
       title: ['', Validators.required],
-      categories: this.fb.array([]),
+      categoryId: [null, Validators.required],
       variant: this.fb.array([]),
       variants: this.fb.array([]),
-      shipping: this.fb.array([]),
+      shippings: this.fb.array([]),
       commission: [0, Validators.required],
       brandName: [''],
       description: ['', Validators.required],
@@ -110,9 +109,9 @@ export class ProductCreateComponent implements OnInit {
       weight: [0, Validators.required],
       customsDeclaredCharge: [0, Validators.required],
       originCountryId: [null, Validators.required],
-      isPowder: ['', Validators.required],
-      isLiquid: ['', Validators.required],
-      isBattery: ['', Validators.required]
+      isPowder: [false, Validators.required],
+      isLiquid: [false, Validators.required],
+      isBattery: [false, Validators.required]
     });
 
     this.addProductList();
@@ -140,11 +139,6 @@ export class ProductCreateComponent implements OnInit {
     }));
   }
 
-  addCategory() {
-    this.categories.push(this.fb.group({
-      id: ['', Validators.required]
-    }));
-  }
 
   changeShippingMethod($event, p) {
     this.adminService.getShippingList($event).then((data) => {
@@ -156,7 +150,7 @@ export class ProductCreateComponent implements OnInit {
 
     p.patchValue({
       price: 0,
-      shippingTime: '',
+      shippingTime: 0,
       checked: false,
       min: 0,
       max: 0
@@ -251,7 +245,7 @@ export class ProductCreateComponent implements OnInit {
             variant: [item],
             attributes: [newArr],
             sku: ['', Validators.required],
-            stock: ['', Validators.required],
+            stock: [0, Validators.required],
             saleUnitPrice: [0, Validators.required],
             unitPrice: [0]
           }));
@@ -261,7 +255,7 @@ export class ProductCreateComponent implements OnInit {
         this.product.push(this.fb.group({
           attributes: [[]],
           sku: ['', Validators.required],
-          stock: ['', Validators.required],
+          stock: [0, Validators.required],
           saleUnitPrice: [0, Validators.required],
           unitPrice: [0]
         }));
@@ -272,7 +266,7 @@ export class ProductCreateComponent implements OnInit {
       this.product.push(this.fb.group({
         attributes: [[]],
         sku: ['', Validators.required],
-        stock: ['', Validators.required],
+        stock: [0, Validators.required],
         saleUnitPrice: [0, Validators.required],
         unitPrice: [0]
       }));
@@ -336,7 +330,6 @@ export class ProductCreateComponent implements OnInit {
   ngOnInit():void {
     this.adminService.getCategoryList().then((data) => {
       this.categoryList = data;
-      this.addCategory();
     });
 
     this.adminService.getVariantList().then((data) => {
@@ -383,8 +376,16 @@ export class ProductCreateComponent implements OnInit {
     let product = this.productForm.value;
     let self = this;
 
+    let shippings = [];
+    for(let item of product.shippings) {
+      if(item.countryId != '' && item.shippingId != '') {
+        shippings.push(item);
+      }
+    }
+
+    product.shippings = shippings;
+
     this.adminService.productDraftCreate(product).then((data) => {
-      self.openPendingProductDialog();
       self.ngZone.runOutsideAngular(() => {
         self.document.querySelector('html').style.top = '0';
       });
