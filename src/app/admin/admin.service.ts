@@ -59,7 +59,7 @@ export class AdminService {
       .catch(this.handleError);
   }
 
-  draftCreate(product:any): Promise<any> {
+  productDraftCreate(product:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ export class AdminService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/create/`;
+    const url = `${this.baseUrl.url}product/draft/create/`;
 
     return this.http.post(url, product, options)
       .toPromise()
@@ -105,6 +105,23 @@ export class AdminService {
     const url = `${this.baseUrl.url}product/draft/add/${product.id}/`;
 
     return this.http.put(url, product, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  getProductList(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/supplier/list/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);

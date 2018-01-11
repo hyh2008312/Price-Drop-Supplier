@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject} from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, NgZone} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router,NavigationStart, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
@@ -18,6 +18,10 @@ export class ProductMainComponent implements OnInit {
 
   productPublished: any = false;
   productPublishedIndex = 1;
+  productPendingApproval: any = false;
+  productPendingApprovalIndex = 1;
+  productDisapproved: any = false;
+  productDisapprovedIndex = 1;
   productDraft: any = false;
   productDraftIndex = 1;
   productUnpublished: any = false;
@@ -32,7 +36,6 @@ export class ProductMainComponent implements OnInit {
 
   selectedIndex: number = 0;
   subscription: any;
-  subscription1: any;
 
   searchKey: any = '';
   isSearch: boolean = false;
@@ -50,6 +53,7 @@ export class ProductMainComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {
+
     this.searchForm = this.fb.group({
       searchKey: ['']
     });
@@ -67,11 +71,27 @@ export class ProductMainComponent implements OnInit {
 
   ngOnInit():void {
     let self = this;
+    this.subscription = this.activatedRoute.queryParams.subscribe((data) => {
+      switch(data.tab) {
+        case 'pending':
+          self.selectedIndex = 1;
+          break;
+        case 'draft':
+          self.selectedIndex = 4;
+          break;
+        default:
+          self.selectedIndex = 0;
+          break;
+      }
 
+      self.changeProducts({
+        index: self.selectedIndex
+      });
+    });
   }
 
   ngOnDestroy() {
-
+    this.subscription.unsubscribe();
   }
 
   // MatPaginator Output
@@ -82,10 +102,18 @@ export class ProductMainComponent implements OnInit {
         this.productPublishedIndex = event.pageIndex + 1;
         break;
       case 1:
-        this.productDraftIndex = event.pageIndex + 1;
+        this.productPendingApprovalIndex = event.pageIndex + 1;
         break;
       case 2:
+        this.productDisapprovedIndex = event.pageIndex + 1;
+        break;
+      case 3:
         this.productUnpublishedIndex = event.pageIndex + 1;
+        break;
+      case 4:
+        this.productDraftIndex = event.pageIndex + 1;
+        break;
+      default:
         break;
     }
     this.changeProducts({index: type});
@@ -101,17 +129,52 @@ export class ProductMainComponent implements OnInit {
     let page = this.productPublishedIndex;
     switch (event.index) {
       case 1:
-        relationStatus = 'draft';
-        page = this.productDraftIndex;
+        relationStatus = 'pending';
+        page = this.productPendingApprovalIndex;
         break;
       case 2:
+        relationStatus = 'disapproved';
+        page = this.productDisapprovedIndex;
+        break;
+      case 3:
         relationStatus = 'unpublished';
         page = this.productUnpublishedIndex;
+        break;
+      case 4:
+        relationStatus = 'draft';
+        page = this.productDraftIndex;
         break;
       default:
         break;
     }
 
+    let self = this;
+
+    this.adminService.getProductList({
+      status: relationStatus,
+      page: page,
+      page_size: this.pageSize
+    }).then((data) => {
+      self.length = data.count;
+      switch (event.index) {
+        case 1:
+          self.productPendingApproval = data.results;
+          break;
+        case 2:
+          self.productDisapproved = data.results;
+          break;
+        case 3:
+          self.productUnpublished = data.results;
+          break;
+        case 4:
+          self.productDraft = data.results;
+          break;
+        default:
+          self.productPublished = data.results;
+          break;
+      }
+
+    });
 
   }
 

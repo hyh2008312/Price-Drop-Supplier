@@ -17,6 +17,7 @@ import { ViewObjectScrollDirective }  from './directives/view-object-srcoll/view
 import { RepeatOrderDirective }  from './directives/repeat-order/repeat-order.directive';
 import { SocialShareDirective }  from './directives/social-share/social-share.directive';
 import { ValidateEqualDirective }  from './directives/validate-equal/validate-equal.directive';
+import { ViewScrollTopDirective }  from './directives/view-scroll-top/view-scroll-top.directive';
 
 import { UserAvatarComponent } from './components/user-avatar/user-avatar.component';
 import { UserBadgeComponent } from './components/user-badge/user-badge.component';
@@ -124,6 +125,7 @@ let providers = {
     RepeatOrderDirective,
     SocialShareDirective,
     ValidateEqualDirective,
+    ViewScrollTopDirective,
     UserAvatarComponent,
     UserBadgeComponent,
     UserFollowComponent,
@@ -157,6 +159,7 @@ let providers = {
     RepeatOrderDirective,
     SocialShareDirective,
     ValidateEqualDirective,
+    ViewScrollTopDirective,
     UserAvatarComponent,
     UserBadgeComponent,
     UserFollowComponent,

@@ -8,6 +8,7 @@
   }
   &__product{
     position: relative;
+    min-height: calc(100vh - 96px);
 
     &-sort{
       width: 140px;
@@ -28,8 +29,8 @@
     }
 
     &-image{
-      width: 120px;
-      height: 120px;
+      width: 80px;
+      height: 80px;
       border-radius: 4px;
       overflow: hidden;
       margin-right: 16px;
@@ -44,7 +45,7 @@
       }
     }
     &-width{
-      width: 120px;
+      width: 80px;
       margin-right: 16px;
     }
 

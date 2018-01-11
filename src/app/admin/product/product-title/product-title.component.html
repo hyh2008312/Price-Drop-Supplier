@@ -1,20 +1,20 @@
 <div class="sc-product__product-navigation" fxLayout="row" fxLayoutAlign="start center">
   <div class="sc-product__product-width sc-product__product-title-1" fxFlex="none">
-    Picture
+    Product
   </div>
-  <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="35">Product Name</div>
+  <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="35">&nbsp;</div>
   <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="10"
-       fxLayout="column" fxLayoutAlign="center center">Quantity</div>
+       fxLayout="column" fxLayoutAlign="center center">Inventory</div>
   <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">Price</div>
   <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">Commission</div>
   <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="15"
-       fxLayout="column" fxLayoutAlign="center center" *ngIf="status == 0 || status == 2">Performance</div>
+       fxLayout="column" fxLayoutAlign="center center" *ngIf="status == 0 || status == 3">Performance</div>
   <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="15"
-       fxLayout="column" fxLayoutAlign="center center" *ngIf="status == 1 || status == 4">Status</div>
+       fxLayout="column" fxLayoutAlign="center center" *ngIf="status == 1 || status == 2">Status</div>
   <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="5"
-       fxLayout="column" fxLayoutAlign="center center" *ngIf="status == 3"></div>
+       fxLayout="column" fxLayoutAlign="center center" *ngIf="status == 4"></div>
   <div class="sc-product__product-title-1" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">Action</div>
 </div>

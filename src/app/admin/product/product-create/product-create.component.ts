@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, Inject} from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, NgZone} from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators , FormArray } from '@angular/forms';
 import { Router, ActivatedRoute} from '@angular/router';
 import { MatDialog } from '@angular/material';
@@ -82,14 +83,17 @@ export class ProductCreateComponent implements OnInit {
   get product() { return this.productForm.get('variants') as FormArray; }
   get shipping() { return this.productForm.get('shipping') as FormArray; }
   get categories() { return this.productForm.get('categories') as FormArray; }
+  get productTitle() { return this.productForm.get('title'); }
 
   constructor(
-    private constantService: ConstantService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private fb: FormBuilder,
     private dialog: MatDialog,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private ngZone: NgZone,
+    @Inject(DOCUMENT) private document: Document
   ) {
-    this.countries = this.constantService.getCountries();
 
     this.productForm = this.fb.group({
       title: ['', Validators.required],
@@ -97,18 +101,15 @@ export class ProductCreateComponent implements OnInit {
       variant: this.fb.array([]),
       variants: this.fb.array([]),
       shipping: this.fb.array([]),
-      commission: ['', Validators.required],
-    });
-
-    this.productForm1 = this.fb.group({
+      commission: [0, Validators.required],
       brandName: [''],
       description: ['', Validators.required],
-      length: ['', Validators.required],
-      width: ['', Validators.required],
-      height: ['', Validators.required],
-      weight: ['', Validators.required],
-      customsDeclaredCharge: ['', Validators.required],
-      originCountryId: ['', Validators.required],
+      length: [0, Validators.required],
+      width: [0, Validators.required],
+      height: [0, Validators.required],
+      weight: [0, Validators.required],
+      customsDeclaredCharge: [0, Validators.required],
+      originCountryId: [null, Validators.required],
       isPowder: ['', Validators.required],
       isLiquid: ['', Validators.required],
       isBattery: ['', Validators.required]
@@ -116,10 +117,13 @@ export class ProductCreateComponent implements OnInit {
 
     this.addProductList();
     this.addShippingList();
-    this.addCategory();
+
   }
 
   changeStep(index) {
+    this.ngZone.runOutsideAngular(() => {
+      this.document.querySelector('html').scrollTop = 0;
+    });
     this.step = index;
   }
 
@@ -248,8 +252,8 @@ export class ProductCreateComponent implements OnInit {
             attributes: [newArr],
             sku: ['', Validators.required],
             stock: ['', Validators.required],
-            saleUnitPrice: ['', Validators.required],
-            unitPrice: ['']
+            saleUnitPrice: [0, Validators.required],
+            unitPrice: [0]
           }));
         }
       } else {
@@ -258,8 +262,8 @@ export class ProductCreateComponent implements OnInit {
           attributes: [[]],
           sku: ['', Validators.required],
           stock: ['', Validators.required],
-          saleUnitPrice: ['', Validators.required],
-          unitPrice: ['']
+          saleUnitPrice: [0, Validators.required],
+          unitPrice: [0]
         }));
       }
 
@@ -269,8 +273,8 @@ export class ProductCreateComponent implements OnInit {
         attributes: [[]],
         sku: ['', Validators.required],
         stock: ['', Validators.required],
-        saleUnitPrice: ['', Validators.required],
-        unitPrice: ['']
+        saleUnitPrice: [0, Validators.required],
+        unitPrice: [0]
       }));
     }
 
@@ -332,6 +336,7 @@ export class ProductCreateComponent implements OnInit {
   ngOnInit():void {
     this.adminService.getCategoryList().then((data) => {
       this.categoryList = data;
+      this.addCategory();
     });
 
     this.adminService.getVariantList().then((data) => {
@@ -356,17 +361,34 @@ export class ProductCreateComponent implements OnInit {
 
   continue() {
     let product = this.productForm.value;
-    this.adminService.productCreate(product).then((data) => {
-      this.productId = data.id;
-      this.step = 1;
+    this.step = 1;
+    this.ngZone.runOutsideAngular(() => {
+      this.document.querySelector('html').scrollTop = 0;
     });
   }
 
   publish() {
-    let product = this.productForm1.value;
-    product.id = this.productId;
-    this.adminService.addProduct(product).then((data) => {
-      this.openPendingProductDialog();
+    let product = this.productForm.value;
+    let self = this;
+    this.adminService.productCreate(product).then((data) => {
+      self.openPendingProductDialog();
+      self.ngZone.runOutsideAngular(() => {
+        self.document.querySelector('html').style.top = '0';
+      });
+      self.router.navigate(['../'], { queryParams: {tab: 'pending'}, replaceUrl: true, relativeTo: this.activatedRoute});
+    });
+  }
+
+  createDraft() {
+    let product = this.productForm.value;
+    let self = this;
+
+    this.adminService.productDraftCreate(product).then((data) => {
+      self.openPendingProductDialog();
+      self.ngZone.runOutsideAngular(() => {
+        self.document.querySelector('html').style.top = '0';
+      });
+      self.router.navigate(['../'], { queryParams: {tab: 'draft'}, replaceUrl: true, relativeTo: this.activatedRoute});
     });
   }
 
@@ -376,7 +398,9 @@ export class ProductCreateComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      this.ngZone.runOutsideAngular(() => {
+        this.document.querySelector('html').style.top = '0';
+      });
     });
   }
 

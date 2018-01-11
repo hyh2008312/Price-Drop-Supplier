@@ -2157,7 +2157,8 @@ textarea.mat-input-element {
 .sc-product__container {
   padding: 0 16px; }
 .sc-product__product {
-  position: relative; }
+  position: relative;
+  min-height: calc(100vh - 96px); }
   .sc-product__product-sort {
     width: 140px;
     text-align: center; }
@@ -2171,8 +2172,8 @@ textarea.mat-input-element {
     border-radius: 2px;
     overflow: hidden; }
   .sc-product__product-image {
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
     border-radius: 4px;
     overflow: hidden;
     margin-right: 16px;
@@ -2188,7 +2189,7 @@ textarea.mat-input-element {
       -o-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%); }
   .sc-product__product-width {
-    width: 120px;
+    width: 80px;
     margin-right: 16px; }
   .sc-product__product-id {
     text-align: center; }
