@@ -4,7 +4,7 @@
       {{order.created | amDateFormat:'MMMM Do, YYYY'}}
     </div>
     <div class="md-margin-left-3" fxFlex>Order #: {{order.number}}</div>
-    <div class="text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/1">View Details</div>
+    <div class="text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/{{order.id}}">View Details</div>
   </div>
   <div class="sc-order__product-item-1" fxLayout="row" fxLayoutAlign="start start">
     <div fxLayout="column" fxFlex="75" fxLayoutAlign="start stretch">
@@ -48,7 +48,7 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status == 3">
   <div class="sc-order__product-height" fxLayout="row" fxLayoutAlign="start center" >
     <div fxFlex>Order #: {{order.number}}</div>
-    <div class="text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/1">View Details</div>
+    <div class="text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/{{order.id}}">View Details</div>
   </div>
   <div class="sc-order__product-item-2" fxLayout="row" fxLayoutAlign="start stretch">
     <div class="sc-order__product-width sc-order__product-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">

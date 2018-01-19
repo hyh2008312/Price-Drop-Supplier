@@ -15,15 +15,23 @@ import { UserService } from  '../../../shared/services/user/user.service';
 
 export class OrderDetailComponent implements OnInit {
 
+  order: any = {};
 
   constructor(
-
+    private adminService: AdminService,
+    private activatedRoute: ActivatedRoute
   ) {
 
   }
 
   ngOnInit() {
-
+    let id = this.activatedRoute.snapshot.params['id'];
+    this.adminService.getSupplyOrderDetail({
+      id
+    }).then((data) => {
+      console.log(data);
+      this.order = data;
+    });
   }
 
 }

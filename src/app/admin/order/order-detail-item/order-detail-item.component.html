@@ -7,12 +7,12 @@
       <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
         <div class="sc-order__product-title-2" >{{order.title}}</div>
         <div fxLayout="row" fxLayoutAlign="start center">
-          <div>SKU: 201778903</div>
+          <div>SKU: {{order.sku}}</div>
         </div>
       </div>
     </div>
     <div class="sc-order__detail-margin-right" fxFlex="15"
-         fxLayout="column" fxLayoutAlign="center center"> 2</div>
+         fxLayout="column" fxLayoutAlign="center center"> {{order.quantity}}</div>
     <div class="sc-order__detail-margin-right" fxFlex="20"
          fxLayout="column" fxLayoutAlign="center center">
       <div fxLayout="row" fxLayoutAlign="start center">
@@ -23,36 +23,36 @@
           <div class="md-margin-top-1">Total:&nbsp;</div>
         </div>
         <div>
-          <div>$ {{order.productAmount}}</div>
-          <div class="md-margin-top-1">$ {{order.shippingAmount}}</div>
-          <div class="md-margin-top-1">$ {{order.taxAmount}}</div>
-          <div class="md-margin-top-1">$ {{order.totalAmount}}</div>
+          <div>{{order.priceExclTax | currency: currency: true}}</div>
+          <div class="md-margin-top-1">{{order.shippingExclTax | currency: currency: true}}</div>
+          <div class="md-margin-top-1">$0</div>
+          <div class="md-margin-top-1">{{totalAmount | currency: currency: true}}</div>
         </div>
       </div>
     </div>
     <div class="sc-order__detail-margin-right" fxFlex="20"
-         fxLayout="column" fxLayoutAlign="center center">{{order.fulfillmentStatus}}</div>
+         fxLayout="column" fxLayoutAlign="center center">{{order.status}}</div>
     <div class="sc-order__detail-margin-right" fxFlex="15"
          fxLayout="column" fxLayoutAlign="center center">{{order.paymentStatus}}</div>
-    <div fxFlex="15" *ngIf="order.fulfillmentStatus=='Unfulfilled' && order.paymentStatus == 'Paid'"
+    <div fxFlex="15" *ngIf="order.status=='Unfulfilled' && order.paymentStatus == 'Paid'"
          fxLayout="column" fxLayoutAlign="center stretch">
       <button mat-raised-button color="accent" (click)="editTracking()">Fulfill Order</button>
       <div class="md-margin-top-1" fxLayout="column">
         <button mat-raised-button color="accent" (click)="cancelOrder()">Cancel Order</button>
       </div>
     </div>
-    <div fxFlex="15" *ngIf="order.fulfillmentStatus == 'Fulfilled' && order.paymentStatus == 'Refunded'"
+    <div fxFlex="15" *ngIf="order.status == 'Fulfilled' && order.paymentStatus == 'Refunded'"
          fxLayout="column" fxLayoutAlign="center stretch">
       <button mat-raised-button color="accent" (click)="editTracking()">Edit Tracking</button>
       <div class="md-margin-top-1" fxLayout="column">
         <button mat-raised-button color="accent" (click)="cancelFulfillment()">Cancel Fulfillment</button>
       </div>
     </div>
-    <div fxFlex="15" *ngIf="order.fulfillmentStatus == 'Unfulfilled' && order.paymentStatus == 'Refunded' && status == 0"
+    <div fxFlex="15" *ngIf="order.status == 'Unfulfilled' && order.paymentStatus == 'Refunded' && status == 0"
          fxLayout="column" fxLayoutAlign="center center">
       <div class="sc-order__detail-color">Supplier Canceled</div>
     </div>
-    <div fxFlex="15" *ngIf="order.fulfillmentStatus == 'Unfulfilled' && order.paymentStatus == 'Refunded' && status == 1"
+    <div fxFlex="15" *ngIf="order.status == 'Unfulfilled' && order.paymentStatus == 'Refunded' && status == 1"
          fxLayout="column" fxLayoutAlign="center center">
       <div class="sc-order__detail-color">Customer Canceled</div>
     </div>
@@ -82,12 +82,12 @@
       <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
         <div class="sc-order__product-title-2" >{{order.title}}</div>
         <div fxLayout="row" fxLayoutAlign="start center">
-          <div>SKU: 201778903</div>
+          <div>SKU: {{order.sku}}</div>
         </div>
       </div>
     </div>
     <div class="sc-order__detail-margin-right sc-order__detail-height" fxFlex="15"
-         fxLayout="column" fxLayoutAlign="center center"> 2</div>
+         fxLayout="column" fxLayoutAlign="center center"> {{order.quantity}}</div>
     <div class="sc-order__detail-margin-right" fxFlex="25"
          fxLayout="column" fxLayoutAlign="start center">
       <div fxLayout="row" fxLayoutAlign="start center">
@@ -98,10 +98,10 @@
           <div class="md-margin-top-1">Total:&nbsp;</div>
         </div>
         <div>
-          <div>$ {{order.productAmount}}</div>
-          <div class="md-margin-top-1">$ {{order.shippingAmount}}</div>
-          <div class="md-margin-top-1">$ {{order.taxAmount}}</div>
-          <div class="md-margin-top-1">$ {{order.totalAmount}}</div>
+          <div>{{order.priceExclTax | currency: currency: true}}</div>
+          <div class="md-margin-top-1">{{order.shippingExclTax | currency: currency: true}}</div>
+          <div class="md-margin-top-1">$0</div>
+          <div class="md-margin-top-1">{{totalAmount | currency: currency: true}}</div>
         </div>
       </div>
     </div>
@@ -134,7 +134,7 @@
       <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
         <div class="sc-order__product-title-2" >{{order.title}}</div>
         <div fxLayout="row" fxLayoutAlign="start center">
-          <div>SKU: 201778903</div>
+          <div>SKU: {{order.sku}}</div>
         </div>
       </div>
     </div>
@@ -150,10 +150,10 @@
           <div class="md-margin-top-1">Total:&nbsp;</div>
         </div>
         <div>
-          <div>$ {{order.productAmount}}</div>
-          <div class="md-margin-top-1">$ {{order.shippingAmount}}</div>
-          <div class="md-margin-top-1">$ {{order.taxAmount}}</div>
-          <div class="md-margin-top-1">$ {{order.totalAmount}}</div>
+          <div>{{order.priceExclTax | currency: currency: true}}</div>
+          <div class="md-margin-top-1">{{order.shippingExclTax | currency: currency: true}}</div>
+          <div class="md-margin-top-1">$0</div>
+          <div class="md-margin-top-1">{{totalAmount | currency: currency: true}}</div>
         </div>
       </div>
     </div>

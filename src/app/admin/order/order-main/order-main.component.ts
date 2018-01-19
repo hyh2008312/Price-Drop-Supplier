@@ -172,27 +172,25 @@ export class OrderMainComponent implements OnInit {
       number: this.searchKey
     }).then((data) => {
 
-      switch (data.status) {
-        case 'Unfulfilled':
-          self.orderUnfulfilled = [];
-          self.orderUnfulfilled.push(data);
-          self.selectedIndex = 0;
-          break;
-        case 'Fulfilled':
-          self.orderFulfilled = [];
-          self.orderFulfilled.push(data);
-          self.selectedIndex = 1;
-          break;
-        case 'Canceled':
-          self.orderCanceled = [];
-          self.orderCanceled.push(data);
-          self.selectedIndex = 2;
-          break;
-        case 'Returns':
-          self.orderReturns = [];
-          self.orderReturns.push(data);
-          self.selectedIndex = 3;
-          break;
+      if(data.length> 0) {
+        switch (data[0].status) {
+          case 'Unfulfilled':
+            self.orderUnfulfilled = data;
+            self.selectedIndex = 0;
+            break;
+          case 'Fulfilled':
+            self.orderFulfilled = data;
+            self.selectedIndex = 1;
+            break;
+          case 'Canceled':
+            self.orderCanceled = data;
+            self.selectedIndex = 2;
+            break;
+          case 'Returns':
+            self.orderReturns = data;
+            self.selectedIndex = 3;
+            break;
+        }
       }
 
     });
