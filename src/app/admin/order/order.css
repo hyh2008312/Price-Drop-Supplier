@@ -2224,7 +2224,6 @@ textarea.mat-input-element {
     text-align: center; }
   .sc-order__product-item {
     padding: 16px 0;
-    border-right: 1px solid rgba(0, 0, 0, 0.12);
     border-bottom: 1px solid rgba(0, 0, 0, 0.12); }
     .sc-order__product-item:last-child {
       border-bottom: none; }
@@ -2249,10 +2248,14 @@ textarea.mat-input-element {
       line-height: 96px;
       color: rgba(0, 0, 0, 0.38); }
 .sc-order__search {
+  position: absolute;
+  top: 10px;
+  right: 16px;
   border-bottom: 1px solid #222;
   height: 32px;
+  width: 240px;
   margin: 16px 0;
-  position: relative; }
+  z-index: 10; }
   .sc-order__search > i {
     margin: 0 16px 0 0;
     color: #222; }

@@ -28,7 +28,7 @@
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                      placeholder="Search by product title or SKU"
-                     (keyup.enter)="getProductList(isSearch)"/>
+                     (keyup.enter)="changeProducts({index:0})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
                 <i class="material-icons">close</i>
@@ -67,7 +67,7 @@
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                      placeholder="Search by product title or SKU"
-                     (keyup.enter)="getProductList(isSearch)"/>
+                     (keyup.enter)="changeProducts({index:1})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
                 <i class="material-icons">close</i>
@@ -106,7 +106,7 @@
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                      placeholder="Search by product title or SKU"
-                     (keyup.enter)="getProductList(isSearch)"/>
+                     (keyup.enter)="changeProducts({index:2})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
                 <i class="material-icons">close</i>
@@ -155,7 +155,7 @@
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                      placeholder="Search by product title or SKU"
-                     (keyup.enter)="getProductList(isSearch)"/>
+                     (keyup.enter)="changeProducts({index:3})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
                 <i class="material-icons">close</i>
@@ -194,7 +194,7 @@
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                      placeholder="Search by product title or SKU"
-                     (keyup.enter)="getProductList(isSearch)"/>
+                     (keyup.enter)="changeProducts({index:4})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
                 <i class="material-icons">close</i>

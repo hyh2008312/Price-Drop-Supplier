@@ -153,7 +153,8 @@ export class ProductMainComponent implements OnInit {
     this.adminService.getProductList({
       status: relationStatus,
       page: page,
-      page_size: this.pageSize
+      page_size: this.pageSize,
+      q: this.searchKey
     }).then((data) => {
       self.length = data.count;
       switch (event.index) {

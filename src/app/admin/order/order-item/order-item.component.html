@@ -1,61 +1,67 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status <= 2">
   <div class="sc-order__product-height" fxLayout="row" fxLayoutAlign="start center" >
     <div class="xb-bold">
-      Oct 14, 2017
+      {{order.created | amDateFormat:'MMMM Do, YYYY'}}
     </div>
-    <div class="md-margin-left-3" fxFlex>Order #: 201700231478</div>
-    <div class="text-underline xb-bold md-margin-right-2" >View Details</div>
+    <div class="md-margin-left-3" fxFlex>Order #: {{order.number}}</div>
+    <div class="text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/1">View Details</div>
   </div>
   <div class="sc-order__product-item-1" fxLayout="row" fxLayoutAlign="start start">
     <div fxLayout="column" fxFlex="75" fxLayoutAlign="start stretch">
-      <div class="sc-order__product-item" fxLayout="row" fxLayoutAlign="start center" *ngFor="let value of [1,2,3]">
+      <div class="sc-order__product-item" fxLayout="row" fxLayoutAlign="start center">
         <div class="sc-order__product-width sc-order__product-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
           <div class="sc-order__product-image" fxFlex="none">
-            <img [src]="product.imageUrl">
+            <img [src]="order.variant.imageMain">
           </div>
           <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
-            <div class="sc-order__product-title" >{{product.title}}</div>
+            <div class="sc-order__product-title" >{{order.title}}</div>
             <div fxLayout="row" fxLayoutAlign="start center">
-              <div>Black</div><div class="sc-order__product-margin-left">L</div>
+              <div [ngClass]="{'sc-order__product-margin-left': i > 0}"
+                   *ngFor="let item of order.variant.attributeValues;let i = index;">
+                {{item.name}}
+              </div>
             </div>
           </div>
         </div>
         <div class="sc-order__product-margin-right" fxFlex="25"
-             fxLayout="column" fxLayoutAlign="center center">Fulfilled</div>
+             fxLayout="column" fxLayoutAlign="center center">{{order.status}}</div>
         <div class="sc-order__product-margin-right" fxFlex="25"
              fxLayout="column" fxLayoutAlign="center center">
-          Paid
+          {{order.paymentStatus}}
         </div>
         <div fxFlex="15"
-             fxLayout="column" fxLayoutAlign="center center">20</div>
+             fxLayout="column" fxLayoutAlign="center center">{{order.quantity}}</div>
       </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="start start" fxFlex="25">
       <div class="md-margin-right-2 sc-order__product-height-1 xb-bold" fxFlex="55"
            fxLayout="column" fxLayoutAlign="center center">
-        Steven Wong
+        {{order.lastName + ' ' + order.firstName}}
       </div>
       <div class="sc-order__product-height-1 xb-bold" fxFlex="45"
            fxLayout="column" fxLayoutAlign="center center">
-        $ 60
+        {{ order.unitPriceExclTax | currency: currency: true }}
       </div>
     </div>
   </div>
 </div>
 <div fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status == 3">
   <div class="sc-order__product-height" fxLayout="row" fxLayoutAlign="start center" >
-    <div fxFlex>Order #: 201700231478</div>
-    <div class="text-underline xb-bold md-margin-right-2" >View Details</div>
+    <div fxFlex>Order #: {{order.number}}</div>
+    <div class="text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/1">View Details</div>
   </div>
   <div class="sc-order__product-item-2" fxLayout="row" fxLayoutAlign="start stretch">
     <div class="sc-order__product-width sc-order__product-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
       <div class="sc-order__product-image" fxFlex="none">
-        <img [src]="product.imageUrl">
+        <img [src]="order.variant.imageMain">
       </div>
       <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
-        <div class="sc-order__product-title" >{{product.title}}</div>
+        <div class="sc-order__product-title" >{{order.title}}</div>
         <div fxLayout="row" fxLayoutAlign="start center">
-          <div>Black</div><div class="sc-order__product-margin-left">L</div>
+          <div [ngClass]="{'sc-order__product-margin-left': i > 0}"
+               *ngFor="let item of order.variant.attributeValues;let i = index;">
+            {{item.name}}
+          </div>
         </div>
       </div>
     </div>
@@ -63,7 +69,7 @@
          fxLayout="column" fxLayoutAlign="center center"> Oct 14, 2017</div>
     <div class="sc-order__product-margin-right" fxFlex="20"
          fxLayout="column" fxLayoutAlign="center center">
-      Steven Wong
+      {{order.lastName + ' ' + order.firstName}}
     </div>
     <div class="sc-order__product-margin-right" fxFlex="15"
          fxLayout="column" fxLayoutAlign="center center">Exchange</div>

@@ -16,12 +16,14 @@ import { UserService } from  '../../../shared/services/user/user.service';
 export class OrderMainComponent implements OnInit {
 
 
-  productPublished: any = false;
-  productPublishedIndex = 1;
-  productDraft: any = false;
-  productDraftIndex = 1;
-  productUnpublished: any = false;
-  productUnpublishedIndex = 1;
+  orderUnfulfilled: any = false;
+  orderUnfulfilledIndex = 1;
+  orderFulfilled: any = false;
+  orderFulfilledIndex = 1;
+  orderCanceled: any = false;
+  orderCanceledIndex = 1;
+  orderReturns: any = false;
+  orderReturnsIndex = 1;
 
   allSorted = 'All';
   unfulfilledSorted = 'All';
@@ -35,10 +37,10 @@ export class OrderMainComponent implements OnInit {
 
   selectedIndex: number = 0;
   subscription: any;
-  subscription1: any;
 
   searchKey: any = '';
   isSearch: boolean = false;
+  searchResult: any;
   searchForm: FormGroup;
 
   // MatPaginator Inputs
@@ -70,11 +72,21 @@ export class OrderMainComponent implements OnInit {
 
   ngOnInit():void {
     let self = this;
+    this.subscription = this.activatedRoute.queryParams.subscribe((data) => {
+      switch(data.tab) {
+        default:
+          self.selectedIndex = 0;
+          break;
+      }
 
+      self.changeProducts({
+        index: self.selectedIndex
+      });
+    });
   }
 
   ngOnDestroy() {
-
+    this.subscription.unsubscribe();
   }
 
   // MatPaginator Output
@@ -82,13 +94,16 @@ export class OrderMainComponent implements OnInit {
     this.pageSize = event.pageSize;
     switch (type) {
       case 0:
-        this.productPublishedIndex = event.pageIndex + 1;
+        this.orderUnfulfilledIndex = event.pageIndex + 1;
         break;
       case 1:
-        this.productDraftIndex = event.pageIndex + 1;
+        this.orderFulfilledIndex = event.pageIndex + 1;
         break;
       case 2:
-        this.productUnpublishedIndex = event.pageIndex + 1;
+        this.orderCanceledIndex = event.pageIndex + 1;
+        break;
+      case 3:
+        this.orderReturnsIndex = event.pageIndex + 1;
         break;
     }
     this.changeProducts({index: type});
@@ -100,54 +115,91 @@ export class OrderMainComponent implements OnInit {
 
 
   changeProducts(event) {
-    let relationStatus = 'published';
-    let page = this.productPublishedIndex;
+    let status = '';
+    let page = 0;
     switch (event.index) {
+      case 0:
+        status = 'Unfulfilled';
+        page = this.orderUnfulfilledIndex;
+        break;
       case 1:
-        relationStatus = 'draft';
-        page = this.productDraftIndex;
+        status = 'Fulfilled';
+        page = this.orderFulfilledIndex;
         break;
       case 2:
-        relationStatus = 'unpublished';
-        page = this.productUnpublishedIndex;
+        status = 'Canceled';
+        page = this.orderCanceledIndex;
+        break;
+      case 3:
+        status = 'Returns';
+        page = this.orderReturnsIndex;
         break;
       default:
         break;
     }
 
+    let self = this;
+
+    this.adminService.getSupplyOrderList({
+      status,
+      page,
+      page_size: this.pageSize,
+      q: this.searchKey
+    }).then((data) => {
+      self.length = data.count;
+      switch (event.index) {
+        case 0:
+          self.orderUnfulfilled = data.results;
+          break;
+        case 1:
+          self.orderFulfilled = data.results;
+          break;
+        case 2:
+          self.orderCanceled = data.results;
+          break;
+        case 3:
+          self.orderReturns = data.results;
+          break;
+      }
+    });
 
   }
 
+  searchResultProducts() {
+    let self = this;
+
+    this.adminService.getSupplyOrderResult({
+      orderNumber: this.searchKey
+    }).then((data) => {
+
+      switch (data.status) {
+        case 'Unfulfilled':
+          self.orderUnfulfilled = [];
+          self.orderUnfulfilled.push(data);
+          self.selectedIndex = 0;
+          break;
+        case 'Fulfilled':
+          self.orderFulfilled = [];
+          self.orderFulfilled.push(data);
+          self.selectedIndex = 1;
+          break;
+        case 'Canceled':
+          self.orderCanceled = [];
+          self.orderCanceled.push(data);
+          self.selectedIndex = 2;
+          break;
+        case 'Returns':
+          self.orderReturns = [];
+          self.orderReturns.push(data);
+          self.selectedIndex = 3;
+          break;
+      }
+
+    });
+  }
+
   productChange(event) {
-    switch(event.status) {
-      case 0:
-        switch(event.event) {
-          case 'delete':
-            this.productPublished.splice(event.index,1);
-            break;
-          case 'unpublish':
-            this.productPublished.splice(event.index,1);
-            break;
-        }
-        break;
-      case 1:
-        switch(event.event) {
-          case 'delete':
-            this.productDraft.splice(event.index,1);
-            break;
-        }
-        break;
-      case 2:
-        switch(event.event) {
-          case 'delete':
-            this.productUnpublished.splice(event.index,1);
-            break;
-          case 'publish':
-            this.productUnpublished.splice(event.index,1);
-            break;
-        }
-        break;
-    }
+
   }
 
 }

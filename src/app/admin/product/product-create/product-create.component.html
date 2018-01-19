@@ -37,6 +37,12 @@
               <input type="text" matInput placeholder="Product Name" formControlName="title">
             </mat-form-field>
           </div>
+          <div *ngIf="productForm.get('title').invalid && (productForm.get('title').dirty ||
+            productForm.get('title').touched)" class="xb-input-error">
+             <div *ngIf="productForm.get('title').hasError('required')">
+               This field is required.
+             </div>
+          </div>
           <div fxLayout="row" fxLayoutAlign="space-between center">
             <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
@@ -47,6 +53,12 @@
                 </mat-select>
               </mat-form-field>
             </div>
+          </div>
+          <div *ngIf="productForm.get('categoryId').invalid && (productForm.get('categoryId').dirty ||
+            productForm.get('categoryId').touched)" class="xb-input-error">
+             <div *ngIf="productForm.get('categoryId').hasError('required')">
+               This field is required.
+             </div>
           </div>
         </div>
         <div class="sc-product__create-title-1 md-margin-top-1">
@@ -108,7 +120,7 @@
         </div>
         <div class="md-margin-top-2" *ngIf="!isProductListShow">
           <div formArrayName="variants" >
-            <div *ngFor="let p of product.controls; let i = index">
+            <div *ngFor="let p of product.controls; let i = index;">
               <div [formGroupName]="i" fxLayout="column">
                 <div fxLayout="row" fxLayoutAlign="start center">
                   <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
@@ -117,11 +129,23 @@
                     </mat-form-field>
                   </div>
                 </div>
+                <div *ngIf="p.get('sku').invalid && (p.get('sku').dirty ||
+                p.get('sku').touched)" class="xb-input-error">
+                  <div *ngIf="p.get('sku').hasError('required')">
+                    This field is required.
+                  </div>
+                </div>
                 <div fxLayout="row" fxLayoutAlign="start center">
                   <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                     <mat-form-field fxFlex>
                       <input type="text" matInput placeholder="Quantity" formControlName="stock">
                     </mat-form-field>
+                  </div>
+                </div>
+                <div *ngIf="p.get('stock').invalid && (p.get('stock').dirty ||
+                p.get('stock').touched)" class="xb-input-error">
+                  <div *ngIf="p.get('stock').hasError('required')">
+                    This field is required.
                   </div>
                 </div>
                 <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -136,6 +160,16 @@
                     <mat-form-field fxFlex>
                       <input type="text" matInput placeholder="Original Price" formControlName="unitPrice">
                     </mat-form-field>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                  <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                    <div *ngIf="p.get('saleUnitPrice').invalid && (p.get('saleUnitPrice').dirty ||
+                    p.get('saleUnitPrice').touched)" class="xb-input-error">
+                      <div *ngIf="p.get('saleUnitPrice').hasError('required')">
+                        This field is required.
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -197,6 +231,26 @@
                   <i class="material-icons md-dark-secondary xb-pointer" (click)="deleteVariantObject(i)">delete</i>
                 </div>
               </div>
+              <div [formGroupName]="i">
+                <div *ngIf="p.get('stock').invalid && (p.get('stock').dirty ||
+                    p.get('stock').touched)" class="xb-input-error">
+                  <div *ngIf="p.get('stock').hasError('required')">
+                    The Quantity field is required.
+                  </div>
+                </div>
+                <div *ngIf="p.get('sku').invalid && (p.get('sku').dirty ||
+                    p.get('sku').touched)" class="xb-input-error">
+                  <div *ngIf="p.get('sku').hasError('required')">
+                    The SKU field is required.
+                  </div>
+                </div>
+                <div *ngIf="p.get('saleUnitPrice').invalid && (p.get('saleUnitPrice').dirty ||
+                    p.get('saleUnitPrice').touched)" class="xb-input-error">
+                  <div *ngIf="p.get('saleUnitPrice').hasError('required')">
+                    This Sale Price field is required.
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -221,6 +275,12 @@
                   </mat-form-field>
                 </div>
               </div>
+              <div *ngIf="p.get('countryId').invalid && (p.get('countryId').dirty ||
+                    p.get('countryId').touched)" class="xb-input-error">
+                <div *ngIf="p.get('countryId').hasError('required')">
+                  This field is required.
+                </div>
+              </div>
               <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="p.shippingMethodList && p.shippingMethodList.length > 0">
                 <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field fxFlex>
@@ -238,6 +298,24 @@
                     <input type="text" matInput placeholder="Shipping Charge"
                            formControlName="price" >
                   </mat-form-field>
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="p.shippingMethodList && p.shippingMethodList.length > 0">
+                <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                  <div *ngIf="p.get('id').invalid && (p.get('id').dirty ||
+                    p.get('id').touched)" class="xb-input-error">
+                    <div *ngIf="p.get('id').hasError('required')">
+                      This field is required.
+                    </div>
+                  </div>
+                </div>
+                <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center" *ngIf="p.value.id != ''">
+                  <div *ngIf="p.get('price').invalid && (p.get('price').dirty ||
+                    p.get('price').touched)" class="xb-input-error">
+                    <div *ngIf="p.get('price').hasError('required')">
+                      This field is required.
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="sc-product__create-title-1 md-margin-top-2" *ngIf="p.value.id != ''">
@@ -263,6 +341,14 @@
                   </div>
                 </mat-radio-button>
               </mat-radio-group>
+              <div *ngIf="p.value.id != ''">
+                <div *ngIf="p.get('shippingTime').invalid && (p.get('shippingTime').dirty ||
+                    p.get('shippingTime').touched)" class="xb-input-error">
+                  <div *ngIf="p.get('shippingTime').hasError('required')">
+                    This field is required.
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -286,6 +372,12 @@
                 <input type="text" matInput placeholder="Set Your Affiliate Sales Commission Rate" formControlName="commission">
               </mat-form-field>
               <div class="md-margin-right-2 sc-product__create-title">%</div>
+            </div>
+          </div>
+          <div *ngIf="productForm.get('commission').invalid && (productForm.get('commission').dirty ||
+            productForm.get('commission').touched)" class="xb-input-error">
+            <div *ngIf="productForm.get('commission').hasError('required')">
+              This field is required.
             </div>
           </div>
           <div class="sc-product__create-text-1 md-margin-top-2">- Your commission is set to reward your affiliate
@@ -323,6 +415,12 @@
               <textarea matInput placeholder="Product Description" formControlName="description"></textarea>
             </mat-form-field>
           </div>
+          <div *ngIf="productForm.get('description').invalid && (productForm.get('description').dirty ||
+            productForm.get('description').touched)" class="xb-input-error">
+            <div *ngIf="productForm.get('description').hasError('required')">
+              This field is required.
+            </div>
+          </div>
         </div>
         <div class="sc-product__create-title-1 md-margin-top-2">
           Main Image
@@ -353,6 +451,17 @@
             <div>cm</div>
           </div>
           <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none"></div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <div *ngIf="productForm.get('length').invalid && (productForm.get('length').dirty ||
+              productForm.get('length').touched)" class="xb-input-error">
+                <div *ngIf="productForm.get('length').hasError('required')">
+                  This field is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
             <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Package Width</div>
             <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
               <mat-form-field fxFlex>
@@ -360,6 +469,17 @@
               </mat-form-field>
             </div>
             <div>cm</div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none"></div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <div *ngIf="productForm.get('width').invalid && (productForm.get('width').dirty ||
+              productForm.get('width').touched)" class="xb-input-error">
+                <div *ngIf="productForm.get('width').hasError('required')">
+                  This field is required.
+                </div>
+              </div>
+            </div>
           </div>
           <div fxLayout="row" fxLayoutAlign="start center">
             <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Package Height</div>
@@ -371,6 +491,17 @@
             <div>cm</div>
           </div>
           <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none"></div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <div *ngIf="productForm.get('height').invalid && (productForm.get('height').dirty ||
+              productForm.get('height').touched)" class="xb-input-error">
+                <div *ngIf="productForm.get('height').hasError('required')">
+                  This field is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
             <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Package Weight</div>
             <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
               <mat-form-field fxFlex>
@@ -380,12 +511,34 @@
             <div>g</div>
           </div>
           <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none"></div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <div *ngIf="productForm.get('weight').invalid && (productForm.get('weight').dirty ||
+              productForm.get('weight').touched)" class="xb-input-error">
+                <div *ngIf="productForm.get('weight').hasError('required')">
+                  This field is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
             <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Custom Declared Value</div>
             <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
               <div class="sc-product__create-margin-right-2">$</div>
               <mat-form-field fxFlex>
                 <input type="text" matInput formControlName="customsDeclaredCharge">
               </mat-form-field>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none"></div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <div *ngIf="productForm.get('customsDeclaredCharge').invalid && (productForm.get('customsDeclaredCharge').dirty ||
+              productForm.get('customsDeclaredCharge').touched)" class="xb-input-error">
+                <div *ngIf="productForm.get('customsDeclaredCharge').hasError('required')">
+                  This field is required.
+                </div>
+              </div>
             </div>
           </div>
           <div fxLayout="row" fxLayoutAlign="start center">
@@ -402,6 +555,17 @@
             </div>
           </div>
           <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none"></div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <div *ngIf="productForm.get('originCountryId').invalid && (productForm.get('originCountryId').dirty ||
+              productForm.get('originCountryId').touched)" class="xb-input-error">
+                <div *ngIf="productForm.get('originCountryId').hasError('required')">
+                  This field is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
             <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Contains Powder</div>
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
               <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="isPowder">
@@ -410,6 +574,17 @@
                   {{ value.text }}
                 </mat-radio-button>
               </mat-radio-group>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none"></div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <div *ngIf="productForm.get('isPowder').invalid && (productForm.get('isPowder').dirty ||
+              productForm.get('isPowder').touched)" class="xb-input-error">
+                <div *ngIf="productForm.get('isPowder').hasError('required')">
+                  This field is required.
+                </div>
+              </div>
             </div>
           </div>
           <div fxLayout="row" fxLayoutAlign="start center">
@@ -423,6 +598,17 @@
               </mat-radio-group>
             </div>
           </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none"></div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <div *ngIf="productForm.get('isLiquid').invalid && (productForm.get('isLiquid').dirty ||
+              productForm.get('isLiquid').touched)" class="xb-input-error">
+                <div *ngIf="productForm.get('isLiquid').hasError('required')">
+                  This field is required.
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Contains Battery</div>
             <div fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
@@ -432,6 +618,17 @@
                   {{ value.text }}
                 </mat-radio-button>
               </mat-radio-group>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none"></div>
+            <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+              <div *ngIf="productForm.get('isBattery').invalid && (productForm.get('isBattery').dirty ||
+              productForm.get('isBattery').touched)" class="xb-input-error">
+                <div *ngIf="productForm.get('isBattery').hasError('required')">
+                  This field is required.
+                </div>
+              </div>
             </div>
           </div>
         </div>
