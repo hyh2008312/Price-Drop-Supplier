@@ -238,7 +238,7 @@ export class AdminService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}order/supplier/${params.orderNumber}/detail/`;
+    const url = `${this.baseUrl.url}order/supplier/number/detail/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()

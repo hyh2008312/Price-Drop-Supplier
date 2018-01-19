@@ -169,7 +169,7 @@ export class OrderMainComponent implements OnInit {
     let self = this;
 
     this.adminService.getSupplyOrderResult({
-      orderNumber: this.searchKey
+      number: this.searchKey
     }).then((data) => {
 
       switch (data.status) {
