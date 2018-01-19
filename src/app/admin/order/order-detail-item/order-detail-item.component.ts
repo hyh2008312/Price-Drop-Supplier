@@ -49,7 +49,9 @@ export class OrderDetailItemComponent implements OnInit {
 
   editTracking() {
     let dialogRef = this.dialog.open(AddTrackingInformationDialogComponent, {
-      data: {}
+      data: {
+        order: this.order
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -59,7 +61,9 @@ export class OrderDetailItemComponent implements OnInit {
 
   cancelOrder() {
     let dialogRef = this.dialog.open(CancelOrderDialogComponent, {
-      data: {}
+      data: {
+        order: this.order
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -69,7 +73,9 @@ export class OrderDetailItemComponent implements OnInit {
 
   cancelFulfillment() {
     let dialogRef = this.dialog.open(CancelFulfillmentDialogComponent, {
-      data: {}
+      data: {
+        order: this.order
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -79,7 +85,9 @@ export class OrderDetailItemComponent implements OnInit {
 
   denyRequest() {
     let dialogRef = this.dialog.open(DenyRequestDialogComponent, {
-      data: {}
+      data: {
+        order: this.order
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -89,7 +97,9 @@ export class OrderDetailItemComponent implements OnInit {
 
   authorizeReturn() {
     let dialogRef = this.dialog.open(AuthorizeReturnDialogComponent, {
-      data: {}
+      data: {
+        order: this.order
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -99,7 +109,9 @@ export class OrderDetailItemComponent implements OnInit {
 
   shipExchangeItem() {
     let dialogRef = this.dialog.open(ShipExchangeItemDialogComponent, {
-      data: {}
+      data: {
+        order: this.order
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -109,7 +121,9 @@ export class OrderDetailItemComponent implements OnInit {
 
   issueRefund() {
     let dialogRef = this.dialog.open(IssueRefundDialogComponent, {
-      data: {}
+      data: {
+        order: this.order
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -13,11 +13,16 @@ export class AddTrackingInformationDialogComponent implements OnInit {
   trackingForm : FormGroup;
   shippingCarrier = ['DHL','EMS'];
 
+  order: any;
+
   constructor(
     public dialogRef: MatDialogRef<AddTrackingInformationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder
   ) {
+
+    this.order = data.order;
+
     this.trackingForm = this.fb.group({
       carrier: ['', Validators.required],
       trackingName: ['', Validators.required],
