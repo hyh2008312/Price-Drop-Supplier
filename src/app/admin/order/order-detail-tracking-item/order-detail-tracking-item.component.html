@@ -5,7 +5,7 @@
         Product
       </div>
       <div>
-        in-ear headset Ancoki  Apple earphones  Remote control perfect for iPhone 6s 6 Plus 5s 5 4s 4 SE 5C iPad 7 8 7s IOS S7 S6 Note 1 2 3  Tablet PC and Other Compatible Devices(2 PACK)
+        {{order.title}}
       </div>
     </div>
     <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
@@ -13,7 +13,7 @@
         Shipping Carrier
       </div>
       <div>
-        EMS
+        {{shippingPrice.shippingName}}
       </div>
     </div>
     <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
@@ -21,7 +21,7 @@
         Tracking Number
       </div>
       <div>
-        12345679798786
+        {{order.shippingNumber}}
       </div>
     </div>
     <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
@@ -29,7 +29,9 @@
         Tracking URL
       </div>
       <div class="sc__accent-dark">
-        <button mat-raised-button color="primary">View Tracking</button>
+        <button mat-raised-button color="primary"
+                *ngIf="shippingPrice.shippingUrl != ''"
+                routerLink="{{shippingPrice.shippingUrl}}">View Tracking</button>
       </div>
     </div>
   </div>

@@ -16,6 +16,8 @@ import { AuthorizeReturnDialogComponent } from './authorize-return-dialog/author
 import { ShipExchangeItemDialogComponent } from './ship-exchange-item-dialog/ship-exchange-item-dialog.component';
 import { IssueRefundDialogComponent } from './issue-refund-dialog/issue-refund-dialog.component';
 
+import { OrderService } from './order.service';
+
 import { OrderRoutingModule } from './order.routes.module';
 import { SharedModule } from '../../shared/shared.module';
 
@@ -50,7 +52,9 @@ import { SharedModule } from '../../shared/shared.module';
     ShipExchangeItemDialogComponent,
     IssueRefundDialogComponent
   ],
-  providers: []
+  providers: [
+    OrderService
+  ]
 })
 export class OrderModule { }
 

@@ -1,144 +1,146 @@
-<div class="container">
-  <div class="sc-order__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
-    <div class="sc-order__header"></div>
-    <form class="sc-order__search" [formGroup]="searchForm"
-          fxLayout="row" fxLayoutAlign="start center" >
-      <i class="material-icons">search</i>
-      <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-             placeholder="Search by order number"
-             (keyup.enter)="searchResultProducts()"/>
-      <div class="sc-order__search-close" fxLayout="row" fxLayoutAlign="center center"
-           *ngIf="searchKey != ''" (click)="clearSearchKey()">
-        <i class="material-icons">close</i>
-      </div>
-    </form>
-    <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
-      <mat-tab label="Unfulfilled">
-        <div class="md-margin-top-2">
-          <app-order-title [status]="0" ></app-order-title>
+<div class="sc-order__product">
+  <div class="container">
+    <div class="sc-order__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
+      <div class="sc-order__header"></div>
+      <form class="sc-order__search" [formGroup]="searchForm"
+            fxLayout="row" fxLayoutAlign="start center" >
+        <i class="material-icons">search</i>
+        <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+               placeholder="Search by order number"
+               (keyup.enter)="searchResultProducts()"/>
+        <div class="sc-order__search-close" fxLayout="row" fxLayoutAlign="center center"
+             *ngIf="searchKey != ''" (click)="clearSearchKey()">
+          <i class="material-icons">close</i>
         </div>
-        <div class="sc-order__product-bg" fxLayout="column">
-          <div class="md-margin-bottom-2">
-            <div class="sc-order__product-list" *ngFor="let item of orderUnfulfilled;let i = index;" >
-              <app-order-item [status]="0" [index]="i" (productChange)="productChange($event)" [order]="item"></app-order-item>
+      </form>
+      <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
+        <mat-tab label="Unfulfilled">
+          <div class="md-margin-top-2">
+            <app-order-title [status]="0" ></app-order-title>
+          </div>
+          <div class="sc-order__product-bg" fxLayout="column">
+            <div class="md-margin-bottom-2">
+              <div class="sc-order__product-list" *ngFor="let item of orderUnfulfilled;let i = index;" >
+                <app-order-item [status]="0" [index]="i" (productChange)="productChange($event)" [order]="item"></app-order-item>
+              </div>
+            </div>
+            <mat-paginator [length]="length"
+                           [pageSize]="pageSize"
+                           [pageSizeOptions]="pageSizeOptions"
+                           (page)="changePage($event, 1)"
+                           *ngIf="orderUnfulfilled && orderUnfulfilled.length > 0">
+            </mat-paginator>
+            <div class="sc-order__product-none" fxLayout="row" fxLayoutAlign="center center"
+                 *ngIf="orderUnfulfilled && orderUnfulfilled.length <= 0">
+              <div fxLayout="column" fxLayoutAlign="center center">
+                <i class="iconfontXberts icon-ic-empty"></i>
+                <div class="sc-order__product-title-1 md-margin-top-4">No orders found</div>
+                <span>You can find orders by changing your search or filtering options.</span>
+              </div>
             </div>
           </div>
-          <mat-paginator [length]="length"
-                         [pageSize]="pageSize"
-                         [pageSizeOptions]="pageSizeOptions"
-                         (page)="changePage($event, 1)"
-                         *ngIf="orderUnfulfilled && orderUnfulfilled.length > 0">
-          </mat-paginator>
-          <div class="sc-order__product-none" fxLayout="row" fxLayoutAlign="center center"
-               *ngIf="orderUnfulfilled && orderUnfulfilled.length <= 0">
-            <div fxLayout="column" fxLayoutAlign="center center">
-              <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-order__product-title-1 md-margin-top-4">No orders found</div>
-              <span>You can find orders by changing your search or filtering options.</span>
+        </mat-tab>
+        <mat-tab label="Fulfilled">
+          <div class="md-margin-top-2">
+            <app-order-title [status]="1" ></app-order-title>
+          </div>
+          <div class="sc-order__product-bg" fxLayout="column">
+            <div class="md-margin-bottom-2">
+              <div class="sc-order__product-list" *ngFor="let item of orderFulfilled;let i = index;" >
+                <app-order-item [status]="1" [index]="i" (productChange)="productChange($event)" [order]="item"></app-order-item>
+              </div>
+            </div>
+            <mat-paginator [length]="length"
+                           [pageSize]="pageSize"
+                           [pageSizeOptions]="pageSizeOptions"
+                           (page)="changePage($event, 2)"
+                           *ngIf="orderFulfilled && orderFulfilled.length > 0">
+            </mat-paginator>
+            <div class="sc-order__product-none" fxLayout="row" fxLayoutAlign="center center"
+                 *ngIf="orderFulfilled && orderFulfilled.length <= 0">
+              <div fxLayout="column" fxLayoutAlign="center center">
+                <i class="iconfontXberts icon-ic-empty"></i>
+                <div class="sc-order__product-title-1 md-margin-top-4">No orders found</div>
+                <span>You can find orders by changing your search or filtering options.</span>
+              </div>
             </div>
           </div>
-        </div>
-      </mat-tab>
-      <mat-tab label="Fulfilled">
-        <div class="md-margin-top-2">
-          <app-order-title [status]="1" ></app-order-title>
-        </div>
-        <div class="sc-order__product-bg" fxLayout="column">
-          <div class="md-margin-bottom-2">
-            <div class="sc-order__product-list" *ngFor="let item of orderFulfilled;let i = index;" >
-              <app-order-item [status]="1" [index]="i" (productChange)="productChange($event)" [order]="item"></app-order-item>
+        </mat-tab>
+        <mat-tab label="Canceled">
+          <div class="md-margin-top-2">
+            <app-order-title [status]="2" ></app-order-title>
+          </div>
+          <div class="sc-order__product-bg" fxLayout="column">
+            <div class="md-margin-bottom-2">
+              <div class="sc-order__product-list" *ngFor="let item of orderCanceled;let i = index;" >
+                <app-order-item [status]="2" [index]="i" (productChange)="productChange($event)" [order]="item"></app-order-item>
+              </div>
+            </div>
+            <mat-paginator [length]="length"
+                           [pageSize]="pageSize"
+                           [pageSizeOptions]="pageSizeOptions"
+                           (page)="changePage($event, 1)"
+                           *ngIf="orderCanceled && orderCanceled.length > 0">
+            </mat-paginator>
+            <div class="sc-order__product-none" fxLayout="row" fxLayoutAlign="center center"
+                 *ngIf="orderCanceled && orderCanceled.length <= 0">
+              <div fxLayout="column" fxLayoutAlign="center center">
+                <i class="iconfontXberts icon-ic-empty"></i>
+                <div class="sc-order__product-title-1 md-margin-top-4">No orders found</div>
+                <span>You can find orders by changing your search or filtering options.</span>
+              </div>
             </div>
           </div>
-          <mat-paginator [length]="length"
-                         [pageSize]="pageSize"
-                         [pageSizeOptions]="pageSizeOptions"
-                         (page)="changePage($event, 2)"
-                         *ngIf="orderFulfilled && orderFulfilled.length > 0">
-          </mat-paginator>
-          <div class="sc-order__product-none" fxLayout="row" fxLayoutAlign="center center"
-               *ngIf="orderFulfilled && orderFulfilled.length <= 0">
-            <div fxLayout="column" fxLayoutAlign="center center">
-              <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-order__product-title-1 md-margin-top-4">No orders found</div>
-              <span>You can find orders by changing your search or filtering options.</span>
+        </mat-tab>
+        <mat-tab label="Return Requests">
+          <div class="sc-order__container" fxLayout="row" fxLayoutAlign="start center">
+            <div>Request Type </div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-order__product-sort">
+                <mat-select [(ngModel)]="requestTypeSorted" name="sort">
+                  <mat-option class="md-align-center" *ngFor="let item of requestTypeList" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="md-margin-left-3">Return Status </div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-order__product-sort">
+                <mat-select [(ngModel)]="returnStatusSorted" name="sort">
+                  <mat-option class="md-align-center" *ngFor="let item of returnStatusList" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
           </div>
-        </div>
-      </mat-tab>
-      <mat-tab label="Canceled">
-        <div class="md-margin-top-2">
-          <app-order-title [status]="2" ></app-order-title>
-        </div>
-        <div class="sc-order__product-bg" fxLayout="column">
-          <div class="md-margin-bottom-2">
-            <div class="sc-order__product-list" *ngFor="let item of orderCanceled;let i = index;" >
-              <app-order-item [status]="2" [index]="i" (productChange)="productChange($event)" [order]="item"></app-order-item>
+          <div>
+            <app-order-title [status]="3" ></app-order-title>
+          </div>
+          <div class="sc-order__product-bg" fxLayout="column">
+            <div class="md-margin-bottom-2">
+              <div class="sc-order__product-list" *ngFor="let item of orderReturns;let i = index;" >
+                <app-order-item [status]="3" [index]="i" (productChange)="productChange($event)" [order]="item"></app-order-item>
+              </div>
+            </div>
+            <mat-paginator [length]="length"
+                           [pageSize]="pageSize"
+                           [pageSizeOptions]="pageSizeOptions"
+                           (page)="changePage($event, 1)"
+                           *ngIf="orderReturns && orderReturns.length > 0">
+            </mat-paginator>
+            <div class="sc-order__product-none" fxLayout="row" fxLayoutAlign="center center"
+                 *ngIf="orderReturns && orderReturns.length <= 0">
+              <div fxLayout="column" fxLayoutAlign="center center">
+                <i class="iconfontXberts icon-ic-empty"></i>
+                <div class="sc-order__product-title-1 md-margin-top-4">No orders found</div>
+                <span>You can find orders by changing your search or filtering options.</span>
+              </div>
             </div>
           </div>
-          <mat-paginator [length]="length"
-                         [pageSize]="pageSize"
-                         [pageSizeOptions]="pageSizeOptions"
-                         (page)="changePage($event, 1)"
-                         *ngIf="orderCanceled && orderCanceled.length > 0">
-          </mat-paginator>
-          <div class="sc-order__product-none" fxLayout="row" fxLayoutAlign="center center"
-               *ngIf="orderCanceled && orderCanceled.length <= 0">
-            <div fxLayout="column" fxLayoutAlign="center center">
-              <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-order__product-title-1 md-margin-top-4">No orders found</div>
-              <span>You can find orders by changing your search or filtering options.</span>
-            </div>
-          </div>
-        </div>
-      </mat-tab>
-      <mat-tab label="Return Requests">
-        <div class="sc-order__container" fxLayout="row" fxLayoutAlign="start center">
-          <div>Request Type </div>
-          <div class="md-margin-left-2 unicorn-dark-theme">
-            <mat-form-field class="sc-order__product-sort">
-              <mat-select [(ngModel)]="requestTypeSorted" name="sort">
-                <mat-option class="md-align-center" *ngFor="let item of requestTypeList" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="md-margin-left-3">Return Status </div>
-          <div class="md-margin-left-2 unicorn-dark-theme">
-            <mat-form-field class="sc-order__product-sort">
-              <mat-select [(ngModel)]="returnStatusSorted" name="sort">
-                <mat-option class="md-align-center" *ngFor="let item of returnStatusList" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </div>
-        <div>
-          <app-order-title [status]="3" ></app-order-title>
-        </div>
-        <div class="sc-order__product-bg" fxLayout="column">
-          <div class="md-margin-bottom-2">
-            <div class="sc-order__product-list" *ngFor="let item of orderReturns;let i = index;" >
-              <app-order-item [status]="3" [index]="i" (productChange)="productChange($event)" [order]="item"></app-order-item>
-            </div>
-          </div>
-          <mat-paginator [length]="length"
-                         [pageSize]="pageSize"
-                         [pageSizeOptions]="pageSizeOptions"
-                         (page)="changePage($event, 1)"
-                         *ngIf="orderReturns && orderReturns.length > 0">
-          </mat-paginator>
-          <div class="sc-order__product-none" fxLayout="row" fxLayoutAlign="center center"
-               *ngIf="orderReturns && orderReturns.length <= 0">
-            <div fxLayout="column" fxLayoutAlign="center center">
-              <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-order__product-title-1 md-margin-top-4">No orders found</div>
-              <span>You can find orders by changing your search or filtering options.</span>
-            </div>
-          </div>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
 </div>

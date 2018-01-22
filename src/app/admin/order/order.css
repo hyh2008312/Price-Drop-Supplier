@@ -2157,7 +2157,8 @@ textarea.mat-input-element {
 .sc-order__container {
   padding: 0 16px; }
 .sc-order__product {
-  position: relative; }
+  position: relative;
+  min-height: calc(100vh - 96px); }
   .sc-order__product-sort {
     width: 140px;
     text-align: center; }

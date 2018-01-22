@@ -4,7 +4,7 @@ import { Router,NavigationStart, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
-import { AdminService } from '../../admin.service';
+import { OrderService } from '../order.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 
 @Component({
@@ -16,9 +16,11 @@ import { UserService } from  '../../../shared/services/user/user.service';
 export class OrderDetailComponent implements OnInit {
 
   order: any = {};
+  shippingAddress: any;
+  shippingPrice: any = {};
 
   constructor(
-    private adminService: AdminService,
+    private orderService: OrderService,
     private activatedRoute: ActivatedRoute
   ) {
 
@@ -26,11 +28,16 @@ export class OrderDetailComponent implements OnInit {
 
   ngOnInit() {
     let id = this.activatedRoute.snapshot.params['id'];
-    this.adminService.getSupplyOrderDetail({
+    this.orderService.getSupplyOrderDetail({
       id
     }).then((data) => {
-      console.log(data);
       this.order = data;
+      if(data.shippingAddress) {
+        this.shippingAddress = data.shippingAddress;
+      }
+      if(data.shippingPrice) {
+        this.shippingPrice = data.shippingPrice;
+      }
     });
   }
 

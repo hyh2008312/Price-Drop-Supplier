@@ -64,13 +64,15 @@
       <div class="sc-order__product-title" >{{order.title}}</div>
     </div>
     <div class="sc-order__detail-margin-right" fxFlex="15"
-         fxLayout="column" fxLayoutAlign="center center">2</div>
+         fxLayout="column" fxLayoutAlign="center center">{{order.quantity}}</div>
     <div class="sc-order__detail-margin-right" fxFlex="35"
          fxLayout="column" fxLayoutAlign="center center">
-      DHL
+      {{order.shippingPrice.shippingName}}
     </div>
     <div fxFlex="30"
-         fxLayout="column" fxLayoutAlign="center center">3 - 5 Days</div>
+         fxLayout="column" fxLayoutAlign="center center">
+      {{order.shippingPrice.shippingTimeMin}} - {{order.shippingPrice.shippingTimeMax}} Days
+    </div>
   </div>
 </div>
 <div class="sc__accent-dark" fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status == 3">
@@ -139,7 +141,7 @@
       </div>
     </div>
     <div class="sc-order__detail-margin-right sc-order__detail-height" fxFlex="15"
-         fxLayout="column" fxLayoutAlign="center center"> 2</div>
+         fxLayout="column" fxLayoutAlign="center center">{{order.quantity}}</div>
     <div class="sc-order__detail-margin-right" fxFlex="25"
          fxLayout="column" fxLayoutAlign="start center">
       <div fxLayout="row" fxLayoutAlign="start center">

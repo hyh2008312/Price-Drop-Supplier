@@ -15,17 +15,8 @@
     <app-order-detail-item [status]="2" [order]="order"></app-order-detail-item>
   </div>
   <form class="md-margin-top-3" [formGroup]="trackingForm" novalidate>
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
-        <mat-form-field fxFlex>
-          <mat-select name="carrier" placeholder="Shipping Carrier" formControlName="carrier">
-            <mat-option class="md-align-center" *ngFor="let item of shippingCarrier" [value]="item">
-              {{ item }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="46">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
         <mat-form-field fxFlex>
           <input type="text" matInput placeholder="Tracking Number" formControlName="trackingName">
         </mat-form-field>
@@ -38,7 +29,7 @@
     </div>
   </form>
   <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-raised-button color="primary">SAVE</button>
+    <button mat-raised-button color="primary" (click)="changeTracking()">SAVE</button>
     <div class="md-margin-left-2">
       <button mat-button color="primary" (click)="close()">CANCEL</button>
     </div>

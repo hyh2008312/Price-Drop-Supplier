@@ -4,7 +4,7 @@ import { Router,NavigationStart, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
-import { AdminService } from '../../admin.service';
+import { OrderService } from '../order.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 
 @Component({
@@ -49,7 +49,7 @@ export class OrderMainComponent implements OnInit {
   pageSizeOptions = [6, 12];
 
   constructor(
-    private adminService: AdminService,
+    private orderService: OrderService,
     private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -140,7 +140,7 @@ export class OrderMainComponent implements OnInit {
 
     let self = this;
 
-    this.adminService.getSupplyOrderList({
+    this.orderService.getSupplyOrderList({
       status,
       page,
       page_size: this.pageSize,
@@ -168,7 +168,7 @@ export class OrderMainComponent implements OnInit {
   searchResultProducts() {
     let self = this;
 
-    this.adminService.getSupplyOrderResult({
+    this.orderService.getSupplyOrderResult({
       number: this.searchKey
     }).then((data) => {
 

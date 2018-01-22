@@ -8,6 +8,7 @@
   }
   &__product{
     position: relative;
+    min-height: calc(100vh - 96px);
 
     &-sort{
       width: 140px;

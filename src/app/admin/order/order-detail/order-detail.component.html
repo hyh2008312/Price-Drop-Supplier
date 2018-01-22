@@ -118,7 +118,7 @@
     <div *ngIf="false">
       <app-order-detail-item [status]="4"></app-order-detail-item>
     </div>
-    <div class="sc-order__detail-container-1">
+    <div class="sc-order__detail-container-1" *ngIf="shippingAddress">
       <div class="sc-order__detail-title-1 sc-order__detail-margin-top">
         Shipping Information
       </div>
@@ -128,7 +128,7 @@
             Name
           </div>
           <div>
-            Taylor Swift
+            {{shippingAddress.firstName + '' + shippingAddress.lastName}}
           </div>
         </div>
         <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
@@ -136,7 +136,7 @@
             Shipping Address Line1
           </div>
           <div>
-            123 John Street, Prtland, OR 123456
+            {{shippingAddress.line1}}
           </div>
         </div>
         <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
@@ -144,7 +144,7 @@
             Shipping Address Line2
           </div>
           <div>
-            123 John Street, Prtland, OR 123456
+            {{shippingAddress.line2}}
           </div>
         </div>
         <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
@@ -152,7 +152,7 @@
             City
           </div>
           <div>
-            John
+            {{shippingAddress.city}}
           </div>
         </div>
         <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
@@ -160,7 +160,7 @@
             State
           </div>
           <div>
-            Portland
+            {{shippingAddress.state.name}}
           </div>
         </div>
         <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
@@ -168,7 +168,7 @@
             Postal / Zip Code
           </div>
           <div>
-            9078 1234 8897 2234
+            {{shippingAddress.postcode}}
           </div>
         </div>
         <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
@@ -176,7 +176,7 @@
             Country
           </div>
           <div>
-            United States of America
+            {{shippingAddress.country.name}}
           </div>
         </div>
         <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
@@ -184,7 +184,7 @@
             Phone Number
           </div>
           <div>
-            123455677
+            {{shippingAddress.phoneNumber}}
           </div>
         </div>
       </div>
@@ -193,8 +193,8 @@
   <div class="sc-order__detail-container-padding md-margin-top-2">
     <div class="sc-order__detail-title sc-order__detail-margin-left-1">Tracking Information</div>
     <div class="md-margin-top-3">
-      <div class="sc-order__detail-margin-bottom" *ngFor="let item of [0, 1]">
-        <app-order-detail-tracking-item ></app-order-detail-tracking-item>
+      <div class="sc-order__detail-margin-bottom">
+        <app-order-detail-tracking-item [order]="order" [shippingPrice]="shippingPrice"></app-order-detail-tracking-item>
       </div>
     </div>
   </div>
