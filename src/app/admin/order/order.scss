@@ -9,6 +9,7 @@
   &__product{
     position: relative;
     min-height: calc(100vh - 96px);
+    overflow: hidden;
 
     &-sort{
       width: 140px;
@@ -47,6 +48,10 @@
 
     &-width{
       width: 400px;
+    }
+
+    &-width-1{
+      width: 100px;
     }
 
     &-height{
@@ -318,6 +323,10 @@
 
     &-width-2{
       width: 80px;
+    }
+
+    &-width-3{
+      width: 142px;
     }
 
     &-height{

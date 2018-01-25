@@ -10,9 +10,9 @@
     <div class="md-margin-top-2">Are you sure you want to cancel this order now?</div>
   </div>
   <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-raised-button color="primary">NO</button>
+    <button mat-raised-button color="primary" (click)="close()">NO</button>
     <div class="md-margin-left-2">
-      <button mat-button color="primary" (click)="close()">YES</button>
+      <button mat-button color="primary" (click)="cancel()">YES</button>
     </div>
   </div>
 </div>

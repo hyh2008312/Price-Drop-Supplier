@@ -34,27 +34,23 @@
          fxLayout="column" fxLayoutAlign="center center">{{order.status}}</div>
     <div class="sc-order__detail-margin-right" fxFlex="15"
          fxLayout="column" fxLayoutAlign="center center">{{order.paymentStatus}}</div>
-    <div fxFlex="15" *ngIf="order.status=='Unfulfilled' && order.paymentStatus == 'Paid'"
+    <div fxFlex="none" *ngIf="order.status == 'Unfulfilled'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
       <button mat-raised-button color="accent" (click)="editTracking()">Fulfill Order</button>
       <div class="md-margin-top-1" fxLayout="column">
         <button mat-raised-button color="accent" (click)="cancelOrder()">Cancel Order</button>
       </div>
     </div>
-    <div fxFlex="15" *ngIf="order.status == 'Fulfilled' && order.paymentStatus == 'Refunded'"
+    <div fxFlex="none" *ngIf="order.status == 'Fulfilled'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
       <button mat-raised-button color="accent" (click)="editTracking()">Edit Tracking</button>
       <div class="md-margin-top-1" fxLayout="column">
         <button mat-raised-button color="accent" (click)="cancelFulfillment()">Cancel Fulfillment</button>
       </div>
     </div>
-    <div fxFlex="15" *ngIf="order.status == 'Unfulfilled' && order.paymentStatus == 'Refunded' && status == 0"
+    <div fxFlex="none" *ngIf="order.status == 'Canceled'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center center">
-      <div class="sc-order__detail-color">Supplier Canceled</div>
-    </div>
-    <div fxFlex="15" *ngIf="order.status == 'Unfulfilled' && order.paymentStatus == 'Refunded' && status == 1"
-         fxLayout="column" fxLayoutAlign="center center">
-      <div class="sc-order__detail-color">Customer Canceled</div>
+      <div class="sc-order__detail-color xb-bold">{{order.cancelSource ? order.cancelSource: 'Supplier'}} Canceled</div>
     </div>
   </div>
 </div>
@@ -109,7 +105,7 @@
     </div>
     <div class="sc-order__detail-margin-right sc-order__detail-height" fxFlex="20"
          fxLayout="column" fxLayoutAlign="center center">{{order.returnStatus}}</div>
-    <div fxFlex="14"
+    <div fxFlex="none" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
       <button mat-raised-button color="primary">Contact Customer</button>
       <div class="md-margin-top-2" fxLayout="column">
@@ -161,7 +157,7 @@
     </div>
     <div class="sc-order__detail-margin-right sc-order__detail-height" fxFlex="20"
          fxLayout="column" fxLayoutAlign="center center">{{order.returnStatus}}</div>
-    <div fxFlex="14"
+    <div fxFlex="none" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
       <button mat-raised-button color="primary">Contact Customer</button>
       <div class="md-margin-top-2" fxLayout="column">

@@ -110,6 +110,23 @@ export class OrderService {
       .catch(this.handleError);
   }
 
+  cancelOrder(order:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}order/supplier/cancel/${order.id}/`;
+
+    return this.http.put(url, order, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
   private handleError (error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {

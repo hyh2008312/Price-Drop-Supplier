@@ -41,4 +41,18 @@ export class OrderDetailComponent implements OnInit {
     });
   }
 
+  productChange($event) {
+    switch ($event.event) {
+      case 'changeShippingNumber':
+        this.order = $event.order;
+        break;
+      case 'cancelOrder':
+        this.order = $event.order;
+        break;
+      case 'cancelFulfillment':
+        this.order = $event.order;
+        break;
+    }
+  }
+
 }

@@ -12,6 +12,7 @@ import { DenyRequestDialogComponent } from '../deny-request-dialog/deny-request-
 import { AuthorizeReturnDialogComponent } from '../authorize-return-dialog/authorize-return-dialog.component';
 import { ShipExchangeItemDialogComponent } from '../ship-exchange-item-dialog/ship-exchange-item-dialog.component';
 import { IssueRefundDialogComponent } from '../issue-refund-dialog/issue-refund-dialog.component';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-order-detail-item',
@@ -26,6 +27,9 @@ export class OrderDetailItemComponent implements OnInit {
   @Input() index: number = 0;
   @Output() productChange = new EventEmitter<any>();
 
+  isShippingNumberEdit: boolean = false;
+  isOrderCancel: boolean = false;
+
   currency:string = 'USD';
 
   totalAmount: number = 0;
@@ -34,8 +38,11 @@ export class OrderDetailItemComponent implements OnInit {
     private adminService: AdminService,
     private userService: UserService,
     private router: Router,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    overlayContainer: OverlayContainer
+  ) {
+    overlayContainer.getContainerElement().classList.add('unicorn-dark-theme');
+  }
 
   ngOnInit(): void {
 
@@ -50,36 +57,63 @@ export class OrderDetailItemComponent implements OnInit {
   editTracking() {
     let dialogRef = this.dialog.open(AddTrackingInformationDialogComponent, {
       data: {
-        order: this.order
+        order: this.order,
+        isShippingNumberEdit: this.isShippingNumberEdit
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    let self = this;
 
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isShippingNumberEdit == true) {
+        self.productChange.emit({
+          index: self.index,
+          order: dialogRef.componentInstance.data.order,
+          event: 'changeShippingNumber'
+        });
+      }
     });
   }
 
   cancelOrder() {
     let dialogRef = this.dialog.open(CancelOrderDialogComponent, {
       data: {
-        order: this.order
+        order: this.order,
+        isOrderCancel: this.isOrderCancel
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    let self = this;
 
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isOrderCancel == true) {
+        self.productChange.emit({
+          index: self.index,
+          order: dialogRef.componentInstance.data.order,
+          event: 'cancelOrder'
+        });
+      }
     });
   }
 
   cancelFulfillment() {
     let dialogRef = this.dialog.open(CancelFulfillmentDialogComponent, {
       data: {
-        order: this.order
+        order: this.order,
+        isOrderCancel: this.isOrderCancel
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    let self = this;
 
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isOrderCancel == true) {
+        self.productChange.emit({
+          index: self.index,
+          order: dialogRef.componentInstance.data.order,
+          event: 'cancelFulfillment'
+        });
+      }
     });
   }
 

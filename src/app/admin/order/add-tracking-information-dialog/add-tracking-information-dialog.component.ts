@@ -15,6 +15,8 @@ export class AddTrackingInformationDialogComponent implements OnInit {
   trackingForm : FormGroup;
   shippingCarrier = ['DHL','EMS'];
 
+  isShippingNumberEdit: boolean = false;
+
   order: any;
 
   constructor(
@@ -28,7 +30,7 @@ export class AddTrackingInformationDialogComponent implements OnInit {
       trackingURL: ['']
     });
     this.order = data.order;
-    if(this.order.trackingNumber == '') {
+    if(this.order.trackingNumber != '') {
       this.trackingForm.patchValue({
         trackingName: this.order.shippingNumber
       })
@@ -54,8 +56,11 @@ export class AddTrackingInformationDialogComponent implements OnInit {
       shippingNumber : this.trackingForm.value.trackingName
     };
 
+    let self = this;
     this.orderService.changeTrackingInformation(tracking).then((data) => {
-      this.order = data;
+      self.close();
+      self.data.isShippingNumberEdit = true;
+      self.data.order = data;
     });
   }
 

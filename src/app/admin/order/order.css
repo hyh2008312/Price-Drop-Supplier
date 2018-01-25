@@ -2158,7 +2158,8 @@ textarea.mat-input-element {
   padding: 0 16px; }
 .sc-order__product {
   position: relative;
-  min-height: calc(100vh - 96px); }
+  min-height: calc(100vh - 96px);
+  overflow: hidden; }
   .sc-order__product-sort {
     width: 140px;
     text-align: center; }
@@ -2190,6 +2191,8 @@ textarea.mat-input-element {
       transform: translate(-50%, -50%); }
   .sc-order__product-width {
     width: 400px; }
+  .sc-order__product-width-1 {
+    width: 100px; }
   .sc-order__product-height {
     padding: 0 16px;
     height: 56px;
@@ -2372,6 +2375,8 @@ textarea.mat-input-element {
   width: 180px; }
 .sc-order__detail-width-2 {
   width: 80px; }
+.sc-order__detail-width-3 {
+  width: 1px; }
 .sc-order__detail-height {
   height: 80px; }
 .sc-order__detail-item {
