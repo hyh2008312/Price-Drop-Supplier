@@ -9,6 +9,7 @@ import { ProductTitleComponent } from './product-title/product-title.component';
 
 import { ImageUploadMainComponent } from './image-upload-main/image-upload-main.component';
 import { ImageUploadAdditionalComponent } from './image-upload-additional/image-upload-additional.component';
+import { ImageUploadColorComponent } from './image-upload-color/image-upload-color.component';
 
 import { SaveProductDialogComponent } from './save-product-dialog/save-product-dialog.component';
 import { PendingProductDialogComponent } from './pending-product-dialog/pending-product-dialog.component';
@@ -31,7 +32,8 @@ import { SharedModule } from '../../shared/shared.module';
     ImageUploadMainComponent,
     ImageUploadAdditionalComponent,
     SaveProductDialogComponent,
-    PendingProductDialogComponent
+    PendingProductDialogComponent,
+    ImageUploadColorComponent
   ],
   entryComponents: [
     SaveProductDialogComponent,

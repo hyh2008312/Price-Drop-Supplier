@@ -21,7 +21,7 @@
     <div class="sc-product__create-navigation" fxFlex="50" *ngIf="step == 1 && productId"
          fxLayout="row" fxLayoutAlign="center center"
          [ngClass]="{'sc-product__create-navigation-active':step==1}">2.Add Product Details</div>
-    <div class="sc-product__create-navigation md-dark-secondary" fxFlex="50" *ngIf="!productId"
+    <div class="sc-product__create-navigation" fxFlex="50" *ngIf="!productId"
          fxLayout="row" fxLayoutAlign="center center"
          [ngClass]="{'sc-product__create-navigation-active':step==1}">2.Add Product Details</div>
   </div>
@@ -61,8 +61,39 @@
              </div>
           </div>
         </div>
-        <div class="sc-product__create-title-1 md-margin-top-1">
-          Variant
+        <div class="sc-product__create-title md-margin-top-2">
+          Product Details
+        </div>
+        <div class="md-margin-top-2" fxLayout="column">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <input type="text" matInput placeholder="Brand Name(Optional)" formControlName="brandName">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <textarea matInput placeholder="Product Description" formControlName="description"></textarea>
+            </mat-form-field>
+          </div>
+          <div *ngIf="productForm.get('description').invalid && (productForm.get('description').dirty ||
+            productForm.get('description').touched)" class="xb-input-error">
+            <div *ngIf="productForm.get('description').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+        <div class="sc-product__create-title-1 md-margin-top-2">
+          Image
+        </div>
+        <div class="md-margin-top-2">
+          <app-product-image-upload-additional [(previewImgFile)]="additionalList"
+                                               [(previewImgSrcs)]="additionalSrcs"></app-product-image-upload-additional>
+          <div><span class="xb-bold">·</span>The images should be at least 600*600 pixels.</div>
+          <div class="md-margin-top-1"><span class="xb-bold">·</span>Do not steal images from other suppliers, or your product will be deleted.</div>
+          <div class="md-margin-top-1"><span class="xb-bold">·</span>Products width high quality images can get the most sales.</div>
+        </div>
+        <div class="sc-product__create-title-1 md-margin-top-4">
+          Variants
         </div>
         <div class="md-margin-top-2" *ngIf="variantAddedList.length == 0">
           <button mat-raised-button color="primary" type="button" (click)="addVariantList()">
@@ -74,37 +105,46 @@
           <div class="sc-product__create-text-1 md-margin-top-2">Add variants if this product has different sizes, colors, etc.</div>
         </div>
         <div class="md-margin-top-2" *ngIf="variantAddedList.length > 0">
-          <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let p of variantAddedList; let i = index">
-            <div class="sc-product__create-margin-right-1" fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
-              <mat-form-field fxFlex>
-                <mat-select name="option" placeholder="Option Name" [value]="p.option" (valueChange)="optionChange($event, p)">
-                  <mat-option *ngFor="let item of variantList" [value]="item.id">
-                    {{ item.name }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+          <div *ngFor="let p of variantAddedList; let i = index">
+            <div fxLayout="row" fxLayoutAlign="start center" >
+              <div class="sc-product__create-margin-right-1" fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field fxFlex>
+                  <mat-select name="option" placeholder="Option Name" [value]="p.option" (valueChange)="optionChange($event, p)">
+                    <mat-option *ngFor="let item of variantList" [value]="item.id">
+                      {{ item.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="sc-product__create-margin-right-2" fxFlex="60" fxLayout="row" fxLayoutAlign="start center" *ngIf="p.isValue">
+                <mat-form-field fxFlex>
+                  <mat-chip-list #chipList>
+                    <mat-chip *ngFor="let item of p.value" [selectable]="p.selectable"
+                              [removable]="p.removable" (remove)="remove(item, p)">
+                      {{item.value}}
+                      <mat-icon matChipRemove *ngIf="p.removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder=""
+                           [matChipInputFor]="chipList"
+                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                           [matChipInputAddOnBlur]="p.addOnBlur"
+                           (matChipInputTokenEnd)="add($event, p)" />
+                  </mat-chip-list>
+                </mat-form-field>
+              </div>
+              <div *ngIf="p.isValue">
+                <i class="material-icons md-dark-secondary xb-pointer" (click)="deleteVariant(i)">delete</i>
+              </div>
             </div>
-            <div class="sc-product__create-margin-right-2" fxFlex="60" fxLayout="row" fxLayoutAlign="start center" *ngIf="p.isValue">
-              <mat-form-field fxFlex>
-                <mat-chip-list #chipList>
-                  <mat-chip *ngFor="let item of p.value" [selectable]="p.selectable"
-                            [removable]="p.removable" (remove)="remove(item, p)">
-                    {{item.value}}
-                    <mat-icon matChipRemove *ngIf="p.removable">cancel</mat-icon>
-                  </mat-chip>
-                  <input placeholder=""
-                         [matChipInputFor]="chipList"
-                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                         [matChipInputAddOnBlur]="p.addOnBlur"
-                         (matChipInputTokenEnd)="add($event, p)" />
-                </mat-chip-list>
-              </mat-form-field>
-            </div>
-            <div *ngIf="p.isValue">
-              <i class="material-icons md-dark-secondary xb-pointer" (click)="deleteVariant(i)">delete</i>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap *ngIf="p.hasColorImage && p.option == 2">
+              <div class="md-margin-right-3" *ngFor="let item of p.colorImageList;let i = index;">
+                <app-product-image-upload-color [(previewImgFile)]="item.image"
+                                                [(previewImgSrcs)]="item.image"></app-product-image-upload-color>
+                <div class="md-align-center md-margin-top-1 md-margin-bottom-1">{{item.value}}</div>
+              </div>
             </div>
           </div>
-          <div class="md-margin-top-2">
+          <div class="md-margin-top-2" *ngIf="variantAddedList.length < 2">
             <button mat-raised-button color="primary" type="button" (click)="addVariantList()">
               <div fxLayout="row" fxLayoutAlign="start center">
                 <i class="material-icons">add</i>
@@ -256,6 +296,14 @@
         </div>
         <div class="sc-product__create-text-1 md-margin-top-2">A competitive price can boost your sales conversion.</div>
       </div>
+
+      <div class="sc-product__create-margin-top" fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" type="button" (click)="continue()">
+          CONTINUE
+        </button>
+      </div>
+    </div>
+    <div  *ngIf="step == 1">
       <div class="sc-product__create-container-1">
         <div class="sc-product__create-title">
           Shipping
@@ -322,7 +370,7 @@
                 Shipping Time
               </div>
               <mat-radio-group class="md-margin-top-2" *ngIf="p.value.id != ''"
-                             fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="shippingTime">
+                               fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="shippingTime">
                 <mat-radio-button fxFlex="25" class="sc-product__create-height" *ngFor="let value of shippingTimeList;let i = index;"
                                   [value]="value.value" color="primary" (change)="showMinAndMaxTime($event, i, p)">
                   <div fxLayout="row" fxLayoutAlign="start center">
@@ -363,7 +411,7 @@
       </div>
       <div class="sc-product__create-container-1">
         <div class="sc-product__create-title">
-          Affiliate Commission Settings
+          Commission Settings
         </div>
         <div class="md-margin-top-2" fxLayout="column">
           <div fxFlex="46" fxLayout="row" fxLayoutAlign="space-between center">
@@ -389,52 +437,6 @@
           <div class="sc-product__create-text-1 md-margin-top-2">- A high commission rate can attract more affiliate
             partners(e.g > 20%).</div>
         </div>
-      </div>
-      <div class="sc-product__create-margin-top" fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button color="primary" type="button" (click)="continue()">
-          CONTINUE
-        </button>
-      </div>
-    </div>
-    <div  *ngIf="step == 1">
-      <div class="sc-product__create-container-1">
-        <div class="sc-product__create-title">
-          Product Details
-        </div>
-        <div class="md-margin-top-4" fxLayout="row" fxLayoutAlign="start center">
-          <div class="md-dark-secondary md-margin-right-3">Product Name</div><div>{{productForm.value.title}}</div>
-        </div>
-        <div class="md-margin-top-2" fxLayout="column">
-          <div fxLayout="row" fxLayoutAlign="start center">
-            <mat-form-field fxFlex>
-              <input type="text" matInput placeholder="Brand Name(Optional)" formControlName="brandName">
-            </mat-form-field>
-          </div>
-          <div fxLayout="row" fxLayoutAlign="start center">
-            <mat-form-field fxFlex>
-              <textarea matInput placeholder="Product Description" formControlName="description"></textarea>
-            </mat-form-field>
-          </div>
-          <div *ngIf="productForm.get('description').invalid && (productForm.get('description').dirty ||
-            productForm.get('description').touched)" class="xb-input-error">
-            <div *ngIf="productForm.get('description').hasError('required')">
-              This field is required.
-            </div>
-          </div>
-        </div>
-        <div class="sc-product__create-title-1 md-margin-top-2">
-          Main Image
-        </div>
-        <div class="md-margin-top-2">
-          <app-product-image-upload-main [(previewImgFile)]="previewImgFile" [(previewImgSrcs)]="previewImgSrcs"></app-product-image-upload-main>
-        </div>
-        <div class="sc-product__create-title-1 md-margin-top-2">
-          Additional Images
-        </div>
-        <div class="md-margin-top-2">
-          <app-product-image-upload-additional [(previewImgFile)]="additionalList" [(previewImgSrcs)]="additionalSrcs"></app-product-image-upload-additional>
-        </div>
-        <div class="sc-product__create-text-1 md-margin-top-4">Products with high quality images can get the most sales.</div>
       </div>
       <div class="sc-product__create-container-1">
         <div class="sc-product__create-title">

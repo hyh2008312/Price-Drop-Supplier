@@ -60,7 +60,7 @@ export class ProductCreateComponent implements OnInit {
     value: false
   }];
 
-  variantList = ['Color','Size', 'Material', 'Other'];
+  variantList:any[] = [];
 
   isProductListShow: boolean = false;
 
@@ -77,12 +77,13 @@ export class ProductCreateComponent implements OnInit {
   previewImgFile: any;
   previewImgSrcs: any;
 
-  additionalList: any[] = new Array(5);
-  additionalSrcs: any[] = new Array(5);
+  additionalList: any = [];
+  additionalSrcs: any = [];
+
+  colorImageList: any[] = [];
 
   get product() { return this.productForm.get('variants') as FormArray; }
   get shipping() { return this.productForm.get('shippings') as FormArray; }
-  get productTitle() { return this.productForm.get('title'); }
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -163,6 +164,16 @@ export class ProductCreateComponent implements OnInit {
 
     // Add our fruit
     if ((value || '').trim()) {
+      if(list.hasColorImage) {
+        this.colorImageList.push({
+          value: value.trim(),
+          image: false
+        });
+        list.colorImageList.push({
+          value: value.trim(),
+          image: false
+        });
+      }
       list.value.push({
         id: list.option,
         value: value.trim()
@@ -181,6 +192,18 @@ export class ProductCreateComponent implements OnInit {
 
     if (index >= 0) {
       list.value.splice(index, 1);
+      if(list.hasColorImage) {
+        list.colorImageList.splice(index, 1);
+        let _index = this.colorImageList.findIndex((data) => {
+          if(data.value == item) {
+            return true;
+          }
+        });
+
+        if(_index >= 0) {
+          this.colorImageList.splice(_index, 1);
+        }
+      }
 
       this.addProductList(true);
     }
@@ -188,13 +211,28 @@ export class ProductCreateComponent implements OnInit {
   }
 
   deleteVariant(index:any) {
+    let item = this.variantAddedList[index];
+    if(item.option == 2) {
+      if(item.colorImageList) {
+        for(let value of item.colorImageList) {
+          let _index = this.colorImageList.findIndex((data) => {
+            if(data.value == value.value) {
+              return true;
+            }
+          });
+          if(_index > -1) {
+            this.colorImageList.splice(_index,1);
+          }
+        }
+      }
+    }
     this.variantAddedList.splice(index, 1);
 
     this.addProductList(true);
   }
 
   deleteVariantObject(i) {
-    this.product.removeAt(i)
+    this.product.removeAt(i);
   }
 
   addVariantList() {
@@ -205,7 +243,9 @@ export class ProductCreateComponent implements OnInit {
       visible: true,
       selectable: true,
       removable: true,
-      addOnBlur: true
+      addOnBlur: true,
+      hasColorImage: false,
+      colorImageList: []
     };
 
     this.variantAddedList.push(option);
@@ -235,15 +275,25 @@ export class ProductCreateComponent implements OnInit {
           let idArr = item.id.toString().split(',');
           let valueArr = item.value.toString().split(',');
           let newArr = new Array(idArr.length);
+          let image = '';
           for(let i = 0; i < newArr.length; i++) {
             newArr[i] = {};
             newArr[i].id = parseInt(idArr[i]);
             newArr[i].value = valueArr[i];
+            if(newArr[i].id == 2) {
+              for(let item of this.colorImageList) {
+                if(item.value == newArr[i].value && item.image) {
+                  image = item.image;
+                  break;
+                }
+              }
+            }
           }
 
           this.product.push(this.fb.group({
             variant: [item],
             attributes: [newArr],
+            mainImage: [image],
             sku: ['', Validators.required],
             stock: [0, Validators.required],
             saleUnitPrice: [0, Validators.required],
@@ -254,6 +304,7 @@ export class ProductCreateComponent implements OnInit {
         this.isProductListShow = false;
         this.product.push(this.fb.group({
           attributes: [[]],
+          mainImage: [''],
           sku: ['', Validators.required],
           stock: [0, Validators.required],
           saleUnitPrice: [0, Validators.required],
@@ -265,6 +316,7 @@ export class ProductCreateComponent implements OnInit {
     } else {
       this.product.push(this.fb.group({
         attributes: [[]],
+        mainImage: [''],
         sku: ['', Validators.required],
         stock: [0, Validators.required],
         saleUnitPrice: [0, Validators.required],
@@ -305,6 +357,12 @@ export class ProductCreateComponent implements OnInit {
   optionChange($event, item) {
     item.option = $event;
     item.isValue = true;
+    item.value = [];
+    if(item.option == 2) {
+      item.hasColorImage = true;
+      item.colorImageList = [];
+    }
+    this.addProductList(true);
   }
 
   changeShippingTime($event, item, index) {

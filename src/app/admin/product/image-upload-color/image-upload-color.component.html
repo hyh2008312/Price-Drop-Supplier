@@ -1,12 +1,12 @@
-<div fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap>
+<div>
   <label class="preview-label preview-label__upload md-margin-right-3" fxLayout="row" fxLayoutAlign="center center" fxFlex="none"
-         *ngFor="let src of previewImgSrcs; let i = index;">
-    <img src="{{src}}" >
-    <app-image-preview-loading [percent]="loading[i]" *ngIf="!closeAnimate[i] && !closeLoading[i]"
-                               (loadingChange)="loadingChange($event, i)" [width]="320"></app-image-preview-loading>
+         *ngIf="previewImgSrcs">
+    <img src="{{previewImgSrcs}}" >
+    <app-image-preview-loading [percent]="loading" *ngIf="!closeAnimate && !closeLoading"
+                               (loadingChange)="loadingChange($event)" [width]="320"></app-image-preview-loading>
     <div class="popup-mask">
       <div fxLayout="row" fxLayoutAlign="end start">
-        <i class="material-icons" (click)="remove(i);">clear</i>
+        <i class="material-icons" (click)="remove();">clear</i>
       </div>
     </div>
   </label>

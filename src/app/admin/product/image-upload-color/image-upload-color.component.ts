@@ -5,24 +5,24 @@ import { S3UploaderService } from "../../../shared/services/s3-upload/s3-upload.
 import { HttpEventType, HttpResponse} from "@angular/common/http";
 
 @Component({
-  selector: 'app-product-image-upload-additional',
-  templateUrl: './image-upload-additional.component.html',
-  styleUrls: ['./_image-upload-additional.component.scss']
+  selector: 'app-product-image-upload-color',
+  templateUrl: './image-upload-color.component.html',
+  styleUrls: ['./_image-upload-color.component.scss']
 })
-export class ImageUploadAdditionalComponent implements OnInit {
+export class ImageUploadColorComponent implements OnInit {
 
-  @Input() previewImgFile: any[] = [];
+  @Input() previewImgFile: any = false;
   @Output() previewImgFileChange: EventEmitter<any[]> = new EventEmitter();
 
-  @Input() previewImgSrcs: any[] = [];
+  @Input() previewImgSrcs: any = false;
 
-  loading: any = [0,0,0,0,0];
+  loading: any = 0;
 
   upload: any = false;
 
-  closeLoading: any = [true,true,true,true,true];
+  closeLoading: any = true;
 
-  closeAnimate: any = [false,false,false,false,false];
+  closeAnimate: any = false;
 
   constructor(
     public previewImageService: ImageUploadPreviewService,
@@ -36,7 +36,7 @@ export class ImageUploadAdditionalComponent implements OnInit {
   }
 
   ngOnChanges() {
-    if(this.previewImgSrcs.length >= 5) {
+    if(this.previewImgFile != '') {
       this.upload = true;
     }
   }
@@ -46,14 +46,13 @@ export class ImageUploadAdditionalComponent implements OnInit {
       return;
     }
     let that = this;
-    let length = that.previewImgSrcs.length;
-    that.loading[index] = 0;
-    that.closeLoading[index] = false;
-    that.closeAnimate[index] = false;
+    that.loading = 0;
+    that.closeLoading = false;
+    that.closeAnimate = false;
 
     this.previewImageService.readAsDataUrl(event.target.files[0]).then(function(result) {
 
-      that.previewImgSrcs.push(result);
+      that.previewImgSrcs = result;
       let file = event.target.files[0];
 
       let image = new Image();
@@ -75,9 +74,9 @@ export class ImageUploadAdditionalComponent implements OnInit {
             // Look for upload progress events.
             if (event.type === HttpEventType.UploadProgress) {
               // This is an upload progress event. Compute and show the % done:
-              that.loading[length] = Math.round(100 * event.loaded / event.total);
+              that.loading = Math.round(100 * event.loaded / event.total);
             } else if (event instanceof HttpResponse) {
-              that.previewImgFile.push(src);
+              that.previewImgFile = src;
               that.previewImgFileChange.emit(that.previewImgFile);
 
             }
@@ -86,24 +85,22 @@ export class ImageUploadAdditionalComponent implements OnInit {
       };
       image.src = window.URL.createObjectURL(file);
 
-      if( that.previewImgSrcs.length >= 5) {
-        that.upload = true;
-      }
+      that.upload = true;
     });
 
   }
 
   remove(i) {
-    this.previewImgSrcs.splice(i,1);
-    this.previewImgFile.splice(i,1);
+    this.previewImgSrcs = false;
+    this.previewImgFile = false;
 
     this.upload = false;
   }
 
-  loadingChange(event, index) {
+  loadingChange(event) {
     if(event) {
-      this.closeAnimate[index] = true;
-      this.closeLoading[index] = true;
+      this.closeAnimate = true;
+      this.closeLoading = true;
     }
   }
 
