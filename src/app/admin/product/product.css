@@ -2157,8 +2157,7 @@ textarea.mat-input-element {
 .sc-product__container {
   padding: 0 16px; }
 .sc-product__product {
-  position: relative;
-  min-height: calc(100vh - 96px); }
+  position: relative; }
   .sc-product__product-sort {
     width: 140px;
     text-align: center; }
@@ -2369,6 +2368,15 @@ textarea.mat-input-element {
   .sc-product__create-list:last-child {
     border-bottom: none;
     padding-bottom: 0; }
+.sc-product__edit-button {
+  margin-top: 8px;
+  border-radius: 4px;
+  line-height: 40px;
+  font-size: 16px;
+  padding: 0 16px;
+  width: 180px; }
+  .sc-product__edit-button:hover {
+    background-color: rgba(0, 0, 0, 0.12); }
 
 .sc-product-dialog {
   padding: 40px 28px;

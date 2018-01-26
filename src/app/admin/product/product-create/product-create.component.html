@@ -82,7 +82,7 @@
             </div>
           </div>
         </div>
-        <div class="sc-product__create-title-1 md-margin-top-2">
+        <div class="sc-product__create-title md-margin-top-2">
           Image
         </div>
         <div class="md-margin-top-2">
@@ -92,7 +92,7 @@
           <div class="md-margin-top-1"><span class="xb-bold">·</span>Do not steal images from other suppliers, or your product will be deleted.</div>
           <div class="md-margin-top-1"><span class="xb-bold">·</span>Products width high quality images can get the most sales.</div>
         </div>
-        <div class="sc-product__create-title-1 md-margin-top-4">
+        <div class="sc-product__create-title md-margin-top-4">
           Variants
         </div>
         <div class="md-margin-top-2" *ngIf="variantAddedList.length == 0">
@@ -247,12 +247,12 @@
                 </div>
                 <div class="sc-product__create-margin-right-1" fxFlex="20" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field class="sc-product__create-width-100">
-                    <input type="text" matInput formControlName="stock">
+                    <input type="text" matInput formControlName="sku">
                   </mat-form-field>
                 </div>
                 <div class="sc-product__create-margin-right-3" fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field class="sc-product__create-width-100">
-                    <input type="text" matInput formControlName="sku">
+                    <input type="text" matInput formControlName="stock">
                   </mat-form-field>
                 </div>
                 <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
@@ -329,10 +329,29 @@
                   This field is required.
                 </div>
               </div>
-              <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="p.shippingMethodList && p.shippingMethodList.length > 0">
+              <div fxLayout="row" fxLayoutAlign="space-between center"
+                   *ngIf="p.value.countryId != ''">
                 <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field fxFlex>
-                    <mat-select name="method" placeholder="Choose a Shipping Carrier"
+                    <mat-select name="method" placeholder="Shipping Method"
+                                formControlName="type">
+                      <mat-option class="md-align-center" *ngFor="let item of shippingTypeList" [value]="item.type">
+                        {{ item.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div *ngIf="p.get('type').invalid && (p.get('type').dirty ||
+                    p.get('type').touched)" class="xb-input-error">
+                <div *ngIf="p.get('type').hasError('required')">
+                  This field is required.
+                </div>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="p.value.type != ''">
+                <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                  <mat-form-field fxFlex>
+                    <mat-select name="carrier" placeholder="Shipping Carrier"
                                 formControlName="id" (ngModelChange)="changeShippingPrice($event, p)">
                       <mat-option class="md-align-center" *ngFor="let item of p.shippingMethodList" [value]="item.id">
                         {{ item.shippingProvider }}
@@ -340,15 +359,15 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
-                <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center" *ngIf="p.value.id != ''">
+                <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center" *ngIf="p.value.id != '' && p.value.type != 'Free'">
                   <div class="md-margin-right-2 sc-product__create-title">$</div>
                   <mat-form-field fxFlex>
-                    <input type="text" matInput placeholder="Shipping Charge"
+                    <input type="text" matInput placeholder="Shipping Cost"
                            formControlName="price" >
                   </mat-form-field>
                 </div>
               </div>
-              <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="p.shippingMethodList && p.shippingMethodList.length > 0">
+              <div fxLayout="row" fxLayoutAlign="space-between center">
                 <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                   <div *ngIf="p.get('id').invalid && (p.get('id').dirty ||
                     p.get('id').touched)" class="xb-input-error">

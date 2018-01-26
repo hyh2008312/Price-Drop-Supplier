@@ -1,5 +1,5 @@
 import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AdminService } from '../../admin.service';
 import { UserService } from  '../../../shared/services/user/user.service';
@@ -22,7 +22,8 @@ export class ProductItemComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -61,6 +62,7 @@ export class ProductItemComponent implements OnInit {
         tab = 'unpublish';
         break;
     }
+    this.router.navigate(['./edit/1'], {relativeTo: this.activatedRoute});
   }
 
   countInventory(variants) {

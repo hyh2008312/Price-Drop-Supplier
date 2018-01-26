@@ -8,7 +8,7 @@ import { AuthenticationService } from '../../shared/services/authentication/auth
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['../admin.scss']
+  styleUrls: ['../_admin.scss']
 })
 
 export class MainComponent implements OnInit {

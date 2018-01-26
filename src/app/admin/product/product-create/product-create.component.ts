@@ -26,9 +26,18 @@ export class ProductCreateComponent implements OnInit {
 
   productId: any;
 
-  isFirstStepFinished: boolean = false;
-
   categoryList:any;
+
+  shippingTypeList = [{
+    name: 'Free Shipping',
+    type: 'Free'
+  }, {
+    name: 'Standard Shipping',
+    type: 'Standard'
+  }, {
+    name: 'Expedited Shipping',
+    type: 'Expedited'
+  }];
 
   shippingMethodList = ['EMS','DHL'];
 
@@ -131,6 +140,7 @@ export class ProductCreateComponent implements OnInit {
 
     this.shipping.push(this.fb.group({
       countryId: ['', Validators.required],
+      type: ['', Validators.required],
       id: ['', Validators.required],
       price: [0, Validators.required],
       checked: [false, Validators.required],

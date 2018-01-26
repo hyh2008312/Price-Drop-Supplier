@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, Inject} from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, NgZone} from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators , FormArray } from '@angular/forms';
 import { Router, ActivatedRoute} from '@angular/router';
 import { MatDialog } from '@angular/material';
@@ -11,6 +12,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { ENTER } from '@angular/cdk/keycodes';
 
 import { SaveProductDialogComponent } from '../save-product-dialog/save-product-dialog.component';
+import { PendingProductDialogComponent } from '../pending-product-dialog/pending-product-dialog.component';
 
 @Component({
   selector: 'app-product-edit',
@@ -22,21 +24,61 @@ export class ProductEditComponent implements OnInit {
 
   step: number = 0;
 
+  productId: any;
+
   isFirstStepFinished: boolean = false;
 
-  category = ['Date', 'Most Views', 'Most Orders', 'Highest Conversion'];
+  categoryList:any;
 
-  shippingTimeList = ['5 - 10 days','7 - 14 days','10 - 15 days','14 - 21 days','21 - 28 days','other'];
+  shippingTypeList = [{
+    name: 'Free Shipping',
+    type: 'Free'
+  }, {
+    name: 'Standard Shipping',
+    type: 'Standard'
+  }, {
+    name: 'Expedited Shipping',
+    type: 'Expedited'
+  }];
 
-  YesOrNo = ["Yes", 'No'];
+  shippingMethodList = ['EMS','DHL'];
 
-  variantList = ['Color','Size', 'Material', 'Other'];
+  shippingTimeList = [{
+    value: [5, 10],
+    text: '5 - 10 days'
+  }, {
+    value: [7, 14],
+    text: '7 - 14 days'
+  }, {
+    value: [10, 15],
+    text: '10 - 15 days'
+  }, {
+    value: [14, 21],
+    text:'14 - 21 days'
+  },{
+    value: [21, 28],
+    text: '21 - 28 days'
+  },{
+    value: [0, 0],
+    text: 'other'
+  }];
+
+  YesOrNo = [{
+    text: "Yes",
+    value: true
+  }, {
+    text: 'No',
+    value: false
+  }];
+
+  variantList:any[] = [];
 
   isProductListShow: boolean = false;
 
   variantAddedList: any[] = [];
 
   productForm : FormGroup;
+  productForm1: FormGroup;
 
   countries: Object[];
 
@@ -46,39 +88,42 @@ export class ProductEditComponent implements OnInit {
   previewImgFile: any;
   previewImgSrcs: any;
 
-  additionalList: any[] = new Array(5);
-  additionalSrcs: any[] = new Array(5);
+  additionalList: any = [];
+  additionalSrcs: any = [];
 
-  get product() { return this.productForm.get('product') as FormArray; }
-  get shipping() { return this.productForm.get('shipping') as FormArray; }
+  colorImageList: any[] = [];
+
+  get product() { return this.productForm.get('variants') as FormArray; }
+  get shipping() { return this.productForm.get('shippings') as FormArray; }
 
   constructor(
-    private constantService: ConstantService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private adminService: AdminService,
+    private ngZone: NgZone,
+    @Inject(DOCUMENT) private document: Document
   ) {
-    this.countries = this.constantService.getCountries();
 
     this.productForm = this.fb.group({
-      name: ['', Validators.required],
-      category: ['', Validators.required],
+      title: ['', Validators.required],
+      categoryId: [null, Validators.required],
       variant: this.fb.array([]),
-      product: this.fb.array([]),
-      shipping: this.fb.array([]),
-      commission: ['', Validators.required],
-      brand: [''],
+      variants: this.fb.array([]),
+      shippings: this.fb.array([]),
+      commission: [0, Validators.required],
+      brandName: [''],
       description: ['', Validators.required],
-      package: this.fb.group({
-        length: ['', Validators.required],
-        width: ['', Validators.required],
-        height: ['', Validators.required],
-        weight: ['', Validators.required],
-        declaredValue: ['', Validators.required],
-        country: ['', Validators.required],
-        powder: ['', Validators.required],
-        liquid: ['', Validators.required],
-        battery: ['', Validators.required]
-      })
+      length: [0, Validators.required],
+      width: [0, Validators.required],
+      height: [0, Validators.required],
+      weight: [0, Validators.required],
+      customsDeclaredCharge: [0, Validators.required],
+      originCountryId: [null, Validators.required],
+      isPowder: [false, Validators.required],
+      isLiquid: [false, Validators.required],
+      isBattery: [false, Validators.required]
     });
 
     this.addProductList();
@@ -86,15 +131,43 @@ export class ProductEditComponent implements OnInit {
 
   }
 
+  changeStep(index) {
+    this.ngZone.runOutsideAngular(() => {
+      this.document.querySelector('html').scrollTop = 0;
+    });
+    this.step = index;
+  }
+
   addShippingList() {
 
     this.shipping.push(this.fb.group({
-      country: ['', Validators.required],
-      charge: ['', Validators.required],
+      countryId: ['', Validators.required],
+      type: ['', Validators.required],
+      id: ['', Validators.required],
+      price: [0, Validators.required],
+      checked: [false, Validators.required],
       shippingTime: ['', Validators.required],
-      minTime: [''],
-      maxTime: ['']
+      min: [0, Validators.required],
+      max: [0, Validators.required]
     }));
+  }
+
+
+  changeShippingMethod($event, p) {
+    this.adminService.getShippingList($event).then((data) => {
+      p.shippingMethodList = data;
+    });
+  }
+
+  changeShippingPrice($event, p) {
+
+    p.patchValue({
+      price: 0,
+      shippingTime: 0,
+      checked: false,
+      min: 0,
+      max: 0
+    });
   }
 
   add(event: MatChipInputEvent, list: any): void {
@@ -103,7 +176,20 @@ export class ProductEditComponent implements OnInit {
 
     // Add our fruit
     if ((value || '').trim()) {
-      list.value.push(value.trim());
+      if(list.hasColorImage) {
+        this.colorImageList.push({
+          value: value.trim(),
+          image: false
+        });
+        list.colorImageList.push({
+          value: value.trim(),
+          image: false
+        });
+      }
+      list.value.push({
+        id: list.option,
+        value: value.trim()
+      });
       this.addProductList(true);
     }
 
@@ -118,6 +204,18 @@ export class ProductEditComponent implements OnInit {
 
     if (index >= 0) {
       list.value.splice(index, 1);
+      if(list.hasColorImage) {
+        list.colorImageList.splice(index, 1);
+        let _index = this.colorImageList.findIndex((data) => {
+          if(data.value == item) {
+            return true;
+          }
+        });
+
+        if(_index >= 0) {
+          this.colorImageList.splice(_index, 1);
+        }
+      }
 
       this.addProductList(true);
     }
@@ -125,9 +223,28 @@ export class ProductEditComponent implements OnInit {
   }
 
   deleteVariant(index:any) {
+    let item = this.variantAddedList[index];
+    if(item.option == 2) {
+      if(item.colorImageList) {
+        for(let value of item.colorImageList) {
+          let _index = this.colorImageList.findIndex((data) => {
+            if(data.value == value.value) {
+              return true;
+            }
+          });
+          if(_index > -1) {
+            this.colorImageList.splice(_index,1);
+          }
+        }
+      }
+    }
     this.variantAddedList.splice(index, 1);
 
     this.addProductList(true);
+  }
+
+  deleteVariantObject(i) {
+    this.product.removeAt(i);
   }
 
   addVariantList() {
@@ -138,7 +255,9 @@ export class ProductEditComponent implements OnInit {
       visible: true,
       selectable: true,
       removable: true,
-      addOnBlur: true
+      addOnBlur: true,
+      hasColorImage: false,
+      colorImageList: []
     };
 
     this.variantAddedList.push(option);
@@ -165,31 +284,55 @@ export class ProductEditComponent implements OnInit {
 
       if(newArr.length > 0) {
         for(let item of newArr) {
+          let idArr = item.id.toString().split(',');
+          let valueArr = item.value.toString().split(',');
+          let newArr = new Array(idArr.length);
+          let image = '';
+          for(let i = 0; i < newArr.length; i++) {
+            newArr[i] = {};
+            newArr[i].id = parseInt(idArr[i]);
+            newArr[i].value = valueArr[i];
+            if(newArr[i].id == 2) {
+              for(let item of this.colorImageList) {
+                if(item.value == newArr[i].value && item.image) {
+                  image = item.image;
+                  break;
+                }
+              }
+            }
+          }
+
           this.product.push(this.fb.group({
             variant: [item],
-            SKU: ['', Validators.required],
-            quantity: ['', Validators.required],
-            price: ['', Validators.required],
-            MSRP: ['']
+            attributes: [newArr],
+            mainImage: [image],
+            sku: ['', Validators.required],
+            stock: [0, Validators.required],
+            saleUnitPrice: [0, Validators.required],
+            unitPrice: [0]
           }));
         }
       } else {
         this.isProductListShow = false;
         this.product.push(this.fb.group({
-          SKU: ['', Validators.required],
-          quantity: ['', Validators.required],
-          price: ['', Validators.required],
-          MSRP: ['']
+          attributes: [[]],
+          mainImage: [''],
+          sku: ['', Validators.required],
+          stock: [0, Validators.required],
+          saleUnitPrice: [0, Validators.required],
+          unitPrice: [0]
         }));
       }
 
 
     } else {
       this.product.push(this.fb.group({
-        SKU: ['', Validators.required],
-        quantity: ['', Validators.required],
-        price: ['', Validators.required],
-        MSRP: ['']
+        attributes: [[]],
+        mainImage: [''],
+        sku: ['', Validators.required],
+        stock: [0, Validators.required],
+        saleUnitPrice: [0, Validators.required],
+        unitPrice: [0]
       }));
     }
 
@@ -205,7 +348,9 @@ export class ProductEditComponent implements OnInit {
       let index = 0;
       for (let i = 0; i < len1; i++) {
         for (let j = 0; j < len2; j++) {
-          temp[index] = doubleArrays[0][i] + ', ' + doubleArrays[1][j];
+          temp[index] = {};
+          temp[index].id = doubleArrays[0][i].id + ',' + doubleArrays[1][j].id;
+          temp[index].value = doubleArrays[0][i].value + ', ' + doubleArrays[1][j].value;
           index++;
         }
       }
@@ -224,9 +369,46 @@ export class ProductEditComponent implements OnInit {
   optionChange($event, item) {
     item.option = $event;
     item.isValue = true;
+    item.value = [];
+    if(item.option == 2) {
+      item.hasColorImage = true;
+      item.colorImageList = [];
+    }
+    this.addProductList(true);
+  }
+
+  changeShippingTime($event, item, index) {
+    let shippingTime = item.value.shippingTime;
+    shippingTime[index] = $event;
+    item.patchValue({
+      shipTime: shippingTime
+    });
+  }
+
+  showMinAndMaxTime($event, index, item) {
+    if(index == 5) {
+      item.patchValue({
+        checked: true
+      });
+    } else {
+      item.patchValue({
+        checked: false
+      });
+    }
   }
 
   ngOnInit():void {
+    this.adminService.getCategoryList().then((data) => {
+      this.categoryList = data;
+    });
+
+    this.adminService.getVariantList().then((data) => {
+      this.variantList = data;
+    });
+
+    this.adminService.getCountryList().then((data) => {
+      this.countries = data;
+    });
 
   }
 
@@ -237,6 +419,59 @@ export class ProductEditComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
 
+    });
+  }
+
+  continue() {
+    let product = this.productForm.value;
+    this.step = 1;
+    this.ngZone.runOutsideAngular(() => {
+      this.document.querySelector('html').scrollTop = 0;
+    });
+  }
+
+  publish() {
+    let product = this.productForm.value;
+    let self = this;
+    this.adminService.productCreate(product).then((data) => {
+      self.openPendingProductDialog();
+      self.ngZone.runOutsideAngular(() => {
+        self.document.querySelector('html').style.top = '0';
+      });
+      self.router.navigate(['../'], { queryParams: {tab: 'pending'}, replaceUrl: true, relativeTo: this.activatedRoute});
+    });
+  }
+
+  createDraft() {
+    let product = this.productForm.value;
+    let self = this;
+
+    let shippings = [];
+    for(let item of product.shippings) {
+      if(item.countryId != '' && item.shippingId != '') {
+        shippings.push(item);
+      }
+    }
+
+    product.shippings = shippings;
+
+    this.adminService.productDraftCreate(product).then((data) => {
+      self.ngZone.runOutsideAngular(() => {
+        self.document.querySelector('html').style.top = '0';
+      });
+      self.router.navigate(['../'], { queryParams: {tab: 'draft'}, replaceUrl: true, relativeTo: this.activatedRoute});
+    });
+  }
+
+  openPendingProductDialog() {
+    let dialogRef = this.dialog.open(PendingProductDialogComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngZone.runOutsideAngular(() => {
+        this.document.querySelector('html').style.top = '0';
+      });
     });
   }
 

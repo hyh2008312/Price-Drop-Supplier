@@ -2158,7 +2158,6 @@ textarea.mat-input-element {
   padding: 0 16px; }
 .sc-order__product {
   position: relative;
-  min-height: calc(100vh - 96px);
   overflow: hidden; }
   .sc-order__product-sort {
     width: 140px;
@@ -2376,7 +2375,7 @@ textarea.mat-input-element {
 .sc-order__detail-width-2 {
   width: 80px; }
 .sc-order__detail-width-3 {
-  width: 1px; }
+  width: 142px; }
 .sc-order__detail-height {
   height: 80px; }
 .sc-order__detail-item {
