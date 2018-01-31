@@ -171,7 +171,7 @@ export class OrderService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}order/supplier/return/${order.id}/`;
+    const url = `${this.baseUrl.url}order/supplier/return/${order.id}/?${this.serializeParams(order)}`;
 
     return this.http.get(url, options)
       .toPromise()

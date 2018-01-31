@@ -55,7 +55,7 @@ export class OrderDetailItemComponent implements OnInit {
         this.totalAmount = (parseFloat(this.order.priceExclTax) + parseFloat(this.order.shippingExclTax)) * this.order.quantity;
       } else {
         this.totalAmount = (parseFloat(this.order.line.priceExclTax) + parseFloat(this.order.line.shippingExclTax)) * this.order.quantity;
-        this.netPaymentAmount = (parseFloat(this.order.line.priceExclTax) + parseFloat(this.order.line.shippingExclTax)) * this.order.line.quantity;
+        this.netPaymentAmount = this.totalAmount - this.order.line.refundAmount;
       }
     }
   }

@@ -106,7 +106,7 @@
           <div class="md-margin-top-1">{{totalAmount | currency: currency: true}}</div>
           <div *ngIf="order.status == 'Partially Refunded' || order.status == 'Refunded'">
             <div class="md-margin-top-1">{{order.line.refundAmount | currency: currency: true}}</div>
-            <div class="md-margin-top-1">{{totalAmount | currency: currency: true}}</div>
+            <div class="md-margin-top-1">{{netPaymentAmount | currency: currency: true}}</div>
           </div>
         </div>
       </div>
@@ -125,8 +125,11 @@
       <div class="md-margin-top-1" fxLayout="column"  *ngIf="order.status == 'Authorized' || order.status == 'Exchanged'">
         <button mat-raised-button color="accent" (click)="shipExchangeItem()">Ship Exchange Item</button>
       </div>
-      <div class="md-margin-top-1" fxLayout="column" *ngIf="order.status != 'Refunded'">
+      <div class="md-margin-top-1" fxLayout="column" *ngIf="order.status != 'Refunded' && order.status != 'Partially Refunded'">
         <button mat-raised-button color="accent" (click)="issueRefund()">Issue Refund</button>
+      </div>
+      <div class="md-margin-top-1" fxLayout="column" *ngIf="order.status == 'Partially Refunded'">
+        <button mat-raised-button color="accent" (click)="issueRefund()">Continue Refund</button>
       </div>
       <div class="md-margin-top-1" fxLayout="column" *ngIf="order.status == 'Pending'">
         <button mat-raised-button color="accent" (click)="denyRequest()">Deny Request</button>
@@ -157,12 +160,20 @@
           <div class="md-margin-top-1">Shipping:&nbsp;</div>
           <div class="md-margin-top-1">Tax:&nbsp;</div>
           <div class="md-margin-top-1">Total:&nbsp;</div>
+          <div *ngIf="order.status == 'Partially Refunded' || order.status == 'Refunded'">
+            <div class="md-margin-top-1 md-align-right">Refunded:</div>
+            <div class="md-margin-top-1 md-align-right">Net Payment:</div>
+          </div>
         </div>
         <div>
           <div>{{order.line.priceExclTax | currency: currency: true}}</div>
           <div class="md-margin-top-1">{{order.line.shippingExclTax | currency: currency: true}}</div>
           <div class="md-margin-top-1">$0</div>
           <div class="md-margin-top-1">{{totalAmount | currency: currency: true}}</div>
+          <div *ngIf="order.status == 'Partially Refunded' || order.status == 'Refunded'">
+            <div class="md-margin-top-1">{{order.line.refundAmount | currency: currency: true}}</div>
+            <div class="md-margin-top-1">{{netPaymentAmount | currency: currency: true}}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -177,8 +188,11 @@
       <div class="md-margin-top-2" fxLayout="column" *ngIf="order.status == 'Authorized'">
         <button mat-raised-button color="accent" (click)="authorizeReturn()">View Return Info</button>
       </div>
-      <div class="md-margin-top-1" fxLayout="column" *ngIf="order.status != 'Refunded'">
+      <div class="md-margin-top-1" fxLayout="column" *ngIf="order.status != 'Refunded' && order.status != 'Partially Refunded'">
         <button mat-raised-button color="accent" (click)="issueRefund()">Issue Refund</button>
+      </div>
+      <div class="md-margin-top-1" fxLayout="column" *ngIf="order.status == 'Partially Refunded'">
+        <button mat-raised-button color="accent" (click)="issueRefund()">Continue Refund</button>
       </div>
       <div class="md-margin-top-1" fxLayout="column"  *ngIf="order.status == 'Pending'">
         <button mat-raised-button color="accent" (click)="denyRequest()">Deny Request</button>

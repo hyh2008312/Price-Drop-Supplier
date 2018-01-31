@@ -97,7 +97,8 @@
             <div>Request Type </div>
             <div class="md-margin-left-2 unicorn-dark-theme">
               <mat-form-field class="sc-order__product-sort">
-                <mat-select [(ngModel)]="requestTypeSorted" name="sort">
+                <mat-select [(ngModel)]="requestTypeSorted" name="sort"
+                            (valueChange)="changeReturnRequest($event)">
                   <mat-option class="md-align-center" *ngFor="let item of requestTypeList" [value]="item">
                     {{ item }}
                   </mat-option>
@@ -107,7 +108,8 @@
             <div class="md-margin-left-3">Return Status </div>
             <div class="md-margin-left-2 unicorn-dark-theme">
               <mat-form-field class="sc-order__product-sort">
-                <mat-select [(ngModel)]="returnStatusSorted" name="sort">
+                <mat-select [(ngModel)]="returnStatusSorted" name="sort"
+                            (valueChange)="changeReturnRequest($event)">
                   <mat-option class="md-align-center" *ngFor="let item of returnStatusList" [value]="item">
                     {{ item }}
                   </mat-option>

@@ -47,7 +47,7 @@ export class IssueRefundDialogComponent implements OnInit {
       return;
     }
     let order = this.moneyForm.value;
-    order.id = this.data.order.line.id;
+    order.id = this.data.order.id;
     let self = this;
     self.orderService.refund(order).then((data) => {
       self.formErr = false;

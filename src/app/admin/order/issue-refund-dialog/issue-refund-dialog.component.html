@@ -6,6 +6,9 @@
     <div class="sc-order-dialog__title">
       Refund Payments
     </div>
+    <div *ngIf="formErr" class="xb-input-error md-margin-top-2">
+      {{ formErr }}
+    </div>
     <div class="sc-order__detail-margin-top-1" fxLayout="column" >
       <div fxLayout="row" fxLayoutAlign="start start">
         <div class="md-dark-secondary sc-order__detail-bill-left-1" fxFlex="none">

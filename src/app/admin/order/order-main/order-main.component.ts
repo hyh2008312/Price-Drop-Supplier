@@ -114,6 +114,12 @@ export class OrderMainComponent implements OnInit {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
+  changeReturnRequest($event) {
+    this.changeProducts({
+      index: 3
+    });
+  }
+
 
   changeProducts(event) {
     let status = '';
