@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators , FormArray } from '@angular/forms';
 import { Router, ActivatedRoute} from '@angular/router';
 import { MatDialog } from '@angular/material';
 
-import { AdminService } from '../../admin.service';
+import { ProductService } from '../product.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 import { ConstantService } from  '../../../shared/services/constant/constant.service';
 
@@ -77,8 +77,10 @@ export class ProductEditComponent implements OnInit {
 
   variantAddedList: any[] = [];
 
-  productForm : FormGroup;
-  productForm1: FormGroup;
+
+  productForm: FormGroup;
+  productBasicForm : FormGroup;
+
 
   countries: Object[];
 
@@ -101,7 +103,7 @@ export class ProductEditComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private dialog: MatDialog,
-    private adminService: AdminService,
+    private adminService: ProductService,
     private ngZone: NgZone,
     @Inject(DOCUMENT) private document: Document
   ) {
@@ -124,6 +126,28 @@ export class ProductEditComponent implements OnInit {
       isPowder: [false, Validators.required],
       isLiquid: [false, Validators.required],
       isBattery: [false, Validators.required]
+    });
+
+    this.productBasicForm = this.fb.group({
+      title: ['', Validators.required],
+      categoryId: [null, Validators.required],
+      brandName: [''],
+      description: ['', Validators.required],
+      productCategoryId: ['', Validators.required]
+    });
+
+    let id = this.activatedRoute.snapshot.params['id'];
+
+    this.adminService.getProductBasic({
+      id
+    }).then((data) => {
+      this.productBasicForm.patchValue({
+        title: data.title,
+        categoryId: data.category.id,
+        brandName: data.brandName,
+        description: data.description,
+        productCategoryId: data.category.id
+      })
     });
 
     this.addProductList();
@@ -416,12 +440,17 @@ export class ProductEditComponent implements OnInit {
 
   }
 
-  continue() {
-    let product = this.productForm.value;
-    this.step = 1;
-    this.ngZone.runOutsideAngular(() => {
-      this.document.querySelector('html').scrollTop = 0;
-    });
+  changeProductBasic() {
+    if(this.productBasicForm.invalid) {
+      return;
+    }
+    let product = this.productBasicForm.value;
+    let id = parseInt(this.activatedRoute.snapshot.params["id"]);
+    product.id = id;
+    product.images = '';
+    this.adminService.changeProductBasic(product).then((data) => {
+      console.log(data)
+    })
   }
 
   publish() {

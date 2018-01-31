@@ -17,6 +17,8 @@ import { PendingProductDialogComponent } from './pending-product-dialog/pending-
 import { ProductRoutingModule } from './product.routes.module';
 import { SharedModule } from '../../shared/shared.module';
 
+import { ProductService } from './product.service';
+
 @NgModule({
   imports: [
     SharedModule,
@@ -39,7 +41,9 @@ import { SharedModule } from '../../shared/shared.module';
     SaveProductDialogComponent,
     PendingProductDialogComponent
   ],
-  providers: []
+  providers: [
+    ProductService
+  ]
 })
 export class ProductModule { }
 

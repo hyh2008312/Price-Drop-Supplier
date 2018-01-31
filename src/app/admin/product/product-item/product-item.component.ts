@@ -62,7 +62,7 @@ export class ProductItemComponent implements OnInit {
         tab = 'unpublish';
         break;
     }
-    this.router.navigate(['./edit/1'], {relativeTo: this.activatedRoute});
+    this.router.navigate([`./edit/${this.product.id}`], {relativeTo: this.activatedRoute});
   }
 
   countInventory(variants) {

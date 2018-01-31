@@ -4,7 +4,7 @@ import { Router,NavigationStart, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
-import { AdminService } from '../../admin.service';
+import { ProductService } from '../product.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 
 @Component({
@@ -34,6 +34,9 @@ export class ProductMainComponent implements OnInit {
   pendingSortList = ['Under Review', 'Disapproved'];
   unpublishedSortList = ['Date', 'Most Views', 'Most Orders', 'Highest Conversion'];
 
+  searchCategory = 'SKU';
+  searchList = ['SKU','Product'];
+
   selectedIndex: number = 0;
   subscription: any;
 
@@ -47,7 +50,7 @@ export class ProductMainComponent implements OnInit {
   pageSizeOptions = [6, 12];
 
   constructor(
-    private adminService: AdminService,
+    private adminService: ProductService,
     private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute,

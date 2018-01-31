@@ -27,13 +27,22 @@
                   fxLayout="row" fxLayoutAlign="start center" >
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-                     placeholder="Search by product title or SKU"
+                     placeholder="Search"
                      (keyup.enter)="changeProducts({index:0})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
                 <i class="material-icons">close</i>
               </div>
             </form>
+            <div class="sc-product__search-margin-top unicorn-dark-theme">
+              <mat-form-field class="sc-product__product-sort">
+                <mat-select [(ngModel)]="searchCategory" name="sort">
+                  <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
           </div>
         </div>
         <div>
@@ -66,13 +75,22 @@
                   fxLayout="row" fxLayoutAlign="start center" >
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-                     placeholder="Search by product title or SKU"
+                     placeholder="Search"
                      (keyup.enter)="changeProducts({index:1})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
                 <i class="material-icons">close</i>
               </div>
             </form>
+            <div class="sc-product__search-margin-top unicorn-dark-theme">
+              <mat-form-field class="sc-product__product-sort">
+                <mat-select [(ngModel)]="searchCategory" name="sort">
+                  <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
           </div>
         </div>
         <div>
@@ -105,13 +123,22 @@
                   fxLayout="row" fxLayoutAlign="start center" >
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-                     placeholder="Search by product title or SKU"
+                     placeholder="Search"
                      (keyup.enter)="changeProducts({index:2})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
                 <i class="material-icons">close</i>
               </div>
             </form>
+            <div class="sc-product__search-margin-top unicorn-dark-theme">
+              <mat-form-field class="sc-product__product-sort">
+                <mat-select [(ngModel)]="searchCategory" name="sort">
+                  <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
           </div>
         </div>
         <div>
@@ -154,7 +181,7 @@
                   fxLayout="row" fxLayoutAlign="start center" >
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-                     placeholder="Search by product title or SKU"
+                     placeholder="Search"
                      (keyup.enter)="changeProducts({index:3})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
@@ -193,13 +220,22 @@
                   fxLayout="row" fxLayoutAlign="start center" >
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-                     placeholder="Search by product title or SKU"
+                     placeholder="Search"
                      (keyup.enter)="changeProducts({index:4})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
                 <i class="material-icons">close</i>
               </div>
             </form>
+            <div class="sc-product__search-margin-top unicorn-dark-theme">
+              <mat-form-field class="sc-product__product-sort">
+                <mat-select [(ngModel)]="searchCategory" name="sort">
+                  <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
           </div>
         </div>
         <div>

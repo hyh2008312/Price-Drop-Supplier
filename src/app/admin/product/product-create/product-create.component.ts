@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators , FormArray } from '@angular/forms';
 import { Router, ActivatedRoute} from '@angular/router';
 import { MatDialog } from '@angular/material';
 
-import { AdminService } from '../../admin.service';
+import { ProductService } from '../product.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 import { ConstantService } from  '../../../shared/services/constant/constant.service';
 
@@ -99,7 +99,7 @@ export class ProductCreateComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private dialog: MatDialog,
-    private adminService: AdminService,
+    private adminService: ProductService,
     private ngZone: NgZone,
     @Inject(DOCUMENT) private document: Document
   ) {

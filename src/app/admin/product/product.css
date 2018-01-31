@@ -2254,7 +2254,7 @@ textarea.mat-input-element {
       .sc-product__product-button-list > a:hover {
         background-color: rgba(0, 0, 0, 0.12); }
 .sc-product__search {
-  border-bottom: 1px solid #222;
+  border-bottom: 2px solid #222;
   height: 32px;
   margin: 16px 0;
   position: relative; }
@@ -2264,7 +2264,7 @@ textarea.mat-input-element {
   .sc-product__search > input {
     border: none;
     background-color: transparent;
-    width: 250px; }
+    width: 150px; }
   .sc-product__search-close {
     position: absolute;
     cursor: pointer;
@@ -2285,6 +2285,8 @@ textarea.mat-input-element {
       color: #fff; }
   .sc-product__search-result {
     color: #00bdd6; }
+  .sc-product__search-margin-top {
+    margin-top: 10px; }
 .sc-product__create-text span {
   font-family: 'San Francisco', Helvetica; }
 .sc-product__create-text-1 {
