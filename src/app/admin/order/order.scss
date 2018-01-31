@@ -291,6 +291,16 @@
       @include media();
     }
 
+    &-tracking-button{
+      line-height: 40px;
+      font-size: 14px;
+      background-color: $blackColor;
+      color: $whiteColor;
+      border-radius: 4px;
+      display: block;
+      padding: 0 16px;
+    }
+
     &-margin-right{
       margin-right: 16px;
     }
@@ -320,11 +330,11 @@
     }
 
     &-width-2{
-      width: 80px;
+      width: 100px;
     }
 
     &-width-3{
-      width: 142px;
+      width: 150px;
     }
 
     &-height{
@@ -384,6 +394,10 @@
 
   &__margin-top{
     margin-top: 24px;
+  }
+
+  &__color{
+    color: black;
   }
 
 }

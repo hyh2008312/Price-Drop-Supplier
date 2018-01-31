@@ -413,13 +413,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   openLeaveDialog() {
-    let dialogRef = this.dialog.open(SaveProductDialogComponent, {
-      data: {}
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-
-    });
   }
 
   continue() {

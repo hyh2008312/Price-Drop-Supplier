@@ -40,6 +40,7 @@ export class OrderMainComponent implements OnInit {
 
   searchKey: any = '';
   isSearch: boolean = false;
+  isSearchResult: boolean = false;
   searchResult: any;
   searchForm: FormGroup;
 
@@ -131,68 +132,81 @@ export class OrderMainComponent implements OnInit {
         page = this.orderCanceledIndex;
         break;
       case 3:
-        status = 'Returns';
         page = this.orderReturnsIndex;
         break;
       default:
         break;
     }
-
     let self = this;
+    if(this.isSearchResult) {
+      this.isSearchResult = false;
+      return;
+    }
+    if(event.index < 3) {
+      this.orderService.getSupplyOrderList({
+        status,
+        page,
+        page_size: this.pageSize,
+        q: this.searchKey
+      }).then((data) => {
 
-    this.orderService.getSupplyOrderList({
-      status,
-      page,
-      page_size: this.pageSize,
-      q: this.searchKey
-    }).then((data) => {
-      self.length = data.count;
-      switch (event.index) {
-        case 0:
-          self.orderUnfulfilled = data.results;
-          break;
-        case 1:
-          self.orderFulfilled = data.results;
-          break;
-        case 2:
-          self.orderCanceled = data.results;
-          break;
-        case 3:
-          self.orderReturns = data.results;
-          break;
-      }
-    });
+        self.length = data.count;
+        switch (event.index) {
+          case 0:
+            self.orderUnfulfilled = data.results;
+            break;
+          case 1:
+            self.orderFulfilled = data.results;
+            break;
+          case 2:
+            self.orderCanceled = data.results;
+            break;
+        }
+      });
+    } else {
+      let type = this.requestTypeSorted == 'All'? null: this.requestTypeSorted;
+      let status = this.returnStatusSorted == 'All'? null: this.returnStatusSorted;
+      this.orderService.getReturnOrderList({
+        type,
+        status,
+        page,
+        page_size: this.pageSize
+      }).then((data) => {
+        self.length = data.count;
+        self.orderReturns = data.results;
+      });
+    }
 
   }
 
   searchResultProducts() {
     let self = this;
+    self.isSearchResult = true;
 
     this.orderService.getSupplyOrderResult({
       number: this.searchKey
     }).then((data) => {
-
       if(data.length> 0) {
-        switch (data[0].status) {
-          case 'Unfulfilled':
-            self.orderUnfulfilled = data;
-            self.selectedIndex = 0;
-            break;
-          case 'Fulfilled':
-            self.orderFulfilled = data;
-            self.selectedIndex = 1;
-            break;
-          case 'Canceled':
-            self.orderCanceled = data;
-            self.selectedIndex = 2;
-            break;
-          case 'Returns':
-            self.orderReturns = data;
-            self.selectedIndex = 3;
-            break;
+        if(data[0].orderType == 'Return') {
+          self.selectedIndex = 3;
+          self.orderReturns = data;
+        } else {
+          switch (data[0].status) {
+            case 'Unfulfilled':
+              self.selectedIndex = 0;
+              self.orderUnfulfilled = data;
+              break;
+            case 'Fulfilled':
+              self.selectedIndex = 1;
+              self.orderFulfilled = data;
+              break;
+            case 'Canceled':
+              self.selectedIndex = 2;
+              self.orderCanceled = data;
+              break;
+          }
         }
       }
-
     });
   }
 

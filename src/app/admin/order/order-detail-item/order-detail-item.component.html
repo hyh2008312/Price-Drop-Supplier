@@ -75,12 +75,12 @@
   <div class="sc-order__detail-item" fxLayout="row" fxLayoutAlign="start start">
     <div class="sc-order__detail-width sc-order__detail-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
       <div class="sc-order__detail-image" fxFlex="none">
-        <img [src]="order.imageUrl">
+        <img [src]="order.line.mainImage">
       </div>
       <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
-        <div class="sc-order__product-title-2" >{{order.title}}</div>
+        <div class="sc-order__product-title-2" >{{order.line.title}}</div>
         <div fxLayout="row" fxLayoutAlign="start center">
-          <div>SKU: {{order.sku}}</div>
+          <div>SKU: {{order.line.sku}}</div>
         </div>
       </div>
     </div>
@@ -90,34 +90,45 @@
          fxLayout="column" fxLayoutAlign="start center">
       <div fxLayout="row" fxLayoutAlign="start center">
         <div class="sc-order__detail-width-2">
-          <div>Subtotal:&nbsp;</div>
-          <div class="md-margin-top-1">Shipping:&nbsp;</div>
-          <div class="md-margin-top-1">Tax:&nbsp;</div>
-          <div class="md-margin-top-1">Total:&nbsp;</div>
+          <div class="md-align-right">Subtotal:</div>
+          <div class="md-margin-top-1 md-align-right">Shipping:</div>
+          <div class="md-margin-top-1 md-align-right">Tax:</div>
+          <div class="md-margin-top-1 md-align-right">Total:</div>
+          <div *ngIf="order.status == 'Partially Refunded' || order.status == 'Refunded'">
+            <div class="md-margin-top-1 md-align-right">Refunded:</div>
+            <div class="md-margin-top-1 md-align-right">Net Payment:</div>
+          </div>
         </div>
-        <div>
-          <div>{{order.priceExclTax | currency: currency: true}}</div>
-          <div class="md-margin-top-1">{{order.shippingExclTax | currency: currency: true}}</div>
+        <div class="md-margin-left-1">
+          <div>{{order.line.priceExclTax | currency: currency: true}}</div>
+          <div class="md-margin-top-1">{{order.line.shippingExclTax | currency: currency: true}}</div>
           <div class="md-margin-top-1">$0</div>
           <div class="md-margin-top-1">{{totalAmount | currency: currency: true}}</div>
+          <div *ngIf="order.status == 'Partially Refunded' || order.status == 'Refunded'">
+            <div class="md-margin-top-1">{{order.line.refundAmount | currency: currency: true}}</div>
+            <div class="md-margin-top-1">{{totalAmount | currency: currency: true}}</div>
+          </div>
         </div>
       </div>
     </div>
     <div class="sc-order__detail-margin-right sc-order__detail-height" fxFlex="20"
-         fxLayout="column" fxLayoutAlign="center center">{{order.returnStatus}}</div>
+         fxLayout="column" fxLayoutAlign="center center">{{order.status}}</div>
     <div fxFlex="none" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
       <button mat-raised-button color="primary">Contact Customer</button>
-      <div class="md-margin-top-2" fxLayout="column">
+      <div class="md-margin-top-2" fxLayout="column" *ngIf="order.status == 'Pending'" >
         <button mat-raised-button color="accent" (click)="authorizeReturn()">Authorize Return</button>
       </div>
-      <div class="md-margin-top-1" fxLayout="column">
+      <div class="md-margin-top-2" fxLayout="column" *ngIf="order.status == 'Authorized' || order.status == 'Exchanged'">
+        <button mat-raised-button color="accent" (click)="authorizeReturn()">View Return Info</button>
+      </div>
+      <div class="md-margin-top-1" fxLayout="column"  *ngIf="order.status == 'Authorized' || order.status == 'Exchanged'">
         <button mat-raised-button color="accent" (click)="shipExchangeItem()">Ship Exchange Item</button>
       </div>
-      <div class="md-margin-top-1" fxLayout="column">
+      <div class="md-margin-top-1" fxLayout="column" *ngIf="order.status != 'Refunded'">
         <button mat-raised-button color="accent" (click)="issueRefund()">Issue Refund</button>
       </div>
-      <div class="md-margin-top-1" fxLayout="column">
+      <div class="md-margin-top-1" fxLayout="column" *ngIf="order.status == 'Pending'">
         <button mat-raised-button color="accent" (click)="denyRequest()">Deny Request</button>
       </div>
     </div>
@@ -127,12 +138,12 @@
   <div class="sc-order__detail-item" fxLayout="row" fxLayoutAlign="start start">
     <div class="sc-order__detail-width sc-order__detail-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
       <div class="sc-order__detail-image" fxFlex="none">
-        <img [src]="order.imageUrl">
+        <img [src]="order.line.mainImage">
       </div>
       <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
-        <div class="sc-order__product-title-2" >{{order.title}}</div>
+        <div class="sc-order__product-title-2" >{{order.line.title}}</div>
         <div fxLayout="row" fxLayoutAlign="start center">
-          <div>SKU: {{order.sku}}</div>
+          <div>SKU: {{order.line.sku}}</div>
         </div>
       </div>
     </div>
@@ -148,25 +159,28 @@
           <div class="md-margin-top-1">Total:&nbsp;</div>
         </div>
         <div>
-          <div>{{order.priceExclTax | currency: currency: true}}</div>
-          <div class="md-margin-top-1">{{order.shippingExclTax | currency: currency: true}}</div>
+          <div>{{order.line.priceExclTax | currency: currency: true}}</div>
+          <div class="md-margin-top-1">{{order.line.shippingExclTax | currency: currency: true}}</div>
           <div class="md-margin-top-1">$0</div>
           <div class="md-margin-top-1">{{totalAmount | currency: currency: true}}</div>
         </div>
       </div>
     </div>
     <div class="sc-order__detail-margin-right sc-order__detail-height" fxFlex="20"
-         fxLayout="column" fxLayoutAlign="center center">{{order.returnStatus}}</div>
+         fxLayout="column" fxLayoutAlign="center center">{{order.status}}</div>
     <div fxFlex="none" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
       <button mat-raised-button color="primary">Contact Customer</button>
-      <div class="md-margin-top-2" fxLayout="column">
+      <div class="md-margin-top-2" fxLayout="column" *ngIf="order.status == 'Pending'" >
         <button mat-raised-button color="accent" (click)="authorizeReturn()">Authorize Return</button>
       </div>
-      <div class="md-margin-top-1" fxLayout="column">
+      <div class="md-margin-top-2" fxLayout="column" *ngIf="order.status == 'Authorized'">
+        <button mat-raised-button color="accent" (click)="authorizeReturn()">View Return Info</button>
+      </div>
+      <div class="md-margin-top-1" fxLayout="column" *ngIf="order.status != 'Refunded'">
         <button mat-raised-button color="accent" (click)="issueRefund()">Issue Refund</button>
       </div>
-      <div class="md-margin-top-1" fxLayout="column">
+      <div class="md-margin-top-1" fxLayout="column"  *ngIf="order.status == 'Pending'">
         <button mat-raised-button color="accent" (click)="denyRequest()">Deny Request</button>
       </div>
     </div>

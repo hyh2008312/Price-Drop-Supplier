@@ -17,13 +17,13 @@
     </div>
     <div class="sc-product__create-navigation xb-pointer" fxFlex="50" *ngIf="step == 0 && productId"
       fxLayout="row" fxLayoutAlign="center center" (click)="changeStep(1)"
-      [ngClass]="{'sc-product__create-navigation-active':step==1}">2.Add Product Details</div>
+      [ngClass]="{'sc-product__create-navigation-active':step==1}">2.Add More Details</div>
     <div class="sc-product__create-navigation" fxFlex="50" *ngIf="step == 1 && productId"
          fxLayout="row" fxLayoutAlign="center center"
-         [ngClass]="{'sc-product__create-navigation-active':step==1}">2.Add Product Details</div>
+         [ngClass]="{'sc-product__create-navigation-active':step==1}">2.Add More Details</div>
     <div class="sc-product__create-navigation" fxFlex="50" *ngIf="!productId"
          fxLayout="row" fxLayoutAlign="center center"
-         [ngClass]="{'sc-product__create-navigation-active':step==1}">2.Add Product Details</div>
+         [ngClass]="{'sc-product__create-navigation-active':step==1}">2.Add More Details</div>
   </div>
   <form [formGroup]="productForm" novalidate>
     <div *ngIf="step == 0">

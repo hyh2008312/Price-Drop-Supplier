@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { OrderMainComponent } from './order-main/order-main.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { OrderReturnDetailComponent } from './order-return-detail/order-return-detail.component';
 
 import { OrderItemComponent } from './order-item/order-item.component';
 import { OrderTitleComponent } from './order-title/order-title.component';
@@ -30,6 +31,7 @@ import { SharedModule } from '../../shared/shared.module';
   declarations: [
     OrderMainComponent,
     OrderDetailComponent,
+    OrderReturnDetailComponent,
     OrderItemComponent,
     OrderTitleComponent,
     OrderDetailItemComponent,

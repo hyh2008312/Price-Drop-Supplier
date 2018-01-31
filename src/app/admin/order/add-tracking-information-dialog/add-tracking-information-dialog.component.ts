@@ -30,12 +30,10 @@ export class AddTrackingInformationDialogComponent implements OnInit {
       trackingURL: ['']
     });
     this.order = data.order;
-    if(this.order.trackingNumber != '') {
-      this.trackingForm.patchValue({
-        trackingName: this.order.shippingNumber
-      })
-    }
-
+    this.trackingForm.patchValue({
+      trackingName: this.order.shippingNumber,
+      trackingURL: this.order.shippingPrice.shippingUrl
+    });
   }
 
   ngOnInit():void {

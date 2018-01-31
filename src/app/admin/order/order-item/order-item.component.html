@@ -18,7 +18,7 @@
             <div fxLayout="row" fxLayoutAlign="start center">
               <div [ngClass]="{'sc-order__product-margin-left': i > 0}"
                    *ngFor="let item of order.variant.attributeValues;let i = index;">
-                {{item.name}}
+                {{item.value}}
               </div>
             </div>
           </div>
@@ -47,35 +47,35 @@
 </div>
 <div fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status == 3">
   <div class="sc-order__product-height" fxLayout="row" fxLayoutAlign="start center" >
-    <div fxFlex>Order #: {{order.number}}</div>
-    <div class="text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/{{order.id}}">View Details</div>
+    <div fxFlex>Order #: {{order.line.number}}</div>
+    <div class="text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./return/{{order.id}}">View Details</div>
   </div>
   <div class="sc-order__product-item-2" fxLayout="row" fxLayoutAlign="start stretch">
     <div class="sc-order__product-width sc-order__product-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
       <div class="sc-order__product-image" fxFlex="none">
-        <img [src]="order.variant.imageMain">
+        <img [src]="order.line.variant.imageMain">
       </div>
       <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
-        <div class="sc-order__product-title" >{{order.title}}</div>
+        <div class="sc-order__product-title" >{{order.line.title}}</div>
         <div fxLayout="row" fxLayoutAlign="start center">
           <div [ngClass]="{'sc-order__product-margin-left': i > 0}"
-               *ngFor="let item of order.variant.attributeValues;let i = index;">
-            {{item.name}}
+               *ngFor="let item of order.line.variant.attributeValues;let i = index;">
+            {{item.value}}
           </div>
         </div>
       </div>
     </div>
     <div class="sc-order__product-margin-right" fxFlex="20"
-         fxLayout="column" fxLayoutAlign="center center"> Oct 14, 2017</div>
+         fxLayout="column" fxLayoutAlign="center center"> {{order.created | amDateFormat:'MMMM Do, YYYY'}}</div>
     <div class="sc-order__product-margin-right" fxFlex="20"
          fxLayout="column" fxLayoutAlign="center center">
-      {{order.lastName + ' ' + order.firstName}}
+      {{order.customerName}}
     </div>
     <div class="sc-order__product-margin-right" fxFlex="15"
-         fxLayout="column" fxLayoutAlign="center center">Exchange</div>
+         fxLayout="column" fxLayoutAlign="center center">{{order.type}}</div>
     <div fxFlex="15"
          fxLayout="column" fxLayoutAlign="center center">
-      Pending
+      {{order.status}}
     </div>
   </div>
 </div>

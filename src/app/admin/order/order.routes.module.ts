@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 import { OrderMainComponent } from './order-main/order-main.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { OrderReturnDetailComponent } from './order-return-detail/order-return-detail.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,9 @@ const routes: Routes = [
   },
   {
     path: 'detail/:id', component: OrderDetailComponent
+  },
+  {
+    path: 'return/:id', component: OrderReturnDetailComponent
   }
 ];
 

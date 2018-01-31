@@ -33,6 +33,7 @@ export class OrderDetailItemComponent implements OnInit {
   currency:string = 'USD';
 
   totalAmount: number = 0;
+  netPaymentAmount: number = 0;
 
   constructor(
     private adminService: AdminService,
@@ -50,7 +51,12 @@ export class OrderDetailItemComponent implements OnInit {
 
   ngOnChanges() {
     if(this.order) {
-      this.totalAmount = parseFloat(this.order.priceExclTax) + parseFloat(this.order.shippingExclTax);
+      if(this.status < 3) {
+        this.totalAmount = (parseFloat(this.order.priceExclTax) + parseFloat(this.order.shippingExclTax)) * this.order.quantity;
+      } else {
+        this.totalAmount = (parseFloat(this.order.line.priceExclTax) + parseFloat(this.order.line.shippingExclTax)) * this.order.quantity;
+        this.netPaymentAmount = (parseFloat(this.order.line.priceExclTax) + parseFloat(this.order.line.shippingExclTax)) * this.order.line.quantity;
+      }
     }
   }
 
@@ -120,48 +126,84 @@ export class OrderDetailItemComponent implements OnInit {
   denyRequest() {
     let dialogRef = this.dialog.open(DenyRequestDialogComponent, {
       data: {
-        order: this.order
+        order: this.order,
+        isRequestDeny: false
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    let self = this;
 
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isRequestDeny == true) {
+        self.productChange.emit({
+          index: self.index,
+          order: dialogRef.componentInstance.data.order,
+          event: 'denyRequest'
+        });
+      }
     });
   }
 
   authorizeReturn() {
     let dialogRef = this.dialog.open(AuthorizeReturnDialogComponent, {
       data: {
-        order: this.order
+        order: this.order,
+        isAuthorized: false
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    let self = this;
 
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isAuthorized == true) {
+        self.productChange.emit({
+          index: self.index,
+          order: dialogRef.componentInstance.data.order,
+          event: 'authorized'
+        });
+      }
     });
   }
 
   shipExchangeItem() {
     let dialogRef = this.dialog.open(ShipExchangeItemDialogComponent, {
       data: {
-        order: this.order
+        order: this.order,
+        isExchange: false
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    let self = this;
 
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isExchange == true) {
+        self.productChange.emit({
+          index: self.index,
+          order: dialogRef.componentInstance.data.order,
+          event: 'exchange'
+        });
+      }
     });
   }
 
   issueRefund() {
     let dialogRef = this.dialog.open(IssueRefundDialogComponent, {
       data: {
-        order: this.order
+        order: this.order,
+        isRefund: false
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    let self = this;
 
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isRefund == true) {
+        self.productChange.emit({
+          index: self.index,
+          order: dialogRef.componentInstance.data.order,
+          event: 'refund'
+        });
+      }
     });
   }
 

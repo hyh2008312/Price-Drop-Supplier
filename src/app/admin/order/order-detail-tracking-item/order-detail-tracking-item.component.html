@@ -29,9 +29,7 @@
         Tracking URL
       </div>
       <div class="sc__accent-dark">
-        <button mat-raised-button color="primary"
-                *ngIf="shippingPrice.shippingUrl != ''"
-                routerLink="{{shippingPrice.shippingUrl}}">View Tracking</button>
+        <a class="sc-order__detail-tracking-button" href="{{shippingPrice.shippingUrl}}" target="_blank">View Tracking</a>
       </div>
     </div>
   </div>

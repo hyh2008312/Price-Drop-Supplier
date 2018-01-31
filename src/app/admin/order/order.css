@@ -2157,8 +2157,7 @@ textarea.mat-input-element {
 .sc-order__container {
   padding: 0 16px; }
 .sc-order__product {
-  position: relative;
-  overflow: hidden; }
+  position: relative; }
   .sc-order__product-sort {
     width: 140px;
     text-align: center; }
@@ -2358,6 +2357,14 @@ textarea.mat-input-element {
   margin-right: 32px;
   text-align: right;
   font-weight: 600; }
+.sc-order__detail-tracking-button {
+  line-height: 40px;
+  font-size: 14px;
+  background-color: #222;
+  color: #fff;
+  border-radius: 4px;
+  display: block;
+  padding: 0 16px; }
 .sc-order__detail-margin-right {
   margin-right: 16px; }
 .sc-order__detail-margin-left {
@@ -2373,9 +2380,9 @@ textarea.mat-input-element {
 .sc-order__detail-width-1 {
   width: 180px; }
 .sc-order__detail-width-2 {
-  width: 80px; }
+  width: 100px; }
 .sc-order__detail-width-3 {
-  width: 142px; }
+  width: 150px; }
 .sc-order__detail-height {
   height: 80px; }
 .sc-order__detail-item {
@@ -2417,5 +2424,7 @@ textarea.mat-input-element {
     font-weight: 400; }
   .sc-order-dialog__margin-top {
     margin-top: 24px; }
+  .sc-order-dialog__color {
+    color: black; }
 
 /*# sourceMappingURL=order.css.map */
