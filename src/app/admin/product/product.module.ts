@@ -10,9 +10,12 @@ import { ProductTitleComponent } from './product-title/product-title.component';
 import { ImageUploadMainComponent } from './image-upload-main/image-upload-main.component';
 import { ImageUploadAdditionalComponent } from './image-upload-additional/image-upload-additional.component';
 import { ImageUploadColorComponent } from './image-upload-color/image-upload-color.component';
+import { ImageUploadVariantComponent } from './image-upload-variant/image-upload-variant.component';
+import { ImageUploadVariantPreviewComponent } from './image-upload-variant-preview/image-upload-variant-preview.component';
 
 import { SaveProductDialogComponent } from './save-product-dialog/save-product-dialog.component';
 import { PendingProductDialogComponent } from './pending-product-dialog/pending-product-dialog.component';
+import { DeleteVariantDialogComponent } from './delete-variant-dialog/delete-variant-dialog.component';
 
 import { ProductRoutingModule } from './product.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -35,11 +38,15 @@ import { ProductService } from './product.service';
     ImageUploadAdditionalComponent,
     SaveProductDialogComponent,
     PendingProductDialogComponent,
-    ImageUploadColorComponent
+    DeleteVariantDialogComponent,
+    ImageUploadColorComponent,
+    ImageUploadVariantComponent,
+    ImageUploadVariantPreviewComponent
   ],
   entryComponents: [
     SaveProductDialogComponent,
-    PendingProductDialogComponent
+    PendingProductDialogComponent,
+    DeleteVariantDialogComponent
   ],
   providers: [
     ProductService

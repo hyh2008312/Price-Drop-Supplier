@@ -396,13 +396,11 @@
                     {{ value.text }}
                     <div *ngIf="i == 5 && p.value.checked" class="md-margin-left-4" fxLayout="row" fxLayoutAlign="start center">
                       <mat-form-field class="sc-product__create-width">
-                        <input class="md-align-center" type="number" matInput placeholder="Min" formControlName="min"
-                               (ngModelChange)="changeShippingTime($event, p, 0)">
+                        <input class="md-align-center" type="number" matInput placeholder="Min" formControlName="shippingTimeMin">
                       </mat-form-field>
                       <div class="md-margin-left-2 md-margin-right-2">-</div>
                       <mat-form-field class="sc-product__create-width">
-                        <input class="md-align-center" type="number" matInput placeholder="Max" formControlName="max"
-                               (ngModelChange)="changeShippingTime($event, p, 1)">
+                        <input class="md-align-center" type="number" matInput placeholder="Max" formControlName="shippingTimeMax">
                       </mat-form-field>
                     </div>
                   </div>

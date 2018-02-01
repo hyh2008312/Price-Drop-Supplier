@@ -42,22 +42,22 @@ export class ProductCreateComponent implements OnInit {
   shippingMethodList = ['EMS','DHL'];
 
   shippingTimeList = [{
-    value: [5, 10],
+    value: '5-10',
     text: '5 - 10 days'
   }, {
-    value: [7, 14],
+    value: '7-14',
     text: '7 - 14 days'
   }, {
-    value: [10, 15],
+    value: '10-15',
     text: '10 - 15 days'
   }, {
-    value: [14, 21],
+    value: '14-21',
     text:'14 - 21 days'
   },{
-    value: [21, 28],
+    value: '21-28',
     text: '21 - 28 days'
   },{
-    value: [0, 0],
+    value: '0',
     text: 'other'
   }];
 
@@ -107,6 +107,7 @@ export class ProductCreateComponent implements OnInit {
     this.productForm = this.fb.group({
       title: ['', Validators.required],
       categoryId: [null, Validators.required],
+      images: [''],
       variant: this.fb.array([]),
       variants: this.fb.array([]),
       shippings: this.fb.array([]),
@@ -145,8 +146,8 @@ export class ProductCreateComponent implements OnInit {
       price: [0, Validators.required],
       checked: [false, Validators.required],
       shippingTime: ['', Validators.required],
-      min: [0, Validators.required],
-      max: [0, Validators.required]
+      shippingTimeMin: [0, Validators.required],
+      shippingTimeMax: [0, Validators.required]
     }));
   }
 
@@ -163,8 +164,8 @@ export class ProductCreateComponent implements OnInit {
       price: 0,
       shippingTime: 0,
       checked: false,
-      min: 0,
-      max: 0
+      shippingTimeMin: 0,
+      shippingTimeMax: 0
     });
   }
 
@@ -375,13 +376,6 @@ export class ProductCreateComponent implements OnInit {
     this.addProductList(true);
   }
 
-  changeShippingTime($event, item, index) {
-    let shippingTime = item.value.shippingTime;
-    shippingTime[index] = $event;
-    item.patchValue({
-      shipTime: shippingTime
-    });
-  }
 
   showMinAndMaxTime($event, index, item) {
     if(index == 5) {
@@ -389,8 +383,11 @@ export class ProductCreateComponent implements OnInit {
         checked: true
       });
     } else {
+      let timeArr = this.shippingTimeList[index].value.split('-');
       item.patchValue({
-        checked: false
+        checked: false,
+        shippingTimeMin: timeArr[0],
+        shippingTimeMax: timeArr[1]
       });
     }
   }

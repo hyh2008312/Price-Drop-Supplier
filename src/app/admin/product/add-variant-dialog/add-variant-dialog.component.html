@@ -1,0 +1,60 @@
+<div class="sc-product-variant-dialog">
+  <div class="sc-product-variant-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-product-variant-dialog__title">
+    Add a New Variant
+  </div>
+  <form [formGroup]="variantForm" novalidate>
+    <div class="sc-product__create-title">
+      Variant Name
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center" formArrayName="attributes">
+      <div fxFlex="46" *ngFor="let p of attributes.controls; let i = index;">
+        <div fxLayout="row" fxLayoutAlign="start center" >
+          <mat-form-field fxFlex>
+            <input type="text" matInput placeholder="{{p.value.name}}" formControlName="value">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="sc-product__create-title">
+      Inventory
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center" >
+      <div fxFlex="46" >
+        <div fxLayout="row" fxLayoutAlign="start center" >
+          <mat-form-field fxFlex>
+            <input type="text" matInput placeholder="SKU" formControlName="sku">
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxFlex="46" >
+        <div fxLayout="row" fxLayoutAlign="start center" >
+          <mat-form-field fxFlex>
+            <input type="text" matInput placeholder="Quantity" formControlName="stock">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="sc-product__create-title">
+      Pricing
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between center" >
+      <div fxFlex="46" >
+        <div fxLayout="row" fxLayoutAlign="start center" >
+          <mat-form-field fxFlex>
+            <input type="text" matInput placeholder="Price" formControlName="saleUnitPrice">
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxFlex="46" >
+        <div fxLayout="row" fxLayoutAlign="start center" >
+          <mat-form-field fxFlex>
+            <input type="text" matInput placeholder="MSRP(Optional)" formControlName="unitPrice">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
