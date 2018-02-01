@@ -39,11 +39,11 @@ export class AddVariantDialogComponent implements OnInit {
     });
 
     for(let item of this.attributeList) {
-      this.attributes.push({
+      this.attributes.push(this.fb.group({
         id: [item.id, Validators.required],
         name: [item.name, Validators.required],
         value: ['', Validators.required],
-      });
+      }));
     }
 
   }
