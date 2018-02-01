@@ -12,6 +12,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { ENTER } from '@angular/cdk/keycodes';
 
 import { DeleteVariantDialogComponent } from '../delete-variant-dialog/delete-variant-dialog.component';
+import { AddVariantDialogComponent } from '../add-variant-dialog/add-variant-dialog.component';
 
 @Component({
   selector: 'app-product-edit',
@@ -75,6 +76,8 @@ export class ProductEditComponent implements OnInit {
   isProductListShow: boolean = false;
 
   variantAddedList: any[] = [];
+
+  variantProductList: any;
 
   productBasicForm: FormGroup;
   productVariantForm: FormGroup;
@@ -280,10 +283,30 @@ export class ProductEditComponent implements OnInit {
     });
   }
 
+  openVariantDialog() {
+    let id = parseInt(this.activatedRoute.snapshot.params["id"]);
+    let dialogRef = this.dialog.open(AddVariantDialogComponent, {
+      data: {
+        variant: {},
+        productId: id,
+        isVariantAdded: false
+      }
+    });
+
+    let self = this;
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isVariantAdded == true) {
+        self.addProductList(dialogRef.componentInstance.data.variant);
+      }
+    });
+  }
+
   addProductList(variant) {
     let attribute = '';
-    for(let item of variant.attributeValues ) {
-      attribute += item.value;
+    let index = 0;
+    for(let item of variant.attributeValues) {
+      attribute += index != 0?', ' +item.value.trim():item.value.trim();
+      index++;
     }
     this.product.push(this.fb.group({
       id: [variant.id],

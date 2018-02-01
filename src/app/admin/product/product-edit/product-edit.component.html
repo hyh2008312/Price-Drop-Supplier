@@ -3,7 +3,7 @@
     <span class="md-dark-secondary xb-pointer" (click)="openLeaveDialog()">产品</span> <span class="md-dark-secondary">></span> <span class="xb-bold">编辑产品</span>
   </div>
   <div fxLayout="row" fxLayoutAlign="start start">
-    <div class="md-margin-top-1 md-margin-right-2">
+    <div class="md-margin-top-2 md-margin-right-2 sc-product__edit-tab">
       <div class="sc-product__edit-button xb-pointer" (click)="changeStep(0)"
         [ngClass]="{'active': step == 0}">Basic Information</div>
       <div class="sc-product__edit-button xb-pointer"(click)="changeStep(1)"
@@ -96,7 +96,7 @@
               Inventory & Pricing
             </div>
             <div>
-              <button mat-raised-button color="primary" type="button">
+              <button mat-raised-button color="primary" type="button" (click)="openVariantDialog()">
                 <div fxLayout="row" fxLayoutAlign="start center">
                   <i class="material-icons">add</i>
                   <span class="md-margin-left-1">Add a New Variant</span>

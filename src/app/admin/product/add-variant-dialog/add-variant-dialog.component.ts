@@ -13,6 +13,7 @@ export class AddVariantDialogComponent implements OnInit {
 
   variantForm: FormGroup;
   get attributes() { return this.variantForm.get('attributes') as FormArray; }
+  image: any='';
 
   attributeList = [{
     id: 1,
@@ -33,7 +34,7 @@ export class AddVariantDialogComponent implements OnInit {
       sku: ['', Validators.required],
       saleUnitPrice: ['', Validators.required],
       unitPrice: ['', Validators.required],
-      productId: ['', Validators.required],
+      productId: [this.data.productId, Validators.required],
       stock: ['', Validators.required],
       attributes: this.fb.array([])
     });
@@ -57,13 +58,17 @@ export class AddVariantDialogComponent implements OnInit {
   }
 
   add() {
-    let product = {
-      id: this.data.id
-    };
+    if(this.variantForm.invalid) {
+      return;
+    }
+
+    let product = this.variantForm.value;
 
     let self = this;
     this.productService.addNewVariant(product).then((data) => {
-      self.data.isDelete = true;
+      self.data.isVariantAdded = true;
+      self.data.variant = data;
+      self.close();
     });
   }
 

@@ -6,22 +6,32 @@
     Add a New Variant
   </div>
   <form [formGroup]="variantForm" novalidate>
-    <div class="sc-product__create-title">
+    <div class="sc-product__create-title md-margin-top-2">
       Variant Name
     </div>
-    <div fxLayout="row" fxLayoutAlign="space-between center" formArrayName="attributes">
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="space-between center" formArrayName="attributes">
       <div fxFlex="46" *ngFor="let p of attributes.controls; let i = index;">
-        <div fxLayout="row" fxLayoutAlign="start center" >
+        <div fxLayout="row" fxLayoutAlign="start center" [formGroupName]="i">
           <mat-form-field fxFlex>
             <input type="text" matInput placeholder="{{p.value.name}}" formControlName="value">
           </mat-form-field>
         </div>
       </div>
     </div>
-    <div class="sc-product__create-title">
+    <div class="sc-product__create-title md-margin-top-2">
+      Main Image
+    </div>
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+      <div fxLayout="column" fxLayoutAlign="start center">
+        <app-product-image-upload-color [(previewImgFile)]="image"
+                                        [(previewImgSrcs)]="image"></app-product-image-upload-color>
+        <div class="md-align-center md-margin-top-1 md-margin-bottom-1">Color</div>
+      </div>
+    </div>
+    <div class="sc-product__create-title md-margin-top-2">
       Inventory
     </div>
-    <div fxLayout="row" fxLayoutAlign="space-between center" >
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="space-between center" >
       <div fxFlex="46" >
         <div fxLayout="row" fxLayoutAlign="start center" >
           <mat-form-field fxFlex>
@@ -37,10 +47,10 @@
         </div>
       </div>
     </div>
-    <div class="sc-product__create-title">
+    <div class="sc-product__create-title md-margin-top-2">
       Pricing
     </div>
-    <div fxLayout="row" fxLayoutAlign="space-between center" >
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="space-between center" >
       <div fxFlex="46" >
         <div fxLayout="row" fxLayoutAlign="start center" >
           <mat-form-field fxFlex>
@@ -54,6 +64,12 @@
             <input type="text" matInput placeholder="MSRP(Optional)" formControlName="unitPrice">
           </mat-form-field>
         </div>
+      </div>
+    </div>
+    <div class="sc-product-variant-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary" type="button" (click)="add()">SAVE</button>
+      <div class="md-margin-left-2">
+        <button mat-button color="primary" type="button" (click)="close()">NO</button>
       </div>
     </div>
   </form>
