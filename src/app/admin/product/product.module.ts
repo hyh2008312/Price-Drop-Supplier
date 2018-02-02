@@ -17,6 +17,7 @@ import { SaveProductDialogComponent } from './save-product-dialog/save-product-d
 import { PendingProductDialogComponent } from './pending-product-dialog/pending-product-dialog.component';
 import { DeleteVariantDialogComponent } from './delete-variant-dialog/delete-variant-dialog.component';
 import { AddVariantDialogComponent } from './add-variant-dialog/add-variant-dialog.component';
+import { DeleteShippingDialogComponent } from './delete-shipping-dialog/delete-shipping-dialog.component';
 
 import { ProductRoutingModule } from './product.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -43,13 +44,15 @@ import { ProductService } from './product.service';
     ImageUploadColorComponent,
     ImageUploadVariantComponent,
     ImageUploadVariantPreviewComponent,
-    AddVariantDialogComponent
+    AddVariantDialogComponent,
+    DeleteShippingDialogComponent
   ],
   entryComponents: [
     SaveProductDialogComponent,
     PendingProductDialogComponent,
     DeleteVariantDialogComponent,
-    AddVariantDialogComponent
+    AddVariantDialogComponent,
+    DeleteShippingDialogComponent
   ],
   providers: [
     ProductService

@@ -399,6 +399,23 @@ export class ProductService {
       .catch(this.handleError);
   }
 
+  deleteShipping(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/shipping/delete/${params.id}/`;
+
+    return this.http.delete(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
   getCategoryList(): Promise<any> {
 
     let headers = new Headers({

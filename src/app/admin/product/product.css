@@ -2384,6 +2384,9 @@ textarea.mat-input-element {
   .sc-product__edit-button:hover {
     font-weight: 600;
     background-color: rgba(0, 0, 0, 0.12); }
+  .sc-product__edit-button.active {
+    font-weight: 600;
+    background-color: rgba(0, 0, 0, 0.12); }
 .sc-product__edit-tab {
   width: 224px;
   border-radius: 4px;

@@ -13,6 +13,7 @@ import { ENTER } from '@angular/cdk/keycodes';
 
 import { DeleteVariantDialogComponent } from '../delete-variant-dialog/delete-variant-dialog.component';
 import { AddVariantDialogComponent } from '../add-variant-dialog/add-variant-dialog.component';
+import { DeleteShippingDialogComponent } from '../delete-shipping-dialog/delete-shipping-dialog.component';
 
 @Component({
   selector: 'app-product-edit',
@@ -237,6 +238,7 @@ export class ProductEditComponent implements OnInit {
       this.shipping.push(this.fb.group({
         countryId: [data.countryId, Validators.required],
         type: [data.type, Validators.required],
+        id: [data.id],
         shippingId: [data.shippingId, Validators.required],
         price: [data.priceItem, Validators.required],
         checked: [false, Validators.required],
@@ -283,6 +285,29 @@ export class ProductEditComponent implements OnInit {
         self.product.removeAt(i);
       }
     });
+  }
+
+  deleteShippingObject(i) {
+    let id = this.shipping.controls[i].value.id;
+    console.log(this.shipping.controls[i].value)
+    console.log(id)
+    let self = this;
+    if(id) {
+      let dialogRef = this.dialog.open(DeleteShippingDialogComponent, {
+        data: {
+          id: id,
+          isDelete: false
+        }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if(dialogRef.componentInstance.data.isDelete == true) {
+          self.shipping.removeAt(i);
+        }
+      });
+    } else {
+      self.shipping.removeAt(i);
+    }
   }
 
   openVariantDialog() {
@@ -377,8 +402,7 @@ export class ProductEditComponent implements OnInit {
       return;
     }
     let product = this.productBasicForm.value;
-    let id = parseInt(this.activatedRoute.snapshot.params["id"]);
-    product.id = id;
+    product.id = parseInt(this.activatedRoute.snapshot.params["id"]);
     product.images = '';
     this.adminService.changeProductBasic(product).then((data) => {
       console.log(data);
@@ -390,8 +414,7 @@ export class ProductEditComponent implements OnInit {
       return;
     }
     let product = this.productCommissionForm.value;
-    let id = parseInt(this.activatedRoute.snapshot.params["id"]);
-    product.id = id;
+    product.id = parseInt(this.activatedRoute.snapshot.params["id"]);
     this.adminService.changeProductCommission(product).then((data) => {
       console.log(data)
     });
@@ -402,8 +425,7 @@ export class ProductEditComponent implements OnInit {
       return;
     }
     let product = this.productLogisticForm.value;
-    let id = parseInt(this.activatedRoute.snapshot.params["id"]);
-    product.id = id;
+    product.id = parseInt(this.activatedRoute.snapshot.params["id"]);
     this.adminService.changeProductCommission(product).then((data) => {
       console.log(data)
     });
@@ -414,8 +436,7 @@ export class ProductEditComponent implements OnInit {
       return;
     }
     let product = this.productShippingForm.value;
-    let id = parseInt(this.activatedRoute.snapshot.params["id"]);
-    product.id = id;
+    product.id = parseInt(this.activatedRoute.snapshot.params["id"]);
     this.adminService.changeProductShipping(product).then((data) => {
       console.log(data)
     });
