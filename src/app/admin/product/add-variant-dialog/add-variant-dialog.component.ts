@@ -39,7 +39,7 @@ export class AddVariantDialogComponent implements OnInit {
       attributes: this.fb.array([])
     });
 
-    for(let item of this.attributeList) {
+    for(let item of this.data.attributes) {
       this.attributes.push(this.fb.group({
         id: [item.id, Validators.required],
         name: [item.name, Validators.required],

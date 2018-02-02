@@ -91,8 +91,9 @@ export class ProductCreateComponent implements OnInit {
 
   colorImageList: any[] = [];
 
-  get product() { return this.productForm.get('variants') as FormArray; }
   get shipping() { return this.productForm.get('shippings') as FormArray; }
+  get product() { return this.productForm.get('variants') as FormArray; }
+  get attributes() { return this.productForm.get('attributes') as FormArray; }
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -108,7 +109,7 @@ export class ProductCreateComponent implements OnInit {
       title: ['', Validators.required],
       categoryId: [null, Validators.required],
       images: [[]],
-      variant: this.fb.array([]),
+      attributes: this.fb.array([]),
       variants: this.fb.array([]),
       shippings: this.fb.array([]),
       commission: [0, Validators.required],
@@ -427,6 +428,9 @@ export class ProductCreateComponent implements OnInit {
 
   publish() {
     let product = this.productForm.value;
+
+    product.attributes = this.addProductWithAttributes();
+
     let self = this;
     this.adminService.productCreate(product).then((data) => {
       self.openPendingProductDialog();
@@ -449,6 +453,7 @@ export class ProductCreateComponent implements OnInit {
     }
 
     product.shippings = shippings;
+    product.attributes = this.addProductWithAttributes();
 
     this.adminService.productDraftCreate(product).then((data) => {
       self.ngZone.runOutsideAngular(() => {
@@ -456,6 +461,28 @@ export class ProductCreateComponent implements OnInit {
       });
       self.router.navigate(['../'], { queryParams: {tab: 'draft'}, replaceUrl: true, relativeTo: this.activatedRoute});
     });
+  }
+
+  addProductWithAttributes() {
+    let attributes = [];
+    for(let item of this.variantAddedList) {
+      let id = item.option;
+      let name = '';
+      let index = this.variantList.findIndex((data) => {
+        if(data.id == id) {
+          return true;
+        }
+      });
+      if(index > -1) {
+        name = this.variantList[index].name;
+      }
+      attributes.push({
+        id,
+        name,
+        value: item.value
+      });
+    }
+    return attributes;
   }
 
   openPendingProductDialog() {

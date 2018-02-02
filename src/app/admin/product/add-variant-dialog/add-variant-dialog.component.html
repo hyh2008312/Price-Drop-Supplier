@@ -18,16 +18,21 @@
         </div>
       </div>
     </div>
-    <div class="sc-product__create-title md-margin-top-2">
-      Main Image
-    </div>
-    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
-      <div fxLayout="column" fxLayoutAlign="start center">
-        <app-product-image-upload-color [(previewImgFile)]="image"
-                                        [(previewImgSrcs)]="image"></app-product-image-upload-color>
-        <div class="md-align-center md-margin-top-1 md-margin-bottom-1">Color</div>
+    <div *ngFor="let p of attributes.controls; let i = index;">
+      <div *ngIf="p.value.name == 'Color'">
+        <div class="sc-product__create-title md-margin-top-2">
+          Main Image
+        </div>
+        <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="column" fxLayoutAlign="start center">
+            <app-product-image-upload-color [(previewImgFile)]="image"
+                                            [(previewImgSrcs)]="image"></app-product-image-upload-color>
+            <div class="md-align-center md-margin-top-1 md-margin-bottom-1">{{p.value.value}}</div>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="sc-product__create-title md-margin-top-2">
       Inventory
     </div>

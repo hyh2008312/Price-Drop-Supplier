@@ -73,6 +73,8 @@ export class ProductEditComponent implements OnInit {
 
   variantList:any[] = [];
 
+  attributes:any[];
+
   isProductListShow: boolean = false;
 
   variantAddedList: any[] = [];
@@ -110,7 +112,6 @@ export class ProductEditComponent implements OnInit {
     private ngZone: NgZone,
     @Inject(DOCUMENT) private document: Document
   ) {
-
 
     this.productBasicForm = this.fb.group({
       title: ['', Validators.required],
@@ -161,6 +162,7 @@ export class ProductEditComponent implements OnInit {
     this.adminService.getProductVariantList({
       pid: id
     }).then((data) => {
+      this.attributes = data.attributes;
       for(let item of data.variants) {
         this.addProductList(item);
       }
@@ -288,6 +290,7 @@ export class ProductEditComponent implements OnInit {
     let dialogRef = this.dialog.open(AddVariantDialogComponent, {
       data: {
         variant: {},
+        attributes: this.attributes,
         productId: id,
         isVariantAdded: false
       }
