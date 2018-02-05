@@ -285,7 +285,8 @@ export class ProductEditComponent implements OnInit {
     } else {
       this.adminService.changeVariant(p.value).then((data) => {
         p.patchValue({
-          isEdit: !p.value.isEdit
+          isEdit: !p.value.isEdit,
+          mainImage: data.mainImage
         });
       });
     }

@@ -31,8 +31,8 @@
         </div>
         <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="column" fxLayoutAlign="start center">
-            <app-product-image-upload-color [(previewImgFile)]="image"
-                                            [(previewImgSrcs)]="image"></app-product-image-upload-color>
+            <app-product-image-upload-color [previewImgFile]="image" (previewImgFileChange)="addVariantImage($event)"
+                                            [previewImgSrcs]="image"></app-product-image-upload-color>
             <div class="md-align-center md-margin-top-1 md-margin-bottom-1">{{p.value.value}}</div>
           </div>
         </div>

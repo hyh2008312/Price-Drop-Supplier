@@ -44,6 +44,7 @@ export class AddVariantDialogComponent implements OnInit {
         id: [item.id, Validators.required],
         name: [item.name, Validators.required],
         value: ['', Validators.required],
+        images: ['']
       }));
     }
 
@@ -55,6 +56,10 @@ export class AddVariantDialogComponent implements OnInit {
 
   close():void {
     this.dialogRef.close();
+  }
+
+  addVariantImage($event) {
+    this.image = $event.file;
   }
 
   add() {

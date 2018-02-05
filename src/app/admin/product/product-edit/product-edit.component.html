@@ -95,7 +95,7 @@
             <div class="sc-product__create-title">
               Inventory & Pricing
             </div>
-            <div>
+            <div *ngIf="attributes.length > 0">
               <button mat-raised-button color="primary" type="button" (click)="openVariantDialog()">
                 <div fxLayout="row" fxLayoutAlign="start center">
                   <i class="material-icons">add</i>
@@ -105,7 +105,7 @@
             </div>
           </div>
           <div class="md-margin-top-3">
-            <div formArrayName="variants" >
+            <div formArrayName="variants" *ngIf="attributes.length > 0">
               <div fxLayout="row" fxLayoutAlign="start center">
                 <div class="sc-product__create-margin-right-1 sc-product__create-width-5 md-dark-secondary xb-bold"
                      fxFlex="none" fxLayout="row" fxLayoutAlign="start center">
@@ -221,6 +221,103 @@
                     </div>
                     <div class="md-margin-left-2">
                       <i class="material-icons md-dark-secondary xb-pointer" (click)="deleteVariantObject(i)">delete</i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div formArrayName="variants" *ngIf="attributes.length == 0">
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-align-center"
+                     fxFlex="25">
+                  SKU
+                </div>
+                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-align-center"
+                     fxFlex="25">
+                  Quantity
+                </div>
+                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-align-center"
+                     fxFlex="25">
+                  Sale Price
+                </div>
+                <div class="md-dark-secondary xb-bold md-align-center"
+                     fxFlex="25">
+                  Original Price
+                </div>
+                <div class="sc-product__create-width-3" fxFlex="none" >
+
+                </div>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="start stretch" *ngFor="let p of product.controls; let i = index;">
+                <div class="md-margin-top-2" [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center" *ngIf="p.value.isEdit">
+                  <div class="sc-product__create-margin-right-3"  fxFlex="25" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="sc-product__create-width-100">
+                      <input class="md-align-center" type="text" matInput formControlName="sku">
+                    </mat-form-field>
+                  </div>
+                  <div class="sc-product__create-margin-right-3" fxFlex="25" fxLayout="row" fxLayoutAlign="start center">
+                    <mat-form-field class="sc-product__create-width-100">
+                      <input class="md-align-center" type="text" matInput formControlName="stock">
+                    </mat-form-field>
+                  </div>
+                  <div class="sc-product__create-margin-right-3" fxFlex="25" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="md-margin-right-2 sc-product__create-title">$</div>
+                    <mat-form-field class="sc-product__create-width-100">
+                      <input class="md-align-center" type="text" matInput formControlName="saleUnitPrice">
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="25" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="md-margin-right-2 sc-product__create-title">$</div>
+                    <mat-form-field class="sc-product__create-width-100">
+                      <input class="md-align-center" type="text" matInput formControlName="unitPrice">
+                    </mat-form-field>
+                  </div>
+                  <div class="sc-product__create-width-3" fxLayout="row" fxLayoutAlign="center center" fxFlex="none" (click)="editVariant(p)">
+                    <div class="md-margin-left-2">
+                      <button mat-raised-button color="primary" type="button">
+                        SAVE
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div [formGroupName]="i" *ngIf="p.value.isEdit">
+                  <div *ngIf="p.get('stock').invalid && (p.get('stock').dirty ||
+                    p.get('stock').touched)" class="xb-input-error">
+                    <div *ngIf="p.get('stock').hasError('required')">
+                      The Quantity field is required.
+                    </div>
+                  </div>
+                  <div *ngIf="p.get('sku').invalid && (p.get('sku').dirty ||
+                    p.get('sku').touched)" class="xb-input-error">
+                    <div *ngIf="p.get('sku').hasError('required')">
+                      The SKU field is required.
+                    </div>
+                  </div>
+                  <div *ngIf="p.get('saleUnitPrice').invalid && (p.get('saleUnitPrice').dirty ||
+                    p.get('saleUnitPrice').touched)" class="xb-input-error">
+                    <div *ngIf="p.get('saleUnitPrice').hasError('required')">
+                      This Sale Price field is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="md-margin-top-2" [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center" *ngIf="!p.value.isEdit">
+                  <div class="sc-product__create-margin-right-3 md-align-center" fxFlex="25">
+                    {{p.value.sku}}
+                  </div>
+                  <div class="sc-product__create-margin-right-3 md-align-center" fxFlex="25">
+                    {{p.value.stock}}
+                  </div>
+                  <div class="sc-product__create-margin-right-3" fxFlex="25" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="md-margin-right-2 sc-product__create-title">$</div>
+                    {{p.value.saleUnitPrice}}
+                  </div>
+                  <div fxFlex="25" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="md-margin-right-2 sc-product__create-title">$</div>
+                    {{p.value.unitPrice}}
+                  </div>
+                  <div class="sc-product__create-width-3" fxLayout="row" fxLayoutAlign="start center" fxFlex="none">
+                    <div class="md-margin-left-2">
+                      <i class="material-icons md-dark-secondary xb-pointer" (click)="editVariant(p)">edit</i>
                     </div>
                   </div>
                 </div>

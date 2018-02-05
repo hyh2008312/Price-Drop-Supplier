@@ -141,7 +141,7 @@ export class ProductDraftEditComponent implements OnInit {
         height: data.height,
         weight: data.weight,
         customsDeclaredCharge: data.customsDeclaredCharge,
-        originCountryId: data.originCountry.id,
+        originCountryId: data.originCountry? data.originCountry.id: null,
         isPowder: data.isPowder,
         isLiquid: data.isLiquid,
         isBattery: data.isBattery
@@ -565,7 +565,7 @@ export class ProductDraftEditComponent implements OnInit {
       self.ngZone.runOutsideAngular(() => {
         self.document.querySelector('html').style.top = '0';
       });
-      self.router.navigate(['../'], { queryParams: {tab: 'pending'}, replaceUrl: true, relativeTo: this.activatedRoute});
+      self.router.navigate(['../../'], { queryParams: {tab: 'pending'}, replaceUrl: true, relativeTo: this.activatedRoute});
     });
   }
 
@@ -585,11 +585,11 @@ export class ProductDraftEditComponent implements OnInit {
     product.shippings = shippings;
     product.attributes = this.addProductWithAttributes();
 
-    this.adminService.productDraftCreate(product).then((data) => {
+    this.adminService.saveDraft(product).then((data) => {
       self.ngZone.runOutsideAngular(() => {
         self.document.querySelector('html').style.top = '0';
       });
-      self.router.navigate(['../'], { queryParams: {tab: 'draft'}, replaceUrl: true, relativeTo: this.activatedRoute});
+      self.router.navigate(['../../'], { queryParams: {tab: 'draft'}, replaceUrl: true, relativeTo: this.activatedRoute});
     });
   }
 
