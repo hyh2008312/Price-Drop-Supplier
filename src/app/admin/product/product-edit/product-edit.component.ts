@@ -8,12 +8,11 @@ import { ProductService } from '../product.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 import { ConstantService } from  '../../../shared/services/constant/constant.service';
 
-import { MatChipInputEvent } from '@angular/material';
-import { ENTER } from '@angular/cdk/keycodes';
-
 import { DeleteVariantDialogComponent } from '../delete-variant-dialog/delete-variant-dialog.component';
 import { AddVariantDialogComponent } from '../add-variant-dialog/add-variant-dialog.component';
 import { DeleteShippingDialogComponent } from '../delete-shipping-dialog/delete-shipping-dialog.component';
+import { EditShippingDialogComponent } from '../edit-shipping-dialog/edit-shipping-dialog.component';
+import { AddShippingDialogComponent } from '../add-shipping-dialog/add-shipping-dialog.component';
 
 @Component({
   selector: 'app-product-edit',
@@ -24,45 +23,11 @@ import { DeleteShippingDialogComponent } from '../delete-shipping-dialog/delete-
 export class ProductEditComponent implements OnInit {
 
   step: number = 0;
+  status: any = false;
 
   productId: any;
 
-  isFirstStepFinished: boolean = false;
-
   categoryList:any;
-
-  shippingTypeList = [{
-    name: 'Free Shipping',
-    type: 'Free'
-  }, {
-    name: 'Standard Shipping',
-    type: 'Standard'
-  }, {
-    name: 'Expedited Shipping',
-    type: 'Expedited'
-  }];
-
-  shippingMethodList = ['EMS','DHL'];
-
-  shippingTimeList = [{
-    value: '5-10',
-    text: '5 - 10 days'
-  }, {
-    value: '7-14',
-    text: '7 - 14 days'
-  }, {
-    value: '10-15',
-    text: '10 - 15 days'
-  }, {
-    value: '14-21',
-    text:'14 - 21 days'
-  },{
-    value: '21-28',
-    text: '21 - 28 days'
-  },{
-    value: '0',
-    text: 'other'
-  }];
 
   YesOrNo = [{
     text: "Yes",
@@ -76,22 +41,12 @@ export class ProductEditComponent implements OnInit {
 
   attributes:any[];
 
-  isProductListShow: boolean = false;
-
-  variantAddedList: any[] = [];
-
-  variantProductList: any;
-
   productBasicForm: FormGroup;
   productVariantForm: FormGroup;
   productCommissionForm: FormGroup;
-  productShippingForm: FormGroup;
   productLogisticForm: FormGroup;
 
   countries: Object[];
-
-  // Enter, comma
-  separatorKeysCodes = [ENTER, 188];
 
   previewImgFile: any;
   previewImgSrcs: any;
@@ -99,10 +54,9 @@ export class ProductEditComponent implements OnInit {
   additionalList: any = [];
   additionalSrcs: any = [];
 
-  colorImageList: any[] = [];
+  productShippingList: any[];
 
   get product() { return this.productVariantForm.get('variants') as FormArray; }
-  get shipping() { return this.productShippingForm.get('shippings') as FormArray; }
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -130,10 +84,6 @@ export class ProductEditComponent implements OnInit {
       commissionRate: ['', Validators.required]
     });
 
-    this.productShippingForm = this.fb.group({
-      shippings: this.fb.array([]),
-    });
-
     this.productLogisticForm = this.fb.group({
       length: [0, Validators.required],
       width: [0, Validators.required],
@@ -158,6 +108,11 @@ export class ProductEditComponent implements OnInit {
         description: data.description,
         productCategoryId: data.productCategories[0].id
       });
+
+      this.status = data.status;
+
+      this.additionalList = [...data.images];
+      this.additionalSrcs = [...data.images];
     });
 
     this.adminService.getProductVariantList({
@@ -180,9 +135,7 @@ export class ProductEditComponent implements OnInit {
     this.adminService.getProductShipping({
       id
     }).then((data) => {
-      for(let item of data.shippingPrices) {
-        this.editShippingList(item);
-      }
+      this.productShippingList = data.shippingPrices;
     });
 
     this.adminService.getLogisticShipping({
@@ -210,66 +163,6 @@ export class ProductEditComponent implements OnInit {
     this.step = index;
   }
 
-  addShippingList() {
-
-    this.shipping.push(this.fb.group({
-      countryId: ['', Validators.required],
-      type: ['', Validators.required],
-      id: [''],
-      shippingId: ['', Validators.required],
-      price: [0, Validators.required],
-      checked: [false, Validators.required],
-      shippingTime: ['', Validators.required],
-      shippingTimeMin: [0, Validators.required],
-      shippingTimeMax: [0, Validators.required],
-      shippingMethodList: [[]]
-    }));
-  }
-
-  editShippingList(data) {
-
-    this.adminService.getShippingList(1).then((res) => {
-      let shippingTime = data.shippingTimeMin+ '-' +data.shippingTimeMax;
-      let index = this.shippingTimeList.findIndex((data) => {
-        if(data.value == shippingTime) {
-          return true;
-        }
-      });
-      this.shipping.push(this.fb.group({
-        countryId: [data.countryId, Validators.required],
-        type: [data.type, Validators.required],
-        id: [data.id],
-        shippingId: [data.shippingId, Validators.required],
-        price: [data.priceItem, Validators.required],
-        checked: [false, Validators.required],
-        shippingTime: [index > -1? shippingTime: '0', Validators.required],
-        shippingTimeMin: [data.shippingTimeMin, Validators.required],
-        shippingTimeMax: [data.shippingTimeMax, Validators.required],
-        shippingMethodList: [res]
-      }));
-    });
-
-  }
-
-  changeShippingMethod($event, p) {
-    this.adminService.getShippingList($event).then((data) => {
-      p.patchValue({
-        shippingMethodList : data
-      });
-    });
-  }
-
-  changeShippingPrice($event, p) {
-
-    p.patchValue({
-      price: 0,
-      shippingTime: 0,
-      checked: false,
-      shippingTimeMin: 0,
-      shippingTimeMax: 0
-    });
-  }
-
   deleteVariantObject(i) {
     let id = this.product.controls[i].value.id;
     let dialogRef = this.dialog.open(DeleteVariantDialogComponent, {
@@ -288,9 +181,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   deleteShippingObject(i) {
-    let id = this.shipping.controls[i].value.id;
-    console.log(this.shipping.controls[i].value)
-    console.log(id)
+    let id = this.productShippingList[i].id;
     let self = this;
     if(id) {
       let dialogRef = this.dialog.open(DeleteShippingDialogComponent, {
@@ -302,12 +193,49 @@ export class ProductEditComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if(dialogRef.componentInstance.data.isDelete == true) {
-          self.shipping.removeAt(i);
+          self.productShippingList.splice(i, 1);
         }
       });
     } else {
-      self.shipping.removeAt(i);
+      self.productShippingList.splice(i, 1);
     }
+  }
+
+  openEditShippingDialog(i) {
+    let item = this.productShippingList[i];
+    let dialogRef = this.dialog.open(EditShippingDialogComponent, {
+      data: {
+        shipping: item,
+        countries: this.countries,
+        isShippingEdit: false
+      }
+    });
+
+    let self = this;
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isShippingEdit == true) {
+        this.productShippingList[i] = dialogRef.componentInstance.data.shipping;
+      }
+    });
+  }
+
+  openAddShippingDialog(i) {
+    let item = this.productShippingList[i];
+    let dialogRef = this.dialog.open(AddShippingDialogComponent, {
+      data: {
+        shipping: {},
+        productId: parseInt(this.activatedRoute.snapshot.params["id"]),
+        countries: this.countries,
+        isShippingAdd: false
+      }
+    });
+
+    let self = this;
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isShippingAdd == true) {
+        self.productShippingList.push(dialogRef.componentInstance.data.shipping);
+      }
+    });
   }
 
   openVariantDialog() {
@@ -328,6 +256,7 @@ export class ProductEditComponent implements OnInit {
       }
     });
   }
+
 
   addProductList(variant) {
     let attribute = '';
@@ -362,22 +291,6 @@ export class ProductEditComponent implements OnInit {
     }
   }
 
-
-  showMinAndMaxTime($event, index, item) {
-    if(index == 5) {
-      item.patchValue({
-        checked: true
-      });
-    } else {
-      let timeArr = this.shippingTimeList[index].value.split('-');
-      item.patchValue({
-        checked: false,
-        shippingTimeMin: timeArr[0],
-        shippingTimeMax: timeArr[1]
-      });
-    }
-  }
-
   ngOnInit():void {
     this.adminService.getCategoryList().then((data) => {
       this.categoryList = data;
@@ -394,7 +307,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   openLeaveDialog() {
-
+    this.router.navigate(['/admin/product'], { queryParams: {tab:this.status}});
   }
 
   changeProductBasic() {
@@ -403,7 +316,7 @@ export class ProductEditComponent implements OnInit {
     }
     let product = this.productBasicForm.value;
     product.id = parseInt(this.activatedRoute.snapshot.params["id"]);
-    product.images = '';
+    product.images = this.additionalList;
     this.adminService.changeProductBasic(product).then((data) => {
       console.log(data);
     });
@@ -430,16 +343,4 @@ export class ProductEditComponent implements OnInit {
       console.log(data)
     });
   }
-
-  changeProductShipping() {
-    if(this.productShippingForm.invalid) {
-      return;
-    }
-    let product = this.productShippingForm.value;
-    product.id = parseInt(this.activatedRoute.snapshot.params["id"]);
-    this.adminService.changeProductShipping(product).then((data) => {
-      console.log(data)
-    });
-  }
-
 }

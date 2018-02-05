@@ -41,15 +41,15 @@ export class ImageUploadAdditionalComponent implements OnInit {
     }
   }
 
-  previewPic(event, index) {
+  previewPic(event) {
     if(!event.target.files[0]) {
       return;
     }
     let that = this;
     let length = that.previewImgSrcs.length;
-    that.loading[index] = 0;
-    that.closeLoading[index] = false;
-    that.closeAnimate[index] = false;
+    that.loading[length] = 0;
+    that.closeLoading[length] = false;
+    that.closeAnimate[length] = false;
 
     this.previewImageService.readAsDataUrl(event.target.files[0]).then(function(result) {
 
@@ -62,7 +62,7 @@ export class ImageUploadAdditionalComponent implements OnInit {
         let height = image.height;
 
         that.s3UploaderService.upload({
-          type: 'COLLECTOR_PRODUCT_COVER',
+          type: 'product',
           fileName: file.name,
           use: 'cover',
           width: width,

@@ -76,8 +76,14 @@ export class ProductMainComponent implements OnInit {
     let self = this;
     this.subscription = this.activatedRoute.queryParams.subscribe((data) => {
       switch(data.tab) {
+        case 'published':
+          self.selectedIndex = 0;
+          break;
         case 'pending':
           self.selectedIndex = 1;
+          break;
+        case 'unpublished':
+          self.selectedIndex = 3;
           break;
         case 'draft':
           self.selectedIndex = 4;
@@ -202,6 +208,16 @@ export class ProductMainComponent implements OnInit {
         }
         break;
       case 2:
+        switch(event.event) {
+          case 'delete':
+            this.productUnpublished.splice(event.index,1);
+            break;
+          case 'publish':
+            this.productUnpublished.splice(event.index,1);
+            break;
+        }
+        break;
+      case 3:
         switch(event.event) {
           case 'delete':
             this.productUnpublished.splice(event.index,1);

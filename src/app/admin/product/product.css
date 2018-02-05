@@ -2364,6 +2364,8 @@ textarea.mat-input-element {
   width: 60px; }
 .sc-product__create-width-5 {
   width: 150px; }
+.sc-product__create-width-6 {
+  width: 180px; }
 .sc-product__create-width-100 {
   width: 100%; }
 .sc-product__create-height {
@@ -2392,6 +2394,12 @@ textarea.mat-input-element {
   border-radius: 4px;
   background-color: #fff;
   overflow: hidden; }
+.sc-product__edit-line {
+  height: 54px;
+  padding: 0 40px;
+  margin: 0 -40px; }
+  .sc-product__edit-line:hover {
+    background-color: rgba(0, 0, 0, 0.12); }
 
 .sc-product-dialog {
   padding: 40px 28px;

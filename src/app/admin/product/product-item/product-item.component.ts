@@ -1,7 +1,7 @@
 import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AdminService } from '../../admin.service';
+import { ProductService } from '../product.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class ProductItemComponent implements OnInit {
   currency: string = 'USD';
 
   constructor(
-    private adminService: AdminService,
+    private adminService: ProductService,
     private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -39,30 +39,44 @@ export class ProductItemComponent implements OnInit {
 
   publish() {
     let self = this;
-
+    self.adminService.publishProduct({
+      id: self.product.id,
+      status: 'published'
+    }).then((data) => {
+      console.log(data);
+      self.productChange.emit({
+        index: this.index,
+        product : data,
+        status: this.status,
+        event: 'publish'
+      });
+    });
 
   }
 
   unpublish() {
     let self = this;
 
-
+    self.adminService.publishProduct({
+      id: self.product.id,
+      status: 'unpublished'
+    }).then((data) => {
+      console.log(data);
+      self.productChange.emit({
+        index: this.index,
+        product : data,
+        status: this.status,
+        event: 'unpublish'
+      });
+    });
   }
 
   edit() {
-    let tab = '';
-    switch (this.status) {
-      case 0:
-        tab = 'publish';
-        break;
-      case 1:
-        tab = 'draft';
-        break;
-      case 2:
-        tab = 'unpublish';
-        break;
+    if(this.status != 4) {
+      this.router.navigate([`./edit/${this.product.id}`], {relativeTo: this.activatedRoute});
+    } else {
+      this.router.navigate([`./draftedit/${this.product.id}`], {relativeTo: this.activatedRoute});
     }
-    this.router.navigate([`./edit/${this.product.id}`], {relativeTo: this.activatedRoute});
   }
 
   countInventory(variants) {

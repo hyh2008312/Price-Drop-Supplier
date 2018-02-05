@@ -53,7 +53,7 @@
   <div class="sc-product__product-action-buttons"
        fxLayout="column" fxLayoutAlign="center center" fxFlex="10">
     <button mat-button color="primary" (click)="edit()">Edit</button>
-    <button mat-button color="primary" *ngIf="status == 2" (click)="publish()">Publish</button>
+    <button mat-button color="primary" *ngIf="status == 3" (click)="publish()">Publish</button>
     <button mat-button color="primary" *ngIf="status == 0" (click)="unpublish()">Unpublish</button>
     <button mat-button color="primary" (click)="delete()">Delete</button>
   </div>

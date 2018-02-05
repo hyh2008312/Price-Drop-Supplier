@@ -353,7 +353,7 @@
                   <mat-form-field fxFlex>
                     <mat-select name="carrier" placeholder="Shipping Carrier"
                                 formControlName="id" (ngModelChange)="changeShippingPrice($event, p)">
-                      <mat-option class="md-align-center" *ngFor="let item of p.shippingMethodList" [value]="item.id">
+                      <mat-option class="md-align-center" *ngFor="let item of p.value.shippingMethodList" [value]="item.id">
                         {{ item.shippingProvider }}
                       </mat-option>
                     </mat-select>

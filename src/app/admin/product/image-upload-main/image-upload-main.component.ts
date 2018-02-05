@@ -7,7 +7,7 @@ import { HttpEventType, HttpResponse} from "@angular/common/http";
 @Component({
   selector: 'app-product-image-upload-main',
   templateUrl: './image-upload-main.component.html',
-  styleUrls: ['./image-upload-main.component.css']
+  styleUrls: ['./_image-upload-main.component.scss']
 })
 export class ImageUploadMainComponent implements OnInit {
 
@@ -65,7 +65,7 @@ export class ImageUploadMainComponent implements OnInit {
         let height = image.height;
 
         that.s3UploaderService.upload({
-          type: 'COLLECTOR_USER_AVATAR',
+          type: 'product',
           fileName: file.name,
           use: 'avatar',
           width: width,

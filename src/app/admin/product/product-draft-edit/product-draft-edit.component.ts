@@ -15,12 +15,12 @@ import { SaveProductDialogComponent } from '../save-product-dialog/save-product-
 import { PendingProductDialogComponent } from '../pending-product-dialog/pending-product-dialog.component';
 
 @Component({
-  selector: 'app-product-create',
-  templateUrl: './product-create.component.html',
+  selector: 'app-product-draft-edit',
+  templateUrl: './product-draft-edit.component.html',
   styleUrls: ['../product.scss']
 })
 
-export class ProductCreateComponent implements OnInit {
+export class ProductDraftEditComponent implements OnInit {
 
   step: number = 0;
 
@@ -126,9 +126,57 @@ export class ProductCreateComponent implements OnInit {
       isBattery: [false, Validators.required]
     });
 
-    this.addProductList();
-    this.addShippingList();
+    let id = this.activatedRoute.snapshot.params['id'];
+    this.adminService.getProductDetail({
+      id
+    }).then((data) => {
+      this.productForm.patchValue({
+        title: data.title,
+        categoryId: data.productCategories[0].categoryId,
+        commission: data.commissionRate,
+        brandName: data.brandName,
+        description: data.description,
+        length: data.length,
+        width: data.width,
+        height: data.height,
+        weight: data.weight,
+        customsDeclaredCharge: data.customsDeclaredCharge,
+        originCountryId: data.originCountry.id,
+        isPowder: data.isPowder,
+        isLiquid: data.isLiquid,
+        isBattery: data.isBattery
+      });
 
+      this.additionalList = [...data.images];
+      this.additionalSrcs = [...data.images];
+
+      if(data.shippingPrices.length > 0) {
+        for(let item of data.shippingPrices) {
+          this.editShippingList(item);
+        }
+      } else {
+        this.addShippingList();
+      }
+
+
+      if(data.variants.length > 0) {
+        if(data.variants[0].attributeValues.length > 0) {
+          this.isProductListShow = true;
+        }
+        for(let item of data.variants) {
+          this.editProductList(item);
+        }
+      } else {
+        this.addProductList();
+      }
+
+      if(data.attributes.length > 0) {
+        for(let item of data.attributes) {
+          this.addVariantList(item);
+        }
+      }
+
+    });
   }
 
   changeStep(index) {
@@ -148,14 +196,39 @@ export class ProductCreateComponent implements OnInit {
       checked: [false, Validators.required],
       shippingTime: ['', Validators.required],
       shippingTimeMin: [0, Validators.required],
-      shippingTimeMax: [0, Validators.required]
+      shippingTimeMax: [0, Validators.required],
+      shippingMethodList: [[]]
     }));
   }
 
+  editShippingList(data) {
+
+    this.adminService.getShippingList(data.countryId).then((res) => {
+      let shippingTime = data.shippingTimeMin + '-' + data.shippingTimeMax;
+      let index = this.shippingTimeList.findIndex((data) => {
+        if (data.value == shippingTime) {
+          return true;
+        }
+      });
+      this.shipping.push(this.fb.group({
+        countryId: [data.countryId, Validators.required],
+        type: [data.type, Validators.required],
+        id: [data.shippingId, Validators.required],
+        price: [data.priceItem, Validators.required],
+        checked: [false, Validators.required],
+        shippingTime: [index > -1 ? shippingTime : '0', Validators.required],
+        shippingTimeMin: [data.shippingTimeMin, Validators.required],
+        shippingTimeMax: [data.shippingTimeMax, Validators.required],
+        shippingMethodList: [res]
+      }));
+    });
+  }
 
   changeShippingMethod($event, p) {
     this.adminService.getShippingList($event).then((data) => {
-      p.shippingMethodList = data;
+      p.patchValue({
+        shippingMethodList : data
+      });
     });
   }
 
@@ -247,7 +320,7 @@ export class ProductCreateComponent implements OnInit {
     this.product.removeAt(i);
   }
 
-  addVariantList() {
+  addVariantList(value?:any) {
     let option = {
       option: '',
       isValue: false,
@@ -259,6 +332,23 @@ export class ProductCreateComponent implements OnInit {
       hasColorImage: false,
       colorImageList: []
     };
+    if(value) {
+      option = {
+        option: value.id,
+        isValue: value.value.length > 0? true : false,
+        value : [...value.value],
+        visible: true,
+        selectable: true,
+        removable: true,
+        addOnBlur: true,
+        hasColorImage: value.id == 2 ? true : false,
+        colorImageList: [...value.images]
+      };
+
+      if(value.value.length > 0 && value.id == 2) {
+        this.colorImageList = [...value.images];
+      }
+    }
 
     this.variantAddedList.push(option);
   }
@@ -272,6 +362,27 @@ export class ProductCreateComponent implements OnInit {
       }
     }
     this.addProductList(true);
+  }
+
+  editProductList(variant) {
+    let attribute = {
+      value: ''
+    };
+    let index = 0;
+    for(let item of variant.attributeValues) {
+      attribute.value += index != 0?', ' +item.value.trim():item.value.trim();
+      index++;
+    }
+
+    this.product.push(this.fb.group({
+      variant: [attribute],
+      attributes: [variant.attributeValues],
+      mainImage: [variant.mainImage?variant.mainImage: ''],
+      sku: [variant.sku, Validators.required],
+      stock: [variant.variantStockrecord, Validators.required],
+      saleUnitPrice: [variant.saleUnitPrice, Validators.required],
+      unitPrice: [variant.unitPrice]
+    }));
   }
 
   addProductList(variant?: any) {
@@ -442,12 +553,14 @@ export class ProductCreateComponent implements OnInit {
       return;
     }
     let product = this.productForm.value;
+
+    product.id = parseInt(this.activatedRoute.snapshot.params['id']);
     product.images = this.additionalList;
 
     product.attributes = this.addProductWithAttributes();
 
     let self = this;
-    this.adminService.productCreate(product).then((data) => {
+    this.adminService.publishDraft(product).then((data) => {
       self.openPendingProductDialog();
       self.ngZone.runOutsideAngular(() => {
         self.document.querySelector('html').style.top = '0';
@@ -458,6 +571,7 @@ export class ProductCreateComponent implements OnInit {
 
   createDraft() {
     let product = this.productForm.value;
+    product.id = parseInt(this.activatedRoute.snapshot.params['id']);
     product.images = this.additionalList;
     let self = this;
 
@@ -484,7 +598,6 @@ export class ProductCreateComponent implements OnInit {
     for(let item of this.variantAddedList) {
       let id = item.option;
       let name = '';
-      let Image = '';
       let index = this.variantList.findIndex((data) => {
         if(data.id == id) {
           return true;

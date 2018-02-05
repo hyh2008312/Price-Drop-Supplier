@@ -93,6 +93,40 @@ export class ProductService {
       .catch(this.handleError);
   }
 
+  publishDraft(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/draft/submit/${product.id}/`;
+
+    return this.http.put(url, product, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  saveDraft(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/draft/save/${product.id}/`;
+
+    return this.http.put(url, product, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
   addDraft(product:any): Promise<any> {
 
     let headers = new Headers({
@@ -110,6 +144,23 @@ export class ProductService {
       .catch(this.handleError);
   }
 
+  publishProduct(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/updown/${product.id}/?${this.serializeParams(product)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
   getProductList(params:any): Promise<any> {
 
     let headers = new Headers({
@@ -120,6 +171,23 @@ export class ProductService {
     let options = new RequestOptions({headers:headers});
 
     const url = `${this.baseUrl.url}product/supplier/list/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  getProductDetail(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/supplier/detail/${params.id}/`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -314,7 +382,7 @@ export class ProductService {
       .catch(this.handleError);
   }
 
-  changeShippingList(params:any): Promise<any> {
+  addShipping(params:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -408,9 +476,26 @@ export class ProductService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/shipping/delete/${params.id}/`;
+    const url = `${this.baseUrl.url}product/shipping/detail/${params.id}/`;
 
     return this.http.delete(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  editShipping(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/shipping/detail/${params.id}/`;
+
+    return this.http.put(url, params, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);

@@ -12,7 +12,7 @@ import { HttpEventType, HttpResponse} from "@angular/common/http";
 export class ImageUploadColorComponent implements OnInit {
 
   @Input() previewImgFile: any = false;
-  @Output() previewImgFileChange: EventEmitter<any[]> = new EventEmitter();
+  @Output() previewImgFileChange: EventEmitter<any> = new EventEmitter();
 
   @Input() previewImgSrcs: any = false;
 
@@ -61,7 +61,7 @@ export class ImageUploadColorComponent implements OnInit {
         let height = image.height;
 
         that.s3UploaderService.upload({
-          type: 'COLLECTOR_PRODUCT_COVER',
+          type: 'product',
           fileName: file.name,
           use: 'cover',
           width: width,
@@ -76,8 +76,9 @@ export class ImageUploadColorComponent implements OnInit {
               // This is an upload progress event. Compute and show the % done:
               that.loading = Math.round(100 * event.loaded / event.total);
             } else if (event instanceof HttpResponse) {
-              that.previewImgFile = src;
-              that.previewImgFileChange.emit(that.previewImgFile);
+              that.previewImgFileChange.emit({
+                file: src
+              });
 
             }
           });
@@ -90,11 +91,14 @@ export class ImageUploadColorComponent implements OnInit {
 
   }
 
-  remove(i) {
+  remove() {
     this.previewImgSrcs = false;
     this.previewImgFile = false;
 
     this.upload = false;
+    this.previewImgFileChange.emit({
+      file: false
+    });
   }
 
   loadingChange(event) {

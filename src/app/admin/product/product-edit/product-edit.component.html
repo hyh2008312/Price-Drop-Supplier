@@ -77,7 +77,7 @@
           </div>
           <div class="md-margin-top-2">
             <app-product-image-upload-additional [(previewImgFile)]="additionalList"
-                                                 [(previewImgSrcs)]="additionalSrcs"></app-product-image-upload-additional>
+                                                 [previewImgSrcs]="additionalSrcs"></app-product-image-upload-additional>
             <div><span class="xb-bold">·</span>The images should be at least 600*600 pixels.</div>
             <div class="md-margin-top-1"><span class="xb-bold">·</span>Do not steal images from other suppliers, or your product will be deleted.</div>
             <div class="md-margin-top-1"><span class="xb-bold">·</span>Products width high quality images can get the most sales.</div>
@@ -265,124 +265,71 @@
           </button>
         </div>
       </form>
-      <form *ngIf="step == 3" [formGroup]="productShippingForm" novalidate>
-        <div formArrayName="shippings">
-          <div class="sc-product__create-container-1" fxLayout="column" *ngFor="let p of shipping.controls; let i = index;">
-            <div fxLayout="row" fxLayoutAlign="start center">
-              <div class="sc-product__create-title" fxFlex>
-                Shipping
-                <span *ngFor="let item of countries" >
-                  <span *ngIf="item.id == p.value.countryId">to {{item.name}}</span>
-                </span>
-              </div>
-              <div class="md-margin-left-2">
-                <i class="material-icons md-dark-secondary xb-pointer" (click)="deleteShippingObject(i)">delete</i>
-              </div>
+      <div *ngIf="step == 3">
+        <div class="sc-product__create-container-1">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="sc-product__create-title">
+              Shipping
             </div>
-            <div class="md-margin-top-2" >
-              <div class="sc-product__create-list" >
-                <div [formGroupName]="i">
-                  <div fxLayout="row" fxLayoutAlign="space-between center">
-                    <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
-                      <mat-form-field fxFlex>
-                        <mat-select name="country" placeholder="Shipping Country"
-                                    formControlName="countryId" (ngModelChange)="changeShippingMethod($event, p)">
-                          <mat-option class="md-align-center" *ngFor="let item of countries" [value]="item.id">
-                            {{ item.name }}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
+            <div>
+              <button type="button" mat-raised-button color="primary">
+                <div fxLayout="row" fxLayoutAlign="start center" (click)="openAddShippingDialog()">
+                  <i class="material-icons">add</i>
+                  <span class="md-margin-left-1">Add Another Shipping Method</span>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div class="md-margin-top-3">
+            <div >
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-1 sc-product__create-width-6 md-dark-secondary xb-bold"
+                     fxFlex="none" fxLayout="row" fxLayoutAlign="start center">
+                  Country
+                </div>
+                <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold md-align-center" fxFlex="15">
+                  Method
+                </div>
+                <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold md-align-center"
+                     fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
+                  Carrier
+                </div>
+                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-align-center"
+                     fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
+                  Cost
+                </div>
+                <div class="md-dark-secondary xb-bold md-align-center"
+                     fxFlex="15">
+                  Time
+                </div>
+                <div class="sc-product__create-width-3" fxFlex="none"></div>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="start stretch" >
+                <div class="sc-product__edit-line" fxLayout="row" fxLayoutAlign="start center"
+                     *ngFor="let p of productShippingList; let i = index;">
+                  <div class="sc-product__create-margin-right-1 sc-product__create-width-6 sc-product__create-text-2" fxFlex="none">
+                    <ng-container *ngFor="let item of countries">
+                      <div *ngIf="item.id == p.countryId">{{item.name}}</div>
+                    </ng-container>
                   </div>
-                  <div *ngIf="p.get('countryId').invalid && (p.get('countryId').dirty ||
-                    p.get('countryId').touched)" class="xb-input-error">
-                    <div *ngIf="p.get('countryId').hasError('required')">
-                      This field is required.
-                    </div>
+                  <div class="sc-product__create-margin-right-1 md-align-center" fxFlex="15">
+                    {{p.type}}
                   </div>
-                  <div fxLayout="row" fxLayoutAlign="space-between center"
-                       *ngIf="p.value.countryId != ''">
-                    <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
-                      <mat-form-field fxFlex>
-                        <mat-select name="method" placeholder="Shipping Method"
-                                    formControlName="type">
-                          <mat-option class="md-align-center" *ngFor="let item of shippingTypeList" [value]="item.type">
-                            {{ item.name }}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
+                  <div class="sc-product__create-margin-right-1 md-align-center" fxFlex="15" >
+                    {{p.shippingName}}
                   </div>
-                  <div *ngIf="p.get('type').invalid && (p.get('type').dirty ||
-                    p.get('type').touched)" class="xb-input-error">
-                    <div *ngIf="p.get('type').hasError('required')">
-                      This field is required.
-                    </div>
+                  <div class="sc-product__create-margin-right-3 md-align-center" fxFlex="15">
+                    {{p.priceItem}}
                   </div>
-                  <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="p.value.type != ''">
-                    <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
-                      <mat-form-field fxFlex>
-                        <mat-select name="carrier" placeholder="Shipping Carrier"
-                                    formControlName="shippingId" (ngModelChange)="changeShippingPrice($event, p)">
-                          <mat-option class="md-align-center" *ngFor="let item of p.value.shippingMethodList" [value]="item.id">
-                            {{ item.shippingProvider }}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                    <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center" *ngIf="p.value.shippingId != '' && p.value.type != 'Free'">
-                      <div class="md-margin-right-2 sc-product__create-title">$</div>
-                      <mat-form-field fxFlex>
-                        <input type="text" matInput placeholder="Shipping Cost"
-                               formControlName="price" >
-                      </mat-form-field>
-                    </div>
+                  <div class="md-align-center" fxFlex="15">
+                    {{p.shippingTimeMin}} - {{p.shippingTimeMax}} days
                   </div>
-                  <div fxLayout="row" fxLayoutAlign="space-between center">
-                    <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
-                      <div *ngIf="p.get('shippingId').invalid && (p.get('shippingId').dirty ||
-                    p.get('shippingId').touched)" class="xb-input-error">
-                        <div *ngIf="p.get('shippingId').hasError('required')">
-                          This field is required.
-                        </div>
-                      </div>
+                  <div class="sc-product__create-width-3" fxLayout="row" fxLayoutAlign="start center" fxFlex="none">
+                    <div class="md-margin-left-2">
+                      <i class="material-icons md-dark-secondary xb-pointer" (click)="openEditShippingDialog(i)">edit</i>
                     </div>
-                    <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center" *ngIf="p.value.shippingId != ''">
-                      <div *ngIf="p.get('price').invalid && (p.get('price').dirty ||
-                    p.get('price').touched)" class="xb-input-error">
-                        <div *ngIf="p.get('price').hasError('required')">
-                          This field is required.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="sc-product__create-title-1 md-margin-top-2" *ngIf="p.value.shippingId != ''">
-                    Shipping Time
-                  </div>
-                  <mat-radio-group class="md-margin-top-2" *ngIf="p.value.shippingId != ''"
-                                   fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="shippingTime">
-                    <mat-radio-button fxFlex="25" class="sc-product__create-height" *ngFor="let value of shippingTimeList;let i = index;"
-                                      [value]="value.value" color="primary" (change)="showMinAndMaxTime($event, i, p)">
-                      <div fxLayout="row" fxLayoutAlign="start center">
-                        {{ value.text }}
-                        <div *ngIf="i == 5 && p.value.checked" class="md-margin-left-4" fxLayout="row" fxLayoutAlign="start center">
-                          <mat-form-field class="sc-product__create-width">
-                            <input class="md-align-center" type="number" matInput placeholder="Min" formControlName="shippingTimeMin">
-                          </mat-form-field>
-                          <div class="md-margin-left-2 md-margin-right-2">-</div>
-                          <mat-form-field class="sc-product__create-width">
-                            <input class="md-align-center" type="number" matInput placeholder="Max" formControlName="shippingTimeMax">
-                          </mat-form-field>
-                        </div>
-                      </div>
-                    </mat-radio-button>
-                  </mat-radio-group>
-                  <div *ngIf="p.value.id != ''">
-                    <div *ngIf="p.get('shippingTime').invalid && (p.get('shippingTime').dirty ||
-                    p.get('shippingTime').touched)" class="xb-input-error">
-                      <div *ngIf="p.get('shippingTime').hasError('required')">
-                        This field is required.
-                      </div>
+                    <div class="md-margin-left-2">
+                      <i class="material-icons md-dark-secondary xb-pointer" (click)="deleteShippingObject(i)">delete</i>
                     </div>
                   </div>
                 </div>
@@ -390,22 +337,7 @@
             </div>
           </div>
         </div>
-        <div class="sc-product__create-container-2" >
-          <div class="md-margin-top-2">
-            <button type="button" mat-raised-button color="primary" (click)="addShippingList()">
-              <div fxLayout="row" fxLayoutAlign="start center">
-                <i class="material-icons">add</i>
-                <span class="md-margin-left-1">Add Another Shipping Method</span>
-              </div>
-            </button>
-          </div>
-        </div>
-        <div class="sc-product__create-margin-top" fxLayout="row" fxLayoutAlign="center center">
-          <button mat-raised-button color="primary" type="button" (click)="changeProductShipping()">
-            SAVE CHANGES
-          </button>
-        </div>
-      </form>
+      </div>
       <form *ngIf="step == 4" [formGroup]="productLogisticForm" novalidate>
         <div class="sc-product__create-container-1">
           <div class="sc-product__create-title">

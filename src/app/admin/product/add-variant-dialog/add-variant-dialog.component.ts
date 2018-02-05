@@ -63,7 +63,7 @@ export class AddVariantDialogComponent implements OnInit {
     }
 
     let product = this.variantForm.value;
-
+    product.mainImage = this.image;
     let self = this;
     this.productService.addNewVariant(product).then((data) => {
       self.data.isVariantAdded = true;

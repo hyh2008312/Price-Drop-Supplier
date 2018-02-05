@@ -41,7 +41,7 @@ export class ImageUploadVariantComponent implements OnInit {
     }
   }
 
-  previewPic(event, index) {
+  previewPic(event) {
     if(!event.target.files[0]) {
       return;
     }
@@ -61,7 +61,7 @@ export class ImageUploadVariantComponent implements OnInit {
         let height = image.height;
 
         that.s3UploaderService.upload({
-          type: 'COLLECTOR_PRODUCT_COVER',
+          type: 'product',
           fileName: file.name,
           use: 'cover',
           width: width,

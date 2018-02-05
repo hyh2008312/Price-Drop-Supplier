@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ProductMainComponent } from './product-main/product-main.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProductDraftEditComponent } from './product-draft-edit/product-draft-edit.component';
 
 import { ProductItemComponent } from './product-item/product-item.component';
 import { ProductTitleComponent } from './product-title/product-title.component';
@@ -18,6 +19,8 @@ import { PendingProductDialogComponent } from './pending-product-dialog/pending-
 import { DeleteVariantDialogComponent } from './delete-variant-dialog/delete-variant-dialog.component';
 import { AddVariantDialogComponent } from './add-variant-dialog/add-variant-dialog.component';
 import { DeleteShippingDialogComponent } from './delete-shipping-dialog/delete-shipping-dialog.component';
+import { EditShippingDialogComponent } from './edit-shipping-dialog/edit-shipping-dialog.component';
+import { AddShippingDialogComponent } from './add-shipping-dialog/add-shipping-dialog.component';
 
 import { ProductRoutingModule } from './product.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -45,14 +48,19 @@ import { ProductService } from './product.service';
     ImageUploadVariantComponent,
     ImageUploadVariantPreviewComponent,
     AddVariantDialogComponent,
-    DeleteShippingDialogComponent
+    DeleteShippingDialogComponent,
+    EditShippingDialogComponent,
+    AddShippingDialogComponent,
+    ProductDraftEditComponent
   ],
   entryComponents: [
     SaveProductDialogComponent,
     PendingProductDialogComponent,
     DeleteVariantDialogComponent,
     AddVariantDialogComponent,
-    DeleteShippingDialogComponent
+    DeleteShippingDialogComponent,
+    EditShippingDialogComponent,
+    AddShippingDialogComponent
   ],
   providers: [
     ProductService

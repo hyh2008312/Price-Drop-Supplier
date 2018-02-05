@@ -312,6 +312,10 @@
       width: 150px;
     }
 
+    &-width-6{
+      width: 180px;
+    }
+
     &-width-100{
       width: 100%;
     }
@@ -353,6 +357,15 @@
       border-radius: 4px;
       background-color: $whiteColor;
       overflow: hidden;
+    }
+
+    &-line{
+      height: 54px;
+      padding: 0 40px;
+      margin: 0 -40px;
+      &:hover{
+        background-color: rgba(0,0,0,.12);
+      }
     }
   }
 }
