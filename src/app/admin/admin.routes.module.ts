@@ -13,6 +13,9 @@ const routes: Routes = [
       }, {
         path: 'order',
         loadChildren: 'app/admin/order/order.module#OrderModule'
+      }, {
+        path: 'customerService',
+        loadChildren: 'app/admin/customer-service/customer-service.module#CustomerServiceModule'
       }
     ]
   }, {
