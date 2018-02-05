@@ -1,0 +1,22 @@
+<div class="xb-customer-service-main__item" fxLayout="row" fxLayoutAlign="start start">
+  <div class="xb-customer-service-main__item-title xb-customer-service__right48px md-margin-left-2" fxFlex="15"
+       fxLayout="row" fxLayoutAlign="start start">
+    {{product?.customerName}}
+  </div>
+  <div class="xb-customer-service-main__item-title xb-customer-service__right48px" fxFlex="15"
+       fxLayout="row" fxLayoutAlign="start start">
+    {{product?.created | amDateFormat:'MMMM Do, YYYY' }}
+  </div>
+  <div class="xb-customer-service-main__item-title xb-customer-service__right48px" fxFlex="15"
+       fxLayout="row" fxLayoutAlign="start start">36 hours,25 mins
+  </div>
+  <div fxFlex fxLayout="column" fxLayoutAlign="start start">
+    <div class="xb-customer-service-main__item-title">
+      {{product.messages[product.messages.length-1].context}}
+    </div>
+    <div class="xb-customer-service-main__item-detail" (click)="jumpCustomerServiceDetail()">
+      View Details
+    </div>
+
+  </div>
+</div>
