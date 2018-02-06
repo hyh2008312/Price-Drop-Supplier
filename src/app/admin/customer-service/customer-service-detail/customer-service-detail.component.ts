@@ -68,7 +68,7 @@ export class CustomerServiceDetailComponent implements OnInit {
 
   /*判断那个 close this ticket 的按钮是否出现*/
   judgeCloseTicketIsShow() {
-    if (this.respondStatus === 'Awaiting Response') {
+    if (this.respondStatus === 'Awaiting Response' || this.respondStatus === 'Responded') {
       for (let i = 0; i < this.messageList.length; i++) {
         if (!this.messageList[i].direction) {
           this.isShowCloseButton = true;

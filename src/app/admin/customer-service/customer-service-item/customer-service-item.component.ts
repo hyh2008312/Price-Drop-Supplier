@@ -11,7 +11,7 @@ import {UserService} from '../../../shared/services/user/user.service';
 })
 
 export class CustomerServiceItemComponent implements OnInit {
-  @Input() status: number = 0;
+  @Input() status: number = 1;
   @Input() product: any;
   @Input() index: number = 0;
   @Output() productChange = new EventEmitter<any>();
@@ -23,16 +23,22 @@ export class CustomerServiceItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let now = Date.parse(this.product.nowTime);
-    let modify = Date.parse(this.product.modified);
-    let subtraction = now - modify;  // 毫秒值
-    let sumMinutes = Math.floor(subtraction / (1000 * 60));
-    let hours = Math.floor(sumMinutes / 60);
-    let minutes = sumMinutes % 60;
-    if (this.product.isExpired && hours < 48) {
-      this.timeLeft = `${47 - hours} hours,${60 - minutes} mins`;
-    } else {
-      this.timeLeft = `Expired`;
+    if (this.status === 1) {
+      let now = Date.parse(this.product.nowTime);
+      let modify = Date.parse(this.product.modified);
+      let subtraction = now - modify;  // 毫秒值
+      let sumMinutes = Math.floor(subtraction / (1000 * 60));
+      let hours = Math.floor(sumMinutes / 60);
+      let minutes = sumMinutes % 60;
+      if (this.product.isExpired && hours < 48) {
+        this.timeLeft = `${47 - hours} hours,${60 - minutes} mins`;
+      } else {
+        this.timeLeft = `Expired`;
+      }
+    } else if (this.status === 2) {
+      this.timeLeft = this.product.supplierModified;
+    } else if (this.status === 3) {
+      this.timeLeft = this.product.modified;
     }
   }
 

@@ -5,11 +5,11 @@
   </div>
   <div class="xb-customer-service-main__item-title xb-customer-service__right48px" fxFlex="15"
        fxLayout="row" fxLayoutAlign="start start">
-    {{product?.modified | amDateFormat:'MMMM Do, YYYY' }}
+    {{product?.customerModified | amDateFormat:'MMMM Do, YYYY' }}
   </div>
   <div class="xb-customer-service-main__item-title xb-customer-service__right48px" fxFlex="15"
        fxLayout="row" fxLayoutAlign="start start">
-    {{timeLeft}}
+    {{status===1?timeLeft:timeLeft|amDateFormat:'MMMM Do, YYYY' }}
   </div>
   <div fxFlex fxLayout="column" fxLayoutAlign="start start">
     <div class="xb-customer-service-main__item-title">

@@ -8,6 +8,10 @@ const routes: Routes = [
     path: '', component: MainComponent,
     children: [
       {
+        path: 'dashboard',
+        loadChildren: 'app/admin/dashboard/dashboard.module#DashboardModule'
+      },
+      {
         path: 'product',
         loadChildren: 'app/admin/product/product.module#ProductModule'
       }, {

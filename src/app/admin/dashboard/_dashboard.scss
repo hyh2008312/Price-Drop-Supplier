@@ -1,0 +1,80 @@
+@charset "UTF-8";
+@import "../../styles/utils/_index";
+@import "../../styles/_variables";
+
+.xb-dashboard {
+  padding-bottom: 300px;
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  &__top {
+    margin-top: 35px;
+    &-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+    }
+  }
+
+  &__card {
+    border-radius: 10px;
+    padding: 28px 0 28px 28px;
+    color: $whiteColor;
+    margin-bottom: 16px;
+    overflow: hidden;
+    position: relative;
+    > i {
+      position: absolute;
+      color: $whiteColor;
+      font-size: 48px;
+      line-height: 48px;
+      right: 16px;
+      top: 25%;
+    }
+    &-data {
+      font-size: 24px;
+      font-weight: bold;
+      color: $whiteColor;
+    }
+    &-word {
+      font-size: 14px;
+      @include regular();
+      color: $whiteColor;
+      margin-top: 8px;
+    }
+
+  }
+
+  &__action {
+    padding: 56px 0;
+    margin-top: 24px;
+    background-color: $whiteColor;
+    &-data {
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+      text-align: center;
+    }
+    &-word {
+      font-size: 14px;
+      @include regular();
+      color: black;
+      margin-top: 8px;
+    }
+  }
+
+  &__navigation {
+    height: 54px;
+    background-color: #F9F9F9;
+    margin-top: 18px;
+    &-title {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+  }
+
+}
+
+
+
