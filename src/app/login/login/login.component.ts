@@ -99,7 +99,6 @@ export class LoginComponent implements OnInit {
     }
 
     let self = this;
-    let _setLogin = false;
     self.service.login(this.loginGroup.value).then((data) => {
       self.loginErr = false;
       self.auth.setAccessToken(data);
@@ -161,41 +160,41 @@ export class LoginComponent implements OnInit {
     let self = this;
     let first = false;
     this.facebookLoginSub = this._auth.login(provider).subscribe(
-        (data) => {
-          if(data) {
-            self.service.facebookLogin(data).then((res) => {
-              self.loginErr = false;
-              if(res && !first) {
-                first = true;
+      (data) => {
+        if(data) {
+          self.service.facebookLogin(data).then((res) => {
+            self.loginErr = false;
+            if(res && !first) {
+              first = true;
 
-                let token = {
-                  access_token: res.token.accessToken,
-                  refresh_token: res.token.refreshToken,
-                  expires_in: res.token.expiresIn
-                };
-                self.auth.setAccessToken(token);
-                self.userService.addUser(res.user);
-                self.auth.inviteToken(res.user.isInvite);
-                if(res.user.firstLogin) {
-                  self.router.navigate(['/account/signup'], {queryParams:{tab: 'settingProfile'}});
-                } else {
-                  if(res.user && res.user.store && res.user.store.length>0) {
+              let token = {
+                access_token: res.token.accessToken,
+                refresh_token: res.token.refreshToken,
+                expires_in: res.token.expiresIn
+              };
+              self.auth.setAccessToken(token);
+              self.userService.addUser(res.user);
+              self.auth.inviteToken(res.user.isInvite);
+              if(res.user.firstLogin) {
+                self.router.navigate(['/account/signup'], {queryParams:{tab: 'settingProfile'}});
+              } else {
+                if(res.user && res.user.store && res.user.store.length>0) {
 
-                    if(res.user && res.user.isInvite) {
-                      self.router.navigate(['/admin']);
+                  if(res.user && res.user.isInvite) {
+                    self.router.navigate(['/admin']);
 
-                    } else {
-                      self.router.navigate(['/account/invitation']);
-                    }
                   } else {
-                    self.router.navigate(['/account/signup'], {queryParams: {step: 1}});
+                    self.router.navigate(['/account/invitation']);
                   }
+                } else {
+                  self.router.navigate(['/account/signup'], {queryParams: {step: 1}});
                 }
               }
-            });
-          }
+            }
+          });
         }
-      )
+      }
+    )
   }
 
 

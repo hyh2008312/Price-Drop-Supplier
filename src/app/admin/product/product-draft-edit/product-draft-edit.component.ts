@@ -532,11 +532,18 @@ export class ProductDraftEditComponent implements OnInit {
 
   openLeaveDialog() {
     let dialogRef = this.dialog.open(SaveProductDialogComponent, {
-      data: {}
+      data: {
+        isSaved: false
+      }
     });
 
+    let self = this;
     dialogRef.afterClosed().subscribe(result => {
-
+      if(dialogRef.componentInstance.data.isSaved == true) {
+        self.createDraft();
+      } else {
+        self.router.navigate(['../../'], {  queryParams: {tab:'draft'}, replaceUrl: true, relativeTo: this.activatedRoute});
+      }
     });
   }
 
