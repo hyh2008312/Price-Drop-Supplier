@@ -1,7 +1,18 @@
 <div class="xb-dashboard">
   <div class="xb-dashboard__top" fxLayout="row" fxLayoutAlign="space-between center">
     <div class="xb-dashboard__top-title">Overview</div>
-    <div>Data Range Yesterday</div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="xb-dashboard__top-category-title">Date Range</div>
+      <div class="unicorn-dark-theme">
+        <mat-form-field class="xb-dashboard-category">
+          <mat-select class="xb-dashboard-category__name" [(value)]="overViewCategory">
+            <mat-option *ngFor="let viewCategory of overViewListCategory"
+                        [value]="viewCategory">{{viewCategory}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
   </div>
   <div class="md-margin-top-3" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutWrap>
     <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#3f51b5'}" fxFlex.gt-sm="24" fxFlex.sm="48"
@@ -77,14 +88,46 @@
   <div class="xb-dashboard__top" fxLayout="row" fxLayoutAlign="space-between center">
     <div class="xb-dashboard__top-title">Top Selling Products</div>
     <div fxLayout="row" fxLayoutAlign="start center">
-      <div class="md-margin-right-3">Data Range Yesterday</div>
-      <div>Data Range Yesterday</div>
+      <div class="xb-dashboard__mgrignt48px" fxLayout="row" fxLayoutAlign="start center">
+        <div class="xb-dashboard__top-category-title">Date Range</div>
+        <div class="unicorn-dark-theme">
+          <mat-form-field class="xb-dashboard-category">
+            <mat-select class="xb-dashboard-category__name" [(value)]="topProductCategory">
+              <mat-option *ngFor="let viewCategory of topProductListCategory"
+                          [value]="viewCategory">{{viewCategory}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="xb-dashboard__top-category-title">Sort By</div>
+        <div class="unicorn-dark-theme">
+          <mat-form-field class="xb-dashboard-category">
+            <mat-select class="xb-dashboard-category__name" [(value)]="topProductSortCategory">
+              <mat-option *ngFor="let viewCategory of topProductSortListCategory"
+                          [value]="viewCategory">{{viewCategory}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
     </div>
 
   </div>
   <div>
     <app-dashboard-title></app-dashboard-title>
   </div>
-
-
+  <ng-container *ngFor="let aa of textList">
+    <div [ngStyle]="{'background-color':'white'}">
+      <app-dashboard-item></app-dashboard-item>
+      <div class="xb-dashboard-item__line"></div>
+    </div>
+  </ng-container>
+  <div [ngStyle]="{'background-color':'white'}">
+    <mat-paginator [length]="length"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="pageSizeOptions">
+    </mat-paginator>
+  </div>
 </div>
