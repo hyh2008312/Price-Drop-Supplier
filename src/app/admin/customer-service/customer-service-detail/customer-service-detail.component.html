@@ -20,7 +20,7 @@
         </app-customer-service-message>
       </ng-container>
       <div class="xb-customer-service-detail__content-left-line"></div>
-      <div *ngIf="isClose">
+      <div *ngIf="isClose && isExpired">
         <form [formGroup]="replyMessageForm" class="xb-customer-service-detail__content-left-reply">
           <div fxLayout="row" fxLayoutAlign="start center">
             <mat-form-field fxFlex>
@@ -31,7 +31,7 @@
         </form>
       </div>
       <div class="xb-customer-service-detail__content-left-bottom" fxLayout="row" fxLayoutAlign="space-between center"
-           *ngIf="isClose">
+           *ngIf="isClose && isExpired">
         <div>
           <div class="xb-customer-service-detail__content-left-close xb-pointer"
                (click)="requestCloseMessage()" *ngIf="isShowCloseButton">Close This Ticket

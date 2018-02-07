@@ -39,8 +39,7 @@ export class CustomerServiceMainComponent implements OnInit {
   pageSizeOptions = [6, 12];
 
 
-  constructor(
-              private router: Router,
+  constructor(private router: Router,
               private customerService: CustomerService,
               private activatedRoute: ActivatedRoute,
               private fb: FormBuilder) {
@@ -64,7 +63,6 @@ export class CustomerServiceMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   ngOnDestroy() {

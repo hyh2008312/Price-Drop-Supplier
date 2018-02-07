@@ -29,12 +29,15 @@ export class CustomerServiceDetailComponent implements OnInit {
   aCustomerName: string;
   aSuppierName: string;
   isClose: boolean = false;
+  // 特别注意，根据后台的判读条件，当为true的时候代表没有过期，当为false的时候就表示过期了
+  isExpired: boolean = true;
 
   tipWord: string = 'Please note :You must respond to this ticket within 48 hours.';
   isShowCloseButton: boolean = false;
 
   constructor(private fb: FormBuilder,
               private customerService: CustomerService,
+              private router: Router,
               private activatedRoute: ActivatedRoute) {
     this.replyMessageForm = this.fb.group({
       replyMessage: ['']
@@ -50,9 +53,7 @@ export class CustomerServiceDetailComponent implements OnInit {
   //关闭问题
   requestCloseMessage() {
     this.customerService.startCloseMessage(this.id).then((data) => {
-      this.respondStatus = 'Closed';
-      this.judgeMessageIsClose();
-      this.judgeTipWarn();
+      this.router.navigate(['/admin/customerService']);
     });
   }
 
@@ -83,6 +84,9 @@ export class CustomerServiceDetailComponent implements OnInit {
   judgeTipWarn() {
     if (this.respondStatus === 'Closed') {
       this.tipWord = 'Please note : This support ticket has been closed.';
+    } else if (!this.isExpired) {
+      this.respondStatus = 'Expired';
+      this.tipWord = 'Please note : This ticket has expired and has been transferred to SocialCommer Support Team.';
     } else if (this.isShowCloseButton) {
       this.tipWord = 'Please note: You can close this ticket if you have resolved the issue for your customer without leaving a reply.';
     } else {
@@ -112,6 +116,7 @@ export class CustomerServiceDetailComponent implements OnInit {
       this.aSuppierName = data.communication.supplier.name;
       this.messageList = data.communication.messages;
       this.respondStatus = data.communication.status;
+      this.isExpired = data.communication.isExpired;
       this.judgeMessageIsClose();
       this.judgeCloseTicketIsShow();
       this.judgeTipWarn();

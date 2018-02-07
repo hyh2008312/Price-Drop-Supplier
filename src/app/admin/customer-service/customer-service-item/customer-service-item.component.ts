@@ -16,12 +16,24 @@ export class CustomerServiceItemComponent implements OnInit {
   @Input() index: number = 0;
   @Output() productChange = new EventEmitter<any>();
 
+  timeLeft: string = '';
+
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-
+    let now = Date.parse(this.product.nowTime);
+    let modify = Date.parse(this.product.modified);
+    let subtraction = now - modify;  // 毫秒值
+    let sumMinutes = Math.floor(subtraction / (1000 * 60));
+    let hours = Math.floor(sumMinutes / 60);
+    let minutes = sumMinutes % 60;
+    if (this.product.isExpired && hours < 48) {
+      this.timeLeft = `${47 - hours} hours,${60 - minutes} mins`;
+    } else {
+      this.timeLeft = `Expired`;
+    }
   }
 
   jumpCustomerServiceDetail() {
