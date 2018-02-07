@@ -24,4 +24,9 @@ export class SaveProductDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  save() {
+    this.data.isSaved = true;
+    this.close();
+  }
+
 }
