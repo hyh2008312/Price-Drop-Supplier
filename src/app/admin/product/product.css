@@ -2304,6 +2304,11 @@ textarea.mat-input-element {
   padding: 28px 40px 40px;
   background-color: #fff;
   border-radius: 4px; }
+.sc-product__create-container-2 {
+  margin-top: 16px;
+  padding: 20px 20px 20px;
+  background-color: #fff;
+  border-radius: 4px; }
 .sc-product__create-navigation {
   position: relative;
   height: 54px;
@@ -2350,6 +2355,8 @@ textarea.mat-input-element {
   margin-right: 24px; }
 .sc-product__create-margin-right-4 {
   margin-right: 64px; }
+.sc-product__create-margin-left {
+  margin-left: 20px; }
 .sc-product__create-width {
   width: 54px; }
 .sc-product__create-width-1 {
@@ -2372,12 +2379,12 @@ textarea.mat-input-element {
   height: 57px;
   line-height: 57px; }
 .sc-product__create-list {
-  padding-top: 16px;
-  padding-bottom: 32px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12); }
-  .sc-product__create-list:last-child {
-    border-bottom: none;
-    padding-bottom: 0; }
+  margin-bottom: 20px;
+  padding: 24px 20px 30px;
+  -webkit-box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.24);
+  border-radius: 4px; }
 .sc-product__edit-button {
   line-height: 54px;
   font-size: 16px;

@@ -211,6 +211,13 @@
       border-radius: 4px;
     }
 
+    &-container-2{
+      margin-top: 16px;
+      padding: 20px 20px 20px;
+      background-color: $whiteColor;
+      border-radius: 4px;
+    }
+
     $parent: &;
 
     &-navigation{
@@ -286,6 +293,11 @@
       margin-right: 64px;
     }
 
+    &-margin-left{
+      margin-left: 20px;
+    }
+
+
     &-width{
       width: 54px;
     }
@@ -326,13 +338,10 @@
     }
 
     &-list{
-      padding-top: 16px;
-      padding-bottom: 32px;
-      border-bottom: 1px solid rgba(0,0,0,.12);
-      &:last-child{
-        border-bottom: none;
-        padding-bottom: 0;
-      }
+      margin-bottom: 20px;
+      padding: 24px 20px 30px;
+      @include box-shadow(0 1px 3px 1px rgba(0, 0, 0, 0.24));
+      border-radius: 4px;
     }
   }
 

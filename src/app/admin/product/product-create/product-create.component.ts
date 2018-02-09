@@ -249,6 +249,10 @@ export class ProductCreateComponent implements OnInit {
     this.product.removeAt(i);
   }
 
+  deleteShippingObject(i) {
+    this.shipping.removeAt(i);
+  }
+
   addVariantList() {
     let option = {
       option: '',

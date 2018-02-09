@@ -314,8 +314,8 @@
       </div>
     </div>
     <div  *ngIf="step == 1">
-      <div class="sc-product__create-container-1">
-        <div class="sc-product__create-title">
+      <div class="sc-product__create-container-2">
+        <div class="sc-product__create-title sc-product__create-margin-left">
           Shipping
         </div>
         <div class="md-margin-top-2" formArrayName="shippings">
@@ -327,7 +327,7 @@
                     <mat-select name="country" placeholder="Shipping Country"
                                 formControlName="countryId" (ngModelChange)="changeShippingMethod($event, p)">
                       <mat-option class="md-align-center" *ngFor="let item of countries" [value]="item.id">
-                        {{ item.code }}
+                        {{ item.name }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -358,7 +358,7 @@
                   This field is required.
                 </div>
               </div>
-              <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="p.value.type != '' && p.value.shippingMethodList.length>0">
+              <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="p.value.type != '' && p.value.shippingMethodList.length > 0">
                 <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field fxFlex>
                     <mat-select name="carrier" placeholder="Shipping Carrier"
@@ -423,6 +423,13 @@
                     This field is required.
                   </div>
                 </div>
+              </div>
+              <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center" *ngIf="i > 0">
+                <div>
+                  <i class="material-icons md-dark-third xb-pointer" (click)="deleteShippingObject(i)">delete</i>
+                </div>
+                <div class="md-margin-left-1 text-underline sc-product__create-title xb-pointer"
+                     (click)="deleteShippingObject(i)">Delete</div>
               </div>
             </div>
           </div>
