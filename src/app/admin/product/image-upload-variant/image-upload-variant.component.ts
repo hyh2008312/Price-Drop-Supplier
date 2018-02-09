@@ -68,6 +68,8 @@ export class ImageUploadVariantComponent implements OnInit {
           height: height
         }).then((data) => {
           let src = data.url + '/' + data.key;
+          let url = data.url;
+          let key = data.key.split('source/product/')[1];
 
           that.s3UploaderService.uploadToS3(file, data).subscribe((event) => {
             // Via this API, you get access to the raw event stream.
@@ -76,9 +78,15 @@ export class ImageUploadVariantComponent implements OnInit {
               // This is an upload progress event. Compute and show the % done:
               that.loading = Math.round(100 * event.loaded / event.total);
             } else if (event instanceof HttpResponse) {
-              that.previewImgFile = src;
-              that.previewImgFileChange.emit(that.previewImgFile);
-
+              that.s3UploaderService.formatImage({
+                cat: 'product',
+                name: src,
+                width: 720,
+                height: 720
+              }).then((data) => {
+                that.previewImgFile = url + '/cdn/product/cc/' + key;
+                that.previewImgFileChange.emit(that.previewImgFile);
+              });
             }
           });
         });

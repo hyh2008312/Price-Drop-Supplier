@@ -46,9 +46,19 @@
           <div fxLayout="row" fxLayoutAlign="space-between center">
             <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
-                <mat-select name="category" placeholder="Select a Category" formControlName="categoryId">
+                <mat-select name="category" placeholder="Select a Category" formControlName="mainCategoryId"
+                  (valueChange)="categoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
-                    {{ item.name }}
+                    {{ item.data.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+              <mat-form-field fxFlex>
+                <mat-select name="subcategory" placeholder="Select a Subcategory" formControlName="categoryId">
+                  <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                    {{ item.data.name }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -348,7 +358,7 @@
                   This field is required.
                 </div>
               </div>
-              <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="p.value.type != ''">
+              <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="p.value.type != '' && p.shippingMethodList.length > 0">
                 <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field fxFlex>
                     <mat-select name="carrier" placeholder="Shipping Carrier"

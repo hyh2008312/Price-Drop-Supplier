@@ -26,7 +26,8 @@ export class ProductDraftEditComponent implements OnInit {
 
   productId: any;
 
-  categoryList:any;
+  categoryList:any = [];
+  subCategoryList: any;
 
   shippingTypeList = [{
     name: 'Free Shipping',
@@ -107,6 +108,7 @@ export class ProductDraftEditComponent implements OnInit {
 
     this.productForm = this.fb.group({
       title: ['', Validators.required],
+      mainCategoryId: [null],
       categoryId: [null, Validators.required],
       images: [[]],
       attributes: this.fb.array([]),
@@ -132,6 +134,7 @@ export class ProductDraftEditComponent implements OnInit {
     }).then((data) => {
       this.productForm.patchValue({
         title: data.title,
+        mainCategoryId: [data.productCategories[0].parentId],
         categoryId: data.productCategories[0].categoryId,
         commission: data.commissionRate,
         brandName: data.brandName,
@@ -145,6 +148,11 @@ export class ProductDraftEditComponent implements OnInit {
         isPowder: data.isPowder,
         isLiquid: data.isLiquid,
         isBattery: data.isBattery
+      });
+
+      this.adminService.getCategoryList().then((value) => {
+        this.categoryList = [...value];
+        this.categoryChange(data.productCategories[0].parentId);
       });
 
       this.additionalList = [...data.images];
@@ -412,9 +420,9 @@ export class ProductDraftEditComponent implements OnInit {
           let image = '';
           for(let i = 0; i < newArr.length; i++) {
             newArr[i] = {};
-            newArr[i].id = parseInt(idArr[i]);
+            newArr[i].attributeId = parseInt(idArr[i]);
             newArr[i].value = valueArr[i];
-            if(newArr[i].id == 2) {
+            if(newArr[i].attributeId == 2) {
               for(let item of this.colorImageList) {
                 if(item.value == newArr[i].value && item.image) {
                   image = item.image;
@@ -499,7 +507,20 @@ export class ProductDraftEditComponent implements OnInit {
     this.addProductList(true);
   }
 
-
+  categoryChange($event) {
+    if(this.categoryList.length > 0) {
+      let index = this.categoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.categoryList[index] && this.categoryList[index].children) {
+        this.subCategoryList = [...this.categoryList[index].children];
+      } else {
+        this.subCategoryList = false;
+      }
+    }
+  }
   showMinAndMaxTime($event, index, item) {
     if(index == 5) {
       item.patchValue({
@@ -516,9 +537,7 @@ export class ProductDraftEditComponent implements OnInit {
   }
 
   ngOnInit():void {
-    this.adminService.getCategoryList().then((data) => {
-      this.categoryList = data;
-    });
+
 
     this.adminService.getVariantList().then((data) => {
       this.variantList = data;

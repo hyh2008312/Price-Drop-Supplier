@@ -11,15 +11,12 @@
       <div class="sc-order__product-item" fxLayout="row" fxLayoutAlign="start center">
         <div class="sc-order__product-width sc-order__product-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
           <div class="sc-order__product-image" fxFlex="none">
-            <img [src]="order.variant.imageMain">
+            <img [src]="order.mainImage">
           </div>
           <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
             <div class="sc-order__product-title" >{{order.title}}</div>
             <div fxLayout="row" fxLayoutAlign="start center">
-              <div [ngClass]="{'sc-order__product-margin-left': i > 0}"
-                   *ngFor="let item of order.variant.attributeValues;let i = index;">
-                {{item.value}}
-              </div>
+              {{order.attributes}}
             </div>
           </div>
         </div>

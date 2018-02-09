@@ -27,7 +27,8 @@ export class ProductEditComponent implements OnInit {
 
   productId: any;
 
-  categoryList:any;
+  categoryList: any = [];
+  subCategoryList: any;
 
   YesOrNo = [{
     text: "Yes",
@@ -70,6 +71,7 @@ export class ProductEditComponent implements OnInit {
 
     this.productBasicForm = this.fb.group({
       title: ['', Validators.required],
+      mainCategoryId: [null],
       categoryId: [null, Validators.required],
       brandName: [''],
       description: ['', Validators.required],
@@ -103,10 +105,16 @@ export class ProductEditComponent implements OnInit {
     }).then((data) => {
       this.productBasicForm.patchValue({
         title: data.title,
+        mainCategoryId: data.productCategories[0].parentId,
         categoryId: data.productCategories[0].categoryId,
         brandName: data.brandName,
         description: data.description,
         productCategoryId: data.productCategories[0].id
+      });
+
+      this.adminService.getCategoryList().then((value) => {
+        this.categoryList = [...value];
+        this.categoryChange(data.productCategories[0].parentId);
       });
 
       this.status = data.status;
@@ -161,6 +169,21 @@ export class ProductEditComponent implements OnInit {
       this.document.querySelector('html').scrollTop = 0;
     });
     this.step = index;
+  }
+
+  categoryChange($event) {
+    if(this.categoryList.length > 0) {
+      let index = this.categoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.categoryList[index] && this.categoryList[index].children) {
+        this.subCategoryList = [...this.categoryList[index].children];
+      } else {
+        this.subCategoryList = false;
+      }
+    }
   }
 
   deleteVariantObject(i) {
@@ -293,9 +316,6 @@ export class ProductEditComponent implements OnInit {
   }
 
   ngOnInit():void {
-    this.adminService.getCategoryList().then((data) => {
-      this.categoryList = data;
-    });
 
     this.adminService.getVariantList().then((data) => {
       this.variantList = data;

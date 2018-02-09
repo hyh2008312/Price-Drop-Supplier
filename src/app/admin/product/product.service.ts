@@ -510,7 +510,7 @@ export class ProductService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/category/list/`;
+    const url = `${this.baseUrl.url}product/category/create/`;
 
     return this.http.get(url, options)
       .toPromise()

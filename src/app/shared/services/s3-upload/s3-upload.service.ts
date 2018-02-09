@@ -39,6 +39,37 @@ export class S3UploaderService {
 
   }
 
+  serializeParams(params) {
+
+    let array = [];
+
+    for (const key in params) {
+      if(Array.isArray(params[key])) {
+        if(params[key].length > 0) {
+          let item = params[key].join(',');
+          array.push(key + '=' + item);
+        }
+      } else {
+        if(params[key] != undefined) {
+          array.push(key + '=' + params[key]);
+        }
+      }
+    }
+
+    return array.join('&');
+  }
+
+  serializeParamsJSONP(params) {
+
+    let _params = new URLSearchParams();
+
+    for (const key in params) {
+      _params.set( key, params[key]);
+    }
+    _params.set('callback', "JSONP_CALLBACK");
+
+    return _params;
+  }
 
   private getPostOptions(): RequestOptions {
 
@@ -102,6 +133,17 @@ export class S3UploaderService {
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
+  }
+
+  formatImage(file: any): Promise<any> {
+
+    let options = new RequestOptions();
+    const url = `${this.baseUrl.formatUrl}image/upload/done/?${this.serializeParams(file)}`;
+
+    return this.http.get(url, options)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.handleError);
   }
 
   private handleError (error: Response | any) {

@@ -26,7 +26,8 @@ export class ProductCreateComponent implements OnInit {
 
   productId: any;
 
-  categoryList:any;
+  categoryList:any = [];
+  subCategoryList: any;
 
   shippingTypeList = [{
     name: 'Free Shipping',
@@ -107,6 +108,7 @@ export class ProductCreateComponent implements OnInit {
 
     this.productForm = this.fb.group({
       title: ['', Validators.required],
+      mainCategoryId: [null],
       categoryId: [null, Validators.required],
       images: [[]],
       attributes: this.fb.array([]),
@@ -303,7 +305,7 @@ export class ProductCreateComponent implements OnInit {
             newArr[i] = {};
             newArr[i].attributeId = parseInt(idArr[i]);
             newArr[i].value = valueArr[i];
-            if(newArr[i].id == 2) {
+            if(newArr[i].attributeId == 2) {
               for(let item of this.colorImageList) {
                 if(item.value == newArr[i].value && item.image) {
                   image = item.image;
@@ -388,6 +390,20 @@ export class ProductCreateComponent implements OnInit {
     this.addProductList(true);
   }
 
+  categoryChange($event) {
+    if(this.categoryList.length > 0) {
+      let index = this.categoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.categoryList[index] && this.categoryList[index].children) {
+        this.subCategoryList = [...this.categoryList[index].children];
+      } else {
+        this.subCategoryList = false;
+      }
+    }
+  }
 
   showMinAndMaxTime($event, index, item) {
     if(index == 5) {
