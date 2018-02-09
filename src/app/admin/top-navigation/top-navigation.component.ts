@@ -15,6 +15,7 @@ export class TopNavigationComponent implements OnInit {
   contents = [{
     id: 0,
     text: '首页',
+    router: './dashboard',
     isActive: false
   }, {
     id: 1,
