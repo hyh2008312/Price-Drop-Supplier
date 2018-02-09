@@ -35,12 +35,31 @@ export class DashboardMainComponent implements OnInit {
   textList: any = [1, 2, 3, 4, 5];
 
 
+  showTwo: boolean = false;
+  showSeven: boolean = false;
+  showEight: boolean = false;
+
+
   constructor(private router: Router,
               private dashboardService: DashboardService,
               private activatedRoute: ActivatedRoute,
               private fb: FormBuilder) {
+
   }
 
   ngOnInit(): void {
+
+  }
+
+  changeTwo(flag: boolean) {
+    this.showTwo = flag;
+  }
+
+  changeSeven(flag: boolean) {
+    this.showSeven = flag;
+  }
+
+  changeEight(flag: boolean) {
+    this.showEight = flag;
   }
 }

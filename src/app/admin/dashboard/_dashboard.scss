@@ -7,6 +7,41 @@
   width: 960px;
   margin-left: auto;
   margin-right: auto;
+
+  &__wenhao {
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    cursor: pointer;
+    &—word {
+      height: 40px;
+      width: 255px;
+      color: black;
+      font-size: 14px;
+      padding-left: 16px;
+      background-color: white;
+      line-height: 40px;
+      @include regular();
+    }
+    &-content {
+      position: absolute;
+      z-index: 5;
+      right: -106px;
+    }
+    &-triangle-up {
+      width: 0;
+      height: 0;
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-bottom: 7px solid white;
+      margin-left: 130px;
+    }
+    &-bg {
+      margin-left: 5px;
+      position: relative;
+    }
+  }
+
   &__mgrignt48px {
     margin-right: 48px;
   }
@@ -30,9 +65,9 @@
   &__card {
     border-radius: 10px;
     padding: 28px 0 28px 28px;
+    height: 120px;
     color: $whiteColor;
     margin-bottom: 16px;
-    overflow: hidden;
     position: relative;
     > i {
       position: absolute;
@@ -117,22 +152,20 @@
       @include transform(translate(-50%, -50%));
     }
   }
-  &__Product{
+  &__Product {
     height: 100%;
-    &-price-now{
+    &-price-now {
       font-size: 14px;
       font-weight: bold;
       color: black;
     }
-    &-price-origin{
+    &-price-origin {
       font-size: 14px;
       @include regular();
       color: black;
       margin-top: 8px;
       text-decoration: line-through;
     }
-
-
 
   }
   &__line {
