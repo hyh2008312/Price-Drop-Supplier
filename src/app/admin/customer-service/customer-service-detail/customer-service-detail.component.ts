@@ -57,6 +57,11 @@ export class CustomerServiceDetailComponent implements OnInit {
     });
   }
 
+  // 跳转到订单详情
+  jumpOrderDetail() {
+    this.router.navigate(['/admin/order/detail', this.id]);
+  }
+
   /*判断该私信是否关闭*/
   judgeMessageIsClose() {
     if (this.respondStatus === 'Closed') {
