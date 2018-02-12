@@ -5,8 +5,10 @@
         <img [src]="order.mainImage">
       </div>
       <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
-        <div class="sc-order__product-title-2" >{{order.title}}</div>
-        <div>{{order.attributes}}</div>
+        <div>
+          <div class="sc-order__product-title-2" >{{order.title}}</div>
+          <div class="md-margin-top-1">{{order.attributes}}</div>
+        </div>
         <div fxLayout="row" fxLayoutAlign="start center">
           <div>SKU: {{order.sku}}</div>
         </div>
