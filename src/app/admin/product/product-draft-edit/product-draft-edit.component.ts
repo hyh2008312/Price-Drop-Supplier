@@ -421,10 +421,10 @@ export class ProductDraftEditComponent implements OnInit {
           for(let i = 0; i < newArr.length; i++) {
             newArr[i] = {};
             newArr[i].attributeId = parseInt(idArr[i]);
-            newArr[i].value = valueArr[i];
+            newArr[i].value = valueArr[i].trim();
             if(newArr[i].attributeId == 2) {
               for(let item of this.colorImageList) {
-                if(item.value.trim() == newArr[i].value.trim() && item.image) {
+                if(item.value == newArr[i].value && item.image) {
                   image = item.image;
                   break;
                 }
