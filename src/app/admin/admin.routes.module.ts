@@ -20,6 +20,9 @@ const routes: Routes = [
       }, {
         path: 'customerService',
         loadChildren: 'app/admin/customer-service/customer-service.module#CustomerServiceModule'
+      }, {
+        path: 'account',
+        loadChildren:'app/admin/account/account.module#AccountModule'
       }
     ]
   }, {

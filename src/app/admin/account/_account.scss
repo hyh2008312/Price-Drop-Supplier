@@ -1,0 +1,78 @@
+@charset "UTF-8";
+@import "../../styles/utils/_index";
+@import "../../styles/_variables";
+
+.xb-account {
+  padding-bottom: 200px;
+  &__margin-top-48 {
+    margin-top: 48px;
+  }
+  &__w960px {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  &__regular {
+    @include regular();
+  }
+  &__nav-title {
+    font-size: 14px;
+    color: black;
+  }
+}
+
+.xb-account-balance {
+  &__title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  &__withdraw {
+    background-color: black;
+    color: white;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 2px;
+  }
+  &__summary {
+    background-color: white;
+    height: 200px;
+    padding-top: 56px;
+    padding-bottom: 56px;
+    &-word {
+      font-size: 14px;
+      @include regular();
+    }
+  }
+}
+
+.xb-account-navigation {
+  height: 56px;
+  background-color: #F9F9F9;
+  margin-top: 16px;
+  &__title {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 28px;
+  }
+
+}
+
+.xb-account-item {
+  height: 72px;
+  background-color: $whiteColor;
+  &__title {
+    font-size: 14px;
+    @include regular();
+  }
+  &__line {
+    height: 1px;
+    margin-left: 16px;
+    margin-right: 16px;
+    background-color: rgba(0, 0, 0, .12);
+  }
+}
+
+
+
