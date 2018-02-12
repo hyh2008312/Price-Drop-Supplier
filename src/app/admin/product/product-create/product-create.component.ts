@@ -308,7 +308,7 @@ export class ProductCreateComponent implements OnInit {
           for(let i = 0; i < newArr.length; i++) {
             newArr[i] = {};
             newArr[i].attributeId = parseInt(idArr[i]);
-            newArr[i].value = valueArr[i];
+            newArr[i].value = valueArr[i].trim();
             if(newArr[i].attributeId == 2) {
               for(let item of this.colorImageList) {
                 if(item.value == newArr[i].value && item.image) {
