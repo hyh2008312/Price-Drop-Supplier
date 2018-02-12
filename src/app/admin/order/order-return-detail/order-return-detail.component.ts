@@ -16,6 +16,7 @@ import { UserService } from  '../../../shared/services/user/user.service';
 export class OrderReturnDetailComponent implements OnInit {
 
   order: any = {};
+  annexName: any = '';
   product: any = {};
   shippingAddress: any;
   shippingPrice: any = {};
@@ -33,6 +34,7 @@ export class OrderReturnDetailComponent implements OnInit {
       id
     }).then((data) => {
       this.order = data;
+      this.annexName = data.annex.split('/source/annex/')[1];
       this.product = data.line;
       if(data.line.shippingAddress) {
         this.shippingAddress = data.line.shippingAddress;
