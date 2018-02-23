@@ -7,6 +7,8 @@ import {AccountItemComponent} from "./account-item/account-item.component";
 import {AccountBalanceComponent} from "./account-balance/account-balance.component";
 import {AccountMainComponent} from "./account-main/account-main.component";
 import {AccountTitleComponent} from "./account-title/account-title.component";
+import {AccountBalanceWithdrawMoneyDialogComponent} from "./account-balance-withdraw-money-dialog/account-balance-withdraw-money-dialog.component";
+import {AccountPaymentSettingComponent} from "./account-payment-setting/account-payment-setting.component";
 
 @NgModule({
   imports: [
@@ -18,10 +20,14 @@ import {AccountTitleComponent} from "./account-title/account-title.component";
     AccountItemComponent,
     AccountBalanceComponent,
     AccountMainComponent,
-    AccountTitleComponent
+    AccountTitleComponent,
+    AccountBalanceWithdrawMoneyDialogComponent,
+    AccountPaymentSettingComponent
 
   ],
-  entryComponents: [],
+  entryComponents: [
+    AccountBalanceWithdrawMoneyDialogComponent,
+  ],
   providers: [AccountService]
 })
 export class AccountModule {
