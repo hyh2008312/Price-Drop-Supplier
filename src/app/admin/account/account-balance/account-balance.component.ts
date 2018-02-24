@@ -23,6 +23,8 @@ export class AccountBalanceComponent implements OnInit {
   pageSize = 12;
   pageSizeOptions = [6, 12];
 
+  isShowTip: boolean = false;
+
   constructor(private router: Router,
               private accountService: AccountService,
               private activatedRoute: ActivatedRoute,
@@ -33,6 +35,11 @@ export class AccountBalanceComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  //是否进行显示 tip
+  changeShowTip(isShow: boolean): void {
+    this.isShowTip = isShow;
   }
 
   //打开提现按钮

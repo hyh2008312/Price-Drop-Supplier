@@ -2,13 +2,25 @@
   <div class="container ">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div class="sc-navigation__scroll" fxLayout="row" fxLayoutAlign="start center">
-        <div class="sc-navigation__buttons" [ngClass]="{'active': content.isActive}"
+        <div class="sc-navigation__buttons" [ngClass]="{'active': content.isActive && !isAccountNavigation}"
              *ngFor="let content of contents; let i = index;"
              (click)="changeSlide(content,i)" fxFlex="none">
           {{ content.text }}
         </div>
       </div>
-      <div class="sc-navigation__buttons">我的账户</div>
+      <div class="sc-navigation__my-account" id="account-menu" (mouseenter)="changeShowMenu(true)"
+           (mouseleave)="changeShowMenu(false)">
+        <div class="sc-navigation__buttons" fxLayout="row" fxLayoutAlign="start center">我的账户<span
+          class="sc-navigation__triangle-down md-margin-left-1"></span></div>
+        <div class="sc-navigation__my-account-menu">
+          <div class="sc-navigation__my-account-menu-item"
+               *ngFor="let account of accounts; let i = index;"
+               [ngClass]="{'active': account.isActive && isAccountNavigation}"
+               (click)="changeAccount(account,i)">
+            {{ account.text }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

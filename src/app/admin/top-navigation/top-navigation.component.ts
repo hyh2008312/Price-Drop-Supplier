@@ -51,17 +51,65 @@ export class TopNavigationComponent implements OnInit {
     isActive: false
   }];
 
+  accounts = [
+    {
+      id: 0,
+      text: 'Payment Settings',
+      router: './account/paymentsettings',
+      isActive: false
+    },
+    {
+      id: 1,
+      text: 'Account Balance',
+      router: './account/balance',
+      isActive: false
+    },
+    {
+      id: 2,
+      text: 'Disputes',
+      router: './account/balance',
+      isActive: false
+    },
+    {
+      id: 4,
+      text: 'Settings',
+      router: './account/balance',
+      isActive: false
+    },
+    {
+      id: 5,
+      text: 'Logout',
+      router: './account/balance',
+      isActive: false
+    }
+  ];
+
+
+  //是否显示我的账户的东西
+  isShowMenu: boolean = false;
+
+  //区分为是导航选项 && 还是账户选项
+
+  isAccountNavigation: boolean = false;
+
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private adminService: AdminService) {
   }
 
   ngOnInit(): void {
+  }
 
+  changeShowMenu(isShow: boolean): void {
+    if (isShow) {
+      document.getElementById('account-menu').style.overflowY = 'visible';
+    } else {
+      document.getElementById('account-menu').style.overflowY = 'hidden';
+    }
   }
 
   changeSlide(obj: any, index: number) {
-
+    this.isAccountNavigation = false;
     for (let value of this.contents) {
       if (value.id != obj.id) {
         value.isActive = false;
@@ -77,4 +125,21 @@ export class TopNavigationComponent implements OnInit {
     }
   }
 
+  changeAccount(obj: any, index: number) {
+    this.isAccountNavigation = true;
+    for (let value of this.accounts) {
+      if (value.id != obj.id) {
+        value.isActive = false;
+      }
+    }
+    if (obj.slide) {
+      obj.isActive = !obj.isActive;
+    } else {
+      obj.isActive = true;
+    }
+
+    if (obj.router) {
+      this.router.navigate([`${obj.router}`], {relativeTo: this.activatedRoute});
+    }
+  }
 }

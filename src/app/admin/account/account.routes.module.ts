@@ -9,7 +9,7 @@ const routes: Routes = [
     path: 'balance',
     component: AccountBalanceComponent
   }, {
-    path: 'paymentSettings',
+    path: 'paymentsettings',
     component: AccountPaymentSettingComponent
   }
 ];
