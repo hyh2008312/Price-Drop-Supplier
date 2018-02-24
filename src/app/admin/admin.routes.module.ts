@@ -21,6 +21,9 @@ const routes: Routes = [
         path: 'customerService',
         loadChildren: 'app/admin/customer-service/customer-service.module#CustomerServiceModule'
       }, {
+        path: 'report',
+        loadChildren: 'app/admin/report/report.module#ReportModule'
+      }, {
         path: 'account',
         loadChildren:'app/admin/account/account.module#AccountModule'
       }

@@ -7,7 +7,7 @@ import {AdminService} from '../admin.service';
 @Component({
   selector: 'app-top-navigation',
   templateUrl: './top-navigation.component.html',
-  styleUrls: ['./top-navigation.scss']
+  styleUrls: ['./_top-navigation.scss']
 })
 
 export class TopNavigationComponent implements OnInit {
@@ -33,15 +33,20 @@ export class TopNavigationComponent implements OnInit {
     isActive: false
   }, {
     id: 4,
-    text: '客服问题',
+    text: '客服',
     router: './customerService',
     isActive: false
   }, {
     id: 5,
-    text: '业绩',
+    text: '报告',
+    router: './report',
     isActive: false
   }, {
     id: 6,
+    text: '业绩',
+    isActive: false
+  }, {
+    id: 7,
     text: '通知',
     isActive: false
   }];
