@@ -78,7 +78,7 @@ export class ReportMainComponent implements OnInit {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
-  changeProducts(event) {
+  changeProducts() {
     let relationStatus = 'published';
     let page = this.salesIndex;
 
