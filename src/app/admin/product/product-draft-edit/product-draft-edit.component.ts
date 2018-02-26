@@ -8,6 +8,9 @@ import { ProductService } from '../product.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 import { ConstantService } from  '../../../shared/services/constant/constant.service';
 
+import { ImageUploadPreviewService } from "../../../shared/components/image-upload-preview/image-upload-preview.service";
+import { S3UploaderService } from "../../../shared/services/s3-upload/s3-upload.service";
+
 import { MatChipInputEvent } from '@angular/material';
 import { ENTER } from '@angular/cdk/keycodes';
 
@@ -92,6 +95,10 @@ export class ProductDraftEditComponent implements OnInit {
 
   colorImageList: any[] = [];
 
+  public editor;
+  public editorContent = 'Please add product details and images';
+  public editorImageId = 'quillImage';
+
   get shipping() { return this.productForm.get('shippings') as FormArray; }
   get product() { return this.productForm.get('variants') as FormArray; }
   get attributes() { return this.productForm.get('attributes') as FormArray; }
@@ -103,6 +110,8 @@ export class ProductDraftEditComponent implements OnInit {
     private dialog: MatDialog,
     private adminService: ProductService,
     private ngZone: NgZone,
+    private previewImageService: ImageUploadPreviewService,
+    private s3UploaderService: S3UploaderService,
     @Inject(DOCUMENT) private document: Document
   ) {
 
@@ -183,6 +192,51 @@ export class ProductDraftEditComponent implements OnInit {
           this.addVariantList(item);
         }
       }
+
+    });
+  }
+
+  onEditorCreated(quill) {
+    this.editor = quill;
+
+    let self = this;
+    this.editor.getModule('toolbar').addHandler("image", (image) => {
+      if(image) {
+        var fileInput = document.getElementById(self.editorImageId);
+        fileInput.click();
+      }
+    });
+  }
+
+  addPicture(event) {
+    if(!event.target.files[0]) {
+      return;
+    }
+    let that = this;
+    this.previewImageService.readAsDataUrl(event.target.files[0]).then(function(result) {
+
+      let file = event.target.files[0];
+
+      let image = new Image();
+      image.onload = function(){
+        let width = image.width;
+        let height = image.height;
+
+        that.s3UploaderService.upload({
+          type: 'detail',
+          fileName: file.name,
+          use: 'detail',
+          width: width,
+          height: height
+        }).then((data)=> {
+          let imageUrl = `${data.url}/${data.key}`;
+          that.s3UploaderService.uploadToS3WithoutLoading(file, data).then((data) => {
+            let range = that.editor.getSelection();
+            that.editor.insertEmbed(range.index, 'image', imageUrl);
+          });
+        });
+      };
+      image.src = window.URL.createObjectURL(file);
 
     });
   }
