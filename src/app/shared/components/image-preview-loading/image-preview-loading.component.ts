@@ -3,7 +3,7 @@ import {Component, Input, OnChanges, OnInit, ElementRef, ViewChild, OnDestroy, E
 @Component({
   selector: 'app-image-preview-loading',
   templateUrl: './image-preview-loading.component.html',
-  styleUrls: ['./image-preview-loading.component.css']
+  styleUrls: ['./_image-preview-loading.component.scss']
 })
 export class ImagePreviewLoadingComponent implements OnInit, OnDestroy {
 
@@ -28,7 +28,7 @@ export class ImagePreviewLoadingComponent implements OnInit, OnDestroy {
 
 
   private paint() {
-    if(this.angel <= this.percent * 360 / 100 && this.percent > 0) {
+    if(this.angel < this.percent * 359 / 100 && this.percent > 0) {
       this.angel++;
     } else {
       return;
