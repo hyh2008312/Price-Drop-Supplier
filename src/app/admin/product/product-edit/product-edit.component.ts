@@ -414,7 +414,7 @@ export class ProductEditComponent implements OnInit {
     }
     let product = this.productLogisticForm.value;
     product.id = parseInt(this.activatedRoute.snapshot.params["id"]);
-    this.adminService.changeProductCommission(product).then((data) => {
+    this.adminService.changeLogisticShipping(product).then((data) => {
       console.log(data)
     });
   }
