@@ -126,6 +126,7 @@ export class TopNavigationComponent implements OnInit {
   }
 
   changeAccount(obj: any, index: number) {
+    this.changeShowMenu(false);
     this.isAccountNavigation = true;
     for (let value of this.accounts) {
       if (value.id != obj.id) {
