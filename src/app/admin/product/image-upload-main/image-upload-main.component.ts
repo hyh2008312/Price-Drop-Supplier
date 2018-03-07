@@ -88,6 +88,8 @@ export class ImageUploadMainComponent implements OnInit {
                 width: 720,
                 height: 720
               }).then((data) => {
+                that.closeAnimate = true;
+                that.closeLoading = true;
                 that.previewImgFile = url + '/cdn/product/cc/' + key;
                 that.previewImgFileChange.emit(that.previewImgFile);
               });
@@ -105,8 +107,7 @@ export class ImageUploadMainComponent implements OnInit {
 
   loadingChange(event) {
     if(event) {
-      this.closeAnimate = true;
-      this.closeLoading = true;
+
     }
   }
 

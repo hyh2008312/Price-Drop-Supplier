@@ -8,6 +8,9 @@ import { ProductService } from '../product.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 import { ConstantService } from  '../../../shared/services/constant/constant.service';
 
+import { ImageUploadPreviewService } from "../../../shared/components/image-upload-preview/image-upload-preview.service";
+import { S3UploaderService } from "../../../shared/services/s3-upload/s3-upload.service";
+
 import { DeleteVariantDialogComponent } from '../delete-variant-dialog/delete-variant-dialog.component';
 import { AddVariantDialogComponent } from '../add-variant-dialog/add-variant-dialog.component';
 import { DeleteShippingDialogComponent } from '../delete-shipping-dialog/delete-shipping-dialog.component';
@@ -57,6 +60,10 @@ export class ProductEditComponent implements OnInit {
 
   productShippingList: any[];
 
+  public editor;
+  public editorContent = 'Please add product details and images';
+  public editorImageId = 'quillImage';
+
   get product() { return this.productVariantForm.get('variants') as FormArray; }
 
   constructor(
@@ -66,6 +73,8 @@ export class ProductEditComponent implements OnInit {
     private dialog: MatDialog,
     private adminService: ProductService,
     private ngZone: NgZone,
+    private previewImageService: ImageUploadPreviewService,
+    private s3UploaderService: S3UploaderService,
     @Inject(DOCUMENT) private document: Document
   ) {
 
@@ -162,6 +171,51 @@ export class ProductEditComponent implements OnInit {
       });
     });
 
+  }
+
+  onEditorCreated(quill) {
+    this.editor = quill;
+
+    let self = this;
+    this.editor.getModule('toolbar').addHandler("image", (image) => {
+      if(image) {
+        var fileInput = document.getElementById(self.editorImageId);
+        fileInput.click();
+      }
+    });
+  }
+
+  addPicture(event) {
+    if(!event.target.files[0]) {
+      return;
+    }
+    let that = this;
+    this.previewImageService.readAsDataUrl(event.target.files[0]).then(function(result) {
+
+      let file = event.target.files[0];
+
+      let image = new Image();
+      image.onload = function(){
+        let width = image.width;
+        let height = image.height;
+
+        that.s3UploaderService.upload({
+          type: 'detail',
+          fileName: file.name,
+          use: 'detail',
+          width: width,
+          height: height
+        }).then((data)=> {
+          let imageUrl = `${data.url}/${data.key}`;
+          that.s3UploaderService.uploadToS3WithoutLoading(file, data).then((data) => {
+            let range = that.editor.getSelection();
+            that.editor.insertEmbed(range.index, 'image', imageUrl);
+          });
+        });
+      };
+      image.src = window.URL.createObjectURL(file);
+
+    });
   }
 
   changeStep(index) {
@@ -360,7 +414,7 @@ export class ProductEditComponent implements OnInit {
     }
     let product = this.productLogisticForm.value;
     product.id = parseInt(this.activatedRoute.snapshot.params["id"]);
-    this.adminService.changeProductCommission(product).then((data) => {
+    this.adminService.changeLogisticShipping(product).then((data) => {
       console.log(data)
     });
   }

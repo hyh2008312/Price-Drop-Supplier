@@ -83,6 +83,8 @@ export class ImageUploadColorComponent implements OnInit {
                 width: 720,
                 height: 720
               }).then((res) => {
+                that.closeAnimate = true;
+                that.closeLoading = true;
                 src = url + '/cdn/product/cc/' + key;
                 that.previewImgFileChange.emit({
                   file: src
@@ -111,8 +113,7 @@ export class ImageUploadColorComponent implements OnInit {
 
   loadingChange(event) {
     if(event) {
-      this.closeAnimate = true;
-      this.closeLoading = true;
+
     }
   }
 

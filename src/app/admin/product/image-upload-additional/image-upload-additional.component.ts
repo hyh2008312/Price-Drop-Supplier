@@ -85,16 +85,11 @@ export class ImageUploadAdditionalComponent implements OnInit {
                 width: 720,
                 height: 720
               }).then((data) => {
-                that.s3UploaderService.formatImage({
-                  cat: 'product',
-                  name: src,
-                  width: 720,
-                  height: 720
-                }).then((res) => {
-                  src = url + '/cdn/product/cc/' + key;
-                  that.previewImgFile.push(src);
-                  that.previewImgFileChange.emit(that.previewImgFile);
-                });
+                that.closeAnimate[length] = true;
+                that.closeLoading[length] = true;
+                src = url + '/cdn/product/cc/' + key;
+                that.previewImgFile.push(src);
+                that.previewImgFileChange.emit(that.previewImgFile);
               });
             }
           });
@@ -118,8 +113,6 @@ export class ImageUploadAdditionalComponent implements OnInit {
 
   loadingChange(event, index) {
     if(event) {
-      this.closeAnimate[index] = true;
-      this.closeLoading[index] = true;
     }
   }
 

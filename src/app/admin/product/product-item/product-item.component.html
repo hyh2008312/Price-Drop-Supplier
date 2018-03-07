@@ -4,7 +4,7 @@
   </div>
   <div class="md-margin-right-2" fxFlex="35" fxLayout="column" fxLayoutAlign="space-between start">
     <div class="sc-product__product-title" >{{product.title}}</div>
-    <div>{{product.variantNum > 2 ? product.variantNum + ' variants': ''}}</div>
+    <div>{{product.variantNum >= 2 ? product.variantNum + ' variants': ''}}</div>
   </div>
   <div class="sc-product__product-id md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">

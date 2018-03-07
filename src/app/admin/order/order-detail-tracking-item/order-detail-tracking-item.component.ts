@@ -13,7 +13,7 @@ import { UserService } from  '../../../shared/services/user/user.service';
 export class OrderDetailTrackingItemComponent implements OnInit {
 
   @Input() order:any = {};
-  @Input() shippingPrice:string = '';
+  @Input() shippingPrice:any = {};
 
   constructor(
 
