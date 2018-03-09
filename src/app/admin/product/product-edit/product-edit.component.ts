@@ -61,7 +61,6 @@ export class ProductEditComponent implements OnInit {
   productShippingList: any[];
 
   public editor;
-  public editorContent = 'Please add product details and images';
   public editorImageId = 'quillImage';
 
   get product() { return this.productVariantForm.get('variants') as FormArray; }
@@ -83,7 +82,7 @@ export class ProductEditComponent implements OnInit {
       mainCategoryId: [null],
       categoryId: [null, Validators.required],
       brandName: [''],
-      description: ['', Validators.required],
+      description: ['Please add product details and images', Validators.required],
       productCategoryId: ['', Validators.required]
     });
 

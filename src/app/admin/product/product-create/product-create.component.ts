@@ -96,7 +96,6 @@ export class ProductCreateComponent implements OnInit {
   colorImageList: any[] = [];
 
   public editor;
-  public editorContent = 'Please add product details and images';
   public editorImageId = 'quillImage';
 
   get shipping() { return this.productForm.get('shippings') as FormArray; }
@@ -125,7 +124,7 @@ export class ProductCreateComponent implements OnInit {
       shippings: this.fb.array([]),
       commission: [0, Validators.required],
       brandName: [''],
-      description: ['', Validators.required],
+      description: ['Please add product details and images', Validators.required],
       length: [0, Validators.required],
       width: [0, Validators.required],
       height: [0, Validators.required],
