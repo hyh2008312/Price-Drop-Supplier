@@ -1,0 +1,65 @@
+<div class="xb-account md-padding-right-2 md-padding-top-2 md-padding-left-2">
+  <div class="xb-account__header"></div>
+  <mat-tab-group color="accent" (selectedTabChange)="changeLists($event)"  [(selectedIndex)]="selectedIndex">
+    <mat-tab label="Approve">
+      <div class="md-margin-top-2" fxLayout="column">
+        <div *ngFor="let item of [1,2,3];let i = index;">
+          <app-admin-user-item [status]="0"></app-admin-user-item>
+        </div>
+        <mat-paginator [length]="length"
+                       [pageSize]="pageSize"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="changePage($event, 0)"
+                       *ngIf="accounts && accounts.length > 0">
+        </mat-paginator>
+        <div class="xb-account__product-none" fxLayout="row" fxLayoutAlign="center center"
+             *ngIf="accounts && accounts.length <= 0">
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <img src="https://media.xberts.com/collector/source/web/pic/pic-no-product.png">
+            <span class="md-dark-secondary">You haven't published any products yet.</span>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Skip">
+      <div class="md-margin-top-2" fxLayout="column">
+        <div *ngFor="let item of [1,2,3];let i = index;">
+          <app-admin-user-item [status]="1"></app-admin-user-item>
+        </div>
+        <mat-paginator [length]="length"
+                       [pageSize]="pageSize"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="changePage($event, 1)"
+                       *ngIf="accounts && accounts.length > 0">
+        </mat-paginator>
+        <div class="xb-account__product-none" fxLayout="row" fxLayoutAlign="center center"
+             *ngIf="accounts && accounts.length <= 0">
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <img src="https://media.xberts.com/collector/source/web/pic/pic-no-product.png">
+            <span class="md-dark-secondary">You haven't published any products yet.</span>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Disapprove">
+      <div class="md-margin-top-2" fxLayout="column">
+        <div *ngFor="let item of [1,2,3];let i = index;">
+          <app-admin-user-item [status]="2"></app-admin-user-item>
+        </div>
+        <mat-paginator [length]="length"
+                       [pageSize]="pageSize"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="changePage($event, 2)"
+                       *ngIf="accounts && accounts.length > 0">
+        </mat-paginator>
+        <div class="xb-account__product-none" fxLayout="row" fxLayoutAlign="center center"
+             *ngIf="accounts && accounts.length <= 0">
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <img src="https://media.xberts.com/collector/source/web/pic/pic-no-product.png">
+            <span class="md-dark-secondary">You haven't published any products yet.</span>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

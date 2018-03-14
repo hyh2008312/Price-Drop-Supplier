@@ -1,0 +1,27 @@
+<div class="xb-account-item" fxLayout="row" fxLayoutAlign="start center">
+  <div fxFlex="40">
+    <div class="xb-account-item__text" fxLayout="row" fxLayoutAlign="start center">First Name
+    </div>
+    <div class="xb-account-item__text" fxLayout="row" fxLayoutAlign="start center">Last Name
+    </div>
+    <div class="xb-account-item__text" fxLayout="row" fxLayoutAlign="start center">Email Address
+    </div>
+    <div class="xb-account-item__text" fxLayout="row" fxLayoutAlign="start center">Country
+    </div>
+  </div>
+  <div fxFlex="50">
+    <div class="xb-account-item__text" fxLayout="row" fxLayoutAlign="start center">Store Name
+    </div>
+    <div class="xb-account-item__text" fxLayout="row" fxLayoutAlign="start center">Target Market
+    </div>
+    <div class="xb-account-item__text" fxLayout="row" fxLayoutAlign="start center">Store URL
+    </div>
+    <div class="xb-account-item__text" fxLayout="row" fxLayoutAlign="start center">Social Media
+    </div>
+  </div>
+  <div fxFlex="10" fxLayout="column" fxLayoutAlign="center center">
+    <button mat-button color="primary" *ngIf="status == 1 || status == 2">Approve</button>
+    <button mat-button color="primary" *ngIf="status == 0 || status == 2">Skip</button>
+    <button mat-button color="primary" *ngIf="status == 0 || status == 1">Disapproved</button>
+  </div>
+</div>

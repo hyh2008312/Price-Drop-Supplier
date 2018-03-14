@@ -26,6 +26,9 @@ const routes: Routes = [
       }, {
         path: 'account',
         loadChildren:'app/admin/account/account.module#AccountModule'
+      }, {
+        path: 'user',
+        loadChildren:'app/admin/user/user.module#UserModule'
       }
     ]
   }, {
