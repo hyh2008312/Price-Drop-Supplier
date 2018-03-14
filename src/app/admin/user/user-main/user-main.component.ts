@@ -91,6 +91,7 @@ export class UserMainComponent implements OnInit {
       page,
       page_size: this.pageSize
     }).then((data) => {
+      this.length = data.count;
       switch ($event.index) {
         case 1:
           this.userSkipped = [...data.results];
