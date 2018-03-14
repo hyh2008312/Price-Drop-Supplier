@@ -11,7 +11,7 @@ import { User } from './user';
 
 @Injectable()
 export class UserService {
-  currentUser: Subject<User> = new BehaviorSubject<User>(null);
+  currentUser: Subject<any> = new BehaviorSubject<any>(null);
   userCategory: Subject<any> = new BehaviorSubject<any>(null);
   pubCategory: Subject<any> = new BehaviorSubject<any>(null);
 

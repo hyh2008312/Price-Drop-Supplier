@@ -43,6 +43,39 @@ export class AccountService {
     return array.join('&');
   }
 
+  getAccountsList(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}systemadmin/manage/user/list/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.handleError);
+  }
+
+  changeAccountsStatus(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}systemadmin/auditing/usr/detail/${params.id}/`;
+
+    return this.http.put(url, params, options)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.handleError);
+  }
 
   private handleError(error: Response | any) {
     let errMsg: string;
