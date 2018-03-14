@@ -4,7 +4,7 @@
       <mat-tab label="Pending">
         <div class="md-margin-top-2" fxLayout="column">
           <div *ngFor="let item of userPending;let i = index;">
-            <app-admin-user-item [status]="0" [item]="item" [index]="i" [userChange]="userChange($event)"></app-admin-user-item>
+            <app-admin-user-item [status]="0" [item]="item" [index]="i" (userChange)="userChange($event)"></app-admin-user-item>
           </div>
           <mat-paginator [length]="length"
                          [pageSize]="pageSize"
@@ -21,10 +21,10 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Skip">
+      <mat-tab label="Skipped">
         <div class="md-margin-top-2" fxLayout="column">
           <div *ngFor="let item of userSkipped;let i = index;">
-            <app-admin-user-item [status]="1" [item]="item" [index]="i" [userChange]="userChange($event)"></app-admin-user-item>
+            <app-admin-user-item [status]="1" [item]="item" [index]="i" (userChange)="userChange($event)"></app-admin-user-item>
           </div>
           <mat-paginator [length]="length"
                          [pageSize]="pageSize"
@@ -41,10 +41,10 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Approve">
+      <mat-tab label="Approved">
         <div class="md-margin-top-2" fxLayout="column">
           <div *ngFor="let item of userApproved;let i = index;">
-            <app-admin-user-item [status]="2" [item]="item" [index]="i" [userChange]="userChange($event)"></app-admin-user-item>
+            <app-admin-user-item [status]="2" [item]="item" [index]="i" (userChange)="userChange($event)"></app-admin-user-item>
           </div>
           <mat-paginator [length]="length"
                          [pageSize]="pageSize"
@@ -61,10 +61,10 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Disapprove">
+      <mat-tab label="Disapproved">
         <div class="md-margin-top-2" fxLayout="column">
           <div *ngFor="let item of userDisapproved;let i = index;">
-            <app-admin-user-item [status]="0" [item]="item" [index]="i" [userChange]="userChange($event)"></app-admin-user-item>
+            <app-admin-user-item [status]="3" [item]="item" [index]="i" (userChange)="userChange($event)"></app-admin-user-item>
           </div>
           <mat-paginator [length]="length"
                          [pageSize]="pageSize"

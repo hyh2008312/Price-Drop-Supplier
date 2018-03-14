@@ -29,8 +29,8 @@ export class UserMainComponent implements OnInit {
 
   // MatPaginator Inputs
   length:number = 0;
-  pageSize = 12;
-  pageSizeOptions = [12];
+  pageSize = 20;
+  pageSizeOptions = [20];
 
   // MatPaginator Output
   changePage(event, type) {
@@ -113,44 +113,60 @@ export class UserMainComponent implements OnInit {
       case 0:
         switch(event.event) {
           case 'Skipped':
-            this.userSkipped.splice(event.index,1);
+            this.userPending.splice(event.index,1);
             break;
           case 'Approved':
-            this.userApproved.splice(event.index,1);
+            this.userPending.splice(event.index,1);
             break;
           case 'Disapproved':
-            this.userApproved.splice(event.index,1);
+            this.userPending.splice(event.index,1);
             break;
+        }
+        if(this.userPending.length == 0) {
+          this.userPendingIndex++;
+          this.changeLists({index:0});
         }
         break;
       case 1:
         switch(event.event) {
           case 'Approved':
-            this.userApproved.splice(event.index,1);
+            this.userSkipped.splice(event.index,1);
             break;
           case 'Disapproved':
-            this.userApproved.splice(event.index,1);
+            this.userSkipped.splice(event.index,1);
             break;
+        }
+        if(this.userSkipped.length == 0) {
+          this.userSkippedIndex++;
+          this.changeLists({index:0});
         }
         break;
       case 2:
         switch(event.event) {
           case 'Skipped':
-            this.userSkipped.splice(event.index,1);
+            this.userApproved.splice(event.index,1);
             break;
           case 'Disapproved':
             this.userApproved.splice(event.index,1);
             break;
         }
+        if(this.userApproved.length == 0) {
+          this.userApprovedIndex++;
+          this.changeLists({index:0});
+        }
         break;
       case 3:
         switch(event.event) {
           case 'Skipped':
-            this.userSkipped.splice(event.index,1);
+            this.userDisapproved.splice(event.index,1);
             break;
           case 'Approved':
-            this.userApproved.splice(event.index,1);
+            this.userDisapproved.splice(event.index,1);
             break;
+        }
+        if(this.userDisapproved.length == 0) {
+          this.userDisapprovedIndex++;
+          this.changeLists({index:0});
         }
         break;
     }

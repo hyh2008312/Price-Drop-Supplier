@@ -1,5 +1,8 @@
-<div class="xb-account-item" fxLayout="row" fxLayoutAlign="start center">
+<div class="xb-account-item" fxLayout="row" fxLayoutAlign="start start">
   <div fxFlex="40">
+    <div class="xb-account-item__text" fxLayout="row" fxLayoutAlign="start center">
+      <span class="xb-bold">id:&nbsp;&nbsp;&nbsp;</span>{{item.id}}
+    </div>
     <div class="xb-account-item__text" fxLayout="row" fxLayoutAlign="start center">
       <span class="xb-bold">First Name:&nbsp;&nbsp;&nbsp;</span>{{item.firstName}}
     </div>
@@ -29,7 +32,7 @@
   </div>
   <div fxFlex="10" fxLayout="column" fxLayoutAlign="center center">
     <button mat-button color="primary" *ngIf="status == 0 || status == 1 || status == 3" (click)="approved()">Approve</button>
-    <button mat-button color="primary" *ngIf="status == 0 || status == 2 || status == 3" (click)="skipped()">Skip</button>
-    <button mat-button color="primary" *ngIf="status == 0 || status == 1 || status == 2" (click)="disapproved()">Disapproved</button>
+    <button mat-button color="primary" *ngIf="status == 0" (click)="skipped()">Skip</button>
+    <button mat-button color="primary" *ngIf="status == 0 || status == 1 || status == 2" (click)="disapproved()">Disapprove</button>
   </div>
 </div>
