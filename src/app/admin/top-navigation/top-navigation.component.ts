@@ -3,6 +3,7 @@ import {Router, ActivatedRoute, NavigationEnd} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 
 import {AdminService} from '../admin.service';
+import {UserService} from '../../shared/services/user/user.service';
 
 @Component({
   selector: 'app-top-navigation',
@@ -92,9 +93,24 @@ export class TopNavigationComponent implements OnInit {
 
   isAccountNavigation: boolean = false;
 
-  constructor(private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private adminService: AdminService) {
+  constructor(
+      private router: Router,
+      private activatedRoute: ActivatedRoute,
+      private adminService: AdminService,
+      private useService: UserService
+  ) {
+    this.useService.currentUser.subscribe((data) => {
+      if(data) {
+        if(data.isStaff && data.isSuperuser) {
+          this.contents.push({
+            id: 8,
+            text: '用户审核',
+            router: './user',
+            isActive: false
+          })
+        }
+      }
+    })
   }
 
   ngOnInit(): void {
