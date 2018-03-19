@@ -31,7 +31,6 @@ export class UserItemComponent implements OnInit {
       id: self.item.id,
       status: 'Approved'
     }).then((data) => {
-      console.log(data);
       self.userChange.emit({
         index: this.index,
         user : data,
