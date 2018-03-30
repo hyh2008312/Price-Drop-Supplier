@@ -682,6 +682,10 @@ export class ProductDraftEditComponent implements OnInit {
     product.shippings = shippings;
     product.attributes = this.addProductWithAttributes();
 
+    if(product.description == null) {
+      product.description = '';
+    }
+
     this.adminService.saveDraft(product).then((data) => {
       self.ngZone.runOutsideAngular(() => {
         self.document.querySelector('html').style.top = '0';
