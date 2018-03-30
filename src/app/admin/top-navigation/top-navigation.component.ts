@@ -1,6 +1,5 @@
-import {Input, Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute, NavigationEnd} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
 
 import {AdminService} from '../admin.service';
 import {UserService} from '../../shared/services/user/user.service';

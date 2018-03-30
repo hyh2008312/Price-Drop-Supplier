@@ -6,7 +6,6 @@ import { MatDialog } from '@angular/material';
 
 import { ProductService } from '../product.service';
 import { UserService } from  '../../../shared/services/user/user.service';
-import { ConstantService } from  '../../../shared/services/constant/constant.service';
 
 import { ImageUploadPreviewService } from "../../../shared/components/image-upload-preview/image-upload-preview.service";
 import { S3UploaderService } from "../../../shared/services/s3-upload/s3-upload.service";
@@ -27,8 +26,6 @@ export class ProductEditComponent implements OnInit {
 
   step: number = 0;
   status: any = false;
-
-  productId: any;
 
   categoryList: any = [];
   subCategoryList: any;
@@ -65,6 +62,10 @@ export class ProductEditComponent implements OnInit {
 
   get product() { return this.productVariantForm.get('variants') as FormArray; }
 
+  isSuperUser: boolean = false;
+
+  sub: any;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -74,8 +75,15 @@ export class ProductEditComponent implements OnInit {
     private ngZone: NgZone,
     private previewImageService: ImageUploadPreviewService,
     private s3UploaderService: S3UploaderService,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    private userService :UserService
   ) {
+
+    this.sub = this.userService.currentUser.subscribe((data) => {
+      if(data && data.isStaff && data.isSuperuser) {
+        this.isSuperUser = true;
+      }
+    });
 
     this.productBasicForm = this.fb.group({
       title: ['', Validators.required],
@@ -83,7 +91,8 @@ export class ProductEditComponent implements OnInit {
       categoryId: [null, Validators.required],
       brandName: [''],
       description: ['Please add product details and images', Validators.required],
-      productCategoryId: ['', Validators.required]
+      productCategoryId: ['', Validators.required],
+      purchaseLink: [' ', Validators.required]
     });
 
     this.productVariantForm = this.fb.group({
@@ -117,7 +126,8 @@ export class ProductEditComponent implements OnInit {
         categoryId: data.productCategories[0].categoryId,
         brandName: data.brandName,
         description: data.description,
-        productCategoryId: data.productCategories[0].id
+        productCategoryId: data.productCategories[0].id,
+        purchaseLink: data.purchaseLink
       });
 
       this.adminService.getCategoryList().then((value) => {
@@ -170,6 +180,10 @@ export class ProductEditComponent implements OnInit {
       });
     });
 
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   onEditorCreated(quill) {

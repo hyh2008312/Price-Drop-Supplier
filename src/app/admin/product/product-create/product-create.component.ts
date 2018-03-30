@@ -6,7 +6,6 @@ import { MatDialog } from '@angular/material';
 
 import { ProductService } from '../product.service';
 import { UserService } from  '../../../shared/services/user/user.service';
-import { ConstantService } from  '../../../shared/services/constant/constant.service';
 
 import { MatChipInputEvent } from '@angular/material';
 import { ENTER } from '@angular/cdk/keycodes';
@@ -80,7 +79,6 @@ export class ProductCreateComponent implements OnInit {
   variantAddedList: any[] = [];
 
   productForm : FormGroup;
-  productForm1: FormGroup;
 
   countries: Object[];
 
@@ -102,6 +100,10 @@ export class ProductCreateComponent implements OnInit {
   get product() { return this.productForm.get('variants') as FormArray; }
   get attributes() { return this.productForm.get('attributes') as FormArray; }
 
+  isSuperUser: boolean = false;
+
+  sub: any;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -111,7 +113,8 @@ export class ProductCreateComponent implements OnInit {
     private ngZone: NgZone,
     private previewImageService: ImageUploadPreviewService,
     private s3UploaderService: S3UploaderService,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    private userService :UserService
   ) {
 
     this.productForm = this.fb.group({
@@ -133,12 +136,23 @@ export class ProductCreateComponent implements OnInit {
       originCountryId: [null, Validators.required],
       isPowder: [false, Validators.required],
       isLiquid: [false, Validators.required],
-      isBattery: [false, Validators.required]
+      isBattery: [false, Validators.required],
+      purchaseLink: [' ', Validators.required]
     });
 
     this.addProductList();
     this.addShippingList();
 
+    this.sub = this.userService.currentUser.subscribe((data) => {
+      if(data && data.isStaff && data.isSuperuser) {
+        this.isSuperUser = true;
+      }
+    });
+
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   onEditorCreated(quill) {

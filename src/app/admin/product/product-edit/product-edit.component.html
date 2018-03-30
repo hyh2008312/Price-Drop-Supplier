@@ -94,6 +94,16 @@
             <div class="md-margin-top-1"><span class="xb-bold">·</span>Products width high quality images can get the most sales.</div>
           </div>
         </div>
+        <div class="sc-product__create-container-1" *ngIf="isSuperUser">
+          <div class="sc-product__create-title">
+            Purchase Link
+          </div>
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <input type="text" matInput placeholder="Purchase Link" formControlName="purchaseLink">
+            </mat-form-field>
+          </div>
+        </div>
         <div class="sc-product__create-margin-top" fxLayout="row" fxLayoutAlign="center center">
           <button mat-raised-button color="primary" type="button" (click)="changeProductBasic()">
             SAVE CHANGES

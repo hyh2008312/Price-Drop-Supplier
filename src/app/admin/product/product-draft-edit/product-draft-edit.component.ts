@@ -6,7 +6,6 @@ import { MatDialog } from '@angular/material';
 
 import { ProductService } from '../product.service';
 import { UserService } from  '../../../shared/services/user/user.service';
-import { ConstantService } from  '../../../shared/services/constant/constant.service';
 
 import { ImageUploadPreviewService } from "../../../shared/components/image-upload-preview/image-upload-preview.service";
 import { S3UploaderService } from "../../../shared/services/s3-upload/s3-upload.service";
@@ -102,6 +101,10 @@ export class ProductDraftEditComponent implements OnInit {
   get product() { return this.productForm.get('variants') as FormArray; }
   get attributes() { return this.productForm.get('attributes') as FormArray; }
 
+  isSuperUser: boolean = false;
+
+  sub: any;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -111,8 +114,15 @@ export class ProductDraftEditComponent implements OnInit {
     private ngZone: NgZone,
     private previewImageService: ImageUploadPreviewService,
     private s3UploaderService: S3UploaderService,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    private userService :UserService
   ) {
+
+    this.sub = this.userService.currentUser.subscribe((data) => {
+      if(data && data.isStaff && data.isSuperuser) {
+        this.isSuperUser = true;
+      }
+    });
 
     this.productForm = this.fb.group({
       title: ['', Validators.required],
@@ -133,7 +143,8 @@ export class ProductDraftEditComponent implements OnInit {
       originCountryId: [null, Validators.required],
       isPowder: [false, Validators.required],
       isLiquid: [false, Validators.required],
-      isBattery: [false, Validators.required]
+      isBattery: [false, Validators.required],
+      purchaseLink: [' ', Validators.required]
     });
 
     let id = this.activatedRoute.snapshot.params['id'];
@@ -155,7 +166,8 @@ export class ProductDraftEditComponent implements OnInit {
         originCountryId: data.originCountry? data.originCountry.id: null,
         isPowder: data.isPowder,
         isLiquid: data.isLiquid,
-        isBattery: data.isBattery
+        isBattery: data.isBattery,
+        purchaseLink: data.purchaseLink
       });
 
       this.adminService.getCategoryList().then((value) => {
@@ -194,6 +206,12 @@ export class ProductDraftEditComponent implements OnInit {
 
     });
   }
+
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
 
   onEditorCreated(quill) {
     this.editor = quill;
