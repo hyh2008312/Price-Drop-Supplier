@@ -167,7 +167,7 @@ export class ProductDraftEditComponent implements OnInit {
         isPowder: data.isPowder,
         isLiquid: data.isLiquid,
         isBattery: data.isBattery,
-        purchaseLink: data.purchaseLink
+        purchaseLink: data.purchaseLink == null || data.perchaseLink == ''? ' ': data.purchaseLink
       });
 
       this.adminService.getCategoryList().then((value) => {

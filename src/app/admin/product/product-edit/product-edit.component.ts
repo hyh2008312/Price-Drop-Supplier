@@ -127,7 +127,7 @@ export class ProductEditComponent implements OnInit {
         brandName: data.brandName,
         description: data.description,
         productCategoryId: data.productCategories[0].id,
-        purchaseLink: data.purchaseLink
+        purchaseLink: data.purchaseLink == null || data.perchaseLink == ''? ' ': data.purchaseLink
       });
 
       this.adminService.getCategoryList().then((value) => {
