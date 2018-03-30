@@ -9,6 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "start:dev": "ng serve",
     "start:prod": "ng serve --env=prod",
     "postinstall": "ng build --prod --env=prod -aot"
   },
