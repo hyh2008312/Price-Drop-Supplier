@@ -1,0 +1,75 @@
+@import "../../styles/utils/_index";
+@import "../../styles/_variables";
+
+.sc-promote{
+
+  &__title{
+    margin: 40px 16px 24px;
+    font-size: 24px;
+    @include media();
+  }
+
+  &__promote{
+    position: relative;
+
+    &-bg{
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    &-list{
+      padding: 0 16px;
+      background-color: $whiteColor;
+    }
+
+    &-buttons{
+      position: absolute;
+      right: 16px;
+      top: 8px;
+      z-index: 10;
+    }
+
+    &-navigation{
+      padding: 0 16px;
+      height: 54px;
+      background-color: $lightGrayColor;
+    }
+
+
+    &-none{
+      padding: 96px 0;
+      background-color: $whiteColor;
+      border-radius: 4px;
+      span{
+        margin-top: 16px;
+        @include media();
+      }
+      i{
+        font-size: 96px;
+        line-height: 96px;
+        color: rgba(0,0,0,.38);
+      }
+    }
+
+    &-item{
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0,0,0,.12);
+    }
+
+    &-title-1{
+      font-size: 16px;
+      @include media();
+      color: rgba(0,0,0,.87);
+    }
+
+    &-width{
+      width: 138px;
+    }
+
+    &-text{
+      font-size: 12px;
+    }
+  }
+
+}
+

@@ -9,26 +9,29 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: 'app/admin/dashboard/dashboard.module#DashboardModule'
+        loadChildren: './dashboard/dashboard.module#DashboardModule'
       },
       {
         path: 'product',
-        loadChildren: 'app/admin/product/product.module#ProductModule'
+        loadChildren: './product/product.module#ProductModule'
       }, {
         path: 'order',
-        loadChildren: 'app/admin/order/order.module#OrderModule'
+        loadChildren: './order/order.module#OrderModule'
+      }, {
+        path: 'promote',
+        loadChildren: './promote/promote.module#PromoteModule'
       }, {
         path: 'customerService',
-        loadChildren: 'app/admin/customer-service/customer-service.module#CustomerServiceModule'
+        loadChildren: './customer-service/customer-service.module#CustomerServiceModule'
       }, {
         path: 'report',
-        loadChildren: 'app/admin/report/report.module#ReportModule'
+        loadChildren: './report/report.module#ReportModule'
       }, {
         path: 'account',
-        loadChildren:'app/admin/account/account.module#AccountModule'
+        loadChildren:'./account/account.module#AccountModule'
       }, {
         path: 'user',
-        loadChildren:'app/admin/user/user.module#UserModule'
+        loadChildren:'./user/user.module#UserModule'
       }
     ]
   }, {
