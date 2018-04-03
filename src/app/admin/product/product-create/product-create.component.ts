@@ -221,7 +221,6 @@ export class ProductCreateComponent implements OnInit {
     }));
   }
 
-
   changeShippingMethod($event, p) {
     this.adminService.getShippingList($event).then((data) => {
       p.shippingMethodList = data;

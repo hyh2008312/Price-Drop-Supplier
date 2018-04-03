@@ -1,33 +1,78 @@
-<div class="sc-promote__promote-item" fxLayout="row" fxLayoutAlign="start stretch">
-  <div class="sc-promote__promote-width" fxFlex="none" fxLayout="column" fxLayoutAlign="center start">
+<div class="sc-promote__promote-item" fxLayout="row" fxLayoutAlign="start stretch" *ngIf="status == 0">
+  <div fxFlex="25" fxLayout="column" fxLayoutAlign="center start">
     <div class="sc-promote__promote-text">{{promote.title}}</div>
-  </div>
-  <div class="md-margin-right-2" fxFlex="10"
-       fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{promote.type}}</div>
-  </div>
-  <div class="md-margin-right-2" fxFlex="10"
-       fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{promote.status}}</div>
-  </div>
-  <div class="md-margin-right-2" fxFlex="25"
-       fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text" fxLayout="row" fxLayoutAlign="start start">
-      <span class="xb-bold">From</span><span>2018.10.30, 12:00AM</span>
-    </div>
-    <div class="sc-promote__promote-text" fxLayout="row" fxLayoutAlign="start start">
-      <span class="xb-bold">To</span><span>2018.10.30, 12:00AM</span>
-    </div>
   </div>
   <div class="md-margin-right-2" fxFlex="15"
        fxLayout="column" fxLayoutAlign="center center">
+    <div class="sc-promote__promote-text">{{promote.promotionType}}</div>
+  </div>
+  <div class="md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="center center">
+    <div class="sc-promote__promote-text">{{promote.promotionStatus}}</div>
+  </div>
+  <div class="md-margin-right-2" fxFlex="25"
+       fxLayout="column" fxLayoutAlign="center center">
     <div>
-      Pending
+      <div class="sc-promote__promote-text" fxLayout="row" fxLayoutAlign="start start">
+        <span class="sc-promote__promote-width-2 md-align-right xb-bold">From</span>
+        <span class="md-margin-left-1">{{promote.startTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
+      </div>
+      <div class="sc-promote__promote-text md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
+        <span class="sc-promote__promote-width-2 md-align-right xb-bold">To</span>
+        <span class="md-margin-left-1">{{promote.endTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
+      </div>
     </div>
   </div>
-  <div class="sc-promote__promote-width-1"
-       fxLayout="column" fxLayoutAlign="center center" fxFlex="10">
-    <button mat-button color="primary">Edit</button>
-    <button mat-button color="primary">Disabled</button>
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="column" fxLayoutAlign="center center">
+    <div>
+      <div class="sc-promote__promote-text" fxLayout="row" fxLayoutAlign="start start">
+        <span class="sc-promote__promote-width-3 md-align-right xb-bold">Total Sales</span>
+        <span class="md-margin-left-1">$100.00</span>
+      </div>
+    </div>
+  </div>
+  <div class="sc-promote__promote-width-1 sc__accent-dark"
+       fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
+    <button mat-raised-button color="primary">Edit</button>
+    <div class="md-margin-top-1"></div>
+    <button mat-raised-button color="accent">Disabled</button>
+  </div>
+</div>
+<div class="sc-promote__promote-item" fxLayout="row" fxLayoutAlign="start stretch" *ngIf="status  > 0">
+  <div fxFlex="25" fxLayout="column" fxLayoutAlign="center start">
+    <div class="sc-promote__promote-text">{{promote.title}}</div>
+  </div>
+  <div class="md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="center center">
+    <div class="sc-promote__promote-text">{{promote.promotionType}}</div>
+  </div>
+  <div class="md-margin-right-2" fxFlex="25"
+       fxLayout="column" fxLayoutAlign="center center">
+    <div>
+      <div class="sc-promote__promote-text" fxLayout="row" fxLayoutAlign="start start">
+        <span class="sc-promote__promote-width-2 md-align-right xb-bold">From</span>
+        <span class="md-margin-left-1">{{promote.startTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
+      </div>
+      <div class="sc-promote__promote-text md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
+        <span class="sc-promote__promote-width-2 md-align-right xb-bold">To</span>
+        <span class="md-margin-left-1">{{promote.endTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
+      </div>
+    </div>·1
+  </div>
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="column" fxLayoutAlign="center center">
+    <div>
+      <div class="sc-promote__promote-text" fxLayout="row" fxLayoutAlign="start start">
+        <span class="sc-promote__promote-width-3 md-align-right xb-bold">Total Sales</span>
+        <span class="md-margin-left-1">$100.00</span>
+      </div>
+    </div>
+  </div>
+  <div class="sc-promote__promote-width-1 sc__accent-dark"
+       fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
+    <button mat-raised-button color="primary">Edit</button>
+    <div class="md-margin-top-1"></div>
+    <button mat-raised-button color="accent">Disable</button>
   </div>
 </div>

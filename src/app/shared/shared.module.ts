@@ -72,7 +72,8 @@ import {
   MatCheckboxModule,
   MatPaginatorModule,
   MatSnackBarModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatDatepickerModule
 } from '@angular/material';
 
 import { GoogleClientId, FacebookClientId } from '../config/app.api';
@@ -112,7 +113,8 @@ let providers = {
     MatPaginatorModule,
     MatSnackBarModule,
     Angular2SocialLoginModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDatepickerModule
   ],
   declarations: [
     SafeHtmlPipe,
@@ -205,7 +207,8 @@ let providers = {
     MatCheckboxModule,
     MatPaginatorModule,
     MatSnackBarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDatepickerModule
   ],
   providers: [
     FollowService,

@@ -41,7 +41,7 @@ export class PromoteService {
     return array.join('&');
   }
 
-  productCreate(product:any): Promise<any> {
+  promotionCreate(product:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -50,24 +50,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/create/`;
-
-    return this.http.post(url, product, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  productDraftCreate(product:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/draft/create/`;
+    const url = `${this.baseUrl.url}product/promotion/create/`;
 
     return this.http.post(url, product, options)
       .toPromise()
@@ -92,74 +75,6 @@ export class PromoteService {
       .catch(this.handleError);
   }
 
-  publishDraft(product:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/draft/submit/${product.id}/`;
-
-    return this.http.put(url, product, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  saveDraft(product:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/draft/save/${product.id}/`;
-
-    return this.http.put(url, product, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  addDraft(product:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/draft/add/${product.id}/`;
-
-    return this.http.put(url, product, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  publishProduct(product:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/updown/${product.id}/?${this.serializeParams(product)}`;
-
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
   getPromotionList(params:any): Promise<any> {
 
     let headers = new Headers({
@@ -177,7 +92,24 @@ export class PromoteService {
       .catch(this.handleError);
   }
 
-  getProductDetail(params:any): Promise<any> {
+  getPromotionProductList(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/list/promotion/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  getPromotionDetail(params:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -187,6 +119,23 @@ export class PromoteService {
     let options = new RequestOptions({headers:headers});
 
     const url = `${this.baseUrl.url}product/supplier/detail/${params.id}/`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  getCategoryList(): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/list/category/`;
 
     return this.http.get(url, options)
       .toPromise()

@@ -5,15 +5,15 @@ import { PromoteService } from '../promote.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 
 @Component({
-  selector: 'app-promote-promote-item',
-  templateUrl: './promote-item.component.html',
+  selector: 'app-promote-product-item',
+  templateUrl: './promote-product-item.component.html',
   styleUrls: ['../_promote.scss']
 })
 
-export class PromoteItemComponent implements OnInit {
+export class ProductProductItemComponent implements OnInit {
 
   @Input() status: number = 0;
-  @Input() promote: any = {};
+  @Input() promote: any={};
   @Input() index: number = 0;
   @Output() productChange = new EventEmitter<any>();
 

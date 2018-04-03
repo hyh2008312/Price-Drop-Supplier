@@ -15,7 +15,7 @@
       <mat-tab label="All Campaigns">
         <div class="md-margin-top-2">
           <div class="sc-promote__promote-bg">
-            <app-promote-product-title [status]="0" ></app-promote-product-title>
+            <app-admin-promote-title [status]="0" ></app-admin-promote-title>
             <div class="sc-promote__promote-list" *ngFor="let item of promoteAll;let i = index;">
               <app-promote-promote-item [status]="0" [index]="i" (productChange)="productChange($event)" [promote]="item"></app-promote-promote-item>
             </div>
@@ -38,7 +38,7 @@
       <mat-tab label="Scheduled">
         <div class="md-margin-top-2">
           <div class="sc-promote__promote-bg">
-            <app-promote-product-title [status]="1" ></app-promote-product-title>
+            <app-admin-promote-title [status]="1" ></app-admin-promote-title>
             <div class="sc-promote__promote-list" *ngFor="let item of promoteScheduled;let i = index;">
               <app-promote-promote-item [status]="1" [index]="i" (productChange)="productChange($event)" [promote]="item"></app-promote-promote-item>
             </div>
@@ -61,7 +61,7 @@
       <mat-tab label="Ongoing">
         <div class="md-margin-top-2">
           <div class="sc-promote__promote-bg">
-            <app-promote-product-title [status]="2" ></app-promote-product-title>
+            <app-admin-promote-title [status]="2" ></app-admin-promote-title>
             <div class="sc-promote__promote-list" *ngFor="let item of promoteOngoing;let i = index;">
               <app-promote-promote-item [status]="2" [index]="i" (productChange)="productChange($event)" [promote]="item"></app-promote-promote-item>
             </div>
@@ -84,7 +84,7 @@
       <mat-tab label="Ended">
         <div class="md-margin-top-2">
           <div class="sc-promote__promote-bg">
-            <app-promote-product-title [status]="3" ></app-promote-product-title>
+            <app-admin-promote-title [status]="3" ></app-admin-promote-title>
             <div class="sc-promote__promote-list" *ngFor="let item of promoteEnded;let i = index;" >
               <app-promote-promote-item [status]="3" [index]="i" (productChange)="productChange($event)" [promote]="item"></app-promote-promote-item>
             </div>

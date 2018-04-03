@@ -33,6 +33,12 @@
       padding: 0 16px;
       height: 54px;
       background-color: $lightGrayColor;
+
+      &-1{
+        padding: 0 12px;
+        background-color: $lightWhiteColor;
+        height: 40px;
+      }
     }
 
 
@@ -54,6 +60,11 @@
     &-item{
       padding: 16px 0;
       border-bottom: 1px solid rgba(0,0,0,.12);
+
+      &-1{
+        padding: 16px 12px;
+        border-bottom: 1px solid rgba(0,0,0,.12);
+      }
     }
 
     &-title-1{
@@ -62,8 +73,25 @@
       color: rgba(0,0,0,.87);
     }
 
+    &-title-2{
+      font-size: 12px;
+      @include media();
+    }
+
     &-width{
       width: 138px;
+    }
+
+    &-width-1{
+      width: 88px;
+    }
+
+    &-width-2{
+      width: 32px;
+    }
+
+    &-width-3{
+      width: 80px;
     }
 
     &-text{
@@ -71,5 +99,121 @@
     }
   }
 
+  &__create{
+    &-text{
+      padding: 0 16px;
+    }
+
+    &-bg{
+      padding: 40px 16px;
+      border-radius: 4px;
+      background-color: $whiteColor;
+    }
+
+    &-width{
+      width: 140px;
+    }
+  }
+
 }
 
+.sc-promotion-dialog{
+
+  padding: 28px 40px;
+  max-width: 640px;
+  width: 100%;
+  position: relative;
+  background-color: $whiteColor;
+  border-radius: 4px;
+  @include xb-xs-screen{
+    padding: 16px 16px;
+  }
+
+  &__close{
+    position: absolute;
+    left: calc(100% - 36px);
+    top: 12px;
+    color: $blackColor;
+    cursor: pointer;
+    i{
+      font-size: 24px;
+      line-height: 24px;
+      @include media();
+    }
+  }
+
+  &__title{
+    font-size: 24px;
+    line-height: 28px;
+    @include media();
+  }
+
+  &__width{
+    width: 172px;
+  }
+
+  &__search{
+    border-bottom: 2px solid $blackColor;
+    height: 32px;
+    margin: 16px 0;
+    position: relative;
+
+    >i{
+      margin: 0 16px 0 0;
+      color: $blackColor;
+    }
+
+    >input{
+      border: none;
+      background-color: transparent;
+      width: 150px;
+    }
+
+    &-close{
+      position: absolute;
+      cursor: pointer;
+      right: 0;
+      top: 50%;
+      @include transform(translateY(-50%));
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      background-color: rgba(0,0,0,.54);
+      >i{
+        font-size: 12px;
+        line-height: 12px;
+        color: $whiteColor;
+      }
+    }
+  }
+
+  &__bg{
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+}
+
+
+.xb-pagination{
+  line-height: 32px;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 4px;
+  padding: 0 12px;
+  font-size: 12px;
+  color: rgba(0,0,0,.87);
+  cursor: pointer;
+
+  &.active{
+    background-color: #000;
+    border: 1px solid #000;
+    color: $whiteColor;
+  }
+
+  &:hover{
+    background-color: #000;
+    border: 1px solid #000;
+    color: $whiteColor;
+  }
+
+}
