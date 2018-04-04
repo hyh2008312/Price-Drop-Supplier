@@ -59,23 +59,40 @@ export class SelectProductDialogComponent implements OnInit {
   }
 
   getPromoteProduct() {
-    let param = {
-      cat: this.cat,
-      q: this.searchKey,
-      qt: 'product',
-      pid: this.data.promotionId,
-      page: this.page,
-      pageSize: this.pageSize
-    };
+    let param: any = {};
+    if(this.searchKey != '') {
+      param = {
+        cat: this.cat,
+        q: this.searchKey,
+        qt: 'product',
+        pid: this.data.promotionId,
+        page: this.page,
+        page_size: this.pageSize
+      };
+    } else {
+      param = {
+        cat: this.cat,
+        pid: this.data.promotionId,
+        page: this.page,
+        page_size: this.pageSize
+      }
+    }
+
 
     this.promoteService.getPromotionProductList(param).then((data) => {
       this.length = data.count;
-      this.promotionProduct = data;
+      this.promotionProduct = data.results;
     });
   }
 
   changePage($event) {
     this.page = $event.page;
     this.getPromoteProduct();
+  }
+
+  promoteChanges(event) {
+    if(event.event == 'changed') {
+      this.promotionProduct.splice(event.index,1);
+    }
   }
 }

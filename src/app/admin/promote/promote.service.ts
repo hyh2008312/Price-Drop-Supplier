@@ -58,7 +58,7 @@ export class PromoteService {
       .catch(this.handleError);
   }
 
-  addProduct(product:any): Promise<any> {
+  addPromotionProduct(promotion:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -67,9 +67,9 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/add/${product.id}/`;
+    const url = `${this.baseUrl.url}product/promotion/add/${promotion.promoteId}/`;
 
-    return this.http.put(url, product, options)
+    return this.http.put(url, promotion, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
@@ -84,9 +84,26 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}promotion/detail/${promotion.id}/`;
+    const url = `${this.baseUrl.url}product/promotion/detail/${promotion.id}/`;
 
     return this.http.delete(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  endPromotion(promotion:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/promotion/detail/${promotion.id}/`;
+
+    return this.http.put(url, promotion, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
@@ -135,7 +152,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/supplier/detail/${params.id}/`;
+    const url = `${this.baseUrl.url}product/promotion/detail/${params.id}/`;
 
     return this.http.get(url, options)
       .toPromise()

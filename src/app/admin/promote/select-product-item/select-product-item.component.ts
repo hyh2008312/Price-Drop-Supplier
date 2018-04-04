@@ -11,6 +11,8 @@ import { PromoteService } from '../promote.service';
 export class SelectProductItemComponent implements OnInit {
 
   @Input() promote: any={};
+  @Input() index: any = 0;
+  @Input() promoteId: any;
   @Output() promoteChange = new EventEmitter<any>();
 
   currency: string = 'USD';
@@ -21,6 +23,21 @@ export class SelectProductItemComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  selectPromotionProduct() {
+    let params: any ={};
+    params.promoteId = this.promoteId;
+    params.pid = this.promote.id;
+
+    this.promoteService.addPromotionProduct(params).then(((data) => {
+      this.promote = data;
+      this.promoteChange.emit({
+        index: this.index,
+        promote : data,
+        event: 'changed'
+      });
+    }));
   }
 
 }

@@ -14,11 +14,11 @@
        fxLayout="column" fxLayoutAlign="center center">
     <div>
       <div class="sc-promote__promote-text" fxLayout="row" fxLayoutAlign="start start">
-        <span class="sc-promote__promote-width-2 md-align-right xb-bold">From</span>
+        <span class="sc-promote__promote-width-2 md-align-right xb-bold" fxFlex="none">From</span>
         <span class="md-margin-left-1">{{promote.startTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
       </div>
       <div class="sc-promote__promote-text md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
-        <span class="sc-promote__promote-width-2 md-align-right xb-bold">To</span>
+        <span class="sc-promote__promote-width-2 md-align-right xb-bold" fxFlex="none">To</span>
         <span class="md-margin-left-1">{{promote.endTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
       </div>
     </div>
@@ -32,11 +32,15 @@
       </div>
     </div>
   </div>
-  <div class="sc-promote__promote-width-1 sc__accent-dark"
+  <div class="sc-promote__promote-width-4 sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
-    <button mat-raised-button color="primary">Edit</button>
+    <button mat-raised-button color="primary" *ngIf="promote.promotionStatus == 'Scheduled'">Edit</button>
+    <button mat-raised-button color="primary" *ngIf="promote.promotionStatus == 'Ongoing'">View & Edit</button>
+    <button mat-raised-button color="primary" *ngIf="promote.promotionStatus == 'Ended'">View</button>
     <div class="md-margin-top-1"></div>
-    <button mat-raised-button color="accent">Disabled</button>
+    <button mat-raised-button color="accent" *ngIf="promote.promotionStatus == 'Ongoing'">Disable</button>
+    <button mat-raised-button color="accent" *ngIf="promote.promotionStatus == 'Scheduled'"
+      (click)="delete()">Delete</button>
   </div>
 </div>
 <div class="sc-promote__promote-item" fxLayout="row" fxLayoutAlign="start stretch" *ngIf="status  > 0">
@@ -51,11 +55,11 @@
        fxLayout="column" fxLayoutAlign="center center">
     <div>
       <div class="sc-promote__promote-text" fxLayout="row" fxLayoutAlign="start start">
-        <span class="sc-promote__promote-width-2 md-align-right xb-bold">From</span>
+        <span class="sc-promote__promote-width-2 md-align-right xb-bold" fxFlex="none">From</span>
         <span class="md-margin-left-1">{{promote.startTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
       </div>
       <div class="sc-promote__promote-text md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
-        <span class="sc-promote__promote-width-2 md-align-right xb-bold">To</span>
+        <span class="sc-promote__promote-width-2 md-align-right xb-bold" fxFlex="none">To</span>
         <span class="md-margin-left-1">{{promote.endTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
       </div>
     </div>
@@ -69,17 +73,13 @@
       </div>
     </div>
   </div>
-  <div class="sc-promote__promote-width-1 sc__accent-dark" *ngIf="status != 2"
+  <div class="sc-promote__promote-width-4 sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
     <button mat-raised-button color="primary" *ngIf="status == 1">Edit</button>
-    <button mat-raised-button color="primary" *ngIf="status == 3">Check</button>
+    <button mat-raised-button color="primary" *ngIf="status == 2">View & Edit</button>
+    <button mat-raised-button color="primary" *ngIf="status == 3">View</button>
     <div class="md-margin-top-1"></div>
-    <button mat-raised-button color="accent" *ngIf="status == 1">Delete</button>
-  </div>
-  <div class="sc-promote__promote-width-4 sc__accent-dark" *ngIf="status == 2"
-       fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
-    <button mat-raised-button color="primary">Check & Edit</button>
-    <div class="md-margin-top-1"></div>
-    <button mat-raised-button color="accent">Disable</button>
+    <button mat-raised-button color="accent" *ngIf="status == 2">Disable</button>
+    <button mat-raised-button color="accent" *ngIf="status == 1" (click)="delete()">Delete</button>
   </div>
 </div>

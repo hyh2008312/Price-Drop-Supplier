@@ -27,10 +27,11 @@
       </form>
     </div>
   </div>
-  <div class="sc-promotion-dialog__bg md-margin-top-2">
+  <div class="sc-promotion-dialog__bg">
     <app-promote-select-product-title></app-promote-select-product-title>
-    <div *ngFor="let item of [1,2,3]">
-      <app-promote-select-product-item></app-promote-select-product-item>
+    <div *ngFor="let item of promotionProduct;let i = index;">
+      <app-promote-select-product-item [promote]="item" [index]="i" [promoteId]="data.promotionId"
+         (promoteChange)="promoteChanges($event)"></app-promote-select-product-item>
     </div>
     <div class="md-margin-top-2">
       <app-promote-pagination  [length]="length"

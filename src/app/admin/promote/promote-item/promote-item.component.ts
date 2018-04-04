@@ -20,10 +20,7 @@ export class PromoteItemComponent implements OnInit {
   currency: string = 'USD';
 
   constructor(
-    private promoteService: PromoteService,
-    private userService: UserService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    private promoteService: PromoteService
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +31,6 @@ export class PromoteItemComponent implements OnInit {
     let self = this;
     this.promoteService.deletePromotion(this.promote).then((data) => {
 
-      console.log(data);
       self.promotionChange.emit({
         index: this.index,
         promote : data,
@@ -46,9 +42,8 @@ export class PromoteItemComponent implements OnInit {
 
   disable() {
     let self = this;
-    this.promoteService.deletePromotion(this.promote).then((data) => {
+    this.promoteService.endPromotion(this.promote).then((data) => {
 
-      console.log(data);
       self.promotionChange.emit({
         index: this.index,
         promote : data,

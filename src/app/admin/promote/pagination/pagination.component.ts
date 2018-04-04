@@ -20,6 +20,8 @@ export class PaginationComponent implements OnInit {
 
   pageArray: any = [];
 
+  record: number = 0;
+
   constructor(
 
   ) {
@@ -52,15 +54,15 @@ export class PaginationComponent implements OnInit {
 
   changeNextPagination() {
     this.page++;
-    if(this.page <= this.length) {
+    if(this.page <= Math.ceil(this.length / this.pageSize)) {
       if(this.page > this.pageArray[this.pageArray.length - 1]) {
-        if(this.showPaginationNumber < this.length - this.page) {
+        if(this.showPaginationNumber < Math.ceil(this.length / this.pageSize) - this.page + 1) {
           this.pageArray = [];
           for(let i = 0; i < this.showPaginationNumber; i++) {
             this.pageArray.push(this.page + i);
           }
         } else {
-          let _len = this.length - this.page + 1;
+          let _len = Math.ceil(this.length / this.pageSize) - this.page + 1;
           this.pageArray = [];
           for(let i = 0; i < _len; i++) {
             this.pageArray.push(this.page + i);
@@ -68,7 +70,7 @@ export class PaginationComponent implements OnInit {
         }
       }
 
-      if(this.page == this.length) {
+      if(this.page == Math.ceil(this.length / this.pageSize)) {
         this.hasNext = false;
       }
 
@@ -88,19 +90,23 @@ export class PaginationComponent implements OnInit {
   }
 
   ngOnChanges() {
-    this.initPagination();
+    if(this.record != this.length) {
+      this.record = this.length;
+      this.initPagination();
+    }
   }
 
   initPagination() {
-    if(this.length > 4) {
+    this.page = 1;
+    if(this.length / this.pageSize > 4) {
       this.pageArray = [];
       for(let i = 0; i < this.showPaginationNumber; i++) {
         this.pageArray.push(this.page + i);
       }
       this.hasNext = true;
-    } else if( this.length > 0 && this.length <= 4) {
+    } else if( this.length > 0 && this.length / this.pageSize <= 4) {
       this.pageArray = [];
-      for(let i = 0; i < this.length; i++) {
+      for(let i = 0; i < Math.ceil(this.length / this.pageSize); i++) {
         this.pageArray.push(this.page + i);
       }
       this.hasNext = false;
@@ -114,6 +120,17 @@ export class PaginationComponent implements OnInit {
       page: this.page,
       pageSize: this.pageSize
     });
+
+    this.hasPrevious = true;
+    this.hasNext = true;
+
+    if(this.page == 1) {
+      this.hasPrevious = false;
+    }
+
+    if(this.page == Math.ceil(this.length / this.pageSize)) {
+      this.hasNext = false;
+    }
   }
 
 }
