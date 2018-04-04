@@ -92,6 +92,7 @@ export class SelectProductDialogComponent implements OnInit {
 
   promoteChanges(event) {
     if(event.event == 'changed') {
+      this.data.isEdit = true;
       this.promotionProduct.splice(event.index,1);
     }
   }

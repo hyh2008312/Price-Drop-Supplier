@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { PromoteMainComponent } from './promote-main/promote-main.component';
 import { PromoteCreateComponent } from './promote-create/promote-create.component';
+import { PromoteEditComponent } from './promote-edit/promote-edit.component';
 
 import { PromoteItemComponent } from './promote-item/promote-item.component';
 import { PromoteTitleComponent } from './promote-title/promote-title.component';
@@ -33,7 +34,8 @@ import { PromoteService } from './promote.service';
     SelectProductDialogComponent,
     SelectProductTitleComponent,
     SelectProductItemComponent,
-    PaginationComponent
+    PaginationComponent,
+    PromoteEditComponent
   ],
   entryComponents: [
     SelectProductDialogComponent

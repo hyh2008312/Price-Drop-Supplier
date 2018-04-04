@@ -68,13 +68,33 @@ export class PromoteCreateComponent implements OnInit {
     let dialogRef = this.dialog.open(SelectProductDialogComponent, {
       data: {
         categoryList: this.categoryList,
-        promotionId: this.campaign.id
+        promotionId: this.campaign.id,
+        isEdit: false
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    let self = this;
 
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        self.getPromotionDetail();
+      }
     });
+  }
+
+  getPromotionDetail() {
+    let params: any = {
+      id: this.campaign.id
+    };
+    this.promoteService.getPromotionDetail(params).then((data) => {
+      this.campaign = data;
+    });
+  }
+
+  changePromotionProduct(event) {
+    if(event.event == 'delete') {
+      this.campaign.promotionProducts.splice(event.index, 1);
+    }
   }
 
 }

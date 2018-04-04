@@ -28,15 +28,18 @@
     <div>
       <div class="sc-promote__promote-text" fxLayout="row" fxLayoutAlign="start start">
         <span class="sc-promote__promote-width-3 md-align-right xb-bold">Total Sales</span>
-        <span class="md-margin-left-1">{{promote.totalSale|currency:currency:true}}</span>
+        <span class="md-margin-left-1">{{promote.totalSale | currency:currency:true}}</span>
       </div>
     </div>
   </div>
   <div class="sc-promote__promote-width-4 sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
-    <button mat-raised-button color="primary" *ngIf="promote.promotionStatus == 'Scheduled'">Edit</button>
-    <button mat-raised-button color="primary" *ngIf="promote.promotionStatus == 'Ongoing'">View & Edit</button>
-    <button mat-raised-button color="primary" *ngIf="promote.promotionStatus == 'Ended'">View</button>
+    <button mat-raised-button color="primary" *ngIf="promote.promotionStatus == 'Scheduled'"
+            routerLink="./edit/{{promote.id}}">Edit</button>
+    <button mat-raised-button color="primary" *ngIf="promote.promotionStatus == 'Ongoing'"
+            routerLink="./edit/{{promote.id}}">View & Edit</button>
+    <button mat-raised-button color="primary" *ngIf="promote.promotionStatus == 'Ended'"
+            routerLink="./edit/{{promote.id}}">View</button>
     <div class="md-margin-top-1"></div>
     <button mat-raised-button color="accent" *ngIf="promote.promotionStatus == 'Ongoing'">Disable</button>
     <button mat-raised-button color="accent" *ngIf="promote.promotionStatus == 'Scheduled'"
@@ -69,15 +72,18 @@
     <div>
       <div class="sc-promote__promote-text" fxLayout="row" fxLayoutAlign="start start">
         <span class="sc-promote__promote-width-3 md-align-right xb-bold">Total Sales</span>
-        <span class="md-margin-left-1">{{promote.totalSale|currency:currency:true}}</span>
+        <span class="md-margin-left-1">{{promote.totalSale | currency:currency:true}}</span>
       </div>
     </div>
   </div>
   <div class="sc-promote__promote-width-4 sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
-    <button mat-raised-button color="primary" *ngIf="status == 1">Edit</button>
-    <button mat-raised-button color="primary" *ngIf="status == 2">View & Edit</button>
-    <button mat-raised-button color="primary" *ngIf="status == 3">View</button>
+    <button mat-raised-button color="primary" *ngIf="status == 1"
+            routerLink="./edit/{{promote.id}}">Edit</button>
+    <button mat-raised-button color="primary" *ngIf="status == 2"
+            routerLink="./edit/{{promote.id}}">View & Edit</button>
+    <button mat-raised-button color="primary" *ngIf="status == 3"
+            routerLink="./edit/{{promote.id}}">View</button>
     <div class="md-margin-top-1"></div>
     <button mat-raised-button color="accent" *ngIf="status == 2">Disable</button>
     <button mat-raised-button color="accent" *ngIf="status == 1" (click)="delete()">Delete</button>

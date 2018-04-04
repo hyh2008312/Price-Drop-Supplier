@@ -1,8 +1,6 @@
 import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 
 import { PromoteService } from '../promote.service';
-import { UserService } from  '../../../shared/services/user/user.service';
 
 @Component({
   selector: 'app-promote-promote-item',

@@ -92,7 +92,7 @@
       </div>
     </div>
   </form>
-  <div>
+  <div *ngIf="isEdit">
     <div class="md-margin-top-3 sc-promote__create-bg">
       <div fxLayout="row" fxLayoutAlign="space-between start">
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
@@ -104,7 +104,7 @@
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
           <div class="sc-promote__promote-text xb-bold">Campaign Type</div>
           <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-            {{campaign.type}}
+            {{campaign.promotionType}}
           </div>
         </div>
       </div>
@@ -122,7 +122,6 @@
           </div>
         </div>
       </div>
-
     </div>
     <div class="md-margin-top-3 sc-promote__create-text" fxLayout="row" fxLayoutAlign="start center">
       <div class="sc-promote__promote-text xb-bold">Add Product for This Campaign:</div>
@@ -134,11 +133,13 @@
     </div>
     <div class="md-margin-top-3 sc-promote__promote-bg">
       <app-promote-product-title></app-promote-product-title>
-      <div class="sc-promote__promote-list" *ngFor="let item of [1,2,3]">
-        <app-promote-product-item ></app-promote-product-item>
+      <div class="sc-promote__promote-list"
+           *ngFor="let item of campaign.promotionProducts;let i = index;">
+        <app-promote-product-item [promote]="item" [index]="i"
+                                  (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
       </div>
       <div class="sc-promote__promote-navigation" fxLayout="row" fxLayoutAlign="start center">
-        <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="xb-pointer" fxLayout="row" fxLayoutAlign="start center" (click)="selectProduct()">
           <i class="material-icons sc-promote__promote-text">add</i>
           <div class="md-margin-left-1 text-underline">Add Product</div>
         </div>
