@@ -144,7 +144,30 @@ export class PromoteMainComponent implements OnInit {
 
   }
 
-  productChange(event) {
+  promotionChange(event) {
+    switch(event.status) {
+      case 0:
+        switch(event.event) {
+          case 'delete':
+            this.promoteAll.splice(event.index,1);
+            break;
+        }
+        break;
+      case 1:
+        switch(event.event) {
+          case 'delete':
+            this.promoteScheduled.splice(event.index,1);
+            break;
+        }
+        break;
+      case 2:
+        switch(event.event) {
+          case 'delete':
+            this.promoteOngoing.splice(event.index,1);
+            break;
+        }
+        break;
+    }
   }
 
 }

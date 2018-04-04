@@ -39,7 +39,7 @@ export class SelectProductDialogComponent implements OnInit {
 
     this.searchForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
-    //this.getPromoteProduct();
+    this.getPromoteProduct();
   }
 
   ngOnInit(): void {

@@ -15,7 +15,7 @@ export class PromoteItemComponent implements OnInit {
   @Input() status: number = 0;
   @Input() promote: any = {};
   @Input() index: number = 0;
-  @Output() productChange = new EventEmitter<any>();
+  @Output() promotionChange = new EventEmitter<any>();
 
   currency: string = 'USD';
 
@@ -28,6 +28,34 @@ export class PromoteItemComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  delete() {
+    let self = this;
+    this.promoteService.deletePromotion(this.promote).then((data) => {
+
+      console.log(data);
+      self.promotionChange.emit({
+        index: this.index,
+        promote : data,
+        status: this.status,
+        event: 'delete'
+      });
+    });
+  }
+
+  disable() {
+    let self = this;
+    this.promoteService.deletePromotion(this.promote).then((data) => {
+
+      console.log(data);
+      self.promotionChange.emit({
+        index: this.index,
+        promote : data,
+        status: this.status,
+        event: 'delete'
+      });
+    });
   }
 
 }

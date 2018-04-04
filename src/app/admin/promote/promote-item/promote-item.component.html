@@ -28,7 +28,7 @@
     <div>
       <div class="sc-promote__promote-text" fxLayout="row" fxLayoutAlign="start start">
         <span class="sc-promote__promote-width-3 md-align-right xb-bold">Total Sales</span>
-        <span class="md-margin-left-1">$100.00</span>
+        <span class="md-margin-left-1">{{}}</span>
       </div>
     </div>
   </div>
@@ -58,20 +58,27 @@
         <span class="sc-promote__promote-width-2 md-align-right xb-bold">To</span>
         <span class="md-margin-left-1">{{promote.endTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
       </div>
-    </div>·1
+    </div>
   </div>
   <div class="md-margin-right-2" fxFlex="20"
        fxLayout="column" fxLayoutAlign="center center">
     <div>
       <div class="sc-promote__promote-text" fxLayout="row" fxLayoutAlign="start start">
         <span class="sc-promote__promote-width-3 md-align-right xb-bold">Total Sales</span>
-        <span class="md-margin-left-1">$100.00</span>
+        <span class="md-margin-left-1">{{promote.totalSale|currency:currency:true}}</span>
       </div>
     </div>
   </div>
-  <div class="sc-promote__promote-width-1 sc__accent-dark"
+  <div class="sc-promote__promote-width-1 sc__accent-dark" *ngIf="status != 2"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
-    <button mat-raised-button color="primary">Edit</button>
+    <button mat-raised-button color="primary" *ngIf="status == 1">Edit</button>
+    <button mat-raised-button color="primary" *ngIf="status == 3">Check</button>
+    <div class="md-margin-top-1"></div>
+    <button mat-raised-button color="accent" *ngIf="status == 1">Delete</button>
+  </div>
+  <div class="sc-promote__promote-width-4 sc__accent-dark" *ngIf="status == 2"
+       fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
+    <button mat-raised-button color="primary">Check & Edit</button>
     <div class="md-margin-top-1"></div>
     <button mat-raised-button color="accent">Disable</button>
   </div>

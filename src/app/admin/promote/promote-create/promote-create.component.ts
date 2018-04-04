@@ -67,8 +67,8 @@ export class PromoteCreateComponent implements OnInit {
   selectProduct() {
     let dialogRef = this.dialog.open(SelectProductDialogComponent, {
       data: {
-        //categoryList: this.categoryList,
-        //promotionId: this.campaign.id
+        categoryList: this.categoryList,
+        promotionId: this.campaign.id
       }
     });
 

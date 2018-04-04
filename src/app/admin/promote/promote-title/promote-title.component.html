@@ -40,7 +40,11 @@
     Performance
   </div>
   <div class="sc-promote__promote-width-1 sc-promote__promote-title-2 md-align-center" fxFlex="none"
-       fxLayout="column" fxLayoutAlign="center center">
+       fxLayout="column" fxLayoutAlign="center center" *ngIf="status != 2">
+    Action
+  </div>
+  <div class="sc-promote__promote-width-4 sc-promote__promote-title-2 md-align-center" fxFlex="none"
+       fxLayout="column" fxLayoutAlign="center center" *ngIf="status == 2">
     Action
   </div>
 </div>
