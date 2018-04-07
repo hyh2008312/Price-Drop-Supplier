@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { PromoteService } from '../promote.service';
 
+
 @Component({
   selector: 'app-promote-promote-edit',
   templateUrl: './promote-edit.component.html',
@@ -17,6 +18,8 @@ export class PromoteEditComponent implements OnInit {
   campaign: any = {};
 
   categoryList: any;
+
+  promotionProducts: any;
 
   promotionId: any;
 
@@ -41,11 +44,19 @@ export class PromoteEditComponent implements OnInit {
       id
     }).then((data) => {
       this.campaign = data;
+      this.promotionProducts = data.promotionProducts;
     });
   }
 
   changePromotionProduct(event) {
-
+    switch (event.event) {
+      case 'delete':
+        this.campaign.promotionProducts.splice(event.index, 1);
+        break;
+      case 'save':
+        this.campaign = event.promote;
+        break;
+    }
   }
 
   save() {

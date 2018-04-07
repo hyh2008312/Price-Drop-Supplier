@@ -101,6 +101,14 @@
     &-text{
       font-size: 12px;
     }
+
+    &-button{
+      line-height: 24px;
+      border-bottom: 1px solid rgba(0,0,0,.12);
+      min-width: 100px;
+      text-align: center;
+      cursor: pointer;
+    }
   }
 
   &__create{
@@ -135,6 +143,18 @@
   border-radius: 4px;
   @include xb-xs-screen{
     padding: 16px 16px;
+  }
+
+  &__large{
+    padding: 40px 40px;
+    max-width: 960px;
+    width: 100%;
+    position: relative;
+    background-color: $whiteColor;
+    border-radius: 4px;
+    @include xb-xs-screen{
+      padding: 16px 16px;
+    }
   }
 
   &__close{

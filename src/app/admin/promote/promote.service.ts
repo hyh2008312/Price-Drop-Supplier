@@ -126,6 +126,40 @@ export class PromoteService {
       .catch(this.handleError);
   }
 
+  changePromotionProductVariant(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/promotion/stock/${params.id}/`;
+
+    return this.http.put(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  deletePromotionProductVariant(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/promotion/stock/${params.id}/`;
+
+    return this.http.delete(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
   savePromotionProduct(params:any): Promise<any> {
 
     let headers = new Headers({
@@ -135,7 +169,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/detail/${params.id}/`;
+    const url = `${this.baseUrl.url}product/promotion/discount/${params.id}/`;
 
     return this.http.put(url, params, options)
       .toPromise()

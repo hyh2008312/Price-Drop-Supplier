@@ -1,6 +1,8 @@
 import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
+import { MatDialog } from '@angular/material';
 
 import { PromoteService } from '../promote.service';
+import {ChangeVariantDialogComponent} from '../change-variant-dialog/change-variant-dialog.component';
 
 @Component({
   selector: 'app-promote-product-item',
@@ -12,6 +14,7 @@ export class ProductProductItemComponent implements OnInit {
 
   @Input() status: number = 0;
   @Input() promote: any={};
+  @Input() promoteId: any;
   @Input() index: number = 0;
   @Output() promotionChange = new EventEmitter<any>();
 
@@ -20,6 +23,7 @@ export class ProductProductItemComponent implements OnInit {
   currency: string = 'USD';
 
   constructor(
+    private dialog: MatDialog,
     private promoteService: PromoteService
   ) { }
 
@@ -57,6 +61,35 @@ export class ProductProductItemComponent implements OnInit {
     let params:any = this.promote;
     this.promoteService.savePromotionProduct(params).then((data) => {
       self.isEdit = false;
+      self.promotionChange.emit({
+        index: self.index,
+        event: 'save',
+        promote: data
+      });
+    });
+  }
+
+  variantPromotions() {
+    let dialogRef = this.dialog.open(ChangeVariantDialogComponent, {
+      data: {
+        title: this.promote.title,
+        variantPromotions: this.promote.variantPromotions,
+        isEdit: false
+      }
+    });
+
+    let self = this;
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        self.promoteService.getPromotionDetail({
+          id: this.promoteId
+        }).then((data) => {
+
+          self.promote = data.promotionProducts[self.index];
+
+        });
+      }
     });
   }
 }

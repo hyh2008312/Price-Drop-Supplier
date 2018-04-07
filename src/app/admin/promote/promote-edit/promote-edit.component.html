@@ -5,13 +5,21 @@
   </div>
   <div>
     <div class="md-margin-top-3 sc-promote__create-bg">
-      <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="sc-promote__promote-text xb-bold">Campaign Name</div>
+        <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+          <mat-form-field fxFlex>
+            <textarea matInput type="text" placeholder="" [(ngModel)]="campaign.title"
+                      matTextareaAutosize matAutosizeMinRows="1"
+                      matAutosizeMaxRows="3"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between start">
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
-          <div class="sc-promote__promote-text xb-bold">Campaign Name</div>
-          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center">
-            <mat-form-field fxFlex>
-              <input matInput type="text" placeholder="" [(ngModel)]="campaign.title">
-            </mat-form-field>
+          <div class="sc-promote__promote-text xb-bold">Campaign Type</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            {{campaign.promotionStatus}}
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
@@ -38,11 +46,30 @@
 
     </div>
     <div class="md-margin-top-3 sc-promote__promote-bg">
-      <app-promote-product-title [status]="1"></app-promote-product-title>
-      <div class="sc-promote__promote-list"
-           *ngFor="let item of campaign.promotionProducts;let i = index;">
-        <app-promote-product-item [promote]="item" [index]="i" [status]="1"
-                                  (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
+      <app-promote-product-title [status]="1" *ngIf="campaign.promotionStatus != 'Ended'">
+
+      </app-promote-product-title>
+      <app-promote-product-title [status]="2" *ngIf="campaign.promotionStatus == 'Ended'">
+
+      </app-promote-product-title>
+      <ng-container *ngIf="campaign.promotionStatus != 'Ended'">
+        <div class="sc-promote__promote-list" *ngFor="let item of campaign.promotionProducts;let i = index;">
+          <app-promote-product-item [promote]="item" [index]="i" [status]="1" [promoteId]="promotionId"
+                                    (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="campaign.promotionStatus == 'Ended'">
+        <div class="sc-promote__promote-list" *ngFor="let item of campaign.promotionProducts;let i = index;">
+          <app-promote-product-item [promote]="item" [index]="i" [status]="2"
+                                    (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
+        </div>
+      </ng-container>
+      <div class="sc-promote__promote-none" fxLayout="row" fxLayoutAlign="center center"
+           *ngIf="campaign.promotionProducts && campaign.promotionProducts.length <= 0">
+        <div fxLayout="column" fxLayoutAlign="center center">
+          <i class="iconfontXberts icon-ic-empty"></i>
+          <div class="sc-promote__promote-title-1 md-margin-top-4">You haven't any promotion product yet. </div>
+        </div>
       </div>
     </div>
 
