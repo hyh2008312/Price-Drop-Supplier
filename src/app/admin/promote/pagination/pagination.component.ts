@@ -110,6 +110,10 @@ export class PaginationComponent implements OnInit {
         this.pageArray.push(this.page + i);
       }
       this.hasNext = false;
+    } else if(this.length <= 0) {
+      this.hasNext = false;
+      this.hasPrevious = false;
+      this.pageArray = [];
     }
   }
 
