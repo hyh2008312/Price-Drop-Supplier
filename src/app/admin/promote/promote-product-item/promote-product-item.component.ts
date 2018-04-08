@@ -72,7 +72,7 @@ export class ProductProductItemComponent implements OnInit {
   variantPromotions() {
     let dialogRef = this.dialog.open(ChangeVariantDialogComponent, {
       data: {
-        title: this.promote.title,
+        title: this.promote.productTitle,
         variantPromotions: this.promote.variantPromotions,
         isEdit: false
       }

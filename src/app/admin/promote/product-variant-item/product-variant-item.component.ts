@@ -34,6 +34,7 @@ export class ProductVariantItemComponent implements OnInit {
 
     let self = this;
     this.promoteService.deletePromotionProductVariant(param).then((data) => {
+      self.variantLength--;
       self.variantChange.emit({
         event: 'delete',
         index: self.index,
@@ -58,6 +59,19 @@ export class ProductVariantItemComponent implements OnInit {
         data: data
       });
     });
+  }
+
+  changeStock($event) {
+    if($event < this.variant.orderNum) {
+      $event = this.variant.orderNum;
+    } else if($event > this.variant.stock + this.variant.totalStock) {
+      $event = this.variant.stock + this.variant.totalStock;
+    }
+    let lastStock = this.variant.stock;
+    if(lastStock != $event) {
+      this.variant.totalStock = this.variant.totalStock - ($event - lastStock);
+    }
+    this.variant.stock = $event;
   }
 
 }

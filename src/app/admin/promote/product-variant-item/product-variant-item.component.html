@@ -16,13 +16,14 @@
   </div>
   <div class="md-margin-right-2" fxFlex="20"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{variant.totalStock}}</div>
+    <div class="sc-promote__promote-text">{{variant.totalStock + variant.stock}}</div>
   </div>
   <div class="sc-promote__promote-width-1 sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
     <div fxLayout="row" fxLayoutAlign="center center">
       <i class="material-icons md-dark-secondary xb-pointer" (click)="edit()">edit</i>
-      <i class="material-icons md-dark-secondary xb-pointer md-margin-left-2" (click)="delete()">delete</i>
+      <i class="material-icons md-dark-secondary xb-pointer md-margin-left-2" (click)="delete()"
+        *ngIf="variantLength > 1 && variant.orderNum <= 0">delete</i>
     </div>
   </div>
 </div>
@@ -37,7 +38,8 @@
   <div class="md-margin-right-2" fxFlex="20"
        fxLayout="column" fxLayoutAlign="center center">
     <mat-form-field class="sc-promote__promote-width sc-promote__create-align-center">
-      <input matInput type="number" placeholder="" step="1" [(ngModel)]="variant.stock" >
+      <input matInput type="number" placeholder="" step="1" [ngModel]="variant.stock"
+        (ngModelChange)="changeStock($event)">
     </mat-form-field>
   </div>
   <div class="md-margin-right-2" fxFlex="20"
@@ -46,7 +48,7 @@
   </div>
   <div class="md-margin-right-2" fxFlex="20"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{variant.totalStock}}</div>
+    <div class="sc-promote__promote-text">{{variant.totalStock + variant.stock}}</div>
   </div>
   <div class="sc-promote__promote-width-1 sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
