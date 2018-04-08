@@ -46,6 +46,10 @@ export class PromoteCreateComponent implements OnInit {
   ngOnInit(): void {
     this.promoteService.getCategoryList().then((data) => {
       this.categoryList = data;
+      this.categoryList.unshift({
+        id: 'all',
+        name: 'All'
+      });
     });
   }
 

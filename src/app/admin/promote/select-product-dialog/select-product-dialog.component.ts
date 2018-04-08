@@ -90,6 +90,12 @@ export class SelectProductDialogComponent implements OnInit {
     this.getPromoteProduct();
   }
 
+  categorySelect($event) {
+    this.cat = $event;
+
+    this.getPromoteProduct();
+  }
+
   promoteChanges(event) {
     if(event.event == 'changed') {
       this.data.isEdit = true;

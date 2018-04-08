@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 
 import { PromoteService } from '../promote.service';
-
+import {SelectProductDialogComponent} from '../select-product-dialog/select-product-dialog.component';
 
 @Component({
   selector: 'app-promote-promote-edit',
@@ -35,6 +35,10 @@ export class PromoteEditComponent implements OnInit {
   ngOnInit(): void {
     this.promoteService.getCategoryList().then((data) => {
       this.categoryList = data;
+      this.categoryList.unshift({
+        id: 'all',
+        name: 'All'
+      });
     });
   }
 
@@ -65,6 +69,25 @@ export class PromoteEditComponent implements OnInit {
     }
     this.promoteService.promotionEdit(this.campaign).then((data) => {
       this.campaign = data;
+    });
+  }
+
+
+  selectProduct() {
+    let dialogRef = this.dialog.open(SelectProductDialogComponent, {
+      data: {
+        categoryList: this.categoryList,
+        promotionId: this.campaign.id,
+        isEdit: false
+      }
+    });
+
+    let self = this;
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        self.getPromotionDetail();
+      }
     });
   }
 
