@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 
@@ -29,7 +30,9 @@ export class PromoteCreateComponent implements OnInit {
   constructor(
     private promoteService: PromoteService,
     private dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
 
     this.promotionForm = this.fb.group({
@@ -92,9 +95,34 @@ export class PromoteCreateComponent implements OnInit {
   }
 
   changePromotionProduct(event) {
-    if(event.event == 'delete') {
-      this.campaign.promotionProducts.splice(event.index, 1);
+    switch(event.event) {
+      case 'delete':
+        this.campaign.promotionProducts.splice(event.index, 1);
+        break;
+      case 'discount':
+        this.campaign.promotionProducts[event.index] = event.promote;
     }
+  }
+
+  save() {
+    if(!this.campaign.promotionProducts || this.campaign.promotionProducts.length <= 0) {
+      return this.router.navigate(['../'],{relativeTo: this.activatedRoute});
+    }
+
+    let discounts: any = [];
+    for(let item of this.campaign.promotionProducts) {
+      discounts.push({
+        pid: item.id,
+        discount: item.discount
+      });
+    }
+
+    this.promoteService.changePromotionDiscounts({
+      id: this.campaign.id,
+      discounts
+    }).then((data) => {
+      this.router.navigate(['../'],{relativeTo: this.activatedRoute});
+    });
   }
 
 }

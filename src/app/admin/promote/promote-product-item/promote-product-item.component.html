@@ -21,7 +21,8 @@
   <div class="md-margin-right-2" fxFlex="20"
        fxLayout="column" fxLayoutAlign="center center">
     <mat-form-field class="sc-promote__promote-width sc-promote__create-align-center">
-      <input matInput type="text" placeholder="" [(ngModel)]="promote.discount" >
+      <input matInput type="text" placeholder="" [ngModel]="promote.discount"
+        (ngModelChange)="changeDiscount($event)">
     </mat-form-field>
   </div>
   <div fxLayout="column" fxLayoutAlign="center center" fxFlex="10">

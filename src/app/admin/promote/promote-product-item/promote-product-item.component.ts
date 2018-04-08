@@ -92,4 +92,13 @@ export class ProductProductItemComponent implements OnInit {
       }
     });
   }
+
+  changeDiscount($event) {
+    this.promote.discount = $event;
+    this.promotionChange.emit({
+      index: this.index,
+      event: 'discount',
+      promote: this.promote
+    });
+  }
 }

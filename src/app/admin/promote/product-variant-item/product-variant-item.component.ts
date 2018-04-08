@@ -11,6 +11,7 @@ import { PromoteService } from '../promote.service';
 export class ProductVariantItemComponent implements OnInit {
 
   @Input() variant: any={};
+  @Input() variantLength: any;
   @Input() index: any = 0;
   @Output() variantChange = new EventEmitter<any>();
 

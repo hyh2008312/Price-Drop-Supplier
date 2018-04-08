@@ -8,7 +8,7 @@
   <div class="sc-promotion-dialog__bg">
     <app-promote-product-variant-title></app-promote-product-variant-title>
     <div *ngFor="let item of data.variantPromotions;let i = index;">
-      <app-promote-change-variant-item [variant]="item" [index]="i"
+      <app-promote-change-variant-item [variant]="item" [index]="i" [variantLength]="data.variantPromotions.length"
          (variantChange)="variantChange($event)"></app-promote-change-variant-item>
     </div>
   </div>

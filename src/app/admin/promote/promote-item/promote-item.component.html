@@ -38,12 +38,13 @@
             routerLink="./edit/{{promote.id}}">Edit</button>
     <button mat-raised-button color="primary" *ngIf="promote.promotionStatus == 'Ongoing'"
             routerLink="./edit/{{promote.id}}">View & Edit</button>
-    <button mat-raised-button color="primary" *ngIf="promote.promotionStatus == 'Ended'"
+    <button mat-raised-button color="primary" *ngIf="promote.promotionStatus == 'Ended' "
             routerLink="./edit/{{promote.id}}">View</button>
     <div class="md-margin-top-1"></div>
-    <button mat-raised-button color="accent" *ngIf="promote.promotionStatus == 'Ongoing'">Disable</button>
+    <button mat-raised-button color="accent" *ngIf="promote.promotionStatus == 'Ongoing'"
+            (click)="disable()">Disable</button>
     <button mat-raised-button color="accent" *ngIf="promote.promotionStatus == 'Scheduled'"
-      (click)="delete()">Delete</button>
+            (click)="delete()">Delete</button>
   </div>
 </div>
 <div class="sc-promote__promote-item" fxLayout="row" fxLayoutAlign="start stretch" *ngIf="status  > 0">
@@ -85,7 +86,7 @@
     <button mat-raised-button color="primary" *ngIf="status == 3"
             routerLink="./edit/{{promote.id}}">View</button>
     <div class="md-margin-top-1"></div>
-    <button mat-raised-button color="accent" *ngIf="status == 2">Disable</button>
+    <button mat-raised-button color="accent" *ngIf="status == 2" (click)="disable()">Disable</button>
     <button mat-raised-button color="accent" *ngIf="status == 1" (click)="delete()">Delete</button>
   </div>
 </div>
