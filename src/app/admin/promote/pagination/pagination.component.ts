@@ -98,6 +98,8 @@ export class PaginationComponent implements OnInit {
 
   initPagination() {
     this.page = 1;
+    this.hasPrevious = false;
+    this.hasNext = false;
     if(this.length / this.pageSize > 4) {
       this.pageArray = [];
       for(let i = 0; i < this.showPaginationNumber; i++) {
@@ -109,7 +111,11 @@ export class PaginationComponent implements OnInit {
       for(let i = 0; i < Math.ceil(this.length / this.pageSize); i++) {
         this.pageArray.push(this.page + i);
       }
-      this.hasNext = false;
+      if(this.length/this.pageSize <1) {
+        this.hasNext = false;
+      } else {
+        this.hasNext = true;
+      }
     } else if(this.length <= 0) {
       this.hasNext = false;
       this.hasPrevious = false;
