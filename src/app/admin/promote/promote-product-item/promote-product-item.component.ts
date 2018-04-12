@@ -32,8 +32,8 @@ export class ProductProductItemComponent implements OnInit {
   }
 
   get price() {
-    if(!isNaN(this.promote.discount)) {
-      return Math.round(this.promote.productPrice * (100 - this.promote.discount)) / 100;
+    if(this.promote.discount <= 100 &&  this.promote.discount > 0) {
+      return this.promote.productPrice * this.promote.discount / 100;
     } else {
       return this.promote.productPrice;
     }
