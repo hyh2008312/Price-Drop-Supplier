@@ -11,7 +11,8 @@
     "e2e": "ng e2e",
     "start:dev": "ng serve",
     "start:prod": "ng serve --env=prod",
-    "postinstall": "ng build --prod --app 1"
+    "postinstall": "ng build --prod --app 1",
+    "postinstall:dev": "ng build --prod --e dev --app 1"
   },
   "private": true,
   "dependencies": {
