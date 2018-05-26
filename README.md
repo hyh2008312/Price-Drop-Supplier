@@ -6,8 +6,8 @@
   
   - Add bitbucket git remote
   
-        git remote add staging https://heyh@bitbucket.org/xberts/web.git
-        git remote add prod https://heyh@bitbucket.org/xberts/web.git
+        git remote add staging https://heyh@bitbucket.org/socialcommer/price-drop-admin.git
+        git remote add prod https://heyh@bitbucket.org/socialcommer/price-drop-admin.git
         
 ### Update staging server
   - Push update
