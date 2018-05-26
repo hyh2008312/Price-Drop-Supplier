@@ -61,15 +61,15 @@ export class ImageUploadColorComponent implements OnInit {
         let height = image.height;
 
         that.s3UploaderService.upload({
-          type: 'product',
+          type: 'product/detail',
           fileName: file.name,
           use: 'cover',
           width: width,
           height: height
         }).then((data) => {
-          let src = data.url + '/' + data.key;
-          let url = data.url;
-          let key = data.key.split('source/product/')[1];
+          let src = data.domain + '/' + data.name;
+          let url = data.domain;
+          let key = data.name;
           that.s3UploaderService.uploadToS3(file, data).subscribe((event) => {
             // Via this API, you get access to the raw event stream.
             // Look for upload progress events.
@@ -77,18 +77,11 @@ export class ImageUploadColorComponent implements OnInit {
               // This is an upload progress event. Compute and show the % done:
               that.loading = Math.round(100 * event.loaded / event.total);
             } else if (event instanceof HttpResponse) {
-              that.s3UploaderService.formatImage({
-                cat: 'product',
-                name: src,
-                width: 720,
-                height: 720
-              }).then((res) => {
-                that.closeAnimate = true;
-                that.closeLoading = true;
-                src = url + '/cdn/product/cc/' + key;
-                that.previewImgFileChange.emit({
-                  file: src
-                });
+              that.closeAnimate = true;
+              that.closeLoading = true;
+              src = url + '/' + key;
+              that.previewImgFileChange.emit({
+                file: src
               });
             }
           });

@@ -44,7 +44,6 @@ export class ProductEditComponent implements OnInit {
 
   productBasicForm: FormGroup;
   productVariantForm: FormGroup;
-  productCommissionForm: FormGroup;
   productLogisticForm: FormGroup;
 
   countries: Object[];
@@ -99,10 +98,6 @@ export class ProductEditComponent implements OnInit {
       variants: this.fb.array([]),
     });
 
-    this.productCommissionForm = this.fb.group({
-      commissionRate: ['', Validators.required]
-    });
-
     this.productLogisticForm = this.fb.group({
       length: [0, Validators.required],
       width: [0, Validators.required],
@@ -148,14 +143,6 @@ export class ProductEditComponent implements OnInit {
       for(let item of data.variants) {
         this.addProductList(item);
       }
-    });
-
-    this.adminService.getProductCommission({
-      id
-    }).then((data) => {
-      this.productCommissionForm.patchValue({
-        commissionRate: data.commissionRate
-      })
     });
 
     this.adminService.getProductShipping({
@@ -407,17 +394,6 @@ export class ProductEditComponent implements OnInit {
     product.images = this.additionalList;
     this.adminService.changeProductBasic(product).then((data) => {
       console.log(data);
-    });
-  }
-
-  changeProductCommission() {
-    if(this.productCommissionForm.invalid) {
-      return;
-    }
-    let product = this.productCommissionForm.value;
-    product.id = parseInt(this.activatedRoute.snapshot.params["id"]);
-    this.adminService.changeProductCommission(product).then((data) => {
-      console.log(data)
     });
   }
 

@@ -83,7 +83,7 @@ export class S3UploaderService {
   upload(file: UploadFile): Promise<any> {
 
     let _options = this.getPostOptions();
-    const url = `${this.baseUrl.url}image/s3policy/`;
+    const url = `${this.baseUrl.url}image/qiniu/`;
 
     return this.http.post(url, file, _options)
       .toPromise()
@@ -95,14 +95,7 @@ export class S3UploaderService {
 
     let formData = new FormData();
 
-    formData.append('acl',  postParams.acl);
-    formData.append('key', postParams.key);
-    formData.append('Content-Type', postParams['Content-Type']);
-    formData.append('policy', postParams.policy);
-    formData.append('x-amz-date', postParams['x-amz-date']);
-    formData.append('x-amz-algorithm', postParams['x-amz-algorithm']);
-    formData.append('x-amz-credential', postParams['x-amz-credential']);
-    formData.append('x-amz-signature', postParams['x-amz-signature']);
+    formData.append('upload_token', postParams['token']);
 
     formData.append('file', file);
 
@@ -118,14 +111,7 @@ export class S3UploaderService {
 
     let formData = new FormData();
 
-    formData.append('acl',  postParams.acl);
-    formData.append('key', postParams.key);
-    formData.append('Content-Type', postParams['Content-Type']);
-    formData.append('policy', postParams.policy);
-    formData.append('x-amz-date', postParams['x-amz-date']);
-    formData.append('x-amz-algorithm', postParams['x-amz-algorithm']);
-    formData.append('x-amz-credential', postParams['x-amz-credential']);
-    formData.append('x-amz-signature', postParams['x-amz-signature']);
+    formData.append('upload_token', postParams['token']);
 
     formData.append('file', file);
 

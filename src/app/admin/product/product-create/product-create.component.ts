@@ -125,7 +125,6 @@ export class ProductCreateComponent implements OnInit {
       attributes: this.fb.array([]),
       variants: this.fb.array([]),
       shippings: this.fb.array([]),
-      commission: [0, Validators.required],
       brandName: [''],
       description: ['Please add product details and images', Validators.required],
       length: [0, Validators.required],

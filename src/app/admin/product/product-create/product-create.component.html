@@ -456,34 +456,6 @@
       </div>
       <div class="sc-product__create-container-1">
         <div class="sc-product__create-title">
-          Sales Commission Settings
-        </div>
-        <div class="md-margin-top-2" fxLayout="column">
-          <div fxFlex="46" fxLayout="row" fxLayoutAlign="space-between center">
-            <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
-              <mat-form-field fxFlex>
-                <input type="text" matInput placeholder="Set Your Affiliate Sales Commission Rate" formControlName="commission">
-              </mat-form-field>
-              <div class="md-margin-right-2 sc-product__create-title">%</div>
-            </div>
-          </div>
-          <div *ngIf="productForm.get('commission').invalid && (productForm.get('commission').dirty ||
-            productForm.get('commission').touched)" class="xb-input-error">
-            <div *ngIf="productForm.get('commission').hasError('required')">
-              This field is required.
-            </div>
-          </div>
-          <div class="sc-product__create-text-1 md-margin-top-2">Set Your Sales Commission Rate for Resellers:  </div>
-          <div class="sc-product__create-text-1 md-margin-top-2">- Your commission is set to reward your resellers
-            on SocialCommer.</div>
-          <div class="sc-product__create-text-1 md-margin-top-2">- The commission is charged based on your product
-            price and shipping fee.</div>
-          <div class="sc-product__create-text-1 md-margin-top-2">- A high commission rate can attract more
-            resellers (e.g > 20%).</div>
-        </div>
-      </div>
-      <div class="sc-product__create-container-1">
-        <div class="sc-product__create-title">
           Logistics Information
         </div>
         <div>
