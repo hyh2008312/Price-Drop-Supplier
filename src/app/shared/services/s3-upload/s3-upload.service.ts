@@ -95,12 +95,13 @@ export class S3UploaderService {
 
     let formData = new FormData();
 
-    formData.append('upload_token', postParams['token']);
+    formData.append('token', postParams['token']);
+    formData.append('key', postParams['name']);
 
     formData.append('file', file);
 
 
-    const req = new HttpRequest('POST', postParams.url, formData, {
+    const req = new HttpRequest('POST', postParams.domain, formData, {
       reportProgress: true
     });
 
@@ -111,11 +112,12 @@ export class S3UploaderService {
 
     let formData = new FormData();
 
-    formData.append('upload_token', postParams['token']);
+    formData.append('token', postParams['token']);
+    formData.append('key', postParams['name']);
 
     formData.append('file', file);
 
-    return this.http.post(postParams.url, formData)
+    return this.http.post(postParams.domain, formData)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);

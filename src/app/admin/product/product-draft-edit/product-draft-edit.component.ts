@@ -238,13 +238,13 @@ export class ProductDraftEditComponent implements OnInit {
         let height = image.height;
 
         that.s3UploaderService.upload({
-          type: 'detail',
+          type: 'product/detail',
           fileName: file.name,
           use: 'detail',
           width: width,
           height: height
         }).then((data)=> {
-          let imageUrl = `${data.url}/${data.key}`;
+          let imageUrl = `${data.url}/${data.name}`;
           that.s3UploaderService.uploadToS3WithoutLoading(file, data).then((data) => {
             let range = that.editor.getSelection();
             that.editor.insertEmbed(range.index, 'image', imageUrl);

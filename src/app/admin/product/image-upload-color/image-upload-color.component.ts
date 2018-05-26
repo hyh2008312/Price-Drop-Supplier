@@ -61,14 +61,14 @@ export class ImageUploadColorComponent implements OnInit {
         let height = image.height;
 
         that.s3UploaderService.upload({
-          type: 'product/detail',
+          type: 'product/main',
           fileName: file.name,
           use: 'cover',
           width: width,
           height: height
         }).then((data) => {
-          let src = data.domain + '/' + data.name;
-          let url = data.domain;
+          let src = data.url + '/' + data.name;
+          let url = data.url;
           let key = data.name;
           that.s3UploaderService.uploadToS3(file, data).subscribe((event) => {
             // Via this API, you get access to the raw event stream.
