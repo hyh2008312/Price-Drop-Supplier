@@ -13,10 +13,10 @@
        fxLayout="column" fxLayoutAlign="center center">
     <div class="sc-product__product-price-sale" *ngIf="product.saleUnitPrice>0">
       {{ product.saleUnitPrice | currency: currency: true }}</div>
-    <div class="line-through" *ngIf="product.unitPrice>0">
-      {{product.unitPrice | currency: currency: true  }}
+    <div class="line-through" *ngIf="product.lowestPrice>0">
+      {{product.lowestPrice | currency: currency: true  }}
     </div>
-    <div class="line-through" *ngIf="product.unitPrice == 0 && product.saleUnitPrice == 0">
+    <div class="line-through" *ngIf="product.lowestPrice == 0 && product.saleUnitPrice == 0">
       &nbsp;&nbsp;&nbsp;
     </div>
   </div>

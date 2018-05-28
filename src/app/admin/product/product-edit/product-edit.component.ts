@@ -350,6 +350,7 @@ export class ProductEditComponent implements OnInit {
       sku: [variant.sku, Validators.required],
       stock: [variant.variantStockrecord, Validators.required],
       saleUnitPrice: [variant.saleUnitPrice, Validators.required],
+      lowestPrice: [variant.lowestPrice || '0.00', Validators.required],
       unitPrice: [variant.unitPrice]
     }));
   }

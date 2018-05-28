@@ -223,6 +223,24 @@
                     </div>
                   </div>
                 </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                  <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="md-margin-right-2 sc-product__create-title">$</div>
+                    <mat-form-field fxFlex>
+                      <input type="text" matInput placeholder="Lowest Price" formControlName="lowestPrice">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                  <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                    <div *ngIf="p.get('lowestPrice').invalid && (p.get('lowestPrice').dirty ||
+                    p.get('lowestPrice').touched)" class="xb-input-error">
+                      <div *ngIf="p.get('lowestPrice').hasError('required')">
+                        This field is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -230,12 +248,12 @@
         <div class="md-margin-top-2" *ngIf="isProductListShow">
           <div formArrayName="variants" >
             <div fxLayout="row" fxLayoutAlign="start center">
-              <div class="sc-product__create-margin-right-1 sc-product__create-width-1 md-dark-secondary xb-bold"
+              <div class="sc-product__create-margin-right-3 sc-product__create-width-1 md-dark-secondary xb-bold"
                    fxFlex="none" fxLayout="row" fxLayoutAlign="center center">
                 Variants
               </div>
-              <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold"
-                   fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
+              <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
+                   fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
                 SKU
               </div>
               <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
@@ -243,20 +261,24 @@
                 Quantity
               </div>
               <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
-                   fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
+                   fxFlex="10" fxLayout="row" fxLayoutAlign="center center">
                 Sale Price
               </div>
+              <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
+                   fxFlex="12" fxLayout="row" fxLayoutAlign="center center">
+                Lowest Price
+              </div>
               <div class="md-dark-secondary xb-bold"
-                   fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
+                   fxFlex="13" fxLayout="row" fxLayoutAlign="center center">
                 Original Price
               </div>
             </div>
             <div fxLayout="column" fxLayoutAlign="start stretch" *ngFor="let p of product.controls; let i = index;">
               <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">
-                <div class="sc-product__create-margin-right-1 sc-product__create-width-1 sc-product__create-text-2" fxFlex="none">
+                <div class="sc-product__create-margin-right-3 sc-product__create-width-1 sc-product__create-text-2" fxFlex="none">
                   {{p.value.variant.value}}
                 </div>
-                <div class="sc-product__create-margin-right-1" fxFlex="20" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field class="sc-product__create-width-100">
                     <input type="text" matInput formControlName="sku">
                   </mat-form-field>
@@ -266,13 +288,19 @@
                     <input type="text" matInput formControlName="stock">
                   </mat-form-field>
                 </div>
-                <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-3" fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
                   <div class="md-margin-right-2 sc-product__create-title">$</div>
                   <mat-form-field class="sc-product__create-width-100">
                     <input type="text" matInput formControlName="saleUnitPrice">
                   </mat-form-field>
                 </div>
-                <div fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-3" fxFlex="12" fxLayout="row" fxLayoutAlign="start center">
+                  <div class="md-margin-right-2 sc-product__create-title">$</div>
+                  <mat-form-field class="sc-product__create-width-100">
+                    <input type="text" matInput formControlName="lowestPrice">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="13" fxLayout="row" fxLayoutAlign="start center">
                   <div class="md-margin-right-2 sc-product__create-title">$</div>
                   <mat-form-field class="sc-product__create-width-100">
                     <input type="text" matInput formControlName="unitPrice">
