@@ -1,14 +1,17 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {ProductMainComponent} from './product-main/product-main.component';
-import {ProductCreateComponent} from './product-create/product-create.component';
-import {ProductEditComponent} from './product-edit/product-edit.component';
-import {ProductDraftEditComponent} from './product-draft-edit/product-draft-edit.component';
+import { PromoteMainComponent } from './promote-main/promote-main.component';
+import { PromoteCreateComponent } from './promote-create/promote-create.component';
+import { PromoteEditComponent } from './promote-edit/promote-edit.component';
 
 const routes: Routes = [
   {
-    path: '', component: ProductMainComponent
+    path: '', component: PromoteMainComponent
+  }, {
+    path: 'create', component: PromoteCreateComponent
+  }, {
+    path: 'edit/:id', component: PromoteEditComponent
   }
 ];
 

@@ -1,26 +1,20 @@
 import { NgModule } from '@angular/core';
 
-import { ProductMainComponent } from './product-main/product-main.component';
-import { ProductCreateComponent } from './product-create/product-create.component';
-import { ProductEditComponent } from './product-edit/product-edit.component';
-import { ProductDraftEditComponent } from './product-draft-edit/product-draft-edit.component';
+import { PromoteMainComponent } from './promote-main/promote-main.component';
+import { PromoteCreateComponent } from './promote-create/promote-create.component';
+import { PromoteEditComponent } from './promote-edit/promote-edit.component';
 
-import { ProductItemComponent } from './product-item/product-item.component';
-import { ProductTitleComponent } from './product-title/product-title.component';
-
-import { ImageUploadMainComponent } from './image-upload-main/image-upload-main.component';
-import { ImageUploadAdditionalComponent } from './image-upload-additional/image-upload-additional.component';
-import { ImageUploadColorComponent } from './image-upload-color/image-upload-color.component';
-import { ImageUploadVariantComponent } from './image-upload-variant/image-upload-variant.component';
-import { ImageUploadVariantPreviewComponent } from './image-upload-variant-preview/image-upload-variant-preview.component';
-
-import { SaveProductDialogComponent } from './save-product-dialog/save-product-dialog.component';
-import { PendingProductDialogComponent } from './pending-product-dialog/pending-product-dialog.component';
-import { DeleteVariantDialogComponent } from './delete-variant-dialog/delete-variant-dialog.component';
-import { AddVariantDialogComponent } from './add-variant-dialog/add-variant-dialog.component';
-import { DeleteShippingDialogComponent } from './delete-shipping-dialog/delete-shipping-dialog.component';
-import { EditShippingDialogComponent } from './edit-shipping-dialog/edit-shipping-dialog.component';
-import { AddShippingDialogComponent } from './add-shipping-dialog/add-shipping-dialog.component';
+import { PromoteItemComponent } from './promote-item/promote-item.component';
+import { PromoteTitleComponent } from './promote-title/promote-title.component';
+import { PromoteProductTitleComponent } from  './promote-product-title/promote-product-title.component';
+import { ProductProductItemComponent } from  './promote-product-item/promote-product-item.component';
+import { SelectProductDialogComponent } from  './select-product-dialog/select-product-dialog.component';
+import { SelectProductTitleComponent } from  './select-product-title/select-product-title.component';
+import { SelectProductItemComponent } from  './select-product-item/select-product-item.component';
+import { PaginationComponent } from  './pagination/pagination.component';
+import { ChangeVariantDialogComponent } from  './change-variant-dialog/change-variant-dialog.component';
+import { ProductVariantItemComponent } from './product-variant-item/product-variant-item.component';
+import { ProductVariantTitleComponent } from './product-variant-title/product-variant-title.component';
 
 import { TopicRoutingModule } from './topic.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -34,33 +28,24 @@ import { TopicService } from './topic.service';
   ],
   exports: [],
   declarations: [
-    ProductMainComponent,
-    ProductCreateComponent,
-    ProductEditComponent,
-    ProductItemComponent,
-    ProductTitleComponent,
-    ImageUploadMainComponent,
-    ImageUploadAdditionalComponent,
-    SaveProductDialogComponent,
-    PendingProductDialogComponent,
-    DeleteVariantDialogComponent,
-    ImageUploadColorComponent,
-    ImageUploadVariantComponent,
-    ImageUploadVariantPreviewComponent,
-    AddVariantDialogComponent,
-    DeleteShippingDialogComponent,
-    EditShippingDialogComponent,
-    AddShippingDialogComponent,
-    ProductDraftEditComponent
+    PromoteMainComponent,
+    PromoteItemComponent,
+    PromoteTitleComponent,
+    PromoteCreateComponent,
+    PromoteProductTitleComponent,
+    ProductProductItemComponent,
+    SelectProductDialogComponent,
+    SelectProductTitleComponent,
+    SelectProductItemComponent,
+    PaginationComponent,
+    PromoteEditComponent,
+    ChangeVariantDialogComponent,
+    ProductVariantItemComponent,
+    ProductVariantTitleComponent
   ],
   entryComponents: [
-    SaveProductDialogComponent,
-    PendingProductDialogComponent,
-    DeleteVariantDialogComponent,
-    AddVariantDialogComponent,
-    DeleteShippingDialogComponent,
-    EditShippingDialogComponent,
-    AddShippingDialogComponent
+    SelectProductDialogComponent,
+    ChangeVariantDialogComponent
   ],
   providers: [
     TopicService
