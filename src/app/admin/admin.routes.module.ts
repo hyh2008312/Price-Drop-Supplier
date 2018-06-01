@@ -32,6 +32,9 @@ const routes: Routes = [
       }, {
         path: 'user',
         loadChildren:'./user/user.module#UserModule'
+      }, {
+        path: 'topic',
+        loadChildren:'./topic/topic.module#TopicModule'
       }
     ]
   }, {

@@ -39,8 +39,8 @@ export class TopNavigationComponent implements OnInit {
     isActive: false
   }, {
     id: 5,
-    text: '报告',
-    router: './report',
+    text: '专题',
+    router: './topic',
     isActive: false
   }, {
     id: 6,
