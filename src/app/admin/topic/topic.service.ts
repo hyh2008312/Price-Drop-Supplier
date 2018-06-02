@@ -221,7 +221,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}product/topic/web/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()

@@ -161,6 +161,23 @@ export class ProductService {
       .catch(this.handleError);
   }
 
+  addProductToSelected(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/selected/create/`;
+
+    return this.http.post(url, product, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
   getProductList(params:any): Promise<any> {
 
     let headers = new Headers({

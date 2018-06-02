@@ -33,7 +33,15 @@ export class ProductItemComponent implements OnInit {
 
   delete() {
     let self = this;
+  }
 
+  add() {
+    let self = this;
+    self.adminService.addProductToSelected({
+      products: [{id:self.product.id}]
+    }).then((data) => {
+      console.log(data);
+    });
 
   }
 
