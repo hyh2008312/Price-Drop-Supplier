@@ -135,7 +135,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/create/${params.id}/${params.productId}/`;
+    const url = `${this.baseUrl.url}product/topic/create/${params.id}/`;
 
     return this.http.delete(url, options)
       .toPromise()
