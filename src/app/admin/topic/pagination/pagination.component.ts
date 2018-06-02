@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, OnChanges, Output, EventEmitter} from '@angular/core';
 
 @Component({
-  selector: 'app-promote-pagination',
+  selector: 'app-topic-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['../_topic.scss']
 })

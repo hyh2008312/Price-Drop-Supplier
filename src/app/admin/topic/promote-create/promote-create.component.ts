@@ -27,6 +27,8 @@ export class PromoteCreateComponent implements OnInit {
 
   categoryList: any;
 
+  image: any;
+
   constructor(
     private promoteService: TopicService,
     private dialog: MatDialog,
@@ -36,10 +38,8 @@ export class PromoteCreateComponent implements OnInit {
   ) {
 
     this.promotionForm = this.fb.group({
-      title: ['', Validators.required],
-      type: ['Flash Sale', Validators.required],
-      startTime: ['', Validators.required],
-      endTime: ['', Validators.required]
+      name: ['', Validators.required],
+      image: ['']
     });
   }
 
@@ -60,8 +60,7 @@ export class PromoteCreateComponent implements OnInit {
 
     let params = this.promotionForm.value;
 
-    params.startTime = new Date(params.startTime).getTime() / 1000;
-    params.endTime = new Date(params.endTime).getTime() / 1000;
+    params.image = this.image;
 
     this.promoteService.promotionCreate(this.promotionForm.value).then((data) => {
       if(data) {

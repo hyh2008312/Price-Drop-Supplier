@@ -1,83 +1,23 @@
 <div class="container">
   <div class="md-margin-top-4 sc-promote__create-text">
     <span class="md-dark-secondary xb-pointer" routerLink="../">Promotions</span>
-    <span class="md-dark-secondary">></span> <span class="xb-bold">Create a Campaign</span>
+    <span class="md-dark-secondary">></span> <span class="xb-bold">Create a Activity</span>
   </div>
   <form [formGroup]="promotionForm" novalidate *ngIf="!isEdit">
     <div class="md-margin-top-3 sc-promote__create-bg">
       <div fxLayout="row" fxLayoutAlign="space-between start">
-        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
-          <div class="sc-promote__promote-text xb-bold">Campaign Name</div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
+          <div class="sc-promote__promote-text xb-bold">Activity Name</div>
           <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
             <mat-form-field fxFlex>
-              <input matInput type="text" placeholder="" formControlName="title">
-            </mat-form-field>
-          </div>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
-          <div class="sc-promote__promote-text xb-bold">Campaign Type</div>
-          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-            <mat-form-field fxFlex>
-              <mat-select placeholder="" name="promotion type" formControlName="type">
-                <mat-option *ngFor="let item of campaignType" [value]="item">
-                  {{ item }}
-                </mat-option>
-              </mat-select>
+              <input matInput type="text" placeholder="" formControlName="name">
             </mat-form-field>
           </div>
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="space-between start">
-        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
-          <div *ngIf="promotionForm.get('title').invalid && (promotionForm.get('title').dirty ||
-            promotionForm.get('title').touched)" class="xb-input-error">
-            <div *ngIf="promotionForm.get('title').hasError('required')">
-              This field is required.
-            </div>
-          </div>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
-          <div *ngIf="promotionForm.get('type').invalid && (promotionForm.get('type').dirty ||
-            promotionForm.get('type').touched)" class="xb-input-error">
-            <div *ngIf="promotionForm.get('type').hasError('required')">
-              This field is required.
-            </div>
-          </div>
-        </div>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="start start">
-        <div>
-          <div fxLayout="row" fxLayoutAlign="start center" >
-            <div class="sc-promote__promote-text xb-bold">Start Time</div>
-            <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center">
-              <mat-form-field>
-                <input matInput type="datetime-local" placeholder="" formControlName="startTime">
-              </mat-form-field>
-            </div>
-          </div>
-          <div *ngIf="promotionForm.get('startTime').invalid && (promotionForm.get('startTime').dirty ||
-            promotionForm.get('startTime').touched)" class="xb-input-error">
-            <div *ngIf="promotionForm.get('startTime').hasError('required')">
-              This field is required.
-            </div>
-          </div>
-        </div>
-        <div class="md-margin-left-3">
-          <div fxLayout="row" fxLayoutAlign="start center" >
-            <div class="sc-promote__promote-text xb-bold">End Time</div>
-            <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center">
-              <mat-form-field>
-                <input matInput type="datetime-local" placeholder="" formControlName="endTime">
-              </mat-form-field>
-            </div>
-          </div>
-          <div *ngIf="promotionForm.get('endTime').invalid && (promotionForm.get('endTime').dirty ||
-            promotionForm.get('endTime').touched)" class="xb-input-error">
-            <div *ngIf="promotionForm.get('endTime').hasError('required')">
-              This field is required.
-            </div>
-          </div>
-        </div>
+        <app-topic-image-upload-main [(previewImgFile)]="image"
+                                     [(previewImgSrcs)]="image"></app-topic-image-upload-main>
       </div>
     </div>
 
@@ -95,36 +35,16 @@
   <div *ngIf="isEdit">
     <div class="md-margin-top-3 sc-promote__create-bg">
       <div fxLayout="row" fxLayoutAlign="start center" >
-        <div class="sc-promote__promote-text xb-bold">Campaign Name</div>
+        <div class="sc-promote__promote-text xb-bold">Activity Name</div>
         <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-          {{campaign.title}}
+          {{campaign.name}}
         </div>
       </div>
       <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="space-between start">
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
-          <div class="sc-promote__promote-text xb-bold">Campaign Status</div>
+          <div class="sc-promote__promote-text xb-bold">Activity Banner</div>
           <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-            {{campaign.promotionStatus}}
-          </div>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
-          <div class="sc-promote__promote-text xb-bold">Campaign Type</div>
-          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-            {{campaign.promotionType}}
-          </div>
-        </div>
-      </div>
-      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="space-between start">
-        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
-          <div class="sc-promote__promote-text xb-bold">Start Time</div>
-          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center">
-            {{campaign.startTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}
-          </div>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
-          <div class="sc-promote__promote-text xb-bold">End Time</div>
-          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center">
-            {{campaign.endTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}
+            <img [src]="campaign.image" />
           </div>
         </div>
       </div>

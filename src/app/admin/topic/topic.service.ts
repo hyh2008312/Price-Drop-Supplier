@@ -50,7 +50,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/create/`;
+    const url = `${this.baseUrl.url}product/topic/list/`;
 
     return this.http.post(url, promotion, options)
       .toPromise()
@@ -221,7 +221,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}product/topic/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()

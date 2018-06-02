@@ -16,6 +16,8 @@ import { ChangeVariantDialogComponent } from  './change-variant-dialog/change-va
 import { ProductVariantItemComponent } from './product-variant-item/product-variant-item.component';
 import { ProductVariantTitleComponent } from './product-variant-title/product-variant-title.component';
 
+import { ImageUploadMainComponent } from './image-upload-main/image-upload-main.component'
+
 import { TopicRoutingModule } from './topic.routes.module';
 import { SharedModule } from '../../shared/shared.module';
 
@@ -41,7 +43,8 @@ import { TopicService } from './topic.service';
     PromoteEditComponent,
     ChangeVariantDialogComponent,
     ProductVariantItemComponent,
-    ProductVariantTitleComponent
+    ProductVariantTitleComponent,
+    ImageUploadMainComponent
   ],
   entryComponents: [
     SelectProductDialogComponent,
