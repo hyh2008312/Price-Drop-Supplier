@@ -40,17 +40,17 @@ export class ProductItemComponent implements OnInit {
     self.adminService.addProductToSelected({
       products: [{id:self.product.id}]
     }).then((data) => {
-      this.product.isSelected = true
+      this.product.isSelected = true;
     });
 
   }
 
   deleteSelected() {
     let self = this;
-    self.adminService.addProductToSelected({
-      products: [{id:self.product.id}]
+    self.adminService.deleteProductToSelected({
+      id: self.product.id
     }).then((data) => {
-      console.log(data);
+      this.product.isSelected = false;
     });
 
   }

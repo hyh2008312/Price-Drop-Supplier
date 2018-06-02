@@ -54,4 +54,25 @@ export class PromoteItemComponent implements OnInit {
     });
   }
 
+  publish() {
+    let self = this;
+    let status = false;
+    switch (this.status) {
+      case 1:
+        status = true;
+    }
+    let params = {
+      id: this.promote.id,
+      status: status
+    }
+    this.promoteService.publishPromotion(params).then((data) => {
+      self.promotionChange.emit({
+        index: this.index,
+        promote : data,
+        status: this.status,
+        event: 'delete'
+      });
+    });
+  }
+
 }

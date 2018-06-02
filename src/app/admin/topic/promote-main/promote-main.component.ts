@@ -82,11 +82,11 @@ export class PromoteMainComponent implements OnInit {
 
 
   changeProducts(event) {
-    let status = true;
+    let status = 1;
     let page = this.promoteAllIndex;
     switch (event.index) {
       case 1:
-        status = false;
+        status = 0;
         page = this.promoteScheduledIndex;
         break;
       default:

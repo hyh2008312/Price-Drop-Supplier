@@ -65,7 +65,7 @@ export class SelectProductDialogComponent implements OnInit {
         cat: this.cat,
         q: this.searchKey,
         qt: 'product',
-        pid: this.data.promotionId,
+        status: 'published',
         page: this.page,
         page_size: this.pageSize
       };
@@ -73,11 +73,11 @@ export class SelectProductDialogComponent implements OnInit {
       param = {
         cat: this.cat,
         pid: this.data.promotionId,
+        status: 'published',
         page: this.page,
         page_size: this.pageSize
       }
     }
-
 
     this.promoteService.getPromotionProductList(param).then((data) => {
       this.length = data.count;

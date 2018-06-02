@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { TopicService } from '../topic.service';
 import {SelectProductDialogComponent} from '../select-product-dialog/select-product-dialog.component';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-promote-promote-edit',
@@ -15,6 +16,10 @@ export class PromoteEditComponent implements OnInit {
 
   currency: string = 'USD';
 
+  promotionForm: FormGroup;
+
+  image: any;
+
   campaign: any = {};
 
   categoryList: any;
@@ -23,13 +28,30 @@ export class PromoteEditComponent implements OnInit {
 
   promotionId: any;
 
+  page = 1;
+
+  pageSize = 6;
+
+  length = 1;
+
+  pageSizeOptions = [12];
+
   constructor(
     private promoteService: TopicService,
     private dialog: MatDialog,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
   ) {
+
+    this.promotionForm = this.fb.group({
+      id: ['', Validators.required],
+      name: ['', Validators.required],
+      image: ['']
+    });
+
     this.promotionId = this.activatedRoute.snapshot.params['id'];
     this.getPromotionDetail();
+    this.getPromotionProductList()
   }
 
   ngOnInit(): void {
@@ -47,10 +69,33 @@ export class PromoteEditComponent implements OnInit {
     this.promoteService.getPromotionDetail({
       id
     }).then((data) => {
-      this.campaign = data;
-      this.promotionProducts = data.promotionProducts;
+      this.promotionForm.patchValue({
+        id: data.id,
+        name: data.name,
+        image: data.image
+      });
+      this.image = data.image
     });
   }
+
+  // MatPaginator Output
+  changePage(event) {
+    this.pageSize = event.pageSize;
+    this.page = event.pageIndex + 1;
+    this.getPromotionProductList();
+  }
+
+  getPromotionProductList() {
+    this.promoteService.getSelectedPromotionProductList({
+      topicId: this.promotionId,
+      page: this.page,
+      page_size: this.pageSize
+    }).then((data) => {
+      this.length = data.count;
+      this.promotionProducts = [...data.results];
+    });
+  }
+
 
   changePromotionProduct(event) {
     switch (event.event) {
@@ -64,9 +109,14 @@ export class PromoteEditComponent implements OnInit {
   }
 
   save() {
-    if(this.campaign.title == '') {
-      return false;
+    if(this.promotionForm.invalid) {
+      return;
     }
+
+    let params = this.promotionForm.value;
+
+    params.image = this.image;
+
     this.promoteService.promotionEdit(this.campaign).then((data) => {
       this.campaign = data;
     });

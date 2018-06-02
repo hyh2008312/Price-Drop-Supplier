@@ -67,7 +67,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/detail/${promotion.id}/`;
+    const url = `${this.baseUrl.url}product/topic/detail/${promotion.id}/`;
 
     return this.http.put(url, promotion, options)
       .toPromise()
@@ -84,7 +84,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/detail/${promotion.id}/`;
+    const url = `${this.baseUrl.url}product/topic/detail/${promotion.id}/`;
 
     return this.http.delete(url, options)
       .toPromise()
@@ -101,9 +101,9 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/add/${promotion.promoteId}/`;
+    const url = `${this.baseUrl.url}product/topic/create/${promotion.id}/`;
 
-    return this.http.put(url, promotion, options)
+    return this.http.post(url, promotion, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
@@ -135,7 +135,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/add/${params.id}/`;
+    const url = `${this.baseUrl.url}product/topic/create/${params.id}/${params.productId}/`;
 
     return this.http.delete(url, options)
       .toPromise()
@@ -212,6 +212,23 @@ export class TopicService {
       .catch(this.handleError);
   }
 
+  publishPromotion(promotion:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/topic/detail/${promotion.id}/`;
+
+    return this.http.put(url, promotion, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
   getPromotionList(params:any): Promise<any> {
 
     let headers = new Headers({
@@ -238,7 +255,24 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/list/promotion/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}product/supplier/list/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  getSelectedPromotionProductList(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/topic/products/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -255,7 +289,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/detail/${params.id}/`;
+    const url = `${this.baseUrl.url}product/topic/detail/${params.id}/`;
 
     return this.http.get(url, options)
       .toPromise()

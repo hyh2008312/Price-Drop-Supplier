@@ -42,7 +42,8 @@ export class ProductProductItemComponent implements OnInit {
   delete() {
     let self = this;
     this.promoteService.deletePromotionProduct({
-      id: this.promote.id
+      id: this.promoteId,
+      productId: this.promote.id
     }).then((data) => {
       this.promotionChange.emit({
         index: self.index,

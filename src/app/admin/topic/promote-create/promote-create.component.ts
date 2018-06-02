@@ -25,6 +25,16 @@ export class PromoteCreateComponent implements OnInit {
 
   campaign: any = {};
 
+  page = 1;
+
+  pageSize = 6;
+
+  length = 1;
+
+  pageSizeOptions = [12];
+
+  promotionProducts: any = [];
+
   categoryList: any;
 
   image: any;
@@ -66,7 +76,6 @@ export class PromoteCreateComponent implements OnInit {
       if(data) {
         this.isEdit = true;
         this.campaign = data;
-        console.log(data)
       }
     });
   }
@@ -84,17 +93,8 @@ export class PromoteCreateComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(dialogRef.componentInstance.data.isEdit == true) {
-        self.getPromotionDetail();
+        self.getPromotionProductList();
       }
-    });
-  }
-
-  getPromotionDetail() {
-    let params: any = {
-      id: this.campaign.id
-    };
-    this.promoteService.getPromotionDetail(params).then((data) => {
-      this.campaign = data;
     });
   }
 
@@ -127,6 +127,24 @@ export class PromoteCreateComponent implements OnInit {
     }).then((data) => {
       this.router.navigate(['../'],{relativeTo: this.activatedRoute});
     });
+  }
+
+  getPromotionProductList() {
+    this.promoteService.getSelectedPromotionProductList({
+      topicId: this.campaign.id,
+      page: this.page,
+      page_size: this.pageSize
+    }).then((data) => {
+      this.length = data.count;
+      this.promotionProducts = [...data.results];
+    });
+  }
+
+  // MatPaginator Output
+  changePage(event) {
+    this.pageSize = event.pageSize;
+    this.page = event.pageIndex + 1;
+    this.getPromotionProductList();
   }
 
 }
