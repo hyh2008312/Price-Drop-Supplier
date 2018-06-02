@@ -17,10 +17,6 @@ export class PromoteMainComponent implements OnInit {
   promoteAllIndex = 1;
   promoteScheduled: any = false;
   promoteScheduledIndex = 1;
-  promoteOngoing: any = false;
-  promoteOngoingIndex = 1;
-  promoteEnded: any = false;
-  promoteEndedIndex = 1;
 
   selectedIndex: number = 0;
   subscription: any;
@@ -43,17 +39,11 @@ export class PromoteMainComponent implements OnInit {
     let self = this;
     this.subscription = this.activatedRoute.queryParams.subscribe((data) => {
       switch(data.tab) {
-        case 'all':
+        case 'unpublished':
           self.selectedIndex = 0;
           break;
-        case 'scheduled':
+        case 'published':
           self.selectedIndex = 1;
-          break;
-        case 'ongoing':
-          self.selectedIndex = 2;
-          break;
-        case 'ended':
-          self.selectedIndex = 3;
           break;
         default:
           self.selectedIndex = 0;
@@ -80,12 +70,6 @@ export class PromoteMainComponent implements OnInit {
       case 1:
         this.promoteScheduledIndex = event.pageIndex + 1;
         break;
-      case 2:
-        this.promoteOngoingIndex = event.pageIndex + 1;
-        break;
-      case 3:
-        this.promoteEndedIndex = event.pageIndex + 1;
-        break;
       default:
         break;
     }
@@ -98,20 +82,12 @@ export class PromoteMainComponent implements OnInit {
 
 
   changeProducts(event) {
-    let status = '';
+    let status = true;
     let page = this.promoteAllIndex;
     switch (event.index) {
       case 1:
-        status = 'Scheduled';
+        status = false;
         page = this.promoteScheduledIndex;
-        break;
-      case 2:
-        status = 'Ongoing';
-        page = this.promoteOngoingIndex;
-        break;
-      case 3:
-        status = 'Ended';
-        page = this.promoteEndedIndex;
         break;
       default:
         break;
@@ -128,12 +104,6 @@ export class PromoteMainComponent implements OnInit {
       switch (event.index) {
         case 1:
           self.promoteScheduled = data.results;
-          break;
-        case 2:
-          self.promoteOngoing = data.results;
-          break;
-        case 3:
-          self.promoteEnded = data.results;
           break;
         default:
           self.promoteAll = data.results;
@@ -157,13 +127,6 @@ export class PromoteMainComponent implements OnInit {
         switch(event.event) {
           case 'delete':
             this.promoteScheduled.splice(event.index,1);
-            break;
-        }
-        break;
-      case 2:
-        switch(event.event) {
-          case 'delete':
-            this.promoteOngoing.splice(event.index,1);
             break;
         }
         break;

@@ -66,6 +66,7 @@ export class PromoteCreateComponent implements OnInit {
       if(data) {
         this.isEdit = true;
         this.campaign = data;
+        console.log(data)
       }
     });
   }
