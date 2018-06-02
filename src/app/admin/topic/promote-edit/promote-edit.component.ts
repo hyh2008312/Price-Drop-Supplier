@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { TopicService } from '../topic.service';
 import {SelectProductDialogComponent} from '../select-product-dialog/select-product-dialog.component';
@@ -41,6 +41,7 @@ export class PromoteEditComponent implements OnInit {
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
+    private router: Router
   ) {
 
     this.promotionForm = this.fb.group({
@@ -120,6 +121,7 @@ export class PromoteEditComponent implements OnInit {
 
     this.promoteService.promotionEdit(this.campaign).then((data) => {
       this.campaign = data;
+      this.router.navigate(['../'],{relativeTo: this.activatedRoute});
     });
   }
 

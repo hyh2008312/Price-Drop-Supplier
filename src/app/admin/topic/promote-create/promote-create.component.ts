@@ -109,7 +109,7 @@ export class PromoteCreateComponent implements OnInit {
   }
 
   save() {
-    if(!this.campaign.promotionProducts || this.campaign.promotionProducts.length <= 0) {
+    if(!this.promotionProducts || this.promotionProducts.length <= 0) {
       return this.router.navigate(['../'],{relativeTo: this.activatedRoute});
     }
 
@@ -121,10 +121,7 @@ export class PromoteCreateComponent implements OnInit {
       });
     }
 
-    this.promoteService.changePromotionDiscounts({
-      id: this.campaign.id,
-      discounts
-    }).then((data) => {
+    this.promoteService.promotionEdit(this.campaign).then((data) => {
       this.router.navigate(['../'],{relativeTo: this.activatedRoute});
     });
   }

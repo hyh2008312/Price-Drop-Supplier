@@ -65,15 +65,14 @@ export class SelectProductDialogComponent implements OnInit {
         cat: this.cat,
         q: this.searchKey,
         qt: 'product',
-        status: 'published',
+        topicId: this.data.promotionId,
         page: this.page,
         page_size: this.pageSize
       };
     } else {
       param = {
         cat: this.cat,
-        pid: this.data.promotionId,
-        status: 'published',
+        topicId: this.data.promotionId,
         page: this.page,
         page_size: this.pageSize
       }
