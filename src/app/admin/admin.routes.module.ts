@@ -33,7 +33,7 @@ const routes: Routes = [
         path: 'user',
         loadChildren:'./user/user.module#UserModule'
       }, {
-        path: 'topic',
+        path: 'event',
         loadChildren:'./topic/topic.module#TopicModule'
       }
     ]

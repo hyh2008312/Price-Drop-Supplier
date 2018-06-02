@@ -48,11 +48,11 @@
        fxLayout="column" fxLayoutAlign="space-around center" *ngIf="status == 4">
   </div>
 
-  <div class="sc-product__product-action-buttons"
-       fxLayout="column" fxLayoutAlign="center center" fxFlex="10">
+  <div class="sc-product__product-action-buttons sc__accent-dark"
+       fxLayout="column" fxLayoutAlign="center stretch" fxFlex="15">
+    <button mat-raised-button color="primary" *ngIf="status == 0 && !product.isSelected" (click)="add()">Add To Featured</button>
+    <button mat-raised-button color="accent" *ngIf="status == 0 && product.isSelected" (click)="deleteSelected()">Remove Featured</button>
     <button mat-button color="primary" (click)="edit()">Edit</button>
-    <button mat-button color="primary" *ngIf="status == 0 && !product.isSelected" (click)="add()">Add To Selected</button>
-    <button mat-button color="primary" *ngIf="status == 0 && product.isSelected" (click)="deleteSelected()">Added</button>
     <button mat-button color="primary" *ngIf="status == 3" (click)="publish()">Publish</button>
     <button mat-button color="primary" *ngIf="status == 0" (click)="unpublish()">Unpublish</button>
     <button mat-button color="primary" (click)="delete()">Delete</button>

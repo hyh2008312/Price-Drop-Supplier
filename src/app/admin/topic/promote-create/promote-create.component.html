@@ -1,7 +1,7 @@
 <div class="container">
   <div class="md-margin-top-4 sc-promote__create-text">
-    <span class="md-dark-secondary xb-pointer" routerLink="../">Activity</span>
-    <span class="md-dark-secondary">></span> <span class="xb-bold">Create a Activity</span>
+    <span class="md-dark-secondary xb-pointer" routerLink="../">Events</span>
+    <span class="md-dark-secondary">></span> <span class="xb-bold">Create an Event</span>
   </div>
   <form [formGroup]="promotionForm" novalidate *ngIf="!isEdit">
     <div class="md-margin-top-3 sc-promote__create-bg">
@@ -61,7 +61,7 @@
       <app-promote-product-title></app-promote-product-title>
       <div class="sc-promote__promote-list"
            *ngFor="let item of promotionProducts;let i = index;">
-        <app-promote-product-item [promote]="item" [index]="i"
+        <app-promote-product-item [promote]="item" [index]="i" [promoteId]="campaign.id"
                                   (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
       </div>
       <mat-paginator [length]="length"

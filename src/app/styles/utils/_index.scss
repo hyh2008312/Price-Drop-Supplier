@@ -18,6 +18,8 @@ $theme: mat-light-theme($primary, $accent, $warn);
 
   .mat-raised-button{
     line-height: 32px;
+    font-size: 14px;
+    font-weight: normal;
   }
 }
 

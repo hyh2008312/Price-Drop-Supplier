@@ -43,7 +43,7 @@ export class ProductProductItemComponent implements OnInit {
     let self = this;
     this.promoteService.deletePromotionProduct({
       id: this.promoteId,
-      productId: this.promote.id
+      productId: this.promote.productId
     }).then((data) => {
       this.promotionChange.emit({
         index: self.index,

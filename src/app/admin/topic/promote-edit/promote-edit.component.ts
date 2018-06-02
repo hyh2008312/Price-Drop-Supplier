@@ -69,6 +69,7 @@ export class PromoteEditComponent implements OnInit {
     this.promoteService.getPromotionDetail({
       id
     }).then((data) => {
+      this.campaign = data;
       this.promotionForm.patchValue({
         id: data.id,
         name: data.name,
@@ -136,7 +137,7 @@ export class PromoteEditComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(dialogRef.componentInstance.data.isEdit == true) {
-        self.getPromotionDetail();
+        self.getPromotionProductList();
       }
     });
   }

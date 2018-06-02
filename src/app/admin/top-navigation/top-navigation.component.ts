@@ -40,7 +40,7 @@ export class TopNavigationComponent implements OnInit {
   }, {
     id: 5,
     text: '专题',
-    router: './topic',
+    router: './event',
     isActive: false
   }, {
     id: 6,
