@@ -101,10 +101,10 @@ export class PromoteCreateComponent implements OnInit {
   changePromotionProduct(event) {
     switch(event.event) {
       case 'delete':
-        this.campaign.promotionProducts.splice(event.index, 1);
+        this.promotionProducts.splice(event.index, 1);
         break;
       case 'discount':
-        this.campaign.promotionProducts[event.index] = event.promote;
+        this.promotionProducts[event.index] = event.promote;
     }
   }
 

@@ -102,7 +102,7 @@ export class PromoteEditComponent implements OnInit {
   changePromotionProduct(event) {
     switch (event.event) {
       case 'delete':
-        this.campaign.promotionProducts.splice(event.index, 1);
+        this.promotionProducts.splice(event.index, 1);
         break;
       case 'save':
         this.campaign = event.promote;
