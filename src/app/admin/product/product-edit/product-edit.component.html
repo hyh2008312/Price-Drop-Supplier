@@ -261,7 +261,7 @@
             </div>
             <div formArrayName="variants" *ngIf="attributes.length == 0">
               <div fxLayout="row" fxLayoutAlign="start center">
-                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-align-center"
+                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
                      fxFlex="20">
                   SKU
                 </div>
@@ -353,6 +353,10 @@
                   <div class="sc-product__create-margin-right-3" fxFlex="25" fxLayout="row" fxLayoutAlign="center center">
                     <div class="md-margin-right-2 sc-product__create-title">Rs</div>
                     {{p.value.saleUnitPrice}}
+                  </div>
+                  <div class="sc-product__create-margin-right-3" fxFlex="25" fxLayout="row" fxLayoutAlign="center center">
+                    <div class="md-margin-right-2 sc-product__create-title">Rs</div>
+                    {{p.value.lowestPrice}}
                   </div>
                   <div fxFlex="25" fxLayout="row" fxLayoutAlign="center center">
                     <div class="md-margin-right-2 sc-product__create-title">Rs</div>
