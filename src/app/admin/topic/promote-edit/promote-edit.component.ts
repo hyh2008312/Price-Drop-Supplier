@@ -119,9 +119,9 @@ export class PromoteEditComponent implements OnInit {
 
     params.image = this.image;
 
-    this.promoteService.promotionEdit(this.campaign).then((data) => {
+    this.promoteService.promotionEdit(params).then((data) => {
       this.campaign = data;
-      this.router.navigate(['../'],{relativeTo: this.activatedRoute});
+      this.router.navigate(['../../'],{relativeTo: this.activatedRoute});
     });
   }
 
