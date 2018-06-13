@@ -1,12 +1,10 @@
-<div class="sc-order__product-navigation" fxLayout="row" fxLayoutAlign="start center" *ngIf="status <= 2">
+<div class="sc-order__product-navigation" fxLayout="row" fxLayoutAlign="start center">
   <div fxLayout="row" fxLayoutAlign="start center" fxFlex="75">
     <div class="sc-order__product-width sc-order__product-title-1 sc-order__product-margin-right" fxFlex="none">
       Product
     </div>
-    <div class="sc-order__product-title-1 sc-order__product-margin-right" fxFlex="20"
-         fxLayout="column" fxLayoutAlign="center center">Fulfillment Status</div>
     <div class="sc-order__product-title-1 sc-order__product-margin-right" fxFlex="25"
-         fxLayout="column" fxLayoutAlign="center center">Payment Status</div>
+         fxLayout="column" fxLayoutAlign="center center">Status</div>
     <div class="sc-order__product-title-1" fxFlex="15"
          fxLayout="column" fxLayoutAlign="center center">Quantity</div>
   </div>
@@ -16,17 +14,4 @@
     <div class="sc-order__product-title-1" fxFlex="45"
          fxLayout="column" fxLayoutAlign="center center">Amount</div>
   </div>
-</div>
-<div class="sc-order__product-navigation" fxLayout="row" fxLayoutAlign="start center" *ngIf="status == 3">
-  <div class="sc-order__product-width sc-order__product-title-1 sc-order__product-margin-right" fxFlex="none">
-    Product
-  </div>
-  <div class="sc-order__product-title-1 sc-order__product-margin-right" fxFlex="20"
-       fxLayout="column" fxLayoutAlign="center center">Request Date</div>
-  <div class="sc-order__product-title-1 sc-order__product-margin-right" fxFlex="20"
-       fxLayout="column" fxLayoutAlign="center center">Customer</div>
-  <div class="sc-order__product-title-1 sc-order__product-margin-right" fxFlex="15"
-       fxLayout="column" fxLayoutAlign="center center">Request Type</div>
-  <div class="sc-order__product-title-1" fxFlex="15"
-       fxLayout="column" fxLayoutAlign="center center" >Return Status</div>
 </div>

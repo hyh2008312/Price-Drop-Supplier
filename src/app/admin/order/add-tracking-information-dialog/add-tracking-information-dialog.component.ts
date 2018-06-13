@@ -13,7 +13,7 @@ import { OrderService } from '../order.service';
 export class AddTrackingInformationDialogComponent implements OnInit {
 
   trackingForm : FormGroup;
-  shippingCarrier = ['DHL','EMS'];
+  shippingList = [];
 
   isShippingNumberEdit: boolean = false;
 
@@ -25,14 +25,15 @@ export class AddTrackingInformationDialogComponent implements OnInit {
     private fb: FormBuilder,
     private orderService: OrderService
   ) {
+    this.getShippingList()
     this.trackingForm = this.fb.group({
-      trackingName: ['', Validators.required],
-      trackingURL: ['']
+      shippingNumber: ['', Validators.required],
+      shippingId: ['']
     });
     this.order = data.order;
     this.trackingForm.patchValue({
-      trackingName: this.order.shippingNumber,
-      trackingURL: this.order.shippingPrice.shippingUrl
+      shippingNumber: this.order.shippingNumber,
+      shippingId: this.order.shippingId
     });
   }
 
@@ -51,7 +52,8 @@ export class AddTrackingInformationDialogComponent implements OnInit {
 
     let tracking = {
       id: this.order.id,
-      shippingNumber : this.trackingForm.value.trackingName
+      shippingNumber : this.trackingForm.value.shippingNumber,
+      shippingId: this.trackingForm.value.shippingId
     };
 
     let self = this;
@@ -60,6 +62,12 @@ export class AddTrackingInformationDialogComponent implements OnInit {
       self.data.isShippingNumberEdit = true;
       self.data.order = data;
     });
+  }
+
+  getShippingList() {
+    this.orderService.getSupplyShippingList().then((data) => {
+      this.shippingList = [...data];
+    })
   }
 
 }

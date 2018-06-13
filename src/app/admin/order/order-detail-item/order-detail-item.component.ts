@@ -30,7 +30,7 @@ export class OrderDetailItemComponent implements OnInit {
   isShippingNumberEdit: boolean = false;
   isOrderCancel: boolean = false;
 
-  currency:string = 'USD';
+  currency:string = 'INR';
 
   totalAmount: number = 0;
   netPaymentAmount: number = 0;

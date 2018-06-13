@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status <= 2">
+<div fxLayout="column" fxLayoutAlign="start stretch">
   <div class="sc-order__product-height" fxLayout="row" fxLayoutAlign="start center" >
     <div class="xb-bold">
       {{order.created | amDateFormat:'MMMM Do, YYYY'}}
@@ -11,68 +11,30 @@
       <div class="sc-order__product-item" fxLayout="row" fxLayoutAlign="start center">
         <div class="sc-order__product-width sc-order__product-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
           <div class="sc-order__product-image" fxFlex="none">
-            <img [src]="order.mainImage">
+            <img [src]="order.lines[0].mainImage">
           </div>
           <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
-            <div class="sc-order__product-title" >{{order.title}}</div>
+            <div class="sc-order__product-title" >{{order.lines[0].title}}</div>
             <div fxLayout="row" fxLayoutAlign="start center">
-              {{order.attributes}}
+              {{order.lines[0].attributes}}
             </div>
           </div>
         </div>
         <div class="sc-order__product-margin-right" fxFlex="25"
-             fxLayout="column" fxLayoutAlign="center center">{{order.status}}</div>
-        <div class="sc-order__product-margin-right" fxFlex="25"
-             fxLayout="column" fxLayoutAlign="center center">
-          {{order.paymentStatus}}
-        </div>
+             fxLayout="column" fxLayoutAlign="center center">{{order.orderStatus}}</div>
         <div fxFlex="15"
-             fxLayout="column" fxLayoutAlign="center center">{{order.quantity}}</div>
+             fxLayout="column" fxLayoutAlign="center center">{{order.lines[0].quantity}}</div>
       </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="start start" fxFlex="25">
       <div class="md-margin-right-2 sc-order__product-height-1 xb-bold" fxFlex="55"
            fxLayout="column" fxLayoutAlign="center center">
-        {{order.lastName + ' ' + order.firstName}}
+        {{order.username}}
       </div>
       <div class="sc-order__product-height-1 xb-bold" fxFlex="45"
            fxLayout="column" fxLayoutAlign="center center">
-        {{ order.unitPriceExclTax | currency: currency: true }}
+        {{ order.paymentAmount | currency: currency: true }}
       </div>
-    </div>
-  </div>
-</div>
-<div fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status == 3">
-  <div class="sc-order__product-height" fxLayout="row" fxLayoutAlign="start center" >
-    <div fxFlex>Order #: {{order.line.number}}</div>
-    <div class="text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./return/{{order.id}}">View Details</div>
-  </div>
-  <div class="sc-order__product-item-2" fxLayout="row" fxLayoutAlign="start stretch">
-    <div class="sc-order__product-width sc-order__product-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
-      <div class="sc-order__product-image" fxFlex="none">
-        <img [src]="order.line.variant.imageMain">
-      </div>
-      <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
-        <div class="sc-order__product-title" >{{order.line.title}}</div>
-        <div fxLayout="row" fxLayoutAlign="start center">
-          <div [ngClass]="{'sc-order__product-margin-left': i > 0}"
-               *ngFor="let item of order.line.variant.attributeValues;let i = index;">
-            {{item.value}}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="sc-order__product-margin-right" fxFlex="20"
-         fxLayout="column" fxLayoutAlign="center center"> {{order.created | amDateFormat:'MMMM Do, YYYY'}}</div>
-    <div class="sc-order__product-margin-right" fxFlex="20"
-         fxLayout="column" fxLayoutAlign="center center">
-      {{order.customerName}}
-    </div>
-    <div class="sc-order__product-margin-right" fxFlex="15"
-         fxLayout="column" fxLayoutAlign="center center">{{order.type}}</div>
-    <div fxFlex="15"
-         fxLayout="column" fxLayoutAlign="center center">
-      {{order.status}}
     </div>
   </div>
 </div>

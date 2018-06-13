@@ -17,7 +17,7 @@ export class OrderItemComponent implements OnInit {
   @Input() index: number = 0;
   @Output() productChange = new EventEmitter<any>();
 
-  currency: string = 'USD';
+  currency: string = 'INR';
 
   constructor(
     private adminService: AdminService,

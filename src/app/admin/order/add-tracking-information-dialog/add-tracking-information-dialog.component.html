@@ -18,13 +18,17 @@
     <div fxLayout="row" fxLayoutAlign="start center">
       <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
         <mat-form-field fxFlex>
-          <input type="text" matInput placeholder="Tracking Number" formControlName="trackingName">
+          <input type="text" matInput placeholder="Tracking Number" formControlName="shippingNumber">
         </mat-form-field>
       </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="Tracking URL" formControlName="trackingURL">
+        <mat-select name="shippingProvider" placeholder="Select a Provider" formControlName="shippingId">
+          <mat-option class="md-align-center" *ngFor="let item of shippingList" [value]="item.id">
+            {{ item.shippingProvider }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
   </form>

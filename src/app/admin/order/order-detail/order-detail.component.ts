@@ -15,8 +15,9 @@ import { UserService } from  '../../../shared/services/user/user.service';
 
 export class OrderDetailComponent implements OnInit {
 
-  order: any = {};
-  shippingAddress: any;
+  order: any = {
+    lines: [{}]
+  };
   shippingPrice: any = {};
 
   constructor(
@@ -32,9 +33,6 @@ export class OrderDetailComponent implements OnInit {
       id
     }).then((data) => {
       this.order = data;
-      if(data.shippingAddress) {
-        this.shippingAddress = data.shippingAddress;
-      }
       if(data.shippingPrice) {
         this.shippingPrice = data.shippingPrice;
       }
