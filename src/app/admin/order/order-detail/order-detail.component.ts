@@ -50,6 +50,9 @@ export class OrderDetailComponent implements OnInit {
       case 'cancelFulfillment':
         this.order = $event.order;
         break;
+      case 'audit':
+        this.order = $event.order;
+        break;
     }
   }
 

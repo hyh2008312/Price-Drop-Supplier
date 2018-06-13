@@ -47,10 +47,20 @@
       <div class="md-margin-top-1" fxLayout="column">
         <button mat-raised-button color="accent" (click)="cancelFulfillment()">Cancel Fulfillment</button>
       </div>
+      <div class="md-margin-top-1" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="issueRefund()">Refund</button>
+      </div>
     </div>
     <div fxFlex="none" *ngIf="order.orderStatus == 'Canceled'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center center">
       <div class="sc-order__detail-color xb-bold">{{order.cancelType ? 'Customer' : 'Supplier'}} Canceled</div>
+    </div>
+    <div fxFlex="none" *ngIf="order.orderStatus == 'Audit canceled'" class="sc-order__detail-width-3"
+         fxLayout="column" fxLayoutAlign="center stretch">
+      <button mat-raised-button color="accent" (click)="approveCancel()">Approve Cancel</button>
+      <div class="md-margin-top-1" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="issueRefund()">Refund</button>
+      </div>
     </div>
   </div>
 </div>

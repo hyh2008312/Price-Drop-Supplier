@@ -179,6 +179,24 @@ export class OrderService {
       .catch(this.handleError);
   }
 
+
+  auditCancelOrder(order:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}order/supplier/audit/${order.id}/`;
+
+    return this.http.put(url, order, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
   denyReturnOrderRequest(order:any): Promise<any> {
 
     let headers = new Headers({
@@ -222,7 +240,7 @@ export class OrderService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}order/supplier/refund/${order.id}/`;
+    const url = `${this.baseUrl.url}payment/razorpay/${order.id}/refund/`;
 
     return this.http.put(url, order, options)
       .toPromise()

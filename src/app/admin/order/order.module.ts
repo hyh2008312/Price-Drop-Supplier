@@ -16,6 +16,7 @@ import { DenyRequestDialogComponent } from './deny-request-dialog/deny-request-d
 import { AuthorizeReturnDialogComponent } from './authorize-return-dialog/authorize-return-dialog.component';
 import { ShipExchangeItemDialogComponent } from './ship-exchange-item-dialog/ship-exchange-item-dialog.component';
 import { IssueRefundDialogComponent } from './issue-refund-dialog/issue-refund-dialog.component';
+import { ApproveCancelDialogComponent } from './approve-cancel-dialog/approve-cancel-dialog.component';
 
 import { OrderService } from './order.service';
 
@@ -43,7 +44,8 @@ import { SharedModule } from '../../shared/shared.module';
     DenyRequestDialogComponent,
     AuthorizeReturnDialogComponent,
     ShipExchangeItemDialogComponent,
-    IssueRefundDialogComponent
+    IssueRefundDialogComponent,
+    ApproveCancelDialogComponent
   ],
   entryComponents: [
     AddTrackingInformationDialogComponent,
@@ -52,7 +54,8 @@ import { SharedModule } from '../../shared/shared.module';
     DenyRequestDialogComponent,
     AuthorizeReturnDialogComponent,
     ShipExchangeItemDialogComponent,
-    IssueRefundDialogComponent
+    IssueRefundDialogComponent,
+    ApproveCancelDialogComponent
   ],
   providers: [
     OrderService

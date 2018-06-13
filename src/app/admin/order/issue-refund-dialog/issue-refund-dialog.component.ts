@@ -26,9 +26,9 @@ export class IssueRefundDialogComponent implements OnInit {
       amount: ['', Validators.required]
     });
     if(this.data.order) {
-      this.totalRefund = (parseFloat(this.data.order.line.unitPriceInclTax) * this.data.order.quantity + parseFloat(this.data.order.line.shippingExclTax) * this.data.order.quantity);
+      this.totalRefund = this.data.order.paymentAmount;
       this.moneyForm.patchValue({
-        amount: (this.totalRefund - this.data.order.line.refundAmount)
+        amount: this.totalRefund
       });
 
     }

@@ -12,6 +12,7 @@ import { DenyRequestDialogComponent } from '../deny-request-dialog/deny-request-
 import { AuthorizeReturnDialogComponent } from '../authorize-return-dialog/authorize-return-dialog.component';
 import { ShipExchangeItemDialogComponent } from '../ship-exchange-item-dialog/ship-exchange-item-dialog.component';
 import { IssueRefundDialogComponent } from '../issue-refund-dialog/issue-refund-dialog.component';
+import { ApproveCancelDialogComponent } from '../approve-cancel-dialog/approve-cancel-dialog.component';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
@@ -202,6 +203,27 @@ export class OrderDetailItemComponent implements OnInit {
           index: self.index,
           order: dialogRef.componentInstance.data.order,
           event: 'refund'
+        });
+      }
+    });
+  }
+
+  approveCancel() {
+    let dialogRef = this.dialog.open(ApproveCancelDialogComponent, {
+      data: {
+        order: this.order,
+        isOrderCancel: false
+      }
+    });
+
+    let self = this;
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isOrderCancel == true) {
+        self.productChange.emit({
+          index: self.index,
+          order: dialogRef.componentInstance.data.order,
+          event: 'audit'
         });
       }
     });
