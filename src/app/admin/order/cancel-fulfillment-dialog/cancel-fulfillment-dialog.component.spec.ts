@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SaveProductDialogComponent } from './save-product-dialog.component';
+import { CancelFulfillmentDialogComponent } from './cancel-fulfillment-dialog.component';
 
-describe('SaveProductDialogComponent', () => {
-  let component: SaveProductDialogComponent;
-  let fixture: ComponentFixture<SaveProductDialogComponent>;
+describe('CancelFulfillmentDialogComponent', () => {
+  let component: CancelFulfillmentDialogComponent;
+  let fixture: ComponentFixture<CancelFulfillmentDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SaveProductDialogComponent ]
+      declarations: [ CancelFulfillmentDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SaveProductDialogComponent);
+    fixture = TestBed.createComponent(CancelFulfillmentDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
