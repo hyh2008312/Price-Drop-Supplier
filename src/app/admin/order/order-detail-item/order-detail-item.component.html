@@ -38,9 +38,6 @@
       {{order.orderStatus == 'Audit canceled' ? 'Pending Cancel': order.orderStatus}}</div>
     <div fxFlex="none" *ngIf="order.orderStatus == 'Unpaid'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
-      <div class="md-margin-top-1" fxLayout="column">
-        <button mat-raised-button color="accent" (click)="cancelOrder()">Cancel Order</button>
-      </div>
     </div>
     <div fxFlex="none" *ngIf="order.orderStatus == 'Packing'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
