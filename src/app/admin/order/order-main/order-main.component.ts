@@ -26,6 +26,8 @@ export class OrderMainComponent implements OnInit {
   orderAuditIndex = 1;
   orderCanceled: any = false;
   orderCanceledIndex = 1;
+  orderCompleted: any = false;
+  orderCompletedIndex = 1;
 
   selectedIndex: number = 0;
   subscription: any;
@@ -101,6 +103,9 @@ export class OrderMainComponent implements OnInit {
       case 4:
         this.orderCanceledIndex = event.pageIndex + 1;
         break;
+      case 5:
+        this.orderCompletedIndex = event.pageIndex + 1;
+        break;
     }
     this.changeProducts({index: type});
   }
@@ -140,6 +145,10 @@ export class OrderMainComponent implements OnInit {
         status = 'Canceled';
         page = this.orderCanceledIndex;
         break;
+      case 5:
+        status = 'Completed';
+        page = this.orderCompletedIndex;
+        break;
       default:
         break;
     }
@@ -171,6 +180,9 @@ export class OrderMainComponent implements OnInit {
           break;
         case 4:
           self.orderCanceled = data.results;
+          break;
+        case 5:
+          self.orderCompleted = data.results;
           break;
       }
     });
@@ -205,6 +217,10 @@ export class OrderMainComponent implements OnInit {
           case 'Canceled':
             self.selectedIndex = 4;
             self.orderCanceled = data;
+            break;
+          case 'Completed':
+            self.selectedIndex = 4;
+            self.orderCompleted = data;
             break;
         }
       }

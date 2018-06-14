@@ -242,7 +242,7 @@ export class OrderService {
 
     const url = `${this.baseUrl.url}payment/razorpay/${order.id}/refund/`;
 
-    return this.http.put(url, order, options)
+    return this.http.post(url, order, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);

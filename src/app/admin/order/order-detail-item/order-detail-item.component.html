@@ -34,7 +34,8 @@
       </div>
     </div>
     <div class="sc-order__detail-margin-right" fxFlex="15"
-         fxLayout="column" fxLayoutAlign="center center">{{order.orderStatus}}</div>
+         fxLayout="column" fxLayoutAlign="center center">
+      {{order.orderStatus == 'Audit canceled' ? 'Pending Cancel': order.orderStatus}}</div>
     <div fxFlex="none" *ngIf="order.orderStatus == 'Unpaid'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
       <div class="md-margin-top-1" fxLayout="column">
@@ -51,7 +52,7 @@
         <button mat-raised-button color="accent" (click)="issueRefund()">Refund</button>
       </div>
     </div>
-    <div fxFlex="none" *ngIf="order.orderStatus == 'Shipped'" class="sc-order__detail-width-3"
+    <div fxFlex="none" *ngIf="order.orderStatus == 'Shipped' || order.orderStatus == 'Completed'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
       <button mat-raised-button color="accent" (click)="issueRefund()">Refund</button>
     </div>
@@ -61,7 +62,7 @@
     </div>
     <div fxFlex="none" *ngIf="order.orderStatus == 'Audit canceled'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
-      <button mat-raised-button color="accent" (click)="approveCancel()">Approve Cancel</button>
+      <button mat-raised-button color="accent" (click)="approveCancel()">View Detail</button>
     </div>
   </div>
 </div>

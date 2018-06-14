@@ -3,11 +3,12 @@
     <i class="iconfontXberts icon-ic-close"></i>
   </div>
   <div class="sc-order-dialog__title">
-    Approve Customer Cancel And Refund
+    Order Cancellation Request
   </div>
   <div class="sc-order-dialog__content">
-    <div>Once you approve this fulfillment, the payment will be full refunded to your customer. It will also affect your performance metrics.</div>
-    <div class="md-margin-top-2">Are you sure you want to approve this customer cancel now?</div>
+    <div>Reason: {{data.order.cancelReason}}</div>
+    <div class="md-margin-top-2">Once you approve this request, the order will be cancelled and refunded to customers.
+    If you have already shipped the item, you can disapprove the request. </div>
   </div>
   <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
     <button mat-raised-button color="primary" (click)="approved()">APPROVED</button>
