@@ -61,7 +61,6 @@ export class ProductItemComponent implements OnInit {
       id: self.product.id,
       status: 'published'
     }).then((data) => {
-      console.log(data);
       self.productChange.emit({
         index: this.index,
         product : data,
@@ -79,12 +78,26 @@ export class ProductItemComponent implements OnInit {
       id: self.product.id,
       status: 'unpublished'
     }).then((data) => {
-      console.log(data);
       self.productChange.emit({
         index: this.index,
         product : data,
         status: this.status,
         event: 'unpublish'
+      });
+    });
+  }
+
+  disapprove() {
+    let self = this;
+
+    self.adminService.disapproveProduct({
+      id: self.product.id
+    }).then((data) => {
+      self.productChange.emit({
+        index: this.index,
+        product : data,
+        status: this.status,
+        event: 'disapprove'
       });
     });
   }

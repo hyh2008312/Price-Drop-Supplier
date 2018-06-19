@@ -53,7 +53,8 @@
     <button mat-raised-button color="primary" *ngIf="status == 0 && !product.isSelected" (click)="add()">Add To Featured</button>
     <button mat-raised-button color="accent" *ngIf="status == 0 && product.isSelected" (click)="deleteSelected()">Remove Featured</button>
     <button mat-button color="primary" (click)="edit()">Edit</button>
-    <button mat-button color="primary" *ngIf="status == 3" (click)="publish()">Publish</button>
+    <button mat-button color="primary" *ngIf="status == 1 || status == 3" (click)="publish()">Publish</button>
+    <button mat-button color="primary" *ngIf="status == 1" (click)="disapprove()">Disapprove</button>
     <button mat-button color="primary" *ngIf="status == 0" (click)="unpublish()">Unpublish</button>
     <button mat-button color="primary" (click)="delete()">Delete</button>
   </div>

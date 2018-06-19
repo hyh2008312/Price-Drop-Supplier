@@ -203,7 +203,13 @@ export class ProductMainComponent implements OnInit {
       case 1:
         switch(event.event) {
           case 'delete':
-            this.productDraft.splice(event.index,1);
+            this.productPendingApproval.splice(event.index,1);
+            break;
+          case 'disapprove':
+            this.productPendingApproval.splice(event.index,1);
+            break;
+          case 'publish':
+            this.productPendingApproval.splice(event.index,1);
             break;
         }
         break;

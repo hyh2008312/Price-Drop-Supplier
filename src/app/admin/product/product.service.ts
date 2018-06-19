@@ -161,6 +161,23 @@ export class ProductService {
       .catch(this.handleError);
   }
 
+  disapproveProduct(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/disapprove/${product.id}/`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
   addProductToSelected(product:any): Promise<any> {
 
     let headers = new Headers({

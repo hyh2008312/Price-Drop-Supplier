@@ -209,7 +209,7 @@
                   <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                     <div class="md-margin-right-2 sc-product__create-title">Rs</div>
                     <mat-form-field fxFlex>
-                      <input type="text" matInput placeholder="Original Price" formControlName="unitPrice">
+                      <input type="text" matInput placeholder="Cost Price" formControlName="unitPrice">
                     </mat-form-field>
                   </div>
                 </div>
@@ -218,6 +218,24 @@
                     <div *ngIf="p.get('saleUnitPrice').invalid && (p.get('saleUnitPrice').dirty ||
                     p.get('saleUnitPrice').touched)" class="xb-input-error">
                       <div *ngIf="p.get('saleUnitPrice').hasError('required')">
+                        This field is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                  <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="md-margin-right-2 sc-product__create-title">Rs</div>
+                    <mat-form-field fxFlex>
+                      <input type="text" matInput placeholder="Lowest Price" formControlName="lowestPrice">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                  <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                    <div *ngIf="p.get('lowestPrice').invalid && (p.get('lowestPrice').dirty ||
+                    p.get('lowestPrice').touched)" class="xb-input-error">
+                      <div *ngIf="p.get('lowestPrice').hasError('required')">
                         This field is required.
                       </div>
                     </div>
@@ -246,9 +264,13 @@
                    fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
                 Sale Price
               </div>
+              <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
+                   fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                Lowest Price
+              </div>
               <div class="md-dark-secondary xb-bold"
                    fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
-                Original Price
+                Cost Price
               </div>
             </div>
             <div fxLayout="column" fxLayoutAlign="start stretch" *ngFor="let p of product.controls; let i = index;">
@@ -270,6 +292,12 @@
                   <div class="md-margin-right-2 sc-product__create-title">Rs</div>
                   <mat-form-field class="sc-product__create-width-100">
                     <input type="text" matInput formControlName="saleUnitPrice">
+                  </mat-form-field>
+                </div>
+                <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                  <div class="md-margin-right-2 sc-product__create-title">Rs</div>
+                  <mat-form-field class="sc-product__create-width-100">
+                    <input type="text" matInput formControlName="lowestPrice">
                   </mat-form-field>
                 </div>
                 <div fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
@@ -299,6 +327,12 @@
                     p.get('saleUnitPrice').touched)" class="xb-input-error">
                   <div *ngIf="p.get('saleUnitPrice').hasError('required')">
                     This Sale Price field is required.
+                  </div>
+                </div>
+                <div *ngIf="p.get('lowestPrice').invalid && (p.get('lowestPrice').dirty ||
+                    p.get('lowestPrice').touched)" class="xb-input-error">
+                  <div *ngIf="p.get('lowestPrice').hasError('required')">
+                    This Lowest Price field is required.
                   </div>
                 </div>
               </div>
