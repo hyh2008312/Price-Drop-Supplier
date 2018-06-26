@@ -34,8 +34,8 @@ export class ProductMainComponent implements OnInit {
   pendingSortList = ['Under Review', 'Disapproved'];
   unpublishedSortList = ['Date', 'Most Views', 'Most Orders', 'Highest Conversion'];
 
-  searchCategory = 'SKU';
-  searchList = ['SKU','Product'];
+  searchCategory = 'sku';
+  searchList = ['sku','product'];
 
   selectedIndex: number = 0;
   subscription: any;
@@ -158,12 +158,19 @@ export class ProductMainComponent implements OnInit {
     }
 
     let self = this;
+    let q = this.searchKey;
+    let qt = this.searchCategory
+    if(q == '') {
+      q = null;
+      qt = null;
+    }
 
     this.adminService.getProductList({
       status: relationStatus,
       page: page,
       page_size: this.pageSize,
-      q: this.searchKey
+      q,
+      qt
     }).then((data) => {
       self.length = data.count;
       switch (event.index) {
