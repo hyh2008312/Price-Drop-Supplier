@@ -1,9 +1,10 @@
 <div class="sc__accent-dark" fxLayout="column" fxLayoutAlign="start stretch" *ngIf="status != 2">
   <div class="sc-order__detail-item" fxLayout="row" fxLayoutAlign="start stretch">
     <div class="sc-order__detail-width sc-order__detail-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
-      <div class="sc-order__detail-image" fxFlex="none">
+      <a class="sc-order__detail-image xb-pointer" fxFlex="none"
+           routerLink="/admin/product/edit/{{order.lines[0].productId}}" target="_blank">
         <img [src]="order.lines[0].mainImage">
-      </div>
+      </a>
       <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
         <div>
           <div class="sc-order__product-title-2" >{{order.lines[0].title}}</div>
