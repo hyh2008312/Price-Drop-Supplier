@@ -263,6 +263,23 @@ export class ProductService {
       .catch(this.handleError);
   }
 
+  changeDrop(params: any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/cut/add/${params.id}/`;
+
+    return this.http.put(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
   getProductDetail(params:any): Promise<any> {
 
     let headers = new Headers({

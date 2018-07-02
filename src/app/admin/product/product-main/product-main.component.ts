@@ -300,7 +300,7 @@ export class ProductMainComponent implements OnInit {
       case 6:
         switch(event.event) {
           case 'delete':
-            this.productSelected.splice(event.index,1);
+            this.productDrops.splice(event.index,1);
             break;
         }
         break;

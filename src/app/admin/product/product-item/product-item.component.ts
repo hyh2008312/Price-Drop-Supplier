@@ -45,12 +45,34 @@ export class ProductItemComponent implements OnInit {
 
   }
 
+  addToDrop() {
+    let self = this;
+    self.adminService.changeDrop({
+      id: self.product.id,
+      isDrop: 1
+    }).then((data) => {
+      this.product.isDrop = true;
+    });
+  }
+
   deleteSelected() {
     let self = this;
     self.adminService.deleteProductToSelected({
       id: self.product.id
     }).then((data) => {
       this.product.isSelected = false;
+    });
+
+  }
+
+
+  deleteDrop() {
+    let self = this;
+    self.adminService.changeDrop({
+      id: self.product.id,
+      isDrop: 0
+    }).then((data) => {
+      this.product.isDrop = false;
     });
 
   }
@@ -65,6 +87,22 @@ export class ProductItemComponent implements OnInit {
         product : data,
         status: this.status,
         event: 'selected'
+      });
+    });
+
+  }
+
+  deleteDropNew() {
+    let self = this;
+    self.adminService.changeDrop({
+      id: self.product.id,
+      isDrop: 0
+    }).then((data) => {
+      self.productChange.emit({
+        index: this.index,
+        product : data,
+        status: this.status,
+        event: 'delete'
       });
     });
 
