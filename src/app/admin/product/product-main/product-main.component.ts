@@ -26,6 +26,10 @@ export class ProductMainComponent implements OnInit {
   productDraftIndex = 1;
   productUnpublished: any = false;
   productUnpublishedIndex = 1;
+  productSelected: any = false;
+  productSelectedIndex = 1;
+  productDrops: any = false;
+  productDropsIndex = 1;
 
   publishedSorted = 'Date';
   pendingSorted = 'Under Review';
@@ -88,6 +92,12 @@ export class ProductMainComponent implements OnInit {
         case 'draft':
           self.selectedIndex = 4;
           break;
+        case 'featured':
+          self.selectedIndex = 5;
+          break;
+        case 'drops':
+          self.selectedIndex = 6;
+          break;
         default:
           self.selectedIndex = 0;
           break;
@@ -122,6 +132,12 @@ export class ProductMainComponent implements OnInit {
       case 4:
         this.productDraftIndex = event.pageIndex + 1;
         break;
+      case 5:
+        this.productSelectedIndex = event.pageIndex + 1;
+        break;
+      case 5:
+        this.productDropsIndex = event.pageIndex + 1;
+        break;
       default:
         break;
     }
@@ -132,66 +148,100 @@ export class ProductMainComponent implements OnInit {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
-
   changeProducts(event) {
     let relationStatus = 'published';
     let page = this.productPublishedIndex;
-    switch (event.index) {
-      case 1:
-        relationStatus = 'pending';
-        page = this.productPendingApprovalIndex;
-        break;
-      case 2:
-        relationStatus = 'disapproved';
-        page = this.productDisapprovedIndex;
-        break;
-      case 3:
-        relationStatus = 'unpublished';
-        page = this.productUnpublishedIndex;
-        break;
-      case 4:
-        relationStatus = 'draft';
-        page = this.productDraftIndex;
-        break;
-      default:
-        break;
-    }
-
-    let self = this;
-    let q = this.searchKey;
-    let qt = this.searchCategory
-    if(q == '') {
-      q = null;
-      qt = null;
-    }
-
-    this.adminService.getProductList({
-      status: relationStatus,
-      page: page,
-      page_size: this.pageSize,
-      q,
-      qt
-    }).then((data) => {
-      self.length = data.count;
+    if(event.index < 5) {
       switch (event.index) {
         case 1:
-          self.productPendingApproval = data.results;
+          relationStatus = 'pending';
+          page = this.productPendingApprovalIndex;
           break;
         case 2:
-          self.productDisapproved = data.results;
+          relationStatus = 'disapproved';
+          page = this.productDisapprovedIndex;
           break;
         case 3:
-          self.productUnpublished = data.results;
+          relationStatus = 'unpublished';
+          page = this.productUnpublishedIndex;
           break;
         case 4:
-          self.productDraft = data.results;
+          relationStatus = 'draft';
+          page = this.productDraftIndex;
           break;
         default:
-          self.productPublished = data.results;
           break;
       }
 
-    });
+      let self = this;
+      let q = this.searchKey;
+      let qt = this.searchCategory;
+      if(q == '') {
+        q = null;
+        qt = null;
+      }
+
+      this.adminService.getProductList({
+        status: relationStatus,
+        page: page,
+        page_size: this.pageSize,
+        q,
+        qt
+      }).then((data) => {
+        self.length = data.count;
+        switch (event.index) {
+          case 1:
+            self.productPendingApproval = data.results;
+            break;
+          case 2:
+            self.productDisapproved = data.results;
+            break;
+          case 3:
+            self.productUnpublished = data.results;
+            break;
+          case 4:
+            self.productDraft = data.results;
+            break;
+          default:
+            self.productPublished = data.results;
+            break;
+        }
+
+      });
+    } else if(event.index == 5) {
+
+      page = this.productSelectedIndex;
+      let self = this;
+      let q = this.searchKey;
+      let qt = this.searchCategory;
+      if(q == '') {
+        q = null;
+        qt = null;
+      }
+      this.adminService.getSelectedProductList({
+        page: page,
+        page_size: this.pageSize,
+        q,
+        qt
+      }).then((data) => {
+        self.length = data.count;
+        self.productSelected = data.results;
+
+      });
+    } else if(event.index == 6) {
+
+      page = this.productDropsIndex;
+      let self = this;
+      this.adminService.getDropsProductList({
+        page: page,
+        page_size: this.pageSize
+      }).then((data) => {
+        self.length = data.count;
+        self.productDrops = data.results;
+
+      });
+    }
+
 
   }
 
@@ -237,6 +287,20 @@ export class ProductMainComponent implements OnInit {
             break;
           case 'publish':
             this.productUnpublished.splice(event.index,1);
+            break;
+        }
+        break;
+      case 5:
+        switch(event.event) {
+          case 'selected':
+            this.productSelected.splice(event.index,1);
+            break;
+        }
+        break;
+      case 6:
+        switch(event.event) {
+          case 'delete':
+            this.productSelected.splice(event.index,1);
             break;
         }
         break;

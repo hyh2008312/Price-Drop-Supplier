@@ -55,6 +55,21 @@ export class ProductItemComponent implements OnInit {
 
   }
 
+  deleteSelectedNew() {
+    let self = this;
+    self.adminService.deleteProductToSelected({
+      id: self.product.productId
+    }).then((data) => {
+      self.productChange.emit({
+        index: this.index,
+        product : data,
+        status: this.status,
+        event: 'selected'
+      });
+    });
+
+  }
+
   publish() {
     let self = this;
     self.adminService.publishProduct({
