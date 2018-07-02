@@ -156,10 +156,12 @@ export class ProductItemComponent implements OnInit {
   }
 
   edit() {
-    if(this.status != 4) {
+    if(this.status != 4 && this.status != 5) {
       this.router.navigate([`./edit/${this.product.id}`], {relativeTo: this.activatedRoute});
-    } else {
+    } else if(this.status == 4) {
       this.router.navigate([`./draftedit/${this.product.id}`], {relativeTo: this.activatedRoute});
+    } else if(this.status == 5) {
+      this.router.navigate([`./edit/${this.product.productId}`], {relativeTo: this.activatedRoute});
     }
   }
 
