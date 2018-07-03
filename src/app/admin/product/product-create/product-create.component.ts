@@ -392,7 +392,8 @@ export class ProductCreateComponent implements OnInit {
             stock: [0, Validators.required],
             saleUnitPrice: [0, Validators.required],
             lowestPrice: [0, Validators.required],
-            unitPrice: [0]
+            unitPrice: [0],
+            costPrice: [0]
           }));
         }
       } else {
@@ -404,7 +405,8 @@ export class ProductCreateComponent implements OnInit {
           stock: [0, Validators.required],
           saleUnitPrice: [0, Validators.required],
           lowestPrice: [0, Validators.required],
-          unitPrice: [0]
+          unitPrice: [0],
+          costPrice: [0]
         }));
       }
 
@@ -417,7 +419,8 @@ export class ProductCreateComponent implements OnInit {
         stock: [0, Validators.required],
         saleUnitPrice: [0, Validators.required],
         lowestPrice: [0, Validators.required],
-        unitPrice: [0]
+        unitPrice: [0],
+        costPrice: [0]
       }));
     }
 

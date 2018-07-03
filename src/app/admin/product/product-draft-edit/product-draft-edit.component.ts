@@ -459,7 +459,8 @@ export class ProductDraftEditComponent implements OnInit {
       stock: [variant.variantStockrecord, Validators.required],
       saleUnitPrice: [variant.saleUnitPrice, Validators.required],
       lowestPrice: [variant.lowestPrice, Validators.required],
-      unitPrice: [variant.unitPrice]
+      unitPrice: [variant.unitPrice],
+      costPrice: [variant.costPrice]
     }));
   }
 
@@ -510,7 +511,8 @@ export class ProductDraftEditComponent implements OnInit {
             stock: [0, Validators.required],
             saleUnitPrice: [0, Validators.required],
             lowestPrice: [0, Validators.required],
-            unitPrice: [0]
+            unitPrice: [0],
+            costPrice: [0]
           }));
         }
       } else {
@@ -522,7 +524,8 @@ export class ProductDraftEditComponent implements OnInit {
           stock: [0, Validators.required],
           saleUnitPrice: [0, Validators.required],
           lowestPrice: [0, Validators.required],
-          unitPrice: [0]
+          unitPrice: [0],
+          costPrice: [0]
         }));
       }
 
@@ -535,7 +538,8 @@ export class ProductDraftEditComponent implements OnInit {
         stock: [0, Validators.required],
         saleUnitPrice: [0, Validators.required],
         lowestPrice: [0, Validators.required],
-        unitPrice: [0]
+        unitPrice: [0],
+        costPrice: [0]
       }));
     }
 
