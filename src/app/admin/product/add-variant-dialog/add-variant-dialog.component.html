@@ -77,7 +77,7 @@
       <div fxFlex="46" >
         <div fxLayout="row" fxLayoutAlign="start center" >
           <mat-form-field fxFlex>
-            <input type="text" matInput placeholder="Price" formControlName="saleUnitPrice">
+            <input type="text" matInput placeholder="Sale Price" formControlName="saleUnitPrice">
           </mat-form-field>
         </div>
         <div *ngIf="variantForm.get('saleUnitPrice').invalid && (variantForm.get('saleUnitPrice').dirty ||
@@ -90,7 +90,29 @@
       <div fxFlex="46" >
         <div fxLayout="row" fxLayoutAlign="start center" >
           <mat-form-field fxFlex>
-            <input type="text" matInput placeholder="MSRP(Optional)" formControlName="unitPrice">
+            <input type="text" matInput placeholder="Unit Price" formControlName="unitPrice">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="space-between start" >
+      <div fxFlex="46" >
+        <div fxLayout="row" fxLayoutAlign="start center" >
+          <mat-form-field fxFlex>
+            <input type="text" matInput placeholder="Cost Price" formControlName="costPrice">
+          </mat-form-field>
+        </div>
+        <div *ngIf="variantForm.get('saleUnitPrice').invalid && (variantForm.get('saleUnitPrice').dirty ||
+                    variantForm.get('saleUnitPrice').touched)" class="xb-input-error">
+          <div *ngIf="variantForm.get('saleUnitPrice').hasError('required')">
+            This field is required.
+          </div>
+        </div>
+      </div>
+      <div fxFlex="46" >
+        <div fxLayout="row" fxLayoutAlign="start center" >
+          <mat-form-field fxFlex>
+            <input type="text" matInput placeholder="Lowest Price" formControlName="lowestPrice">
           </mat-form-field>
         </div>
       </div>

@@ -34,6 +34,8 @@ export class AddVariantDialogComponent implements OnInit {
       sku: ['', Validators.required],
       saleUnitPrice: ['', Validators.required],
       unitPrice: ['', Validators.required],
+      costPrice: ['', Validators.required],
+      lowestPrice: ['', Validators.required],
       productId: [this.data.productId, Validators.required],
       stock: ['', Validators.required],
       attributes: this.fb.array([])
