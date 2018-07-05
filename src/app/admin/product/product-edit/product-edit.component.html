@@ -275,29 +275,29 @@
             </div>
             <div formArrayName="variants" *ngIf="attributes.length == 0">
               <div fxLayout="row" fxLayoutAlign="start center">
-                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold"
+                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-caption"
                      fxFlex="25">
                   SKU
                 </div>
-                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center"
-                     fxFlex="15">
+                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center md-caption"
+                     fxFlex="10">
                   Quantity
                 </div>
-                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center"
+                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center md-caption"
                      fxFlex="15">
-                  Sale Price
+                  Sale Price<br>原价
                 </div>
-                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center"
+                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center md-caption"
                      fxFlex="15">
-                  lowest Price
+                  Lowest Price<br>砍最低价
                 </div>
-                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center"
+                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center md-caption"
                      fxFlex="15">
-                  Cost Price
+                  Cost Price<br>成本价
                 </div>
-                <div class="md-dark-secondary xb-bold md-align-center"
+                <div class="md-dark-secondary xb-bold md-align-center md-caption"
                      fxFlex="15">
-                  Unit Price
+                  Unit Price<br>销售价
                 </div>
                 <div class="sc-product__create-width-3" fxFlex="none" >
 
@@ -310,7 +310,7 @@
                       <input class="md-align-center" type="text" matInput formControlName="sku">
                     </mat-form-field>
                   </div>
-                  <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                  <div class="sc-product__create-margin-right-3" fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
                     <mat-form-field class="sc-product__create-width-100">
                       <input class="md-align-center" type="text" matInput formControlName="stock">
                     </mat-form-field>
@@ -371,7 +371,7 @@
                   <div class="sc-product__create-margin-right-2" fxFlex="25">
                     {{p.value.sku}}
                   </div>
-                  <div class="sc-product__create-margin-right-2 md-align-center" fxFlex="15">
+                  <div class="sc-product__create-margin-right-2 md-align-center" fxFlex="10">
                     {{p.value.stock}}
                   </div>
                   <div class="sc-product__create-margin-right-2" fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
@@ -419,22 +419,22 @@
           <div class="md-margin-top-3">
             <div >
               <div fxLayout="row" fxLayoutAlign="start center">
-                <div class="sc-product__create-margin-right-1 sc-product__create-width-6 md-dark-secondary xb-bold"
+                <div class="sc-product__create-margin-right-1 sc-product__create-width-6 md-dark-secondary xb-bold md-caption"
                      fxFlex="none" fxLayout="row" fxLayoutAlign="start center">
                   Country
                 </div>
-                <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold md-align-center" fxFlex="15">
+                <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold md-caption" fxFlex="15">
                   Method
                 </div>
-                <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold md-align-center"
-                     fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
+                <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold md-caption"
+                     fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                   Carrier
                 </div>
-                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-align-center"
-                     fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
+                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-caption"
+                     fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                   Cost
                 </div>
-                <div class="md-dark-secondary xb-bold md-align-center"
+                <div class="md-dark-secondary xb-bold md-caption"
                      fxFlex="15">
                   Time
                 </div>
@@ -448,16 +448,16 @@
                       <div *ngIf="item.id == p.countryId">{{item.name}}</div>
                     </ng-container>
                   </div>
-                  <div class="sc-product__create-margin-right-1 md-align-center" fxFlex="15">
+                  <div class="sc-product__create-margin-right-1" fxFlex="15">
                     {{p.type}}
                   </div>
-                  <div class="sc-product__create-margin-right-1 md-align-center" fxFlex="15" >
+                  <div class="sc-product__create-margin-right-1" fxFlex="15" >
                     {{p.shippingName}}
                   </div>
-                  <div class="sc-product__create-margin-right-3 md-align-center" fxFlex="15">
+                  <div class="sc-product__create-margin-right-3" fxFlex="15">
                     {{p.priceItem}}
                   </div>
-                  <div class="md-align-center" fxFlex="15">
+                  <div fxFlex="15">
                     {{p.shippingTimeMin}} - {{p.shippingTimeMax}} days
                   </div>
                   <div class="sc-product__create-width-3" fxLayout="row" fxLayoutAlign="start center" fxFlex="none">
