@@ -27,7 +27,7 @@
             <mat-paginator [length]="length"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
-                           (page)="changePage($event, 1)"
+                           (page)="changePage($event, 0)"
                            *ngIf="orderUnpaid && orderUnpaid.length > 0">
             </mat-paginator>
             <div class="sc-order__product-none" fxLayout="row" fxLayoutAlign="center center"
@@ -53,7 +53,7 @@
             <mat-paginator [length]="length"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
-                           (page)="changePage($event, 2)"
+                           (page)="changePage($event, 1)"
                            *ngIf="orderPacking && orderPacking.length > 0">
             </mat-paginator>
             <div class="sc-order__product-none" fxLayout="row" fxLayoutAlign="center center"
@@ -79,7 +79,7 @@
             <mat-paginator [length]="length"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
-                           (page)="changePage($event, 3)"
+                           (page)="changePage($event, 2)"
                            *ngIf="orderShipped && orderShipped.length > 0">
             </mat-paginator>
             <div class="sc-order__product-none" fxLayout="row" fxLayoutAlign="center center"
@@ -105,7 +105,7 @@
             <mat-paginator [length]="length"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
-                           (page)="changePage($event, 1)"
+                           (page)="changePage($event, 3)"
                            *ngIf="orderAudit && orderAudit.length > 0">
             </mat-paginator>
             <div class="sc-order__product-none" fxLayout="row" fxLayoutAlign="center center"
@@ -125,7 +125,7 @@
           <div class="sc-order__product-bg" fxLayout="column">
             <div class="md-margin-bottom-2">
               <div class="sc-order__product-list" *ngFor="let item of orderCanceled;let i = index;" >
-                <app-order-item [status]="3" [index]="i" (productChange)="productChange($event)" [order]="item"></app-order-item>
+                <app-order-item [status]="4" [index]="i" (productChange)="productChange($event)" [order]="item"></app-order-item>
               </div>
             </div>
             <mat-paginator [length]="length"
@@ -151,7 +151,7 @@
           <div class="sc-order__product-bg" fxLayout="column">
             <div class="md-margin-bottom-2">
               <div class="sc-order__product-list" *ngFor="let item of orderCompleted;let i = index;" >
-                <app-order-item [status]="3" [index]="i" (productChange)="productChange($event)" [order]="item"></app-order-item>
+                <app-order-item [status]="5" [index]="i" (productChange)="productChange($event)" [order]="item"></app-order-item>
               </div>
             </div>
             <mat-paginator [length]="length"

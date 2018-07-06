@@ -135,7 +135,7 @@ export class ProductMainComponent implements OnInit {
       case 5:
         this.productSelectedIndex = event.pageIndex + 1;
         break;
-      case 5:
+      case 6:
         this.productDropsIndex = event.pageIndex + 1;
         break;
       default:
