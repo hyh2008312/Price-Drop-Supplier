@@ -138,7 +138,7 @@ export class OrderMainComponent implements OnInit {
         page = this.orderShippedIndex;
         break;
       case 3:
-        status = 'Audit Canceled';
+        status = 'Audit canceled';
         page = this.orderAuditIndex;
         break;
       case 4:
@@ -200,27 +200,27 @@ export class OrderMainComponent implements OnInit {
         switch (data[0].orderStatus) {
           case 'Unpaid':
             self.selectedIndex = 0;
-            self.orderUnpaid = data;
+            self.orderUnpaid = [...data];
             break;
           case 'Packing':
             self.selectedIndex = 1;
-            self.orderPacking = data;
+            self.orderPacking = [...data];
             break;
           case 'Shipped':
             self.selectedIndex = 2;
-            self.orderShipped = data;
+            self.orderShipped = [...data];
             break;
-          case 'Audit Canceled':
+          case 'Audit canceled':
             self.selectedIndex = 3;
-            self.orderAudit = data;
+            self.orderAudit = [...data];
             break;
           case 'Canceled':
             self.selectedIndex = 4;
-            self.orderCanceled = data;
+            self.orderCanceled = [...data];
             break;
           case 'Completed':
-            self.selectedIndex = 4;
-            self.orderCompleted = data;
+            self.selectedIndex = 5;
+            self.orderCompleted = [...data];
             break;
         }
       }
