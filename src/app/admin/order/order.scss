@@ -120,6 +120,16 @@
       background-color: $whiteColor;
     }
 
+    &-item-3{
+      padding: 16px;
+      background-color: $whiteColor;
+      border-top: 1px solid rgba(0,0,0,.12);
+    }
+
+    &-item-left{
+      width: 150px;
+    }
+
     &-list{
       margin-top: 16px;
     }
