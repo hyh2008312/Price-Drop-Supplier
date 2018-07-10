@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response , Headers , RequestOptions } from '@angular/http';
+import {Router} from '@angular/router';
 
 import 'rxjs/add/operator/toPromise';
 import{ Subject, BehaviorSubject } from 'rxjs';
@@ -10,7 +11,10 @@ import { AuthenticationService } from '../../shared/services/authentication/auth
 @Injectable()
 export class OrderService {
 
-  constructor( private http: Http, private baseUrl: BaseApi, private auth: AuthenticationService) { }
+  constructor( private http: Http, private baseUrl: BaseApi, private auth: AuthenticationService,
+               public router: Router) {
+
+  }
 
   createAuthorizationHeader(headers: Headers) {
 
@@ -56,7 +60,9 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
   getReturnOrderList(params:any): Promise<any> {
@@ -73,7 +79,9 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
 
@@ -91,7 +99,9 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
   getReturnOrderDetail(params:any): Promise<any> {
@@ -108,7 +118,9 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
   getSupplyOrderResult(params:any): Promise<any> {
@@ -125,7 +137,9 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
   getSupplyShippingList(): Promise<any> {
@@ -142,7 +156,9 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
   changeTrackingInformation(tracking:any): Promise<any> {
@@ -159,7 +175,9 @@ export class OrderService {
     return this.http.put(url, tracking, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
   cancelOrder(order:any): Promise<any> {
@@ -176,7 +194,9 @@ export class OrderService {
     return this.http.put(url, order, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
 
@@ -194,7 +214,9 @@ export class OrderService {
     return this.http.put(url, order, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
   denyReturnOrderRequest(order:any): Promise<any> {
@@ -211,7 +233,9 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
   authorizeReturnOrderRequest(order:any): Promise<any> {
@@ -228,7 +252,9 @@ export class OrderService {
     return this.http.put(url, order, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
   refund(order:any): Promise<any> {
@@ -245,7 +271,9 @@ export class OrderService {
     return this.http.post(url, order, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
   changeShippingMethod(order:any): Promise<any> {
@@ -262,7 +290,9 @@ export class OrderService {
     return this.http.put(url, order, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
   getShippingList(country: any): Promise<any> {
@@ -279,7 +309,9 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
   getCountryList(): Promise<any> {
@@ -296,7 +328,9 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
   getStateList(country:any): Promise<any> {
@@ -313,12 +347,20 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => {
+        this.handleError(error, this)
+      });
   }
 
-  private handleError (error: Response | any) {
+  private handleError (error: Response | any, target?: any) {
     let errMsg: string;
     if (error instanceof Response) {
+      if(error.status == 401) {
+        if(target) {
+          target.router.navigate(['/account/login']);
+        }
+        return Promise.reject(401);
+      }
       const body = error.json() || '';
       const err = body.error || body;
       if(err.detail) {

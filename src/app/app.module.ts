@@ -18,6 +18,7 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AuthenticationModule } from './shared/services/authentication/index';
 import { UserModule } from './shared/services/user/user.module';
+import { GuardLinkService } from './shared/services/guard-link/guard-link.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { UserModule } from './shared/services/user/user.module';
     UserModule,
     Angulartics2Module.forRoot([ Angulartics2GoogleTagManager ])
   ],
-  providers: [BaseApi, SystemConstant, DataApi, BlogCover,HttpClientModule],
+  providers: [BaseApi, SystemConstant, DataApi, BlogCover, HttpClientModule, GuardLinkService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

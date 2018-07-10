@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { LoginService } from '../login.service';
 import { AuthenticationService } from '../../shared/services/authentication/authentication.service';
 import { UserService } from '../../shared/services/user/user.service';
+import { GuardLinkService } from '../../shared/services/guard-link/guard-link.service';
 
 import { AuthService } from "angular2-social-login";
-import { SystemConstant } from '../../config/app.api';
 
 @Component({
   selector: 'app-login',
@@ -42,13 +42,18 @@ export class LoginComponent implements OnInit {
   facebookLoginSub: any;
   googleLoginSub: any;
 
+  loginLink: any = false;
+  sub: any;
+
   constructor(
     private router: Router,
     private service: LoginService,
     private fb: FormBuilder,
     private auth: AuthenticationService,
     private userService: UserService,
-    public _auth: AuthService
+    public _auth: AuthService,
+    private changeDetectorRef:ChangeDetectorRef,
+    private guardLinkService: GuardLinkService
   ) {
     this.loginGroup = this.fb.group({
       username: ['', [
@@ -61,6 +66,11 @@ export class LoginComponent implements OnInit {
 
     this.loginGroup.valueChanges.subscribe(data => this.onValueChanged(data));
 
+    this.sub = this.guardLinkService.routerLink.subscribe((data) => {
+      if(data) {
+        this.loginLink = data;
+      }
+    });
   }
 
 
@@ -140,7 +150,6 @@ export class LoginComponent implements OnInit {
 
                   if(res.user && res.user.isInvite) {
                     self.router.navigate(['/admin']);
-
                   } else {
                     self.router.navigate(['/account/invitation']);
                   }
