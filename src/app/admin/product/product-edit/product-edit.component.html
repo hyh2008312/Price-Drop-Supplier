@@ -178,7 +178,7 @@
                   </div>
                   <div class="sc-product__create-margin-right-3" fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
                     <mat-form-field class="sc-product__create-width-100">
-                      <input class="md-align-center" type="text" matInput formControlName="stock">
+                      <input class="md-align-center" type="text" matInput formControlName="variantStockrecord">
                     </mat-form-field>
                   </div>
                   <div class="sc-product__create-margin-right-3" fxFlex="12" fxLayout="row" fxLayoutAlign="start center">
@@ -214,9 +214,9 @@
                   </div>
                 </div>
                 <div [formGroupName]="i" *ngIf="p.value.isEdit">
-                  <div *ngIf="p.get('stock').invalid && (p.get('stock').dirty ||
-                    p.get('stock').touched)" class="xb-input-error">
-                    <div *ngIf="p.get('stock').hasError('required')">
+                  <div *ngIf="p.get('variantStockrecord').invalid && (p.get('variantStockrecord').dirty ||
+                    p.get('variantStockrecord').touched)" class="xb-input-error">
+                    <div *ngIf="p.get('variantStockrecord').hasError('required')">
                       The Quantity field is required.
                     </div>
                   </div>
@@ -244,7 +244,7 @@
                     {{p.value.sku}}
                   </div>
                   <div class="sc-product__create-margin-right-3 md-align-center" fxFlex="10">
-                    {{p.value.stock}}
+                    {{p.value.variantStockrecord}}
                   </div>
                   <div class="sc-product__create-margin-right-3" fxFlex="12" fxLayout="row" fxLayoutAlign="start center">
                     <div class="md-margin-right-2 sc-product__create-title">Rs</div>
@@ -312,7 +312,7 @@
                   </div>
                   <div class="sc-product__create-margin-right-3" fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
                     <mat-form-field class="sc-product__create-width-100">
-                      <input class="md-align-center" type="text" matInput formControlName="stock">
+                      <input class="md-align-center" type="text" matInput formControlName="variantStockrecord">
                     </mat-form-field>
                   </div>
                   <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
@@ -348,9 +348,9 @@
                   </div>
                 </div>
                 <div [formGroupName]="i" *ngIf="p.value.isEdit">
-                  <div *ngIf="p.get('stock').invalid && (p.get('stock').dirty ||
-                    p.get('stock').touched)" class="xb-input-error">
-                    <div *ngIf="p.get('stock').hasError('required')">
+                  <div *ngIf="p.get('variantStockrecord').invalid && (p.get('stock').dirty ||
+                    p.get('variantStockrecord').touched)" class="xb-input-error">
+                    <div *ngIf="p.get('variantStockrecord').hasError('required')">
                       The Quantity field is required.
                     </div>
                   </div>
@@ -372,7 +372,7 @@
                     {{p.value.sku}}
                   </div>
                   <div class="sc-product__create-margin-right-2 md-align-center" fxFlex="10">
-                    {{p.value.stock}}
+                    {{p.value.variantStockrecord}}
                   </div>
                   <div class="sc-product__create-margin-right-2" fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
                     <div class="md-margin-right-2 sc-product__create-title">Rs</div>

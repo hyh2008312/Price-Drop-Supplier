@@ -348,7 +348,7 @@ export class ProductEditComponent implements OnInit {
       attributes: [attribute],
       mainImage: [variant.mainImage?variant.mainImage: ''],
       sku: [variant.sku, Validators.required],
-      stock: [variant.stock, Validators.required],
+      variantStockrecord: [variant.variantStockrecord, Validators.required],
       saleUnitPrice: [variant.saleUnitPrice, Validators.required],
       lowestPrice: [variant.lowestPrice, Validators.required],
       unitPrice: [variant.unitPrice],
