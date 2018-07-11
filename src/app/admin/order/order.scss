@@ -411,3 +411,58 @@
   }
 
 }
+
+
+.sc-product{
+
+  &__search{
+    border-bottom: 2px solid $blackColor;
+    height: 32px;
+    margin: 16px 0;
+    position: relative;
+
+    >i{
+      margin: 0 16px 0 0;
+      color: $blackColor;
+    }
+
+    >input{
+      border: none;
+      background-color: transparent;
+      width: 150px;
+    }
+
+    &-close{
+      position: absolute;
+      cursor: pointer;
+      right: 0;
+      top: 50%;
+      @include transform(translateY(-50%));
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      background-color: rgba(0,0,0,.54);
+      >i{
+        font-size: 12px;
+        line-height: 12px;
+        color: $whiteColor;
+      }
+    }
+
+    &-result{
+      color: $primaryColor;
+    }
+
+    &-margin-top{
+      margin-top: 10px;
+    }
+  }
+
+  &__product {
+
+    &-sort {
+      width: 140px;
+      text-align: center;
+    }
+  }
+}

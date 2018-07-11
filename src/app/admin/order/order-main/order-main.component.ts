@@ -33,10 +33,16 @@ export class OrderMainComponent implements OnInit {
   subscription: any;
 
   searchKey: any = '';
+  searchPackingKey: any = '';
   isSearch: boolean = false;
   isSearchResult: boolean = false;
+  isSearchPackingResult: boolean = false;
   searchResult: any;
   searchForm: FormGroup;
+  searchPackingForm: FormGroup;
+
+  searchCategory = 'sku';
+  searchList = ['sku','username'];
 
   // MatPaginator Inputs
   length:number = 0;
@@ -52,6 +58,10 @@ export class OrderMainComponent implements OnInit {
   ) {
     this.searchForm = this.fb.group({
       searchKey: ['']
+    });
+
+    this.searchPackingForm = this.fb.group({
+      searchPackingKey: ['']
     });
 
     this.searchForm.valueChanges.subscribe(data => this.onValueChanged(data));
@@ -225,6 +235,31 @@ export class OrderMainComponent implements OnInit {
         }
       }
     });
+  }
+
+  searchPackingResult() {
+    let self = this;
+    self.isSearchPackingResult = true;
+
+    let params: any = {
+      status: 'Packing',
+      sku: self.searchPackingKey
+    };
+
+    if(this.searchCategory == 'username') {
+      params = {
+        status: 'Packing',
+        username: self.searchPackingKey
+      };
+    }
+
+    this.orderService.getSupplyOrderPackingResult(params).then((data) => {
+      self.orderPacking = [...data];
+    });
+  }
+
+  clearSearchPackingKey() {
+    this.searchPackingKey = '';
   }
 
   productChange(event) {
