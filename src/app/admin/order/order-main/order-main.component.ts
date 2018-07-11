@@ -241,6 +241,8 @@ export class OrderMainComponent implements OnInit {
     let self = this;
     self.isSearchPackingResult = true;
 
+    if(self.searchPackingKey == '') return;
+
     let params: any = {
       status: 'Packing',
       sku: self.searchPackingKey
