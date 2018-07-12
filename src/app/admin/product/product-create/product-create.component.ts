@@ -390,9 +390,9 @@ export class ProductCreateComponent implements OnInit {
             mainImage: [image],
             sku: ['', Validators.required],
             stock: [0, Validators.required],
-            saleUnitPrice: [0, Validators.required],
-            lowestPrice: [0, Validators.required],
-            unitPrice: [0],
+            saleUnitPrice: [1, Validators.required],
+            lowestPrice: [1, Validators.required],
+            unitPrice: [1, Validators.required],
             costPrice: [0]
           }));
         }
@@ -403,9 +403,9 @@ export class ProductCreateComponent implements OnInit {
           mainImage: [''],
           sku: ['', Validators.required],
           stock: [0, Validators.required],
-          saleUnitPrice: [0, Validators.required],
-          lowestPrice: [0, Validators.required],
-          unitPrice: [0],
+          saleUnitPrice: [1, Validators.required],
+          lowestPrice: [1, Validators.required],
+          unitPrice: [1, Validators.required],
           costPrice: [0]
         }));
       }
@@ -417,9 +417,9 @@ export class ProductCreateComponent implements OnInit {
         mainImage: [''],
         sku: ['', Validators.required],
         stock: [0, Validators.required],
-        saleUnitPrice: [0, Validators.required],
-        lowestPrice: [0, Validators.required],
-        unitPrice: [0],
+        saleUnitPrice: [1, Validators.required],
+        lowestPrice: [1, Validators.required],
+        unitPrice: [1, Validators.required],
         costPrice: [0]
       }));
     }
