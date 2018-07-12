@@ -7,6 +7,10 @@ import 'rxjs/add/operator/map';
 import { OrderService } from '../order.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 
+import { utils, write, WorkBook } from 'xlsx';
+
+import { saveAs } from 'file-saver';
+
 @Component({
   selector: 'app-order-main',
   templateUrl: './order-main.component.html',
@@ -265,6 +269,44 @@ export class OrderMainComponent implements OnInit {
   }
 
   productChange(event) {
+
+  }
+
+  export(): void {
+    const ws_name = 'SomeSheet';
+    const wb: WorkBook = { SheetNames: [], Sheets: {} };
+    let packing: any = [];
+
+    for(let item of this.orderPacking) {
+      let orderItem: any = {};
+      orderItem.orderNumber = item.number;
+      orderItem.mainImage = item.lines[0].mainImage;
+      orderItem.productTitle = item.lines[0].title;
+      orderItem.sku = item.lines[0].sku;
+      orderItem.created = item.created.split('T')[0];
+      orderItem.username = item.username;
+      orderItem.quantity = item.lines[0].quantity;
+      orderItem.email = item.email;
+      orderItem.phoneNumber = item.phoneNumber;
+      orderItem.address = item.address;
+      packing.push(orderItem);
+    }
+
+    const ws: any = utils.json_to_sheet(packing);
+    wb.SheetNames.push(ws_name);
+    wb.Sheets[ws_name] = ws;
+    const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+    function s2ab(s) {
+      const buf = new ArrayBuffer(s.length);
+      const view = new Uint8Array(buf);
+      for (let i = 0; i !== s.length; ++i) {
+        view[i] = s.charCodeAt(i) & 0xFF;
+      }
+      return buf;
+    }
+
+    saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), 'exported.xlsx');
 
   }
 

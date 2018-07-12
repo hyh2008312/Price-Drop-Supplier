@@ -53,6 +53,7 @@
     "throng": "^4.0.0",
     "web-animations-js": "^2.3.1",
     "webpack": "^3.8.1",
+    "xlsx": "^0.13.2",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
