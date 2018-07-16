@@ -27,10 +27,11 @@
           <div class="md-margin-top-1 md-align-right">Total:&nbsp;</div>
         </div>
         <div class="md-margin-left-2">
-          <div>{{order.lines[0].priceExclTax | currency: currency: true}}</div>
-          <div class="md-margin-top-1">{{order.lines[0].shippingExclTax | currency: currency: true}}</div>
+          <div *ngIf="order.orderType=='Cut'">{{order.totalExclTax | currency: currency: true}}</div>
+          <div *ngIf="order.orderType=='Normal'">{{cutAmount | currency: currency: true}}</div>
+          <div class="md-margin-top-1">{{order.shippingExclTax | currency: currency: true}}</div>
           <div class="md-margin-top-1">$0</div>
-          <div class="md-margin-top-1">{{order.lines[0].paymentPrice  | currency: currency: true}}</div>
+          <div class="md-margin-top-1">{{order.paymentAmount  | currency: currency: true}}</div>
         </div>
       </div>
     </div>

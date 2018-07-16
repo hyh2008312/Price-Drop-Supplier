@@ -53,6 +53,10 @@ export class ProductMainComponent implements OnInit {
   pageSize = 12;
   pageSizeOptions = [6, 12];
 
+  isSuperuser: boolean = false;
+
+  userPermission: any = [false, true, true, false, false, true, true];
+
   constructor(
     private adminService: ProductService,
     private userService: UserService,
@@ -60,6 +64,14 @@ export class ProductMainComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {
+
+    this.userService.currentUser.subscribe((data) => {
+      if(data) {
+        if(data.isStaff && data.isSuperuser) {
+          this.isSuperuser = true
+        }
+      }
+    });
 
     this.searchForm = this.fb.group({
       searchKey: ['']
@@ -87,16 +99,16 @@ export class ProductMainComponent implements OnInit {
           self.selectedIndex = 1;
           break;
         case 'unpublished':
-          self.selectedIndex = 3;
+          self.selectedIndex = 2;
           break;
         case 'draft':
-          self.selectedIndex = 4;
+          self.selectedIndex = 3;
           break;
         case 'featured':
-          self.selectedIndex = 5;
+          self.selectedIndex = 4;
           break;
         case 'drops':
-          self.selectedIndex = 6;
+          self.selectedIndex = 5;
           break;
         default:
           self.selectedIndex = 0;
@@ -116,31 +128,46 @@ export class ProductMainComponent implements OnInit {
   // MatPaginator Output
   changePage(event, type) {
     this.pageSize = event.pageSize;
-    switch (type) {
-      case 0:
-        this.productPublishedIndex = event.pageIndex + 1;
-        break;
-      case 1:
-        this.productPendingApprovalIndex = event.pageIndex + 1;
-        break;
-      case 2:
-        this.productDisapprovedIndex = event.pageIndex + 1;
-        break;
-      case 3:
-        this.productUnpublishedIndex = event.pageIndex + 1;
-        break;
-      case 4:
-        this.productDraftIndex = event.pageIndex + 1;
-        break;
-      case 5:
-        this.productSelectedIndex = event.pageIndex + 1;
-        break;
-      case 6:
-        this.productDropsIndex = event.pageIndex + 1;
-        break;
-      default:
-        break;
+    if(this.isSuperuser) {
+      switch (type) {
+        case 0:
+          this.productPublishedIndex = event.pageIndex + 1;
+          break;
+        case 1:
+          this.productPendingApprovalIndex = event.pageIndex + 1;
+          break;
+        case 2:
+          this.productDisapprovedIndex = event.pageIndex + 1;
+          break;
+        case 3:
+          this.productUnpublishedIndex = event.pageIndex + 1;
+          break;
+        case 4:
+          this.productDraftIndex = event.pageIndex + 1;
+          break;
+        case 5:
+          this.productSelectedIndex = event.pageIndex + 1;
+          break;
+        case 6:
+          this.productDropsIndex = event.pageIndex + 1;
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (type) {
+        case 0:
+          this.productPublishedIndex = event.pageIndex + 1;
+          break;
+        case 1:
+          this.productUnpublishedIndex = event.pageIndex + 1;
+          break;
+        case 2:
+          this.productDraftIndex = event.pageIndex + 1;
+          break;
+      }
     }
+
     this.changeProducts({index: type});
   }
 
@@ -152,26 +179,42 @@ export class ProductMainComponent implements OnInit {
     let relationStatus = 'published';
     let page = this.productPublishedIndex;
     if(event.index < 5) {
-      switch (event.index) {
-        case 1:
-          relationStatus = 'pending';
-          page = this.productPendingApprovalIndex;
-          break;
-        case 2:
-          relationStatus = 'disapproved';
-          page = this.productDisapprovedIndex;
-          break;
-        case 3:
-          relationStatus = 'unpublished';
-          page = this.productUnpublishedIndex;
-          break;
-        case 4:
-          relationStatus = 'draft';
-          page = this.productDraftIndex;
-          break;
-        default:
-          break;
+      if(this.isSuperuser) {
+        switch (event.index) {
+          case 1:
+            relationStatus = 'pending';
+            page = this.productPendingApprovalIndex;
+            break;
+          case 2:
+            relationStatus = 'disapproved';
+            page = this.productDisapprovedIndex;
+            break;
+          case 3:
+            relationStatus = 'unpublished';
+            page = this.productUnpublishedIndex;
+            break;
+          case 4:
+            relationStatus = 'draft';
+            page = this.productDraftIndex;
+            break;
+          default:
+            break;
+        }
+      } else {
+        switch (event.index) {
+          case 1:
+            relationStatus = 'unpublished';
+            page = this.productUnpublishedIndex;
+            break;
+          case 2:
+            relationStatus = 'draft';
+            page = this.productDraftIndex;
+            break;
+          default:
+            break;
+        }
       }
+
 
       let self = this;
       let q = this.searchKey;
@@ -189,23 +232,38 @@ export class ProductMainComponent implements OnInit {
         qt
       }).then((data) => {
         self.length = data.count;
-        switch (event.index) {
-          case 1:
-            self.productPendingApproval = data.results;
-            break;
-          case 2:
-            self.productDisapproved = data.results;
-            break;
-          case 3:
-            self.productUnpublished = data.results;
-            break;
-          case 4:
-            self.productDraft = data.results;
-            break;
-          default:
-            self.productPublished = data.results;
-            break;
+        if(this.isSuperuser) {
+          switch (event.index) {
+            case 1:
+              self.productPendingApproval = data.results;
+              break;
+            case 2:
+              self.productDisapproved = data.results;
+              break;
+            case 3:
+              self.productUnpublished = data.results;
+              break;
+            case 4:
+              self.productDraft = data.results;
+              break;
+            default:
+              self.productPublished = data.results;
+              break;
+          }
+        } else {
+          switch (event.index) {
+            case 1:
+              self.productUnpublished = data.results;
+              break;
+            case 2:
+              self.productDraft = data.results;
+              break;
+            default:
+              self.productPublished = data.results;
+              break;
+          }
         }
+
 
       });
     } else if(event.index == 5) {
@@ -246,64 +304,89 @@ export class ProductMainComponent implements OnInit {
   }
 
   productChange(event) {
-    switch(event.status) {
-      case 0:
-        switch(event.event) {
-          case 'delete':
-            this.productPublished.splice(event.index,1);
-            break;
-          case 'unpublish':
-            this.productPublished.splice(event.index,1);
-            break;
-        }
-        break;
-      case 1:
-        switch(event.event) {
-          case 'delete':
-            this.productPendingApproval.splice(event.index,1);
-            break;
-          case 'disapprove':
-            this.productPendingApproval.splice(event.index,1);
-            break;
-          case 'publish':
-            this.productPendingApproval.splice(event.index,1);
-            break;
-        }
-        break;
-      case 2:
-        switch(event.event) {
-          case 'delete':
-            this.productUnpublished.splice(event.index,1);
-            break;
-          case 'publish':
-            this.productUnpublished.splice(event.index,1);
-            break;
-        }
-        break;
-      case 3:
-        switch(event.event) {
-          case 'delete':
-            this.productUnpublished.splice(event.index,1);
-            break;
-          case 'publish':
-            this.productUnpublished.splice(event.index,1);
-            break;
-        }
-        break;
-      case 5:
-        switch(event.event) {
-          case 'selected':
-            this.productSelected.splice(event.index,1);
-            break;
-        }
-        break;
-      case 6:
-        switch(event.event) {
-          case 'delete':
-            this.productDrops.splice(event.index,1);
-            break;
-        }
-        break;
+    if(this.isSuperuser) {
+      switch(event.status) {
+        case 0:
+          switch(event.event) {
+            case 'delete':
+              this.productPublished.splice(event.index,1);
+              break;
+            case 'unpublish':
+              this.productPublished.splice(event.index,1);
+              break;
+          }
+          break;
+        case 1:
+          switch(event.event) {
+            case 'delete':
+              this.productPendingApproval.splice(event.index,1);
+              break;
+            case 'disapprove':
+              this.productPendingApproval.splice(event.index,1);
+              break;
+            case 'publish':
+              this.productPendingApproval.splice(event.index,1);
+              break;
+          }
+          break;
+        case 2:
+          switch(event.event) {
+            case 'delete':
+              this.productUnpublished.splice(event.index,1);
+              break;
+            case 'publish':
+              this.productUnpublished.splice(event.index,1);
+              break;
+          }
+          break;
+        case 3:
+          switch(event.event) {
+            case 'delete':
+              this.productUnpublished.splice(event.index,1);
+              break;
+            case 'publish':
+              this.productUnpublished.splice(event.index,1);
+              break;
+          }
+          break;
+        case 5:
+          switch(event.event) {
+            case 'selected':
+              this.productSelected.splice(event.index,1);
+              break;
+          }
+          break;
+        case 6:
+          switch(event.event) {
+            case 'delete':
+              this.productDrops.splice(event.index,1);
+              break;
+          }
+          break;
+      }
+    } else {
+      switch(event.status) {
+        case 0:
+          switch(event.event) {
+            case 'delete':
+              this.productPublished.splice(event.index,1);
+              break;
+            case 'unpublish':
+              this.productPublished.splice(event.index,1);
+              break;
+          }
+          break;
+        case 2:
+          switch(event.event) {
+            case 'delete':
+              this.productUnpublished.splice(event.index,1);
+              break;
+            case 'publish':
+              this.productUnpublished.splice(event.index,1);
+              break;
+          }
+          break;
+      }
     }
   }
 

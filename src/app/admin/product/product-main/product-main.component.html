@@ -10,7 +10,7 @@
       </button>
     </div>
     <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
-      <mat-tab label="Published">
+      <mat-tab label="Published" *ngIf="!userPermission[0] || (userPermission[0] == isSuperuser)">
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <div>Sort by</div>
           <div class="md-margin-left-2 unicorn-dark-theme">
@@ -67,7 +67,7 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Pending Approval">
+      <mat-tab label="Pending Approval" *ngIf="!userPermission[1] || (userPermission[1] == isSuperuser)">
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
@@ -114,7 +114,7 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Disapproved">
+      <mat-tab label="Disapproved" *ngIf="!userPermission[2] || (userPermission[2] == isSuperuser)">
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
@@ -161,7 +161,7 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Unpublished">
+      <mat-tab label="Unpublished" *ngIf="!userPermission[3] || (userPermission[3] == isSuperuser)">
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <div>Sort by </div>
           <div class="md-margin-left-2 unicorn-dark-theme">
@@ -209,7 +209,7 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Drafts">
+      <mat-tab label="Drafts" *ngIf="!userPermission[4] || (userPermission[4] == isSuperuser)">
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
@@ -256,7 +256,7 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Featured">
+      <mat-tab label="Featured" *ngIf="!userPermission[5] || (userPermission[5] == isSuperuser)">
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <div>Sort by</div>
           <div class="md-margin-left-2 unicorn-dark-theme">
@@ -313,7 +313,7 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Drops">
+      <mat-tab label="Drops" *ngIf="!userPermission[6] || (userPermission[6] == isSuperuser)">
         <div class="md-margin-top-2">
           <app-product-title [status]="6" ></app-product-title>
         </div>

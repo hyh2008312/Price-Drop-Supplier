@@ -18,13 +18,22 @@ export class ProductItemComponent implements OnInit {
   @Output() productChange = new EventEmitter<any>();
 
   currency: string = 'INR';
+  isSuperuser: boolean = false;
 
   constructor(
     private adminService: ProductService,
     private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {
+    this.userService.currentUser.subscribe((data) => {
+      if(data) {
+        if(data.isStaff && data.isSuperuser) {
+          this.isSuperuser = true
+        }
+      }
+    });
+  }
 
   ngOnInit(): void {
 

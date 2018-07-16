@@ -16,40 +16,54 @@ export class TopNavigationComponent implements OnInit {
     id: 0,
     text: '首页',
     router: './dashboard',
-    isActive: false
+    isActive: false,
+    staff: false
   }, {
     id: 1,
     text: '产品',
     router: './product',
-    isActive: false
+    isActive: false,
+    staff: false
   }, {
     id: 2,
     text: '促销',
     router: './promote',
-    isActive: false
+    isActive: false,
+    staff: true
   }, {
     id: 3,
     text: '订单',
     router: './order',
-    isActive: false
+    isActive: false,
+    staff: false
   }, {
     id: 4,
     text: '客服',
     router: './customerService',
-    isActive: false
+    isActive: false,
+    staff: false
   }, {
     id: 5,
     text: '专题',
     router: './event',
-    isActive: false
+    isActive: false,
+    staff: true
   }, {
     id: 6,
     text: '业绩',
-    isActive: false
+    isActive: false,
+    staff: false
   }, {
     id: 7,
     text: '通知',
-    isActive: false
+    isActive: false,
+    staff: false
+  }, {
+    id: 8,
+    text: '用户审核',
+    router: './user',
+    isActive: false,
+    staff: true
   }];
 
   accounts = [
@@ -93,6 +107,8 @@ export class TopNavigationComponent implements OnInit {
 
   isAccountNavigation: boolean = false;
 
+  isSuperuser: boolean = false;
+
   constructor(
       private router: Router,
       private activatedRoute: ActivatedRoute,
@@ -102,12 +118,7 @@ export class TopNavigationComponent implements OnInit {
     this.useService.currentUser.subscribe((data) => {
       if(data) {
         if(data.isStaff && data.isSuperuser) {
-          this.contents.push({
-            id: 8,
-            text: '用户审核',
-            router: './user',
-            isActive: false
-          })
+          this.isSuperuser = true
         }
       }
     })

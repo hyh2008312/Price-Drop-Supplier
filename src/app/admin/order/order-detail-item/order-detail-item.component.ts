@@ -36,6 +36,8 @@ export class OrderDetailItemComponent implements OnInit {
   totalAmount: number = 0;
   netPaymentAmount: number = 0;
 
+  cutAmount: any = 0;
+
   constructor(
     private adminService: AdminService,
     private userService: UserService,
@@ -58,6 +60,8 @@ export class OrderDetailItemComponent implements OnInit {
         this.totalAmount = (parseFloat(this.order.line.priceExclTax) + parseFloat(this.order.line.shippingExclTax)) * this.order.quantity;
         this.netPaymentAmount = this.totalAmount - this.order.line.refundAmount;
       }
+
+      this.cutAmount = ((this.order.paymentAmount * 100 - this.order.shippingExclTax * 100) / 100).toFixed(2);
     }
   }
 

@@ -550,7 +550,7 @@ export class ProductCreateComponent implements OnInit {
       self.ngZone.runOutsideAngular(() => {
         self.document.querySelector('html').style.top = '0';
       });
-      self.router.navigate(['../'], { queryParams: {tab: 'pending'}, replaceUrl: true, relativeTo: this.activatedRoute});
+      self.router.navigate(['../'], { queryParams: {tab: 'published'}, replaceUrl: true, relativeTo: this.activatedRoute});
     });
   }
 

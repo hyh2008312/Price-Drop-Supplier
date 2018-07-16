@@ -2,11 +2,13 @@
   <div class="container ">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div class="sc-navigation__scroll" fxLayout="row" fxLayoutAlign="start center">
-        <div class="sc-navigation__buttons" [ngClass]="{'active': content.isActive && !isAccountNavigation}"
-             *ngFor="let content of contents; let i = index;"
-             (click)="changeSlide(content,i)" fxFlex="none">
-          {{ content.text }}
-        </div>
+        <ng-container *ngFor="let content of contents; let i = index;">
+          <div class="sc-navigation__buttons" [ngClass]="{'active': content.isActive && !isAccountNavigation}"
+               *ngIf="!content.staff || (content.staff == isSuperuser)"
+               (click)="changeSlide(content,i)" fxFlex="none">
+            {{ content.text }}
+          </div>
+        </ng-container>
       </div>
       <div class="sc-navigation__my-account" id="account-menu" (mouseenter)="changeShowMenu(true)"
            (mouseleave)="changeShowMenu(false)">

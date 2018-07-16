@@ -35,6 +35,10 @@ const routes: Routes = [
       }, {
         path: 'event',
         loadChildren:'./topic/topic.module#TopicModule'
+      }, {
+        path: '',
+        redirectTo: 'product',
+        pathMatch: 'full'
       }
     ]
   }, {
