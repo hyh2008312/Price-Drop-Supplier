@@ -55,7 +55,7 @@ export class ProductMainComponent implements OnInit {
 
   isSuperuser: boolean = false;
 
-  userPermission: any = [false, true, true, false, false, true, true];
+  userPermission: any = [false, true, true, false, false, true, false];
 
   constructor(
     private adminService: ProductService,
@@ -165,21 +165,24 @@ export class ProductMainComponent implements OnInit {
         case 2:
           this.productDraftIndex = event.pageIndex + 1;
           break;
+        case 3:
+          this.productDropsIndex = event.pageIndex + 1;
+          break;
       }
     }
 
-    this.changeProducts({index: type});
+    this.changeProducts({index: type}, this.isSuperuser);
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
-  changeProducts(event) {
+  changeProducts(event, superUser?:any) {
     let relationStatus = 'published';
     let page = this.productPublishedIndex;
-    if(event.index < 5) {
-      if(this.isSuperuser) {
+    if(superUser) {
+      if(event.index < 5) {
         switch (event.index) {
           case 1:
             relationStatus = 'pending';
@@ -200,39 +203,24 @@ export class ProductMainComponent implements OnInit {
           default:
             break;
         }
-      } else {
-        switch (event.index) {
-          case 1:
-            relationStatus = 'unpublished';
-            page = this.productUnpublishedIndex;
-            break;
-          case 2:
-            relationStatus = 'draft';
-            page = this.productDraftIndex;
-            break;
-          default:
-            break;
+
+
+        let self = this;
+        let q = this.searchKey;
+        let qt = this.searchCategory;
+        if(q == '') {
+          q = null;
+          qt = null;
         }
-      }
 
-
-      let self = this;
-      let q = this.searchKey;
-      let qt = this.searchCategory;
-      if(q == '') {
-        q = null;
-        qt = null;
-      }
-
-      this.adminService.getProductList({
-        status: relationStatus,
-        page: page,
-        page_size: this.pageSize,
-        q,
-        qt
-      }).then((data) => {
-        self.length = data.count;
-        if(this.isSuperuser) {
+        this.adminService.getProductList({
+          status: relationStatus,
+          page: page,
+          page_size: this.pageSize,
+          q,
+          qt
+        }).then((data) => {
+          self.length = data.count;
           switch (event.index) {
             case 1:
               self.productPendingApproval = data.results;
@@ -250,7 +238,75 @@ export class ProductMainComponent implements OnInit {
               self.productPublished = data.results;
               break;
           }
-        } else {
+
+
+        });
+      } else if(event.index == 5) {
+
+        page = this.productSelectedIndex;
+        let self = this;
+        let q = this.searchKey;
+        let qt = this.searchCategory;
+        if(q == '') {
+          q = null;
+          qt = null;
+        }
+        this.adminService.getSelectedProductList({
+          page: page,
+          page_size: this.pageSize,
+          q,
+          qt
+        }).then((data) => {
+          self.length = data.count;
+          self.productSelected = data.results;
+
+        });
+      } else if(event.index == 6) {
+
+        page = this.productDropsIndex;
+        let self = this;
+        this.adminService.getDropsProductList({
+          page: page,
+          page_size: this.pageSize
+        }).then((data) => {
+          self.length = data.count;
+          self.productDrops = data.results;
+
+        });
+      }
+
+    } else {
+      if(event.index < 3) {
+        switch (event.index) {
+          case 1:
+            relationStatus = 'unpublished';
+            page = this.productUnpublishedIndex;
+            break;
+          case 2:
+            relationStatus = 'draft';
+            page = this.productDraftIndex;
+            break;
+          default:
+            break;
+        }
+
+
+        let self = this;
+        let q = this.searchKey;
+        let qt = this.searchCategory;
+        if(q == '') {
+          q = null;
+          qt = null;
+        }
+
+        this.adminService.getProductList({
+          status: relationStatus,
+          page: page,
+          page_size: this.pageSize,
+          q,
+          qt
+        }).then((data) => {
+          self.length = data.count;
           switch (event.index) {
             case 1:
               self.productUnpublished = data.results;
@@ -262,131 +318,86 @@ export class ProductMainComponent implements OnInit {
               self.productPublished = data.results;
               break;
           }
-        }
 
 
-      });
-    } else if(event.index == 5) {
+        });
+      } else if(event.index == 3) {
 
-      page = this.productSelectedIndex;
-      let self = this;
-      let q = this.searchKey;
-      let qt = this.searchCategory;
-      if(q == '') {
-        q = null;
-        qt = null;
+        page = this.productDropsIndex;
+        let self = this;
+        this.adminService.getDropsProductList({
+          page: page,
+          page_size: this.pageSize
+        }).then((data) => {
+          self.length = data.count;
+          self.productDrops = data.results;
+
+        });
       }
-      this.adminService.getSelectedProductList({
-        page: page,
-        page_size: this.pageSize,
-        q,
-        qt
-      }).then((data) => {
-        self.length = data.count;
-        self.productSelected = data.results;
-
-      });
-    } else if(event.index == 6) {
-
-      page = this.productDropsIndex;
-      let self = this;
-      this.adminService.getDropsProductList({
-        page: page,
-        page_size: this.pageSize
-      }).then((data) => {
-        self.length = data.count;
-        self.productDrops = data.results;
-
-      });
     }
 
 
   }
 
   productChange(event) {
-    if(this.isSuperuser) {
-      switch(event.status) {
-        case 0:
-          switch(event.event) {
-            case 'delete':
-              this.productPublished.splice(event.index,1);
-              break;
-            case 'unpublish':
-              this.productPublished.splice(event.index,1);
-              break;
-          }
-          break;
-        case 1:
-          switch(event.event) {
-            case 'delete':
-              this.productPendingApproval.splice(event.index,1);
-              break;
-            case 'disapprove':
-              this.productPendingApproval.splice(event.index,1);
-              break;
-            case 'publish':
-              this.productPendingApproval.splice(event.index,1);
-              break;
-          }
-          break;
-        case 2:
-          switch(event.event) {
-            case 'delete':
-              this.productUnpublished.splice(event.index,1);
-              break;
-            case 'publish':
-              this.productUnpublished.splice(event.index,1);
-              break;
-          }
-          break;
-        case 3:
-          switch(event.event) {
-            case 'delete':
-              this.productUnpublished.splice(event.index,1);
-              break;
-            case 'publish':
-              this.productUnpublished.splice(event.index,1);
-              break;
-          }
-          break;
-        case 5:
-          switch(event.event) {
-            case 'selected':
-              this.productSelected.splice(event.index,1);
-              break;
-          }
-          break;
-        case 6:
-          switch(event.event) {
-            case 'delete':
-              this.productDrops.splice(event.index,1);
-              break;
-          }
-          break;
-      }
-    } else {
-      switch(event.status) {
-        case 0:
-          switch(event.event) {
-            case 'delete':
-              this.productPublished.splice(event.index,1);
-              break;
-            case 'unpublish':
-              this.productPublished.splice(event.index,1);
-              break;
-          }
-          break;
-        case 2:
-          switch(event.event) {
-            case 'delete':
-              this.productUnpublished.splice(event.index,1);
-              break;
-            case 'publish':
-              this.productUnpublished.splice(event.index,1);
-              break;
-          }
-          break;
-      }
+    switch(event.status) {
+      case 0:
+        switch(event.event) {
+          case 'delete':
+            this.productPublished.splice(event.index,1);
+            break;
+          case 'unpublish':
+            this.productPublished.splice(event.index,1);
+            break;
+        }
+        break;
+      case 1:
+        switch(event.event) {
+          case 'delete':
+            this.productPendingApproval.splice(event.index,1);
+            break;
+          case 'disapprove':
+            this.productPendingApproval.splice(event.index,1);
+            break;
+          case 'publish':
+            this.productPendingApproval.splice(event.index,1);
+            break;
+        }
+        break;
+      case 2:
+        switch(event.event) {
+          case 'delete':
+            this.productUnpublished.splice(event.index,1);
+            break;
+          case 'publish':
+            this.productUnpublished.splice(event.index,1);
+            break;
+        }
+        break;
+      case 3:
+        switch(event.event) {
+          case 'delete':
+            this.productUnpublished.splice(event.index,1);
+            break;
+          case 'publish':
+            this.productUnpublished.splice(event.index,1);
+            break;
+        }
+        break;
+      case 5:
+        switch(event.event) {
+          case 'selected':
+            this.productSelected.splice(event.index,1);
+            break;
+        }
+        break;
+      case 6:
+        switch(event.event) {
+          case 'delete':
+            this.productDrops.splice(event.index,1);
+            break;
+        }
+        break;
     }
   }
 
