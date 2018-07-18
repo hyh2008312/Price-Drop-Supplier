@@ -283,12 +283,12 @@ export class OrderMainComponent implements OnInit {
       orderItem.mainImage = item.lines[0].mainImage;
       orderItem.productTitle = item.lines[0].title;
       orderItem.sku = item.lines[0].sku;
+      orderItem.quantity = item.lines[0].quantity;
       orderItem.created = item.created.split('T')[0];
       orderItem.username = item.username;
-      orderItem.quantity = item.lines[0].quantity;
-      orderItem.email = item.email;
-      orderItem.phoneNumber = item.phoneNumber;
       orderItem.address = item.address;
+      orderItem.phoneNumber = item.phoneNumber;
+      orderItem.email = item.email;
       packing.push(orderItem);
     }
 
