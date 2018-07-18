@@ -48,8 +48,8 @@ export class ProductCreateComponent implements OnInit {
     value: '5-10',
     text: '5 - 10 business days'
   }, {
-    value: '7-14',
-    text: '7 - 14 business days'
+    value: '7-12',
+    text: '7 - 12 business days'
   }, {
     value: '10-15',
     text: '10 - 15 business days'

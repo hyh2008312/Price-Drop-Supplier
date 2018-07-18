@@ -17,19 +17,19 @@ export class EditShippingDialogComponent implements OnInit {
   shippingMethodList: any[];
   shippingTimeList = [{
     value: '5-10',
-    text: '5 - 10 days'
+    text: '5 - 10 business days'
   }, {
-    value: '7-14',
-    text: '7 - 14 days'
+    value: '7-12',
+    text: '7 - 12 business days'
   }, {
     value: '10-15',
-    text: '10 - 15 days'
+    text: '10 - 15 business days'
   }, {
     value: '14-21',
-    text:'14 - 21 days'
+    text:'14 - 21 business days'
   },{
     value: '21-28',
-    text: '21 - 28 days'
+    text: '21 - 28 business days'
   },{
     value: '0',
     text: 'other'
