@@ -247,20 +247,35 @@ export class OrderMainComponent implements OnInit {
 
     if(self.searchPackingKey == '') return;
 
+    let status = 'Packing';
+    switch (self.selectedIndex) {
+      case 2:
+        status = 'Shipped';
+        break;
+    }
+
     let params: any = {
-      status: 'Packing',
+      status,
       sku: self.searchPackingKey
     };
 
     if(this.searchCategory == 'username') {
       params = {
-        status: 'Packing',
+        status,
         username: self.searchPackingKey
       };
     }
 
     this.orderService.getSupplyOrderPackingResult(params).then((data) => {
-      self.orderPacking = [...data];
+
+      switch (self.selectedIndex) {
+        case 1:
+          self.orderPacking = [...data];
+          break;
+        case 2:
+          self.orderShipped = [...data];
+          break;
+      }
     });
   }
 
