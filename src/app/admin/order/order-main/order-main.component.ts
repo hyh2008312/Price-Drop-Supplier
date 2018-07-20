@@ -46,7 +46,7 @@ export class OrderMainComponent implements OnInit {
   searchPackingForm: FormGroup;
 
   searchCategory = 'sku';
-  searchList = ['sku','username'];
+  searchList = ['sku','username','title'];
 
   // MatPaginator Inputs
   length:number = 0;
@@ -249,8 +249,20 @@ export class OrderMainComponent implements OnInit {
 
     let status = 'Packing';
     switch (self.selectedIndex) {
+      case 0:
+        status = 'Unpaid';
+        break;
       case 2:
         status = 'Shipped';
+        break;
+      case 3:
+        status = 'Audit canceled';
+        break;
+      case 4:
+        status = 'Canceled';
+        break;
+      case 5:
+        status = 'Completed';
         break;
     }
 
@@ -259,21 +271,41 @@ export class OrderMainComponent implements OnInit {
       sku: self.searchPackingKey
     };
 
-    if(this.searchCategory == 'username') {
-      params = {
-        status,
-        username: self.searchPackingKey
-      };
+    switch(this.searchCategory) {
+      case 'username':
+        params = {
+          status,
+          username: self.searchPackingKey
+        };
+        break;
+      case 'title':
+        params = {
+          status,
+          title: self.searchPackingKey
+        };
+        break;
     }
 
     this.orderService.getSupplyOrderPackingResult(params).then((data) => {
 
       switch (self.selectedIndex) {
+        case 0:
+          self.orderUnpaid = [...data];
+          break;
         case 1:
           self.orderPacking = [...data];
           break;
         case 2:
           self.orderShipped = [...data];
+          break;
+        case 3:
+          self.orderAudit = [...data];
+          break;
+        case 4:
+          self.orderCanceled = [...data];
+          break;
+        case 5:
+          self.orderCompleted = [...data];
           break;
       }
     });
