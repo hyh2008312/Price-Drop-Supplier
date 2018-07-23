@@ -358,6 +358,7 @@ export class OrderMainComponent implements OnInit {
       orderItem.address = item.address;
       orderItem.phoneNumber = item.phoneNumber;
       orderItem.email = item.email;
+      orderItem.paymentAmount = item.paymentAmount;
       packing.push(orderItem);
     }
 
