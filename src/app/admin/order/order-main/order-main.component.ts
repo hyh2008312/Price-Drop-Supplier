@@ -323,11 +323,33 @@ export class OrderMainComponent implements OnInit {
     const ws_name = 'SomeSheet';
     const wb: WorkBook = { SheetNames: [], Sheets: {} };
     let packing: any = [];
+    let excel: any = [];
+    switch (this.selectedIndex) {
+      case 0:
+        excel = [...this.orderUnpaid];
+        break;
+      case 1:
+        excel = [...this.orderPacking];
+        break;
+      case 2:
+        excel = [...this.orderShipped];
+        break;
+      case 3:
+        excel = [...this.orderAudit];
+        break;
+      case 4:
+        excel = [...this.orderCanceled];
+        break;
+      case 5:
+        excel = [...this.orderCompleted];
+        break;
+    }
 
-    for(let item of this.orderPacking) {
+    for(let item of excel) {
       let orderItem: any = {};
       orderItem.orderNumber = item.number;
       orderItem.mainImage = item.lines[0].mainImage;
+      orderItem.variants = item.lines[0].attributes;
       orderItem.productTitle = item.lines[0].title;
       orderItem.sku = item.lines[0].sku;
       orderItem.quantity = item.lines[0].quantity;
