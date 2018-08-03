@@ -50,8 +50,8 @@ export class ProductMainComponent implements OnInit {
 
   // MatPaginator Inputs
   length:number = 0;
-  pageSize = 12;
-  pageSizeOptions = [6, 12];
+  pageSize = 50;
+  pageSizeOptions = [25, 50];
 
   isSuperuser: boolean = false;
 
