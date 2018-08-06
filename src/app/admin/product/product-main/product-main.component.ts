@@ -70,7 +70,6 @@ export class ProductMainComponent implements OnInit {
         if(data.isStaff && data.isSuperuser) {
           this.isSuperuser = true
         }
-        this.isSuperuser = false
       }
     });
 
