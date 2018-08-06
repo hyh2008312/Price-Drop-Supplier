@@ -70,6 +70,7 @@ export class ProductMainComponent implements OnInit {
         if(data.isStaff && data.isSuperuser) {
           this.isSuperuser = true
         }
+        this.isSuperuser = false
       }
     });
 
@@ -160,12 +161,15 @@ export class ProductMainComponent implements OnInit {
           this.productPublishedIndex = event.pageIndex + 1;
           break;
         case 1:
-          this.productUnpublishedIndex = event.pageIndex + 1;
+          this.productPendingApprovalIndex = event.pageIndex + 1;
           break;
         case 2:
-          this.productDraftIndex = event.pageIndex + 1;
+          this.productUnpublishedIndex = event.pageIndex + 1;
           break;
         case 3:
+          this.productDraftIndex = event.pageIndex + 1;
+          break;
+        case 4:
           this.productDropsIndex = event.pageIndex + 1;
           break;
       }
@@ -276,13 +280,17 @@ export class ProductMainComponent implements OnInit {
       }
 
     } else {
-      if(event.index < 3) {
+      if(event.index <= 3) {
         switch (event.index) {
           case 1:
+            relationStatus = 'pending';
+            page = this.productPendingApprovalIndex;
+            break;
+          case 2:
             relationStatus = 'unpublished';
             page = this.productUnpublishedIndex;
             break;
-          case 2:
+          case 3:
             relationStatus = 'draft';
             page = this.productDraftIndex;
             break;
@@ -309,9 +317,12 @@ export class ProductMainComponent implements OnInit {
           self.length = data.count;
           switch (event.index) {
             case 1:
-              self.productUnpublished = data.results;
+              self.productPendingApproval = data.results;
               break;
             case 2:
+              self.productUnpublished = data.results;
+              break;
+            case 3:
               self.productDraft = data.results;
               break;
             default:
@@ -319,9 +330,8 @@ export class ProductMainComponent implements OnInit {
               break;
           }
 
-
         });
-      } else if(event.index == 3) {
+      } else if(event.index == 4) {
 
         page = this.productDropsIndex;
         let self = this;
