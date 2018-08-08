@@ -53,7 +53,10 @@
     </div>
     <div fxFlex="none" *ngIf="order.orderStatus == 'Shipped' || order.orderStatus == 'Completed'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
-      <button mat-raised-button color="accent" (click)="issueRefund()">Refund</button>
+      <button mat-raised-button color="accent" (click)="editTracking()">Edit Tracking</button>
+      <div class="md-margin-top-1" fxLayout="column">
+        <button mat-raised-button color="accent" (click)="issueRefund()">Refund</button>
+      </div>
     </div>
     <div fxFlex="none" *ngIf="order.orderStatus == 'Canceled'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center center">

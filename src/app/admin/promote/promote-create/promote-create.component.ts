@@ -37,7 +37,7 @@ export class PromoteCreateComponent implements OnInit {
 
     this.promotionForm = this.fb.group({
       title: ['', Validators.required],
-      type: ['Flash Sale', Validators.required],
+      promotionType: ['Flash Sale', Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required]
     });
@@ -58,12 +58,9 @@ export class PromoteCreateComponent implements OnInit {
       return;
     }
 
-    let params = this.promotionForm.value;
+    const params:any = this.promotionForm.value;
 
-    params.startTime = new Date(params.startTime).getTime() / 1000;
-    params.endTime = new Date(params.endTime).getTime() / 1000;
-
-    this.promoteService.promotionCreate(this.promotionForm.value).then((data) => {
+    this.promoteService.promotionCreate(params).then((data) => {
       if(data) {
         this.isEdit = true;
         this.campaign = data;

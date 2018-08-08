@@ -98,7 +98,7 @@ export class PromoteMainComponent implements OnInit {
 
 
   changeProducts(event) {
-    let status = '';
+    let status = null;
     let page = this.promoteAllIndex;
     switch (event.index) {
       case 1:

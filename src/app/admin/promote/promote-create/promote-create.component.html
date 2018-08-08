@@ -18,7 +18,7 @@
           <div class="sc-promote__promote-text xb-bold">Campaign Type</div>
           <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
             <mat-form-field fxFlex>
-              <mat-select placeholder="" name="promotion type" formControlName="type">
+              <mat-select placeholder="" name="promotion type" formControlName="promotionType">
                 <mat-option *ngFor="let item of campaignType" [value]="item">
                   {{ item }}
                 </mat-option>
@@ -37,9 +37,9 @@
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
-          <div *ngIf="promotionForm.get('type').invalid && (promotionForm.get('type').dirty ||
-            promotionForm.get('type').touched)" class="xb-input-error">
-            <div *ngIf="promotionForm.get('type').hasError('required')">
+          <div *ngIf="promotionForm.get('promotionType').invalid && (promotionForm.get('promotionType').dirty ||
+            promotionForm.get('promotionType').touched)" class="xb-input-error">
+            <div *ngIf="promotionForm.get('promotionType').hasError('required')">
               This field is required.
             </div>
           </div>
@@ -104,7 +104,7 @@
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
           <div class="sc-promote__promote-text xb-bold">Campaign Status</div>
           <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-            {{campaign.promotionStatus}}
+            {{campaign.flashStatus}}
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
@@ -140,7 +140,7 @@
     <div class="md-margin-top-3 sc-promote__promote-bg">
       <app-promote-product-title></app-promote-product-title>
       <div class="sc-promote__promote-list"
-           *ngFor="let item of campaign.promotionProducts;let i = index;">
+           *ngFor="let item of campaign.productFlash;let i = index;">
         <app-promote-product-item [promote]="item" [index]="i"
                                   (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
       </div>

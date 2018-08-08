@@ -24,7 +24,7 @@ export class SelectProductDialogComponent implements OnInit {
 
   length = 12;
   page = 1;
-  pageSize = 3;
+  pageSize = 6;
 
   constructor(
     public dialogRef: MatDialogRef<SelectProductDialogComponent>,

@@ -50,7 +50,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/create/`;
+    const url = `${this.baseUrl.url}flashsale/create/`;
 
     return this.http.post(url, promotion, options)
       .toPromise()
@@ -67,7 +67,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/detail/${promotion.id}/`;
+    const url = `${this.baseUrl.url}flashsale/flash/detail/${promotion.id}/`;
 
     return this.http.put(url, promotion, options)
       .toPromise()
@@ -84,7 +84,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/detail/${promotion.id}/`;
+    const url = `${this.baseUrl.url}flashsale/flash/detail/${promotion.id}/`;
 
     return this.http.delete(url, options)
       .toPromise()
@@ -101,7 +101,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/add/${promotion.promoteId}/`;
+    const url = `${this.baseUrl.url}flashsale/products/add/${promotion.promoteId}/`;
 
     return this.http.put(url, promotion, options)
       .toPromise()
@@ -221,7 +221,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}flashsale/flash/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -238,7 +238,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/list/promotion/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}product/flash/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -255,7 +255,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/detail/${params.id}/`;
+    const url = `${this.baseUrl.url}flashsale/flash/detail/${params.id}/`;
 
     return this.http.get(url, options)
       .toPromise()

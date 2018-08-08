@@ -48,7 +48,7 @@ export class PromoteEditComponent implements OnInit {
       id
     }).then((data) => {
       this.campaign = data;
-      this.promotionProducts = data.promotionProducts;
+      this.promotionProducts = data.productFlash;
     });
   }
 
