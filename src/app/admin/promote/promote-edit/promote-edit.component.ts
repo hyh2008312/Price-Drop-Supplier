@@ -48,17 +48,17 @@ export class PromoteEditComponent implements OnInit {
       id
     }).then((data) => {
       this.campaign = data;
-      this.promotionProducts = data.productFlash;
+      this.promotionProducts = data.product;
     });
   }
 
   changePromotionProduct(event) {
     switch (event.event) {
       case 'delete':
-        this.campaign.promotionProducts.splice(event.index, 1);
+        this.campaign.product.splice(event.index, 1);
         break;
       case 'save':
-        this.campaign = event.promote;
+        // this.campaign = event.promote;
         break;
     }
   }

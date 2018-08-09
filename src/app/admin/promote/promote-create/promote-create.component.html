@@ -140,7 +140,7 @@
     <div class="md-margin-top-3 sc-promote__promote-bg">
       <app-promote-product-title></app-promote-product-title>
       <div class="sc-promote__promote-list"
-           *ngFor="let item of campaign.productFlash;let i = index;">
+           *ngFor="let item of campaign.product;let i = index;">
         <app-promote-product-item [promote]="item" [index]="i"
                                   (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
       </div>

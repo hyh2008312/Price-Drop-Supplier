@@ -1,21 +1,21 @@
 <div class="sc-promote__promote-item" fxLayout="row" fxLayoutAlign="start stretch" *ngIf="status == 0">
   <div class="md-margin-right-2" fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch">
-    <div class="sc-promote__promote-text">{{promote.productTitle}}</div>
+    <div class="sc-promote__promote-text">{{promote.title}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{promote.totalStock + promote.totalStockrecord}}</div>
+    <div class="sc-promote__promote-text">{{promote.totalStockAvailable}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="15"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{promote.totalStock}}</div>
+    <div class="sc-promote__promote-text">{{promote.totalStockLocked}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">
     <div class="sc-promote__promote-text">
-      <div class="sc-promote__promote-text">{{promote.productPrice|currency:currency}}</div>
-      <div class="sc-promote__promote-text line-through md-margin-top-2" *ngIf="promote.productUnitPrice > 0">
-        {{promote.productUnitPrice|currency:currency}}
+      <div class="sc-promote__promote-text">{{promote.unitPrice|currency:currency}}</div>
+      <div class="sc-promote__promote-text line-through md-margin-top-2" *ngIf="promote.unitPrice > 0">
+        {{promote.unitPrice|currency:currency}}
       </div>
     </div>
   </div>
@@ -37,21 +37,21 @@
 <div class="sc-promote__promote-item" fxLayout="row"
      fxLayoutAlign="start stretch" *ngIf="status == 1 && !isEdit">
   <div class="md-margin-right-2" fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch">
-    <div class="sc-promote__promote-text">{{promote.productTitle}}</div>
+    <div class="sc-promote__promote-text">{{promote.title}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{promote.totalStock + promote.totalStockrecord}}</div>
+    <div class="sc-promote__promote-text">{{promote.totalStockAvailable}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="15"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{promote.totalStock}}</div>
+    <div class="sc-promote__promote-text">{{promote.totalStockLocked}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{promote.productPrice|currency:currency}}</div>
-    <div class="sc-promote__promote-text line-through md-margin-top-2" *ngIf="promote.productUnitPrice > 0">
-      {{promote.productUnitPrice|currency:currency}}
+    <div class="sc-promote__promote-text">{{promote.unitPrice|currency:currency}}</div>
+    <div class="sc-promote__promote-text line-through md-margin-top-2" *ngIf="promote.unitPrice > 0">
+      {{promote.unitPrice|currency:currency}}
     </div>
   </div>
   <div class="md-margin-right-2" fxFlex="15"
@@ -72,21 +72,21 @@
 <div class="sc-promote__promote-item" fxLayout="row"
      fxLayoutAlign="start stretch" *ngIf="status == 1 && isEdit">
   <div class="md-margin-right-2" fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch">
-    <div class="sc-promote__promote-text">{{promote.productTitle}}</div>
+    <div class="sc-promote__promote-text">{{promote.title}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{promote.totalStock + promote.totalStockrecord}}</div>
+    <div class="sc-promote__promote-text">{{promote.totalStockAvailable}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="15"
        fxLayout="column" fxLayoutAlign="center center" (click)="variantPromotions()">
-    <div class="sc-promote__promote-text sc-promote__promote-button">{{promote.totalStock}}</div>
+    <div class="sc-promote__promote-text sc-promote__promote-button">{{promote.totalStockLocked}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{promote.productPrice|currency:currency}}</div>
-    <div class="sc-promote__promote-text line-through md-margin-top-2" *ngIf="promote.productUnitPrice > 0">
-      {{promote.productUnitPrice|currency:currency}}
+    <div class="sc-promote__promote-text">{{promote.unitPrice|currency:currency}}</div>
+    <div class="sc-promote__promote-text line-through md-margin-top-2" *ngIf="promote.unitPrice > 0">
+      {{promote.unitPrice|currency:currency}}
     </div>
   </div>
   <div class="md-margin-right-2" fxFlex="20"
@@ -106,21 +106,21 @@
 <div class="sc-promote__promote-item" fxLayout="row"
      fxLayoutAlign="start stretch" *ngIf="status == 2">
   <div class="md-margin-right-2" fxFlex="25" fxLayout="column" fxLayoutAlign="center stretch">
-    <div class="sc-promote__promote-text">{{promote.productTitle}}</div>
+    <div class="sc-promote__promote-text">{{promote.title}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{promote.totalStock + promote.totalStockrecord}}</div>
+    <div class="sc-promote__promote-text">{{promote.totalStockAvailable}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="15"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{promote.totalStock}}</div>
+    <div class="sc-promote__promote-text">{{promote.totalStockLocked}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{promote.productPrice|currency:currency}}</div>
-    <div class="sc-promote__promote-text line-through md-margin-top-2" *ngIf="promote.productUnitPrice > 0">
-      {{promote.productUnitPrice|currency:currency}}
+    <div class="sc-promote__promote-text">{{promote.unitPrice|currency:currency}}</div>
+    <div class="sc-promote__promote-text line-through md-margin-top-2" *ngIf="promote.unitPrice > 0">
+      {{promote.unitPrice|currency:currency}}
     </div>
   </div>
   <div class="md-margin-right-2" fxFlex="20"

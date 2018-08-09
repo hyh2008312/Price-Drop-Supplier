@@ -13,12 +13,18 @@ import { PromoteService } from '../promote.service';
 export class ChangeVariantDialogComponent implements OnInit {
 
   currency: string = 'USD';
+  variantPromotions: any;
 
   constructor(
     public dialogRef: MatDialogRef<ChangeVariantDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private promoteService: PromoteService
   ) {
+    this.promoteService.getPromotionVariantsList({
+      id: data.productId
+    }).then((data) => {
+      this.variantPromotions = [...data];
+    })
   }
 
   ngOnInit(): void {

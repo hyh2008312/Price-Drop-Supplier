@@ -135,7 +135,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/add/${params.id}/`;
+    const url = `${this.baseUrl.url}flashsale/flash/update/${params.id}/`;
 
     return this.http.delete(url, options)
       .toPromise()
@@ -186,9 +186,9 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/discount/${params.id}/`;
+    const url = `${this.baseUrl.url}flashsale/flash/update/${params.id}/`;
 
-    return this.http.put(url, params, options)
+    return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
@@ -273,6 +273,23 @@ export class PromoteService {
     let options = new RequestOptions({headers:headers});
 
     const url = `${this.baseUrl.url}product/list/category/`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  getPromotionVariantsList(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/variant/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()

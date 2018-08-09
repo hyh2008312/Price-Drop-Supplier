@@ -33,9 +33,9 @@ export class ProductProductItemComponent implements OnInit {
 
   get price() {
     if(this.promote.discount <= 100 &&  this.promote.discount > 0) {
-      return this.promote.productPrice * this.promote.discount / 100;
+      return this.promote.unitPrice * this.promote.discount / 100;
     } else {
-      return this.promote.productPrice;
+      return this.promote.unitPrice;
     }
   }
 
@@ -61,11 +61,7 @@ export class ProductProductItemComponent implements OnInit {
     let params:any = this.promote;
     this.promoteService.savePromotionProduct(params).then((data) => {
       self.isEdit = false;
-      self.promotionChange.emit({
-        index: self.index,
-        event: 'save',
-        promote: data
-      });
+      self.promote = data
     });
   }
 
@@ -73,7 +69,7 @@ export class ProductProductItemComponent implements OnInit {
     let dialogRef = this.dialog.open(ChangeVariantDialogComponent, {
       data: {
         title: this.promote.title,
-        variantPromotions: this.promote.variantPromotions,
+        productId: this.promote.productId,
         isEdit: false
       }
     });
@@ -86,7 +82,7 @@ export class ProductProductItemComponent implements OnInit {
           id: this.promoteId
         }).then((data) => {
 
-          self.promote = data.promotionProducts[self.index];
+          self.promote = data.product[self.index];
 
         });
       }

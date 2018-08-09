@@ -61,19 +61,19 @@
 
       </app-promote-product-title>
       <ng-container *ngIf="campaign.promotionStatus != 'Ended'">
-        <div class="sc-promote__promote-list" *ngFor="let item of campaign.promotionProducts;let i = index;">
+        <div class="sc-promote__promote-list" *ngFor="let item of campaign.product;let i = index;">
           <app-promote-product-item [promote]="item" [index]="i" [status]="1" [promoteId]="promotionId"
                                     (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
         </div>
       </ng-container>
       <ng-container *ngIf="campaign.promotionStatus == 'Ended'">
-        <div class="sc-promote__promote-list" *ngFor="let item of campaign.promotionProducts;let i = index;">
+        <div class="sc-promote__promote-list" *ngFor="let item of campaign.product;let i = index;">
           <app-promote-product-item [promote]="item" [index]="i" [status]="2"
                                     (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
         </div>
       </ng-container>
       <div class="sc-promote__promote-none" fxLayout="row" fxLayoutAlign="center center"
-           *ngIf="campaign.promotionProducts && campaign.promotionProducts.length <= 0">
+           *ngIf="campaign.product && campaign.product.length <= 0">
         <div fxLayout="column" fxLayoutAlign="center center">
           <i class="iconfontXberts icon-ic-empty"></i>
           <div class="sc-promote__promote-title-1 md-margin-top-4">You haven't any promotion product yet. </div>
