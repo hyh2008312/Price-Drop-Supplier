@@ -69,6 +69,7 @@ export class ProductProductItemComponent implements OnInit {
     let dialogRef = this.dialog.open(ChangeVariantDialogComponent, {
       data: {
         title: this.promote.title,
+        promotionId: this.promoteId,
         productId: this.promote.productId,
         isEdit: false
       }

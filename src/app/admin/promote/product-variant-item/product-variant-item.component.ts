@@ -1,4 +1,4 @@
-import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
+import { Input, Output, Component, OnInit, OnChanges, EventEmitter} from '@angular/core';
 
 import { PromoteService } from '../promote.service';
 
@@ -12,8 +12,11 @@ export class ProductVariantItemComponent implements OnInit {
 
   @Input() variant: any={};
   @Input() variantLength: any;
+  @Input() promotionId: any;
   @Input() index: any = 0;
   @Output() variantChange = new EventEmitter<any>();
+
+  stock: any;
 
   isEdit:boolean = false;
 
@@ -21,10 +24,14 @@ export class ProductVariantItemComponent implements OnInit {
 
   constructor(
     private promoteService: PromoteService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
 
+  }
+
+  ngOnChanges() {
+    this.stock = this.variant.supplierControlStock;
   }
 
   delete() {
@@ -51,7 +58,11 @@ export class ProductVariantItemComponent implements OnInit {
     let param: any = this.variant;
 
     let self = this;
-    this.promoteService.changePromotionProductVariant(param).then((data) => {
+    this.promoteService.changePromotionProductVariant({
+      id: this.variant.id,
+      stockAvailable: this.stock,
+      promotionId: this.promotionId
+    }).then((data) => {
       self.isEdit = false;
       self.variantChange.emit({
         event: 'edit',
@@ -62,16 +73,12 @@ export class ProductVariantItemComponent implements OnInit {
   }
 
   changeStock($event) {
-    if($event < this.variant.orderNum) {
-      $event = this.variant.orderNum;
-    } else if($event > this.variant.stock + this.variant.totalStock) {
-      $event = this.variant.stock + this.variant.totalStock;
+    if($event > this.variant.productTotalStock - this.variant.productTotalStockLocked + this.variant.stock) {
+      $event = this.variant.productTotalStock - this.variant.productTotalStockLocked + this.variant.stock;
+    } else if($event < this.variant.stockLocked) {
+      $event = this.variant.stockLocked;
     }
-    let lastStock = this.variant.stock;
-    if(lastStock != $event) {
-      this.variant.totalStock = this.variant.totalStock - ($event - lastStock);
-    }
-    this.variant.stock = $event;
+    this.stock = $event;
   }
 
 }

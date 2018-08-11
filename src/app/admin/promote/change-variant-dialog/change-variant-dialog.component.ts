@@ -21,7 +21,7 @@ export class ChangeVariantDialogComponent implements OnInit {
     private promoteService: PromoteService
   ) {
     this.promoteService.getPromotionVariantsList({
-      id: data.productId
+      id: data.promotionId
     }).then((data) => {
       this.variantPromotions = [...data];
     })

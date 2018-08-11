@@ -118,7 +118,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/batch/${promotion.id}/`;
+    const url = `${this.baseUrl.url}flashsale/flash/batch/${promotion.id}/`;
 
     return this.http.put(url, promotion, options)
       .toPromise()
@@ -152,7 +152,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/stock/${params.id}/`;
+    const url = `${this.baseUrl.url}flashsale/flash/stock/${params.id}/`;
 
     return this.http.put(url, params, options)
       .toPromise()
@@ -204,9 +204,9 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/disable/${promotion.id}/`;
+    const url = `${this.baseUrl.url}flashsale/promotion/update/${promotion.id}/`;
 
-    return this.http.put(url, promotion, options)
+    return this.http.post(url, promotion, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
@@ -289,7 +289,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/variant/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}flashsale/flash/stock/${params.id}/`;
 
     return this.http.get(url, options)
       .toPromise()

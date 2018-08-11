@@ -40,7 +40,10 @@ export class PromoteItemComponent implements OnInit {
 
   disable() {
     let self = this;
-    this.promoteService.endPromotion(this.promote).then((data) => {
+    this.promoteService.endPromotion({
+      id: this.promote.id,
+      status: 'Ended'
+    }).then((data) => {
       if(self.status > 0) {
         self.promotionChange.emit({
           index: this.index,

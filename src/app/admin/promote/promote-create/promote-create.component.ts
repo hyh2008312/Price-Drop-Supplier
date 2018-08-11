@@ -98,20 +98,20 @@ export class PromoteCreateComponent implements OnInit {
   changePromotionProduct(event) {
     switch(event.event) {
       case 'delete':
-        this.campaign.promotionProducts.splice(event.index, 1);
+        this.campaign.product.splice(event.index, 1);
         break;
       case 'discount':
-        this.campaign.promotionProducts[event.index] = event.promote;
+        this.campaign.product[event.index] = event.promote;
     }
   }
 
   save() {
-    if(!this.campaign.promotionProducts || this.campaign.promotionProducts.length <= 0) {
+    if(!this.campaign.product || this.campaign.product.length <= 0) {
       return this.router.navigate(['../'],{relativeTo: this.activatedRoute});
     }
 
     let discounts: any = [];
-    for(let item of this.campaign.promotionProducts) {
+    for(let item of this.campaign.product) {
       discounts.push({
         pid: item.id,
         discount: item.discount

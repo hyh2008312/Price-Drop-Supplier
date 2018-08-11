@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="md-margin-top-3 sc-promote__create-text" fxLayout="row" fxLayoutAlign="start center"
-         *ngIf="campaign.promotionStatus == 'Scheduled'">
+         *ngIf="campaign.flashStatus == 'Scheduled'">
       <div class="sc-promote__promote-text xb-bold">Add Product for This Campaign:</div>
       <div class="md-margin-left-3 sc__accent-dark">
         <button mat-raised-button color="primary" type="button" (click)="selectProduct()">
@@ -54,19 +54,19 @@
       </div>
     </div>
     <div class="md-margin-top-3 sc-promote__promote-bg">
-      <app-promote-product-title [status]="1" *ngIf="campaign.promotionStatus != 'Ended'">
+      <app-promote-product-title [status]="1" *ngIf="campaign.flashStatus != 'Ended'">
 
       </app-promote-product-title>
-      <app-promote-product-title [status]="2" *ngIf="campaign.promotionStatus == 'Ended'">
+      <app-promote-product-title [status]="2" *ngIf="campaign.flashStatus == 'Ended'">
 
       </app-promote-product-title>
-      <ng-container *ngIf="campaign.promotionStatus != 'Ended'">
+      <ng-container *ngIf="campaign.flashStatus != 'Ended'">
         <div class="sc-promote__promote-list" *ngFor="let item of campaign.product;let i = index;">
           <app-promote-product-item [promote]="item" [index]="i" [status]="1" [promoteId]="promotionId"
                                     (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
         </div>
       </ng-container>
-      <ng-container *ngIf="campaign.promotionStatus == 'Ended'">
+      <ng-container *ngIf="campaign.flashStatus == 'Ended'">
         <div class="sc-promote__promote-list" *ngFor="let item of campaign.product;let i = index;">
           <app-promote-product-item [promote]="item" [index]="i" [status]="2"
                                     (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>

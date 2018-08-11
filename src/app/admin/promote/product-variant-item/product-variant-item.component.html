@@ -1,10 +1,12 @@
 <div class="sc-promote__promote-item-1" fxLayout="row" fxLayoutAlign="start stretch" *ngIf="!isEdit">
   <div class="md-margin-right-2" fxFlex="20" fxLayout="column" fxLayoutAlign="center stretch">
     <div class="sc-promote__promote-text">
-      <span *ngFor="let item of variant.attributeValues;let i = index;">
-        {{item.value}}<span *ngIf="i < variant.attributeValues.length - 1">,</span>
-      </span>
+      {{variant.sku}}
     </div>
+  </div>
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="column" fxLayoutAlign="center center">
+    <div class="sc-promote__promote-text">{{stock}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="20"
        fxLayout="column" fxLayoutAlign="center center">
@@ -12,11 +14,7 @@
   </div>
   <div class="md-margin-right-2" fxFlex="20"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{variant.stock}}</div>
-  </div>
-  <div class="md-margin-right-2" fxFlex="20"
-       fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{variant.variantStockrecord}}</div>
+    <div class="sc-promote__promote-text">{{variant.productTotalStock - variant.productTotalStockLocked + variant.stock}}</div>
   </div>
   <div class="sc-promote__promote-width-1 sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
@@ -30,25 +28,23 @@
 <div class="sc-promote__promote-item-1" fxLayout="row" fxLayoutAlign="start stretch" *ngIf="isEdit">
   <div class="md-margin-right-2" fxFlex="20" fxLayout="column" fxLayoutAlign="center stretch">
     <div class="sc-promote__promote-text">
-      <span *ngFor="let item of variant.attributeValues;let i = index;">
-        {{item.value}}<span *ngIf="i < variant.attributeValues.length - 1">,</span>
-      </span>
+      {{variant.sku}}
     </div>
   </div>
   <div class="md-margin-right-2" fxFlex="20"
        fxLayout="column" fxLayoutAlign="center center">
     <mat-form-field class="sc-promote__promote-width sc-promote__create-align-center">
-      <input matInput type="number" placeholder="" step="1" [ngModel]="variant.stockLocked"
+      <input matInput type="number" placeholder="" step="1" [ngModel]="stock"
         (ngModelChange)="changeStock($event)">
     </mat-form-field>
   </div>
   <div class="md-margin-right-2" fxFlex="20"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{variant.stock}}</div>
+    <div class="sc-promote__promote-text">{{variant.stockLocked}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="20"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">{{variant.variantStockrecord}}</div>
+    <div class="sc-promote__promote-text">{{variant.productTotalStock - variant.productTotalStockLocked + variant.stock}}</div>
   </div>
   <div class="sc-promote__promote-width-1 sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
