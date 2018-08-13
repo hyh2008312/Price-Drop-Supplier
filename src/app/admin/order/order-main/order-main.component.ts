@@ -288,6 +288,8 @@ export class OrderMainComponent implements OnInit {
 
     this.orderService.getSupplyOrderPackingResult(params).then((data) => {
 
+      self.length = data.length;
+
       switch (self.selectedIndex) {
         case 0:
           self.orderUnpaid = [...data];
@@ -355,7 +357,11 @@ export class OrderMainComponent implements OnInit {
       orderItem.quantity = item.lines[0].quantity;
       orderItem.created = item.created.split('T')[0];
       orderItem.username = item.username;
-      orderItem.address = item.address;
+      orderItem.address = item.line3 + (item.line3 != ''? '' : ',') + item.line2 + ',' + item.line1;
+      orderItem.city = item.city;
+      orderItem.state = item.state;
+      orderItem.country = item.country;
+      orderItem.postcode = item.postcode;
       orderItem.phoneNumber = item.phoneNumber;
       orderItem.email = item.email;
       orderItem.paymentAmount = item.paymentAmount;
