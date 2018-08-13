@@ -70,7 +70,7 @@ export class ProductProductItemComponent implements OnInit {
       data: {
         title: this.promote.title,
         promotionId: this.promoteId,
-        productId: this.promote.productId,
+        productId: this.promote.id,
         isEdit: false
       }
     });

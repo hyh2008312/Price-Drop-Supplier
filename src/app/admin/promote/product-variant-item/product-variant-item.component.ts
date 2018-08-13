@@ -1,4 +1,4 @@
-import { Input, Output, Component, OnInit, OnChanges, EventEmitter} from '@angular/core';
+import { Input, Output, Component, OnInit, EventEmitter} from '@angular/core';
 
 import { PromoteService } from '../promote.service';
 
@@ -16,8 +16,6 @@ export class ProductVariantItemComponent implements OnInit {
   @Input() index: any = 0;
   @Output() variantChange = new EventEmitter<any>();
 
-  stock: any;
-
   isEdit:boolean = false;
 
   currency: string = 'USD';
@@ -28,10 +26,6 @@ export class ProductVariantItemComponent implements OnInit {
 
   ngOnInit(): void {
 
-  }
-
-  ngOnChanges() {
-    this.stock = this.variant.supplierControlStock;
   }
 
   delete() {
@@ -60,9 +54,10 @@ export class ProductVariantItemComponent implements OnInit {
     let self = this;
     this.promoteService.changePromotionProductVariant({
       id: this.variant.id,
-      stockAvailable: this.stock,
+      stockAvailable: this.variant.stock,
       promotionId: this.promotionId
     }).then((data) => {
+      self.variant = data;
       self.isEdit = false;
       self.variantChange.emit({
         event: 'edit',
@@ -73,12 +68,13 @@ export class ProductVariantItemComponent implements OnInit {
   }
 
   changeStock($event) {
-    if($event > this.variant.productTotalStock - this.variant.productTotalStockLocked + this.variant.stock) {
-      $event = this.variant.productTotalStock - this.variant.productTotalStockLocked + this.variant.stock;
+    if($event > this.variant.productVariantStock - this.variant.productVariantStockLocked + this.variant.stock) {
+      $event = this.variant.productVariantStock - this.variant.productVariantStockLocked + this.variant.stock;
     } else if($event < this.variant.stockLocked) {
       $event = this.variant.stockLocked;
     }
-    this.stock = $event;
+    this.variant.productVariantStockLocked = parseInt(this.variant.productVariantStockLocked) + parseInt($event) - parseInt(this.variant.stock);
+    this.variant.stock = $event;
   }
 
 }
