@@ -14,6 +14,6 @@
   <div class="sc-promote__promote-width-1 sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
     <button mat-raised-button color="primary" (click)="selectPromotionProduct()"
-            *ngIf="promote.totalStockrecord > 0">Select</button>
+            *ngIf="promote.totalStockrecord > 0 && promote.purchaseMethod == 'direct'">Select</button>
   </div>
 </div>

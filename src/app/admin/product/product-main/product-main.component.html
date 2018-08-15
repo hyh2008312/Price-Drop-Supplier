@@ -256,6 +256,29 @@
           </div>
         </div>
       </mat-tab>
+      <mat-tab label="Drops">
+        <div class="md-margin-top-2">
+          <app-product-title [status]="5" ></app-product-title>
+        </div>
+        <div class="sc-product__product-bg" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of productDrops;let i = index;">
+            <app-product-item [status]="5" [index]="i" (productChange)="productChange($event)" [product]="item"></app-product-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 5)"
+                         *ngIf="productDrops  && productDrops.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="productDrops && productDrops.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any products yet. </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
       <mat-tab label="Featured">
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <div>Sort by</div>
@@ -274,7 +297,7 @@
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                      placeholder="Search"
-                     (keyup.enter)="changeProducts({index:5})"/>
+                     (keyup.enter)="changeProducts({index:6})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
                 <i class="material-icons">close</i>
@@ -292,43 +315,20 @@
           </div>
         </div>
         <div>
-          <app-product-title [status]="5" ></app-product-title>
-        </div>
-        <div class="sc-product__product-bg" fxLayout="column">
-          <div class="sc-product__product-list" *ngFor="let item of productSelected;let i = index;">
-            <app-product-item [status]="5" [index]="i" (productChange)="productChange($event)" [product]="item"></app-product-item>
-          </div>
-          <mat-paginator [length]="length"
-                         [pageSize]="pageSize"
-                         [pageSizeOptions]="pageSizeOptions"
-                         (page)="changePage($event, 5)"
-                         *ngIf="productSelected  && productSelected.length > 0">
-          </mat-paginator>
-          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
-               *ngIf="productSelected && productSelected.length <= 0">
-            <div fxLayout="column" fxLayoutAlign="center center">
-              <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any products yet. </div>
-            </div>
-          </div>
-        </div>
-      </mat-tab>
-      <mat-tab label="Drops">
-        <div class="md-margin-top-2">
           <app-product-title [status]="6" ></app-product-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
-          <div class="sc-product__product-list" *ngFor="let item of productDrops;let i = index;">
+          <div class="sc-product__product-list" *ngFor="let item of productSelected;let i = index;">
             <app-product-item [status]="6" [index]="i" (productChange)="productChange($event)" [product]="item"></app-product-item>
           </div>
           <mat-paginator [length]="length"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 6)"
-                         *ngIf="productDrops  && productDrops.length > 0">
+                         *ngIf="productSelected  && productSelected.length > 0">
           </mat-paginator>
           <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
-               *ngIf="productDrops && productDrops.length <= 0">
+               *ngIf="productSelected && productSelected.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">
               <i class="iconfontXberts icon-ic-empty"></i>
               <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any products yet. </div>

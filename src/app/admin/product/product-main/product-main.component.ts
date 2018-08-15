@@ -104,10 +104,10 @@ export class ProductMainComponent implements OnInit {
         case 'draft':
           self.selectedIndex = 3;
           break;
-        case 'featured':
+        case 'drops':
           self.selectedIndex = 4;
           break;
-        case 'drops':
+        case 'featured':
           self.selectedIndex = 5;
           break;
         default:
@@ -146,10 +146,10 @@ export class ProductMainComponent implements OnInit {
           this.productDraftIndex = event.pageIndex + 1;
           break;
         case 5:
-          this.productSelectedIndex = event.pageIndex + 1;
+          this.productDropsIndex = event.pageIndex + 1;
           break;
         case 6:
-          this.productDropsIndex = event.pageIndex + 1;
+          this.productSelectedIndex = event.pageIndex + 1;
           break;
         default:
           break;
@@ -244,7 +244,7 @@ export class ProductMainComponent implements OnInit {
 
 
         });
-      } else if(event.index == 5) {
+      } else if(event.index == 6) {
 
         page = this.productSelectedIndex;
         let self = this;
@@ -264,7 +264,7 @@ export class ProductMainComponent implements OnInit {
           self.productSelected = data.results;
 
         });
-      } else if(event.index == 6) {
+      } else if(event.index == 5) {
 
         page = this.productDropsIndex;
         let self = this;
@@ -395,15 +395,15 @@ export class ProductMainComponent implements OnInit {
         break;
       case 5:
         switch(event.event) {
-          case 'selected':
-            this.productSelected.splice(event.index,1);
+          case 'delete':
+            this.productDrops.splice(event.index,1);
             break;
         }
         break;
       case 6:
         switch(event.event) {
-          case 'delete':
-            this.productDrops.splice(event.index,1);
+          case 'selected':
+            this.productSelected.splice(event.index,1);
             break;
         }
         break;

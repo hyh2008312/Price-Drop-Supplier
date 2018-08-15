@@ -60,7 +60,7 @@ export class ProductItemComponent implements OnInit {
       id: self.product.id,
       isDrop: 1
     }).then((data) => {
-      this.product.isDrop = true;
+      this.product = data;
     });
   }
 
@@ -81,7 +81,7 @@ export class ProductItemComponent implements OnInit {
       id: self.product.id,
       isDrop: 0
     }).then((data) => {
-      this.product.isDrop = false;
+      this.product = data;
     });
 
   }

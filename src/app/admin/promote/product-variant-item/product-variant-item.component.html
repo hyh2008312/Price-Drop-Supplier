@@ -1,6 +1,9 @@
 <div class="sc-promote__promote-item-1" fxLayout="row" fxLayoutAlign="start stretch" *ngIf="!isEdit">
-  <div class="md-margin-right-2" fxFlex="20" fxLayout="column" fxLayoutAlign="center stretch">
-    <div class="sc-promote__promote-text">
+  <div class="md-margin-right-2 sc-promote__promote-width-5" fxFlex="none" fxLayout="row" fxLayoutAlign="start center">
+    <div class="md-margin-right-2 sc-promote__promote-image" fxFlex="none" fxLayout="column" fxLayoutAlign="center stretch">
+      <img [src]="variant.image">
+    </div>
+    <div class="sc-promote__promote-title-2 sc-promote__promote-text md-dark-secondary">
       {{variant.sku}}
     </div>
   </div>
@@ -26,8 +29,11 @@
   </div>
 </div>
 <div class="sc-promote__promote-item-1" fxLayout="row" fxLayoutAlign="start stretch" *ngIf="isEdit">
-  <div class="md-margin-right-2" fxFlex="20" fxLayout="column" fxLayoutAlign="center stretch">
-    <div class="sc-promote__promote-text">
+  <div class="md-margin-right-2 sc-promote__promote-width-5" fxFlex="none" fxLayout="row" fxLayoutAlign="start center">
+    <div class="md-margin-right-2 sc-promote__promote-image" fxFlex="none" fxLayout="column" fxLayoutAlign="center stretch">
+      <img [src]="variant.image">
+    </div>
+    <div class="sc-promote__promote-title-2 sc-promote__promote-text md-dark-secondary">
       {{variant.sku}}
     </div>
   </div>
