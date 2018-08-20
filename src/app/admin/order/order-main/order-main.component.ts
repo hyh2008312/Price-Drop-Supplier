@@ -220,6 +220,10 @@ export class OrderMainComponent implements OnInit {
             self.selectedIndex = 1;
             self.orderPacking = [...data];
             break;
+          case 'Paid':
+            self.selectedIndex = 1;
+            self.orderPacking = [...data];
+            break;
           case 'Shipped':
             self.selectedIndex = 2;
             self.orderShipped = [...data];
