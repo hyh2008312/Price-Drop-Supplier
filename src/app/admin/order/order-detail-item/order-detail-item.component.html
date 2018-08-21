@@ -41,7 +41,7 @@
     <div fxFlex="none" *ngIf="order.orderStatus == 'Unpaid'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
     </div>
-    <div fxFlex="none" *ngIf="order.orderStatus == 'Packing'" class="sc-order__detail-width-3"
+    <div fxFlex="none" *ngIf="order.orderStatus == 'Packing' || order.orderStatus == 'Paid'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
       <button mat-raised-button color="accent" (click)="editTracking()">Edit Tracking</button>
       <div class="md-margin-top-1" fxLayout="column">
