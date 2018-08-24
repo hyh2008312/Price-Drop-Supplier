@@ -61,7 +61,7 @@ export class ImageUploadVariantComponent implements OnInit {
         let height = image.height;
 
         that.s3UploaderService.upload({
-          type: 'product/main',
+          type: 'product/detail',
           fileName: file.name,
           use: 'cover',
           width: width,
