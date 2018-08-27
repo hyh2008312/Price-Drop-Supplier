@@ -613,6 +613,25 @@ export class ProductService {
       });
   }
 
+  changeAttributes(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/basic/update/detail/${params.id}/`;
+
+    return this.http.post(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   deleteVariant(params:any): Promise<any> {
 
     let headers = new Headers({

@@ -12,6 +12,10 @@
   </div>
   <div class="md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">
+    <div class="sc-promote__promote-text">{{promote.saleUnitPrice|currency:currency}}</div>
+  </div>
+  <div class="md-margin-right-2" fxFlex="10"
+       fxLayout="column" fxLayoutAlign="center center">
     <div class="sc-promote__promote-text">
       <div class="sc-promote__promote-text">{{promote.unitPrice|currency:currency}}</div>
     </div>
@@ -26,6 +30,10 @@
       <input matInput type="text" placeholder="" [ngModel]="promote.discount"
         (ngModelChange)="changeDiscount($event)">
     </mat-form-field>
+  </div>
+  <div class="md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="center center">
+    <div class="sc-promote__promote-text">{{discount}}</div>
   </div>
   <div fxLayout="column" fxLayoutAlign="center center" fxFlex="10">
     <i class="material-icons md-dark-secondary xb-pointer" (click)="delete()">delete</i>
@@ -46,6 +54,10 @@
   </div>
   <div class="md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">
+    <div class="sc-promote__promote-text">{{promote.saleUnitPrice|currency:currency}}</div>
+  </div>
+  <div class="md-margin-right-2" fxFlex="10"
+       fxLayout="column" fxLayoutAlign="center center">
     <div class="sc-promote__promote-text">{{promote.unitPrice|currency:currency}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="15"
@@ -55,6 +67,10 @@
   <div class="md-margin-right-2" fxFlex="20"
        fxLayout="column" fxLayoutAlign="center center">
     <div class="sc-promote__promote-text">{{promote.discount}}</div>
+  </div>
+  <div class="md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="center center">
+    <div class="sc-promote__promote-text">{{discount}}</div>
   </div>
   <div fxLayout="column" fxLayoutAlign="center center" fxFlex="10">
     <div fxLayout="row" fxLayoutAlign="start center">
@@ -78,6 +94,10 @@
   </div>
   <div class="md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">
+    <div class="sc-promote__promote-text">{{promote.saleUnitPrice|currency:currency}}</div>
+  </div>
+  <div class="md-margin-right-2" fxFlex="10"
+       fxLayout="column" fxLayoutAlign="center center">
     <div class="sc-promote__promote-text">{{promote.unitPrice|currency:currency}}</div>
   </div>
   <div class="md-margin-right-2" fxFlex="20"
@@ -89,6 +109,10 @@
     <mat-form-field class="sc-promote__promote-width sc-promote__create-align-center">
       <input matInput type="number" placeholder="" [(ngModel)]="promote.discount" step="1">
     </mat-form-field>
+  </div>
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="column" fxLayoutAlign="center center">
+    <div class="sc-promote__promote-text">{{discount}}</div>
   </div>
   <div fxLayout="column" fxLayoutAlign="center stretch" fxFlex="10">
     <button mat-raised-button color="primary" (click)="save()">Save</button>
@@ -118,6 +142,10 @@
   <div class="md-margin-right-2" fxFlex="15"
        fxLayout="column" fxLayoutAlign="center center">
     <div class="sc-promote__promote-text">{{promote.discount}}</div>
+  </div>
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="column" fxLayoutAlign="center center">
+    <div class="sc-promote__promote-text">{{discount}}</div>
   </div>
   <div fxFlex="20" fxLayout="column" fxLayoutAlign="center center">
     <div class="sc-promote__promote-text">{{promote.totalOrder}}</div>

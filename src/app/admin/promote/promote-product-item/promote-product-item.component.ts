@@ -20,7 +20,7 @@ export class ProductProductItemComponent implements OnInit {
 
   isEdit: boolean = false;
 
-  currency: string = 'USD';
+  currency: string = 'INR';
 
   constructor(
     private dialog: MatDialog,
@@ -37,6 +37,10 @@ export class ProductProductItemComponent implements OnInit {
     } else {
       return this.promote.unitPrice;
     }
+  }
+
+  get discount() {
+    return Math.ceil((this.promote.saleUnitPrice - this.price) / this.promote.saleUnitPrice * 100) + '% OFF';
   }
 
   delete() {

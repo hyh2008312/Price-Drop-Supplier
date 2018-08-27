@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="start stretch">
   <div class="sc-order__product-height" fxLayout="row" fxLayoutAlign="start center" >
     <div class="xb-bold">
-      {{order.created | amDateFormat:'MMMM Do, YYYY'}}
+      {{order.created | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY'}}
     </div>
     <div class="md-margin-left-3" fxFlex>Order #: {{order.number}}</div>
     <div class="text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/{{order.id}}">View Details</div>

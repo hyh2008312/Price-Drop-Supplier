@@ -16,6 +16,8 @@ import { DeleteShippingDialogComponent } from '../delete-shipping-dialog/delete-
 import { EditShippingDialogComponent } from '../edit-shipping-dialog/edit-shipping-dialog.component';
 import { AddShippingDialogComponent } from '../add-shipping-dialog/add-shipping-dialog.component';
 
+import 'rxjs/add/operator/toPromise';
+
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
@@ -183,6 +185,79 @@ export class ProductEditComponent implements OnInit {
         fileInput.click();
       }
     });
+  }
+
+  changeCategory(id) {
+    // this.adminService.getProductVariantList({
+    //   pid: id
+    // }).then((data) => {
+    //   if(data.attributes && data.attributes.length > 0) {
+    //     let isChange = false;
+    //     for(let variant of data.attributes) {
+    //       if(variant.images && variant.images.length > 0) {
+    //         for(let item of variant.images) {
+    //           if(item.image) {
+    //             const image = item.image.split('http://p92s1j3q5.sabkt.gdipper.com/');
+    //             if (image[0] == '') {
+    //               isChange = true;
+    //               item.image = 'http://image.getpricedrop.com/' + image[1];
+    //             }
+    //           }
+    //         }
+    //       }
+    //     }
+    //     if(isChange) {
+    //       let params: any = {
+    //         id,
+    //         attributes: data.attributes
+    //       };
+    //       console.log(params);
+    //       this.adminService.changeAttributes(params).then((data) => {
+    //         console.log(data);
+    //       });
+    //     }
+    //   }
+    // });
+
+    // this.adminService.getProductBasic({
+    //   id
+    // }).then((data) => {
+    //   let product:any = data;
+    //
+    //   let images = product.images;
+    //
+    //   product.images = [];
+    //
+    //   let isChange = false;
+    //
+    //   for(let item of images) {
+    //     const _item = item.split('http://p92s1j3q5.sabkt.gdipper.com/');
+    //     let image: string = '';
+    //     if (_item[0] == '') {
+    //       image = 'http://image.getpricedrop.com/' + _item[1];
+    //       isChange = true;
+    //     } else {
+    //       image = _item[0];
+    //     }
+    //
+    //     product.images.push(image);
+    //   }
+    //
+    //   if(isChange == true) {
+    //     product.categoryId =  product.productCategories[0].categoryId;
+    //     product.mainCategoryId =  product.productCategories[0].parentId;
+    //     product.productCategoryId = product.productCategories[0].id;
+    //     this.adminService.changeProductBasic(product).then((data) => {
+    //       console.log(data);
+    //     });
+    //   }
+    // });
+  }
+
+  getChangeCategory() {
+    for(let i = 1; i <= 1271; i++) {
+      this.changeCategory(i);
+    }
   }
 
   addPicture(event) {

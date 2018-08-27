@@ -13,7 +13,7 @@
         </div>
         <div class="xb-bold sc-order__detail-margin-left">Order Date</div>
         <div class="md-margin-left-2">
-          {{order.created | amDateFormat:'MMMM Do, YYYY'}}
+          {{order.created | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY'}}
         </div>
       </div>
       <div class="md-margin-top-3 sc-order__detail-border-bottom">

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { FlexLayoutModule }    from '@angular/flex-layout';
 import { MomentModule }        from 'angular2-moment';
+import { MomentTimezoneModule } from 'angular-moment-timezone';
 
 import { SafeHtmlPipe }         from './pipes/safe-html/safe-html.pipe';
 import { SafeUrlPipe }         from './pipes/safe-url/safe-url.pipe';
@@ -191,6 +192,7 @@ let providers = {
     QuillEditorModule,
     AngularCropperjsModule,
     MomentModule,
+    MomentTimezoneModule,
     CarouselModule,
     MatInputModule,
     MatFormFieldModule,

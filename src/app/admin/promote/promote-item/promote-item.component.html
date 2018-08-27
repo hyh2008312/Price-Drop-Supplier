@@ -15,11 +15,11 @@
     <div>
       <div class="sc-promote__promote-text" fxLayout="row" fxLayoutAlign="start start">
         <span class="sc-promote__promote-width-2 md-align-right xb-bold" fxFlex="none">From</span>
-        <span class="md-margin-left-1">{{promote.startTime}}</span>
+        <span class="md-margin-left-1">{{promote.startTime | amTz:'Asia/Kolkata' | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
       </div>
       <div class="sc-promote__promote-text md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
         <span class="sc-promote__promote-width-2 md-align-right xb-bold" fxFlex="none">To</span>
-        <span class="md-margin-left-1">{{promote.endTime}}</span>
+        <span class="md-margin-left-1">{{promote.endTime | amTz:'Asia/Kolkata' | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
       </div>
     </div>
   </div>
@@ -60,11 +60,11 @@
     <div>
       <div class="sc-promote__promote-text" fxLayout="row" fxLayoutAlign="start start">
         <span class="sc-promote__promote-width-2 md-align-right xb-bold" fxFlex="none">From</span>
-        <span class="md-margin-left-1">{{promote.startTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
+        <span class="md-margin-left-1">{{promote.startTime | amTz:'Asia/Kolkata' | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
       </div>
       <div class="sc-promote__promote-text md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
         <span class="sc-promote__promote-width-2 md-align-right xb-bold" fxFlex="none">To</span>
-        <span class="md-margin-left-1">{{promote.endTime | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
+        <span class="md-margin-left-1">{{promote.endTime | amTz:'Asia/Kolkata' | amDateFormat:'YYYY, MM.DD, hh:mm A'}}</span>
       </div>
     </div>
   </div>
