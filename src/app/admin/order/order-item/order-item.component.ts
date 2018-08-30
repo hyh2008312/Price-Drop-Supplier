@@ -1,7 +1,7 @@
 import { Input, Output, Component, OnInit, EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AdminService } from '../../admin.service';
+import { OrderService } from '../order.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class OrderItemComponent implements OnInit {
   currency: string = 'INR';
 
   constructor(
-    private adminService: AdminService,
+    private adminService: OrderService,
     private userService: UserService,
     private router: Router
   ) { }
@@ -61,5 +61,15 @@ export class OrderItemComponent implements OnInit {
         tab = 'unpublish';
         break;
     }
+  }
+
+  editPaid() {
+    this.adminService.changeOrderPaid({
+      id: this.order.id,
+      status: 'Packing'
+    }).then((data) => {
+      console.log(data);
+      this.order.orderStatus = 'Packing';
+    })
   }
 }

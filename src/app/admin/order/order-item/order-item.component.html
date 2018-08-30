@@ -44,8 +44,11 @@
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
         Email
       </div>
-      <div>
+      <div fxFlex="">
         {{order.email}}
+      </div>
+      <div class="sc__accent-dark" *ngIf="order.orderStatus == 'Paid'">
+        <button mat-raised-button color="accent" (click)="editPaid()">Edit Status</button>
       </div>
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
