@@ -50,16 +50,22 @@ export class TopNavigationComponent implements OnInit {
     staff: true
   }, {
     id: 6,
+    text: '抽奖',
+    router: './lottery',
+    isActive: false,
+    staff: true
+  }, {
+    id: 7,
     text: '业绩',
     isActive: false,
     staff: false
   }, {
-    id: 7,
+    id: 8,
     text: '通知',
     isActive: false,
     staff: false
   }, {
-    id: 8,
+    id: 9,
     text: '用户审核',
     router: './user',
     isActive: false,

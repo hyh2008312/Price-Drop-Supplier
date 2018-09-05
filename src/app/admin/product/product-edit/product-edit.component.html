@@ -144,11 +144,7 @@
                 </div>
                 <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-align-center"
                      fxFlex="12">
-                  Sale Price
-                </div>
-                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-align-center"
-                     fxFlex="13">
-                  Lowest Price
+                  MRP
                 </div>
                 <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-align-center"
                      fxFlex="10">
@@ -156,7 +152,7 @@
                 </div>
                 <div class="md-dark-secondary xb-bold md-align-center"
                      fxFlex="10">
-                  Unit Price
+                  Sale Price
                 </div>
                 <div class="sc-product__create-width-3" fxFlex="none" >
 
@@ -185,12 +181,6 @@
                     <div class="md-margin-right-1 sc-product__create-title">Rs</div>
                     <mat-form-field class="sc-product__create-width-100">
                       <input type="text" matInput formControlName="saleUnitPrice">
-                    </mat-form-field>
-                  </div>
-                  <div class="sc-product__create-margin-right-3" fxFlex="13" fxLayout="row" fxLayoutAlign="start center">
-                    <div class="md-margin-right-1 sc-product__create-title">Rs</div>
-                    <mat-form-field class="sc-product__create-width-100">
-                      <input type="text" matInput formControlName="lowestPrice">
                     </mat-form-field>
                   </div>
                   <div class="sc-product__create-margin-right-3" fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
@@ -250,10 +240,6 @@
                     <div class="md-margin-right-2 sc-product__create-title">Rs</div>
                     {{p.value.saleUnitPrice}}
                   </div>
-                  <div class="sc-product__create-margin-right-3" fxFlex="12" fxLayout="row" fxLayoutAlign="start center">
-                    <div class="md-margin-right-2 sc-product__create-title">Rs</div>
-                    {{p.value.lowestPrice}}
-                  </div>
                   <div class="sc-product__create-margin-right-3" fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
                     <div class="md-margin-right-2 sc-product__create-title">Rs</div>
                     {{p.value.costPrice}}
@@ -280,16 +266,12 @@
                   SKU
                 </div>
                 <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center md-caption"
-                     fxFlex="10">
+                     fxFlex="15">
                   Quantity
                 </div>
                 <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center md-caption"
                      fxFlex="15">
-                  Sale Price<br>原价
-                </div>
-                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center md-caption"
-                     fxFlex="15">
-                  Lowest Price<br>砍最低价
+                  MRP<br>原价
                 </div>
                 <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center md-caption"
                      fxFlex="15">
@@ -297,7 +279,7 @@
                 </div>
                 <div class="md-dark-secondary xb-bold md-align-center md-caption"
                      fxFlex="15">
-                  Unit Price<br>销售价
+                  Sale Price<br>销售价
                 </div>
                 <div class="sc-product__create-width-3" fxFlex="none" >
 
@@ -310,7 +292,7 @@
                       <input class="md-align-center" type="text" matInput formControlName="sku">
                     </mat-form-field>
                   </div>
-                  <div class="sc-product__create-margin-right-3" fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
+                  <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                     <mat-form-field class="sc-product__create-width-100">
                       <input class="md-align-center" type="text" matInput formControlName="variantStockrecord">
                     </mat-form-field>
@@ -319,12 +301,6 @@
                     <div class="md-margin-right-2 sc-product__create-title">Rs</div>
                     <mat-form-field class="sc-product__create-width-100">
                       <input class="md-align-center" type="text" matInput formControlName="saleUnitPrice">
-                    </mat-form-field>
-                  </div>
-                  <div fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
-                    <div class="md-margin-right-2 sc-product__create-title">Rs</div>
-                    <mat-form-field class="sc-product__create-width-100">
-                      <input class="md-align-center" type="text" matInput formControlName="lowestPrice">
                     </mat-form-field>
                   </div>
                   <div fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
@@ -371,16 +347,12 @@
                   <div class="sc-product__create-margin-right-2" fxFlex="25">
                     {{p.value.sku}}
                   </div>
-                  <div class="sc-product__create-margin-right-2 md-align-center" fxFlex="10">
+                  <div class="sc-product__create-margin-right-2 md-align-center" fxFlex="15">
                     {{p.value.variantStockrecord}}
                   </div>
                   <div class="sc-product__create-margin-right-2" fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
                     <div class="md-margin-right-2 sc-product__create-title">Rs</div>
                     {{p.value.saleUnitPrice}}
-                  </div>
-                  <div class="sc-product__create-margin-right-2" fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
-                    <div class="md-margin-right-2 sc-product__create-title">Rs</div>
-                    {{p.value.lowestPrice}}
                   </div>
                   <div class="sc-product__create-margin-right-2" fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
                     <div class="md-margin-right-2 sc-product__create-title">Rs</div>

@@ -36,6 +36,9 @@ const routes: Routes = [
         path: 'event',
         loadChildren:'./topic/topic.module#TopicModule'
       }, {
+        path: 'lottery',
+        loadChildren:'./lottery/lottery.module#LotteryModule'
+      }, {
         path: '',
         redirectTo: 'product',
         pathMatch: 'full'

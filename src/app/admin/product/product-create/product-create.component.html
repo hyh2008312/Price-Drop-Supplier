@@ -203,7 +203,7 @@
                   <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                     <div class="md-margin-right-2 sc-product__create-title">Rs</div>
                     <mat-form-field fxFlex>
-                      <input type="text" matInput placeholder="Sale Price" formControlName="saleUnitPrice">
+                      <input type="text" matInput placeholder="MRP" formControlName="saleUnitPrice">
                     </mat-form-field>
                   </div>
                   <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
@@ -227,21 +227,15 @@
                   <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                     <div class="md-margin-right-2 sc-product__create-title">Rs</div>
                     <mat-form-field fxFlex>
-                      <input type="text" matInput placeholder="Lowest Price" formControlName="lowestPrice">
-                    </mat-form-field>
-                  </div>
-                  <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
-                    <div class="md-margin-right-2 sc-product__create-title">Rs</div>
-                    <mat-form-field fxFlex>
-                      <input type="text" matInput placeholder="Unit Price" formControlName="unitPrice">
+                      <input type="text" matInput placeholder="Sale Price" formControlName="unitPrice">
                     </mat-form-field>
                   </div>
                 </div>
                 <div fxLayout="row" fxLayoutAlign="space-between center">
                   <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
-                    <div *ngIf="p.get('lowestPrice').invalid && (p.get('lowestPrice').dirty ||
-                    p.get('lowestPrice').touched)" class="xb-input-error">
-                      <div *ngIf="p.get('lowestPrice').hasError('required')">
+                    <div *ngIf="p.get('unitPrice').invalid && (p.get('unitPrice').dirty ||
+                    p.get('unitPrice').touched)" class="xb-input-error">
+                      <div *ngIf="p.get('unitPrice').hasError('required')">
                         This field is required.
                       </div>
                     </div>
@@ -263,24 +257,20 @@
                 SKU
               </div>
               <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
-                   fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
+                   fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                 Quantity
               </div>
               <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
-                   fxFlex="13" fxLayout="row" fxLayoutAlign="start center">
-                Sale Price
-              </div>
-              <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
-                   fxFlex="13" fxLayout="row" fxLayoutAlign="start center">
-                Lowest Price
+                   fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                MRP
               </div>
               <div class="md-dark-secondary xb-bold"
-                   fxFlex="13" fxLayout="row" fxLayoutAlign="start center">
+                   fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                 Cost Price
               </div>
               <div class="md-dark-secondary xb-bold"
                    fxFlex="13" fxLayout="row" fxLayoutAlign="start center">
-                Unit Price
+                Sale Price
               </div>
             </div>
             <div fxLayout="column" fxLayoutAlign="start stretch" *ngFor="let p of product.controls; let i = index;">
@@ -293,24 +283,18 @@
                     <input type="text" matInput formControlName="sku">
                   </mat-form-field>
                 </div>
-                <div class="sc-product__create-margin-right-3" fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field class="sc-product__create-width-100">
                     <input type="text" matInput formControlName="stock">
                   </mat-form-field>
                 </div>
-                <div class="sc-product__create-margin-right-3" fxFlex="13" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                   <div class="md-margin-right-2 sc-product__create-title">Rs</div>
                   <mat-form-field class="sc-product__create-width-100">
                     <input type="text" matInput formControlName="saleUnitPrice">
                   </mat-form-field>
                 </div>
-                <div class="sc-product__create-margin-right-3" fxFlex="13" fxLayout="row" fxLayoutAlign="start center">
-                  <div class="md-margin-right-2 sc-product__create-title">Rs</div>
-                  <mat-form-field class="sc-product__create-width-100">
-                    <input type="text" matInput formControlName="lowestPrice">
-                  </mat-form-field>
-                </div>
-                <div class="sc-product__create-margin-right-3" fxFlex="13" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                   <div class="md-margin-right-2 sc-product__create-title">Rs</div>
                   <mat-form-field class="sc-product__create-width-100" fxFlex>
                     <input type="text" matInput formControlName="costPrice">
@@ -342,13 +326,13 @@
                 <div *ngIf="p.get('saleUnitPrice').invalid && (p.get('saleUnitPrice').dirty ||
                     p.get('saleUnitPrice').touched)" class="xb-input-error">
                   <div *ngIf="p.get('saleUnitPrice').hasError('required')">
-                    This Sale Price field is required.
+                    This MRP field is required.
                   </div>
                 </div>
-                <div *ngIf="p.get('lowestPrice').invalid && (p.get('lowestPrice').dirty ||
-                    p.get('lowestPrice').touched)" class="xb-input-error">
-                  <div *ngIf="p.get('lowestPrice').hasError('required')">
-                    This Lowest Price field is required.
+                <div *ngIf="p.get('unitPrice').invalid && (p.get('unitPrice').dirty ||
+                    p.get('unitPrice').touched)" class="xb-input-error">
+                  <div *ngIf="p.get('unitPrice').hasError('required')">
+                    This Sale Price field is required.
                   </div>
                 </div>
               </div>
