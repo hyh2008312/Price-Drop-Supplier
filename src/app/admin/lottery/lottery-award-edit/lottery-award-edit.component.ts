@@ -122,17 +122,7 @@ export class LotteryAwardEditComponent implements OnInit {
       attributes: this.fb.array([]),
       variants: this.fb.array([]),
       shippings: this.fb.array([]),
-      brandName: [''],
-      description: ['Please add product details and images', Validators.required],
-      length: [0, Validators.required],
-      width: [0, Validators.required],
-      height: [0, Validators.required],
-      weight: [0, Validators.required],
-      customsDeclaredCharge: [0, Validators.required],
-      originCountryId: [null, Validators.required],
-      isPowder: [false, Validators.required],
-      isLiquid: [false, Validators.required],
-      isBattery: [false, Validators.required],
+      background: ['', Validators.required],
       purchaseLink: [' ', Validators.required]
     });
 
