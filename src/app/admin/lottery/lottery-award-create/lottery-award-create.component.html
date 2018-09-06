@@ -49,6 +49,17 @@
                This field is required.
              </div>
           </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <input type="text" matInput placeholder="Theme Color" formControlName="background">
+            </mat-form-field>
+          </div>
+          <div *ngIf="productForm.get('background').invalid && (productForm.get('background').dirty ||
+            productForm.get('background').touched)" class="xb-input-error">
+            <div *ngIf="productForm.get('background').hasError('required')">
+              This field is required.
+            </div>
+          </div>
         </div>
         <div class="sc-product__create-title md-margin-top-2">
           Image

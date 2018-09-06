@@ -122,17 +122,7 @@ export class LotteryAwardCreateComponent implements OnInit {
       attributes: this.fb.array([]),
       variants: this.fb.array([]),
       shippings: this.fb.array([]),
-      brandName: [''],
-      description: ['Please add product details and images', Validators.required],
-      length: [0, Validators.required],
-      width: [0, Validators.required],
-      height: [0, Validators.required],
-      weight: [0, Validators.required],
-      customsDeclaredCharge: [0, Validators.required],
-      originCountryId: [null, Validators.required],
-      isPowder: [false, Validators.required],
-      isLiquid: [false, Validators.required],
-      isBattery: [false, Validators.required],
+      background: ['', Validators.required],
       purchaseLink: [' ', Validators.required]
     });
 
@@ -149,58 +139,6 @@ export class LotteryAwardCreateComponent implements OnInit {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
-  }
-
-  onEditorCreated(quill) {
-    this.editor = quill;
-
-    let self = this;
-    this.editor.getModule('toolbar').addHandler("image", (image) => {
-      if(image) {
-        var fileInput = document.getElementById(self.editorImageId);
-        fileInput.click();
-      }
-    });
-  }
-
-  addPicture(event) {
-    if(!event.target.files[0]) {
-      return;
-    }
-    let that = this;
-    this.previewImageService.readAsDataUrl(event.target.files[0]).then(function(result) {
-
-      let file = event.target.files[0];
-
-      let image = new Image();
-      image.onload = function(){
-        let width = image.width;
-        let height = image.height;
-
-        that.s3UploaderService.upload({
-          type: 'product/main',
-          fileName: file.name,
-          use: 'detail',
-          width: width,
-          height: height
-        }).then((data)=> {
-          let imageUrl = `${data.url}/${data.name}`;
-          that.s3UploaderService.uploadToS3WithoutLoading(file, data).then((data) => {
-            let range = that.editor.getSelection();
-            that.editor.insertEmbed(range.index, 'image', imageUrl);
-          });
-        });
-      };
-      image.src = window.URL.createObjectURL(file);
-
-    });
-  }
-
-  changeStep(index) {
-    this.ngZone.runOutsideAngular(() => {
-      this.document.querySelector('html').scrollTop = 0;
-    });
-    this.step = index;
   }
 
   addShippingList() {
@@ -286,60 +224,9 @@ export class LotteryAwardCreateComponent implements OnInit {
 
   }
 
-  deleteVariant(index:any) {
-    let item = this.variantAddedList[index];
-    if(item.option == 2) {
-      if(item.colorImageList) {
-        for(let value of item.colorImageList) {
-          let _index = this.colorImageList.findIndex((data) => {
-            if(data.value == value.value) {
-              return true;
-            }
-          });
-          if(_index > -1) {
-            this.colorImageList.splice(_index,1);
-          }
-        }
-      }
-    }
-    this.variantAddedList.splice(index, 1);
-
-    this.addProductList(true);
-  }
-
-  deleteVariantObject(i) {
-    this.product.removeAt(i);
-  }
 
   deleteShippingObject(i) {
     this.shipping.removeAt(i);
-  }
-
-  addVariantList() {
-    let option = {
-      option: '',
-      isValue: false,
-      value: [],
-      visible: true,
-      selectable: true,
-      removable: true,
-      addOnBlur: true,
-      hasColorImage: false,
-      colorImageList: []
-    };
-
-    this.variantAddedList.push(option);
-  }
-
-  addVariantImage($event, p) {
-    p.image = $event.file;
-    for(let item of this.colorImageList) {
-      if(item.value == p.value) {
-        item.image = p.image;
-        break;
-      }
-    }
-    this.addProductList(true);
   }
 
   addProductList(variant?: any) {
@@ -385,7 +272,7 @@ export class LotteryAwardCreateComponent implements OnInit {
             variant: [item],
             attributes: [newArr],
             mainImage: [image],
-            sku: ['', Validators.required],
+            sku: ['lottery' + new Date(), Validators.required],
             stock: [50000, Validators.required],
             saleUnitPrice: [1, Validators.required],
             lowestPrice: [0, Validators.required],
@@ -398,7 +285,7 @@ export class LotteryAwardCreateComponent implements OnInit {
         this.product.push(this.fb.group({
           attributes: [[]],
           mainImage: [''],
-          sku: ['', Validators.required],
+          sku: ['lottery' + new Date(), Validators.required],
           stock: [50000, Validators.required],
           saleUnitPrice: [1, Validators.required],
           lowestPrice: [0, Validators.required],
@@ -412,7 +299,7 @@ export class LotteryAwardCreateComponent implements OnInit {
       this.product.push(this.fb.group({
         attributes: [[]],
         mainImage: [''],
-        sku: ['', Validators.required],
+        sku: ['lottery' + new Date(), Validators.required],
         stock: [50000, Validators.required],
         saleUnitPrice: [1, Validators.required],
         lowestPrice: [0, Validators.required],
@@ -524,7 +411,7 @@ export class LotteryAwardCreateComponent implements OnInit {
       self.ngZone.runOutsideAngular(() => {
         self.document.querySelector('html').style.top = '0';
       });
-      self.router.navigate(['../'], { queryParams: {tab: 'pending'}, replaceUrl: true, relativeTo: this.activatedRoute});
+      self.router.navigate(['../../'], { queryParams: {tab: 'pending'}, replaceUrl: true, relativeTo: this.activatedRoute});
     });
   }
 

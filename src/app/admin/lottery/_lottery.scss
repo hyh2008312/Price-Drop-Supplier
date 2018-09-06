@@ -88,6 +88,13 @@
       text-align: center;
     }
 
+    &-background{
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.12);
+    }
+
     &-item{
       padding: 16px 0;
       border-bottom: 1px solid rgba(0,0,0,.12);
@@ -379,71 +386,177 @@
   }
 }
 
+.sc-promote {
+  &__promote {
+    position: relative;
 
-.sc-product-dialog{
+    &-bg {
+      border-radius: 4px;
+      overflow: hidden;
+    }
 
-  padding: 40px 28px;
-  max-width: 540px;
-  position: relative;
-  background-color: $whiteColor;
-  border-radius: 4px;
-  @include xb-xs-screen{
-    padding: 40px 16px;
-  }
+    &-list {
+      padding: 0 16px;
+      background-color: $whiteColor;
+    }
 
-  &__close{
-    position: absolute;
-    left: calc(100% - 36px);
-    top: 12px;
-    color: $blackColor;
-    cursor: pointer;
-    i{
-      font-size: 24px;
-      line-height: 24px;
+    &-buttons {
+      position: absolute;
+      right: 16px;
+      top: 8px;
+      z-index: 10;
+    }
+
+    &-navigation {
+      padding: 0 16px;
+      height: 54px;
+      background-color: $lightGrayColor;
+
+      &-1 {
+        padding: 0 12px;
+        background-color: $lightWhiteColor;
+        height: 40px;
+      }
+    }
+
+    &-none {
+      padding: 96px 0;
+      background-color: $whiteColor;
+      border-radius: 4px;
+      span {
+        margin-top: 16px;
+        @include media();
+      }
+      i {
+        font-size: 96px;
+        line-height: 96px;
+        color: rgba(0, 0, 0, .38);
+      }
+    }
+
+    &-item {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, .12);
+
+      &-1 {
+        padding: 16px 12px;
+        border-bottom: 1px solid rgba(0, 0, 0, .12);
+      }
+    }
+
+    &-title-1 {
+      font-size: 16px;
       @include media();
+      color: rgba(0, 0, 0, .87);
+    }
+
+    &-title-2 {
+      font-size: 12px;
+      @include media();
+    }
+
+    &-width {
+      width: 138px;
+    }
+
+    &-width-1 {
+      width: 88px;
+    }
+
+    &-width-2 {
+      width: 32px;
+    }
+
+    &-width-3 {
+      width: 60px;
+    }
+
+    &-width-4 {
+      width: 120px;
+    }
+
+    &-width-5 {
+      width: 160px;
+    }
+
+    &-text {
+      font-size: 12px;
+    }
+
+    &-button {
+      line-height: 24px;
+      border-bottom: 1px solid rgba(0, 0, 0, .12);
+      min-width: 100px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    &-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-right: 16px;
+      position: relative;
+      border: 1px solid rgba(0, 0, 0, .12);
+
+      > img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        @include transform(translate(-50%, -50%));
+      }
     }
   }
 
-  &__title{
-    font-size: 24px;
-    line-height: 32px;
-    text-align: center;
-    @include media();
-  }
+  &__create{
+    &-text{
+      padding: 0 16px;
+    }
 
-  &__title-1{
-    font-size: 24px;
-    line-height: 32px;
-    @include media();
-  }
+    &-bg{
+      padding: 40px 16px;
+      border-radius: 4px;
+      background-color: $whiteColor;
+    }
 
-  &__content{
-    margin-top: 24px;
-    font-size: 14px;
-    line-height: 24px;
-    text-align: left;
-    @include regular();
-  }
+    &-width{
+      width: 140px;
+    }
 
-  &__margin-top{
-    margin-top: 24px;
-  }
-
-  &__icons{
-    font-size: 24px;
+    &-align-center{
+      text-align: center;
+    }
   }
 
 }
 
-.sc-product-variant-dialog{
+.sc-promotion-dialog{
 
-  padding: 40px 32px;
+  padding: 28px 40px;
   max-width: 800px;
+  max-height: 800px;
+  overflow-y: scroll;
+  width: 100%;
   position: relative;
   background-color: $whiteColor;
   border-radius: 4px;
   @include xb-xs-screen{
-    padding: 40px 16px;
+    padding: 16px 16px;
+  }
+
+  &__large{
+    padding: 40px 40px;
+    max-width: 960px;
+    max-height: 800px;
+    overflow-y: scroll;
+    width: 100%;
+    position: relative;
+    background-color: $whiteColor;
+    border-radius: 4px;
+    @include xb-xs-screen{
+      padding: 16px 16px;
+    }
   }
 
   &__close{
@@ -461,20 +574,52 @@
 
   &__title{
     font-size: 24px;
-    line-height: 32px;
+    line-height: 28px;
     @include media();
   }
 
-  &__content{
-    margin-top: 24px;
-    font-size: 14px;
-    line-height: 24px;
-    text-align: left;
-    @include regular();
+  &__width{
+    width: 172px;
   }
 
-  &__margin-top{
-    margin-top: 24px;
+  &__search{
+    border-bottom: 2px solid $blackColor;
+    height: 32px;
+    margin: 16px 0 30px;
+    position: relative;
+
+    >i{
+      margin: 0 16px 0 0;
+      color: $blackColor;
+    }
+
+    >input{
+      border: none;
+      background-color: transparent;
+      width: 150px;
+    }
+
+    &-close{
+      position: absolute;
+      cursor: pointer;
+      right: 0;
+      top: 50%;
+      @include transform(translateY(-50%));
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      background-color: rgba(0,0,0,.54);
+      >i{
+        font-size: 12px;
+        line-height: 12px;
+        color: $whiteColor;
+      }
+    }
+  }
+
+  &__bg{
+    border-radius: 4px;
+    overflow: hidden;
   }
 
 }

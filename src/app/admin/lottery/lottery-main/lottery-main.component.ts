@@ -7,8 +7,6 @@ import 'rxjs/add/operator/map';
 import { LotteryService } from '../lottery.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 
-import { utils, write, WorkBook } from 'xlsx';
-
 import { saveAs } from 'file-saver';
 
 @Component({
@@ -20,20 +18,20 @@ import { saveAs } from 'file-saver';
 export class LotteryMainComponent implements OnInit {
 
 
-  award: any = [{
-    id: 1,
-    title: 1111,
-    mainImage: '',
-    saleUnitPrice: 111.00,
-    lowestPrice: 0,
-    costPrice: 0,
-    unitPrice: 111.00
-  }];
+  prize: any;
+
+  promoteAll: any;
+
+  selectedIndex = 0;
+  prizeIndex: 1;
+  campaignIndex: 1;
 
   // MatPaginator Inputs
   length:number = 0;
   pageSize = 50;
   pageSizeOptions = [50];
+
+  subscription: any;
 
   constructor(
     private lotteryService: LotteryService,
@@ -45,6 +43,24 @@ export class LotteryMainComponent implements OnInit {
   }
 
   ngOnInit():void {
+    let self = this;
+    this.subscription = this.activatedRoute.queryParams.subscribe((data) => {
+      switch(data.tab) {
+        case 'prize':
+          self.selectedIndex = 0;
+          break;
+        case 'campagin':
+          self.selectedIndex = 1;
+          break;
+        default:
+          self.selectedIndex = 0;
+          break;
+      }
+
+      self.changeProducts({
+        index: self.selectedIndex
+      });
+    });
   }
 
   ngOnDestroy() {
@@ -54,17 +70,55 @@ export class LotteryMainComponent implements OnInit {
   // MatPaginator Output
   changePage(event, type) {
     this.pageSize = event.pageSize;
+    switch (type) {
+      case 0:
+        this.prizeIndex = event.pageIndex + 1;
+        break;
+      case 1:
+        this.campaignIndex = event.pageIndex + 1;
+        break;
+    }
+    this.changeProducts({index: type});
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
-  changeProducts($event) {
+  changeProducts(event) {
+    let page = 0;
+    switch (event.index) {
+      case 0:
+        page = this.prizeIndex;
+        this.lotteryService.getPrizeList({
+          page,
+          page_size: this.pageSize
+        }).then((data) => {
+          this.length = data.count;
+          this.prize = [...data.results];
+        });
+        break;
+      case 1:
+        page = this.campaignIndex;
+        this.lotteryService.getCampaignList({
+          page,
+          page_size: this.pageSize
+        }).then((data) => {
+          this.length = data.count;
+          this.promoteAll = [...data.results];
+        });
+        break;
+      default:
+        break;
+    }
 
   }
 
   productChange($event) {
+
+  }
+
+  promotionChange($event) {
 
   }
 
