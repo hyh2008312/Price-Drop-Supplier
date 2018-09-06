@@ -79,7 +79,7 @@
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
           <div class="sc-promote__promote-text xb-bold">Campaign Status</div>
           <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-            {{campaign.status}}
+            {{campaign.drawStatus}}
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
@@ -115,13 +115,13 @@
         </div>
       </div>
 
-      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center" *ngIf="firstPrize">
         <div class="md-margin-right-2 sc-promote__promote-image" fxFlex="none" fxLayout="column" fxLayoutAlign="center stretch">
-          <img [src]="promote.mainImage">
+          <img [src]="firstPrize.image">
         </div>
         <div class="md-margin-right-2" fxFlex="45" fxLayout="column" fxLayoutAlign="center stretch">
           <div class="sc-promote__promote-text">
-            {{promote.title}}
+            {{firstPrize.product}}
           </div>
         </div>
       </div>
@@ -130,8 +130,7 @@
         <div class="sc-promote__promote-text xb-bold">Add Second Prize for This Campaign:</div>
         <div class="unicorn-dark-theme md-margin-left-3">
           <mat-form-field class="sc-promotion-dialog__width">
-            <mat-select [ngModel]="second" placeholder="Choose Gift Card" name="Category"
-                        (ngModelChange)="cardSecondSelect($event)">
+            <mat-select [ngModel]="secondPrize" placeholder="Choose Gift Card" name="Second Prize">
               <mat-option class="md-align-center" *ngFor="let item of cardList" [value]="item.id">
                 {{ item.name }}
               </mat-option>
@@ -144,9 +143,8 @@
         <div class="sc-promote__promote-text xb-bold">Add Third Prize for This Campaign:</div>
         <div class="unicorn-dark-theme md-margin-left-3">
           <mat-form-field class="sc-promotion-dialog__width">
-            <mat-select [ngModel]="third" placeholder="Choose Gift Card" name="Category"
-                        (ngModelChange)="cardThirdSelect($event)">
-              <mat-option class="md-align-center" *ngFor="let item of cardList" [value]="item.id">
+            <mat-select [(ngModel)]="thirdPrize" placeholder="Choose Gift Card" name="Third Prize">
+              <mat-option class="md-align-center" *ngFor="let item of cardList" [value]="item.name">
                 {{ item.name }}
               </mat-option>
             </mat-select>

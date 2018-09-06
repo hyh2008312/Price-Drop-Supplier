@@ -25,13 +25,15 @@ export class PromoteCreateComponent implements OnInit {
 
   cardList: any;
 
-  second: any;
-
-  third: any;
-
   campaign: any = {};
 
   categoryList: any;
+
+  firstPrize: any;
+
+  secondPrize: any = 'Rs.150';
+
+  thirdPrize: any = 'Rs.150';
 
   constructor(
     private promoteService: LotteryService,
@@ -63,12 +65,6 @@ export class PromoteCreateComponent implements OnInit {
   getCardList() {
     this.promoteService.getCardList().then((res) => {
       this.cardList = res;
-      for(let item of res) {
-        if(item.share == '150.00') {
-          this.second = item.id;
-          this.third = item.id;
-        }
-      }
     });
   }
 
@@ -100,7 +96,7 @@ export class PromoteCreateComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(dialogRef.componentInstance.data.isEdit == true) {
-        self.getPromotionDetail();
+        self.firstPrize = dialogRef.componentInstance.data.firstPrize;
       }
     });
   }
@@ -124,32 +120,15 @@ export class PromoteCreateComponent implements OnInit {
     }
   }
 
-  cardSecondSelect($event) {
-
-  }
-
-  cardThirdSelect($event) {
-
-  }
-
   save() {
-    if(!this.campaign.product || this.campaign.product.length <= 0) {
-      return this.router.navigate(['../../'],{relativeTo: this.activatedRoute});
-    }
 
-    let discounts: any = [];
-    for(let item of this.campaign.product) {
-      discounts.push({
-        pid: item.id,
-        discount: item.discount
-      });
-    }
-
-    this.promoteService.changePromotionDiscounts({
+    this.promoteService.changePromotionPrize({
       id: this.campaign.id,
-      discounts
+      pid: this.firstPrize.id,
+      secondPrize: this.secondPrize,
+      thirdPrize: this.thirdPrize
     }).then((data) => {
-      this.router.navigate(['../'],{relativeTo: this.activatedRoute});
+      this.router.navigate(['../../'],{relativeTo: this.activatedRoute});
     });
   }
 

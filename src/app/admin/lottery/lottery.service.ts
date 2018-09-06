@@ -251,7 +251,7 @@ export class LotteryService {
       });
   }
 
-  changePromotionDiscounts(promotion:any): Promise<any> {
+  changePromotionPrize(promotion:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -260,9 +260,9 @@ export class LotteryService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}flashsale/flash/batch/${promotion.id}/`;
+    const url = `${this.baseUrl.url}prize/update/${promotion.id}/`;
 
-    return this.http.put(url, promotion, options)
+    return this.http.post(url, promotion, options)
       .toPromise()
       .then(response => response.json())
       .catch((error) => {

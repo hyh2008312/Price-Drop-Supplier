@@ -97,6 +97,7 @@ export class SelectProductDialogComponent implements OnInit {
   promoteChanges(event) {
     if(event.event == 'changed') {
       this.data.isEdit = true;
+      this.data.firstPrize = event.promote;
       this.close();
     }
   }

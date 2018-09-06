@@ -54,7 +54,7 @@ export class PromoteEditComponent implements OnInit {
     this.promoteService.getCardList().then((res) => {
       this.cardList = res;
       for(let item of res) {
-        if(item.share == '150.00') {
+        if(item.name == 'Rs.150') {
           this.second = item.id;
           this.third = item.id;
         }
