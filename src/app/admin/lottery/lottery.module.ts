@@ -15,6 +15,8 @@ import { SelectProductDialogComponent } from './select-product-dialog/select-pro
 import { SelectProductTitleComponent } from './select-product-title/select-product-title.component';
 import { SelectProductItemComponent } from './select-product-item/select-product-item.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { DrawParticipantTitleComponent } from './draw-participant-title/draw-participant-title.component';
+import { DrawParticipantItemComponent } from './draw-participant-item/draw-participant-item.component';
 
 import { LotteryRoutingModule } from './lottery.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -42,7 +44,9 @@ import { LotteryService } from './lottery.service';
     SelectProductTitleComponent,
     SelectProductItemComponent,
     PaginationComponent,
-    PromoteEditComponent
+    PromoteEditComponent,
+    DrawParticipantTitleComponent,
+    DrawParticipantItemComponent
   ],
   entryComponents: [
     SelectProductDialogComponent

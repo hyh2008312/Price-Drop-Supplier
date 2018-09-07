@@ -124,7 +124,6 @@ export class PromoteCreateComponent implements OnInit {
 
     this.promoteService.changePromotionPrize({
       id: this.campaign.id,
-      pid: this.firstPrize.id,
       secondPrize: this.secondPrize,
       thirdPrize: this.thirdPrize
     }).then((data) => {

@@ -520,6 +520,12 @@
       background-color: $whiteColor;
     }
 
+    &-bg-1{
+      padding: 16px;
+      border-top: 1px dashed rgba(0,0,0, 0.12);
+      background-color: $whiteColor;
+    }
+
     &-width{
       width: 140px;
     }

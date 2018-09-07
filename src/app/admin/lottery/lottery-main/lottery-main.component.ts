@@ -115,7 +115,9 @@ export class LotteryMainComponent implements OnInit {
   }
 
   productChange($event) {
-
+    if($event.event == 'delete') {
+      this.prize.splice($event.index,1);
+    }
   }
 
   promotionChange($event) {

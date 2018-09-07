@@ -127,7 +127,7 @@ export class LotteryService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}/point/voucher/list/`;
+    const url = `${this.baseUrl.url}point/voucher/list/`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -166,6 +166,63 @@ export class LotteryService {
     const url = `${this.baseUrl.url}product/lottery/create/`;
 
     return this.http.post(url, product, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
+  getPrizeDetail(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/lottery/detail/${product.id}/`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
+  changePrizeDetail(product: any): Promise<any> {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/lottery/basic/update/${product.id}/`;
+
+    return this.http.put(url, product, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
+
+  deletePrize(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/lottery/detail/${product.id}/`;
+
+    return this.http.delete(url, options)
       .toPromise()
       .then(response => response.json())
       .catch((error) => {
@@ -231,6 +288,23 @@ export class LotteryService {
       });
   }
 
+  getParticipantList(params: any): Promise<any> {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}lottery/get/award/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
 
   getPromotionDetail(params:any): Promise<any> {
 
@@ -241,9 +315,27 @@ export class LotteryService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}flashsale/flash/detail/${params.id}/`;
+    const url = `${this.baseUrl.url}lottery/detail/${params.id}/`;
 
     return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
+  changePromotionDetail(params:any): Promise<any> {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}lottery/update/${params.id}/`;
+
+    return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
       .catch((error) => {
@@ -260,7 +352,7 @@ export class LotteryService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}prize/update/${promotion.id}/`;
+    const url = `${this.baseUrl.url}lottery/prize/update/${promotion.id}/`;
 
     return this.http.post(url, promotion, options)
       .toPromise()
@@ -269,26 +361,6 @@ export class LotteryService {
         this.handleError(error, this)
       });
   }
-
-  getPromotionProductList(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/flash/list/?${this.serializeParams(params)}`;
-
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
-  }
-
 
   addPromotionProduct(promotion:any): Promise<any> {
 

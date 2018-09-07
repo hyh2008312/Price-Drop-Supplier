@@ -114,7 +114,7 @@
                 <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field fxFlex>
                     <mat-select name="country" placeholder="Shipping Country"
-                                formControlName="countryId" (ngModelChange)="changeShippingMethod($event, p)">
+                                formControlName="countryId" (ngModelChange)="changeShippingMethod($event)">
                       <mat-option class="md-align-center" *ngFor="let item of countries" [value]="item.id">
                         {{ item.name }}
                       </mat-option>
@@ -147,12 +147,12 @@
                   This field is required.
                 </div>
               </div>
-              <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="p.value.type != '' && p.shippingMethodList.length > 0">
+              <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="p.value.type != '' && shippingMethodList.length > 0">
                 <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field fxFlex>
                     <mat-select name="carrier" placeholder="Shipping Carrier"
-                                formControlName="id" (ngModelChange)="changeShippingPrice($event, p)">
-                      <mat-option class="md-align-center" *ngFor="let item of p.shippingMethodList" [value]="item.id">
+                                formControlName="shippingId" (ngModelChange)="changeShippingPrice($event, p)">
+                      <mat-option class="md-align-center" *ngFor="let item of shippingMethodList" [value]="item.id">
                         {{ item.shippingProvider }}
                       </mat-option>
                     </mat-select>

@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import { LotteryService } from '../lottery.service';
 import {SelectProductDialogComponent} from '../select-product-dialog/select-product-dialog.component';
@@ -15,7 +15,9 @@ export class PromoteEditComponent implements OnInit {
 
   currency: string = 'USD';
 
-  campaign: any = {};
+  campaign: any = {
+    quantity: 1
+  };
 
   categoryList: any;
 
@@ -25,17 +27,38 @@ export class PromoteEditComponent implements OnInit {
 
   cardList: any;
 
-  second: any;
+  firstPrize: any;
 
-  third: any;
+  secondPrize: any = 'Rs.150';
+
+  thirdPrize: any = 'Rs.150';
+
+  selectedIndex = 0;
+
+  // MatPaginator Inputs
+  length:number = 0;
+  pageSize = 100;
+  pageSizeOptions = [100];
+
+  participants: any;
+  participantsIndex: any = 1;
+  candidates: any;
+  candidatesIndex: any = 1;
+  winners: any;
+  winnersIndex: any = 1;
+  shipment: any;
+  shipmentIndex: any = 1;
 
   constructor(
     private promoteService: LotteryService,
     private dialog: MatDialog,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.promotionId = this.activatedRoute.snapshot.params['id'];
     this.getPromotionDetail();
+    this.getParticipantList();
+    this.changeProducts({index: 1});
   }
 
   ngOnInit(): void {
@@ -50,15 +73,71 @@ export class PromoteEditComponent implements OnInit {
     this.getCardList();
   }
 
+  // MatPaginator Output
+  changePage(event, type) {
+    this.pageSize = event.pageSize;
+    switch (type) {
+      case 0:
+        this.participantsIndex = event.pageIndex + 1;
+        break;
+      case 1:
+        this.candidatesIndex = event.pageIndex + 1;
+        break;
+      case 2:
+        this.winnersIndex = event.pageIndex + 1;
+        break;
+      case 3:
+        this.shipmentIndex = event.pageIndex + 1;
+        break;
+    }
+    this.changeProducts({index: type});
+  }
+
+  changeProducts($event) {
+    let page = 0;
+    switch ($event.index) {
+      case 0:
+        page = this.participantsIndex;
+        this.promoteService.getParticipantList({
+          id: this.promotionId,
+          page,
+          page_size: this.pageSize
+        }).then((data) => {
+          this.length = data.count;
+          this.participants = [...data.results];
+        });
+        break;
+      case 1:
+        page = this.candidatesIndex;
+        this.promoteService.getParticipantList({
+          id: this.promotionId,
+          page,
+          page_size: this.pageSize
+        }).then((data) => {
+          this.length = data.count;
+          this.candidates = [...data.results];
+        });
+        break;
+      case 2:
+        page = this.winnersIndex;
+        this.promoteService.getParticipantList({
+          id: this.promotionId,
+          page,
+          page_size: this.pageSize
+        }).then((data) => {
+          this.length = data.count;
+          this.winners = [...data.results];
+        });
+        break;
+      case 3:
+        page = this.shipmentIndex;
+        break;
+    }
+  }
+
   getCardList() {
     this.promoteService.getCardList().then((res) => {
       this.cardList = res;
-      for(let item of res) {
-        if(item.name == 'Rs.150') {
-          this.second = item.id;
-          this.third = item.id;
-        }
-      }
     });
   }
 
@@ -68,8 +147,19 @@ export class PromoteEditComponent implements OnInit {
       id
     }).then((data) => {
       this.campaign = data;
-      this.promotionProducts = data.product;
+      if(data.product) {
+        this.firstPrize = {
+          image: data.image,
+          product: data.product
+        }
+      }
+      this.secondPrize = data.secondPrize;
+      this.thirdPrize = data.thirdPrize;
     });
+  }
+
+  getParticipantList() {
+
   }
 
   changePromotionProduct(event) {
@@ -83,22 +173,21 @@ export class PromoteEditComponent implements OnInit {
     }
   }
 
-  save() {
-    if(this.campaign.title == '') {
-      return false;
-    }
-    this.promoteService.promotionEdit(this.campaign).then((data) => {
-      this.campaign = data;
+  saveBasic() {
+    this.promoteService.changePromotionDetail({
+      id: this.campaign.id,
+      quantity: this.campaign.quantity
+    }).then((data) => {
+
     });
   }
 
-
-  cardSecondSelect($event) {
-
-  }
-
-  cardThirdSelect($event) {
-
+  save() {
+    this.promoteService.changePromotionPrize({
+      id: this.campaign.id,
+      secondPrize: this.secondPrize,
+      thirdPrize: this.thirdPrize
+    }).then((data) => {});
   }
 
 

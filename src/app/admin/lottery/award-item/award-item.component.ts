@@ -42,6 +42,16 @@ export class AwardItemComponent implements OnInit {
 
   delete() {
     let self = this;
+    this.adminService.deletePrize({
+      id: this.product.id
+    }).then((data) => {
+      self.productChange.emit({
+        index: this.index,
+        product : data,
+        status: this.status,
+        event: 'delete'
+      });
+    });
   }
 
   edit() {

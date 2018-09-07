@@ -39,7 +39,7 @@ export class LotteryAwardEditComponent implements OnInit {
     type: 'Expedited'
   }];
 
-  shippingMethodList = ['EMS','DHL'];
+  shippingMethodList:any = [];
 
   shippingTimeList = [{
     value: '5-10',
@@ -115,6 +115,7 @@ export class LotteryAwardEditComponent implements OnInit {
   ) {
 
     this.productForm = this.fb.group({
+      id: [''],
       title: ['', Validators.required],
       mainCategoryId: [null],
       categoryId: [null, Validators.required],
@@ -126,8 +127,7 @@ export class LotteryAwardEditComponent implements OnInit {
       purchaseLink: [' ', Validators.required]
     });
 
-    this.addProductList();
-    this.addShippingList();
+    this.getProductDetail();
 
     this.sub = this.userService.currentUser.subscribe((data) => {
       if(data && data.isStaff && data.isSuperuser) {
@@ -141,75 +141,69 @@ export class LotteryAwardEditComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  onEditorCreated(quill) {
-    this.editor = quill;
+  getProductDetail() {
 
-    let self = this;
-    this.editor.getModule('toolbar').addHandler("image", (image) => {
-      if(image) {
-        var fileInput = document.getElementById(self.editorImageId);
-        fileInput.click();
-      }
+    const id = this.activatedRoute.snapshot.params['id'];
+    this.adminService.getPrizeDetail({
+      id
+    }).then((data) => {
+      this.productForm.patchValue({
+        id: data.id,
+        title: data.title,
+        mainCategoryId: data.productCategories[0].parentId,
+        categoryId: data.productCategories[0].categoryId,
+        images: data.images,
+        background: data.background,
+        purchaseLink: data.purchaseLink
+      });
+
+      this.additionalList = data.images;
+      this.additionalSrcs = data.images;
+
+      this.product.push(this.fb.group({
+        id: [data.variants[0].id],
+        attributes: [data.variants[0].attributes],
+        mainImage: [data.variants[0].mainImage],
+        sku: [data.variants[0].sku, Validators.required],
+        variantStockrecord: [data.variants[0].variantStockrecord, Validators.required],
+        saleUnitPrice: [data.variants[0].saleUnitPrice, Validators.required],
+        lowestPrice: [data.variants[0].lowestPrice, Validators.required],
+        unitPrice: [data.variants[0].unitPrice],
+        costPrice: [data.variants[0].costPrice]
+      }));
+
+      this.adminService.getCategoryList().then((value) => {
+        this.categoryList = [...value];
+        this.categoryChange(data.productCategories[0].parentId);
+      });
+
+
+      let shippingTime = data.shippingPrices[0].shippingTimeMin+ '-' + data.shippingPrices[0].shippingTimeMax;
+      let index = this.shippingTimeList.findIndex((data) => {
+        if(data.value == shippingTime) {
+          return true;
+        }
+      });
+
+      this.shipping.push(this.fb.group({
+        countryId: [data.shippingPrices[0].countryId, Validators.required],
+        type: [data.shippingPrices[0].type, Validators.required],
+        id: [data.shippingPrices[0].id, Validators.required],
+        shippingId: [data.shippingPrices[0].shippingId, Validators.required],
+        price: [data.shippingPrices[0].priceItem, Validators.required],
+        checked: [index > -1? false : true, Validators.required],
+        shippingTime: [index > -1? shippingTime : '0', Validators.required],
+        shippingTimeMin: [data.shippingPrices[0].shippingTimeMin, Validators.required],
+        shippingTimeMax: [data.shippingPrices[0].shippingTimeMax, Validators.required]
+      }));
+
+      this.changeShippingMethod(data.shippingPrices[0].countryId);
     });
   }
 
-  addPicture(event) {
-    if(!event.target.files[0]) {
-      return;
-    }
-    let that = this;
-    this.previewImageService.readAsDataUrl(event.target.files[0]).then(function(result) {
-
-      let file = event.target.files[0];
-
-      let image = new Image();
-      image.onload = function(){
-        let width = image.width;
-        let height = image.height;
-
-        that.s3UploaderService.upload({
-          type: 'product/main',
-          fileName: file.name,
-          use: 'detail',
-          width: width,
-          height: height
-        }).then((data)=> {
-          let imageUrl = `${data.url}/${data.name}`;
-          that.s3UploaderService.uploadToS3WithoutLoading(file, data).then((data) => {
-            let range = that.editor.getSelection();
-            that.editor.insertEmbed(range.index, 'image', imageUrl);
-          });
-        });
-      };
-      image.src = window.URL.createObjectURL(file);
-
-    });
-  }
-
-  changeStep(index) {
-    this.ngZone.runOutsideAngular(() => {
-      this.document.querySelector('html').scrollTop = 0;
-    });
-    this.step = index;
-  }
-
-  addShippingList() {
-
-    this.shipping.push(this.fb.group({
-      countryId: ['', Validators.required],
-      type: ['', Validators.required],
-      id: ['', Validators.required],
-      price: [0, Validators.required],
-      checked: [false, Validators.required],
-      shippingTime: ['', Validators.required],
-      shippingTimeMin: [0, Validators.required],
-      shippingTimeMax: [0, Validators.required]
-    }));
-  }
-
-  changeShippingMethod($event, p) {
+  changeShippingMethod($event) {
     this.adminService.getShippingList($event).then((data) => {
-      p.shippingMethodList = data;
+      this.shippingMethodList = data;
     });
   }
 
@@ -276,60 +270,8 @@ export class LotteryAwardEditComponent implements OnInit {
 
   }
 
-  deleteVariant(index:any) {
-    let item = this.variantAddedList[index];
-    if(item.option == 2) {
-      if(item.colorImageList) {
-        for(let value of item.colorImageList) {
-          let _index = this.colorImageList.findIndex((data) => {
-            if(data.value == value.value) {
-              return true;
-            }
-          });
-          if(_index > -1) {
-            this.colorImageList.splice(_index,1);
-          }
-        }
-      }
-    }
-    this.variantAddedList.splice(index, 1);
-
-    this.addProductList(true);
-  }
-
-  deleteVariantObject(i) {
-    this.product.removeAt(i);
-  }
-
   deleteShippingObject(i) {
     this.shipping.removeAt(i);
-  }
-
-  addVariantList() {
-    let option = {
-      option: '',
-      isValue: false,
-      value: [],
-      visible: true,
-      selectable: true,
-      removable: true,
-      addOnBlur: true,
-      hasColorImage: false,
-      colorImageList: []
-    };
-
-    this.variantAddedList.push(option);
-  }
-
-  addVariantImage($event, p) {
-    p.image = $event.file;
-    for(let item of this.colorImageList) {
-      if(item.value == p.value) {
-        item.image = p.image;
-        break;
-      }
-    }
-    this.addProductList(true);
   }
 
   addProductList(variant?: any) {
@@ -441,16 +383,6 @@ export class LotteryAwardEditComponent implements OnInit {
     }
   }
 
-  optionChange($event, item) {
-    item.option = $event;
-    item.isValue = true;
-    item.value = [];
-    if(item.option == 2) {
-      item.hasColorImage = true;
-      item.colorImageList = [];
-    }
-    this.addProductList(true);
-  }
 
   categoryChange($event) {
     if(this.categoryList.length > 0) {
@@ -483,10 +415,6 @@ export class LotteryAwardEditComponent implements OnInit {
   }
 
   ngOnInit():void {
-    this.adminService.getCategoryList().then((data) => {
-      this.categoryList = data;
-    });
-
     this.adminService.getCountryList().then((data) => {
       this.countries = data;
     });
@@ -510,11 +438,11 @@ export class LotteryAwardEditComponent implements OnInit {
     product.attributes = this.addProductWithAttributes();
 
     let self = this;
-    this.adminService.productCreate(product).then((data) => {
+    this.adminService.changePrizeDetail(product).then((data) => {
       self.ngZone.runOutsideAngular(() => {
         self.document.querySelector('html').style.top = '0';
       });
-      self.router.navigate(['../'], { queryParams: {tab: 'pending'}, replaceUrl: true, relativeTo: this.activatedRoute});
+      self.router.navigate(['../../../'], { queryParams: {tab: 'prize'}, replaceUrl: true, relativeTo: this.activatedRoute});
     });
   }
 
