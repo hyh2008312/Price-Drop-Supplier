@@ -306,6 +306,24 @@ export class LotteryService {
       });
   }
 
+  getWinnerList(params: any): Promise<any> {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}lottery/get/prize/list/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   getPromotionDetail(params:any): Promise<any> {
 
     let headers = new Headers({
@@ -381,8 +399,7 @@ export class LotteryService {
       });
   }
 
-  promotionEdit(promotion:any): Promise<any> {
-
+  addParticipant(user: any): Promise<any> {
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
@@ -390,9 +407,45 @@ export class LotteryService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}flashsale/flash/detail/${promotion.id}/`;
+    const url = `${this.baseUrl.url}lottery/update/award/${user.id}/`;
 
-    return this.http.put(url, promotion, options)
+    return this.http.post(url, user, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
+  deleteParticipant(user: any): Promise<any> {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}lottery/update/award/${user.id}/`;
+
+    return this.http.put(url, user, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
+  setPrizeWinner(promote: any): Promise<any> {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers: headers});
+
+    const url = `${this.baseUrl.url}lottery/set/award/${promote.id}/`;
+
+    return this.http.post(url, promote, options)
       .toPromise()
       .then(response => response.json())
       .catch((error) => {

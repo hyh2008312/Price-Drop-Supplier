@@ -3,12 +3,12 @@ import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
 import { LotteryService } from '../lottery.service';
 
 @Component({
-  selector: 'app-lottery-draw-participant-item',
-  templateUrl: './draw-participant-item.component.html',
+  selector: 'app-lottery-draw-winner-item',
+  templateUrl: './draw-winner-item.component.html',
   styleUrls: ['../_lottery.scss']
 })
 
-export class DrawParticipantItemComponent implements OnInit {
+export class DrawWinnerItemComponent implements OnInit {
 
   @Input() status: number = 0;
   @Input() promote: any = {};

@@ -31,7 +31,7 @@ export class PromoteEditComponent implements OnInit {
 
   secondPrize: any = 'Rs.150';
 
-  thirdPrize: any = 'Rs.150';
+  thirdPrize: any = 'Rs.100';
 
   selectedIndex = 0;
 
@@ -49,6 +49,21 @@ export class PromoteEditComponent implements OnInit {
   shipment: any;
   shipmentIndex: any = 1;
 
+  prize: any = false;
+  prizeList:any = [{
+    value: false,
+    name: 'All'
+  }, {
+    value: 'first',
+    name: 'First'
+  }, {
+    value: 'second',
+    name: 'Second'
+  }, {
+    value: 'third',
+    name: 'Third'
+  }];
+
   constructor(
     private promoteService: LotteryService,
     private dialog: MatDialog,
@@ -58,7 +73,7 @@ export class PromoteEditComponent implements OnInit {
     this.promotionId = this.activatedRoute.snapshot.params['id'];
     this.getPromotionDetail();
     this.getParticipantList();
-    this.changeProducts({index: 1});
+    this.changeProducts({index: 0});
   }
 
   ngOnInit(): void {
@@ -120,10 +135,11 @@ export class PromoteEditComponent implements OnInit {
         break;
       case 2:
         page = this.winnersIndex;
-        this.promoteService.getParticipantList({
+        this.promoteService.getWinnerList({
           id: this.promotionId,
           page,
-          page_size: this.pageSize
+          page_size: this.pageSize,
+          status: this.prize
         }).then((data) => {
           this.length = data.count;
           this.winners = [...data.results];
@@ -131,8 +147,26 @@ export class PromoteEditComponent implements OnInit {
         break;
       case 3:
         page = this.shipmentIndex;
+        this.promoteService.getWinnerList({
+          id: this.promotionId,
+          page,
+          page_size: this.pageSize,
+          status: 'first'
+        }).then((data) => {
+          this.length = data.count;
+          this.shipment = [...data.results];
+        });
         break;
     }
+  }
+
+  productChange($event) {
+
+  }
+
+  prizeChange($event) {
+    this.prize = $event;
+    this.changeProducts({index: 2});
   }
 
   getCardList() {
@@ -206,6 +240,14 @@ export class PromoteEditComponent implements OnInit {
       if(dialogRef.componentInstance.data.isEdit == true) {
         self.getPromotionDetail();
       }
+    });
+  }
+
+  confirmWinnerList() {
+    this.promoteService.setPrizeWinner({
+      id: this.promotionId
+    }).then((data) => {
+      this.campaign = data;
     });
   }
 

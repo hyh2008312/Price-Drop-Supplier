@@ -33,7 +33,7 @@ export class PromoteCreateComponent implements OnInit {
 
   secondPrize: any = 'Rs.150';
 
-  thirdPrize: any = 'Rs.150';
+  thirdPrize: any = 'Rs.100';
 
   constructor(
     private promoteService: LotteryService,

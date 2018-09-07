@@ -17,6 +17,8 @@ import { SelectProductItemComponent } from './select-product-item/select-product
 import { PaginationComponent } from './pagination/pagination.component';
 import { DrawParticipantTitleComponent } from './draw-participant-title/draw-participant-title.component';
 import { DrawParticipantItemComponent } from './draw-participant-item/draw-participant-item.component';
+import { DrawWinnerTitleComponent } from './draw-winner-title/draw-winner-title.component';
+import { DrawWinnerItemComponent } from './draw-winner-item/draw-winner-item.component';
 
 import { LotteryRoutingModule } from './lottery.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -46,7 +48,9 @@ import { LotteryService } from './lottery.service';
     PaginationComponent,
     PromoteEditComponent,
     DrawParticipantTitleComponent,
-    DrawParticipantItemComponent
+    DrawParticipantItemComponent,
+    DrawWinnerTitleComponent,
+    DrawWinnerItemComponent
   ],
   entryComponents: [
     SelectProductDialogComponent

@@ -42,7 +42,7 @@
         SAVE
       </button>
       <div class="md-margin-left-2">
-        <button mat-button color="primary" type="button" routerLink="../../">
+        <button mat-button color="primary" type="button" routerLink="../../../">
           CANCEL
         </button>
       </div>
@@ -62,7 +62,7 @@
         <div class="md-margin-right-2 sc-promote__promote-image" fxFlex="none" fxLayout="column" fxLayoutAlign="center stretch">
           <img [src]="campaign.image">
         </div>
-        <div class="md-margin-right-2" fxFlex="45" fxLayout="column" fxLayoutAlign="center stretch">
+        <div class="md-margin-right-2" fxLayout="column" fxLayoutAlign="center stretch">
           <div class="sc-promote__promote-text">
             {{campaign.product}}
           </div>
@@ -101,7 +101,7 @@
         SAVE
       </button>
       <div class="md-margin-left-2">
-        <button mat-button color="primary" type="button" routerLink="../../">
+        <button mat-button color="primary" type="button" routerLink="../../../">
           CANCEL
         </button>
       </div>
@@ -118,7 +118,8 @@
             </div>
             <div class="sc-product__product-bg md-margin-top-2" fxLayout="column">
               <div class="sc-product__product-list" *ngFor="let item of participants;let i = index;">
-                <app-lottery-draw-participant-item [status]="0" [index]="i" (productChange)="productChange($event)" [promote]="item"></app-lottery-draw-participant-item>
+                <app-lottery-draw-participant-item [status]="0" [index]="i" [promoteId]="promotionId"
+                                                   (productChange)="productChange($event)" [promote]="item"></app-lottery-draw-participant-item>
               </div>
               <mat-paginator [length]="length"
                              [pageSize]="pageSize"
@@ -138,10 +139,17 @@
           <mat-tab label="Candidates">
             <div class="md-margin-top-2">
               <div class="sc-promote__promote-bg">
+                <div class="md-margin-bottom-2" fxLayout="row" fxLayoutAlign="end center">
+                  <button mat-raised-button color="primary" (click)="confirmWinnerList()" *ngIf="!campaign.namesList">
+                    Confirm Campaign Winner
+                  </button>
+                  <div *ngIf="campaign.namesList">Winner Aready Selected</div>
+                </div>
                 <app-lottery-draw-participant-title [status]="0" ></app-lottery-draw-participant-title>
                 <div class="md-margin-top-2"></div>
                 <div class="sc-promote__promote-list" *ngFor="let item of candidates;let i = index;">
-                  <app-lottery-draw-participant-item [status]="0" [index]="i" (promotionChange)="promotionChange($event)" [promote]="item"></app-lottery-draw-participant-item>
+                  <app-lottery-draw-participant-item [status]="1" [index]="i" [promoteId]="promotionId"
+                                                     (promotionChange)="promotionChange($event)" [promote]="item"></app-lottery-draw-participant-item>
                 </div>
                 <mat-paginator [length]="length"
                                [pageSize]="pageSize"
@@ -161,16 +169,30 @@
           </mat-tab>
           <mat-tab label="Winners">
             <div class="md-margin-top-2">
-              <div class="sc-promote__promote-bg">
-                <app-lottery-draw-participant-title [status]="0" ></app-lottery-draw-participant-title>
+              <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-promote__promote-text xb-bold">Filter By Prize:</div>
+                <div class="unicorn-dark-theme md-margin-left-3">
+                  <mat-form-field class="sc-promotion-dialog__width">
+                    <mat-select [ngModel]="prize" placeholder="Choose Prize" name="Choose Prize"
+                      (ngModelChange)="prizeChange($event)">
+                      <mat-option class="md-align-center" *ngFor="let item of prizeList" [value]="item.value">
+                        {{ item.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="sc-promote__promote-bg md-margin-top-2">
+                <app-lottery-draw-winner-title [status]="0" ></app-lottery-draw-winner-title>
                 <div class="md-margin-top-2"></div>
                 <div class="sc-promote__promote-list" *ngFor="let item of winners;let i = index;">
-                  <app-lottery-draw-participant-item [status]="0" [index]="i" (promotionChange)="promotionChange($event)" [promote]="item"></app-lottery-draw-participant-item>
+                  <app-lottery-draw-winner-item [status]="0" [index]="i" [promoteId]="promotionId"
+                                                     (promotionChange)="promotionChange($event)" [promote]="item"></app-lottery-draw-winner-item>
                 </div>
                 <mat-paginator [length]="length"
                                [pageSize]="pageSize"
                                [pageSizeOptions]="pageSizeOptions"
-                               (page)="changePage($event, 1)"
+                               (page)="changePage($event, 2)"
                                *ngIf="winners && winners.length > 0">
                 </mat-paginator>
                 <div class="sc-promote__promote-none" fxLayout="row" fxLayoutAlign="center center"
@@ -186,22 +208,23 @@
           <mat-tab label="Shipment">
             <div class="md-margin-top-2">
               <div class="sc-promote__promote-bg">
-                <app-lottery-promote-title [status]="0" ></app-lottery-promote-title>
+                <app-lottery-draw-winner-title [status]="0" ></app-lottery-draw-winner-title>
                 <div class="md-margin-top-2"></div>
                 <div class="sc-promote__promote-list" *ngFor="let item of shipment;let i = index;">
-                  <app-lottery-promote-item [status]="0" [index]="i" (promotionChange)="promotionChange($event)" [promote]="item"></app-lottery-promote-item>
+                  <app-lottery-draw-winner-item [status]="0" [index]="i" [promoteId]="promotionId"
+                                                (promotionChange)="promotionChange($event)" [promote]="item"></app-lottery-draw-winner-item>
                 </div>
                 <mat-paginator [length]="length"
                                [pageSize]="pageSize"
                                [pageSizeOptions]="pageSizeOptions"
-                               (page)="changePage($event, 1)"
-                               *ngIf="shipment && shipment.length > 0">
+                               (page)="changePage($event, 3)"
+                               *ngIf="winners && winners.length > 0">
                 </mat-paginator>
                 <div class="sc-promote__promote-none" fxLayout="row" fxLayoutAlign="center center"
-                     *ngIf="shipment && shipment.length <= 0">
+                     *ngIf="winners && winners.length <= 0">
                   <div fxLayout="column" fxLayoutAlign="center center">
                     <i class="iconfontXberts icon-ic-empty"></i>
-                    <div class="sc-promote__promote-title-1 md-margin-top-4">You haven't any shipment yet. </div>
+                    <div class="sc-promote__promote-title-1 md-margin-top-4">You haven't any winners yet. </div>
                   </div>
                 </div>
               </div>
