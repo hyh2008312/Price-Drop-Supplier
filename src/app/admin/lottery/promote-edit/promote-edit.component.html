@@ -211,20 +211,20 @@
                 <app-lottery-draw-winner-title [status]="0" ></app-lottery-draw-winner-title>
                 <div class="md-margin-top-2"></div>
                 <div class="sc-promote__promote-list" *ngFor="let item of shipment;let i = index;">
-                  <app-lottery-draw-winner-item [status]="0" [index]="i" [promoteId]="promotionId"
+                  <app-lottery-draw-winner-item [status]="1" [index]="i" [promoteId]="promotionId"
                                                 (promotionChange)="promotionChange($event)" [promote]="item"></app-lottery-draw-winner-item>
                 </div>
                 <mat-paginator [length]="length"
                                [pageSize]="pageSize"
                                [pageSizeOptions]="pageSizeOptions"
                                (page)="changePage($event, 3)"
-                               *ngIf="winners && winners.length > 0">
+                               *ngIf="shipment && shipment.length > 0">
                 </mat-paginator>
                 <div class="sc-promote__promote-none" fxLayout="row" fxLayoutAlign="center center"
-                     *ngIf="winners && winners.length <= 0">
+                     *ngIf="shipment && shipment.length <= 0">
                   <div fxLayout="column" fxLayoutAlign="center center">
                     <i class="iconfontXberts icon-ic-empty"></i>
-                    <div class="sc-promote__promote-title-1 md-margin-top-4">You haven't any winners yet. </div>
+                    <div class="sc-promote__promote-title-1 md-margin-top-4">You haven't any shipment yet. </div>
                   </div>
                 </div>
               </div>

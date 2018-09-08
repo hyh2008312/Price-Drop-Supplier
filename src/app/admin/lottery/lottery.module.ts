@@ -19,6 +19,9 @@ import { DrawParticipantTitleComponent } from './draw-participant-title/draw-par
 import { DrawParticipantItemComponent } from './draw-participant-item/draw-participant-item.component';
 import { DrawWinnerTitleComponent } from './draw-winner-title/draw-winner-title.component';
 import { DrawWinnerItemComponent } from './draw-winner-item/draw-winner-item.component';
+import { AddTrackingInformationDialogComponent } from './add-tracking-information-dialog/add-tracking-information-dialog.component';
+import { OrderDetailTitleComponent } from './order-detail-title/order-detail-title.component';
+import { OrderDetailItemComponent } from './order-detail-item/order-detail-item.component';
 
 import { LotteryRoutingModule } from './lottery.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -50,10 +53,14 @@ import { LotteryService } from './lottery.service';
     DrawParticipantTitleComponent,
     DrawParticipantItemComponent,
     DrawWinnerTitleComponent,
-    DrawWinnerItemComponent
+    DrawWinnerItemComponent,
+    AddTrackingInformationDialogComponent,
+    OrderDetailTitleComponent,
+    OrderDetailItemComponent
   ],
   entryComponents: [
-    SelectProductDialogComponent
+    SelectProductDialogComponent,
+    AddTrackingInformationDialogComponent
   ],
   providers: [
     LotteryService

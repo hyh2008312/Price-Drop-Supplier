@@ -1,6 +1,8 @@
 import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
 
 import { LotteryService } from '../lottery.service';
+import {AddTrackingInformationDialogComponent} from '../add-tracking-information-dialog/add-tracking-information-dialog.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-lottery-draw-winner-item',
@@ -17,26 +19,31 @@ export class DrawWinnerItemComponent implements OnInit {
   @Output() promotionChange = new EventEmitter<any>();
 
   currency: string = 'USD';
+  isShippingNumberEdit: boolean = false;
 
   constructor(
-    private promoteService: LotteryService
+    private promoteService: LotteryService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
 
   }
 
-  addParticipant() {
-    this.promoteService.addParticipant(this.promote).then((data) => {
-
-      this.promote = data;
+  editTracking() {
+    let dialogRef = this.dialog.open(AddTrackingInformationDialogComponent, {
+      data: {
+        order: this.promote.order,
+        isShippingNumberEdit: this.isShippingNumberEdit
+      }
     });
-  }
 
-  deleteParticipant() {
-    this.promoteService.deleteParticipant(this.promote).then((data) => {
+    let self = this;
 
-      this.promote = data;
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isShippingNumberEdit == true) {
+        this.promote.order = dialogRef.componentInstance.data.order;
+      }
     });
   }
 
