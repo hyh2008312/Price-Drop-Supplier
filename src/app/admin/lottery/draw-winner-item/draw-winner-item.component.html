@@ -73,7 +73,7 @@
       <div fxFlex="">
         {{promote.order.orderStatus}}
       </div>
-      <div class="sc__accent-dark" *ngIf="promote.order.orderStatus == 'Paid' || promote.order.orderStatus == 'Packing'">
+      <div class="sc__accent-dark" *ngIf="promote.order.orderStatus == 'Paid' || promote.order.orderStatus == 'Packing' || promote.order.orderStatus == 'Shipped'">
         <button mat-raised-button color="accent" (click)="editTracking()">Edit Tracking</button>
       </div>
     </div>

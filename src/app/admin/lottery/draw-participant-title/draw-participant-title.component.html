@@ -18,8 +18,12 @@
   <div class="sc-promote__promote-title-2 md-align-center md-margin-right-2" fxFlex="15">
     Last Time for 1st Prize
   </div>
-  <div class="sc-promote__promote-width-4 sc-promote__promote-title-2 md-align-center" fxFlex="none"
+  <div class="sc-promote__promote-width-4 sc-promote__promote-title-2 md-align-center" fxFlex="none" *ngIf="status == 0"
        fxLayout="column" fxLayoutAlign="center center">
     Action
+  </div>
+  <div class="sc-promote__promote-width-4 sc-promote__promote-title-2 md-align-center" fxFlex="none" *ngIf="status == 1"
+       fxLayout="column" fxLayoutAlign="center center">
+    Prize
   </div>
 </div>
