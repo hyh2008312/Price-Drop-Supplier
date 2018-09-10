@@ -46,7 +46,9 @@ export class PromoteCreateComponent implements OnInit {
     this.promotionForm = this.fb.group({
       quantity: [1, Validators.required],
       startTime: ['', Validators.required],
-      endTime: ['', Validators.required]
+      endTime: ['', Validators.required],
+      disc_sec: [30, Validators.required],
+      disc_thd: [40, Validators.required]
     });
   }
 

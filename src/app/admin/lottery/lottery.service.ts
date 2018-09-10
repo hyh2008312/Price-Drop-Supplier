@@ -259,9 +259,9 @@ export class LotteryService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}flashsale/flash/detail/${promotion.id}/`;
+    const url = `${this.baseUrl.url}lottery/down/${promotion.id}/`;
 
-    return this.http.delete(url, options)
+    return this.http.post(url, promotion, options)
       .toPromise()
       .then(response => response.json())
       .catch((error) => {

@@ -40,8 +40,6 @@
     <button mat-raised-button color="primary" *ngIf="promote.drawStatus == 'Ended' "
             routerLink="./campaign/edit/{{promote.id}}">View</button>
     <div class="md-margin-top-1"></div>
-    <button mat-raised-button color="accent" *ngIf="promote.drawStatus == 'Ongoing'"
-            (click)="disable()">Disable</button>
     <button mat-raised-button color="accent" *ngIf="promote.drawStatus == 'Scheduled'"
             (click)="delete()">Delete</button>
   </div>

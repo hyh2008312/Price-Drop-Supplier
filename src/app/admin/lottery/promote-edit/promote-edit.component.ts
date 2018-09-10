@@ -210,10 +210,10 @@ export class PromoteEditComponent implements OnInit {
   saveBasic() {
     this.promoteService.changePromotionDetail({
       id: this.campaign.id,
-      quantity: this.campaign.quantity
-    }).then((data) => {
-
-    });
+      quantity: this.campaign.quantity,
+      discSec: this.campaign.discountSecond,
+      discThd: this.campaign.discountThird,
+    }).then((data) => {});
   }
 
   save() {

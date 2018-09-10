@@ -41,6 +41,38 @@
           </div>
         </div>
       </div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48" *ngIf="campaign.drawStatus == 'Scheduled'">
+          <div class="sc-promote__promote-text xb-bold">Second Prize Ratio</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <mat-form-field>
+              <input matInput type="number" placeholder="" [(ngModel)]="campaign.discoutSecond">
+            </mat-form-field>
+            <div class="md-margin-left-3">%</div>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48"  *ngIf="campaign.drawStatus != 'Scheduled'">
+          <div class="sc-promote__promote-text xb-bold">Second Prize Ratio</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            {{campaign.discoutSecond}} %
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48" *ngIf="campaign.drawStatus == 'Scheduled'">
+          <div class="sc-promote__promote-text xb-bold">Third Prize Ratio</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <mat-form-field>
+              <input matInput type="number" placeholder="" [(ngModel)]="campaign.discoutThird">
+            </mat-form-field>
+            <div class="md-margin-left-3">%</div>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48"  *ngIf="campaign.drawStatus != 'Scheduled'">
+          <div class="sc-promote__promote-text xb-bold">Third Prize Ratio</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            {{campaign.discoutThird}} %
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="sc-promote__create-bg-1" fxLayout="row" fxLayoutAlign="center center" *ngIf="campaign.drawStatus == 'Scheduled'">

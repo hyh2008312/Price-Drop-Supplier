@@ -48,6 +48,15 @@
             </mat-form-field>
           </div>
         </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Second Prize Ratio</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <input matInput type="number" placeholder="" formControlName="disc_sec">
+            </mat-form-field>
+            <div class="md-margin-left-3">%</div>
+          </div>
+        </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="space-between start">
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
@@ -58,8 +67,36 @@
             </div>
           </div>
         </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div *ngIf="promotionForm.get('disc_sec').invalid && (promotionForm.get('disc_sec').dirty ||
+            promotionForm.get('disc_sec').touched)" class="xb-input-error">
+            <div *ngIf="promotionForm.get('disc_sec').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
       </div>
-
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Third Prize Ratio</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <input matInput type="number" placeholder="" formControlName="disc_thd">
+            </mat-form-field>
+            <div class="md-margin-left-3">%</div>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div *ngIf="promotionForm.get('disc_thd').invalid && (promotionForm.get('disc_thd').dirty ||
+            promotionForm.get('disc_thd').touched)" class="xb-input-error">
+            <div *ngIf="promotionForm.get('disc_thd').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="md-margin-top-3" fxLayout="row" fxLayoutAlign="center center">
@@ -86,6 +123,20 @@
           <div class="sc-promote__promote-text xb-bold">First Prize Quantity</div>
           <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
             {{campaign.quantity}}
+          </div>
+        </div>
+      </div>
+      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Second Prize Ratio</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            {{campaign.discountSecond}}
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Third Prize Ratio</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            {{campaign.discountThird}}
           </div>
         </div>
       </div>
@@ -131,7 +182,7 @@
         <div class="unicorn-dark-theme md-margin-left-3">
           <mat-form-field class="sc-promotion-dialog__width">
             <mat-select [ngModel]="secondPrize" placeholder="Choose Gift Card" name="Second Prize">
-              <mat-option class="md-align-center" *ngFor="let item of cardList" [value]="item.id">
+              <mat-option class="md-align-center" *ngFor="let item of cardList" [value]="item.name">
                 {{ item.name }}
               </mat-option>
             </mat-select>

@@ -27,7 +27,12 @@ export class PromoteItemComponent implements OnInit {
 
   delete() {
     let self = this;
-    this.promoteService.deletePromotion(this.promote).then((data) => {
+    let param = {
+      id: this.promote.id,
+      isShow: true
+    };
+
+    this.promoteService.deletePromotion(param).then((data) => {
 
       self.promotionChange.emit({
         index: this.index,
