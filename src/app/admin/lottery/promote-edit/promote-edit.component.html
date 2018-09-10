@@ -46,7 +46,7 @@
           <div class="sc-promote__promote-text xb-bold">Second Prize Ratio</div>
           <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
             <mat-form-field>
-              <input matInput type="number" placeholder="" [(ngModel)]="campaign.discoutSecond">
+              <input matInput type="number" placeholder="" [(ngModel)]="campaign.discountSecond">
             </mat-form-field>
             <div class="md-margin-left-3">%</div>
           </div>
@@ -54,14 +54,14 @@
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48"  *ngIf="campaign.drawStatus != 'Scheduled'">
           <div class="sc-promote__promote-text xb-bold">Second Prize Ratio</div>
           <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-            {{campaign.discoutSecond}} %
+            {{campaign.discountSecond}} %
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48" *ngIf="campaign.drawStatus == 'Scheduled'">
           <div class="sc-promote__promote-text xb-bold">Third Prize Ratio</div>
           <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
             <mat-form-field>
-              <input matInput type="number" placeholder="" [(ngModel)]="campaign.discoutThird">
+              <input matInput type="number" placeholder="" [(ngModel)]="campaign.discountThird">
             </mat-form-field>
             <div class="md-margin-left-3">%</div>
           </div>
@@ -69,7 +69,7 @@
         <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48"  *ngIf="campaign.drawStatus != 'Scheduled'">
           <div class="sc-promote__promote-text xb-bold">Third Prize Ratio</div>
           <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-            {{campaign.discoutThird}} %
+            {{campaign.discountThird}} %
           </div>
         </div>
       </div>
