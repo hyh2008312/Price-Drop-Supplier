@@ -77,7 +77,7 @@ export class PromoteEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.promoteService.getCategoryList().then((data) => {
+    this.promoteService.getCategory().then((data) => {
       this.categoryList = data;
       this.categoryList.unshift({
         id: 'all',
