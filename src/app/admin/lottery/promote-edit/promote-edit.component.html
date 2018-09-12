@@ -151,7 +151,7 @@
       </div>
     </div>
 
-    <div class="container" *ngIf="campaign.drawStatus == 'Ended'">
+    <div class="container" *ngIf="campaign.drawStatus == 'Ended' || campaign.drawStatus == 'Ongoing'">
       <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
         <div class="sc-product__header"></div>
 
@@ -190,7 +190,7 @@
           <mat-tab label="Candidates">
             <div class="md-margin-top-2">
               <div class="sc-promote__promote-bg">
-                <div class="md-margin-bottom-2" fxLayout="row" fxLayoutAlign="end center">
+                <div class="md-margin-bottom-2" fxLayout="row" fxLayoutAlign="end center" *ngIf="campaign.drawStatus == 'Ended'">
                   <button mat-raised-button color="primary" (click)="confirmWinnerList()" *ngIf="!campaign.namesList">
                     Confirm Campaign Winner
                   </button>

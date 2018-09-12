@@ -37,8 +37,7 @@ export class LotteryMainComponent implements OnInit {
     private lotteryService: LotteryService,
     private userService: UserService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private activatedRoute: ActivatedRoute
   ) {
   }
 
@@ -46,10 +45,10 @@ export class LotteryMainComponent implements OnInit {
     let self = this;
     this.subscription = this.activatedRoute.queryParams.subscribe((data) => {
       switch(data.tab) {
-        case 'prize':
+        case 'campaign':
           self.selectedIndex = 0;
           break;
-        case 'campagin':
+        case 'prize':
           self.selectedIndex = 1;
           break;
         default:
@@ -71,10 +70,10 @@ export class LotteryMainComponent implements OnInit {
   changePage(event, type) {
     this.pageSize = event.pageSize;
     switch (type) {
-      case 0:
+      case 1:
         this.prizeIndex = event.pageIndex + 1;
         break;
-      case 1:
+      case 0:
         this.campaignIndex = event.pageIndex + 1;
         break;
     }
@@ -88,7 +87,7 @@ export class LotteryMainComponent implements OnInit {
   changeProducts(event) {
     let page = 0;
     switch (event.index) {
-      case 0:
+      case 1:
         page = this.prizeIndex;
         this.lotteryService.getPrizeList({
           page,
@@ -98,7 +97,7 @@ export class LotteryMainComponent implements OnInit {
           this.prize = [...data.results];
         });
         break;
-      case 1:
+      case 0:
         page = this.campaignIndex;
         this.lotteryService.getCampaignList({
           page,
