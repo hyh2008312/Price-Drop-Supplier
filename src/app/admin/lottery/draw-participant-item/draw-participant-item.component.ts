@@ -28,15 +28,21 @@ export class DrawParticipantItemComponent implements OnInit {
 
   addParticipant() {
     this.promoteService.addParticipant(this.promote).then((data) => {
+      if(data.id) {
+        this.promote = data;
+      }
+    }).catch((data) => {
 
-      this.promote = data;
     });
   }
 
   deleteParticipant() {
     this.promoteService.deleteParticipant(this.promote).then((data) => {
+      if(data.id) {
+        this.promote = data;
+      }
+    }).catch((data) => {
 
-      this.promote = data;
     });
   }
 
