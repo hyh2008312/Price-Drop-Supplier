@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { LotteryService } from '../lottery.service';
 import {SelectProductDialogComponent} from '../select-product-dialog/select-product-dialog.component';

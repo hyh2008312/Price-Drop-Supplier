@@ -1,6 +1,8 @@
 import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
 
 import { LotteryService } from '../lottery.service';
+import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-lottery-draw-participant-item',
@@ -19,7 +21,8 @@ export class DrawParticipantItemComponent implements OnInit {
   currency: string = 'USD';
 
   constructor(
-    private promoteService: LotteryService
+    private promoteService: LotteryService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -30,9 +33,11 @@ export class DrawParticipantItemComponent implements OnInit {
     this.promoteService.addParticipant(this.promote).then((data) => {
       if(data.id) {
         this.promote = data;
+      } else {
+
       }
     }).catch((data) => {
-
+      this.openSnackBar();
     });
   }
 
@@ -40,9 +45,19 @@ export class DrawParticipantItemComponent implements OnInit {
     this.promoteService.deleteParticipant(this.promote).then((data) => {
       if(data.id) {
         this.promote = data;
+      } else {
+        this.openSnackBar();
       }
     }).catch((data) => {
+      this.openSnackBar();
+    });
+  }
 
+  openSnackBar() {
+    this.snackBar.openFromComponent(ToolTipsComponent, {
+      data: 'You have reached the limit of selected winners!',
+      duration: 4000,
+      verticalPosition: 'top'
     });
   }
 

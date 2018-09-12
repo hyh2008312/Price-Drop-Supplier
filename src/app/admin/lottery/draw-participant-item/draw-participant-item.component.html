@@ -29,7 +29,6 @@
   <div class="sc-promote__promote-width-4 sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
     <button mat-raised-button color="accent" *ngIf="promote.logFirstPrize == 'none'" (click)="addParticipant()" >Select</button>
-    <div class="md-margin-top-1"></div>
     <button mat-raised-button color="primary" *ngIf="promote.logFirstPrize == 'first'" (click)="deleteParticipant()">Unselect</button>
   </div>
 </div>
