@@ -33,8 +33,6 @@ export class DrawParticipantItemComponent implements OnInit {
     this.promoteService.addParticipant(this.promote).then((data) => {
       if(data.id) {
         this.promote = data;
-      } else {
-
       }
     }).catch((data) => {
       this.openSnackBar();
@@ -45,8 +43,6 @@ export class DrawParticipantItemComponent implements OnInit {
     this.promoteService.deleteParticipant(this.promote).then((data) => {
       if(data.id) {
         this.promote = data;
-      } else {
-        this.openSnackBar();
       }
     }).catch((data) => {
       this.openSnackBar();
