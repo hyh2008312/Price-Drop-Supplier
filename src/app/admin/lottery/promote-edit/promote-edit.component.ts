@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { LotteryService } from '../lottery.service';
 import {SelectProductDialogComponent} from '../select-product-dialog/select-product-dialog.component';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-lottery-promote-edit',
@@ -49,6 +50,11 @@ export class PromoteEditComponent implements OnInit {
   shipment: any;
   shipmentIndex: any = 1;
 
+  searchForm: FormGroup;
+
+  searchKey: any = '';
+  isSearchesult: boolean = false;
+
   prize: any = false;
   prizeList:any = [{
     value: false,
@@ -68,13 +74,51 @@ export class PromoteEditComponent implements OnInit {
     private promoteService: LotteryService,
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) {
+    this.searchForm = this.fb.group({
+      searchKey: ['']
+    });
+
     this.promotionId = this.activatedRoute.snapshot.params['id'];
     this.getPromotionDetail();
     this.getParticipantList();
     this.changeProducts({index: 0});
   }
+
+  searchResult() {
+    let self = this;
+    self.isSearchesult = true;
+
+    if(self.searchKey == '') return;
+
+
+    let params: any = {
+      id: this.promotionId,
+      email: self.searchKey
+    };
+
+    this.promoteService.getSupplyPromoteResult(params).then((data) => {
+
+      self.length = data.length;
+
+      switch (self.selectedIndex) {
+        case 0:
+          this.participants = [...data];
+          break;
+        case 1:
+          this.candidates = [...data];
+          break;
+      }
+
+    });
+  }
+
+  clearSearchKey() {
+    this.searchKey = '';
+  }
+
 
   ngOnInit(): void {
     this.promoteService.getCategory().then((data) => {
