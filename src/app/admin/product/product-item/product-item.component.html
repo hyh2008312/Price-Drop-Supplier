@@ -63,7 +63,15 @@
     <button mat-raised-button color="accent" *ngIf="status == 0 && product.purchaseMethod == 'drop'" (click)="deleteDrop()">Remove Drop</button>
     <button mat-button color="primary" *ngIf="status == 6 && isSuperuser" (click)="deleteSelectedNew()">Remove Featured</button>
     <button mat-button color="primary" *ngIf="status == 5" (click)="deleteDropNew()">Remove Drop</button>
-    <button mat-button color="primary" (click)="edit()">Edit</button>
+    <a fxLayout="column" fxLayoutAlign="center stretch" *ngIf="this.status == 4" routerLink="../draftedit/{{product.id}}" target="_blank">
+      <button mat-button color="primary">Edit</button>
+    </a>
+    <a fxLayout="column" fxLayoutAlign="center stretch" *ngIf="this.status == 6" routerLink="../edit/{{product.productId}}" target="_blank">
+      <button mat-button color="primary">Edit</button>
+    </a>
+    <a fxLayout="column" fxLayoutAlign="center stretch" *ngIf="this.status != 4 && this.status != 6" routerLink="../edit/{{product.id}}" target="_blank">
+      <button mat-button color="primary">Edit</button>
+    </a>
     <button mat-button color="primary" *ngIf="status == 1 || status == 3" (click)="publish()">Publish</button>
     <button mat-button color="primary" *ngIf="status == 1" (click)="disapprove()">Disapprove</button>
     <button mat-button color="primary" *ngIf="status == 0" (click)="unpublish()">Unpublish</button>

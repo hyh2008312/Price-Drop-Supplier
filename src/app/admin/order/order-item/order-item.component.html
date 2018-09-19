@@ -4,7 +4,7 @@
       {{order.created | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY'}}
     </div>
     <div class="md-margin-left-3" fxFlex>Order #: {{order.number}}</div>
-    <div class="text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/{{order.id}}">View Details</div>
+    <a class="sc-product__color text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/{{order.id}}" target="_blank">View Details</a>
   </div>
   <div class="sc-order__product-item-1" fxLayout="row" fxLayoutAlign="start start">
     <div fxLayout="column" fxFlex="75" fxLayoutAlign="start stretch">
