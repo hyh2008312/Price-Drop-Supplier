@@ -33,12 +33,13 @@
   </div>
   <div class="sc-promote__promote-width-4 sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="none">
-    <button mat-raised-button color="primary" *ngIf="promote.drawStatus == 'Scheduled'"
-            routerLink="./campaign/edit/{{promote.id}}">Edit</button>
+    <a routerLink="./campaign/edit/{{promote.id}}" target="_blank" fxLayout="column" fxLayoutAlign="center stretch">
+      <button mat-raised-button color="primary" *ngIf="promote.drawStatus == 'Scheduled'">Edit</button>
+    </a>
     <button mat-raised-button color="primary" *ngIf="promote.drawStatus == 'Ongoing'"
             routerLink="./campaign/edit/{{promote.id}}">View</button>
     <button mat-raised-button color="primary" *ngIf="promote.drawStatus == 'Ended' "
-            routerLink="./campaign/edit/{{promote.id}}">View</button>
+            routerLink="./campaign/edit/{{promote.id}}" >View</button>
     <div class="md-margin-top-1"></div>
     <button mat-raised-button color="accent" *ngIf="promote.drawStatus == 'Scheduled'"
             (click)="delete()">Delete</button>
