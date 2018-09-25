@@ -31,6 +31,7 @@ export class ProductEditComponent implements OnInit {
 
   categoryList: any = [];
   subCategoryList: any;
+  thirdCategoryList: any;
 
   YesOrNo = [{
     text: "Yes",
@@ -88,7 +89,8 @@ export class ProductEditComponent implements OnInit {
 
     this.productBasicForm = this.fb.group({
       title: ['', Validators.required],
-      mainCategoryId: [null],
+      grandParentId: [null],
+      parentId: [null],
       categoryId: [null, Validators.required],
       brandName: [''],
       description: ['Please add product details and images', Validators.required],
@@ -119,7 +121,8 @@ export class ProductEditComponent implements OnInit {
     }).then((data) => {
       this.productBasicForm.patchValue({
         title: data.title,
-        mainCategoryId: data.productCategories[0].parentId,
+        grandParentId: data.productCategories[0].grandParentId,
+        parentId: data.productCategories[0].parentId,
         categoryId: data.productCategories[0].categoryId,
         brandName: data.brandName,
         description: data.description,
@@ -129,7 +132,8 @@ export class ProductEditComponent implements OnInit {
 
       this.adminService.getCategoryList().then((value) => {
         this.categoryList = [...value];
-        this.categoryChange(data.productCategories[0].parentId);
+        this.categoryChange(data.productCategories[0].grandParentId);
+        this.subCategoryChange(data.productCategories[0].parentId);
       });
 
       this.status = data.status;
@@ -311,6 +315,21 @@ export class ProductEditComponent implements OnInit {
         this.subCategoryList = [...this.categoryList[index].children];
       } else {
         this.subCategoryList = false;
+      }
+    }
+  }
+
+  subCategoryChange($event) {
+    if(this.subCategoryList.length > 0) {
+      let index = this.subCategoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.subCategoryList[index] && this.subCategoryList[index].children) {
+        this.thirdCategoryList = [...this.subCategoryList[index].children];
+      } else {
+        this.thirdCategoryList = false;
       }
     }
   }

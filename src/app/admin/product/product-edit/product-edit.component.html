@@ -33,9 +33,9 @@
               </div>
             </div>
             <div fxLayout="row" fxLayoutAlign="space-between center">
-              <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+              <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
                 <mat-form-field fxFlex>
-                  <mat-select name="category" placeholder="Select a Category" formControlName="mainCategoryId"
+                  <mat-select name="category" placeholder="Select a Category" formControlName="grandParentId"
                               (valueChange)="categoryChange($event)">
                     <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
                       {{ item.data.name }}
@@ -43,10 +43,20 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+              <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
                 <mat-form-field fxFlex>
-                  <mat-select name="subcategory" placeholder="Select a Subcategory" formControlName="categoryId">
+                  <mat-select name="subcategory" placeholder="Select a Subcategory" formControlName="parentId"
+                              (valueChange)="subCategoryChange($event)">
                     <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                      {{ item.data.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+                <mat-form-field fxFlex>
+                  <mat-select name="thirdcategory" placeholder="Select a Subcategory" formControlName="categoryId">
+                    <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                       {{ item.data.name }}
                     </mat-option>
                   </mat-select>

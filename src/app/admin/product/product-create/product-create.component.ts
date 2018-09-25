@@ -120,9 +120,9 @@ export class ProductCreateComponent implements OnInit {
 
     this.productForm = this.fb.group({
       title: ['', Validators.required],
-      mainCategoryId: [null],
+      parentId: [null],
       categoryId: [null, Validators.required],
-      thirdCategoryId: [null, Validators.required],
+      grandParentId: [null],
       images: [[]],
       attributes: this.fb.array([]),
       variants: this.fb.array([]),
