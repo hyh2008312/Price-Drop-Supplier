@@ -1,6 +1,7 @@
 <div class="sc-product__create-container">
   <div class="md-margin-top-4 sc-product__create-text">
-    <span class="md-dark-secondary xb-pointer" (click)="openLeaveDialog()">产品</span> <span class="md-dark-secondary">></span> <span class="xb-bold">添加新产品</span>
+    <span class="md-dark-secondary xb-pointer" (click)="openLeaveDialog()">PRODUCT</span>
+    <span class="md-dark-secondary">></span><span class="xb-bold">ADD NEW PRODUCT</span>
   </div>
   <div class="md-margin-top-3 sc-product__create-navigation-bg" fxLayout="row" fxLayoutAlign="start center">
     <div class="sc-product__create-navigation xb-pointer" fxFlex="50" *ngIf="step == 1 && productId"
@@ -43,8 +44,8 @@
                This field is required.
              </div>
           </div>
-          <div fxLayout="row" fxLayoutAlign="space-between center">
-            <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
                 <mat-select name="category" placeholder="Select a Category" formControlName="mainCategoryId"
                   (valueChange)="categoryChange($event)">
@@ -54,10 +55,20 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+            <div class="md-margin-left-3" fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="subcategory" placeholder="Select a Subcategory" formControlName="categoryId">
+                <mat-select name="subcategory" placeholder="Select a Subcategory" formControlName="categoryId"
+                            (valueChange)="subCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                    {{ item.data.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="md-margin-left-3" fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+              <mat-form-field fxFlex>
+                <mat-select name="thirdcategory" placeholder="Select a Thirdcategory" formControlName="thirdCategoryId">
+                  <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                     {{ item.data.name }}
                   </mat-option>
                 </mat-select>
@@ -69,6 +80,12 @@
              <div *ngIf="productForm.get('categoryId').hasError('required')">
                This field is required.
              </div>
+          </div>
+          <div *ngIf="productForm.get('thirdCategoryId').invalid && (productForm.get('thirdCategoryId').dirty ||
+            productForm.get('thirdCategoryId').touched)" class="xb-input-error">
+            <div *ngIf="productForm.get('thirdCategoryId').hasError('required')">
+              This field is required.
+            </div>
           </div>
         </div>
         <div class="sc-product__create-title md-margin-top-2">

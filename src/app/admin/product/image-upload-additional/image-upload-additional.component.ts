@@ -100,6 +100,7 @@ export class ImageUploadAdditionalComponent implements OnInit {
   remove(i) {
     this.previewImgSrcs.splice(i,1);
     this.previewImgFile.splice(i,1);
+    this.previewImgFileChange.emit(this.previewImgFile);
 
     this.upload = false;
   }

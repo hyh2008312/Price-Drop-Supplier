@@ -30,6 +30,7 @@ export class ProductCreateComponent implements OnInit {
 
   categoryList:any = [];
   subCategoryList: any;
+  thirdCategoryList: any;
 
   shippingTypeList = [{
     name: 'Free Shipping',
@@ -121,6 +122,7 @@ export class ProductCreateComponent implements OnInit {
       title: ['', Validators.required],
       mainCategoryId: [null],
       categoryId: [null, Validators.required],
+      thirdCategoryId: [null, Validators.required],
       images: [[]],
       attributes: this.fb.array([]),
       variants: this.fb.array([]),
@@ -476,6 +478,21 @@ export class ProductCreateComponent implements OnInit {
         this.subCategoryList = [...this.categoryList[index].children];
       } else {
         this.subCategoryList = false;
+      }
+    }
+  }
+
+  subCategoryChange($event) {
+    if(this.subCategoryList.length > 0) {
+      let index = this.subCategoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.subCategoryList[index] && this.subCategoryList[index].children) {
+        this.thirdCategoryList = [...this.subCategoryList[index].children];
+      } else {
+        this.thirdCategoryList = false;
       }
     }
   }

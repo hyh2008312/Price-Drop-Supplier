@@ -14,56 +14,56 @@ export class TopNavigationComponent implements OnInit {
 
   contents = [{
     id: 0,
-    text: '首页',
+    text: 'HOME',
     router: './dashboard',
     isActive: false,
     staff: false
   }, {
     id: 1,
-    text: '产品',
+    text: 'PRODUCT',
     router: './product',
     isActive: false,
     staff: false
   }, {
     id: 2,
-    text: '促销',
+    text: 'PROMOTIONS',
     router: './promote',
     isActive: false,
     staff: true
   }, {
     id: 3,
-    text: '订单',
+    text: 'ORDERS',
     router: './order',
     isActive: false,
     staff: false
   }, {
     id: 4,
-    text: '客服',
+    text: 'CUSTOMER SUPPORT',
     router: './customerService',
     isActive: false,
     staff: false
   }, {
     id: 5,
-    text: '专题',
+    text: 'FEATURED',
     router: './event',
     isActive: false,
     staff: true
   }, {
     id: 6,
-    text: '抽奖',
+    text: 'LUCKY DRAW',
     router: './lottery',
     isActive: false,
     staff: true
   }, {
     id: 7,
-    text: '业绩',
+    text: 'SALES',
     isActive: false,
-    staff: false
+    staff: true
   }, {
     id: 8,
-    text: '通知',
+    text: 'NOTIFICATION',
     isActive: false,
-    staff: false
+    staff: true
   }, {
     id: 9,
     text: '用户审核',
