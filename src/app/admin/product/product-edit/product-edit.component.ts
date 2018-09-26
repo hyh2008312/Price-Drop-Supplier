@@ -315,6 +315,10 @@ export class ProductEditComponent implements OnInit {
         this.subCategoryList = [...this.categoryList[index].children];
       } else {
         this.subCategoryList = false;
+        this.productBasicForm.patchValue({
+          parentId: null
+        });
+
       }
     }
   }
@@ -330,6 +334,9 @@ export class ProductEditComponent implements OnInit {
         this.thirdCategoryList = [...this.subCategoryList[index].children];
       } else {
         this.thirdCategoryList = false;
+        this.productBasicForm.patchValue({
+          categoryId: null
+        });
       }
     }
   }
