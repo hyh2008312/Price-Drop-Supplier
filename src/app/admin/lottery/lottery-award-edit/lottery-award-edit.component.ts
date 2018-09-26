@@ -27,6 +27,7 @@ export class LotteryAwardEditComponent implements OnInit {
 
   categoryList:any = [];
   subCategoryList: any;
+  thirdCategoryList: any;
 
   shippingTypeList = [{
     name: 'Free Shipping',
@@ -117,8 +118,9 @@ export class LotteryAwardEditComponent implements OnInit {
     this.productForm = this.fb.group({
       id: [''],
       title: ['', Validators.required],
-      mainCategoryId: [null],
-      categoryId: [null, Validators.required],
+      grandParentId: [null, Validators.required],
+      parentId: [null],
+      childId: [null],
       images: [[]],
       attributes: this.fb.array([]),
       variants: this.fb.array([]),
@@ -150,8 +152,9 @@ export class LotteryAwardEditComponent implements OnInit {
       this.productForm.patchValue({
         id: data.id,
         title: data.title,
-        mainCategoryId: data.productCategories[0].parentId,
-        categoryId: data.productCategories[0].categoryId,
+        grandParentId: data.productCategories[0].grandParentId,
+        parentId: data.productCategories[0].parentId,
+        childId: data.productCategories[0].childId,
         images: data.images,
         background: data.background,
         purchaseLink: data.purchaseLink
@@ -174,7 +177,8 @@ export class LotteryAwardEditComponent implements OnInit {
 
       this.adminService.getCategoryList().then((value) => {
         this.categoryList = [...value];
-        this.categoryChange(data.productCategories[0].parentId);
+        this.categoryChangeNew(data.productCategories[0].grandParentId);
+        this.subCategoryChangeNew(data.productCategories[0].parentId);
       });
 
 
@@ -384,7 +388,33 @@ export class LotteryAwardEditComponent implements OnInit {
   }
 
 
+
   categoryChange($event) {
+    if(this.categoryList.length > 0) {
+      let index = this.categoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.categoryList[index] && this.categoryList[index].children) {
+        this.subCategoryList = [...this.categoryList[index].children];
+        this.thirdCategoryList = [];
+        this.productForm.patchValue({
+          parentId: null,
+          childId: null
+        });
+      } else {
+        this.subCategoryList = false;
+        this.thirdCategoryList = false;
+        this.productForm.patchValue({
+          parentId: null,
+          childId: null
+        });
+      }
+    }
+  }
+
+  categoryChangeNew($event) {
     if(this.categoryList.length > 0) {
       let index = this.categoryList.findIndex((data) => {
         if(data.id == $event) {
@@ -395,6 +425,51 @@ export class LotteryAwardEditComponent implements OnInit {
         this.subCategoryList = [...this.categoryList[index].children];
       } else {
         this.subCategoryList = false;
+        this.thirdCategoryList = false;
+        this.productForm.patchValue({
+          parentId: null,
+          childId: null
+        });
+      }
+    }
+  }
+
+  subCategoryChange($event) {
+    if(this.subCategoryList.length > 0) {
+      let index = this.subCategoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.subCategoryList[index] && this.subCategoryList[index].children) {
+        this.thirdCategoryList = [...this.subCategoryList[index].children];
+        this.productForm.patchValue({
+          childId: null
+        });
+      } else {
+        this.thirdCategoryList = false;
+        this.productForm.patchValue({
+          parentId: null,
+          childId: null
+        });
+      }
+    }
+  }
+
+  subCategoryChangeNew($event) {
+    if(this.subCategoryList.length > 0) {
+      let index = this.subCategoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.subCategoryList[index] && this.subCategoryList[index].children) {
+        this.thirdCategoryList = [...this.subCategoryList[index].children];
+      } else {
+        this.thirdCategoryList = false;
+        this.productForm.patchValue({
+          childId: null
+        });
       }
     }
   }

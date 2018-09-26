@@ -27,6 +27,7 @@ export class LotteryAwardCreateComponent implements OnInit {
 
   categoryList:any = [];
   subCategoryList: any;
+  thirdCategoryList: any;
 
   shippingTypeList = [{
     name: 'Free Shipping',
@@ -116,8 +117,9 @@ export class LotteryAwardCreateComponent implements OnInit {
 
     this.productForm = this.fb.group({
       title: ['', Validators.required],
-      mainCategoryId: [null],
-      categoryId: [null, Validators.required],
+      grandParentId: [null, Validators.required],
+      parentId: [null],
+      childId: [null],
       images: [[]],
       attributes: this.fb.array([]),
       variants: this.fb.array([]),
@@ -358,8 +360,39 @@ export class LotteryAwardCreateComponent implements OnInit {
       });
       if(this.categoryList[index] && this.categoryList[index].children) {
         this.subCategoryList = [...this.categoryList[index].children];
+        this.thirdCategoryList = [];
+        this.productForm.patchValue({
+          parentId: null,
+          childId: null
+        });
       } else {
         this.subCategoryList = false;
+        this.thirdCategoryList = false;
+        this.productForm.patchValue({
+          parentId: null,
+          childId: null
+        });
+      }
+    }
+  }
+
+  subCategoryChange($event) {
+    if(this.subCategoryList.length > 0) {
+      let index = this.subCategoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.subCategoryList[index] && this.subCategoryList[index].children) {
+        this.thirdCategoryList = [...this.subCategoryList[index].children];
+        this.productForm.patchValue({
+          childId: null
+        });
+      } else {
+        this.thirdCategoryList = false;
+        this.productForm.patchValue({
+          categoryId: null
+        });
       }
     }
   }

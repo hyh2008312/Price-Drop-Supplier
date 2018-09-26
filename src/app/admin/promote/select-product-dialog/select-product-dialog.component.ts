@@ -26,6 +26,10 @@ export class SelectProductDialogComponent implements OnInit {
   page = 1;
   pageSize = 6;
 
+  old: any = ['old', 'new'];
+
+  categoryItem: any = 'old';
+
   constructor(
     public dialogRef: MatDialogRef<SelectProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,

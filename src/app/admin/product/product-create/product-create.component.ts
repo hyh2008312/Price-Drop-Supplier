@@ -121,8 +121,8 @@ export class ProductCreateComponent implements OnInit {
     this.productForm = this.fb.group({
       title: ['', Validators.required],
       grandParentId: [null, Validators.required],
-      parentId: [null, Validators.required],
-      categoryId: [null],
+      parentId: [null],
+      childId: [null],
       images: [[]],
       attributes: this.fb.array([]),
       variants: this.fb.array([]),
@@ -476,10 +476,17 @@ export class ProductCreateComponent implements OnInit {
       });
       if(this.categoryList[index] && this.categoryList[index].children) {
         this.subCategoryList = [...this.categoryList[index].children];
+        this.thirdCategoryList = [];
+        this.productForm.patchValue({
+          parentId: null,
+          childId: null
+        });
       } else {
         this.subCategoryList = false;
+        this.thirdCategoryList = false;
         this.productForm.patchValue({
-          parentId: null
+          parentId: null,
+          childId: null
         });
       }
     }
@@ -494,6 +501,9 @@ export class ProductCreateComponent implements OnInit {
       });
       if(this.subCategoryList[index] && this.subCategoryList[index].children) {
         this.thirdCategoryList = [...this.subCategoryList[index].children];
+        this.productForm.patchValue({
+          childId: null
+        });
       } else {
         this.thirdCategoryList = false;
         this.productForm.patchValue({

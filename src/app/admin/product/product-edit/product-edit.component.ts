@@ -89,9 +89,9 @@ export class ProductEditComponent implements OnInit {
 
     this.productBasicForm = this.fb.group({
       title: ['', Validators.required],
-      grandParentId: [null],
+      grandParentId: [null, Validators.required],
       parentId: [null],
-      categoryId: [null, Validators.required],
+      childId: [null],
       brandName: [''],
       description: ['Please add product details and images', Validators.required],
       productCategoryId: ['', Validators.required],
@@ -123,7 +123,7 @@ export class ProductEditComponent implements OnInit {
         title: data.title,
         grandParentId: data.productCategories[0].grandParentId,
         parentId: data.productCategories[0].parentId,
-        categoryId: data.productCategories[0].categoryId,
+        childId: data.productCategories[0].childId,
         brandName: data.brandName,
         description: data.description,
         productCategoryId: data.productCategories[0].id,
@@ -132,8 +132,8 @@ export class ProductEditComponent implements OnInit {
 
       this.adminService.getCategoryList().then((value) => {
         this.categoryList = [...value];
-        this.categoryChange(data.productCategories[0].grandParentId);
-        this.subCategoryChange(data.productCategories[0].parentId);
+        this.categoryChangeNew(data.productCategories[0].grandParentId);
+        this.subCategoryChangeNew(data.productCategories[0].parentId);
       });
 
       this.status = data.status;
@@ -313,12 +313,38 @@ export class ProductEditComponent implements OnInit {
       });
       if(this.categoryList[index] && this.categoryList[index].children) {
         this.subCategoryList = [...this.categoryList[index].children];
+        this.thirdCategoryList = [];
+        this.productBasicForm.patchValue({
+          parentId: null,
+          childId: null
+        });
       } else {
         this.subCategoryList = false;
+        this.thirdCategoryList = false;
         this.productBasicForm.patchValue({
-          parentId: null
+          parentId: null,
+          childId: null
         });
+      }
+    }
+  }
 
+  categoryChangeNew($event) {
+    if(this.categoryList.length > 0) {
+      let index = this.categoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.categoryList[index] && this.categoryList[index].children) {
+        this.subCategoryList = [...this.categoryList[index].children];
+      } else {
+        this.subCategoryList = false;
+        this.thirdCategoryList = false;
+        this.productBasicForm.patchValue({
+          parentId: null,
+          childId: null
+        });
       }
     }
   }
@@ -332,10 +358,32 @@ export class ProductEditComponent implements OnInit {
       });
       if(this.subCategoryList[index] && this.subCategoryList[index].children) {
         this.thirdCategoryList = [...this.subCategoryList[index].children];
+        this.productBasicForm.patchValue({
+          childId: null
+        });
       } else {
         this.thirdCategoryList = false;
         this.productBasicForm.patchValue({
-          categoryId: null
+          parentId: null,
+          childId: null
+        });
+      }
+    }
+  }
+
+  subCategoryChangeNew($event) {
+    if(this.subCategoryList.length > 0) {
+      let index = this.subCategoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.subCategoryList[index] && this.subCategoryList[index].children) {
+        this.thirdCategoryList = [...this.subCategoryList[index].children];
+      } else {
+        this.thirdCategoryList = false;
+        this.productBasicForm.patchValue({
+          childId: null
         });
       }
     }

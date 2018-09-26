@@ -32,7 +32,7 @@
                 This field is required.
               </div>
             </div>
-            <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxLayout="row" fxLayoutAlign="start center">
               <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
                 <mat-form-field fxFlex>
                   <mat-select name="category" placeholder="Select a Category" formControlName="grandParentId"
@@ -43,7 +43,7 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+              <div class="md-margin-left-3" fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
                 <mat-form-field fxFlex>
                   <mat-select name="subcategory" placeholder="Select a Subcategory" formControlName="parentId"
                               (valueChange)="subCategoryChange($event)">
@@ -53,9 +53,9 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+              <div class="md-margin-left-3" fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
                 <mat-form-field fxFlex>
-                  <mat-select name="thirdcategory" placeholder="Select a Thirdcategory" formControlName="categoryId">
+                  <mat-select name="thirdcategory" placeholder="Select a Thirdcategory" formControlName="childId">
                     <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                       {{ item.data.name }}
                     </mat-option>
@@ -63,9 +63,9 @@
                 </mat-form-field>
               </div>
             </div>
-            <div *ngIf="productBasicForm.get('categoryId').invalid && (productBasicForm.get('categoryId').dirty ||
-            productBasicForm.get('categoryId').touched)" class="xb-input-error">
-              <div *ngIf="productBasicForm.get('categoryId').hasError('required')">
+            <div *ngIf="productBasicForm.get('childId').invalid && (productBasicForm.get('childId').dirty ||
+            productBasicForm.get('childId').touched)" class="xb-input-error">
+              <div *ngIf="productBasicForm.get('childId').hasError('required')">
                 This field is required.
               </div>
             </div>
