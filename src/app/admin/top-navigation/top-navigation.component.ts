@@ -26,7 +26,7 @@ export class TopNavigationComponent implements OnInit {
     staff: false
   }, {
     id: 2,
-    text: 'PROMOTIONS',
+    text: 'FLASH SALE',
     router: './promote',
     isActive: false,
     staff: true
@@ -44,7 +44,7 @@ export class TopNavigationComponent implements OnInit {
     staff: false
   }, {
     id: 5,
-    text: 'FEATURED',
+    text: 'EVENTS',
     router: './event',
     isActive: false,
     staff: true
@@ -56,16 +56,11 @@ export class TopNavigationComponent implements OnInit {
     staff: true
   }, {
     id: 7,
-    text: 'SALES',
-    isActive: false,
-    staff: true
-  }, {
-    id: 8,
     text: 'NOTIFICATION',
     isActive: false,
     staff: true
   }, {
-    id: 9,
+    id: 8,
     text: '用户审核',
     router: './user',
     isActive: false,
