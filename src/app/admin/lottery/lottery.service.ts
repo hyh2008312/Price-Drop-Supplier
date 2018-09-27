@@ -314,7 +314,7 @@ export class LotteryService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}lottery/get/award/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}lottery/get/new/award/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()
