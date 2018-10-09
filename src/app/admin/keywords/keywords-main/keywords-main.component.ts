@@ -1,0 +1,59 @@
+import {Component, OnInit, OnDestroy, Inject, NgZone} from '@angular/core';
+import {Router, NavigationStart, ActivatedRoute} from '@angular/router';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+
+import {KeywordsService} from "../keywords.service";
+
+@Component({
+  selector: 'app-admin-keywords-main',
+  templateUrl: './keywords-main.component.html',
+  styleUrls: ['../_keywords.scss']
+})
+
+export class KeywordsMainComponent implements OnInit {
+
+
+  keywordsListIndex = 1;
+  keywordsList: any;
+
+  // MatPaginator Inputs
+  length:number = 0;
+  pageSize = 20;
+  pageSizeOptions = [20];
+
+  // MatPaginator Output
+  changePage(event) {
+    this.pageSize = event.pageSize;
+    this.keywordsListIndex = event.pageIndex + 1;
+    this.changeLists();
+  }
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  }
+
+  constructor(private router: Router,
+              private accountService: KeywordsService,
+              private activatedRoute: ActivatedRoute) {
+    this.changeLists();
+  }
+
+  ngOnInit(): void {
+
+  }
+
+  changeLists() {
+    let status = 'Pending';
+    let page = this.keywordsListIndex;
+
+    this.accountService.getAccountsList({
+      status,
+      page,
+      page_size: this.pageSize
+    }).then((data) => {
+      this.length = data.count;
+      this.keywordsList = [...data.results];
+    })
+  }
+}

@@ -59,12 +59,6 @@ export class TopNavigationComponent implements OnInit {
     text: 'NOTIFICATION',
     isActive: false,
     staff: true
-  }, {
-    id: 8,
-    text: '用户审核',
-    router: './user',
-    isActive: false,
-    staff: true
   }];
 
   accounts = [
@@ -100,13 +94,32 @@ export class TopNavigationComponent implements OnInit {
     }
   ];
 
+  users = [
+    {
+      id: 0,
+      text: '用户审核',
+      router: './user',
+      isActive: false
+    },
+    {
+      id: 1,
+      text: '搜索关键词',
+      router: './keywords',
+      isActive: false
+    }
+  ];
+
 
   //是否显示我的账户的东西
   isShowMenu: boolean = false;
 
+  isShowUserMenu: boolean = false;
+
   //区分为是导航选项 && 还是账户选项
 
   isAccountNavigation: boolean = false;
+
+  isUserNavigation: boolean = false;
 
   isSuperuser: boolean = false;
 
@@ -138,6 +151,7 @@ export class TopNavigationComponent implements OnInit {
 
   changeSlide(obj: any, index: number) {
     this.isAccountNavigation = false;
+    this.isUserNavigation = false;
     for (let value of this.contents) {
       if (value.id != obj.id) {
         value.isActive = false;
@@ -169,6 +183,33 @@ export class TopNavigationComponent implements OnInit {
 
     if (obj.router) {
       this.router.navigate([`${obj.router}`], {relativeTo: this.activatedRoute});
+    }
+  }
+
+  changeInnerSlide(isShow) {
+    if (isShow) {
+      document.getElementById('user-menu').style.overflowY = 'visible';
+    } else {
+      document.getElementById('user-menu').style.overflowY = 'hidden';
+    }
+  }
+
+  changeInnerToggle(list, index) {
+    this.changeInnerSlide(false);
+    this.isAccountNavigation = true;
+    for (let value of this.accounts) {
+      if (value.id != list.id) {
+        value.isActive = false;
+      }
+    }
+    if (list.slide) {
+      list.isActive = !list.isActive;
+    } else {
+      list.isActive = true;
+    }
+
+    if (list.router) {
+      this.router.navigate([`${list.router}`], {relativeTo: this.activatedRoute});
     }
   }
 }

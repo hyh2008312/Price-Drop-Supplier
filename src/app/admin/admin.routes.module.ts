@@ -39,6 +39,9 @@ const routes: Routes = [
         path: 'lottery',
         loadChildren:'./lottery/lottery.module#LotteryModule'
       }, {
+        path: 'keywords',
+        loadChildren: './keywords/keywords.module#KeywordsModule'
+      }, {
         path: '',
         redirectTo: 'product',
         pathMatch: 'full'
