@@ -43,7 +43,7 @@ export class KeywordsService {
     return array.join('&');
   }
 
-  getAccountsList(params:any): Promise<any> {
+  getKeywordsList(params:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -52,7 +52,7 @@ export class KeywordsService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}systemadmin/manage/user/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}statistics/record/search/key/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
         .toPromise()
@@ -60,7 +60,7 @@ export class KeywordsService {
         .catch(this.handleError);
   }
 
-  changeAccountsStatus(params:any): Promise<any> {
+  getKeywordsRecordList(params:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -69,12 +69,12 @@ export class KeywordsService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}systemadmin/auditing/usr/detail/${params.id}/`;
+    const url = `${this.baseUrl.url}statistics/record/search/key/record/list/?${this.serializeParams(params)}`;
 
-    return this.http.put(url, params, options)
-        .toPromise()
-        .then(response => response.json())
-        .catch(this.handleError);
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
   }
 
   private handleError(error: Response | any) {

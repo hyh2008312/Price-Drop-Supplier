@@ -6,13 +6,14 @@ import 'rxjs/add/operator/map';
 import {KeywordsService} from "../keywords.service";
 
 @Component({
-  selector: 'app-admin-keywords-main',
-  templateUrl: './keywords-main.component.html',
+  selector: 'app-admin-keywords-detail',
+  templateUrl: './keywords-detail.component.html',
   styleUrls: ['../_keywords.scss']
 })
 
-export class KeywordsMainComponent implements OnInit {
+export class KeywordsDetailComponent implements OnInit {
 
+  keywords: any = '';
 
   keywordsListIndex = 1;
   keywordsList: any;
@@ -46,10 +47,16 @@ export class KeywordsMainComponent implements OnInit {
   changeLists() {
     let page = this.keywordsListIndex;
 
-    this.accountService.getKeywordsList({
+    const id = this.activatedRoute.snapshot.params['id'];
+
+    this.accountService.getKeywordsRecordList({
+      id,
       page,
       page_size: this.pageSize
     }).then((data) => {
+      if(page == 1) {
+        this.keywords = data.results[0].keyword;
+      }
       this.length = data.count;
       this.keywordsList = [...data.results];
     })

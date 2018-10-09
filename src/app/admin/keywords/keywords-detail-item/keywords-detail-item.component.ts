@@ -2,12 +2,12 @@ import {Input, Output, Component, OnInit, EventEmitter} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-admin-keywords-item',
-  templateUrl: './keywords-item.component.html',
+  selector: 'app-admin-keywords-detail-item',
+  templateUrl: './keywords-detail-item.component.html',
   styleUrls: ['../_keywords.scss']
 })
 
-export class KeywordsItemComponent implements OnInit {
+export class KeywordsDetailItemComponent implements OnInit {
 
   @Input() status = 0;
   @Input() item: any = {};
@@ -20,10 +20,9 @@ export class KeywordsItemComponent implements OnInit {
   ) {
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   jump() {
-    this.router.navigate([`./detail/${this.item.id}`], {relativeTo: this.activatedRoute});
+    this.router.navigate([`./${this.item.id}`], {relativeTo: this.activatedRoute});
   }
 }

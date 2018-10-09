@@ -6,13 +6,9 @@
   position: relative;
 
   &__header{
-    position: absolute;
-    background-color: $whiteColor;
-    height: 65px;
-    width: 100%;
-    left: 0;
-    top: 0;
-    border-bottom: 1px solid rgba(0,0,0,.12);
+    margin: 40px 16px 24px;
+    font-size: 24px;
+    @include media();
   }
 
   &-none{
@@ -26,8 +22,6 @@
   }
 }
 
-
-
 .xb-account-item {
   background-color: $whiteColor;
   border-bottom: 1px solid rgba(0, 0, 0, .12);
@@ -36,6 +30,18 @@
     font-size: 14px;
     @include regular();
     line-height: 1.5em;
+  }
+
+  &__title {
+    font-size: 14px;
+    line-height: 48px;
+    font-weight: bold;
+  }
+
+  &__header {
+    padding: 0 16px;
+    background-color: #fff;
+    border-radius: 2px;
   }
 }
 
