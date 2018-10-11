@@ -88,6 +88,12 @@ export class TopNavigationComponent implements OnInit {
     },
     {
       id: 5,
+      text: 'Company Information',
+      router: './address',
+      isActive: false
+    },
+    {
+      id: 6,
       text: 'Logout',
       router: './account/balance',
       isActive: false

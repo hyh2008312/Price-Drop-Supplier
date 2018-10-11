@@ -42,6 +42,9 @@ const routes: Routes = [
         path: 'keywords',
         loadChildren: './keywords/keywords.module#KeywordsModule'
       }, {
+        path: 'address',
+        loadChildren: './address/address.module#AddressModule'
+      }, {
         path: '',
         redirectTo: 'product',
         pathMatch: 'full'
