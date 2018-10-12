@@ -58,20 +58,6 @@ export class AccountService {
       .catch(this.handleError);
   }
 
-  /*客服私信详情*/
-  getMessageDetail(lineId: any) {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-    let options = new RequestOptions({headers: headers});
-    const url = `${this.baseUrl.url}order/supplier/message/${lineId}/`;
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
   /*客服回复消息*/
   editSupplier(params: any) {
     let headers = new Headers({
@@ -86,19 +72,6 @@ export class AccountService {
       .catch(this.handleError);
   }
 
-  /*关闭私信消息（解决问题）*/
-  startCloseMessage(lineId: any) {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-    let options = new RequestOptions({headers: headers});
-    const url = `${this.baseUrl.url}order/supplier/message/${lineId}/`;
-    return this.http.delete(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
 
   getSupplier() {
     let headers = new Headers({

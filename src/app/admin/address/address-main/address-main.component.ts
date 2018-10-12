@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AddressService } from '../address.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 import { AuthenticationService } from '../../../shared/services/authentication/authentication.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ToolTipsComponent} from '../../account/tool-tips/tool-tips.component';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-address-address-main',
@@ -21,6 +24,15 @@ export class AddressMainComponent implements OnInit {
   pageSize = 100;
   pageSizeOptions = [100];
 
+  currency: string = 'USD';
+
+  accountSettingForm: FormGroup;
+
+  resetSetting: any = {
+    name: '',
+    company: ''
+  }
+
   // MatPaginator Output
   changePage(event) {
     this.pageSize = event.pageSize;
@@ -36,9 +48,22 @@ export class AddressMainComponent implements OnInit {
     private userService: UserService,
     private addressService: AddressService,
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar
   ) {
+    this.accountSettingForm = this.fb.group({
+      name: ['', Validators.required],
+      company: ['', Validators.required]
+    });
 
+    this.addressService.getSupplier().then((data) => {
+      this.resetSetting = data;
+      this.accountSettingForm.patchValue({
+        company: data.company,
+        name: data.name
+      });
+    });
   }
 
   ngOnInit():void {
@@ -55,6 +80,33 @@ export class AddressMainComponent implements OnInit {
       this.addressList = [...data.results];
     });
 
+  }
+
+  edit() {
+    if(this.accountSettingForm.invalid) {
+      return;
+    }
+    this.addressService.editSupplier(this.accountSettingForm.value).then((data) => {
+      this.openSnackBar('Edit your supplier information success!');
+
+      this.resetSetting = data;
+    });
+  }
+
+  openSnackBar(str: any) {
+    this.snackBar.openFromComponent(ToolTipsComponent, {
+      data: str,
+      duration: 4000,
+      verticalPosition: 'top'
+    });
+  }
+
+  reset() {
+    this.accountSettingForm.patchValue({
+      company: this.resetSetting.company,
+      name: this.resetSetting.name
+    });
+    this.openSnackBar('Reset your supplier information success!');
   }
 
 }
