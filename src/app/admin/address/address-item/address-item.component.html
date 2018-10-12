@@ -5,7 +5,7 @@
   <div class="xb-address-item__text md-align-center" fxFlex="20">{{item.city}}</div>
   <div class="xb-address-item__text xb-address-item__width md-align-center" fxFlex="none">{{item.address}}</div>
   <div class="xb-address-item__text md-align-center" fxFlex="15">{{item.postcode}}</div>
-  <div class="xb-address-item__text md-align-center" fxFlex="15">{{item.isDefault? 'Yes' : 'No'}}</div>
+  <div class="xb-address-item__text md-align-center" fxFlex="15">{{item.default? 'Yes' : 'No'}}</div>
   <div class="md-align-center sc__accent-dark" fxFlex="10">
     <button mat-button color="primary" routerLink="{{'./edit/' + item.id}}">EDIT</button>
     <button mat-button color="primary" *ngIf="!item.isDefault" (click)="delete()">DELETE</button>

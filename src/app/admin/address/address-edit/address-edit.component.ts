@@ -60,7 +60,7 @@ export class AddressEditComponent implements OnInit {
         province: data.stateId,
         city: data.city,
         postcode: data.postcode,
-        default: data.isDefault
+        default: data.default
       })
     });
   }
