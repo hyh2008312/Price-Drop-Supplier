@@ -57,7 +57,7 @@ export class AddressEditComponent implements OnInit {
         phoneNumber: data.phoneNumber,
         zoneCode: data.zoneCode,
         address: data.address,
-        province: data.province,
+        province: data.stateId,
         city: data.city,
         postcode: data.postcode,
         default: data.isDefault

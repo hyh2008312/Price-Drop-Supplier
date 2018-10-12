@@ -25,6 +25,7 @@ export class AddressMainComponent implements OnInit {
   changePage(event) {
     this.pageSize = event.pageSize;
     this.index = event.pageIndex + 1;
+    this.getAddressList();
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -37,6 +38,15 @@ export class AddressMainComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private router: Router
   ) {
+
+  }
+
+  ngOnInit():void {
+    this.getAddressList();
+  }
+
+  getAddressList() {
+
     this.addressService.getAddressList({
       page: this.index,
       pageSize: this.pageSize
@@ -44,9 +54,6 @@ export class AddressMainComponent implements OnInit {
       this.length = data.count;
       this.addressList = [...data.results];
     });
-  }
-
-  ngOnInit():void {
 
   }
 
