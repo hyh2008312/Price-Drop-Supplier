@@ -44,6 +44,8 @@
     <div fxFlex="none" *ngIf="order.orderStatus == 'Packing' || order.orderStatus == 'Paid'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
       <button mat-raised-button color="accent" (click)="editTracking()">Edit Tracking</button>
+      <div class="md-margin-top-1" *ngIf="order.carrierCode == 'gati'" ></div>
+      <button *ngIf="order.carrierCode == 'gati'" mat-raised-button color="accent" (click)="createTracking()">Edit GATI Tracking</button>
       <div class="md-margin-top-1" fxLayout="column">
         <button mat-raised-button color="accent" (click)="cancelFulfillment()">Cancel Fulfillment</button>
       </div>

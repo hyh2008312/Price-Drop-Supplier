@@ -199,6 +199,25 @@ export class OrderService {
       });
   }
 
+  changeGATITrackingInformation(tracking:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}order/create/gati/shipping/${tracking.id}/`;
+
+    return this.http.put(url, tracking, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   cancelOrder(order:any): Promise<any> {
 
     let headers = new Headers({
