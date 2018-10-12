@@ -63,8 +63,10 @@ export class AddGatiPostDialogComponent implements OnInit {
     let self = this;
     this.orderService.changeGATITrackingInformation(tracking).then((data) => {
       self.close();
-      self.data.isShippingNumberEdit = true;
-      self.data.order = data;
+      if(data.id) {
+        self.data.isShippingNumberEdit = true;
+        self.data.order = data;
+      }
     });
   }
 
