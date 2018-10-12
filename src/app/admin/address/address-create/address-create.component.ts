@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
+import { Router, ActivatedRoute} from '@angular/router';
 
 import { AddressService } from '../address.service';
 
@@ -16,22 +17,41 @@ export class AddressCreateComponent implements OnInit {
 
   addressForm: FormGroup;
 
+  stateList: any;
+
   constructor(
     private addressService: AddressService,
     private dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
 
     this.addressForm = this.fb.group({
-      title: ['', Validators.required],
-      promotionType: ['Flash Sale', Validators.required],
-      startTime: ['', Validators.required],
-      endTime: ['', Validators.required]
+      contactName: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      zoneCode: ['86', Validators.required],
+      address: ['', Validators.required],
+      province: ['', Validators.required],
+      city: ['', Validators.required],
+      postcode: ['', Validators.required],
+      default: [true, Validators.required]
     });
   }
 
   ngOnInit(): void {
-    this.addressService.getCategoryList().then((data) => {});
+    this.addressService.getStateList().then((data) => {
+      this.stateList = [...data];
+    });
+  }
+
+  create() {
+    if(this.addressForm.invalid) {
+      return;
+    }
+    this.addressService.create(this.addressForm.value).then(() => {
+      this.router.navigate(['../'], { replaceUrl: true, relativeTo: this.activatedRoute});
+    });
   }
 
 }

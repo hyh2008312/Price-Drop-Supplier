@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AddressService } from '../address.service';
+import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-address-address-item',
@@ -15,11 +17,30 @@ export class AddressItemComponent implements OnInit {
   @Input() item: any = {};
   @Input() index: any = 0;
 
-  constructor() {
+  constructor(
+    private addressService: AddressService,
+    private snackBar: MatSnackBar
+  ) {
 
   }
 
   ngOnInit():void {
 
+  }
+
+  delete() {
+    this.addressService.deleteAddress({
+      id: this.item.id
+    }).then(() => {
+      this.openSnackBar('Delete Address Success');
+    });
+  }
+
+  openSnackBar(str: any) {
+    this.snackBar.openFromComponent(ToolTipsComponent, {
+      data: str,
+      duration: 4000,
+      verticalPosition: 'top'
+    });
   }
 }

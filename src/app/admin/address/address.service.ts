@@ -41,7 +41,7 @@ export class AddressService {
     return array.join('&');
   }
 
-  promotionCreate(promotion:any): Promise<any> {
+  create(params:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -50,109 +50,7 @@ export class AddressService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}flashsale/create/`;
-
-    return this.http.post(url, promotion, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  promotionEdit(promotion:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}flashsale/flash/detail/${promotion.id}/`;
-
-    return this.http.put(url, promotion, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  deletePromotion(promotion:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}flashsale/flash/detail/${promotion.id}/`;
-
-    return this.http.delete(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  addPromotionProduct(promotion:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}flashsale/products/add/${promotion.promoteId}/`;
-
-    return this.http.put(url, promotion, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  changePromotionDiscounts(promotion:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}flashsale/flash/batch/${promotion.id}/`;
-
-    return this.http.put(url, promotion, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  deletePromotionProduct(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}flashsale/flash/update/${params.id}/`;
-
-    return this.http.delete(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  changePromotionProductVariant(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}flashsale/flash/stock/${params.id}/`;
+    const url = `${this.baseUrl.url}supplier/add/address/`;
 
     return this.http.put(url, params, options)
       .toPromise()
@@ -160,7 +58,7 @@ export class AddressService {
       .catch(this.handleError);
   }
 
-  deletePromotionProductVariant(params:any): Promise<any> {
+  getAddressDetail(params:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -169,59 +67,7 @@ export class AddressService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/promotion/stock/${params.id}/`;
-
-    return this.http.delete(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  savePromotionProduct(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}flashsale/flash/update/${params.id}/`;
-
-    return this.http.post(url, params, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-
-  endPromotion(promotion:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}flashsale/promotion/update/${promotion.id}/`;
-
-    return this.http.post(url, promotion, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  getPromotionList(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}flashsale/flash/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}supplier/address/detail/${params.id}/`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -229,7 +75,8 @@ export class AddressService {
       .catch(this.handleError);
   }
 
-  getPromotionProductList(params:any): Promise<any> {
+
+  editAddress(promotion:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -238,7 +85,58 @@ export class AddressService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/flash/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}supplier/update/address/${promotion.id}/`;
+
+    return this.http.post(url, promotion, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  deleteAddress(promotion:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}supplier/update/address/${promotion.id}/`;
+
+    return this.http.delete(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  getAddressList(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}supplier/address/list/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  getStateList(): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}address/supplier/state/list/`;
 
     return this.http.get(url, options)
       .toPromise()

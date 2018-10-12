@@ -1,12 +1,27 @@
 <div class="xb-address md-padding-right-2 md-padding-top-2 md-padding-left-2 unicorn-dark-theme">
   <div class="container">
-    <div class="xb-address__header">
-      Address
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="xb-address__header">
+        Company Information
+      </div>
+      <button mat-raised-button color="primary" routerLink="./create">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <i class="material-icons">add</i>
+          <span class="md-margin-left-1">Add Address</span>
+        </div>
+      </button>
     </div>
     <app-address-address-title></app-address-address-title>
     <div class="md-margin-top-2"></div>
     <div *ngFor="let item of addressList;let i = index;">
       <app-address-address-item [item]="item" [index]="i"></app-address-address-item>
+    </div>
+    <div class="xb-address__none" fxLayout="row" fxLayoutAlign="center center"
+         *ngIf="addressList && addressList.length <= 0">
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <i class="iconfontXberts icon-ic-empty"></i>
+        <div class="sc-product__product-title-1 md-margin-top-4">You haven't any address yet. </div>
+      </div>
     </div>
     <mat-paginator [length]="length"
                    [pageSize]="pageSize"

@@ -73,14 +73,14 @@ export class AccountService {
   }
 
   /*客服回复消息*/
-  startReplyMessage(params: any, lineId: any) {
+  editSupplier(params: any) {
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
     this.createAuthorizationHeader(headers);
     let options = new RequestOptions({headers: headers});
-    const url = `${this.baseUrl.url}order/supplier/message/${lineId}/`;
-    return this.http.put(url, params, options)
+    const url = `${this.baseUrl.url}supplier/update/`;
+    return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
@@ -95,6 +95,19 @@ export class AccountService {
     let options = new RequestOptions({headers: headers});
     const url = `${this.baseUrl.url}order/supplier/message/${lineId}/`;
     return this.http.delete(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  getSupplier() {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+    let options = new RequestOptions({headers: headers});
+    const url = `${this.baseUrl.url}supplier/detail/`;
+    return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);

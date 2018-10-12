@@ -14,7 +14,7 @@ import { AuthenticationService } from '../../../shared/services/authentication/a
 export class AddressMainComponent implements OnInit {
 
   addressList: any;
-  index: any;
+  index: any = 1;
 
   // MatPaginator Inputs
   length:number = 0;
@@ -31,14 +31,19 @@ export class AddressMainComponent implements OnInit {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
-
   constructor(
     private userService: UserService,
     private addressService: AddressService,
     private authenticationService: AuthenticationService,
     private router: Router
   ) {
-
+    this.addressService.getAddressList({
+      page: this.index,
+      pageSize: this.pageSize
+    }).then((data) => {
+      this.length = data.count;
+      this.addressList = [...data.results];
+    });
   }
 
   ngOnInit():void {

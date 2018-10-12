@@ -6,6 +6,7 @@ import { AddressEditComponent } from './address-edit/address-edit.component';
 
 import { AddressItemComponent } from './address-item/address-item.component';
 import { AddressTitleComponent } from './address-title/address-title.component';
+import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { AddressRoutingModule } from './address.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -23,9 +24,12 @@ import { AddressService } from './address.service';
     AddressCreateComponent,
     AddressEditComponent,
     AddressItemComponent,
-    AddressTitleComponent
+    AddressTitleComponent,
+    ToolTipsComponent
   ],
-  entryComponents: [],
+  entryComponents: [
+    ToolTipsComponent
+  ],
   providers: [
     AddressService
   ]

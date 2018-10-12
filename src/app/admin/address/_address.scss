@@ -11,13 +11,26 @@
     @include media();
   }
 
-  &-none{
+  &__none{
     padding: 96px 0;
     background-color: $whiteColor;
     border-radius: 4px;
     span{
       margin-top: 16px;
       @include media();
+    }
+    i{
+      font-size: 96px;
+      line-height: 96px;
+      color: rgba(0,0,0,.38);
+    }
+  }
+
+  &__create{
+    &-bg{
+      padding: 40px 16px;
+      border-radius: 4px;
+      background-color: $whiteColor;
     }
   }
 }
@@ -42,6 +55,10 @@
     padding: 0 16px;
     background-color: #fff;
     border-radius: 2px;
+  }
+
+  &__width{
+    width: 120px;
   }
 }
 

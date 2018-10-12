@@ -83,7 +83,7 @@ export class TopNavigationComponent implements OnInit {
     {
       id: 4,
       text: 'Settings',
-      router: './account/balance',
+      router: './account/setting',
       isActive: false
     },
     {
