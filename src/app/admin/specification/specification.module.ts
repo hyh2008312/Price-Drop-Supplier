@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 
 import { SpecificationMainComponent } from './specification-main/specification-main.component';
-import { SpecificationCreateComponent } from './specification-create/specification-create.component';
 import { SpecificationEditComponent } from './specification-edit/specification-edit.component';
 import { SpecificationTitleComponent } from './specification-title/specification-title.component';
 import { SpecificationItemComponent } from './specification-item/specification-item.component';
 import { AttributeTitleComponent } from './attribute-title/attribute-title.component';
 import { AttributeItemComponent } from './attribute-item/attribute-item.component';
+import { AttributeCategoryTitleComponent } from './attribute-category-title/attribute-category-title.component';
+import { AttributeCategoryItemComponent } from './attribute-category-item/attribute-category-item.component';
+import { AddAttributeDialogComponent } from './add-attribute-dialog/add-attribute-dialog.component';
+import { AddCategoryAttributeDialogComponent } from './add-category-attribute-dialog/add-category-attribute-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { SpecificationRoutingModule } from './specification.routes.module';
@@ -22,16 +25,21 @@ import { SpecificationService } from './specification.service';
   exports: [],
   declarations: [
     SpecificationMainComponent,
-    SpecificationCreateComponent,
     SpecificationEditComponent,
     SpecificationTitleComponent,
     SpecificationItemComponent,
     ToolTipsComponent,
     AttributeTitleComponent,
-    AttributeItemComponent
+    AttributeItemComponent,
+    AddAttributeDialogComponent,
+    AddCategoryAttributeDialogComponent,
+    AttributeCategoryItemComponent,
+    AttributeCategoryTitleComponent
   ],
   entryComponents: [
-    ToolTipsComponent
+    ToolTipsComponent,
+    AddAttributeDialogComponent,
+    AddCategoryAttributeDialogComponent
   ],
   providers: [
     SpecificationService

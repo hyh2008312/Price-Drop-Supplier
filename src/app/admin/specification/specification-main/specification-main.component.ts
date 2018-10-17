@@ -7,6 +7,8 @@ import { SpecificationService } from '../specification.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 
 import { saveAs } from 'file-saver';
+import {AddAttributeDialogComponent} from '../add-attribute-dialog/add-attribute-dialog.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-specification-main',
@@ -36,7 +38,8 @@ export class SpecificationMainComponent implements OnInit {
     private specificationService: SpecificationService,
     private userService: UserService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog
   ) {
   }
 
@@ -139,5 +142,19 @@ export class SpecificationMainComponent implements OnInit {
         this.category.push(data[i]);
       }
     }
+  }
+
+  addAttribute() {
+    let dialogRef = this.dialog.open(AddAttributeDialogComponent, {
+      data: {
+        isAddAttribute: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isAddAttribute) {
+        this.changeProducts({index: 1});
+      }
+    });
   }
 }

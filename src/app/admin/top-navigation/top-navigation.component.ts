@@ -106,6 +106,12 @@ export class TopNavigationComponent implements OnInit {
       text: '搜索关键词',
       router: './keywords',
       isActive: false
+    },
+    {
+      id: 2,
+      text: '属性管理',
+      router: './specification',
+      isActive: false
     }
   ];
 
