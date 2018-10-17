@@ -6,25 +6,108 @@
     Add GATI Tracking Information
   </div>
   <form class="md-margin-top-3" [formGroup]="trackingForm" novalidate>
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
-        <mat-form-field fxFlex>
-          <mat-select name="shippingProvider" placeholder="GATI warehouse" formControlName="depotCode">
-            <mat-option class="md-align-center" *ngFor="let item of depotCode" [value]="item.code">
-              {{ item.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+    <div class="xb-bold">
+      GATI Warehouse
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="Declared Value" formControlName="declaredValue">
+        <mat-select name="shippingProvider" placeholder="物流GATI的收货仓库" formControlName="depotCode">
+          <mat-option class="md-align-center" *ngFor="let item of depotCode" [value]="item.code">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
+    <div class="md-margin-top-2" formArrayName="trackingOrder">
+      <div class="sc-product__create-list" fxLayout="column" *ngFor="let p of trackingOrder.controls; let i = index">
+        <div [formGroupName]="i">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2" fxFlex="45" >
+              <div class="xb-bold">
+                Associated Order Number
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field fxFlex>
+                  <input type="text" matInput placeholder="包裹内产品的关联订单号" formControlName="orderNumber">
+                </mat-form-field>
+              </div>
+
+            </div>
+            <div fxFlex="50">
+              <div class="xb-bold">
+                Declared Value (USD)
+              </div>
+              <div class="md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field fxFlex>
+                  <input type="text" matInput placeholder="申报货值 (美元)" formControlName="declaredValue">
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="end center" fxFlex="5">
+              <i class="material-icons md-dark-secondary xb-pointer" (click)="deleteOrderTrackingObject(i)">delete</i>
+            </div>
+          </div>
+
+          <div *ngIf="p.get('orderNumber').invalid && (p.get('orderNumber').dirty ||
+                      p.get('orderNumber').touched)" class="xb-input-error">
+            <div *ngIf="p.get('orderNumber').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+          <div *ngIf="p.get('declaredValue').invalid && (p.get('declaredValue').dirty ||
+                    p.get('declaredValue').touched)" class="xb-input-error">
+            <div *ngIf="p.get('declaredValue').hasError('required')">
+              This field is required.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="md-margin-top-2">
+      <button type="button" mat-raised-button color="primary" (click)="addOrderList()">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <i class="material-icons">add</i>
+          <span class="md-margin-left-1">添加产品订单号</span>
+        </div>
+      </button>
+    </div>
+    <div class="md-margin-top-3" fxLayout="row" fxLayoutAlign="start center">
+      <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Contains Battery (包裹内是否有带电产品)</div>
+      <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+        <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="isBattery">
+          <mat-radio-button class="md-margin-right-4" *ngFor="let value of YesOrNo;let i = index;"
+                            [value]="value.value" color="primary">
+            {{ value.text }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <div class="md-margin-top-3" fxLayout="row" fxLayoutAlign="start center">
+      <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none"></div>
+      <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
+        <div *ngIf="trackingForm.get('isBattery').invalid && (trackingForm.get('isBattery').dirty ||
+              trackingForm.get('isBattery').touched)" class="xb-input-error">
+          <div *ngIf="trackingForm.get('isBattery').hasError('required')">
+            This field is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="xb-bold">
+      Domestic Tracking Number
+    </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="Notes" formControlName="notes">
+        <input type="text" matInput placeholder="国内物流单号" formControlName="domesticTrackingNumber">
+      </mat-form-field>
+    </div>
+    <div class="xb-bold">
+      Notes
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="备注" formControlName="notes">
       </mat-form-field>
     </div>
   </form>

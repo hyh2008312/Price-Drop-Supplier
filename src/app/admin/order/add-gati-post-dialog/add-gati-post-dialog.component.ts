@@ -1,6 +1,6 @@
  import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { OrderService } from '../order.service';
 
@@ -21,7 +21,15 @@ export class AddGatiPostDialogComponent implements OnInit {
     code: 'SZX'
   }];
 
-  order: any;
+  YesOrNo = [{
+    text: "Yes",
+    value: true
+  }, {
+    text: 'No',
+    value: false
+  }];
+
+  get trackingOrder() { return this.trackingForm.get('trackingOrder') as FormArray; }
 
   constructor(
     public dialogRef: MatDialogRef<AddGatiPostDialogComponent>,
@@ -31,13 +39,13 @@ export class AddGatiPostDialogComponent implements OnInit {
   ) {
     this.trackingForm = this.fb.group({
       depotCode: ['', Validators.required],
-      declaredValue: ['', Validators.required],
-      notes: ['']
+      trackingOrder: this.fb.array([]),
+      notes: [''],
+      isBattery: [false, Validators.required],
+      domesticTrackingNumber: ['']
     });
-    this.order = data.order;
-    this.trackingForm.patchValue({
-      declaredValue: this.order.lines[0].costPrice / 2
-    });
+
+    this.addOrderList();
   }
 
   ngOnInit():void {
@@ -54,7 +62,6 @@ export class AddGatiPostDialogComponent implements OnInit {
     }
 
     let tracking = {
-      id: this.order.id,
       depotCode : this.trackingForm.value.depotCode,
       declaredValue: this.trackingForm.value.declaredValue,
       notes: this.trackingForm.value.notes
@@ -68,6 +75,17 @@ export class AddGatiPostDialogComponent implements OnInit {
         self.data.order = data;
       }
     });
+  }
+
+  addOrderList() {
+    this.trackingOrder.push(this.fb.group({
+      orderNumber: ['', Validators.required],
+      declaredValue: ['', Validators.required]
+    }));
+  }
+
+  deleteOrderTrackingObject(i) {
+    this.trackingOrder.removeAt(i);
   }
 
 

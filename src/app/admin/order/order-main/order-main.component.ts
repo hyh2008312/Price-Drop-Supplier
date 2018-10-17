@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, Inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router,NavigationStart, ActivatedRoute} from '@angular/router';
+import { MatDialog } from '@angular/material';
+
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
@@ -10,6 +12,7 @@ import { UserService } from  '../../../shared/services/user/user.service';
 import { utils, write, WorkBook } from 'xlsx';
 
 import { saveAs } from 'file-saver';
+import {AddGatiPostDialogComponent} from '../add-gati-post-dialog/add-gati-post-dialog.component';
 
 @Component({
   selector: 'app-order-main',
@@ -58,7 +61,8 @@ export class OrderMainComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {
     this.searchForm = this.fb.group({
       searchKey: ['']
@@ -388,6 +392,14 @@ export class OrderMainComponent implements OnInit {
 
     saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), 'exported.xlsx');
 
+  }
+
+  createTracking() {
+    let dialogRef = this.dialog.open(AddGatiPostDialogComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {});
   }
 
 }

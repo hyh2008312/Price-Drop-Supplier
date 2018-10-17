@@ -45,6 +45,9 @@ const routes: Routes = [
         path: 'address',
         loadChildren: './address/address.module#AddressModule'
       }, {
+        path: 'specification',
+        loadChildren: './specification/specification.module#SpecificationModule'
+      }, {
         path: '',
         redirectTo: 'product',
         pathMatch: 'full'

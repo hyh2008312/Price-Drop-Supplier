@@ -1,0 +1,12 @@
+<div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
+  <div class="md-margin-right-2" fxFlex="85" fxLayout="column" fxLayoutAlign="space-between start">
+    <div class="sc-product__product-title" >
+      <span *ngFor="let item of parent">{{item.data.name}} > </span>
+      {{product.data.name}}
+    </div>
+  </div>
+  <div class="sc-product__product-action-buttons sc__accent-dark"
+       fxLayout="column" fxLayoutAlign="center stretch" fxFlex="15">
+    <button mat-raised-button color="primary" (click)="edit()">Edit</button>
+  </div>
+</div>

@@ -13,7 +13,6 @@ import { AuthorizeReturnDialogComponent } from '../authorize-return-dialog/autho
 import { ShipExchangeItemDialogComponent } from '../ship-exchange-item-dialog/ship-exchange-item-dialog.component';
 import { IssueRefundDialogComponent } from '../issue-refund-dialog/issue-refund-dialog.component';
 import { ApproveCancelDialogComponent } from '../approve-cancel-dialog/approve-cancel-dialog.component';
-import { AddGatiPostDialogComponent } from '../add-gati-post-dialog/add-gati-post-dialog.component';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
@@ -68,27 +67,6 @@ export class OrderDetailItemComponent implements OnInit {
 
   editTracking() {
     let dialogRef = this.dialog.open(AddTrackingInformationDialogComponent, {
-      data: {
-        order: this.order,
-        isShippingNumberEdit: this.isShippingNumberEdit
-      }
-    });
-
-    let self = this;
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(dialogRef.componentInstance.data.isShippingNumberEdit == true) {
-        self.productChange.emit({
-          index: self.index,
-          order: dialogRef.componentInstance.data.order,
-          event: 'changeShippingNumber'
-        });
-      }
-    });
-  }
-
-  createTracking() {
-    let dialogRef = this.dialog.open(AddGatiPostDialogComponent, {
       data: {
         order: this.order,
         isShippingNumberEdit: this.isShippingNumberEdit
