@@ -27,13 +27,13 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="属性名" formControlName="name">
+        <input type="text" matInput placeholder="中文属性名" formControlName="chineseName">
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
-      <div *ngIf="attributeForm.get('name').invalid && (attributeForm.get('name').dirty ||
-              attributeForm.get('name').touched)" class="xb-input-error">
-        <div *ngIf="attributeForm.get('name').hasError('required')">
+      <div *ngIf="attributeForm.get('chineseName').invalid && (attributeForm.get('chineseName').dirty ||
+              attributeForm.get('chineseName').touched)" class="xb-input-error">
+        <div *ngIf="attributeForm.get('chineseName').hasError('required')">
           This field is required.
         </div>
       </div>

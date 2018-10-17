@@ -29,7 +29,8 @@ export class AttributeCategoryItemComponent implements OnInit {
       id: ['', Validators.required],
       categoryId: ['', Validators.required],
       specificationId: ['', Validators.required],
-      sort: ['', Validators.required]
+      sort: ['', Validators.required],
+      multiSelect: [false, Validators.required]
     });
   }
 
@@ -43,7 +44,8 @@ export class AttributeCategoryItemComponent implements OnInit {
       id: this.product.id,
       categoryId: this.product.categoryId,
       specificationId: this.product.specificationId,
-      sort: this.product.sort
+      sort: this.product.sort,
+      multiSelect: this.product.multiSelect
     });
   }
 
@@ -51,7 +53,8 @@ export class AttributeCategoryItemComponent implements OnInit {
     if(this.attributeForm.invalid) {
       return;
     }
-    this.adminService.categoryAttributeSave(this.attributeForm.value).then(() => {
+    this.adminService.categoryAttributeSave(this.attributeForm.value).then((data) => {
+      this.product = data;
       this.isEdit = false;
     });
   }

@@ -21,7 +21,8 @@ export class AddAttributeDialogComponent implements OnInit {
     private specificationService: SpecificationService
   ) {
     this.attributeForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      chineseName: ['', Validators.required]
     });
 
   }

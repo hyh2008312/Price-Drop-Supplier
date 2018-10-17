@@ -26,7 +26,8 @@ export class AttributeItemComponent implements OnInit {
   ) {
     this.attributeForm = this.fb.group({
       id: ['', Validators.required],
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      chineseName: ['', Validators.required]
     });
   }
 
@@ -38,7 +39,8 @@ export class AttributeItemComponent implements OnInit {
     this.isEdit = true;
     this.attributeForm.patchValue({
       id: this.product.id,
-      name: this.product.name
+      name: this.product.name,
+      chineseName: this.product.chineseName
     });
   }
 

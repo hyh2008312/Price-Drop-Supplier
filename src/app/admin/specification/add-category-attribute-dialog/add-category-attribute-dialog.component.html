@@ -42,6 +42,20 @@
         </div>
       </div>
     </div>
+    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+      <div class="xb-bold md-margin-right-3">
+        Multi Attribute Column
+      </div>
+      <mat-checkbox formControlName="multiSelect"></mat-checkbox>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div *ngIf="attributeForm.get('multiSelect').invalid && (attributeForm.get('multiSelect').dirty ||
+              attributeForm.get('multiSelect').touched)" class="xb-input-error">
+        <div *ngIf="attributeForm.get('multiSelect').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+    </div>
   </form>
   <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
     <button mat-raised-button color="primary" (click)="create()">SAVE</button>

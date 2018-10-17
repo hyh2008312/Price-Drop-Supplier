@@ -25,7 +25,8 @@ export class AddCategoryAttributeDialogComponent implements OnInit {
     this.attributeForm = this.fb.group({
       categoryId: ['', Validators.required],
       specificationId: ['', Validators.required],
-      sort: ['', Validators.required]
+      sort: ['', Validators.required],
+      multiSelect: ['', Validators.required]
     });
 
     this.attributeForm.patchValue({
@@ -51,7 +52,7 @@ export class AddCategoryAttributeDialogComponent implements OnInit {
 
     let self = this;
     this.specificationService.categoryAttributeCreate(this.attributeForm.value).then((data) => {
-      if(data.result) {
+      if(data.id) {
         self.close();
         self.data.isAddAttribute = true;
       }
