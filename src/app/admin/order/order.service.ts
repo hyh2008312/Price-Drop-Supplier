@@ -65,7 +65,7 @@ export class OrderService {
       });
   }
 
-  getReturnOrderList(params:any): Promise<any> {
+  getOrderNumberCost(params:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -74,7 +74,7 @@ export class OrderService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}order/supplier/return/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}order/number/cost/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -208,7 +208,7 @@ export class OrderService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}order/create/gati/shipping/${tracking.id}/`;
+    const url = `${this.baseUrl.url}order/create/gati/shipping/`;
 
     return this.http.put(url, tracking, options)
       .toPromise()

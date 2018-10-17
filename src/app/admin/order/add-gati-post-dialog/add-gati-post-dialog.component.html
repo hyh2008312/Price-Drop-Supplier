@@ -18,8 +18,8 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="md-margin-top-2" formArrayName="trackingOrder">
-      <div class="sc-product__create-list" fxLayout="column" *ngFor="let p of trackingOrder.controls; let i = index">
+    <div class="md-margin-top-2" formArrayName="goods">
+      <div class="sc-product__create-list" fxLayout="column" *ngFor="let p of goods.controls; let i = index">
         <div [formGroupName]="i">
           <div fxLayout="row" fxLayoutAlign="start center">
             <div class="md-margin-right-2" fxFlex="45" >
@@ -28,7 +28,8 @@
               </div>
               <div fxLayout="row" fxLayoutAlign="start center">
                 <mat-form-field fxFlex>
-                  <input type="text" matInput placeholder="包裹内产品的关联订单号" formControlName="orderNumber">
+                  <input type="text" matInput placeholder="包裹内产品的关联订单号" formControlName="orderNumber"
+                         (ngModelChange)="changeOrder($event, p)">
                 </mat-form-field>
               </div>
 
@@ -75,7 +76,7 @@
     <div class="md-margin-top-3" fxLayout="row" fxLayoutAlign="start center">
       <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none">Contains Battery (包裹内是否有带电产品)</div>
       <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
-        <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="isBattery">
+        <mat-radio-group fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap formControlName="serviceCode">
           <mat-radio-button class="md-margin-right-4" *ngFor="let value of YesOrNo;let i = index;"
                             [value]="value.value" color="primary">
             {{ value.text }}
@@ -86,9 +87,9 @@
     <div class="md-margin-top-3" fxLayout="row" fxLayoutAlign="start center">
       <div class="sc-product__create-width-2 sc-product__create-margin-right-1" fxFlex="none"></div>
       <div class="sc-product__create-margin-right-2" fxLayout="row" fxLayoutAlign="start center" fxFlex="50">
-        <div *ngIf="trackingForm.get('isBattery').invalid && (trackingForm.get('isBattery').dirty ||
-              trackingForm.get('isBattery').touched)" class="xb-input-error">
-          <div *ngIf="trackingForm.get('isBattery').hasError('required')">
+        <div *ngIf="trackingForm.get('serviceCode').invalid && (trackingForm.get('serviceCode').dirty ||
+              trackingForm.get('serviceCode').touched)" class="xb-input-error">
+          <div *ngIf="trackingForm.get('serviceCode').hasError('required')">
             This field is required.
           </div>
         </div>
@@ -99,7 +100,7 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="国内物流单号" formControlName="domesticTrackingNumber">
+        <input type="text" matInput placeholder="国内物流单号" formControlName="domesticExp">
       </mat-form-field>
     </div>
     <div class="xb-bold">

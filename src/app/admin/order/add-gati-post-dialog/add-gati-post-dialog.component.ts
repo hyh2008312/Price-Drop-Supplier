@@ -23,13 +23,15 @@ export class AddGatiPostDialogComponent implements OnInit {
 
   YesOrNo = [{
     text: "Yes",
-    value: true
+    value: 'battery'
   }, {
     text: 'No',
-    value: false
+    value: 'general'
   }];
 
-  get trackingOrder() { return this.trackingForm.get('trackingOrder') as FormArray; }
+  currencyRate: any = 74;
+
+  get goods() { return this.trackingForm.get('goods') as FormArray; }
 
   constructor(
     public dialogRef: MatDialogRef<AddGatiPostDialogComponent>,
@@ -39,10 +41,10 @@ export class AddGatiPostDialogComponent implements OnInit {
   ) {
     this.trackingForm = this.fb.group({
       depotCode: ['', Validators.required],
-      trackingOrder: this.fb.array([]),
+      goods: this.fb.array([]),
       notes: [''],
-      isBattery: [false, Validators.required],
-      domesticTrackingNumber: ['']
+      serviceCode: ['general', Validators.required],
+      domesticExp: ['']
     });
 
     this.addOrderList();
@@ -61,14 +63,8 @@ export class AddGatiPostDialogComponent implements OnInit {
       return;
     }
 
-    let tracking = {
-      depotCode : this.trackingForm.value.depotCode,
-      declaredValue: this.trackingForm.value.declaredValue,
-      notes: this.trackingForm.value.notes
-    };
-
     let self = this;
-    this.orderService.changeGATITrackingInformation(tracking).then((data) => {
+    this.orderService.changeGATITrackingInformation(this.trackingForm.value).then((data) => {
       self.close();
       if(data.id) {
         self.data.isShippingNumberEdit = true;
@@ -78,14 +74,26 @@ export class AddGatiPostDialogComponent implements OnInit {
   }
 
   addOrderList() {
-    this.trackingOrder.push(this.fb.group({
+    this.goods.push(this.fb.group({
       orderNumber: ['', Validators.required],
       declaredValue: ['', Validators.required]
     }));
   }
 
   deleteOrderTrackingObject(i) {
-    this.trackingOrder.removeAt(i);
+    this.goods.removeAt(i);
+  }
+
+  changeOrder($event, p) {
+    this.orderService.getOrderNumberCost({
+      order_number: $event
+    }).then((data) => {
+      if(data.id) {
+        p.patchValue({
+          declaredValue: (data.lines[0].costPrice / 2 / 74).toFixed(2)
+        });
+      }
+    });
   }
 
 

@@ -56,6 +56,12 @@ export class AttributeCategoryItemComponent implements OnInit {
     this.adminService.categoryAttributeSave(this.attributeForm.value).then((data) => {
       this.product = data;
       this.isEdit = false;
+      this.productChange.emit({
+        index: this.index,
+        item: data,
+        status: this.status,
+        event: 'edit'
+      });
     });
   }
 
