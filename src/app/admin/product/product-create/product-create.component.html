@@ -67,7 +67,8 @@
             </div>
             <div class="md-margin-left-3" fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="thirdcategory" placeholder="Select a Thirdcategory" formControlName="childId">
+                <mat-select name="thirdcategory" placeholder="Select a Thirdcategory" formControlName="childId"
+                            (valueChange)="thirdCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                     {{ item.data.name }}
                   </mat-option>
@@ -88,6 +89,105 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="sc-product__create-container-1">
+        <div class="sc-product__create-title">
+          Category Attributes
+        </div>
+        <div formArrayName="variants" >
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc-product__create-margin-right-3 sc-product__create-width-1 md-dark-secondary xb-bold"
+                 fxFlex="none" fxLayout="row" fxLayoutAlign="start center">
+              Variants
+            </div>
+            <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
+                 fxFlex="12" fxLayout="row" fxLayoutAlign="start center">
+              SKU
+            </div>
+            <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
+                 fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+              Quantity
+            </div>
+            <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
+                 fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+              MRP
+            </div>
+            <div class="md-dark-secondary xb-bold"
+                 fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+              Cost Price
+            </div>
+            <div class="md-dark-secondary xb-bold"
+                 fxFlex="13" fxLayout="row" fxLayoutAlign="start center">
+              Sale Price
+            </div>
+          </div>
+          <div fxLayout="column" fxLayoutAlign="start stretch" *ngFor="let p of product.controls; let i = index;">
+            <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">
+              <div class="sc-product__create-margin-right-3 sc-product__create-width-1 sc-product__create-text-2" fxFlex="none">
+                {{p.value.variant.value}}
+              </div>
+              <div class="sc-product__create-margin-right-3" fxFlex="12" fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field class="sc-product__create-width-100">
+                  <input type="text" matInput formControlName="sku">
+                </mat-form-field>
+              </div>
+              <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field class="sc-product__create-width-100">
+                  <input type="text" matInput formControlName="stock">
+                </mat-form-field>
+              </div>
+              <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                <div class="md-margin-right-2 sc-product__create-title">Rs</div>
+                <mat-form-field class="sc-product__create-width-100">
+                  <input type="text" matInput formControlName="saleUnitPrice">
+                </mat-form-field>
+              </div>
+              <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                <div class="md-margin-right-2 sc-product__create-title">Rs</div>
+                <mat-form-field class="sc-product__create-width-100" fxFlex>
+                  <input type="text" matInput formControlName="costPrice">
+                </mat-form-field>
+              </div>
+              <div fxFlex="13" fxLayout="row" fxLayoutAlign="start center">
+                <div class="md-margin-right-2 sc-product__create-title">Rs</div>
+                <mat-form-field class="sc-product__create-width-100" fxFlex>
+                  <input type="text" matInput formControlName="unitPrice">
+                </mat-form-field>
+              </div>
+              <div class="md-margin-left-2">
+                <i class="material-icons md-dark-secondary xb-pointer" (click)="deleteVariantObject(i)">delete</i>
+              </div>
+            </div>
+            <div [formGroupName]="i">
+              <div *ngIf="p.get('stock').invalid && (p.get('stock').dirty ||
+                    p.get('stock').touched)" class="xb-input-error">
+                <div *ngIf="p.get('stock').hasError('required')">
+                  The Quantity field is required.
+                </div>
+              </div>
+              <div *ngIf="p.get('sku').invalid && (p.get('sku').dirty ||
+                    p.get('sku').touched)" class="xb-input-error">
+                <div *ngIf="p.get('sku').hasError('required')">
+                  The SKU field is required.
+                </div>
+              </div>
+              <div *ngIf="p.get('saleUnitPrice').invalid && (p.get('saleUnitPrice').dirty ||
+                    p.get('saleUnitPrice').touched)" class="xb-input-error">
+                <div *ngIf="p.get('saleUnitPrice').hasError('required')">
+                  This MRP field is required.
+                </div>
+              </div>
+              <div *ngIf="p.get('unitPrice').invalid && (p.get('unitPrice').dirty ||
+                    p.get('unitPrice').touched)" class="xb-input-error">
+                <div *ngIf="p.get('unitPrice').hasError('required')">
+                  This Sale Price field is required.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sc-product__create-container-1">
         <div class="sc-product__create-title md-margin-top-2">
           Product Details
         </div>

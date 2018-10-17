@@ -100,6 +100,7 @@ export class ProductCreateComponent implements OnInit {
   get shipping() { return this.productForm.get('shippings') as FormArray; }
   get product() { return this.productForm.get('variants') as FormArray; }
   get attributes() { return this.productForm.get('attributes') as FormArray; }
+  get specification() { return this.productForm.get('specification') as FormArray; }
 
   isSuperUser: boolean = false;
 
@@ -125,6 +126,7 @@ export class ProductCreateComponent implements OnInit {
       childId: [null],
       images: [[]],
       attributes: this.fb.array([]),
+      specification: this.fb.array([]),
       variants: this.fb.array([]),
       shippings: this.fb.array([]),
       brandName: [''],
@@ -509,8 +511,31 @@ export class ProductCreateComponent implements OnInit {
         this.productForm.patchValue({
           categoryId: null
         });
+        if(this.subCategoryList[index]) {
+          this.getAttributeDetail($event);
+        }
       }
     }
+  }
+
+  thirdCategoryChange($event) {
+    this.getAttributeDetail($event);
+  }
+
+  getAttributeDetail($event) {
+    this.adminService.getCategoryAttributeDetail({
+      id: $event
+    }).then((data) => {
+      this.specification.controls = [];
+      for(let item of data.specificationList) {
+        this.specification.push(this.fb.group({
+          specificationId: [item.id, Validators.required],
+          content: ['', Validators.required],
+          sort: [item.sort, Validators.required]
+        }));
+      }
+
+    });
   }
 
   showMinAndMaxTime($event, index, item) {

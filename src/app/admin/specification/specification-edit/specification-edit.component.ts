@@ -91,51 +91,56 @@ export class SpecificationEditComponent implements OnInit {
   export(): void {
     const ws_name = this.lastCategoryName + ' Template';
     const wb: WorkBook = { SheetNames: [], Sheets: {} };
-    let excel: any = [
-      [
-        "序号",
-        "产品ID",
-        "主图链接",
-        "SKU",
-        "变体1名称",
-        "变体值",
-        "变体2名称",
-        "变体值",
-        "库存数量",
-        "产品基础分类",
-        "产品CMS分类",
-        "产品中文名称",
-        "产品英文名称",
-        "采购价 (Rs.)",
-        "Cost Price (Rs.)",
-        "MRP (Rs.)",
-        "Sale Price (Rs.)",
-        "Net Weight (kg)",
-        "Shipping Weight (kg)",
-        "长",
-        "宽",
-        "高",
-        "Contain Battery (Y / N)",
-        "Shipping Carrier",
-        "Shipping Time",
-        "Shipping Cost (Rs.)",
-        "Country of Origin",
-        "供应商ID",
-        "供应商名称",
-        "采购链接",
-        "交货期",
-        "最小起订量",
-        "供应商所在地"
-      ]
+
+    let tab1 = [
+      "序号",
+      "产品ID",
+      "主图链接",
+      "SKU",
+      "变体1名称",
+      "变体值",
+      "变体2名称",
+      "变体值",
+      "库存数量",
+      "产品基础分类",
+      "产品CMS分类",
+      "产品中文名称",
+      "产品英文名称",
+      "采购价 (Rs.)",
+      "Cost Price (Rs.)",
+      "MRP (Rs.)",
+      "Sale Price (Rs.)"
+    ];
+    let tab2 = [
+      "Net Weight (kg)",
+      "Shipping Weight (kg)",
+      "长",
+      "宽",
+      "高",
+      "Contain Battery (Y / N)",
+      "Shipping Carrier",
+      "Shipping Time",
+      "Shipping Cost (Rs.)",
+      "Country of Origin",
+      "供应商ID",
+      "供应商名称",
+      "采购链接",
+      "交货期",
+      "最小起订量",
+      "供应商所在地"
     ];
 
-    let startIndex = 16;
+    let tab3 = [];
 
     for(let item of this.attributeList) {
-      excel[0].splice(startIndex, 1, item);
-      startIndex++;
+      tab3.push(item.name);
     }
 
+    let table = tab1.concat(tab3).concat(tab2);
+
+    let excel: any = [];
+
+    excel.push(table);
 
 
     const ws: any = utils.json_to_sheet(excel);
