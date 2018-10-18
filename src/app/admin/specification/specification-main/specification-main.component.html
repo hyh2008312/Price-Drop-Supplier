@@ -14,12 +14,12 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Attributes Management (属性列表)" >
+      <mat-tab label="Attributes Type (属性类列表)" >
         <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="end center">
           <button mat-raised-button color="primary" (click)="addAttribute()">
             <div fxLayout="row" fxLayoutAlign="start center">
               <i class="material-icons">add</i>
-              <span class="md-margin-left-1">Add Attributes</span>
+              <span class="md-margin-left-1">Add Attributes Type</span>
             </div>
           </button>
         </div>
@@ -28,7 +28,7 @@
         </div>
         <div class="sc-product__product-bg md-margin-top-2" fxLayout="column">
           <div class="sc-product__product-list" *ngFor="let item of promoteAll;let i = index;">
-            <app-attribute-item [status]="1" [index]="i" (productChange)="productChange($event)" [product]="item"></app-attribute-item>
+            <app-attribute-item [status]="1" [index]="i" [attributeValueList]="attributeValueList" (productChange)="productChange($event)" [product]="item"></app-attribute-item>
           </div>
           <mat-paginator [length]="length"
                          [pageSize]="pageSize"
@@ -40,7 +40,38 @@
                *ngIf="promoteAll && promoteAll.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">
               <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any awards yet. </div>
+              <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any attribute yet. </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Attributes Value (属性值列表)" >
+        <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="end center">
+          <button mat-raised-button color="primary" (click)="addAttributeValue()">
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <i class="material-icons">add</i>
+              <span class="md-margin-left-1">Add Attributes Value</span>
+            </div>
+          </button>
+        </div>
+        <div class="md-margin-top-2">
+          <app-attribute-value-title></app-attribute-value-title>
+        </div>
+        <div class="sc-product__product-bg md-margin-top-2" fxLayout="column">
+          <div class="sc-product__product-list" *ngFor="let item of attributeValue;let i = index;">
+            <app-attribute-value-item [status]="2" [index]="i" (productChange)="productChange($event)" [product]="item"></app-attribute-value-item>
+          </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 2)"
+                         *ngIf="attributeValue && attributeValue.length > 0">
+          </mat-paginator>
+          <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="attributeValue && attributeValue.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any attribute value yet. </div>
             </div>
           </div>
         </div>

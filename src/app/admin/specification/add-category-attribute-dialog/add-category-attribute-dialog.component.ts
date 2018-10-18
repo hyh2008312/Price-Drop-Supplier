@@ -16,6 +16,13 @@ export class AddCategoryAttributeDialogComponent implements OnInit {
 
   attributeList: any;
 
+  selectable = true;
+  removable = true;
+
+  valueList: any = [];
+
+  attributesValue: any = [];
+
   constructor(
     public dialogRef: MatDialogRef<AddCategoryAttributeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -26,7 +33,7 @@ export class AddCategoryAttributeDialogComponent implements OnInit {
       categoryId: ['', Validators.required],
       specificationId: ['', Validators.required],
       sort: ['', Validators.required],
-      multiSelect: ['', Validators.required]
+      specificationCount: [1, Validators.required]
     });
 
     this.attributeForm.patchValue({
@@ -56,6 +63,25 @@ export class AddCategoryAttributeDialogComponent implements OnInit {
         self.close();
         self.data.isAddAttribute = true;
       }
+    });
+  }
+
+  add(event): void {
+    this.attributesValue.push(event);
+    this.attributeForm.patchValue({
+      attributesValue: this.attributesValue
+    });
+  }
+
+  remove(params: any): void {
+    const index = this.attributesValue.indexOf(params);
+
+    if (index >= 0) {
+      this.attributesValue.splice(index, 1);
+    }
+
+    this.attributeForm.patchValue({
+      attributesValue: this.attributesValue
     });
   }
 

@@ -7,11 +7,11 @@
   </div>
   <form class="md-margin-top-3" [formGroup]="attributeForm" novalidate>
     <div class="xb-bold">
-      Attribute Name
+      Attribute Type
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <mat-select name="attribute name" placeholder="Select Attribute Name" formControlName="specificationId">
+        <mat-select name="attribute name" placeholder="Select Attribute Type" formControlName="specificationId">
           <mat-option class="md-align-center" *ngFor="let item of attributeList" [value]="item.id">
             {{ item.name }}
           </mat-option>
@@ -27,11 +27,11 @@
       </div>
     </div>
     <div class="xb-bold">
-      Attribute Sort
+      Attribute Index
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="number" matInput placeholder="Attribute Sort" formControlName="sort">
+        <input type="number" matInput placeholder="Attribute Index" formControlName="sort">
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
@@ -42,16 +42,18 @@
         </div>
       </div>
     </div>
-    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
-      <div class="xb-bold md-margin-right-3">
-        Multi Attribute Column
-      </div>
-      <mat-checkbox formControlName="multiSelect"></mat-checkbox>
+    <div class="xb-bold">
+      Number of Attribute Column
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
-      <div *ngIf="attributeForm.get('multiSelect').invalid && (attributeForm.get('multiSelect').dirty ||
-              attributeForm.get('multiSelect').touched)" class="xb-input-error">
-        <div *ngIf="attributeForm.get('multiSelect').hasError('required')">
+      <mat-form-field fxFlex>
+        <input type="number" matInput placeholder="Number of Attribute Column" formControlName="specificationCount">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div *ngIf="attributeForm.get('specificationCount').invalid && (attributeForm.get('specificationCount').dirty ||
+              attributeForm.get('specificationCount').touched)" class="xb-input-error">
+        <div *ngIf="attributeForm.get('specificationCount').hasError('required')">
           This field is required.
         </div>
       </div>

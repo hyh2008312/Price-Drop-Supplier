@@ -2,6 +2,8 @@ import { Input, Output, Component, OnInit, EventEmitter} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { SpecificationService } from '../specification.service';
+import { AddCategoryAttributeValueListDialogComponent } from '../add-category-attribute-value-list-dialog/add-category-attribute-value-list-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-attribute-category-item',
@@ -23,14 +25,15 @@ export class AttributeCategoryItemComponent implements OnInit {
 
   constructor(
     private adminService: SpecificationService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {
     this.attributeForm = this.fb.group({
       id: ['', Validators.required],
       categoryId: ['', Validators.required],
       specificationId: ['', Validators.required],
       sort: ['', Validators.required],
-      multiSelect: [false, Validators.required]
+      specificationCount: [false, Validators.required]
     });
   }
 
@@ -45,7 +48,7 @@ export class AttributeCategoryItemComponent implements OnInit {
       categoryId: this.product.categoryId,
       specificationId: this.product.specificationId,
       sort: this.product.sort,
-      multiSelect: this.product.multiSelect
+      specificationCount: this.product.specificationCount
     });
   }
 
@@ -73,6 +76,33 @@ export class AttributeCategoryItemComponent implements OnInit {
         status: this.status,
         event: 'delete'
       });
+    });
+  }
+
+  add() {
+
+    let attr = [];
+
+    for(let item of this.attributeList) {
+      if(item.name == this.product.name) {
+        attr = [...item.specificationSpecificationValues];
+      }
+    }
+
+    let attributesValue = this.product.specificationValues ? this.product.specificationValues.split(',') : [];
+
+    let dialogRef = this.dialog.open(AddCategoryAttributeValueListDialogComponent, {
+      data: {
+        isAddAttribute: false,
+        id: this.product.id,
+        name: this.product.name,
+        attributesValue,
+        attributeValueList: attr
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.product.specificationValues = dialogRef.componentInstance.data.attributesValue.join(',');
     });
   }
 

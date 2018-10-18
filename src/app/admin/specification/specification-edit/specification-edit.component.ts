@@ -132,8 +132,15 @@ export class SpecificationEditComponent implements OnInit {
 
     let tab3 = [];
 
-    for(let item of this.attributeList) {
-      tab3.push(item.name);
+    for(let item of this.promoteAll) {
+      if(item.specificationCount > 1) {
+
+        for(let i = 0; i < item.specificationCount; i++) {
+          tab3.push(item.name);
+        }
+      } else {
+        tab3.push(item.name);
+      }
     }
 
     let table = tab1.concat(tab3).concat(tab2);
@@ -159,6 +166,32 @@ export class SpecificationEditComponent implements OnInit {
 
     saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), `${this.categoryName}.xlsx`);
 
+    // const wb = {
+    //   SheetNames:["Sheet1"],
+    //   Sheets: {
+    //     Sheet1: {
+    //       "!ref": "A1:A2",
+    //       A1:{t:'s', v:"A1:A2"},
+    //       B1:{t:'n', v:1},
+    //       B2:{t:'b', v:true},
+    //       C1:{t:'z', c:"A1",w:'', F:'B1:B2'},
+    //       "!merges":[
+    //         {s:{r:0,c:0},e:{r:1,c:0}} /* A1:A2 */
+    //       ]
+    //     }
+    //   }
+    // };
+    //
+    // const wbout = write(wb, {bookType:'xlsx', type:'binary'});
+    //
+    // function s2ab(s) {
+    //   const buf = new ArrayBuffer(s.length);
+    //   const view = new Uint8Array(buf);
+    //   for (let i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+    //   return buf;
+    // }
+    //
+    // saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), "merges.xlsx");
   }
 
 }

@@ -6,10 +6,15 @@ import { SpecificationTitleComponent } from './specification-title/specification
 import { SpecificationItemComponent } from './specification-item/specification-item.component';
 import { AttributeTitleComponent } from './attribute-title/attribute-title.component';
 import { AttributeItemComponent } from './attribute-item/attribute-item.component';
+import { AttributeValueTitleComponent } from './attribute-value-title/attribute-value-title.component';
+import { AttributeValueItemComponent } from './attribute-value-item/attribute-value-item.component';
 import { AttributeCategoryTitleComponent } from './attribute-category-title/attribute-category-title.component';
 import { AttributeCategoryItemComponent } from './attribute-category-item/attribute-category-item.component';
 import { AddAttributeDialogComponent } from './add-attribute-dialog/add-attribute-dialog.component';
+import { AddAttributeValueDialogComponent } from './add-attribute-value-dialog/add-attribute-value-dialog.component';
 import { AddCategoryAttributeDialogComponent } from './add-category-attribute-dialog/add-category-attribute-dialog.component';
+import { AddAttributeValueListDialogComponent } from './add-attribute-value-list-dialog/add-attribute-value-list-dialog.component';
+import { AddCategoryAttributeValueListDialogComponent } from './add-category-attribute-value-list-dialog/add-category-attribute-value-list-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { SpecificationRoutingModule } from './specification.routes.module';
@@ -34,12 +39,20 @@ import { SpecificationService } from './specification.service';
     AddAttributeDialogComponent,
     AddCategoryAttributeDialogComponent,
     AttributeCategoryItemComponent,
-    AttributeCategoryTitleComponent
+    AttributeCategoryTitleComponent,
+    AddAttributeValueDialogComponent,
+    AttributeValueTitleComponent,
+    AttributeValueItemComponent,
+    AddAttributeValueListDialogComponent,
+    AddCategoryAttributeValueListDialogComponent
   ],
   entryComponents: [
     ToolTipsComponent,
     AddAttributeDialogComponent,
-    AddCategoryAttributeDialogComponent
+    AddCategoryAttributeDialogComponent,
+    AddAttributeValueDialogComponent,
+    AddAttributeValueListDialogComponent,
+    AddCategoryAttributeValueListDialogComponent
   ],
   providers: [
     SpecificationService

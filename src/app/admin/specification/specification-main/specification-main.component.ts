@@ -8,6 +8,7 @@ import { UserService } from  '../../../shared/services/user/user.service';
 
 import { saveAs } from 'file-saver';
 import {AddAttributeDialogComponent} from '../add-attribute-dialog/add-attribute-dialog.component';
+import {AddAttributeValueDialogComponent} from '../add-attribute-value-dialog/add-attribute-value-dialog.component';
 import {MatDialog} from '@angular/material';
 
 @Component({
@@ -24,8 +25,13 @@ export class SpecificationMainComponent implements OnInit {
 
   promoteAll: any;
 
+  attributeValue: any;
+
   selectedIndex = 0;
   promoteIndex:any = 1;
+  attributeIndex:any = 1;
+
+  attributeValueList:any = [];
 
   // MatPaginator Inputs
   length:number = 0;
@@ -41,6 +47,7 @@ export class SpecificationMainComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog
   ) {
+    this.getAttributeValueList();
   }
 
   ngOnInit():void {
@@ -52,6 +59,9 @@ export class SpecificationMainComponent implements OnInit {
           break;
         case 'attribute':
           self.selectedIndex = 1;
+          break;
+        case 'attributeValue':
+          self.selectedIndex = 2;
           break;
         default:
           self.selectedIndex = 0;
@@ -75,6 +85,9 @@ export class SpecificationMainComponent implements OnInit {
       case 1:
         this.promoteIndex = event.pageIndex + 1;
         break;
+      case 2:
+        this.attributeIndex = event.pageIndex + 1;
+        break;
     }
     this.changeProducts({index: type});
   }
@@ -96,6 +109,16 @@ export class SpecificationMainComponent implements OnInit {
           this.promoteAll = [...data.results];
         });
         break;
+      case 2:
+        page = this.promoteIndex;
+        this.specificationService.getSpecificationValueList({
+          page,
+          page_size: this.pageSize
+        }).then((data) => {
+          this.length = data.count;
+          this.attributeValue = [...data.results];
+        });
+        break;
       case 0:
         this.specificationService.getCategoryList().then((data) => {
           this.category = [];
@@ -114,6 +137,11 @@ export class SpecificationMainComponent implements OnInit {
       case 1:
         if($event.event == 'delete') {
           this.promoteAll.splice($event.index,1);
+        }
+      break;
+      case 2:
+        if($event.event == 'delete') {
+          this.attributeValue.splice($event.index,1);
         }
       break;
     }
@@ -155,6 +183,26 @@ export class SpecificationMainComponent implements OnInit {
       if(dialogRef.componentInstance.data.isAddAttribute) {
         this.changeProducts({index: 1});
       }
+    });
+  }
+
+  addAttributeValue() {
+    let dialogRef = this.dialog.open(AddAttributeValueDialogComponent, {
+      data: {
+        isAddAttribute: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isAddAttribute) {
+        this.changeProducts({index: 2});
+      }
+    });
+  }
+
+  getAttributeValueList() {
+    this.specificationService.getAttributeValueList().then((data) => {
+      this.attributeValueList = [...data];
     });
   }
 }

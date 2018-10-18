@@ -511,10 +511,8 @@ export class ProductCreateComponent implements OnInit {
         this.productForm.patchValue({
           categoryId: null
         });
-        if(this.subCategoryList[index]) {
-          this.getAttributeDetail($event);
-        }
       }
+      this.getAttributeDetail($event);
     }
   }
 
@@ -529,6 +527,7 @@ export class ProductCreateComponent implements OnInit {
       this.specification.controls = [];
       for(let item of data.specificationList) {
         this.specification.push(this.fb.group({
+          name: [item.name, Validators.required],
           specificationId: [item.id, Validators.required],
           content: ['', Validators.required],
           sort: [item.sort, Validators.required]

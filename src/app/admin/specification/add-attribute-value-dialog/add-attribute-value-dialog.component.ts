@@ -1,21 +1,21 @@
-import { Component, OnInit, Inject } from '@angular/core';
+ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { SpecificationService } from '../specification.service';
 
 @Component({
-  selector: 'app-specification-add-attribute-dialog',
-  templateUrl: './add-attribute-dialog.component.html',
+  selector: 'app-specification-add-attribute-value-dialog',
+  templateUrl: './add-attribute-value-dialog.component.html',
   styleUrls: ['../_specification.scss']
 })
 
-export class AddAttributeDialogComponent implements OnInit {
+export class AddAttributeValueDialogComponent implements OnInit {
 
   attributeForm : FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<AddAttributeDialogComponent>,
+    public dialogRef: MatDialogRef<AddAttributeValueDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private specificationService: SpecificationService
@@ -41,11 +41,12 @@ export class AddAttributeDialogComponent implements OnInit {
     }
 
     let self = this;
-    this.specificationService.attributeCreate(this.attributeForm.value).then((data) => {
+    this.specificationService.attributeValueCreate(this.attributeForm.value).then((data) => {
       if(data.id) {
         self.close();
         self.data.isAddAttribute = true;
       }
     });
   }
+
 }

@@ -80,6 +80,24 @@ export class SpecificationService {
       });
   }
 
+  getSpecificationValueList(params: any): Promise<any> {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/specification/value/page/list/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   getAttributeList(): Promise<any> {
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -89,6 +107,24 @@ export class SpecificationService {
     let options = new RequestOptions({headers:headers});
 
     const url = `${this.baseUrl.url}product/specification/list/`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
+  getAttributeValueList(): Promise<any> {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/specification/value/list/`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -136,6 +172,82 @@ export class SpecificationService {
       });
   }
 
+  addAttributeValue(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/specification/add/value/`;
+
+    return this.http.post(url, product, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
+  addCategoryAttributeValue(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/category/specification/update/value/`;
+
+    return this.http.post(url, product, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
+  deleteAttributeValue(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/specification/delete/value/${product.id}/`;
+
+    return this.http.delete(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
+  attributeValueCreate(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/specification/value/add/`;
+
+    return this.http.post(url, product, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   categoryAttributeCreate(product:any): Promise<any> {
 
     let headers = new Headers({
@@ -174,6 +286,25 @@ export class SpecificationService {
       });
   }
 
+  attributeValueSave(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/specification/value/update/`;
+
+    return this.http.post(url, product, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   categoryAttributeSave(product:any): Promise<any> {
 
     let headers = new Headers({
@@ -203,6 +334,25 @@ export class SpecificationService {
     let options = new RequestOptions({headers:headers});
 
     const url = `${this.baseUrl.url}product/specification/delete/${product.id}/`;
+
+    return this.http.delete(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
+  attributeValueDelete(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/specification/value/delete/${product.id}/`;
 
     return this.http.delete(url, options)
       .toPromise()
