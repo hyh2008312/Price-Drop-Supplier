@@ -336,7 +336,7 @@ export class SpecificationEditComponent implements OnInit {
             f: '' + sourcingPrice + (indexNumber + 1) + '*1.2+' + shippingCost + (indexNumber + 1)
           };
 
-          product.push(item.originCountry);
+          product.push(item.originCountry.code);
           product.push(item.supplierId);
           product.push(item.supplierName);
           product.push(item.purchaseLink);
