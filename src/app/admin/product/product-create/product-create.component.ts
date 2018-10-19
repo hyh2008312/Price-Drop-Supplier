@@ -28,6 +28,9 @@ export class ProductCreateComponent implements OnInit {
 
   productId: any;
 
+  selectable = true;
+  removable = true;
+
   categoryList:any = [];
   subCategoryList: any;
   thirdCategoryList: any;
@@ -528,9 +531,11 @@ export class ProductCreateComponent implements OnInit {
       for(let item of data.specificationList) {
         this.specification.push(this.fb.group({
           name: [item.name, Validators.required],
-          specificationId: [item.id, Validators.required],
+          specificationId: [item.specificationId, Validators.required],
           content: ['', Validators.required],
-          sort: [item.sort, Validators.required]
+          sort: [item.sort, Validators.required],
+          specificationValues: [item.specificationValues?item.specificationValues.split(','):[]],
+          contentList: [[]]
         }));
       }
 
@@ -668,6 +673,44 @@ export class ProductCreateComponent implements OnInit {
         this.document.querySelector('html').style.top = '0';
       });
     });
+  }
+
+  addAttribute(event, p): void {
+    const index = p.value.contentList.findIndex((e) => {
+      return e == event;
+    });
+
+    if (index >= 0) {
+      return;
+    }
+
+    console.log(p.value.contentList)
+
+    let arr: any = [...p.value.contentList];
+    arr.push(event);
+
+    p.patchValue({
+      contentList: arr,
+      content: arr.join(',')
+    });
+  }
+
+  removeAttribute(params: any, p): void {
+    const index = p.value.contentList.findIndex((e) => {
+      return e == params;
+    });
+
+    if (index >= 0) {
+      let arr: any = [...p.value.contentList];
+      arr.splice(index, 1);
+
+      p.patchValue({
+        contentList: arr,
+        content: arr.join(',')
+      });
+    }
+
+
   }
 
 }

@@ -1,7 +1,7 @@
 <div class="sc-product__create-container">
   <div class="md-margin-top-4 sc-product__create-text">
     <span class="md-dark-secondary xb-pointer" (click)="openLeaveDialog()">PRODUCT</span>
-    <span class="md-dark-secondary">></span><span class="xb-bold">ADD NEW PRODUCT</span>
+    <span class="md-dark-secondary">></span><span class="xb-bold"> ADD NEW PRODUCT</span>
   </div>
   <div class="md-margin-top-3 sc-product__create-navigation-bg" fxLayout="row" fxLayoutAlign="start center">
     <div class="sc-product__create-navigation xb-pointer" fxFlex="50" *ngIf="step == 1 && productId"
@@ -94,15 +94,32 @@
         <div class="sc-product__create-title">
           Category Attributes
         </div>
-        <div class="md-margin-top-2" formArrayName="specification" fxLayout="row wrap" fxLayoutAlign="start start">
-          <div fxFlex="50" *ngFor="let p of specification.controls; let i = index;">
+        <div class="md-margin-top-2" formArrayName="specification">
+          <div *ngFor="let p of specification.controls; let i = index;">
             <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">
-              <div class="sc-product__create-margin-right-3 sc-product__create-text-2" fxFlex="50">
+              <div class="sc-product__create-margin-right-3 sc-product__create-text-2" fxFlex="20">
                 {{p.value.name}}
               </div>
-              <div class="sc-product__create-margin-right-3" fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
-                <mat-form-field fxFlex="90">
-                  <input type="text" matInput formControlName="content">
+              <div *ngIf="p.value.specificationValues.length > 0" class="sc-product__create-margin-right-3" fxFlex="80" fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field fxFlex="30">
+                  <mat-select name="select value" placeholder="Select Value"
+                              (valueChange)="addAttribute($event, p)">
+                    <mat-option class="md-align-center" *ngFor="let item of p.value.specificationValues" [value]="item">
+                      {{ item }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-chip-list class="md-margin-left-3" fxFlex="70">
+                  <mat-chip *ngFor="let item of p.value.contentList" [selectable]="selectable"
+                            [removable]="removable" (removed)="removeAttribute(item, p)">
+                    {{item}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+              <div *ngIf="p.value.specificationValues.length <= 0" class="sc-product__create-margin-right-3" fxFlex="80" fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field fxFlex>
+                  <input type="text" matInput placeholder="Attribute Value" formControlName="content">
                 </mat-form-field>
               </div>
             </div>
