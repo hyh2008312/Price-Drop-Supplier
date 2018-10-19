@@ -121,6 +121,7 @@ export class SpecificationEditComponent implements OnInit {
       "宽",
       "高",
       "Contain Battery (Y / N)",
+      "Shipping Id",
       "Shipping Carrier",
       "shipping Time Min",
       "shipping Time Max",
@@ -166,14 +167,13 @@ export class SpecificationEditComponent implements OnInit {
     }).then((data) => {
       for(let i = 0; i < data.results.length; i++) {
         const item = data.results[i];
-        let columnNumber = 0;
-
-        let costNumber = 0;
-
         for(let j = 0; j < item.variants.length; j++) {
+          let columnNumber = 0;
+          let costNumber = 0;
           const _itm = item.variants[j];
           let product: any = [];
-          product.push(i + j + 1);
+          let indexNumber = i + j + 1;
+          product.push(indexNumber);
           product.push(item.id);
           product.push(item.spu);
           product.push(_itm.mainImage);
@@ -255,7 +255,7 @@ export class SpecificationEditComponent implements OnInit {
 
           columnNumber+=5;
 
-          product.push(26);
+          product.push(_itm.sourcingPrice? _itm.sourcingPrice: 0);
           columnNumber+=1;
           product.push(_itm.costPrice);
           let sourcingPrice = (Math.floor((columnNumber / (tabColumn.length - 1)) - 1) <= 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)]) + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
@@ -318,21 +318,22 @@ export class SpecificationEditComponent implements OnInit {
           product.push(item.isBattery?'Y':'N');
           let isBattery = Math.floor((columnNumber / (tabColumn.length - 1)) - 1) < 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)] + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
           columnNumber+=1;
+          product.push(item.shipping.id);
           product.push(item.shipping.shippingName);
           product.push(item.shipping.shippingTimeMin);
           product.push(item.shipping.shippingTimeMax);
-          columnNumber+=3;
+          columnNumber+=4;
           product.push({
             t: 'n',
             v: item.shipping.priceItem,
-            f: 'IF(' + isBattery + (i + 2) + '="N",IF(' + shippingWeight + (i + 2) + '>' + length + (i + 2) + '*' + width + (i + 2) + '*' + height + (i + 2) + '/6000,' + shippingWeight + (i + 2) + ',' + length + (i + 2) + '*' + width + (i + 2) + '*' + height + (i + 2) + '/6000)*450+60,IF(' + shippingWeight + (i + 2) + '>' + length + (i + 2) + '*' + width + i + '*' + height + (i + 2) + '/6000,' + shippingWeight + (i + 2) + ',' + length + (i + 2) + '*' + width + (i + 2) + '*' + height + (i + 2) + '/6000)*500+60)'
+            f: 'IF(' + isBattery + (indexNumber + 1) + '="N",IF(' + shippingWeight + (indexNumber + 1) + '>' + length + (indexNumber + 1) + '*' + width + (indexNumber + 1) + '*' + height + (indexNumber + 1) + '/6000,' + shippingWeight + (indexNumber + 1) + ',' + length + (indexNumber + 1) + '*' + width + (indexNumber + 1) + '*' + height + (indexNumber + 1) + '/6000)*450+60,IF(' + shippingWeight + (indexNumber + 1) + '>' + length + (indexNumber + 1) + '*' + width + (indexNumber + 1) + '*' + height + (indexNumber + 1) + '/6000,' + shippingWeight + (indexNumber + 1) + ',' + length + (indexNumber + 1) + '*' + width + (indexNumber + 1) + '*' + height + (indexNumber + 1) + '/6000)*500+60)'
           });
           let shippingCost = Math.floor((columnNumber / (tabColumn.length - 1)) - 1) < 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)] + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
 
           product[costNumber] = {
             t: 'n',
             v: _itm.costPrice,
-            f: '' + sourcingPrice + (i + 2) + '*1.2+' + shippingCost + (i + 2)
+            f: '' + sourcingPrice + (indexNumber + 1) + '*1.2+' + shippingCost + (indexNumber + 1)
           };
 
           product.push(item.originCountry);
@@ -346,31 +347,31 @@ export class SpecificationEditComponent implements OnInit {
           excel.push(product);
         }
 
-        for(let itm of this.promoteAll) {
-          let template = [];
-          template.push(itm.name);
+      }
 
-          const attrValues: any = itm.specificationValues ? itm.specificationValues.split(',') : [];
+      for(let itm of this.promoteAll) {
+        let template = [];
+        template.push(itm.name);
 
-          for(let em of attrValues) {
-            template.push(em);
-          }
-          excel1.push(template);
+        const attrValues: any = itm.specificationValues ? itm.specificationValues.split(',') : [];
 
+        for(let em of attrValues) {
+          template.push(em);
         }
-
-        const ws: any = utils.json_to_sheet(excel, {skipHeader: true});
-        const ws1: any = utils.json_to_sheet(excel1, {skipHeader: true});
-        wb.SheetNames.push(ws_name);
-        wb.SheetNames.push(ws_name1);
-        wb.Sheets[ws_name] = ws;
-        wb.Sheets[ws_name1] = ws1;
-
-        const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
-
-        saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `${this.lastCategoryName + '-' + new Date().getTime()}.xlsx`);
+        excel1.push(template);
 
       }
+      const ws: any = utils.json_to_sheet(excel, {skipHeader: true});
+      const ws1: any = utils.json_to_sheet(excel1, {skipHeader: true});
+      wb.SheetNames.push(ws_name);
+      wb.SheetNames.push(ws_name1);
+      wb.Sheets[ws_name] = ws;
+      wb.Sheets[ws_name1] = ws1;
+
+      const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+      saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `${this.lastCategoryName + '-' + new Date().getTime()}.xlsx`);
+
     });
   }
 
