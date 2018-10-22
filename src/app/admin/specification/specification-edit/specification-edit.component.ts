@@ -9,6 +9,7 @@ import {MatDialog} from '@angular/material';
 import { utils, write, WorkBook } from 'xlsx';
 
 import { saveAs } from 'file-saver';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-specification-edit',
@@ -24,15 +25,21 @@ export class SpecificationEditComponent implements OnInit {
   attributeList: any = [];
   categoryId: any;
   searchKey: any = '';
+  searchForm: FormGroup;
 
   constructor(
     private adminService: SpecificationService,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private fb: FormBuilder
   ) {
     this.getAttributeList();
     this.getProductDetail();
     this.categoryId = this.activatedRoute.snapshot.params['id'];
+
+    this.searchForm = this.fb.group({
+      searchKey: ['']
+    });
   }
 
   ngOnInit(): void {
