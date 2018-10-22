@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { MembershipMainComponent } from './membership-main/membership-main.component';
 import { MembershipCreateComponent } from './membership-create/membership-create.component';
 import { MembershipEditComponent } from './membership-edit/membership-edit.component';
+import { MembershipDetailComponent } from './membership-detail/membership-detail.component';
 import { ImageUploadAdditionalComponent } from './image-upload-additional/image-upload-additional.component';
 import { MembershipTitleComponent } from './membership-title/membership-title.component';
 import { MembershipItemComponent } from './membership-item/membership-item.component';
@@ -25,6 +26,7 @@ import { MembershipService } from './membership.service';
     MembershipMainComponent,
     MembershipCreateComponent,
     MembershipEditComponent,
+    MembershipDetailComponent,
     ImageUploadAdditionalComponent,
     MembershipTitleComponent,
     MembershipItemComponent,
