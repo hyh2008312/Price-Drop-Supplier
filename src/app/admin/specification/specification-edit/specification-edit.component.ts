@@ -23,6 +23,7 @@ export class SpecificationEditComponent implements OnInit {
   lastCategoryName: any = '';
   attributeList: any = [];
   categoryId: any;
+  searchKey: any = '';
 
   constructor(
     private adminService: SpecificationService,
@@ -91,6 +92,9 @@ export class SpecificationEditComponent implements OnInit {
   }
 
   export(): void {
+    if(this.searchKey == '') {
+      return;
+    }
     const ws_name = 'Category-' + this.lastCategoryName + '-' + this.categoryId;
     const ws_name1 = 'Template-' + this.lastCategoryName;
     const wb: WorkBook = { SheetNames: [], Sheets: {} };
@@ -164,6 +168,7 @@ export class SpecificationEditComponent implements OnInit {
 
     this.adminService.getCategoryAttributeDetailList({
       categoryId: this.activatedRoute.snapshot.params['id'],
+      shopName: this.searchKey,
       page: 1,
       page_size: 100
     }).then((data) => {
@@ -327,10 +332,10 @@ export class SpecificationEditComponent implements OnInit {
           product.push(item.isBattery?'Y':'N');
           let isBattery = Math.floor((columnNumber / (tabColumn.length - 1)) - 1) < 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)] + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
           columnNumber+=1;
-          product.push(item.shipping.id);
-          product.push(item.shipping.shippingName);
-          product.push(item.shipping.shippingTimeMin);
-          product.push(item.shipping.shippingTimeMax);
+          product.push(item.shipping?item.shipping.id:'');
+          product.push(item.shipping?item.shipping.shippingName:'');
+          product.push(item.shipping?item.shipping.shippingTimeMin:'');
+          product.push(item.shipping?item.shipping.shippingTimeMax:'');
           columnNumber+=4;
           product.push({
             t: 'n',
@@ -347,7 +352,7 @@ export class SpecificationEditComponent implements OnInit {
 
           product.push(item.originCountry.code);
           product.push(item.supplierId);
-          product.push(item.supplierName);
+          product.push(item.shopName);
           product.push(item.purchaseLink);
           product.push(item.processingTime);
           product.push(item.minimumQuantity);
@@ -391,5 +396,9 @@ export class SpecificationEditComponent implements OnInit {
       view[i] = s.charCodeAt(i) & 0xFF;
     }
     return buf;
+  }
+
+  clearSearchKey() {
+    this.searchKey = '';
   }
 }

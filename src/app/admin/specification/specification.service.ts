@@ -426,7 +426,7 @@ export class SpecificationService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}/product/customer/detail/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}product/customer/detail/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()

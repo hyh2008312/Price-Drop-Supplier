@@ -106,7 +106,7 @@ export class AddUploadDialogComponent implements OnInit {
             excelObject[item[1]].length = item[item.length - 16] || '';
             excelObject[item[1]].height = item[item.length - 14] || '';
             excelObject[item[1]].weight = item[item.length - 18] || '';
-            excelObject[item[1]].supplierName = item[item.length - 5] || '';
+            excelObject[item[1]].shopName = item[item.length - 5] || '';
             excelObject[item[1]].supplierId = item[item.length - 6] || '';
             excelObject[item[1]].purchaseLink = item[item.length - 4] || '';
             excelObject[item[1]].isBattery = item[item.length - 13] == 'N' ? false: true;

@@ -5,6 +5,18 @@
       <span class="md-dark-secondary">&nbsp;>&nbsp;</span>
       <span class="xb-bold">{{categoryName}}</span>
       <div fxFlex fxLayout="row" fxLayoutAlign="end center">
+        <div class="md-margin-right-2">
+          <form class="sc-product__search" [formGroup]="searchForm"
+                fxLayout="row" fxLayoutAlign="start center" >
+            <i class="material-icons">search</i>
+            <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                   placeholder="Search"/>
+            <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                 *ngIf="searchKey != ''" (click)="clearSearchKey()">
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </div>
         <button mat-raised-button color="primary" (click)="export()">
           Export Template
         </button>
