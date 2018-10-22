@@ -22,6 +22,7 @@ export class SpecificationEditComponent implements OnInit {
   categoryName: any = '';
   lastCategoryName: any = '';
   attributeList: any = [];
+  categoryId: any;
 
   constructor(
     private adminService: SpecificationService,
@@ -30,6 +31,7 @@ export class SpecificationEditComponent implements OnInit {
   ) {
     this.getAttributeList();
     this.getProductDetail();
+    this.categoryId = this.activatedRoute.snapshot.params['id'];
   }
 
   ngOnInit(): void {
@@ -89,7 +91,7 @@ export class SpecificationEditComponent implements OnInit {
   }
 
   export(): void {
-    const ws_name = 'Category-' + this.lastCategoryName;
+    const ws_name = 'Category-' + this.lastCategoryName + '-' + this.categoryId;
     const ws_name1 = 'Template-' + this.lastCategoryName;
     const wb: WorkBook = { SheetNames: [], Sheets: {} };
 
@@ -172,7 +174,7 @@ export class SpecificationEditComponent implements OnInit {
           let costNumber = 0;
           const _itm = item.variants[j];
           let product: any = [];
-          let indexNumber = i + j + 1;
+          let indexNumber = i * item.variants.length + j + 1;
           product.push(indexNumber);
           product.push(item.id);
           product.push(item.spu);
@@ -185,22 +187,22 @@ export class SpecificationEditComponent implements OnInit {
 
           switch (attr.length) {
             case 0:
-              product.push(null);
-              product.push(null);
-              product.push(null);
-              product.push(null);
+              product.push('');
+              product.push('');
+              product.push('');
+              product.push('');
               columnNumber+=4;
               break;
             case 1:
               if(_itm.attributeValues[0].name == 'Size') {
                 product.push(_itm.attributeValues[0].name);
                 product.push(_itm.attributeValues[0].value);
-                product.push(null);
-                product.push(null);
+                product.push('');
+                product.push('');
                 columnNumber+=4;
               } else {
-                product.push(null);
-                product.push(null);
+                product.push('');
+                product.push('');
                 product.push(_itm.attributeValues[0].name);
                 product.push(_itm.attributeValues[0].value);
                 columnNumber+=4;
@@ -214,17 +216,17 @@ export class SpecificationEditComponent implements OnInit {
               columnNumber+=4;
               break;
             default:
-              product.push(null);
-              product.push(null);
-              product.push(null);
-              product.push(null);
+              product.push('');
+              product.push('');
+              product.push('');
+              product.push('');
               columnNumber+=4;
               break;
           }
 
           product.push(_itm.stock);
           product.push(item.categories[0].fullName);
-          product.push(null);
+          product.push('');
           product.push(item.chineseTitle);
 
           if(item.title) {
@@ -274,12 +276,19 @@ export class SpecificationEditComponent implements OnInit {
                 isInTemplate = true;
                 if(itm.specificationCount > 1) {
                   const arr = specification.content.split(',');
-                  for(let f = 0; f < arr.length; f++) {
-                    product.push(arr[f]);
+                  if(itm.specificationCount >= arr.length) {
+                    for(let f = 0; f < arr.length; f++) {
+                      product.push(arr[f]);
+                    }
+                    for(let k = 0; k < itm.specificationCount - arr.length; k++) {
+                      product.push('');
+                    }
+                  } else {
+                    for(let k = 0; k < itm.specificationCount; k++) {
+                      product.push(arr[k]);
+                    }
                   }
-                  for(let k = 0; k < itm.specificationCount - arr.length; k++) {
-                    product.push(null);
-                  }
+
                   columnNumber+=itm.specificationCount;
                 } else {
                   product.push(specification.content);
@@ -290,11 +299,11 @@ export class SpecificationEditComponent implements OnInit {
             if(!isInTemplate) {
               if(itm.specificationCount > 1) {
                 for(let m = 0; m < itm.specificationCount; m++) {
-                  product.push(null);
+                  product.push('');
                 }
                 columnNumber+=itm.specificationCount;
               } else {
-                product.push(null);
+                product.push('');
                 columnNumber+=1;
               }
             }
@@ -342,7 +351,7 @@ export class SpecificationEditComponent implements OnInit {
           product.push(item.purchaseLink);
           product.push(item.processingTime);
           product.push(item.minimumQuantity);
-          product.push(item.supplierLocation);
+          product.push(item.supplierLocation?item.supplierLocation: '');
 
           excel.push(product);
         }

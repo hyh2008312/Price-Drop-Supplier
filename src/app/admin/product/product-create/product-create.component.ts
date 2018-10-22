@@ -398,6 +398,7 @@ export class ProductCreateComponent implements OnInit {
             sku: ['', Validators.required],
             stock: [50000, Validators.required],
             saleUnitPrice: [1, Validators.required],
+            sourcingPrice: [1, Validators.required],
             lowestPrice: [0, Validators.required],
             unitPrice: [1, Validators.required],
             costPrice: [1]
@@ -411,6 +412,7 @@ export class ProductCreateComponent implements OnInit {
           sku: ['', Validators.required],
           stock: [50000, Validators.required],
           saleUnitPrice: [1, Validators.required],
+          sourcingPrice: [1, Validators.required],
           lowestPrice: [0, Validators.required],
           unitPrice: [1, Validators.required],
           costPrice: [1]
@@ -425,6 +427,7 @@ export class ProductCreateComponent implements OnInit {
         sku: ['', Validators.required],
         stock: [50000, Validators.required],
         saleUnitPrice: [1, Validators.required],
+        sourcingPrice: [1, Validators.required],
         lowestPrice: [0, Validators.required],
         unitPrice: [1, Validators.required],
         costPrice: [1]
@@ -495,6 +498,7 @@ export class ProductCreateComponent implements OnInit {
         });
       }
     }
+    this.specification.controls = [];
   }
 
   subCategoryChange($event) {
@@ -683,8 +687,6 @@ export class ProductCreateComponent implements OnInit {
     if (index >= 0) {
       return;
     }
-
-    console.log(p.value.contentList)
 
     let arr: any = [...p.value.contentList];
     arr.push(event);

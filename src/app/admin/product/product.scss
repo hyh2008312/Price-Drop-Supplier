@@ -384,6 +384,7 @@
 
   padding: 40px 28px;
   max-width: 540px;
+  width: 540px;
   position: relative;
   background-color: $whiteColor;
   border-radius: 4px;
@@ -431,6 +432,20 @@
 
   &__icons{
     font-size: 24px;
+  }
+
+  &__hide{
+    display: none;
+  }
+
+  &__button{
+    min-width: 88px;
+    line-height: 40px;
+    border-radius: 4px;
+    padding: 0 16px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
   }
 
 }

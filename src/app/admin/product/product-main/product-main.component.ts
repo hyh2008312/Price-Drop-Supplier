@@ -7,6 +7,9 @@ import 'rxjs/add/operator/map';
 import { ProductService } from '../product.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 
+import { AddUploadDialogComponent } from '../add-upload-dialog/add-upload-dialog.component';
+import {MatDialog} from '@angular/material';
+
 @Component({
   selector: 'app-product-main',
   templateUrl: './product-main.component.html',
@@ -62,7 +65,8 @@ export class ProductMainComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {
 
     this.userService.currentUser.subscribe((data) => {
@@ -408,6 +412,21 @@ export class ProductMainComponent implements OnInit {
         }
         break;
     }
+  }
+
+  openUploadDialog() {
+    let dialogRef = this.dialog.open(AddUploadDialogComponent, {
+      data: {
+        isUpload: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+       if(dialogRef.componentInstance.data.isUpload == true) {
+         this.selectedIndex = 0;
+         this.changeProducts({index: this.selectedIndex}, this.isSuperuser);
+       }
+    });
   }
 
 }

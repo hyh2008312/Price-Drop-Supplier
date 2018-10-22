@@ -294,12 +294,26 @@
                       <input type="text" matInput placeholder="Sale Price" formControlName="unitPrice">
                     </mat-form-field>
                   </div>
+                  <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="md-margin-right-2 sc-product__create-title">Rs</div>
+                    <mat-form-field fxFlex>
+                      <input type="text" matInput placeholder="Sourcing Price" formControlName="sourcingPrice">
+                    </mat-form-field>
+                  </div>
                 </div>
                 <div fxLayout="row" fxLayoutAlign="space-between center">
                   <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                     <div *ngIf="p.get('unitPrice').invalid && (p.get('unitPrice').dirty ||
                     p.get('unitPrice').touched)" class="xb-input-error">
                       <div *ngIf="p.get('unitPrice').hasError('required')">
+                        This field is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
+                    <div *ngIf="p.get('sourcingPrice').invalid && (p.get('sourcingPrice').dirty ||
+                    p.get('sourcingPrice').touched)" class="xb-input-error">
+                      <div *ngIf="p.get('sourcingPrice').hasError('required')">
                         This field is required.
                       </div>
                     </div>
@@ -312,65 +326,76 @@
         <div class="md-margin-top-2" *ngIf="isProductListShow">
           <div formArrayName="variants" >
             <div fxLayout="row" fxLayoutAlign="start center">
-              <div class="sc-product__create-margin-right-3 sc-product__create-width-1 md-dark-secondary xb-bold"
+              <div class="sc-product__create-margin-right-1 sc-product__create-width-1 md-dark-secondary xb-bold"
                    fxFlex="none" fxLayout="row" fxLayoutAlign="start center">
                 Variants
               </div>
-              <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
-                   fxFlex="12" fxLayout="row" fxLayoutAlign="start center">
+              <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold"
+                   fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                 SKU
               </div>
-              <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
+              <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold"
                    fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                 Quantity
               </div>
-              <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
+              <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold"
                    fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                 MRP
               </div>
-              <div class="md-dark-secondary xb-bold"
+              <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold"
                    fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                 Cost Price
               </div>
-              <div class="md-dark-secondary xb-bold"
-                   fxFlex="13" fxLayout="row" fxLayoutAlign="start center">
+              <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold"
+                   fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                 Sale Price
               </div>
+              <div class="md-dark-secondary xb-bold"
+                   fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                Sourcing Price
+              </div>
+              <div fxFlex="10"></div>
             </div>
             <div fxLayout="column" fxLayoutAlign="start stretch" *ngFor="let p of product.controls; let i = index;">
               <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">
-                <div class="sc-product__create-margin-right-3 sc-product__create-width-1 sc-product__create-text-2" fxFlex="none">
+                <div class="sc-product__create-margin-right-1 sc-product__create-width-1 sc-product__create-text-2" fxFlex="none">
                   {{p.value.variant.value}}
                 </div>
-                <div class="sc-product__create-margin-right-3" fxFlex="12" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-1" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field class="sc-product__create-width-100">
                     <input type="text" matInput formControlName="sku">
                   </mat-form-field>
                 </div>
-                <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-1" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                   <mat-form-field class="sc-product__create-width-100">
                     <input type="text" matInput formControlName="stock">
                   </mat-form-field>
                 </div>
-                <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-1" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                   <div class="md-margin-right-2 sc-product__create-title">Rs</div>
-                  <mat-form-field class="sc-product__create-width-100">
+                  <mat-form-field fxFlex>
                     <input type="text" matInput formControlName="saleUnitPrice">
                   </mat-form-field>
                 </div>
-                <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-1" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                   <div class="md-margin-right-2 sc-product__create-title">Rs</div>
-                  <mat-form-field class="sc-product__create-width-100" fxFlex>
+                  <mat-form-field fxFlex>
                     <input type="text" matInput formControlName="costPrice">
                   </mat-form-field>
                 </div>
-                <div fxFlex="13" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-1" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                   <div class="md-margin-right-2 sc-product__create-title">Rs</div>
-                  <mat-form-field class="sc-product__create-width-100" fxFlex>
+                  <mat-form-field fxFlex>
                     <input type="text" matInput formControlName="unitPrice">
                   </mat-form-field>
                 </div>
-                <div class="md-margin-left-2">
+                <div fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                  <div class="md-margin-right-2 sc-product__create-title">Rs</div>
+                  <mat-form-field fxFlex>
+                    <input type="text" matInput formControlName="sourcingPrice">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="10">
                   <i class="material-icons md-dark-secondary xb-pointer" (click)="deleteVariantObject(i)">delete</i>
                 </div>
               </div>
@@ -396,6 +421,12 @@
                 <div *ngIf="p.get('unitPrice').invalid && (p.get('unitPrice').dirty ||
                     p.get('unitPrice').touched)" class="xb-input-error">
                   <div *ngIf="p.get('unitPrice').hasError('required')">
+                    This Sale Price field is required.
+                  </div>
+                </div>
+                <div *ngIf="p.get('sourcingPrice').invalid && (p.get('sourcingPrice').dirty ||
+                    p.get('sourcingPrice').touched)" class="xb-input-error">
+                  <div *ngIf="p.get('sourcingPrice').hasError('required')">
                     This Sale Price field is required.
                   </div>
                 </div>
