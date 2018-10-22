@@ -19,13 +19,31 @@ export class AddAttributeValueListDialogComponent implements OnInit {
 
   attributesValue: any = [];
 
+  get specificationValues() { return this.attributeForm.get('specificationValues') as FormArray; }
+
   constructor(
     public dialogRef: MatDialogRef<AddAttributeValueListDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private specificationService: SpecificationService
   ) {
+    this.attributeForm = this.fb.group({
+      specificationId: [this.data.id, Validators.required],
+      specificationValues: this.fb.array([])
+    });
 
+    this.addSpecificationValues();
+  }
+
+  deleteSpecificationValues(i) {
+    this.specificationValues.removeAt(i);
+  }
+
+  addSpecificationValues() {
+    this.specificationValues.push(this.fb.group({
+      context: ['', Validators.required],
+      chineseContext: ['', Validators.required]
+    }));
   }
 
   ngOnInit():void {
@@ -42,11 +60,9 @@ export class AddAttributeValueListDialogComponent implements OnInit {
     }
 
     let self = this;
-    this.specificationService.attributeCreate(this.attributeForm.value).then((data) => {
-      if(data.id) {
-        self.close();
-        self.data.isAddAttribute = true;
-      }
+    this.specificationService.attributeCreateList(this.attributeForm.value).then((data) => {
+      this.data.attributesValue = [...data];
+      this.specificationValues.controls = [];
     });
   }
 
