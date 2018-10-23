@@ -23,6 +23,7 @@ export class SpecificationEditComponent implements OnInit {
   categoryName: any = '';
   lastCategoryName: any = '';
   attributeList: any = [];
+  valueList: any = [];
   categoryId: any;
   searchKey: any = '';
   searchForm: FormGroup;
@@ -34,6 +35,7 @@ export class SpecificationEditComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.getAttributeList();
+    this.getValueList();
     this.getProductDetail();
     this.categoryId = this.activatedRoute.snapshot.params['id'];
 
@@ -66,6 +68,12 @@ export class SpecificationEditComponent implements OnInit {
   getAttributeList() {
     this.adminService.getAttributeList().then((data) => {
       this.attributeList = [...data];
+    });
+  }
+
+  getValueList() {
+    this.adminService.getAttributeValueList().then((data) => {
+      this.valueList = [...data];
     });
   }
 
@@ -380,6 +388,23 @@ export class SpecificationEditComponent implements OnInit {
           template.push(em);
         }
         excel1.push(template);
+
+        let template1 = [];
+        for(let im of this.attributeList) {
+          if(itm.name  == im.name) {
+            template1.push(im.chineseName);
+          }
+        }
+
+        for(let bm of attrValues) {
+          for(let cm of this.valueList) {
+            if(cm.name == bm) {
+              template1.push(cm.chineseName);
+            }
+          }
+        }
+
+        excel1.push(template1);
 
       }
       const ws: any = utils.json_to_sheet(excel, {skipHeader: true});
