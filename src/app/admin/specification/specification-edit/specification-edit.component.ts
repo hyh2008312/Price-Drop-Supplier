@@ -283,9 +283,14 @@ export class SpecificationEditComponent implements OnInit {
           let sourcingPrice = (Math.floor((columnNumber / (tabColumn.length - 1)) - 1) <= 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)]) + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
           columnNumber+=1;
           costNumber = columnNumber;
-          product.push(_itm.unitPrice);
+          let costPrice = (Math.floor((columnNumber / (tabColumn.length - 1)) - 1) <= 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)]) + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
+          product.push({
+            t: 'n',
+              v: _itm.saleUnitPrice,
+              f: costPrice + (indexNumber + 1) + '*2.5'
+          });
           columnNumber+=1;
-          product.push(_itm.saleUnitPrice);
+          product.push(_itm.unitPrice);
           columnNumber+=1;
 
           for(let itm of this.promoteAll) {
