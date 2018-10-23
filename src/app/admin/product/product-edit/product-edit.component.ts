@@ -46,6 +46,7 @@ export class ProductEditComponent implements OnInit {
   attributes:any[];
 
   productBasicForm: FormGroup;
+  productAttributeForm: FormGroup;
   productVariantForm: FormGroup;
   productLogisticForm: FormGroup;
 
@@ -63,6 +64,7 @@ export class ProductEditComponent implements OnInit {
   public editorImageId = 'quillImage';
 
   get product() { return this.productVariantForm.get('variants') as FormArray; }
+  get specification() { return this.productAttributeForm.get('specification') as FormArray; }
 
   isSuperUser: boolean = false;
 
@@ -102,11 +104,20 @@ export class ProductEditComponent implements OnInit {
       variants: this.fb.array([]),
     });
 
+    this.productAttributeForm = this.fb.group({
+      specification: this.fb.array([]),
+    });
+
     this.productLogisticForm = this.fb.group({
       length: [0, Validators.required],
       width: [0, Validators.required],
       height: [0, Validators.required],
       weight: [0, Validators.required],
+      shippingWeight: [0, Validators.required],
+      shopName: [''],
+      supplierLocation: [''],
+      processingTime: ['5-7'],
+      minimumQuantity: [1],
       customsDeclaredCharge: [0, Validators.required],
       originCountryId: [null, Validators.required],
       isPowder: [false, Validators.required],
@@ -191,79 +202,6 @@ export class ProductEditComponent implements OnInit {
     });
   }
 
-  changeCategory(id) {
-    // this.adminService.getProductVariantList({
-    //   pid: id
-    // }).then((data) => {
-    //   if(data.attributes && data.attributes.length > 0) {
-    //     let isChange = false;
-    //     for(let variant of data.attributes) {
-    //       if(variant.images && variant.images.length > 0) {
-    //         for(let item of variant.images) {
-    //           if(item.image) {
-    //             const image = item.image.split('http://p92s1j3q5.sabkt.gdipper.com/');
-    //             if (image[0] == '') {
-    //               isChange = true;
-    //               item.image = 'http://image.getpricedrop.com/' + image[1];
-    //             }
-    //           }
-    //         }
-    //       }
-    //     }
-    //     if(isChange) {
-    //       let params: any = {
-    //         id,
-    //         attributes: data.attributes
-    //       };
-    //       console.log(params);
-    //       this.adminService.changeAttributes(params).then((data) => {
-    //         console.log(data);
-    //       });
-    //     }
-    //   }
-    // });
-
-    // this.adminService.getProductBasic({
-    //   id
-    // }).then((data) => {
-    //   let product:any = data;
-    //
-    //   let images = product.images;
-    //
-    //   product.images = [];
-    //
-    //   let isChange = false;
-    //
-    //   for(let item of images) {
-    //     const _item = item.split('http://p92s1j3q5.sabkt.gdipper.com/');
-    //     let image: string = '';
-    //     if (_item[0] == '') {
-    //       image = 'http://image.getpricedrop.com/' + _item[1];
-    //       isChange = true;
-    //     } else {
-    //       image = _item[0];
-    //     }
-    //
-    //     product.images.push(image);
-    //   }
-    //
-    //   if(isChange == true) {
-    //     product.categoryId =  product.productCategories[0].categoryId;
-    //     product.mainCategoryId =  product.productCategories[0].parentId;
-    //     product.productCategoryId = product.productCategories[0].id;
-    //     this.adminService.changeProductBasic(product).then((data) => {
-    //       console.log(data);
-    //     });
-    //   }
-    // });
-  }
-
-  getChangeCategory() {
-    for(let i = 1; i <= 1271; i++) {
-      this.changeCategory(i);
-    }
-  }
-
   addPicture(event) {
     if(!event.target.files[0]) {
       return;
@@ -327,6 +265,7 @@ export class ProductEditComponent implements OnInit {
         });
       }
     }
+    this.specification.controls = [];
   }
 
   categoryChangeNew($event) {
@@ -346,6 +285,7 @@ export class ProductEditComponent implements OnInit {
           childId: null
         });
       }
+      this.specification.controls = [];
     }
   }
 
@@ -368,6 +308,7 @@ export class ProductEditComponent implements OnInit {
           childId: null
         });
       }
+      this.getAttributeDetail($event);
     }
   }
 
@@ -386,7 +327,12 @@ export class ProductEditComponent implements OnInit {
           childId: null
         });
       }
+      this.getAttributeDetail($event);
     }
+  }
+
+  thirdCategoryChange($event) {
+    this.getAttributeDetail($event);
   }
 
   deleteVariantObject(i) {
@@ -501,7 +447,8 @@ export class ProductEditComponent implements OnInit {
       saleUnitPrice: [variant.saleUnitPrice, Validators.required],
       lowestPrice: [variant.lowestPrice, Validators.required],
       unitPrice: [variant.unitPrice],
-      costPrice: [variant.costPrice]
+      costPrice: [variant.costPrice],
+      sourcingPrice:  [variant.sourcingPrice],
     }));
   }
 
@@ -557,5 +504,60 @@ export class ProductEditComponent implements OnInit {
     this.adminService.changeLogisticShipping(product).then((data) => {
       console.log(data)
     });
+  }
+
+  getAttributeDetail($event) {
+    this.adminService.getCategoryAttributeDetail({
+      id: $event
+    }).then((data) => {
+      this.specification.controls = [];
+      for(let item of data.specificationList) {
+        this.specification.push(this.fb.group({
+          name: [item.name, Validators.required],
+          specificationId: [item.specificationId, Validators.required],
+          content: ['', Validators.required],
+          sort: [item.sort, Validators.required],
+          specificationValues: [item.specificationValues?item.specificationValues.split(','):[]],
+          contentList: [[]]
+        }));
+      }
+
+    });
+  }
+
+  addAttribute(event, p): void {
+    const index = p.value.contentList.findIndex((e) => {
+      return e == event;
+    });
+
+    if (index >= 0) {
+      return;
+    }
+
+    let arr: any = [...p.value.contentList];
+    arr.push(event);
+
+    p.patchValue({
+      contentList: arr,
+      content: arr.join(',')
+    });
+  }
+
+  removeAttribute(params: any, p): void {
+    const index = p.value.contentList.findIndex((e) => {
+      return e == params;
+    });
+
+    if (index >= 0) {
+      let arr: any = [...p.value.contentList];
+      arr.splice(index, 1);
+
+      p.patchValue({
+        contentList: arr,
+        content: arr.join(',')
+      });
+    }
+
+
   }
 }
