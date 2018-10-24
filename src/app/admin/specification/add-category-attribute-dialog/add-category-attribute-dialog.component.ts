@@ -63,9 +63,9 @@ export class AddCategoryAttributeDialogComponent implements OnInit {
         let specificationValues = '';
         for(let item of this.attributeList) {
           if(item.name == data.name) {
-            for(let i = 0;i < item.specificationSpecificationValues; i++) {
+            for(let i = 0;i < item.specificationSpecificationValues.length; i++) {
               const em = item.specificationSpecificationValues[i];
-              if(i > 0) {
+              if(i == 0) {
                 specificationValues += em.specificationValueContent;
               } else {
                 specificationValues += ',' + em.specificationValueContent;
