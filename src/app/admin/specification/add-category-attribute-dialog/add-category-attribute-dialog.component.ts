@@ -60,8 +60,27 @@ export class AddCategoryAttributeDialogComponent implements OnInit {
     let self = this;
     this.specificationService.categoryAttributeCreate(this.attributeForm.value).then((data) => {
       if(data.id) {
-        self.close();
-        self.data.isAddAttribute = true;
+        let specificationValues = '';
+        for(let item of this.attributeList) {
+          if(item.name == data.name) {
+            for(let i = 0;i < item.specificationSpecificationValues; i++) {
+              const em = item.specificationSpecificationValues[i];
+              if(i > 0) {
+                specificationValues += em.specificationValueContent;
+              } else {
+                specificationValues += ',' + em.specificationValueContent;
+              }
+            }
+
+          }
+        }
+        this.specificationService.addCategoryAttributeValue({
+          id: data.id,
+          specificationValues
+        }).then((data) => {
+          self.close();
+          self.data.isAddAttribute = true;
+        });
       }
     });
   }
