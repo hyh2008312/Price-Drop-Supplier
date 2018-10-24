@@ -400,7 +400,6 @@ export class ProductCreateComponent implements OnInit {
             variant: [item],
             attributes: [newArr],
             mainImage: [image],
-            sku: ['', Validators.required],
             stock: [50000, Validators.required],
             saleUnitPrice: [1, Validators.required],
             sourcingPrice: [1, Validators.required],
@@ -414,7 +413,6 @@ export class ProductCreateComponent implements OnInit {
         this.product.push(this.fb.group({
           attributes: [[]],
           mainImage: [''],
-          sku: ['', Validators.required],
           stock: [50000, Validators.required],
           saleUnitPrice: [1, Validators.required],
           sourcingPrice: [1, Validators.required],
@@ -429,7 +427,6 @@ export class ProductCreateComponent implements OnInit {
       this.product.push(this.fb.group({
         attributes: [[]],
         mainImage: [''],
-        sku: ['', Validators.required],
         stock: [50000, Validators.required],
         saleUnitPrice: [1, Validators.required],
         sourcingPrice: [1, Validators.required],

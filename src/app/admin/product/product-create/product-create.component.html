@@ -240,19 +240,6 @@
                 <div fxLayout="row" fxLayoutAlign="start center">
                   <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                     <mat-form-field fxFlex>
-                      <input type="text" matInput placeholder="SKU" formControlName="sku">
-                    </mat-form-field>
-                  </div>
-                </div>
-                <div *ngIf="p.get('sku').invalid && (p.get('sku').dirty ||
-                p.get('sku').touched)" class="xb-input-error">
-                  <div *ngIf="p.get('sku').hasError('required')">
-                    This field is required.
-                  </div>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="start center">
-                  <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
-                    <mat-form-field fxFlex>
                       <input type="text" matInput placeholder="Quantity" formControlName="stock">
                     </mat-form-field>
                   </div>
@@ -332,10 +319,6 @@
               </div>
               <div class="md-margin-right-2 md-dark-secondary xb-bold"
                    fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
-                SKU
-              </div>
-              <div class="md-margin-right-2 md-dark-secondary xb-bold"
-                   fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                 Quantity
               </div>
               <div class="md-margin-right-2 md-dark-secondary xb-bold"
@@ -404,12 +387,6 @@
                     p.get('stock').touched)" class="xb-input-error">
                   <div *ngIf="p.get('stock').hasError('required')">
                     The Quantity field is required.
-                  </div>
-                </div>
-                <div *ngIf="p.get('sku').invalid && (p.get('sku').dirty ||
-                    p.get('sku').touched)" class="xb-input-error">
-                  <div *ngIf="p.get('sku').hasError('required')">
-                    The SKU field is required.
                   </div>
                 </div>
                 <div *ngIf="p.get('saleUnitPrice').invalid && (p.get('saleUnitPrice').dirty ||

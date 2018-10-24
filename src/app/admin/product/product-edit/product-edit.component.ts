@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject, NgZone} from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterContentChecked, Inject, NgZone} from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators , FormArray } from '@angular/forms';
 import { Router, ActivatedRoute} from '@angular/router';
@@ -24,7 +24,7 @@ import 'rxjs/add/operator/toPromise';
   styleUrls: ['../product.scss']
 })
 
-export class ProductEditComponent implements OnInit {
+export class ProductEditComponent implements OnInit, AfterContentChecked {
 
   step: number = 0;
   status: any = false;
@@ -45,6 +45,8 @@ export class ProductEditComponent implements OnInit {
 
   attributes:any[];
 
+  attributesList: any = [];
+
   productBasicForm: FormGroup;
   productAttributeForm: FormGroup;
   productVariantForm: FormGroup;
@@ -64,11 +66,17 @@ export class ProductEditComponent implements OnInit {
   public editorImageId = 'quillImage';
 
   get product() { return this.productVariantForm.get('variants') as FormArray; }
-  get specification() { return this.productAttributeForm.get('specification') as FormArray; }
+  get specification() { return this.productAttributeForm.get('productSpecification') as FormArray; }
 
   isSuperUser: boolean = false;
 
   sub: any;
+
+  parentId: any;
+  grandParentId: any;
+  categoryId: any;
+
+  isFirstLoad: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -105,7 +113,7 @@ export class ProductEditComponent implements OnInit {
     });
 
     this.productAttributeForm = this.fb.group({
-      specification: this.fb.array([]),
+      productSpecification: this.fb.array([]),
     });
 
     this.productLogisticForm = this.fb.group({
@@ -127,6 +135,12 @@ export class ProductEditComponent implements OnInit {
 
     let id = this.activatedRoute.snapshot.params['id'];
 
+    this.adminService.getAttributeList({
+      id
+    }).then((data) => {
+      this.attributesList = [...data];
+    });
+
     this.adminService.getProductBasic({
       id
     }).then((data) => {
@@ -141,16 +155,19 @@ export class ProductEditComponent implements OnInit {
         purchaseLink: data.purchaseLink == null || data.perchaseLink == ''? ' ': data.purchaseLink
       });
 
-      this.adminService.getCategoryList().then((value) => {
-        this.categoryList = [...value];
-        this.categoryChangeNew(data.productCategories[0].grandParentId);
-        this.subCategoryChangeNew(data.productCategories[0].parentId);
-      });
+      this.parentId = data.productCategories[0].parentId;
+      this.grandParentId = data.productCategories[0].grandParentId;
+      this.categoryId = data.productCategories[0].categoryId;
 
       this.status = data.status;
 
       this.additionalList = [...data.images];
       this.additionalSrcs = [...data.images];
+    });
+
+    this.adminService.getCategoryList().then((value) => {
+      this.categoryList = [...value];
+
     });
 
     this.adminService.getProductVariantList({
@@ -180,10 +197,25 @@ export class ProductEditComponent implements OnInit {
         originCountryId: data.originCountry.id,
         isPowder: data.isPowder,
         isLiquid: data.isLiquid,
-        isBattery: data.isBattery
+        isBattery: data.isBattery,
+        shippingWeight: data.shippingWeight,
+        shopName: data.shopName,
+        supplierLocation: data.supplierLocation,
+        processingTime: data.processingTime,
+        minimumQuantity: data.minimumQuantity,
       });
     });
 
+  }
+
+  ngAfterContentChecked() {
+    if(this.grandParentId && this.parentId && this.categoryId && this.categoryList.length >0
+      && this.attributesList.length > 0 && !this.isFirstLoad) {
+      this.isFirstLoad = true;
+      this.categoryChangeNew(this.grandParentId);
+      this.subCategoryChangeNew(this.parentId);
+      this.thirdCategoryChange(this.categoryId);
+    }
   }
 
   ngOnDestroy() {
@@ -495,6 +527,17 @@ export class ProductEditComponent implements OnInit {
     });
   }
 
+  changeSpecification() {
+    if(this.productAttributeForm.invalid) {
+      return;
+    }
+    let product:any = this.productAttributeForm.value;
+    product.id = this.activatedRoute.snapshot.params["id"];
+    this.adminService.editAttributeList(product).then((data) => {
+      console.log(data);
+    });
+  }
+
   changeProductLogistic() {
     if(this.productLogisticForm.invalid) {
       return;
@@ -512,13 +555,22 @@ export class ProductEditComponent implements OnInit {
     }).then((data) => {
       this.specification.controls = [];
       for(let item of data.specificationList) {
+        let content = '';
+        let contentList: any = [];
+        for(let im of this.attributesList) {
+          if(im.name == item.name) {
+            content = im.content;
+            let arr = im.content.split(',');
+            contentList = [...arr];
+          }
+        }
         this.specification.push(this.fb.group({
           name: [item.name, Validators.required],
           specificationId: [item.specificationId, Validators.required],
-          content: ['', Validators.required],
+          content: [content, Validators.required],
           sort: [item.sort, Validators.required],
           specificationValues: [item.specificationValues?item.specificationValues.split(','):[]],
-          contentList: [[]]
+          contentList: [contentList]
         }));
       }
 

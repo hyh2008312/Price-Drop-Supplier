@@ -1,14 +1,14 @@
 <div class="container">
   <div class="md-margin-left-2 md-margin-top-4 sc-product__create-text">
     <span class="md-dark-secondary xb-pointer" (click)="openLeaveDialog()">PRODUCT</span>
-    <span class="md-dark-secondary"> > </span><span class="xb-bold">EDIT PRODUCT</span>
+    <span class="md-dark-secondary">&nbsp;>&nbsp;</span><span class="xb-bold">EDIT PRODUCT</span>
   </div>
   <div fxLayout="row" fxLayoutAlign="start start">
     <div class="md-margin-top-2 md-margin-right-2 sc-product__edit-tab" fxFlex="none">
       <div class="sc-product__edit-button xb-pointer" (click)="changeStep(0)"
         [ngClass]="{'active': step == 0}">Basic Information</div>
       <div class="sc-product__edit-button xb-pointer" (click)="changeStep(1)"
-           [ngClass]="{'active': step == 1}">Category & Attribute</div>
+        [ngClass]="{'active': step == 1}">Category & Attribute</div>
       <div class="sc-product__edit-button xb-pointer" (click)="changeStep(2)"
         [ngClass]="{'active': step == 2}">Inventory & Pricing</div>
       <div class="sc-product__edit-button xb-pointer" (click)="changeStep(3)"
@@ -127,7 +127,7 @@
           <div class="sc-product__create-title">
             Category Attributes
           </div>
-          <div class="md-margin-top-2" formArrayName="specification">
+          <div class="md-margin-top-2" formArrayName="productSpecification">
             <div *ngFor="let p of specification.controls; let i = index;">
               <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">
                 <div class="sc-product__create-margin-right-3 sc-product__create-text-2" fxFlex="20">
@@ -168,7 +168,7 @@
           </div>
         </div>
         <div class="sc-product__create-margin-top" fxLayout="row" fxLayoutAlign="center center">
-          <button mat-raised-button color="primary" type="button" (click)="changeProductBasic()">
+          <button mat-raised-button color="primary" type="button" (click)="changeSpecification()">
             SAVE CHANGES
           </button>
         </div>
