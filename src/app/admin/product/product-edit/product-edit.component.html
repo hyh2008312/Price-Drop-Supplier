@@ -220,7 +220,7 @@
                   Sale Price
                 </div>
                 <div class="md-dark-secondary xb-bold md-align-center"
-                     fxFlex="10">
+                     fxFlex="15">
                   Sourcing Price
                 </div>
                 <div class="sc-product__create-width-3" fxFlex="none" >
@@ -237,7 +237,7 @@
                                                   [(previewImgSrcs)]="p.value.mainImage"></app-product-image-upload-variant>
                   </div>
                   <div class="sc-product__create-margin-right-3" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
-                    <mat-form-field class="sc-product__create-width-100">
+                    <mat-form-field class="sc-product__create-width-100" fxFlex="">
                       <input class="md-align-center" type="text" matInput formControlName="sku">
                     </mat-form-field>
                   </div>
@@ -262,6 +262,12 @@
                     <div class="md-margin-right-1 sc-product__create-title">Rs</div>
                     <mat-form-field class="sc-product__create-width-100">
                       <input type="text" matInput formControlName="unitPrice">
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="md-margin-right-2 sc-product__create-title">Rs</div>
+                    <mat-form-field class="sc-product__create-width-100">
+                      <input class="md-align-center" type="text" matInput formControlName="sourcingPrice">
                     </mat-form-field>
                   </div>
                   <div class="sc-product__create-width-3" fxLayout="row" fxLayoutAlign="center center" fxFlex="none" (click)="editVariant(p)">
@@ -317,6 +323,10 @@
                     <div class="md-margin-right-2 sc-product__create-title">Rs</div>
                     {{p.value.unitPrice}}
                   </div>
+                  <div fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="md-margin-right-2 sc-product__create-title">Rs</div>
+                    {{p.value.sourcingPrice}}
+                  </div>
                   <div class="sc-product__create-width-3" fxLayout="row" fxLayoutAlign="start center" fxFlex="none">
                     <div class="md-margin-left-2">
                       <i class="material-icons md-dark-secondary xb-pointer" (click)="editVariant(p)">edit</i>
@@ -361,7 +371,7 @@
               <div fxLayout="column" fxLayoutAlign="start stretch" *ngFor="let p of product.controls; let i = index;">
                 <div class="md-margin-top-2" [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center" *ngIf="p.value.isEdit">
                   <div class="sc-product__create-margin-right-3"  fxFlex="25" fxLayout="row" fxLayoutAlign="start start">
-                    <mat-form-field class="sc-product__create-width-100">
+                    <mat-form-field class="sc-product__create-width-100" fxFlex>
                       <input class="md-align-center" type="text" matInput formControlName="sku">
                     </mat-form-field>
                   </div>

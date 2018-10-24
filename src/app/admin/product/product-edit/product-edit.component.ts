@@ -105,7 +105,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
       brandName: [''],
       description: ['Please add product details and images', Validators.required],
       productCategoryId: ['', Validators.required],
-      purchaseLink: [' ', Validators.required]
+      purchaseLink: [' ']
     });
 
     this.productVariantForm = this.fb.group({
@@ -157,7 +157,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
 
       this.parentId = data.productCategories[0].parentId;
       this.grandParentId = data.productCategories[0].grandParentId;
-      this.categoryId = data.productCategories[0].categoryId;
+      this.categoryId = data.productCategories[0].childId;
 
       this.status = data.status;
 
@@ -194,7 +194,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
         height: data.height,
         weight: data.weight,
         customsDeclaredCharge: data.customsDeclaredCharge,
-        originCountryId: data.originCountry.id,
+        originCountryId: data.originCountry?data.originCountry.id: null,
         isPowder: data.isPowder,
         isLiquid: data.isLiquid,
         isBattery: data.isBattery,
@@ -209,12 +209,14 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
   }
 
   ngAfterContentChecked() {
-    if(this.grandParentId && this.parentId && this.categoryId && this.categoryList.length >0
-      && this.attributesList.length > 0 && !this.isFirstLoad) {
+    if(this.grandParentId && this.parentId && this.categoryList.length >0
+      && !this.isFirstLoad) {
       this.isFirstLoad = true;
       this.categoryChangeNew(this.grandParentId);
       this.subCategoryChangeNew(this.parentId);
-      this.thirdCategoryChange(this.categoryId);
+      if(this.categoryId) {
+        this.thirdCategoryChange(this.categoryId);
+      }
     }
   }
 
@@ -517,6 +519,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
 
   changeProductBasic() {
     if(this.productBasicForm.invalid) {
+      console.log(this.productBasicForm.value)
       return;
     }
     let product = this.productBasicForm.value;
