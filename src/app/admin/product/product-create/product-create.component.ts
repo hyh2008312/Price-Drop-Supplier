@@ -538,7 +538,7 @@ export class ProductCreateComponent implements OnInit {
         this.specification.push(this.fb.group({
           name: [item.name, Validators.required],
           specificationId: [item.specificationId, Validators.required],
-          content: [''  ],
+          content: [''],
           sort: [item.sort, Validators.required],
           specificationValues: [item.specificationValues?item.specificationValues.split(','):[]],
           contentList: [[]]
