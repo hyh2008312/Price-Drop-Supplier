@@ -22,6 +22,7 @@ export class SpecificationMainComponent implements OnInit {
   category: any = [];
 
   categoryList: any = [];
+  subCategoryList: any = [];
 
   promoteAll: any;
 
@@ -96,6 +97,44 @@ export class SpecificationMainComponent implements OnInit {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
+  categoryChange($event) {
+    if(this.categoryList.length > 0) {
+      let index = this.categoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.categoryList[index] && this.categoryList[index].children) {
+        this.subCategoryList = [...this.categoryList[index].children];
+        if(this.subCategoryList[0].children && this.subCategoryList[0].children.length > 0) {
+          this.category = [];
+        } else {
+          this.category = [...this.subCategoryList];
+          this.subCategoryList = [];
+        }
+        console.log(this.category)
+      } else {
+        this.subCategoryList = [];
+        this.category = [...this.categoryList];
+      }
+    }
+  }
+
+  subCategoryChange($event) {
+    if(this.subCategoryList.length > 0) {
+      let index = this.subCategoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.subCategoryList[index] && this.subCategoryList[index].children) {
+        this.category = [...this.subCategoryList[index].children];
+      } else {
+        this.category = [...this.subCategoryList];
+      }
+    }
+  }
+
   changeProducts(event) {
     let page = 0;
     switch (event.index) {
@@ -123,7 +162,7 @@ export class SpecificationMainComponent implements OnInit {
         this.specificationService.getCategoryList().then((data) => {
           this.category = [];
           this.categoryList = [...data];
-          this.getResultCategory(data);
+          // this.getResultCategory(data);
         });
         break;
       default:

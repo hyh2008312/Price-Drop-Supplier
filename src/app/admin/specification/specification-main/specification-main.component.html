@@ -5,6 +5,28 @@
     <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
       <mat-tab label="Attribute Template by Category (分类属性模版)">
         <div class="md-margin-top-2">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center">
+              <mat-form-field fxFlex>
+                <mat-select name="category" placeholder="Select a Category"
+                            (valueChange)="categoryChange($event)">
+                  <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+                    {{ item.data.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+              <mat-form-field fxFlex>
+                <mat-select name="subcategory" placeholder="Select a Subcategory"
+                            (valueChange)="subCategoryChange($event)">
+                  <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                    {{ item.data.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
           <div class="sc-promote__promote-bg">
             <app-specification-title [status]="0" ></app-specification-title>
             <div class="md-margin-top-2"></div>
