@@ -129,15 +129,15 @@ export class AddUploadDialogComponent implements OnInit {
 
             if(item[6]) {
               variant.attributeValues.push({
-                name: item[6],
-                value: item[7],
+                name: item[6]?item[6]:'',
+                value: item[7]?item[7]:'',
                 attributeId: 1
               });
             }
             if(item[8]) {
               variant.attributeValues.push({
-                name: item[8],
-                value: item[9],
+                name: item[8]?item[8]:'',
+                value: item[9]? item[9]: '',
                 attributeId: 2
               });
             }
