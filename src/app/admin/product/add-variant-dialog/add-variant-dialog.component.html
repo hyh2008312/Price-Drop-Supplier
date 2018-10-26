@@ -46,19 +46,6 @@
       <div fxFlex="46" >
         <div fxLayout="row" fxLayoutAlign="start center" >
           <mat-form-field fxFlex>
-            <input type="text" matInput placeholder="SKU" formControlName="sku">
-          </mat-form-field>
-        </div>
-        <div *ngIf="variantForm.get('sku').invalid && (variantForm.get('sku').dirty ||
-                    variantForm.get('sku').touched)" class="xb-input-error">
-          <div *ngIf="variantForm.get('sku').hasError('required')">
-            This field is required.
-          </div>
-        </div>
-      </div>
-      <div fxFlex="46" >
-        <div fxLayout="row" fxLayoutAlign="start center" >
-          <mat-form-field fxFlex>
             <input type="text" matInput placeholder="Quantity" formControlName="stock">
           </mat-form-field>
         </div>
@@ -112,7 +99,7 @@
       <div fxFlex="46" >
         <div fxLayout="row" fxLayoutAlign="start center" >
           <mat-form-field fxFlex>
-            <input type="text" matInput placeholder="Lowest Price" formControlName="lowestPrice">
+            <input type="text" matInput placeholder="Sourcing Price" formControlName="sourcingPrice">
           </mat-form-field>
         </div>
       </div>

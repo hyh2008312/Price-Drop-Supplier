@@ -31,11 +31,11 @@ export class AddVariantDialogComponent implements OnInit {
   ) {
 
     this.variantForm = this.fb.group({
-      sku: ['', Validators.required],
-      saleUnitPrice: ['', Validators.required],
-      unitPrice: ['', Validators.required],
-      costPrice: ['', Validators.required],
-      lowestPrice: ['', Validators.required],
+      saleUnitPrice: [1, Validators.required],
+      unitPrice: [1, Validators.required],
+      costPrice: [1, Validators.required],
+      lowestPrice: [0, Validators.required],
+      sourcingPrice: [1],
       productId: [this.data.productId, Validators.required],
       stock: ['', Validators.required],
       attributes: this.fb.array([])
