@@ -90,7 +90,7 @@ export class AddGatiPostDialogComponent implements OnInit {
     }).then((data) => {
       if(data.id) {
         p.patchValue({
-          declaredValue: (data.lines[0].costPrice / 2 / 74).toFixed(2)
+          declaredValue: (data.lines[0].sourcingPrice / 2 / 74).toFixed(2)
         });
       }
     });
