@@ -117,6 +117,7 @@ export class AddUploadDialogComponent implements OnInit {
             }
 
             let variant: any = {
+              attributeValues: [],
               id: item[4],
               sku: item[5],
               unitPrice: item[18],
@@ -125,6 +126,22 @@ export class AddUploadDialogComponent implements OnInit {
               saleUnitPrice: item[17],
               sourcingPrice: item[15]
             };
+
+            if(item[6]) {
+              variant.attributeValues.push({
+                name: item[6],
+                value: item[7],
+                attributeId: 1
+              });
+            }
+            if(item[8]) {
+              variant.attributeValues.push({
+                name: item[8],
+                value: item[9],
+                attributeId: 2
+              });
+            }
+
             excelObject[item[1]].variants.push(variant);
 
             if(!excelObject[item[1]].productSpecification) {
