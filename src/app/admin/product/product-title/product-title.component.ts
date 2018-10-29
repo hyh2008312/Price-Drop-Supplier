@@ -1,4 +1,4 @@
-import { Input, Output, Component, OnInit} from '@angular/core';
+import {Input, Output, Component, OnInit, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-product-title',
@@ -9,6 +9,10 @@ import { Input, Output, Component, OnInit} from '@angular/core';
 export class ProductTitleComponent implements OnInit {
   @Input() status: number = 0;
 
+  @Output() checkedChange = new EventEmitter<any>();
+
+  @Input() checked: boolean = false;
+
   constructor(
   ) { }
 
@@ -16,6 +20,14 @@ export class ProductTitleComponent implements OnInit {
 
   }
 
+  changeChecked($event) {
 
+    this.checked = $event.checked;
+    this.checkedChange.emit({
+      change : this.checked,
+      status: this.status,
+      event: 'selected'
+    });
+  }
 
 }

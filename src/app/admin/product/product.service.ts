@@ -176,6 +176,25 @@ export class ProductService {
       });
   }
 
+  publishProducts(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/update/state/`;
+
+    return this.http.post(url, product, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   disapproveProduct(product:any): Promise<any> {
 
     let headers = new Headers({

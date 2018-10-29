@@ -39,6 +39,7 @@
       </div>
     </div>
   </form>
+  <div *ngIf="error" class="xb-input-error md-margin-top-2">{{error}}</div>
   <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
     <button mat-raised-button color="primary" (click)="create()">SAVE</button>
     <div class="md-margin-left-2">

@@ -211,4 +211,14 @@ export class ProductItemComponent implements OnInit {
     return price;
   }
 
+  changeChecked($event) {
+    this.product.isChecked = $event.checked;
+    this.productChange.emit({
+      index: this.index,
+      product : this.product,
+      status: this.status,
+      event: 'checked'
+    });
+  }
+
 }

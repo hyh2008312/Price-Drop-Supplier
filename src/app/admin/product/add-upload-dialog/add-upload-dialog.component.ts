@@ -82,7 +82,6 @@ export class AddUploadDialogComponent implements OnInit {
               }
               specIndex += itm.specificationCount;
             } else {
-              console.log(item[specIndex])
               if(item[specIndex] != itm.name) {
                 return this.error = 'Template is not the newest, please update you template!';
               }

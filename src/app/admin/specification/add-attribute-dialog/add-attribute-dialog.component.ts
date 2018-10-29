@@ -13,6 +13,7 @@ import { SpecificationService } from '../specification.service';
 export class AddAttributeDialogComponent implements OnInit {
 
   attributeForm : FormGroup;
+  error: any = false;
 
   constructor(
     public dialogRef: MatDialogRef<AddAttributeDialogComponent>,
@@ -45,6 +46,8 @@ export class AddAttributeDialogComponent implements OnInit {
       if(data.id) {
         self.close();
         self.data.isAddAttribute = true;
+      } else {
+        this.error = 'Duplicate Attribute!';
       }
     });
   }

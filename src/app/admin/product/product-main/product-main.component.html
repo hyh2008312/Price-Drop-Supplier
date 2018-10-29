@@ -76,6 +76,7 @@
       </mat-tab>
       <mat-tab label="Pending Approval">
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <button mat-raised-button color="primary" (click)="publishedWithList()">Publish Products</button>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >
@@ -100,7 +101,7 @@
           </div>
         </div>
         <div>
-          <app-product-title [status]="1" ></app-product-title>
+          <app-product-title [status]="1" [checked]="isPendingChecked" (checkedChange)="checkedChange($event)"></app-product-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <div class="sc-product__product-list" *ngFor="let item of productPendingApproval;let i = index;">

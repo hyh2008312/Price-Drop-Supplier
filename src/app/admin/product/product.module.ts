@@ -22,6 +22,7 @@ import { DeleteShippingDialogComponent } from './delete-shipping-dialog/delete-s
 import { EditShippingDialogComponent } from './edit-shipping-dialog/edit-shipping-dialog.component';
 import { AddShippingDialogComponent } from './add-shipping-dialog/add-shipping-dialog.component';
 import { AddUploadDialogComponent } from './add-upload-dialog/add-upload-dialog.component';
+import { ProductTipsComponent } from './product-tips/product-tips.component';
 
 import { ProductRoutingModule } from './product.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -53,7 +54,8 @@ import { ProductService } from './product.service';
     EditShippingDialogComponent,
     AddShippingDialogComponent,
     ProductDraftEditComponent,
-    AddUploadDialogComponent
+    AddUploadDialogComponent,
+    ProductTipsComponent
   ],
   entryComponents: [
     SaveProductDialogComponent,
@@ -63,7 +65,8 @@ import { ProductService } from './product.service';
     DeleteShippingDialogComponent,
     EditShippingDialogComponent,
     AddShippingDialogComponent,
-    AddUploadDialogComponent
+    AddUploadDialogComponent,
+    ProductTipsComponent
   ],
   providers: [
     ProductService

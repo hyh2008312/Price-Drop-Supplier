@@ -8,7 +8,8 @@ import { ProductService } from '../product.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 
 import { AddUploadDialogComponent } from '../add-upload-dialog/add-upload-dialog.component';
-import {MatDialog} from '@angular/material';
+import { ProductTipsComponent } from '../product-tips/product-tips.component';
+import { MatDialog, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-product-main',
@@ -44,6 +45,8 @@ export class ProductMainComponent implements OnInit {
   searchCategory = 'sku';
   searchList = ['sku','product'];
 
+  isPendingChecked: any = false;
+
   selectedIndex: number = 0;
   subscription: any;
 
@@ -66,7 +69,8 @@ export class ProductMainComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
 
     this.userService.currentUser.subscribe((data) => {
@@ -375,6 +379,9 @@ export class ProductMainComponent implements OnInit {
           case 'publish':
             this.productPendingApproval.splice(event.index,1);
             break;
+          case 'checked':
+            this.productPendingApproval[event.index] = event.product;
+            break;
         }
         break;
       case 2:
@@ -426,6 +433,42 @@ export class ProductMainComponent implements OnInit {
          this.selectedIndex = 0;
          this.changeProducts({index: this.selectedIndex}, this.isSuperuser);
        }
+    });
+  }
+
+  checkedChange($event) {
+    this.isPendingChecked = $event.change;
+    for(let item of this.productPendingApproval) {
+      item.isChecked = $event.change
+    }
+  }
+
+  publishedWithList() {
+    let product: any = [];
+    for(let item of this.productPendingApproval) {
+      if(item.isChecked) {
+        product.push(item.id);
+      }
+    }
+
+    if(product.length <= 0) {
+      return this.publishedTips('You should selected at least one product!');
+    }
+
+    this.adminService.publishProducts({
+      product
+    }).then(() => {
+      this.selectedIndex = 0;
+      this.isPendingChecked = false;
+      this.publishedTips('Publish Success!');
+    });
+  }
+
+  publishedTips(str: any) {
+    this.snackBar.openFromComponent(ProductTipsComponent, {
+      data: str,
+      duration: 4000,
+      verticalPosition: 'top'
     });
   }
 
