@@ -185,7 +185,7 @@ export class SpecificationEditComponent implements OnInit {
       categoryId: this.activatedRoute.snapshot.params['id'],
       shopName: this.searchKey,
       page: 1,
-      page_size: 100
+      page_size: 10000
     }).then((data) => {
       for(let i = 0; i < data.results.length; i++) {
         const item = data.results[i];
