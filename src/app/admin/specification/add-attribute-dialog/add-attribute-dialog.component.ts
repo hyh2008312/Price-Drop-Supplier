@@ -47,8 +47,10 @@ export class AddAttributeDialogComponent implements OnInit {
         self.close();
         self.data.isAddAttribute = true;
       } else {
-        this.error = 'Duplicate Attribute!';
+        self.error = 'Duplicate Attribute!';
       }
+    }).catch(() => {
+      self.error = 'Duplicate Attribute!';
     });
   }
 }
