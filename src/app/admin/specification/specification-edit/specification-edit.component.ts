@@ -248,32 +248,7 @@ export class SpecificationEditComponent implements OnInit {
           product.push(item.categories[0].fullName);
           product.push('');
           product.push(item.chineseTitle);
-
-          if(item.title) {
-            product.push(item.title);
-          } else {
-            let title = '';
-            for(let itm of this.promoteAll) {
-              if(itm.specificationCount > 1) {
-                for(let g = 0; g < item.productSpecification.length; g++) {
-                  const specification = item.productSpecification[g];
-                  const arr = specification.content.split(',');
-                  for(let f = 0; f < arr.length; f++) {
-                    title += arr[f];
-                  }
-                }
-
-              } else {
-                for(let g = 0; g < item.productSpecification.length; g++) {
-                  const specification = item.productSpecification[g];
-                  if(itm.name == specification.name) {
-                    title += specification.value;
-                  }
-                }
-              }
-            }
-            product.push(title);
-          }
+          product.push(item.title);
 
           columnNumber+=5;
 
