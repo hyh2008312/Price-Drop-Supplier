@@ -103,7 +103,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
       parentId: [null],
       childId: [null],
       brandName: [''],
-      description: ['Please add product details and images', Validators.required],
+      description: ['Please add product details and images'],
       productCategoryId: ['', Validators.required],
       purchaseLink: [' ']
     });

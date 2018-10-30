@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="md-margin-top-3 sc-promote__create-text" fxLayout="row" fxLayoutAlign="start center"
-         *ngIf="campaign.flashStatus == 'Scheduled'">
+         *ngIf="campaign.flashStatus == 'Scheduled' || campaign.flashStatus == 'Ongoing'">
       <div class="sc-promote__promote-text xb-bold">Add Product for This Campaign:</div>
       <div class="md-margin-left-3 sc__accent-dark">
         <button mat-raised-button color="primary" type="button" (click)="selectProduct()">
