@@ -23,7 +23,8 @@ export class IssueRefundDialogComponent implements OnInit {
     private orderService: OrderService
   ) {
     this.moneyForm = this.fb.group({
-      amount: ['', Validators.required]
+      amount: ['', Validators.required],
+      point: [true, Validators.required]
     });
     if(this.data.order) {
       this.totalRefund = this.data.order.paymentAmount;
@@ -47,7 +48,7 @@ export class IssueRefundDialogComponent implements OnInit {
       return;
     }
     let order = this.moneyForm.value;
-    order.id = this.data.order.id;
+    order.orderId = this.data.order.id;
     let self = this;
     self.orderService.refund(order).then((data) => {
       self.formErr = false;

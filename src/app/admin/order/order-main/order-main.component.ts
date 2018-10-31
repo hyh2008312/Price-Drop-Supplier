@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, Inject} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router,NavigationStart, ActivatedRoute} from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router, ActivatedRoute} from '@angular/router';
 import { MatDialog } from '@angular/material';
 
 import 'rxjs/add/operator/filter';
@@ -12,7 +12,7 @@ import { UserService } from  '../../../shared/services/user/user.service';
 import { utils, write, WorkBook } from 'xlsx';
 
 import { saveAs } from 'file-saver';
-import {AddGatiPostDialogComponent} from '../add-gati-post-dialog/add-gati-post-dialog.component';
+import { AddGatiPostDialogComponent } from '../add-gati-post-dialog/add-gati-post-dialog.component';
 
 @Component({
   selector: 'app-order-main',
@@ -56,6 +56,8 @@ export class OrderMainComponent implements OnInit {
   pageSize = 50;
   pageSizeOptions = [50];
 
+  isSuperuser: any = false;
+
   constructor(
     private orderService: OrderService,
     private userService: UserService,
@@ -73,6 +75,14 @@ export class OrderMainComponent implements OnInit {
     });
 
     this.searchForm.valueChanges.subscribe(data => this.onValueChanged(data));
+
+    this.userService.currentUser.subscribe((data) => {
+      if(data) {
+        if(data.isStaff && data.isSuperuser) {
+          this.isSuperuser = true
+        }
+      }
+    });
   }
 
   onValueChanged(data) {

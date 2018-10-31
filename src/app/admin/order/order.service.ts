@@ -304,7 +304,7 @@ export class OrderService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}payment/razorpay/${order.id}/refund/`;
+    const url = `${this.baseUrl.url}payment/supplier/paytm/refund/`;
 
     return this.http.post(url, order, options)
       .toPromise()
