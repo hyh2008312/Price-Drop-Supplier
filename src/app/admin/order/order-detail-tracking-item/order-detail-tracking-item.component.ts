@@ -1,8 +1,4 @@
-import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
-import { Router } from '@angular/router';
-
-import { AdminService } from '../../admin.service';
-import { UserService } from  '../../../shared/services/user/user.service';
+import { Input, Output, Component, OnInit, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-order-detail-tracking-item',
