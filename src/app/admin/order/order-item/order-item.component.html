@@ -21,7 +21,16 @@
           </div>
         </div>
         <div class="sc-order__product-margin-right" fxFlex="15"
-             fxLayout="column" fxLayoutAlign="center center">{{order.orderStatus}}</div>
+             fxLayout="column" fxLayoutAlign="center center" *ngIf="order.orderStatus != 'Canceled'">{{order.orderStatus}}</div>
+        <div class="sc-order__product-margin-right" fxFlex="15"
+             fxLayout="column" fxLayoutAlign="center center" *ngIf="order.orderStatus == 'Canceled' && order.cancelType == 'suppiler'">
+          Supplier {{order.orderStatus}}</div>
+        <div class="sc-order__product-margin-right" fxFlex="15"
+             fxLayout="column" fxLayoutAlign="center center" *ngIf="order.orderStatus == 'Canceled' && order.cancelType == 'customer'">
+          Customer {{order.orderStatus}}</div>
+        <div class="sc-order__product-margin-right" fxFlex="15"
+             fxLayout="column" fxLayoutAlign="center center" *ngIf="order.orderStatus == 'Canceled' && !order.cancelType">
+          System {{order.orderStatus}}</div>
         <div class="sc-order__product-margin-right" fxFlex="15"
              fxLayout="column" fxLayoutAlign="center center">{{order.orderType}}</div>
         <div fxFlex="15"
