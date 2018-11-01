@@ -61,7 +61,7 @@
     </div>
     <div fxFlex="none" *ngIf="order.orderStatus == 'Canceled'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center center">
-      <div class="sc-order__detail-color xb-bold">{{order.cancelType ? 'Customer' : 'Supplier'}} Canceled</div>
+      <div class="sc-order__detail-color xb-bold">{{order.cancelType == 'customer' ? 'Customer' : 'Supplier'}} Canceled</div>
     </div>
     <div fxFlex="none" *ngIf="order.orderStatus == 'Audit canceled'" class="sc-order__detail-width-3"
          fxLayout="column" fxLayoutAlign="center stretch">
