@@ -31,7 +31,7 @@
           <div *ngIf="order.orderType=='Normal'">{{cutAmount | currency: currency: true}}</div>
           <div *ngIf="order.orderType=='Flash'">{{cutAmount | currency: currency: true}}</div>
           <div class="md-margin-top-1">{{order.shippingExclTax | currency: currency: true}}</div>
-          <div class="md-margin-top-1">$0</div>
+          <div class="md-margin-top-1">{{0 | currency: currency: true}}</div>
           <div class="md-margin-top-1">{{order.paymentAmount  | currency: currency: true}}</div>
         </div>
       </div>
