@@ -18,7 +18,7 @@
           <div>₹</div>
           <div class="md-margin-left-2">
             <mat-form-field>
-              <input type="text" matInput placeholder="Refund Money" formControlName="amount">
+              <input type="text" matInput placeholder="Refund Money" formControlName="amount" (ngModelChange)="changeNumber($event)">
             </mat-form-field>
           </div>
         </div>

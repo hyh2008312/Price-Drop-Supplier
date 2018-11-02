@@ -35,6 +35,14 @@ export class IssueRefundDialogComponent implements OnInit {
     }
   }
 
+  changeNumber($event) {
+    if($event > this.totalRefund) {
+      this.moneyForm.patchValue({
+        amount: this.totalRefund
+      });
+    }
+  }
+
   ngOnInit():void {
 
   }

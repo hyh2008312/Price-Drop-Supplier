@@ -53,6 +53,9 @@ export class OrderDetailComponent implements OnInit {
       case 'audit':
         this.order = $event.order;
         break;
+      case 'refund':
+        this.order = $event.order;
+        break;
     }
   }
 

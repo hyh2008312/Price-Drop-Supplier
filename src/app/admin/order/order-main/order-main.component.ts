@@ -35,6 +35,8 @@ export class OrderMainComponent implements OnInit {
   orderCanceledIndex = 1;
   orderCompleted: any = false;
   orderCompletedIndex = 1;
+  orderRefund: any = false;
+  orderRefundIndex = 1;
 
   selectedIndex: number = 0;
   subscription: any;
@@ -177,8 +179,11 @@ export class OrderMainComponent implements OnInit {
         status = 'Completed';
         page = this.orderCompletedIndex;
         break;
-      default:
+      case 6:
+        status = 'Refunded';
+        page = this.orderCompletedIndex;
         break;
+      default:
     }
     let self = this;
     if(this.isSearchResult) {
@@ -211,6 +216,9 @@ export class OrderMainComponent implements OnInit {
           break;
         case 5:
           self.orderCompleted = data.results;
+          break;
+        case 6:
+          self.orderRefund = data.results;
           break;
       }
     });
@@ -254,6 +262,10 @@ export class OrderMainComponent implements OnInit {
             self.selectedIndex = 5;
             self.orderCompleted = [...data];
             break;
+          case 'Refunded':
+            self.selectedIndex = 6;
+            self.orderRefund = [...data];
+            break;
         }
       }
     });
@@ -281,6 +293,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 5:
         status = 'Completed';
+        break;
+      case 6:
+        status = 'Refunded';
         break;
     }
 
@@ -327,6 +342,9 @@ export class OrderMainComponent implements OnInit {
         case 5:
           self.orderCompleted = [...data];
           break;
+        case 6:
+          self.orderRefund = [...data];
+          break;
       }
     });
   }
@@ -362,6 +380,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 5:
         excel = [...this.orderCompleted];
+        break;
+      case 6:
+        excel = [...this.orderRefund];
         break;
     }
 
