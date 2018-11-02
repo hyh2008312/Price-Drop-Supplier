@@ -27,7 +27,7 @@ export class IssueRefundDialogComponent implements OnInit {
       point: [true, Validators.required]
     });
     if(this.data.order) {
-      this.totalRefund = this.data.order.paymentAmount;
+      this.totalRefund = this.data.order.paidAmount - this.data.order.refundAmount;
       this.moneyForm.patchValue({
         amount: this.totalRefund
       });
