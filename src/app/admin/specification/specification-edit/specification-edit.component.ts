@@ -189,12 +189,13 @@ export class SpecificationEditComponent implements OnInit {
     }).then((data) => {
       for(let i = 0; i < data.results.length; i++) {
         const item = data.results[i];
+        let indexNumber = 0;
         for(let j = 0; j < item.variants.length; j++) {
           let columnNumber = 0;
           let costNumber = 0;
           const _itm = item.variants[j];
           let product: any = [];
-          let indexNumber = i * item.variants.length + j + 1;
+          indexNumber++;
           product.push(indexNumber);
           product.push(item.id);
           product.push(item.spu);
@@ -254,11 +255,11 @@ export class SpecificationEditComponent implements OnInit {
 
           product.push(_itm.sourcingPrice? _itm.sourcingPrice: 0);
           columnNumber+=1;
+          let sourcingPrice = (Math.floor(columnNumber / tabColumn.length) - 1 < 0 ? '' : tabColumn[Math.floor(columnNumber / tabColumn.length) - 1]) + '' + tabColumn[columnNumber % tabColumn.length];
           product.push(_itm.costPrice);
-          let sourcingPrice = (Math.floor((columnNumber / (tabColumn.length - 1)) - 1) <= 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)]) + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
           columnNumber+=1;
+          let costPrice = (Math.floor(columnNumber / tabColumn.length) - 1 < 0 ? '' : tabColumn[Math.floor(columnNumber / tabColumn.length) - 1]) + '' + tabColumn[columnNumber % tabColumn.length];
           costNumber = columnNumber;
-          let costPrice = (Math.floor((columnNumber / (tabColumn.length - 1)) - 1) <= 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)]) + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
           product.push({
             t: 'n',
               v: _itm.saleUnitPrice,
@@ -310,23 +311,24 @@ export class SpecificationEditComponent implements OnInit {
           }
 
           product.push(item.weight);
-          let netWeight = Math.floor((columnNumber / (tabColumn.length - 1)) - 1) < 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)] + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
           columnNumber+=1;
+          let netWeight = (Math.floor(columnNumber / tabColumn.length) - 1 < 0 ? '' : tabColumn[Math.floor(columnNumber / tabColumn.length) - 1]) + '' + tabColumn[columnNumber % tabColumn.length];
           product.push(item.shippingWeight);
-          let shippingWeight = Math.floor((columnNumber / (tabColumn.length - 1)) - 1) < 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)] + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
           columnNumber+=1;
+          let shippingWeight = (Math.floor(columnNumber / tabColumn.length) - 1 < 0 ? '' : tabColumn[Math.floor(columnNumber / tabColumn.length) - 1])  + '' + tabColumn[columnNumber % tabColumn.length];
           product.push(item.length);
-          let length = Math.floor((columnNumber / (tabColumn.length - 1)) - 1) < 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)] + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
           columnNumber+=1;
+          let length = (Math.floor(columnNumber / tabColumn.length) - 1 < 0 ? '' : tabColumn[Math.floor(columnNumber / tabColumn.length) - 1])  + '' + tabColumn[columnNumber % tabColumn.length];
           product.push(item.width);
-          let width = Math.floor((columnNumber / (tabColumn.length - 1)) - 1) < 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)] + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
           columnNumber+=1;
+          let width = (Math.floor(columnNumber / tabColumn.length) - 1 < 0 ? '' : tabColumn[Math.floor(columnNumber / tabColumn.length) - 1])  + '' + tabColumn[columnNumber % tabColumn.length];
           product.push(item.height);
-          let height = Math.floor((columnNumber / (tabColumn.length - 1)) - 1) < 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)] + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
           columnNumber+=1;
+          let height = (Math.floor(columnNumber / tabColumn.length) - 1 < 0 ? '' : tabColumn[Math.floor(columnNumber / tabColumn.length) - 1])  + '' + tabColumn[columnNumber % tabColumn.length];
           product.push(item.isBattery?'Y':'N');
-          let isBattery = Math.floor((columnNumber / (tabColumn.length - 1)) - 1) < 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)] + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
           columnNumber+=1;
+          let isBattery = (Math.floor(columnNumber / tabColumn.length) - 1 < 0 ? '' : tabColumn[Math.floor(columnNumber / tabColumn.length) - 1])  + '' + tabColumn[columnNumber % tabColumn.length];
+
           product.push(item.shipping?item.shipping.id:'');
           product.push(item.shipping?item.shipping.shippingName:'');
           product.push(item.shipping?item.shipping.shippingTimeMin:'');
@@ -337,8 +339,8 @@ export class SpecificationEditComponent implements OnInit {
             v: item.shipping.priceItem,
             f: 'IF(' + isBattery + (indexNumber + 1) + '="N",IF(' + shippingWeight + (indexNumber + 1) + '>' + length + (indexNumber + 1) + '*' + width + (indexNumber + 1) + '*' + height + (indexNumber + 1) + '/6000,' + shippingWeight + (indexNumber + 1) + ',' + length + (indexNumber + 1) + '*' + width + (indexNumber + 1) + '*' + height + (indexNumber + 1) + '/6000)*450+60,IF(' + shippingWeight + (indexNumber + 1) + '>' + length + (indexNumber + 1) + '*' + width + (indexNumber + 1) + '*' + height + (indexNumber + 1) + '/6000,' + shippingWeight + (indexNumber + 1) + ',' + length + (indexNumber + 1) + '*' + width + (indexNumber + 1) + '*' + height + (indexNumber + 1) + '/6000)*500+60)'
           });
-          let shippingCost = Math.floor((columnNumber / (tabColumn.length - 1)) - 1) < 0 ? '' : tabColumn[Math.floor((columnNumber / (tabColumn.length - 1)) - 1)] + '' + tabColumn[columnNumber % (tabColumn.length - 1)];
-
+          columnNumber+=1;
+          let shippingCost = (Math.floor(columnNumber / tabColumn.length) - 1 < 0 ? '' : tabColumn[Math.floor(columnNumber / tabColumn.length) - 1])  + '' + tabColumn[columnNumber % tabColumn.length];
           product[costNumber] = {
             t: 'n',
             v: _itm.costPrice,
