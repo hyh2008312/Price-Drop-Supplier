@@ -98,7 +98,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
     });
 
     this.productBasicForm = this.fb.group({
-      title: ['', Validators.required],
+      title: [''],
       grandParentId: [null, Validators.required],
       parentId: [null],
       childId: [null],
