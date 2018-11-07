@@ -29,6 +29,9 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
   step: number = 0;
   status: any = false;
 
+  selectable = true;
+  removable = true;
+
   categoryList: any = [];
   subCategoryList: any;
   thirdCategoryList: any;
