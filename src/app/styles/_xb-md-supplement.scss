@@ -138,6 +138,7 @@ $aligns: left right center justify;
 
 .ql-editor, .ql-container{
   height: auto;
+  max-height: 600px;
   box-sizing: border-box;
   @include xb-xs-screen{
     font-size: 10px !important;
