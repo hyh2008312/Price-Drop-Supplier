@@ -7,7 +7,7 @@
     <a class="sc-product__color text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/{{order.id}}" target="_blank">View Details</a>
   </div>
   <div class="sc-order__product-item-1" fxLayout="row" fxLayoutAlign="start start">
-    <div fxLayout="column" fxFlex="75" fxLayoutAlign="start stretch">
+    <div fxLayout="column" fxFlex="70" fxLayoutAlign="start stretch">
       <div class="sc-order__product-item" fxLayout="row" fxLayoutAlign="start center">
         <div class="sc-order__product-width sc-order__product-margin-right" fxLayout="row" fxLayoutAlign="start stretch" fxFlex="none">
           <div class="sc-order__product-image" fxFlex="none">
@@ -37,12 +37,16 @@
              fxLayout="column" fxLayoutAlign="center center">{{order.lines[0].quantity}}</div>
       </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start start" fxFlex="25">
-      <div class="md-margin-right-2 sc-order__product-height-1 xb-bold" fxFlex="55"
+    <div fxLayout="row" fxLayoutAlign="start start" fxFlex="30">
+      <div class="md-margin-right-2 sc-order__product-height-1 xb-bold" fxFlex="35"
            fxLayout="column" fxLayoutAlign="center center">
         {{order.username}}
       </div>
-      <div class="sc-order__product-height-1 xb-bold" fxFlex="45"
+      <div class="sc-order__product-height-1 xb-bold" fxFlex="30"
+           fxLayout="column" fxLayoutAlign="center center">
+        {{ order.cod.exist ? 'Yes' : 'No' }}
+      </div>
+      <div class="sc-order__product-height-1 xb-bold" fxFlex="35"
            fxLayout="column" fxLayoutAlign="center center">
         {{ order.paymentAmount | currency: currency: true }}
       </div>

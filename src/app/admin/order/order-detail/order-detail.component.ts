@@ -32,6 +32,7 @@ export class OrderDetailComponent implements OnInit {
     this.orderService.getSupplyOrderDetail({
       id
     }).then((data) => {
+      console.log(data);
       this.order = data;
       if(data.shippingPrice) {
         this.shippingPrice = data.shippingPrice;

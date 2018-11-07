@@ -196,7 +196,7 @@ export class OrderMainComponent implements OnInit {
       page_size: this.pageSize,
       q: this.searchKey
     }).then((data) => {
-
+      console.log(data);
       self.length = data.count;
       switch (event.index) {
         case 0:
