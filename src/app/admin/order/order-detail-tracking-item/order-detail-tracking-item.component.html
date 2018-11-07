@@ -18,10 +18,10 @@
     </div>
     <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">
       <div class="md-dark-secondary sc-order__detail-tracking-left" fxFlex="none">
-        Cod
+        Cod Status
       </div>
       <div>
-        {{order.cod && order.cod.exist? 'Yes':'No'}}
+        {{order.paymentMode == 'cod' ? 'Cod' : 'None-Cod'}}
       </div>
     </div>
     <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start start">

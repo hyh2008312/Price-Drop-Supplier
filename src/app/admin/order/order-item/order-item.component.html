@@ -44,7 +44,7 @@
       </div>
       <div class="sc-order__product-height-1 xb-bold" fxFlex="30"
            fxLayout="column" fxLayoutAlign="center center">
-        {{ order.cod.exist ? 'Yes' : 'No' }}
+        {{order.paymentMode == 'cod' ? 'Cod' : 'None-Cod'}}
       </div>
       <div class="sc-order__product-height-1 xb-bold" fxFlex="35"
            fxLayout="column" fxLayoutAlign="center center">
