@@ -63,6 +63,9 @@
       <div class="sc__accent-dark" *ngIf="order.orderStatus == 'Paid'">
         <button mat-raised-button color="accent" (click)="editPaid()">Mark as Packing</button>
       </div>
+      <div class="sc__accent-dark" *ngIf="order.orderStatus == 'Audit canceled'">
+        <button mat-raised-button color="accent" (click)="approveCancel()">View Detail</button>
+      </div>
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">

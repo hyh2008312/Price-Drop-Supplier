@@ -2,7 +2,8 @@ import { Input, Output, Component, OnInit, EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { OrderService } from '../order.service';
-import { UserService } from  '../../../shared/services/user/user.service';
+import {ApproveCancelDialogComponent} from '../approve-cancel-dialog/approve-cancel-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-order-item',
@@ -21,8 +22,7 @@ export class OrderItemComponent implements OnInit {
 
   constructor(
     private adminService: OrderService,
-    private userService: UserService,
-    private router: Router
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -71,5 +71,27 @@ export class OrderItemComponent implements OnInit {
       console.log(data);
       this.order.orderStatus = 'Packing';
     })
+  }
+
+  approveCancel() {
+    let dialogRef = this.dialog.open(ApproveCancelDialogComponent, {
+      data: {
+        order: this.order,
+        isOrderCancel: false
+      }
+    });
+
+    let self = this;
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isOrderCancel == true) {
+        self.productChange.emit({
+          index: self.index,
+          status: self.status,
+          order: self.order,
+          event: 'audit'
+        });
+      }
+    });
   }
 }

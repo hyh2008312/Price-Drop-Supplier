@@ -196,7 +196,6 @@ export class OrderMainComponent implements OnInit {
       page_size: this.pageSize,
       q: this.searchKey
     }).then((data) => {
-      console.log(data);
       self.length = data.count;
       switch (event.index) {
         case 0:
@@ -354,7 +353,14 @@ export class OrderMainComponent implements OnInit {
   }
 
   productChange(event) {
-
+    switch(event.status) {
+      case 3:
+        switch(event.event) {
+          case 'audit':
+            this.orderAudit.splice(event.index,1);
+            break;
+        }
+    }
   }
 
   export(): void {
