@@ -112,7 +112,6 @@ export class SpecificationMainComponent implements OnInit {
           this.category = [...this.subCategoryList];
           this.subCategoryList = [];
         }
-        console.log(this.category)
       } else {
         this.subCategoryList = [];
         this.category = [...this.categoryList];

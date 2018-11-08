@@ -28,6 +28,10 @@ export class SpecificationEditComponent implements OnInit {
   searchKey: any = '';
   searchForm: FormGroup;
 
+  page: any = 1;
+  pageList: any = [1,2,3,4,5,6,7,8,9,10];
+  error: any = false;
+
   constructor(
     private adminService: SpecificationService,
     private activatedRoute: ActivatedRoute,
@@ -184,9 +188,11 @@ export class SpecificationEditComponent implements OnInit {
     this.adminService.getCategoryAttributeDetailList({
       categoryId: this.activatedRoute.snapshot.params['id'],
       shopName: this.searchKey,
-      page: 1,
+      page: this.page,
       page_size: 500
     }).then((data) => {
+      this.error = false;
+
       for(let i = 0; i < data.results.length; i++) {
         const item = data.results[i];
         let indexNumber = 0;
@@ -400,6 +406,9 @@ export class SpecificationEditComponent implements OnInit {
 
       saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `${this.lastCategoryName + '-' + new Date().getTime()}.xlsx`);
 
+    }).catch((err) => {
+      console.log(err)
+      this.error = err;
     });
   }
 

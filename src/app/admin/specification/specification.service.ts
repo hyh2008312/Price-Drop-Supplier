@@ -431,9 +431,25 @@ export class SpecificationService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch(this.handleError1);
+  }
+
+  private handleError1 (error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || body;
+      if(err.detail) {
+        errMsg = `${err.detail}`;
+      } else {
+        if(err.error) {
+          errMsg = "Sorry! Server is busy now!";
+        }
+      }
+    } else {
+      errMsg = error.msg ? error.msg : error.toString();
+    }
+    return Promise.reject(errMsg);
   }
 
   private handleError (error: Response | any, target?: any) {
