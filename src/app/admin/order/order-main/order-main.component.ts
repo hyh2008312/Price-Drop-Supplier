@@ -395,6 +395,7 @@ export class OrderMainComponent implements OnInit {
     for(let item of excel) {
       let orderItem: any = {};
       orderItem.orderNumber = item.number;
+      orderItem.codStatus = item.paymentMode == 'cod' ? 'Cod' : 'None-Cod';
       orderItem.mainImage = item.lines[0].mainImage;
       orderItem.variants = item.lines[0].attributes;
       orderItem.productTitle = item.lines[0].title;
