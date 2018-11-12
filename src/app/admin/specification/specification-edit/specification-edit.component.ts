@@ -197,6 +197,7 @@ export class SpecificationEditComponent implements OnInit {
       for(let i = 0; i < data.results.length; i++) {
         const item = data.results[i];
         let indexNumber = 0;
+        const num = (2.3 + Math.random() * (2.8 - 2.3)).toFixed(2);
         for(let j = 0; j < item.variants.length; j++) {
           let columnNumber = 0;
           let costNumber = 0;
@@ -267,7 +268,6 @@ export class SpecificationEditComponent implements OnInit {
           columnNumber+=1;
           let costPrice = (Math.floor(columnNumber / tabColumn.length) - 1 < 0 ? '' : tabColumn[Math.floor(columnNumber / tabColumn.length) - 1]) + '' + tabColumn[columnNumber % tabColumn.length];
           costNumber = columnNumber;
-          const num = (2.3 + Math.random() * (2.8 - 2.3)).toFixed(2);
           product.push({
             t: 'n',
               v: _itm.saleUnitPrice,
