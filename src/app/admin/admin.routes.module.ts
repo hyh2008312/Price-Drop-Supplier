@@ -48,6 +48,9 @@ const routes: Routes = [
         path: 'specification',
         loadChildren: './specification/specification.module#SpecificationModule'
       }, {
+        path: 'landing',
+        loadChildren: './landing/landing.module#LandingModule'
+      }, {
         path: '',
         redirectTo: 'product',
         pathMatch: 'full'

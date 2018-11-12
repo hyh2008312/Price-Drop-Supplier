@@ -112,6 +112,12 @@ export class TopNavigationComponent implements OnInit {
       text: '属性管理',
       router: './specification',
       isActive: false
+    },
+    {
+      id: 3,
+      text: '首页管理',
+      router: './landing',
+      isActive: false
     }
   ];
 
