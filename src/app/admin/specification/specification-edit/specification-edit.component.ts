@@ -194,9 +194,9 @@ export class SpecificationEditComponent implements OnInit {
     }).then((data) => {
       this.error = false;
 
+      let indexNumber = 0;
       for(let i = 0; i < data.results.length; i++) {
         const item = data.results[i];
-        let indexNumber = 0;
         const num = (2.3 + Math.random() * (2.8 - 2.3)).toFixed(2);
         for(let j = 0; j < item.variants.length; j++) {
           let columnNumber = 0;
