@@ -19,17 +19,42 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 
 export class ProductMainComponent implements OnInit {
 
+  categoryList: any = [];
+  subCategoryList: any = [];
+  thirdCategoryList: any = [];
+
+  sortList: any = [{
+    value: false,
+    text: 'New Arrivals'
+  }, {
+    value: 'price_low',
+    text: 'Price Low to High'
+  }, {
+    value: 'price_high',
+    text: 'Price High to Low'
+  }];
+
 
   productPublished: any = false;
   productPublishedIndex = 1;
+  catPublished: any = false;
+  sortPublished: any = false;
   productPendingApproval: any = false;
   productPendingApprovalIndex = 1;
+  catPending: any = false;
+  sortPending: any = false;
   productDisapproved: any = false;
   productDisapprovedIndex = 1;
+  catDisapproved: any = false;
+  sortDisapproved: any = false;
   productDraft: any = false;
   productDraftIndex = 1;
+  catDraft: any = false;
+  sortDraft: any = false;
   productUnpublished: any = false;
   productUnpublishedIndex = 1;
+  catUnpublished: any = false;
+  sortUnpublished: any = false;
   productSelected: any = false;
   productSelectedIndex = 1;
   productDrops: any = false;
@@ -127,6 +152,8 @@ export class ProductMainComponent implements OnInit {
         index: self.selectedIndex
       });
     });
+
+    this.getCategory();
   }
 
   ngOnDestroy() {
@@ -192,24 +219,34 @@ export class ProductMainComponent implements OnInit {
   changeProducts(event, superUser?:any) {
     let relationStatus = 'published';
     let page = this.productPublishedIndex;
+    let cat = this.catPublished;
+    let sort = this.sortPublished;
     if(superUser) {
       if(event.index < 5) {
         switch (event.index) {
           case 1:
             relationStatus = 'pending';
             page = this.productPendingApprovalIndex;
+            cat = this.catPending;
+            sort = this.sortPending;
             break;
           case 2:
             relationStatus = 'disapproved';
             page = this.productDisapprovedIndex;
+            cat = this.catDisapproved;
+            sort = this.sortDisapproved;
             break;
           case 3:
             relationStatus = 'unpublished';
             page = this.productUnpublishedIndex;
+            cat = this.catUnpublished;
+            sort = this.sortUnpublished;
             break;
           case 4:
             relationStatus = 'draft';
             page = this.productDraftIndex;
+            cat = this.catDraft;
+            sort = this.sortDraft;
             break;
           default:
             break;
@@ -224,10 +261,15 @@ export class ProductMainComponent implements OnInit {
           qt = null;
         }
 
+        cat = cat ? cat: null;
+        sort = sort ? sort: null;
+
         this.adminService.getProductList({
           status: relationStatus,
           page: page,
           page_size: this.pageSize,
+          cat,
+          sort,
           q,
           qt
         }).then((data) => {
@@ -292,14 +334,20 @@ export class ProductMainComponent implements OnInit {
           case 1:
             relationStatus = 'pending';
             page = this.productPendingApprovalIndex;
+            cat = this.catPending;
+            sort = this.sortPending;
             break;
           case 2:
             relationStatus = 'unpublished';
             page = this.productUnpublishedIndex;
+            cat = this.catUnpublished;
+            sort = this.sortUnpublished;
             break;
           case 3:
             relationStatus = 'draft';
             page = this.productDraftIndex;
+            cat = this.catDraft;
+            sort = this.sortDraft;
             break;
           default:
             break;
@@ -314,10 +362,15 @@ export class ProductMainComponent implements OnInit {
           qt = null;
         }
 
+        cat = cat ? cat: null;
+        sort = sort ? sort: null;
+
         this.adminService.getProductList({
           status: relationStatus,
           page: page,
           page_size: this.pageSize,
+          cat,
+          sort,
           q,
           qt
         }).then((data) => {
@@ -470,6 +523,203 @@ export class ProductMainComponent implements OnInit {
       duration: 4000,
       verticalPosition: 'top'
     });
+  }
+
+  categoryChange($event) {
+    if(this.categoryList.length > 0) {
+      let index = this.categoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.categoryList[index] && this.categoryList[index].children) {
+        this.subCategoryList = [...this.categoryList[index].children];
+      } else {
+        this.subCategoryList = [];
+      }
+      this.thirdCategoryList = [];
+    }
+    if(this.isSuperuser) {
+      switch (this.selectedIndex) {
+        case 0:
+          this.catPublished = $event;
+          break;
+        case 1:
+          this.catPending = $event;
+          break;
+        case 2:
+          this.catDisapproved = $event;
+          break;
+        case 3:
+          this.catUnpublished = $event;
+          break;
+        case 4:
+          this.catDraft = $event;
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (this.selectedIndex) {
+        case 0:
+          this.catPublished = $event;
+          break;
+        case 1:
+          this.catPending = $event;
+          break;
+        case 2:
+          this.catUnpublished = $event;
+          break;
+        case 3:
+          this.catDraft = $event;
+          break;
+      }
+    }
+    this.changeProducts({index: this.selectedIndex}, this.isSuperuser);
+  }
+
+  subCategoryChange($event) {
+    if(this.subCategoryList.length > 0) {
+      let index = this.subCategoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.subCategoryList[index] && this.subCategoryList[index].children) {
+        this.thirdCategoryList = [...this.subCategoryList[index].children];
+      } else {
+        this.thirdCategoryList = [];
+      }
+    }
+    if(this.isSuperuser) {
+      switch (this.selectedIndex) {
+        case 0:
+          this.catPublished = $event;
+          break;
+        case 1:
+          this.catPending = $event;
+          break;
+        case 2:
+          this.catDisapproved = $event;
+          break;
+        case 3:
+          this.catUnpublished = $event;
+          break;
+        case 4:
+          this.catDraft = $event;
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (this.selectedIndex) {
+        case 0:
+          this.catPublished = $event;
+          break;
+        case 1:
+          this.catPending = $event;
+          break;
+        case 2:
+          this.catUnpublished = $event;
+          break;
+        case 3:
+          this.catDraft = $event;
+          break;
+      }
+    }
+    this.changeProducts({index: this.selectedIndex}, this.isSuperuser);
+  }
+
+  thirdCategoryChange($event) {
+    if(this.isSuperuser) {
+      switch (this.selectedIndex) {
+        case 0:
+          this.catPublished = $event;
+          break;
+        case 1:
+          this.catPending = $event;
+          break;
+        case 2:
+          this.catDisapproved = $event;
+          break;
+        case 3:
+          this.catUnpublished = $event;
+          break;
+        case 4:
+          this.catDraft = $event;
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (this.selectedIndex) {
+        case 0:
+          this.catPublished = $event;
+          break;
+        case 1:
+          this.catPending = $event;
+          break;
+        case 2:
+          this.catUnpublished = $event;
+          break;
+        case 3:
+          this.catDraft = $event;
+          break;
+      }
+    }
+    this.changeProducts({index: this.selectedIndex}, this.isSuperuser);
+  }
+
+  getCategory() {
+    this.adminService.getCategoryList().then((data) => {
+      this.categoryList = [...data];
+      this.categoryList.unshift({
+        id: false,
+        data: {
+          name: 'All'
+        }
+      })
+    });
+  }
+
+  sortChange($event) {
+    if(this.isSuperuser) {
+      switch (this.selectedIndex) {
+        case 0:
+          this.sortPublished = $event;
+          break;
+        case 1:
+          this.sortPending = $event;
+          break;
+        case 2:
+          this.sortDisapproved = $event;
+          break;
+        case 3:
+          this.sortUnpublished = $event;
+          break;
+        case 4:
+          this.sortDraft = $event;
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (this.selectedIndex) {
+        case 0:
+          this.sortPublished = $event;
+          break;
+        case 1:
+          this.sortPending = $event;
+          break;
+        case 2:
+          this.sortUnpublished = $event;
+          break;
+        case 3:
+          this.sortDraft = $event;
+          break;
+      }
+    }
+    this.changeProducts({index: this.selectedIndex}, this.isSuperuser);
   }
 
 }

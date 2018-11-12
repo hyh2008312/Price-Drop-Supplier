@@ -22,9 +22,9 @@
           <div>Sort by</div>
           <div class="md-margin-left-2 unicorn-dark-theme">
             <mat-form-field class="sc-product__product-sort">
-              <mat-select [(ngModel)]="publishedSorted" name="sort">
-                <mat-option class="md-align-center" *ngFor="let item of publishedSortList" [value]="item">
-                  {{ item }}
+              <mat-select [ngModel]="sortPublished" name="sort" (valueChange)="sortChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                  {{ item.text }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -52,7 +52,39 @@
             </div>
           </div>
         </div>
-        <div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <mat-select name="category" placeholder="Select a Category"
+                          (valueChange)="categoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="subcategory" placeholder="Select a Subcategory"
+                          (valueChange)="subCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="thirdcategory" placeholder="Select a ThirdCategory"
+                          (valueChange)="thirdCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
           <app-product-title [status]="0" ></app-product-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
@@ -77,6 +109,16 @@
       <mat-tab label="Pending Approval">
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <button mat-raised-button color="primary" (click)="publishedWithList()">Publish Products</button>
+          <div class="md-margin-left-3">Sort by</div>
+          <div class="md-margin-left-2 unicorn-dark-theme">
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="sortPending" name="sort" (valueChange)="sortChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >
@@ -100,7 +142,39 @@
             </div>
           </div>
         </div>
-        <div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <mat-select name="category" placeholder="Select a Category"
+                          (valueChange)="categoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="subcategory" placeholder="Select a Subcategory"
+                          (valueChange)="subCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="thirdcategory" placeholder="Select a ThirdCategory"
+                          (valueChange)="thirdCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
           <app-product-title [status]="1" [checked]="isPendingChecked" (checkedChange)="checkedChange($event)"></app-product-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
@@ -124,6 +198,16 @@
       </mat-tab>
       <mat-tab label="Disapproved" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div>Sort by</div>
+          <div class="md-margin-left-2 unicorn-dark-theme">
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="sortDisapproved" name="sort" (valueChange)="sortChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >
@@ -147,7 +231,39 @@
             </div>
           </div>
         </div>
-        <div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <mat-select name="category" placeholder="Select a Category"
+                          (valueChange)="categoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="subcategory" placeholder="Select a Subcategory"
+                          (valueChange)="subCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="thirdcategory" placeholder="Select a ThirdCategory"
+                          (valueChange)="thirdCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
           <app-product-title [status]="2" ></app-product-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
@@ -174,9 +290,9 @@
           <div>Sort by </div>
           <div class="md-margin-left-2 unicorn-dark-theme">
             <mat-form-field class="sc-product__product-sort">
-              <mat-select [(ngModel)]="unpublishedSorted" name="sort">
-                <mat-option class="md-align-center" *ngFor="let item of unpublishedSortList" [value]="item">
-                  {{ item }}
+              <mat-select [ngModel]="sortUnpublished" name="sort" (valueChange)="sortChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                  {{ item.text }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -195,7 +311,39 @@
             </form>
           </div>
         </div>
-        <div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <mat-select name="category" placeholder="Select a Category"
+                          (valueChange)="categoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="subcategory" placeholder="Select a Subcategory"
+                          (valueChange)="subCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="thirdcategory" placeholder="Select a ThirdCategory"
+                          (valueChange)="thirdCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
           <app-product-title [status]="3" ></app-product-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
@@ -219,6 +367,16 @@
       </mat-tab>
       <mat-tab label="Drafts">
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div>Sort by </div>
+          <div class="md-margin-left-2 unicorn-dark-theme">
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="sortDraft" name="sort" (valueChange)="sortChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >
@@ -242,7 +400,39 @@
             </div>
           </div>
         </div>
-        <div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <mat-select name="category" placeholder="Select a Category"
+                          (valueChange)="categoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="subcategory" placeholder="Select a Subcategory"
+                          (valueChange)="subCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="thirdcategory" placeholder="Select a ThirdCategory"
+                          (valueChange)="thirdCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
           <app-product-title [status]="4" ></app-product-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
@@ -348,12 +538,12 @@
     <mat-tab-group color="primary" *ngIf="!isSuperuser" (selectedTabChange)="changeProducts($event, isSuperuser)"  [(selectedIndex)]="selectedIndex">
       <mat-tab label="Published" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
-          <div>Sort by</div>
+          <div>Sort by </div>
           <div class="md-margin-left-2 unicorn-dark-theme">
             <mat-form-field class="sc-product__product-sort">
-              <mat-select [(ngModel)]="publishedSorted" name="sort">
-                <mat-option class="md-align-center" *ngFor="let item of publishedSortList" [value]="item">
-                  {{ item }}
+              <mat-select [ngModel]="sortPublished" name="sort" (valueChange)="sortChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                  {{ item.text }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -381,7 +571,39 @@
             </div>
           </div>
         </div>
-        <div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <mat-select name="category" placeholder="Select a Category"
+                          (valueChange)="categoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="subcategory" placeholder="Select a Subcategory"
+                          (valueChange)="subCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="thirdcategory" placeholder="Select a ThirdCategory"
+                          (valueChange)="thirdCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
           <app-product-title [status]="0" ></app-product-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
@@ -405,6 +627,16 @@
       </mat-tab>
       <mat-tab label="Pending Approval">
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div>Sort by </div>
+          <div class="md-margin-left-2 unicorn-dark-theme">
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="sortPending" name="sort" (valueChange)="sortChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >
@@ -428,7 +660,39 @@
             </div>
           </div>
         </div>
-        <div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <mat-select name="category" placeholder="Select a Category"
+                          (valueChange)="categoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="subcategory" placeholder="Select a Subcategory"
+                          (valueChange)="subCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="thirdcategory" placeholder="Select a ThirdCategory"
+                          (valueChange)="thirdCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
           <app-product-title [status]="1" ></app-product-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
@@ -455,9 +719,9 @@
           <div>Sort by </div>
           <div class="md-margin-left-2 unicorn-dark-theme">
             <mat-form-field class="sc-product__product-sort">
-              <mat-select [(ngModel)]="unpublishedSorted" name="sort">
-                <mat-option class="md-align-center" *ngFor="let item of unpublishedSortList" [value]="item">
-                  {{ item }}
+              <mat-select [ngModel]="sortUnpublished" name="sort" (valueChange)="sortChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                  {{ item.text }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -476,7 +740,39 @@
             </form>
           </div>
         </div>
-        <div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <mat-select name="category" placeholder="Select a Category"
+                          (valueChange)="categoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="subcategory" placeholder="Select a Subcategory"
+                          (valueChange)="subCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="thirdcategory" placeholder="Select a ThirdCategory"
+                          (valueChange)="thirdCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
           <app-product-title [status]="3" ></app-product-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
@@ -500,6 +796,16 @@
       </mat-tab>
       <mat-tab label="Drafts">
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div>Sort by </div>
+          <div class="md-margin-left-2 unicorn-dark-theme">
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="sortDraft" name="sort" (valueChange)="sortChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >
@@ -523,7 +829,39 @@
             </div>
           </div>
         </div>
-        <div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <mat-select name="category" placeholder="Select a Category"
+                          (valueChange)="categoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="subcategory" placeholder="Select a Subcategory"
+                          (valueChange)="subCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="thirdcategory" placeholder="Select a ThirdCategory"
+                          (valueChange)="thirdCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="md-margin-top-1">
           <app-product-title [status]="4" ></app-product-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
