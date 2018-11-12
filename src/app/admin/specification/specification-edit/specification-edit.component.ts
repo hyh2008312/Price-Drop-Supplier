@@ -157,7 +157,8 @@ export class SpecificationEditComponent implements OnInit {
       "采购链接",
       "交货期",
       "最小起订量",
-      "供应商所在地"
+      "供应商所在地",
+      "随机数*"
     ];
 
     let tabColumn = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
@@ -266,10 +267,11 @@ export class SpecificationEditComponent implements OnInit {
           columnNumber+=1;
           let costPrice = (Math.floor(columnNumber / tabColumn.length) - 1 < 0 ? '' : tabColumn[Math.floor(columnNumber / tabColumn.length) - 1]) + '' + tabColumn[columnNumber % tabColumn.length];
           costNumber = columnNumber;
+          const num = (2.3 + Math.random() * (2.8 - 2.3)).toFixed(2);
           product.push({
             t: 'n',
               v: _itm.saleUnitPrice,
-              f: costPrice + (indexNumber + 1) + '*2.5'
+              f: costPrice + (indexNumber + 1) + '*' + num
           });
           columnNumber+=1;
           product.push(_itm.unitPrice);
@@ -285,14 +287,14 @@ export class SpecificationEditComponent implements OnInit {
                   const arr = specification.content.split(',');
                   if(itm.specificationCount >= arr.length) {
                     for(let f = 0; f < arr.length; f++) {
-                      product.push(arr[f]);
+                      product.push(arr[f]? arr[f]: '');
                     }
                     for(let k = 0; k < itm.specificationCount - arr.length; k++) {
                       product.push('');
                     }
                   } else {
                     for(let k = 0; k < itm.specificationCount; k++) {
-                      product.push(arr[k]);
+                      product.push(arr[k]? arr[k]: '');
                     }
                   }
 
