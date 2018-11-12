@@ -52,7 +52,8 @@ export class AddUploadDialogComponent implements OnInit {
       /* save data */
       this.newData = <any[][]>(utils.sheet_to_json(ws, {header: 1}));
 
-      const id = wsname.split('-')[2];
+      const nameList = wsname.split('-');
+      const id = nameList[nameList.length - 1];
       this.getProductDetail(id);
 
     };
