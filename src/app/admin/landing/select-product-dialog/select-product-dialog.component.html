@@ -9,7 +9,7 @@
             fxLayout="row" fxLayoutAlign="start center" >
         <i class="material-icons">search</i>
         <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-               placeholder="Search"
+               placeholder="Search by SPU"
                (keyup.enter)="getPromoteProduct()"/>
         <div class="sc-promotion-dialog__search-close" fxLayout="row" fxLayoutAlign="center center"
              *ngIf="searchKey != ''" (click)="clearSearchKey()">
@@ -19,6 +19,7 @@
     </div>
   </div>
   <div class="sc-promotion-dialog__bg">
+    <div class="xb-input-error" *ngIf="error">{{error}}</div>
     <app-promote-select-product-title></app-promote-select-product-title>
     <div *ngFor="let item of promotionProduct;let i = index;">
       <app-promote-select-product-item [promote]="item" [index]="i" [categoryId]="data.categoryId"

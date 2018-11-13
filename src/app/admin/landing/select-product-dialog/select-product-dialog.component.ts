@@ -18,6 +18,8 @@ export class SelectProductDialogComponent implements OnInit {
   isSearch: boolean = false;
   searchForm: FormGroup;
 
+  error: any = false;
+
   cat: any;
 
   promotionProduct: any;
@@ -64,15 +66,17 @@ export class SelectProductDialogComponent implements OnInit {
     let param: any = {};
     if(this.searchKey != '') {
       param = {
+        status: 'published',
         cat: this.cat,
         q: this.searchKey,
-        qt: 'product',
+        qt: 'spu',
         topicId: this.data.promotionId,
         page: this.page,
         page_size: this.pageSize
       };
     } else {
       param = {
+        status: 'published',
         cat: this.cat,
         topicId: this.data.promotionId,
         page: this.page,
@@ -99,8 +103,11 @@ export class SelectProductDialogComponent implements OnInit {
 
   promoteChanges(event) {
     if(event.event == 'changed') {
+      this.error = false;
       this.data.isEdit = true;
       this.promotionProduct.splice(event.index,1);
+    } else if(event.event == 'error') {
+      this.error = event.promote;
     }
   }
 }
