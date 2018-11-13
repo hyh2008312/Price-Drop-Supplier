@@ -4,16 +4,6 @@
   </div>
   <div class="sc-promotion-dialog__title">Select Product</div>
   <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
-    <div class="unicorn-dark-theme">
-      <mat-form-field class="sc-promotion-dialog__width">
-        <mat-select [ngModel]="cat" placeholder="Filter by category" name="Category"
-                    (ngModelChange)="categorySelect($event)">
-          <mat-option class="md-align-center" *ngFor="let item of data.categoryList" [value]="item.id">
-            {{ item.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
     <div class="md-margin-left-4" fxLayout="row" fxLayoutAlign="end center" fxFlex>
       <form class="sc-promotion-dialog__search" [formGroup]="searchForm"
             fxLayout="row" fxLayoutAlign="start center" >
@@ -31,7 +21,7 @@
   <div class="sc-promotion-dialog__bg">
     <app-promote-select-product-title></app-promote-select-product-title>
     <div *ngFor="let item of promotionProduct;let i = index;">
-      <app-promote-select-product-item [promote]="item" [index]="i" [promoteId]="data.promotionId"
+      <app-promote-select-product-item [promote]="item" [index]="i" [categoryId]="data.categoryId"
          (promoteChange)="promoteChanges($event)"></app-promote-select-product-item>
     </div>
     <div class="sc-promote__promote-none" fxLayout="row" fxLayoutAlign="center center"

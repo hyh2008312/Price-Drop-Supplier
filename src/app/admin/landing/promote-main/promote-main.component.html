@@ -4,8 +4,19 @@
   </div>
   <div>
     <div class="md-margin-top-3 sc-promote__create-text" fxLayout="row" fxLayoutAlign="start center">
-      <div class="sc-promote__promote-text xb-bold">Add Product for This Category:</div>
-      <div class="md-margin-left-3 sc__accent-dark">
+      <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <mat-select [ngModel]="categoryId" name="category" placeholder="Select a Category"
+                      (valueChange)="categoryChange($event)">
+            <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+              {{ item.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex></div>
+      <div class="sc-promote__promote-text xb-bold" *ngIf="categoryId">Add Product for This Category:</div>
+      <div class="md-margin-left-3 sc__accent-dark" *ngIf="categoryId">
         <button mat-raised-button color="primary" type="button" (click)="selectProduct()">
           Select
         </button>

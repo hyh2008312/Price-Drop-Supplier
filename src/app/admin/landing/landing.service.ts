@@ -41,7 +41,7 @@ export class LandingService {
     return array.join('&');
   }
 
-  promotionCreate(promotion:any): Promise<any> {
+  categoryProducts(): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -50,9 +50,9 @@ export class LandingService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/list/`;
+    const url = `${this.baseUrl.url}product/supplier/category/product/home/list/`;
 
-    return this.http.post(url, promotion, options)
+    return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
@@ -101,7 +101,7 @@ export class LandingService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/create/${promotion.id}/`;
+    const url = `${this.baseUrl.url}product/supplier/create/category/product/`;
 
     return this.http.post(url, promotion, options)
       .toPromise()
@@ -135,7 +135,7 @@ export class LandingService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/create/${params.id}/`;
+    const url = `${this.baseUrl.url}product/supplier/delete/category/product//${params.id}/`;
 
     return this.http.delete(url, options)
       .toPromise()
@@ -255,7 +255,7 @@ export class LandingService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/products/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}product/supplier/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -306,7 +306,7 @@ export class LandingService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/list/category/`;
+    const url = `${this.baseUrl.url}product/supplier/new/category/`;
 
     return this.http.get(url, options)
       .toPromise()

@@ -37,6 +37,8 @@ export class SelectProductDialogComponent implements OnInit {
       searchKey: ['']
     });
 
+    this.cat = this.data.categoryId;
+
     this.searchForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
     this.getPromoteProduct();

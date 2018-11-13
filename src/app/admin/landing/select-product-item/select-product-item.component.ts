@@ -12,10 +12,11 @@ export class SelectProductItemComponent implements OnInit {
 
   @Input() promote: any={};
   @Input() index: any = 0;
-  @Input() promoteId: any;
+  @Input() categoryId: any;
   @Output() promoteChange = new EventEmitter<any>();
 
-  currency: string = 'USD';
+  currency: string = 'INR';
+  error: any = false;
 
   constructor(
     private promoteService: LandingService
@@ -27,17 +28,25 @@ export class SelectProductItemComponent implements OnInit {
 
   selectPromotionProduct() {
     let params: any ={};
-    params.id = this.promoteId;
-    params.products = [this.promote.id];
+    params.productId = this.promote.id;
+    params.categoryId = this.categoryId;
 
     this.promoteService.addPromotionProduct(params).then(((data) => {
-      this.promote = data;
-      this.promoteChange.emit({
-        index: this.index,
-        promote : data,
-        event: 'changed'
-      });
-    }));
+      if(data && data.id) {
+        this.error = false;
+        this.promote = data;
+        this.promoteChange.emit({
+          index: this.index,
+          promote : data,
+          event: 'changed'
+        });
+      } else {
+        this.error = data.detail;
+      }
+
+    })).catch((data) => {
+      this.error = data.detail;
+    });
   }
 
   countOff (s, o) {
