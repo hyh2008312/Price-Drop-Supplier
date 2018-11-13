@@ -18,6 +18,10 @@ export class SelectProductDialogComponent implements OnInit {
   isSearch: boolean = false;
   searchForm: FormGroup;
 
+  categoryList: any = [];
+  subCategoryList: any = [];
+  thirdCategoryList: any = [];
+
   cat: any;
 
   promotionProduct: any;
@@ -25,10 +29,6 @@ export class SelectProductDialogComponent implements OnInit {
   length = 12;
   page = 1;
   pageSize = 6;
-
-  old: any = ['old', 'new'];
-
-  categoryItem: any = 'old';
 
   constructor(
     public dialogRef: MatDialogRef<SelectProductDialogComponent>,
@@ -40,6 +40,8 @@ export class SelectProductDialogComponent implements OnInit {
     this.searchForm = this.fb.group({
       searchKey: ['']
     });
+
+    this.categoryList = this.data.categoryList;
 
     this.searchForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
@@ -94,16 +96,50 @@ export class SelectProductDialogComponent implements OnInit {
     this.getPromoteProduct();
   }
 
-  categorySelect($event) {
-    this.cat = $event;
-
-    this.getPromoteProduct();
-  }
-
   promoteChanges(event) {
     if(event.event == 'changed') {
       this.data.isEdit = true;
       this.promotionProduct.splice(event.index,1);
     }
+  }
+
+  categoryChange($event) {
+    if(this.categoryList.length > 0) {
+      let index = this.categoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.categoryList[index] && this.categoryList[index].children) {
+        this.subCategoryList = [...this.categoryList[index].children];
+      } else {
+        this.subCategoryList = [];
+      }
+      this.thirdCategoryList = [];
+    }
+    this.cat = $event;
+    this.getPromoteProduct();
+  }
+
+  subCategoryChange($event) {
+    if(this.subCategoryList.length > 0) {
+      let index = this.subCategoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.subCategoryList[index] && this.subCategoryList[index].children) {
+        this.thirdCategoryList = [...this.subCategoryList[index].children];
+      } else {
+        this.thirdCategoryList = [];
+      }
+    }
+    this.cat = $event;
+    this.getPromoteProduct();
+  }
+
+  thirdCategoryChange($event) {
+    this.cat = $event;
+    this.getPromoteProduct();
   }
 }

@@ -17,8 +17,7 @@ export class PromoteEditComponent implements OnInit {
 
   campaign: any = {};
 
-  oldCategoryList: any;
-  newCategoryList: any;
+  categoryList: any;
 
   promotionProducts: any;
 
@@ -35,19 +34,9 @@ export class PromoteEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.promoteService.getCategoryList().then((data) => {
-      this.oldCategoryList = data;
-      this.oldCategoryList.unshift({
-        id: 'all',
-        data: {
-          name: 'All'
-        }
-      });
-    });
-
-    this.promoteService.getNewCategoryList().then((data) => {
-      this.newCategoryList = data;
-      this.newCategoryList.unshift({
-        id: 'all',
+      this.categoryList = data;
+      this.categoryList.unshift({
+        id: false,
         data: {
           name: 'All'
         }
@@ -89,8 +78,7 @@ export class PromoteEditComponent implements OnInit {
   selectProduct() {
     let dialogRef = this.dialog.open(SelectProductDialogComponent, {
       data: {
-        oldCategoryList: this.oldCategoryList,
-        newCategoryList: this.newCategoryList,
+        categoryList: this.categoryList,
         promotionId: this.campaign.id,
         isEdit: false
       }

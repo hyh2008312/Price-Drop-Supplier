@@ -272,7 +272,7 @@ export class PromoteService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/supplier/category/`;
+    const url = `${this.baseUrl.url}product/supplier/new/category/`;
 
     return this.http.get(url, options)
       .toPromise()
