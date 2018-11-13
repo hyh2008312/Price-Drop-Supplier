@@ -66,6 +66,9 @@ export class SelectProductDialogComponent implements OnInit {
 
   getPromoteProduct() {
     let param: any = {};
+
+    this.cat = this.cat? this.cat: null;
+
     if(this.searchKey != '') {
       param = {
         cat: this.cat,
