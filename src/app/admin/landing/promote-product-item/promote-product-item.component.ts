@@ -19,7 +19,7 @@ export class ProductProductItemComponent implements OnInit {
 
   isEdit: boolean = false;
 
-  currency: string = 'USD';
+  currency: string = 'INR';
 
   constructor(
     private dialog: MatDialog,

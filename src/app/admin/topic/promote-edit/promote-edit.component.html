@@ -6,14 +6,48 @@
   <div>
     <form [formGroup]="promotionForm" novalidate>
       <div class="md-margin-top-3 sc-promote__create-bg">
-        <div fxLayout="row" fxLayoutAlign="space-between start">
-          <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
             <div class="sc-promote__promote-text xb-bold">Activity Name</div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
               <mat-form-field fxFlex>
                 <input matInput type="text" placeholder="" formControlName="name">
               </mat-form-field>
             </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+            <div class="sc-promote__promote-text xb-bold">Color Name</div>
+            <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+              <mat-form-field fxFlex>
+                <input matInput type="text" placeholder="" formControlName="color">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+            <div class="sc-promote__promote-text xb-bold">Topic One</div>
+            <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+              <mat-form-field fxFlex>
+                <input matInput type="text" placeholder="" formControlName="topic1">
+              </mat-form-field>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+            <div class="sc-promote__promote-text xb-bold">Topic Two</div>
+            <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+              <mat-form-field fxFlex>
+                <input matInput type="text" placeholder="" formControlName="topic2">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="sc-promote__promote-text xb-bold">Topic Three</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="" formControlName="topic3">
+            </mat-form-field>
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between start">

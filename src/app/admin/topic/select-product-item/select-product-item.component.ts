@@ -15,7 +15,7 @@ export class SelectProductItemComponent implements OnInit {
   @Input() promoteId: any;
   @Output() promoteChange = new EventEmitter<any>();
 
-  currency: string = 'USD';
+  currency: string = 'INR';
 
   constructor(
     private promoteService: TopicService
@@ -38,14 +38,6 @@ export class SelectProductItemComponent implements OnInit {
         event: 'changed'
       });
     }));
-  }
-
-  countOff (s, o) {
-    if (o > 0) {
-      return Math.floor((o - s) / o * 100) + '% OFF'
-    } else {
-      return ''
-    }
   }
 
 }

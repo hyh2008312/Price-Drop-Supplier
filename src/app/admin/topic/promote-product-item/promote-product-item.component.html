@@ -7,10 +7,10 @@
   </div>
   <div class="md-margin-right-2" fxFlex="25"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-promote__promote-text">Rs.{{promote.saleUnitPrice}}</div>
-    <div class="sc-promote__promote-text">lowest: Rs.{{promote.lowestPrice}}</div>
+    <div class="sc-promote__promote-text">Sale Price: {{promote.unitPrice | currency: currency}}</div>
+    <div class="sc-promote__promote-text">MRP: {{promote.saleUnitPrice | currency: currency}}</div>
   </div>
-  <div fxLayout="column" fxLayoutAlign="center center" fxFlex="10">
+  <div fxLayout="column" fxLayoutAlign="center center" fxFlex="20">
     <i class="material-icons md-dark-secondary xb-pointer" (click)="delete()">delete</i>
   </div>
 </div>

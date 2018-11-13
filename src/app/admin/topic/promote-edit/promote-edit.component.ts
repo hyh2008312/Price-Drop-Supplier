@@ -47,12 +47,16 @@ export class PromoteEditComponent implements OnInit {
     this.promotionForm = this.fb.group({
       id: ['', Validators.required],
       name: ['', Validators.required],
-      image: ['']
+      image: [''],
+      color: [],
+      topic1: [],
+      topic2: [],
+      topic3: []
     });
 
     this.promotionId = this.activatedRoute.snapshot.params['id'];
     this.getPromotionDetail();
-    this.getPromotionProductList()
+    this.getPromotionProductList();
   }
 
   ngOnInit(): void {
