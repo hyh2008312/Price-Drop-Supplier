@@ -25,18 +25,56 @@ export class OrderMainComponent implements OnInit {
 
   orderUnpaid: any = false;
   orderUnpaidIndex = 1;
+  typeUnpaid: any = false;
+  paymentUpaid: any = false;
   orderPacking: any = false;
   orderPackingIndex = 1;
+  typePacking: any = false;
+  paymentPacking: any = false;
   orderShipped: any = false;
   orderShippedIndex = 1;
+  typeShipped: any = false;
+  paymentShipped: any = false;
   orderAudit: any = false;
   orderAuditIndex = 1;
+  typeAudit: any = false;
+  paymentAudit: any = false;
   orderCanceled: any = false;
   orderCanceledIndex = 1;
+  typeCanceled: any = false;
+  paymentCanceled: any = false;
   orderCompleted: any = false;
   orderCompletedIndex = 1;
+  typeCompleted: any = false;
+  paymentCompleted: any = false;
   orderRefund: any = false;
   orderRefundIndex = 1;
+  typeRefund: any = false;
+  paymentRefund: any = false;
+
+  typeList: any = [{
+    text: 'All',
+    value: false
+  }, {
+    text: 'Normal',
+    value: 'Normal'
+  }, {
+    text: 'Cut',
+    value: 'Cut'
+  }, {
+    text: 'Flash',
+    value: 'Flash'
+  }];
+  paymentList: any = [{
+    text: 'All',
+    value: false
+  }, {
+    text: 'Cod',
+    value: 'cod'
+  }, {
+    text: 'Imprest',
+    value: 'imprest'
+  }];
 
   selectedIndex: number = 0;
   subscription: any;
@@ -150,10 +188,11 @@ export class OrderMainComponent implements OnInit {
     });
   }
 
-
   changeProducts(event) {
     let status = '';
     let page = 0;
+    let order_type = this.typeUnpaid;
+    let cod_status = this.paymentUpaid;
     switch (event.index) {
       case 0:
         status = 'Unpaid';
@@ -162,26 +201,38 @@ export class OrderMainComponent implements OnInit {
       case 1:
         status = 'Packing';
         page = this.orderPackingIndex;
+        order_type = this.typePacking;
+        cod_status = this.paymentPacking;
         break;
       case 2:
         status = 'Shipped';
         page = this.orderShippedIndex;
+        order_type = this.typeShipped;
+        cod_status = this.paymentShipped;
         break;
       case 3:
         status = 'Audit canceled';
         page = this.orderAuditIndex;
+        order_type = this.typeAudit;
+        cod_status = this.paymentAudit;
         break;
       case 4:
         status = 'Canceled';
         page = this.orderCanceledIndex;
+        order_type = this.typeCanceled;
+        cod_status = this.paymentCanceled;
         break;
       case 5:
         status = 'Completed';
         page = this.orderCompletedIndex;
+        order_type = this.typeCompleted;
+        cod_status = this.paymentCompleted;
         break;
       case 6:
         status = 'Refunded';
         page = this.orderCompletedIndex;
+        order_type = this.typeRefund;
+        cod_status = this.paymentRefund;
         break;
       default:
     }
@@ -190,11 +241,18 @@ export class OrderMainComponent implements OnInit {
       this.isSearchResult = false;
       return;
     }
+
+    order_type = order_type? order_type: null;
+    cod_status = cod_status? cod_status: null;
+    this.searchKey = this.searchKey && this.searchKey != ''? this.searchKey: null;
+
     this.orderService.getSupplyOrderList({
       status,
       page,
       page_size: this.pageSize,
-      q: this.searchKey
+      q: this.searchKey,
+      order_type,
+      cod_status
     }).then((data) => {
       self.length = data.count;
       switch (event.index) {
@@ -440,4 +498,63 @@ export class OrderMainComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {});
   }
 
+  typeChange($event) {
+    switch (this.selectedIndex) {
+      case 0:
+        this.typeUnpaid = $event;
+        break;
+      case 1:
+        this.typePacking = $event;
+        break;
+      case 2:
+        this.typeShipped = $event;
+        break;
+      case 3:
+        this.typeAudit = $event;
+        break;
+      case 4:
+        this.typeCanceled = $event;
+        break;
+      case 5:
+        this.typeCompleted = $event;
+        break;
+      case 6:
+        this.typeRefund = $event;
+        break;
+    }
+
+    this.changeProducts({
+      index: this.selectedIndex
+    });
+  }
+
+  paymentChange($event) {
+    switch (this.selectedIndex) {
+      case 0:
+        this.paymentUpaid = $event;
+        break;
+      case 1:
+        this.paymentPacking = $event;
+        break;
+      case 2:
+        this.paymentShipped = $event;
+        break;
+      case 3:
+        this.paymentAudit = $event;
+        break;
+      case 4:
+        this.paymentCanceled = $event;
+        break;
+      case 5:
+        this.paymentCompleted = $event;
+        break;
+      case 6:
+        this.paymentRefund = $event;
+        break;
+    }
+
+    this.changeProducts({
+      index: this.selectedIndex
+    });
+  }
 }
