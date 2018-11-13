@@ -16,6 +16,8 @@ export class PromoteMainComponent implements OnInit {
 
   categoryList: any = [];
 
+  category: any = [];
+
   promotionProducts: any = [];
 
   categoryId: any;
@@ -26,6 +28,7 @@ export class PromoteMainComponent implements OnInit {
   ) {
 
     this.getPromotionDetail();
+    this.getCategoryList();
   }
 
   ngOnInit(): void {
@@ -56,10 +59,22 @@ export class PromoteMainComponent implements OnInit {
     }
   }
 
+  getCategoryList() {
+    this.promoteService.getCategoryList().then((data) => {
+        this.category = [...data];
+    });
+  }
 
   selectProduct() {
+    let index = this.category.findIndex((data) => {
+      return data.id == this.categoryId;
+    });
+
+    const categoryList = this.category[index].children;
+
     let dialogRef = this.dialog.open(SelectProductDialogComponent, {
       data: {
+        categoryList,
         categoryId: this.categoryId,
         isEdit: false
       }

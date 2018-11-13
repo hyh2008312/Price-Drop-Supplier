@@ -18,6 +18,10 @@ export class SelectProductDialogComponent implements OnInit {
   isSearch: boolean = false;
   searchForm: FormGroup;
 
+  categoryList: any = [];
+  subCategoryList: any = [];
+  thirdCategoryList: any = [];
+
   error: any = false;
 
   cat: any;
@@ -39,7 +43,16 @@ export class SelectProductDialogComponent implements OnInit {
       searchKey: ['']
     });
 
+    this.subCategoryList = this.data.categoryList;
     this.cat = this.data.categoryId;
+
+    this.subCategoryList.unshift({
+      id: this.cat,
+      data: {
+        name: 'ALL'
+      }
+    });
+
 
     this.searchForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
@@ -72,7 +85,8 @@ export class SelectProductDialogComponent implements OnInit {
         qt: 'spu',
         topicId: this.data.promotionId,
         page: this.page,
-        page_size: this.pageSize
+        page_size: this.pageSize,
+        sort: 'public_date'
       };
     } else {
       param = {
@@ -80,7 +94,8 @@ export class SelectProductDialogComponent implements OnInit {
         cat: this.cat,
         topicId: this.data.promotionId,
         page: this.page,
-        page_size: this.pageSize
+        page_size: this.pageSize,
+        sort: 'public_date'
       }
     }
 
@@ -109,5 +124,27 @@ export class SelectProductDialogComponent implements OnInit {
     } else if(event.event == 'error') {
       this.error = event.promote;
     }
+  }
+
+  subCategoryChange($event) {
+    if(this.subCategoryList.length > 0) {
+      let index = this.subCategoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.subCategoryList[index] && this.subCategoryList[index].children) {
+        this.thirdCategoryList = [...this.subCategoryList[index].children];
+      } else {
+        this.thirdCategoryList = [];
+      }
+    }
+    this.cat = $event;
+    this.getPromoteProduct();
+  }
+
+  thirdCategoryChange($event) {
+    this.cat = $event;
+    this.getPromoteProduct();
   }
 }

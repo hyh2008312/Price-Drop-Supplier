@@ -4,6 +4,26 @@
   </div>
   <div class="sc-promotion-dialog__title">Select Product</div>
   <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+    <div fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+      <mat-form-field fxFlex>
+        <mat-select name="subcategory" placeholder="Select a Subcategory"
+                    (valueChange)="subCategoryChange($event)">
+          <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+            {{ item.data.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+      <mat-form-field fxFlex>
+        <mat-select name="thirdcategory" placeholder="Select a ThirdCategory"
+                    (valueChange)="thirdCategoryChange($event)">
+          <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
+            {{ item.data.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <div class="md-margin-left-4" fxLayout="row" fxLayoutAlign="end center" fxFlex>
       <form class="sc-promotion-dialog__search" [formGroup]="searchForm"
             fxLayout="row" fxLayoutAlign="start center" >
