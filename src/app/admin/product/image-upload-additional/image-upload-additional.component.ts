@@ -18,8 +18,6 @@ export class ImageUploadAdditionalComponent implements OnInit {
 
   loading: any = [0,0,0,0,0];
 
-  upload: any = false;
-
   closeLoading: any = [true,true,true,true,true];
 
   closeAnimate: any = [false,false,false,false,false];
@@ -35,25 +33,20 @@ export class ImageUploadAdditionalComponent implements OnInit {
 
   }
 
-  ngOnChanges() {
-    if(this.previewImgSrcs.length >= 5) {
-      this.upload = true;
-    }
-  }
+  ngOnChanges() {}
 
-  previewPic(event) {
+  previewPic(event, index) {
     if(!event.target.files[0]) {
       return;
     }
     let that = this;
-    let length = that.previewImgSrcs.length;
-    that.loading[length] = 0;
-    that.closeLoading[length] = false;
-    that.closeAnimate[length] = false;
+    that.loading[index] = 0;
+    that.closeLoading[index] = false;
+    that.closeAnimate[index] = false;
 
     this.previewImageService.readAsDataUrl(event.target.files[0]).then(function(result) {
 
-      that.previewImgSrcs.push(result);
+      that.previewImgSrcs[index] = result;
       let file = event.target.files[0];
 
       let image = new Image();
@@ -77,32 +70,26 @@ export class ImageUploadAdditionalComponent implements OnInit {
             // Look for upload progress events.
             if (event.type === HttpEventType.UploadProgress) {
               // This is an upload progress event. Compute and show the % done:
-              that.loading[length] = Math.round(100 * event.loaded / event.total);
+              that.loading[index] = Math.round(100 * event.loaded / event.total);
             } else if (event instanceof HttpResponse) {
-              that.closeAnimate[length] = true;
-              that.closeLoading[length] = true;
+              that.closeAnimate[index] = true;
+              that.closeLoading[index] = true;
               src = url + '/' + key;
-              that.previewImgFile.push(src);
+              that.previewImgFile[index] = src;
               that.previewImgFileChange.emit(that.previewImgFile);
             }
           });
         });
       };
       image.src = window.URL.createObjectURL(file);
-
-      if( that.previewImgSrcs.length >= 5) {
-        that.upload = true;
-      }
     });
 
   }
 
   remove(i) {
-    this.previewImgSrcs.splice(i,1);
-    this.previewImgFile.splice(i,1);
+    this.previewImgSrcs[i] = '';
+    this.previewImgFile[i] = '';
     this.previewImgFileChange.emit(this.previewImgFile);
-
-    this.upload = false;
   }
 
   loadingChange(event, index) {

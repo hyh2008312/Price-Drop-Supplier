@@ -89,11 +89,8 @@ export class ProductCreateComponent implements OnInit {
   // Enter, comma
   separatorKeysCodes = [ENTER, 188];
 
-  previewImgFile: any;
-  previewImgSrcs: any;
-
-  additionalList: any = [];
-  additionalSrcs: any = [];
+  additionalList: any = ['', '', '', '', ''];
+  additionalSrcs: any = ['', '', '', '', ''];
 
   colorImageList: any[] = [];
 
@@ -608,7 +605,16 @@ export class ProductCreateComponent implements OnInit {
       return;
     }
     let product = this.productForm.value;
-    product.images = this.additionalList;
+    const images: any = [];
+    for(let item of this.additionalList) {
+      if(item && item != '') {
+        images.push(item);
+      }
+    }
+    if(images.length <= 0) {
+      return;
+    }
+    product.images = images;
 
     product.attributes = this.addProductWithAttributes();
 

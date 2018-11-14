@@ -60,8 +60,8 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
   previewImgFile: any;
   previewImgSrcs: any;
 
-  additionalList: any = [];
-  additionalSrcs: any = [];
+  additionalList: any = ['', '', '', '', ''];
+  additionalSrcs: any = ['', '', '', '', ''];
 
   productShippingList: any[];
 
@@ -166,6 +166,10 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
 
       this.additionalList = [...data.images];
       this.additionalSrcs = [...data.images];
+      for (let i = 0; i < 5 - data.images.length; i++) {
+        this.additionalList.push('');
+        this.additionalSrcs.push('');
+      }
     });
 
     this.adminService.getCategoryList().then((value) => {
@@ -544,12 +548,20 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
 
   changeProductBasic() {
     if(this.productBasicForm.invalid) {
-      console.log(this.productBasicForm.value)
       return;
     }
     let product = this.productBasicForm.value;
     product.id = parseInt(this.activatedRoute.snapshot.params["id"]);
-    product.images = this.additionalList;
+    const images: any = [];
+    for(let item of this.additionalList) {
+      if(item && item != '') {
+        images.push(item);
+      }
+    }
+    if(images.length <= 0) {
+      return;
+    }
+    product.images = images;
     this.adminService.changeProductBasic(product).then((data) => {
       console.log(data);
     });
