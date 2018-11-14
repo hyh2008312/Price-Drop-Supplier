@@ -29,6 +29,7 @@ export class SpecificationEditComponent implements OnInit {
   searchForm: FormGroup;
 
   page: any = 1;
+  length: any = 0;
   pageList: any = [1,2,3,4,5,6,7,8,9,10];
   error: any = false;
 
@@ -192,6 +193,7 @@ export class SpecificationEditComponent implements OnInit {
       page: this.page,
       page_size: 500
     }).then((data) => {
+      this.length = data.count;
       this.error = false;
 
       let indexNumber = 0;
