@@ -222,7 +222,6 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
       pid: id
     }).then((data) => {
       for(let item of data.variants) {
-        console.log(item);
         // return;
         this.adminService.changeVariant(item).then((data) => {
 
