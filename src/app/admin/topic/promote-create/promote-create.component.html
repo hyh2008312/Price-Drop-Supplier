@@ -5,14 +5,48 @@
   </div>
   <form [formGroup]="promotionForm" novalidate *ngIf="!isEdit">
     <div class="md-margin-top-3 sc-promote__create-bg">
-      <div fxLayout="row" fxLayoutAlign="space-between start">
-        <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
           <div class="sc-promote__promote-text xb-bold">Activity Name</div>
           <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
             <mat-form-field fxFlex>
               <input matInput type="text" placeholder="" formControlName="name">
             </mat-form-field>
           </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Color Name</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="" formControlName="color">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Topic One</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="" formControlName="topicOne">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Topic Two</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="" formControlName="topicTwo">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="sc-promote__promote-text xb-bold">Topic Three</div>
+        <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+          <mat-form-field fxFlex>
+            <input matInput type="text" placeholder="" formControlName="topicThree">
+          </mat-form-field>
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="space-between start">
@@ -34,10 +68,38 @@
   </form>
   <div *ngIf="isEdit">
     <div class="md-margin-top-3 sc-promote__create-bg">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48" >
+          <div class="sc-promote__promote-text xb-bold">Activity Name</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            {{campaign.name}}
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48" >
+          <div class="sc-promote__promote-text xb-bold">Color Name</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            {{campaign.color}}
+          </div>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48" >
+          <div class="sc-promote__promote-text xb-bold">Topic One</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            {{campaign.topicOne}}
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Topic Two</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            {{campaign.topicTwo}}
+          </div>
+        </div>
+      </div>
       <div fxLayout="row" fxLayoutAlign="start center" >
-        <div class="sc-promote__promote-text xb-bold">Activity Name</div>
+        <div class="sc-promote__promote-text xb-bold">Topic Three</div>
         <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-          {{campaign.name}}
+          {{campaign.topicThree}}
         </div>
       </div>
       <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="space-between start">

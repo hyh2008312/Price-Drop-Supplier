@@ -49,7 +49,11 @@ export class PromoteCreateComponent implements OnInit {
 
     this.promotionForm = this.fb.group({
       name: ['', Validators.required],
-      image: ['']
+      image: [''],
+      color: [],
+      topicOne: [],
+      topicTwo: [],
+      topicThree: []
     });
   }
 

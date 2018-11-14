@@ -101,4 +101,19 @@ export class ProductProductItemComponent implements OnInit {
       promote: this.promote
     });
   }
+
+  selectPromotionProduct() {
+    let params: any ={};
+    params.id = this.promoteId;
+    params.products = [this.promote.productId];
+
+    this.promoteService.addPromotionProduct(params).then(((data) => {
+      this.promote = data;
+      this.promotionChange.emit({
+        index: this.index,
+        promote : data,
+        event: 'changed'
+      });
+    }));
+  }
 }

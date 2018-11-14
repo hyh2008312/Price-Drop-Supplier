@@ -28,14 +28,6 @@ export class PromoteEditComponent implements OnInit {
 
   promotionId: any;
 
-  page = 1;
-
-  pageSize = 6;
-
-  length = 1;
-
-  pageSizeOptions = [12];
-
   constructor(
     private promoteService: TopicService,
     private dialog: MatDialog,
@@ -49,14 +41,13 @@ export class PromoteEditComponent implements OnInit {
       name: ['', Validators.required],
       image: [''],
       color: [],
-      topic1: [],
-      topic2: [],
-      topic3: []
+      topicOne: [],
+      topicTwo: [],
+      topicThree: []
     });
 
     this.promotionId = this.activatedRoute.snapshot.params['id'];
     this.getPromotionDetail();
-    this.getPromotionProductList();
   }
 
   ngOnInit(): void {
@@ -78,30 +69,16 @@ export class PromoteEditComponent implements OnInit {
       this.promotionForm.patchValue({
         id: data.id,
         name: data.name,
-        image: data.image
+        image: data.image,
+        color: data.color,
+        topicOne: data.topicOne,
+        topicTwo: data.topicTwo,
+        topicThree: data.topicThree
       });
-      this.image = data.image
+      this.image = data.image;
+      this.promotionProducts = [...data.products];
     });
   }
-
-  // MatPaginator Output
-  changePage(event) {
-    this.pageSize = event.pageSize;
-    this.page = event.pageIndex + 1;
-    this.getPromotionProductList();
-  }
-
-  getPromotionProductList() {
-    this.promoteService.getSelectedPromotionProductList({
-      topicId: this.promotionId,
-      page: this.page,
-      page_size: this.pageSize
-    }).then((data) => {
-      this.length = data.count;
-      this.promotionProducts = [...data.results];
-    });
-  }
-
 
   changePromotionProduct(event) {
     switch (event.event) {
@@ -110,6 +87,9 @@ export class PromoteEditComponent implements OnInit {
         break;
       case 'save':
         this.campaign = event.promote;
+        break;
+      case 'changed':
+        this.getPromotionDetail();
         break;
     }
   }
@@ -143,7 +123,7 @@ export class PromoteEditComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(dialogRef.componentInstance.data.isEdit == true) {
-        self.getPromotionProductList();
+        self.getPromotionDetail();
       }
     });
   }

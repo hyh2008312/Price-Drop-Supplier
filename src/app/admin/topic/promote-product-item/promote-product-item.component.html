@@ -10,7 +10,8 @@
     <div class="sc-promote__promote-text">Sale Price: {{promote.unitPrice | currency: currency}}</div>
     <div class="sc-promote__promote-text">MRP: {{promote.saleUnitPrice | currency: currency}}</div>
   </div>
-  <div fxLayout="column" fxLayoutAlign="center center" fxFlex="15">
+  <div fxLayout="row" fxLayoutAlign="center center" fxFlex="15">
+    <i class="material-icons md-dark-secondary xb-pointer md-margin-right-2" *ngIf="status == 1" (click)="selectPromotionProduct()">vertical_align_top</i>
     <i class="material-icons md-dark-secondary xb-pointer" (click)="delete()">delete</i>
   </div>
 </div>
