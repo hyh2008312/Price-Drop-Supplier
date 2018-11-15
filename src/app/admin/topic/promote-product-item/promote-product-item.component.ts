@@ -13,7 +13,7 @@ import {ChangeVariantDialogComponent} from '../change-variant-dialog/change-vari
 export class ProductProductItemComponent implements OnInit {
 
   @Input() status: number = 0;
-  @Input() promote: any={};
+  @Input() promote: any = {};
   @Input() promoteId: any;
   @Input() index: number = 0;
   @Output() promotionChange = new EventEmitter<any>();

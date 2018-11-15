@@ -64,7 +64,7 @@ export class PromoteItemComponent implements OnInit {
     let params = {
       id: this.promote.id,
       status: status
-    }
+    };
     this.promoteService.publishPromotion(params).then((data) => {
       self.promotionChange.emit({
         index: this.index,

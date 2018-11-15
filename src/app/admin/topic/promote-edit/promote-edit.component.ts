@@ -65,7 +65,6 @@ export class PromoteEditComponent implements OnInit {
     this.promoteService.getPromotionDetail({
       id
     }).then((data) => {
-      this.campaign = data;
       this.promotionForm.patchValue({
         id: data.id,
         name: data.name,
@@ -104,7 +103,6 @@ export class PromoteEditComponent implements OnInit {
     params.image = this.image;
 
     this.promoteService.promotionEdit(params).then((data) => {
-      this.campaign = data;
       this.router.navigate(['../../'],{relativeTo: this.activatedRoute});
     });
   }
@@ -114,7 +112,7 @@ export class PromoteEditComponent implements OnInit {
     let dialogRef = this.dialog.open(SelectProductDialogComponent, {
       data: {
         categoryList: this.categoryList,
-        promotionId: this.campaign.id,
+        promotionId: this.promotionId,
         isEdit: false
       }
     });
