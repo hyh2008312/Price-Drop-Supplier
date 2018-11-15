@@ -24,7 +24,7 @@ export class PromoteEditComponent implements OnInit {
 
   categoryList: any;
 
-  promotionProducts: any;
+  promotionProducts: any = [];
 
   promotionId: any;
 
