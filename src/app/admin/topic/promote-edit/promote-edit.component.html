@@ -78,6 +78,7 @@
     <div class="md-margin-top-3 md-padding-bottom-3 sc-promote__promote-bg">
       <app-promote-product-title></app-promote-product-title>
       <div class="sc-promote__promote-list" *ngFor="let item of promotionProducts;let i = index;">
+        <div *ngIf="i == 2 || i == 11 || i == 20" class="md-margin-top-2"></div>
         <app-promote-product-item [promote]="item" [index]="i" [status]="1" [promoteId]="promotionId"
                                   (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
       </div>
