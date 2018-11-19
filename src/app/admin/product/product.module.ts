@@ -23,6 +23,7 @@ import { EditShippingDialogComponent } from './edit-shipping-dialog/edit-shippin
 import { AddShippingDialogComponent } from './add-shipping-dialog/add-shipping-dialog.component';
 import { AddUploadDialogComponent } from './add-upload-dialog/add-upload-dialog.component';
 import { ProductTipsComponent } from './product-tips/product-tips.component';
+import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { ProductRoutingModule } from './product.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -55,7 +56,8 @@ import { ProductService } from './product.service';
     AddShippingDialogComponent,
     ProductDraftEditComponent,
     AddUploadDialogComponent,
-    ProductTipsComponent
+    ProductTipsComponent,
+    ToolTipsComponent
   ],
   entryComponents: [
     SaveProductDialogComponent,
@@ -66,7 +68,8 @@ import { ProductService } from './product.service';
     EditShippingDialogComponent,
     AddShippingDialogComponent,
     AddUploadDialogComponent,
-    ProductTipsComponent
+    ProductTipsComponent,
+    ToolTipsComponent
   ],
   providers: [
     ProductService

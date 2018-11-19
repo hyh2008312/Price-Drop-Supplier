@@ -17,6 +17,8 @@ import { EditShippingDialogComponent } from '../edit-shipping-dialog/edit-shippi
 import { AddShippingDialogComponent } from '../add-shipping-dialog/add-shipping-dialog.component';
 
 import 'rxjs/add/operator/toPromise';
+import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-product-edit',
@@ -91,7 +93,8 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
     private previewImageService: ImageUploadPreviewService,
     private s3UploaderService: S3UploaderService,
     @Inject(DOCUMENT) private document: Document,
-    private userService :UserService
+    private userService :UserService,
+    private snackBar: MatSnackBar
   ) {
 
     this.sub = this.userService.currentUser.subscribe((data) => {
@@ -562,7 +565,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
     }
     product.images = images;
     this.adminService.changeProductBasic(product).then((data) => {
-      console.log(data);
+      this.openSnackBar();
     });
   }
 
@@ -573,7 +576,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
     let product:any = this.productAttributeForm.value;
     product.id = this.activatedRoute.snapshot.params["id"];
     this.adminService.editAttributeList(product).then((data) => {
-      console.log(data);
+      this.openSnackBar();
     });
   }
 
@@ -584,7 +587,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
     let product = this.productLogisticForm.value;
     product.id = parseInt(this.activatedRoute.snapshot.params["id"]);
     this.adminService.changeLogisticShipping(product).then((data) => {
-      console.log(data)
+      this.openSnackBar();
     });
   }
 
@@ -650,5 +653,13 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
     }
 
 
+  }
+
+  openSnackBar() {
+    this.snackBar.openFromComponent(ToolTipsComponent, {
+      data: 'Saved Success!',
+      duration: 4000,
+      verticalPosition: 'top'
+    });
   }
 }
