@@ -657,7 +657,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
 
   openSnackBar() {
     this.snackBar.openFromComponent(ToolTipsComponent, {
-      data: 'Saved Success!',
+      data: 'Successfully Saved!',
       duration: 4000,
       verticalPosition: 'top'
     });

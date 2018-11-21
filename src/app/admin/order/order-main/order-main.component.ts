@@ -72,7 +72,7 @@ export class OrderMainComponent implements OnInit {
     text: 'Cod',
     value: 'cod'
   }, {
-    text: 'Imprest',
+    text: 'Prepaid',
     value: 'imprest'
   }];
 

@@ -148,7 +148,7 @@ export class SpecificationMainComponent implements OnInit {
         });
         break;
       case 2:
-        page = this.promoteIndex;
+        page = this.attributeIndex;
         this.specificationService.getSpecificationValueList({
           page,
           page_size: this.pageSize
