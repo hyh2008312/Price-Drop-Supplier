@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeleteVariantDialogComponent } from './delete-variant-dialog.component';
+import { AddVariantDialogComponent } from './add-variant-dialog.component';
 
-describe('DeleteVariantDialogComponent', () => {
-  let component: DeleteVariantDialogComponent;
-  let fixture: ComponentFixture<DeleteVariantDialogComponent>;
+describe('AddVariantDialogComponent', () => {
+  let component: AddVariantDialogComponent;
+  let fixture: ComponentFixture<AddVariantDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeleteVariantDialogComponent ]
+      declarations: [ AddVariantDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteVariantDialogComponent);
+    fixture = TestBed.createComponent(AddVariantDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

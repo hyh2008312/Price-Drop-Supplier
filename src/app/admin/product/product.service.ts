@@ -537,6 +537,25 @@ export class ProductService {
       });
   }
 
+  changeAttributesValue(params: any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/update/variant/alias/${params.id}/`;
+
+    return this.http.put(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   getShippingList(country: any): Promise<any> {
 
     let headers = new Headers({

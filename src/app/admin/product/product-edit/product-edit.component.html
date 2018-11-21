@@ -465,6 +465,28 @@
             </div>
           </div>
         </div>
+        <div class="sc-product__create-container-1">
+          <div class="sc-product__create-title">
+            Variant Attributes Alias
+          </div>
+          <div class="md-margin-top-2" fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <ng-container *ngFor="let item of attributes; let i = index;">
+                <mat-form-field fxFlex="48" *ngIf="item.name == 'Size'">
+                  <input type="text" matInput placeholder="Product Size Display Name" formControlName="aliasSize">
+                </mat-form-field>
+                <mat-form-field fxFlex="48" *ngIf="item.name == 'Color'">
+                  <input type="text" matInput placeholder="Product Color Display Name" formControlName="aliasColor">
+                </mat-form-field>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="sc-product__create-margin-top" fxLayout="row" fxLayoutAlign="center center">
+          <button mat-raised-button color="primary" type="button" (click)="changeAttributesValue()">
+            SAVE CHANGES
+          </button>
+        </div>
       </form>
       <div *ngIf="step == 3">
         <div class="sc-product__create-container-1">

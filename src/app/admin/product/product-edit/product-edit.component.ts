@@ -115,6 +115,8 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
     });
 
     this.productVariantForm = this.fb.group({
+      aliasColor: [''],
+      aliasSize: [''],
       variants: this.fb.array([]),
     });
 
@@ -184,6 +186,10 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
       pid: id
     }).then((data) => {
       this.attributes = data.attributes;
+      this.productVariantForm.patchValue({
+        aliasColor: data.aliasColor,
+        aliasSize: data.aliasSize
+      });
       for(let item of data.variants) {
         this.addProductList(item);
       }
@@ -566,6 +572,18 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
     let product = this.productLogisticForm.value;
     product.id = parseInt(this.activatedRoute.snapshot.params["id"]);
     this.adminService.changeLogisticShipping(product).then((data) => {
+      this.openSnackBar();
+    });
+  }
+
+
+  changeAttributesValue() {
+    if(this.productVariantForm.invalid) {
+      return;
+    }
+    let product = this.productVariantForm.value;
+    product.id = parseInt(this.activatedRoute.snapshot.params["id"]);
+    this.adminService.changeAttributesValue(product).then((data) => {
       this.openSnackBar();
     });
   }
