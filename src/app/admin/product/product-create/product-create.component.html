@@ -181,7 +181,7 @@
         </div>
         <div class="md-margin-top-2" *ngIf="variantAddedList.length > 0">
           <div *ngFor="let p of variantAddedList; let i = index">
-            <div fxLayout="row" fxLayoutAlign="start center" >
+            <div fxLayout="row" fxLayoutAlign="start start" >
               <div class="sc-product__create-margin-right-1" fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
                 <mat-form-field fxFlex>
                   <mat-select name="option" placeholder="Option Name" [value]="p.option" (valueChange)="optionChange($event, p)">
@@ -207,9 +207,19 @@
                   </mat-chip-list>
                 </mat-form-field>
               </div>
-              <div *ngIf="p.isValue">
+              <div class="md-margin-top-2" *ngIf="p.isValue">
                 <i class="material-icons md-dark-secondary xb-pointer" (click)="deleteVariant(i)">delete</i>
               </div>
+            </div>
+            <div fxLayoutWrap *ngIf=" p.option == 1">
+              <mat-form-field fxFlex="33">
+                <input type="text" matInput placeholder="Product Size Display Name" formControlName="aliasSize">
+              </mat-form-field>
+            </div>
+            <div fxLayoutWrap *ngIf=" p.option == 2">
+              <mat-form-field fxFlex="33">
+                <input type="text" matInput placeholder="Product Color Display Name" formControlName="aliasColor">
+              </mat-form-field>
             </div>
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap *ngIf="p.hasColorImage && p.option == 2">
               <div class="md-margin-right-3" *ngFor="let item of p.colorImageList;let i = index;">

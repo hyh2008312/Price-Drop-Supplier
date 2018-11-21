@@ -216,27 +216,6 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
       });
     });
 
-    this.changeImage();
-
-  }
-
-  getProductVariant(id) {
-    this.adminService.getProductVariantList({
-      pid: id
-    }).then((data) => {
-      for(let item of data.variants) {
-        // return;
-        this.adminService.changeVariant(item).then((data) => {
-
-        });
-      }
-    });
-  }
-
-  changeImage() {
-    for(let i = 4369; i < 4370;i++) {
-      this.getProductVariant(i);
-    }
   }
 
   ngAfterContentChecked() {

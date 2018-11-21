@@ -125,6 +125,8 @@ export class ProductCreateComponent implements OnInit {
       parentId: [null],
       childId: [null],
       images: [[]],
+      aliasSize: [''],
+      aliasColor: [''],
       attributes: this.fb.array([]),
       specification: this.fb.array([]),
       variants: this.fb.array([]),
