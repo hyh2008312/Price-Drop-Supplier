@@ -60,6 +60,23 @@
               </mat-select>
             </mat-form-field>
           </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div>Order Create Start Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="csUnpaid" (dateInput)="addEvent('csUnpaid', $event)">
+              <mat-datepicker-toggle matSuffix [for]="csUnpaid"></mat-datepicker-toggle>
+              <mat-datepicker #csUnpaid></mat-datepicker>
+            </mat-form-field>
+            <div class="md-margin-left-2">Order Create End Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="ceUnpaid" (dateInput)="addEvent('ceUnpaid', $event)">
+              <mat-datepicker-toggle matSuffix [for]="ceUnpaid"></mat-datepicker-toggle>
+              <mat-datepicker #ceUnpaid></mat-datepicker>
+            </mat-form-field>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+            </div>
+          </div>
           <div class="md-margin-top-2">
             <app-order-title [status]="0" ></app-order-title>
           </div>
@@ -134,6 +151,40 @@
               </mat-select>
             </mat-form-field>
           </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div>Order Create Start Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="csPacking" (dateInput)="addEvent('csPacking', $event)">
+              <mat-datepicker-toggle matSuffix [for]="csPacking"></mat-datepicker-toggle>
+              <mat-datepicker #csPacking></mat-datepicker>
+            </mat-form-field>
+            <div class="md-margin-left-2">Order Create End Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="cePacking" (dateInput)="addEvent('cePacking', $event)">
+              <mat-datepicker-toggle matSuffix [for]="cePacking"></mat-datepicker-toggle>
+              <mat-datepicker #cePacking></mat-datepicker>
+            </mat-form-field>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div>Order Paid Start Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="psPacking" (dateInput)="addEvent('psPacking', $event)">
+              <mat-datepicker-toggle matSuffix [for]="psPacking"></mat-datepicker-toggle>
+              <mat-datepicker #psPacking></mat-datepicker>
+            </mat-form-field>
+            <div class="md-margin-left-2">Order Paid End Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="pePacking" (dateInput)="addEvent('pePacking', $event)">
+              <mat-datepicker-toggle matSuffix [for]="pePacking"></mat-datepicker-toggle>
+              <mat-datepicker #pePacking></mat-datepicker>
+            </mat-form-field>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+            </div>
+          </div>
           <div class="md-margin-top-2">
             <app-order-title [status]="1" ></app-order-title>
           </div>
@@ -204,6 +255,40 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div>Order Create Start Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="csShipped" (dateInput)="addEvent('cePacking', $event)">
+              <mat-datepicker-toggle matSuffix [for]="csShipped"></mat-datepicker-toggle>
+              <mat-datepicker #csShipped></mat-datepicker>
+            </mat-form-field>
+            <div class="md-margin-left-2">Order Create End Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="ceShipped" (dateInput)="addEvent('ceShipped', $event)">
+              <mat-datepicker-toggle matSuffix [for]="ceShipped"></mat-datepicker-toggle>
+              <mat-datepicker #ceShipped></mat-datepicker>
+            </mat-form-field>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div>Order Paid Start Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="psShipped" (dateInput)="addEvent('psShipped', $event)">
+              <mat-datepicker-toggle matSuffix [for]="psShipped"></mat-datepicker-toggle>
+              <mat-datepicker #psShipped></mat-datepicker>
+            </mat-form-field>
+            <div class="md-margin-left-2">Order Paid End Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="peShipped" (dateInput)="addEvent('peShipped', $event)">
+              <mat-datepicker-toggle matSuffix [for]="peShipped"></mat-datepicker-toggle>
+              <mat-datepicker #peShipped></mat-datepicker>
+            </mat-form-field>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+            </div>
           </div>
           <div class="md-margin-top-2">
             <app-order-title [status]="2" ></app-order-title>
@@ -276,6 +361,40 @@
               </mat-select>
             </mat-form-field>
           </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div>Order Create Start Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="csAudit" (dateInput)="addEvent('csAudit', $event)">
+              <mat-datepicker-toggle matSuffix [for]="csAudit"></mat-datepicker-toggle>
+              <mat-datepicker #csAudit></mat-datepicker>
+            </mat-form-field>
+            <div class="md-margin-left-2">Order Create End Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="ceAudit" (dateInput)="addEvent('ceAudit', $event)">
+              <mat-datepicker-toggle matSuffix [for]="ceAudit"></mat-datepicker-toggle>
+              <mat-datepicker #ceAudit></mat-datepicker>
+            </mat-form-field>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div>Order Paid Start Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="psAudit" (dateInput)="addEvent('psAudit', $event)">
+              <mat-datepicker-toggle matSuffix [for]="psAudit"></mat-datepicker-toggle>
+              <mat-datepicker #psAudit></mat-datepicker>
+            </mat-form-field>
+            <div class="md-margin-left-2">Order Paid End Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="peAudit" (dateInput)="addEvent('peAudit', $event)">
+              <mat-datepicker-toggle matSuffix [for]="peAudit"></mat-datepicker-toggle>
+              <mat-datepicker #peAudit></mat-datepicker>
+            </mat-form-field>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+            </div>
+          </div>
           <div class="md-margin-top-2">
             <app-order-title [status]="3" ></app-order-title>
           </div>
@@ -346,6 +465,23 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div>Order Create Start Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="csCanceled" (dateInput)="addEvent('csCanceled', $event)">
+              <mat-datepicker-toggle matSuffix [for]="csCanceled"></mat-datepicker-toggle>
+              <mat-datepicker #csCanceled></mat-datepicker>
+            </mat-form-field>
+            <div class="md-margin-left-2">Order Create End Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="ceCanceled" (dateInput)="addEvent('ceCanceled', $event)">
+              <mat-datepicker-toggle matSuffix [for]="ceCanceled"></mat-datepicker-toggle>
+              <mat-datepicker #ceCanceled></mat-datepicker>
+            </mat-form-field>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+            </div>
           </div>
           <div class="md-margin-top-2">
             <app-order-title [status]="4" ></app-order-title>
@@ -418,6 +554,40 @@
               </mat-select>
             </mat-form-field>
           </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div>Order Create Start Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="csCompleted" (dateInput)="addEvent('csCompleted', $event)">
+              <mat-datepicker-toggle matSuffix [for]="csCompleted"></mat-datepicker-toggle>
+              <mat-datepicker #csCompleted></mat-datepicker>
+            </mat-form-field>
+            <div class="md-margin-left-2">Order Create End Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="ceCompleted" (dateInput)="addEvent('ceCompleted', $event)">
+              <mat-datepicker-toggle matSuffix [for]="ceCompleted"></mat-datepicker-toggle>
+              <mat-datepicker #ceCompleted></mat-datepicker>
+            </mat-form-field>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div>Order Paid Start Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="psCompleted" (dateInput)="addEvent('psCompleted', $event)">
+              <mat-datepicker-toggle matSuffix [for]="psCompleted"></mat-datepicker-toggle>
+              <mat-datepicker #psCompleted></mat-datepicker>
+            </mat-form-field>
+            <div class="md-margin-left-2">Order Paid End Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="peCompleted" (dateInput)="addEvent('peCompleted', $event)">
+              <mat-datepicker-toggle matSuffix [for]="peCompleted"></mat-datepicker-toggle>
+              <mat-datepicker #peCompleted></mat-datepicker>
+            </mat-form-field>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+            </div>
+          </div>
           <div class="md-margin-top-2">
             <app-order-title [status]="4" ></app-order-title>
           </div>
@@ -488,6 +658,40 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div>Order Create Start Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="csRefunded" (dateInput)="addEvent('csRefunded', $event)">
+              <mat-datepicker-toggle matSuffix [for]="csRefunded"></mat-datepicker-toggle>
+              <mat-datepicker #csRefunded></mat-datepicker>
+            </mat-form-field>
+            <div class="md-margin-left-2">Order Create End Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="ceRefunded" (dateInput)="addEvent('ceRefunded', $event)">
+              <mat-datepicker-toggle matSuffix [for]="ceRefunded"></mat-datepicker-toggle>
+              <mat-datepicker #ceRefunded></mat-datepicker>
+            </mat-form-field>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div>Order Paid Start Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="psRefunded" (dateInput)="addEvent('psRefunded', $event)">
+              <mat-datepicker-toggle matSuffix [for]="psRefunded"></mat-datepicker-toggle>
+              <mat-datepicker #psCompleted></mat-datepicker>
+            </mat-form-field>
+            <div class="md-margin-left-2">Order Paid End Date:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="peRefunded" (dateInput)="addEvent('peRefunded', $event)">
+              <mat-datepicker-toggle matSuffix [for]="peRefunded"></mat-datepicker-toggle>
+              <mat-datepicker #peRefunded></mat-datepicker>
+            </mat-form-field>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+            </div>
           </div>
           <div class="md-margin-top-2">
             <app-order-title [status]="4" ></app-order-title>

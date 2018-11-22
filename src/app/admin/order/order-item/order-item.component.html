@@ -3,6 +3,9 @@
     <div class="xb-bold">
       {{order.created | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY'}}
     </div>
+    <div class="xb-bold md-margin-left-3" *ngIf="order.paidTime">
+      Paid Time: {{order.paidTime | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY'}}
+    </div>
     <div class="md-margin-left-3">Order #: {{order.number}}</div>
     <div class="md-margin-left-3" fxFlex>{{order.sumOrderNumber? 'Sum Order #:' + order.sumOrderNumber: ''}}</div>
     <a class="sc-product__color text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/{{order.id}}" target="_blank">View Details</a>

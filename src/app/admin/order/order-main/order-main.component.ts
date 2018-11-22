@@ -14,10 +14,25 @@ import { utils, write, WorkBook } from 'xlsx';
 import { saveAs } from 'file-saver';
 import { AddGatiPostDialogComponent } from '../add-gati-post-dialog/add-gati-post-dialog.component';
 
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+
 @Component({
   selector: 'app-order-main',
   templateUrl: './order-main.component.html',
-  styleUrls: ['../order.scss']
+  styleUrls: ['../order.scss'],
+  providers: [
+    // The locale would typically be provided on the root module of your application. We do it at
+    // the component level here, due to limitations of our example generation script.
+    {provide: MAT_DATE_LOCALE, useValue: 'en'},
+
+    // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
+    // `MatMomentDateModule` in your applications root module. We provide it at the component level
+    // here, due to limitations of our example generation script.
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 })
 
 export class OrderMainComponent implements OnInit {
@@ -51,6 +66,31 @@ export class OrderMainComponent implements OnInit {
   orderRefundIndex = 1;
   typeRefund: any = false;
   paymentRefund: any = false;
+
+  csUnpaid: any = false;
+  ceUnpaid: any = false;
+  csPacking: any = false;
+  cePacking: any = false;
+  psPacking: any = false;
+  pePacking: any = false;
+  csShipped: any = false;
+  ceShipped: any = false;
+  psShipped: any = false;
+  peShipped: any = false;
+  csAudit: any = false;
+  ceAudit: any = false;
+  psAudit: any = false;
+  peAudit: any = false;
+  csCanceled: any = false;
+  ceCanceled: any = false;
+  csCompleted: any = false;
+  ceCompleted: any = false;
+  psCompleted: any = false;
+  peCompleted: any = false;
+  csRefunded: any = false;
+  ceRefunded: any = false;
+  psRefunded: any = false;
+  peRefunded: any = false;
 
   typeList: any = [{
     text: 'All',
@@ -193,6 +233,10 @@ export class OrderMainComponent implements OnInit {
     let page = 0;
     let order_type = this.typeUnpaid;
     let cod_status = this.paymentUpaid;
+    let start_time = this.csUnpaid;
+    let end_time = this.ceUnpaid;
+    let paid_start_time = false;
+    let paid_end_time = false;
     switch (event.index) {
       case 0:
         status = 'Unpaid';
@@ -203,36 +247,58 @@ export class OrderMainComponent implements OnInit {
         page = this.orderPackingIndex;
         order_type = this.typePacking;
         cod_status = this.paymentPacking;
+        start_time = this.csPacking;
+        end_time = this.cePacking;
+        paid_start_time = this.psPacking;
+        paid_end_time = this.pePacking;
         break;
       case 2:
         status = 'Shipped';
         page = this.orderShippedIndex;
         order_type = this.typeShipped;
         cod_status = this.paymentShipped;
+        start_time = this.csShipped;
+        end_time = this.ceShipped;
+        paid_start_time = this.psShipped;
+        paid_end_time = this.peShipped;
         break;
       case 3:
         status = 'Audit canceled';
         page = this.orderAuditIndex;
         order_type = this.typeAudit;
         cod_status = this.paymentAudit;
+        start_time = this.csAudit;
+        end_time = this.ceAudit;
+        paid_start_time = this.psAudit;
+        paid_end_time = this.peAudit;
         break;
       case 4:
         status = 'Canceled';
         page = this.orderCanceledIndex;
         order_type = this.typeCanceled;
         cod_status = this.paymentCanceled;
+        start_time = this.csCanceled;
+        end_time = this.ceCanceled;
         break;
       case 5:
         status = 'Completed';
         page = this.orderCompletedIndex;
         order_type = this.typeCompleted;
         cod_status = this.paymentCompleted;
+        start_time = this.csCompleted;
+        end_time = this.ceCanceled;
+        paid_start_time = this.psCompleted;
+        paid_end_time = this.peCompleted;
         break;
       case 6:
         status = 'Refunded';
         page = this.orderCompletedIndex;
         order_type = this.typeRefund;
         cod_status = this.paymentRefund;
+        start_time = this.csRefunded;
+        end_time = this.ceRefunded;
+        paid_start_time = this.psRefunded;
+        paid_end_time = this.peRefunded;
         break;
       default:
     }
@@ -244,6 +310,10 @@ export class OrderMainComponent implements OnInit {
 
     order_type = order_type? order_type: null;
     cod_status = cod_status? cod_status: null;
+    start_time = start_time? start_time: null;
+    end_time = end_time? end_time: null;
+    paid_start_time = paid_start_time? paid_start_time: null;
+    paid_end_time = paid_end_time? paid_end_time: null;
     this.searchKey = this.searchKey && this.searchKey != ''? this.searchKey: null;
 
     this.orderService.getSupplyOrderList({
@@ -252,7 +322,11 @@ export class OrderMainComponent implements OnInit {
       page_size: this.pageSize,
       q: this.searchKey,
       order_type,
-      cod_status
+      cod_status,
+      start_time,
+      end_time,
+      paid_start_time,
+      paid_end_time
     }).then((data) => {
       self.length = data.count;
       switch (event.index) {
@@ -419,6 +493,17 @@ export class OrderMainComponent implements OnInit {
             break;
         }
     }
+  }
+
+  addEvent(type: any, event:MatDatepickerInputEvent<any>) {
+    console.log(event.value._i)
+    this[type] = event.value._i.year + '-'+ (event.value._i.month+1) +'-'+event.value._i.date + ' 00:00:00';
+  }
+
+  filterDate() {
+    this.changeProducts({
+      index: this.selectedIndex
+    });
   }
 
   export(): void {
