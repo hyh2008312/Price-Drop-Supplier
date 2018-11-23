@@ -127,7 +127,7 @@ export class LotteryService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}point/voucher/list/`;
+    const url = `${this.baseUrl.url}point/supplier/voucher/list/`;
 
     return this.http.get(url, options)
       .toPromise()
