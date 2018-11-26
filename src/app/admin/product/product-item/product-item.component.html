@@ -30,6 +30,12 @@
     </div>
   </div>
   <div class="sc-product__product-price md-margin-right-2" fxFlex="15"
+       fxLayout="column" fxLayoutAlign="space-around center">
+    <div>
+      {{product.purchaseMethod}}
+    </div>
+  </div>
+  <div class="sc-product__product-price md-margin-right-2" fxFlex="15"
        fxLayout="column" fxLayoutAlign="space-around center" *ngIf="status == 0">
     <div>
       Published
@@ -71,9 +77,6 @@
       Featured
     </div>
   </div>
-  <div class="sc-product__product-price md-margin-right-2" fxFlex="5"
-       fxLayout="column" fxLayoutAlign="space-around center" *ngIf="status == 4">
-  </div>
 
   <div class="sc-product__product-action-buttons sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="15">
@@ -93,8 +96,8 @@
     <a fxLayout="column" fxLayoutAlign="center stretch" *ngIf="this.status != 4 && this.status != 6" routerLink="../edit/{{product.id}}" target="_blank">
       <button mat-button color="primary">Edit</button>
     </a>
-    <button mat-button color="primary" *ngIf="status == 1 || status == 3" (click)="publish()">Publish</button>
-    <button mat-button color="primary" *ngIf="status == 1" (click)="disapprove()">Disapprove</button>
-    <button mat-button color="primary" *ngIf="status == 0" (click)="unpublish()">Unpublish</button>
+    <button mat-button color="primary" *ngIf="(status == 1 || status == 3) && product.purchaseMethod != 'flash'" (click)="publish()">Publish</button>
+    <button mat-button color="primary" *ngIf="status == 1 && product.purchaseMethod != 'flash'" (click)="disapprove()">Disapprove</button>
+    <button mat-button color="primary" *ngIf="status == 0 && product.purchaseMethod != 'flash'" (click)="unpublish()">Unpublish</button>
   </div>
 </div>

@@ -66,6 +66,10 @@ export class OrderMainComponent implements OnInit {
   orderRefundIndex = 1;
   typeRefund: any = false;
   paymentRefund: any = false;
+  orderUndelivered: any = false;
+  orderUndeliveredIndex = 1;
+  typeUndelivered: any = false;
+  paymentUndelivered: any = false;
 
   csUnpaid: any = false;
   ceUnpaid: any = false;
@@ -91,6 +95,10 @@ export class OrderMainComponent implements OnInit {
   ceRefunded: any = false;
   psRefunded: any = false;
   peRefunded: any = false;
+  csUndelivered: any = false;
+  ceUndelivered: any = false;
+  psUndelivered: any = false;
+  peUndelivered: any = false;
 
   typeList: any = [{
     text: 'All',
@@ -214,6 +222,12 @@ export class OrderMainComponent implements OnInit {
       case 5:
         this.orderCompletedIndex = event.pageIndex + 1;
         break;
+      case 6:
+        this.orderRefundIndex = event.pageIndex + 1;
+        break;
+      case 7:
+        this.orderUndeliveredIndex = event.pageIndex + 1;
+        break;
     }
     this.changeProducts({index: type});
   }
@@ -292,13 +306,23 @@ export class OrderMainComponent implements OnInit {
         break;
       case 6:
         status = 'Refunded';
-        page = this.orderCompletedIndex;
+        page = this.orderRefundIndex;
         order_type = this.typeRefund;
         cod_status = this.paymentRefund;
         start_time = this.csRefunded;
         end_time = this.ceRefunded;
         paid_start_time = this.psRefunded;
         paid_end_time = this.peRefunded;
+        break;
+      case 7:
+        status = 'Undelivered';
+        page = this.orderUndeliveredIndex;
+        order_type = this.typeUndelivered;
+        cod_status = this.paymentUndelivered;
+        start_time = this.csUndelivered;
+        end_time = this.ceUndelivered;
+        paid_start_time = this.psUndelivered;
+        paid_end_time = this.peUndelivered;
         break;
       default:
     }
@@ -351,6 +375,9 @@ export class OrderMainComponent implements OnInit {
         case 6:
           self.orderRefund = data.results;
           break;
+        case 7:
+          self.orderUndelivered = data.results;
+          break;
       }
     });
 
@@ -397,6 +424,10 @@ export class OrderMainComponent implements OnInit {
             self.selectedIndex = 6;
             self.orderRefund = [...data];
             break;
+          case 'Undelivered':
+            self.selectedIndex = 6;
+            self.orderUndelivered = [...data];
+            break;
         }
       }
     });
@@ -427,6 +458,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 6:
         status = 'Refunded';
+        break;
+      case 7:
+        status = 'Undelivered';
         break;
     }
 
@@ -475,6 +509,9 @@ export class OrderMainComponent implements OnInit {
           break;
         case 6:
           self.orderRefund = [...data];
+          break;
+        case 7:
+          self.orderUndelivered = [...data];
           break;
       }
     });
@@ -532,6 +569,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 6:
         excel = [...this.orderRefund];
+        break;
+      case 7:
+        excel = [...this.orderUndelivered];
         break;
     }
 
@@ -606,6 +646,9 @@ export class OrderMainComponent implements OnInit {
       case 6:
         this.typeRefund = $event;
         break;
+      case 7:
+        this.typeUndelivered = $event;
+        break;
     }
 
     this.changeProducts({
@@ -635,6 +678,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 6:
         this.paymentRefund = $event;
+        break;
+      case 7:
+        this.paymentUndelivered = $event;
         break;
     }
 

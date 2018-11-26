@@ -69,7 +69,7 @@ $theme: mat-light-theme($primary, $accent, $warn);
     opacity: 1;
     justify-content: flex-start;
     padding: 0 16px;
-    font-size: 16px;
+    font-size: 14px;
     @include regular();
     min-width: 0;
     &.mat-tab-label-active{
