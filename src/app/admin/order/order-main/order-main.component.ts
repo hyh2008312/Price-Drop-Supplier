@@ -146,6 +146,7 @@ export class OrderMainComponent implements OnInit {
 
   isSuperuser: any = false;
 
+
   constructor(
     private orderService: OrderService,
     private userService: UserService,
@@ -171,6 +172,7 @@ export class OrderMainComponent implements OnInit {
         }
       }
     });
+
   }
 
   onValueChanged(data) {
