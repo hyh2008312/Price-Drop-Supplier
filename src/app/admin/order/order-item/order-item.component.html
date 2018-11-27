@@ -20,7 +20,8 @@
           <div fxFlex fxLayout="column" fxLayoutAlign="space-between start">
             <div class="sc-order__product-title" >{{order.lines[0].title}}</div>
             <div fxLayout="row" fxLayoutAlign="start center">
-              {{order.lines[0].sku}}
+              <div>{{order.lines[0].attributes}}</div>
+              <div class="md-margin-left-2">SKU:{{order.lines[0].sku}}</div>
             </div>
           </div>
         </div>
@@ -88,6 +89,14 @@
       </div>
       <div>
         {{order.address}}
+      </div>
+    </div>
+    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
+      <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
+        Sourcing Number
+      </div>
+      <div>
+        {{order.sourcingOrderNumber}}
       </div>
     </div>
   </div>
