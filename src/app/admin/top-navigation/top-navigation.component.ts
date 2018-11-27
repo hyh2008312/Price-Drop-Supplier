@@ -147,10 +147,21 @@ export class TopNavigationComponent implements OnInit {
           this.isSuperuser = true
         }
       }
-    })
+    });
+
   }
 
   ngOnInit(): void {
+    let url = this.router.routerState.snapshot['url'].split('/admin');
+    for (let value of this.contents) {
+      if (!value.router) {
+      } else {
+        if (url[1] && value.router && value.router != '' && value.router.split('.')[1] == url[1]) {
+          value.isActive = true;
+          break;
+        }
+      }
+    }
   }
 
   changeShowMenu(isShow: boolean): void {

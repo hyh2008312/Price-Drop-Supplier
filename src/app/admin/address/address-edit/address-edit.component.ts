@@ -66,7 +66,7 @@ export class AddressEditComponent implements OnInit {
   }
 
   edit() {
-    if(this.addressForm.invalid) {
+    if(!this.addressForm.invalid) {
       return;
     }
     this.addressService.editAddress(this.addressForm.value).then(() => {
