@@ -428,6 +428,24 @@ export class OrderService {
       });
   }
 
+  changeOrderSourcing(params:any): Promise<any> {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}order/sourcing/supplier/update/${params.id}/`;
+
+    return this.http.post(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   changeOrderStockInformation(params: any): Promise<any> {
 
     let headers = new Headers({

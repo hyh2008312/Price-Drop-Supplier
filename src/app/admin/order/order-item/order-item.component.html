@@ -64,8 +64,11 @@
       <div fxFlex="">
         {{order.email}}
       </div>
-      <div class="sc__accent-dark" *ngIf="order.orderStatus == 'Paid'">
+      <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started'">
         <button mat-raised-button color="accent" (click)="editSourcing()">Mark as Sourcing</button>
+      </div>
+      <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Started'">
+        <button mat-raised-button color="primary" (click)="editSourcing()"> View Sourcing Details</button>
       </div>
       <div class="sc__accent-dark" *ngIf="order.orderStatus == 'Audit canceled'">
         <button mat-raised-button color="accent" (click)="approveCancel()">View Detail</button>

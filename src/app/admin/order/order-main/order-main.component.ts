@@ -124,6 +124,19 @@ export class OrderMainComponent implements OnInit {
     value: 'imprest'
   }];
 
+  sourcingList: any = [{
+    text: 'All',
+    value: false
+  }, {
+    text: 'Not Started',
+    value: 'Not Started'
+  }, {
+    text: 'Started',
+    value: 'Started'
+  }];
+
+  sourcingPacking: any = false;
+
   selectedIndex: number = 0;
   subscription: any;
 
@@ -253,6 +266,7 @@ export class OrderMainComponent implements OnInit {
     let end_time = this.ceUnpaid;
     let paid_start_time = false;
     let paid_end_time = false;
+    let sourcing_status = false;
     switch (event.index) {
       case 0:
         status = 'Unpaid';
@@ -267,6 +281,7 @@ export class OrderMainComponent implements OnInit {
         end_time = this.cePacking;
         paid_start_time = this.psPacking;
         paid_end_time = this.pePacking;
+        sourcing_status = this.sourcingPacking;
         break;
       case 2:
         status = 'Shipped';
@@ -340,6 +355,7 @@ export class OrderMainComponent implements OnInit {
     end_time = end_time? end_time: null;
     paid_start_time = paid_start_time? paid_start_time: null;
     paid_end_time = paid_end_time? paid_end_time: null;
+    sourcing_status = sourcing_status? sourcing_status: null;
     this.searchKey = this.searchKey && this.searchKey != ''? this.searchKey: null;
 
     this.orderService.getSupplyOrderList({
@@ -352,7 +368,8 @@ export class OrderMainComponent implements OnInit {
       start_time,
       end_time,
       paid_start_time,
-      paid_end_time
+      paid_end_time,
+      sourcing_status
     }).then((data) => {
       self.length = data.count;
       switch (event.index) {
@@ -683,6 +700,18 @@ export class OrderMainComponent implements OnInit {
         break;
       case 7:
         this.paymentUndelivered = $event;
+        break;
+    }
+
+    this.changeProducts({
+      index: this.selectedIndex
+    });
+  }
+
+  sourcingChange($event) {
+    switch (this.selectedIndex) {
+      case 1:
+        this.sourcingPacking = $event;
         break;
     }
 

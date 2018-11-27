@@ -22,12 +22,15 @@ export class AddOrderStockDialogComponent implements OnInit {
     private orderService: OrderService
   ) {
     this.orderStockForm = this.fb.group({
+      id: [''],
       sourcingSupplier: [''],
       sourcingOrderNumber: ['']
     });
 
     this.orderStockForm.patchValue({
-      sourcingOrderNumber: this.data.order.sourcingOrderNumber
+      id: this.data.order.id,
+      sourcingOrderNumber: this.data.order.sourcingOrderNumber,
+      sourcingSupplier: this.data.order.sourcingSupplier
     });
 
     this.getSourcingSupplierList();
@@ -45,19 +48,22 @@ export class AddOrderStockDialogComponent implements OnInit {
   getSourcingSupplierList() {
     this.orderService.getSourcingSupplierList().then((data) => {
       this.sourcingSupplierList = [...data];
-      this.orderStockForm.patchValue({
-        sourcingSupplier: this.sourcingSupplierList[0].sourcingName
-      });
+      console.log(this.orderStockForm.value.sourcingSupplier)
+      if(!this.orderStockForm.value.sourcingSupplier) {
+        this.orderStockForm.patchValue({
+          sourcingSupplier: this.sourcingSupplierList[0].sourcingName
+        });
+      }
     });
   }
 
-  changeOrderStock() {
+  changeOrderSourcing() {
     if(this.orderStockForm.invalid) {
       return;
     }
 
     let self = this;
-    this.orderService.changeOrderStockInformation(this.orderStockForm.value).then((data) => {
+    this.orderService.changeOrderSourcing(this.orderStockForm.value).then((data) => {
       self.close();
       if(data.id) {
         self.data.isOrderStockEdit = true;

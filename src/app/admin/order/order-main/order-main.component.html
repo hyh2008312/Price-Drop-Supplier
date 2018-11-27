@@ -143,9 +143,17 @@
               </mat-select>
             </mat-form-field>
             <div class="md-margin-right-2">Sort by Payment Type: </div>
-            <mat-form-field>
+            <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="paymentPacking" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="md-margin-right-2">Sort by Sourcing Status: </div>
+            <mat-form-field>
+              <mat-select [ngModel]="sourcingPacking" name="sourcing" (valueChange)="sourcingChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of sourcingList" [value]="item.value">
                   {{ item.text }}
                 </mat-option>
               </mat-select>
