@@ -11,7 +11,7 @@
                     fxLayout="row" fxLayoutAlign="start center" >
                 <i class="material-icons">search</i>
                 <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-                       placeholder="Search by order number"
+                       placeholder="Search by"
                        (keyup.enter)="searchResultProducts()"/>
                 <div class="sc-order__search-close" fxLayout="row" fxLayoutAlign="center center"
                      *ngIf="searchKey != ''" (click)="clearSearchKey()">
