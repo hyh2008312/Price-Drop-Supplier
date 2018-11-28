@@ -164,6 +164,12 @@ export class OrderMainComponent implements OnInit {
   },{
     text: 'Tracking Number',
     value: 'ShippingNumber'
+  },{
+    text: 'Product Title',
+    value: 'title'
+  },{
+    text: 'SKU',
+    value: 'SKU'
   }];
 
   // MatPaginator Inputs
