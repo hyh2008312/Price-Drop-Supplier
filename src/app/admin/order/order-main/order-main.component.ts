@@ -169,7 +169,7 @@ export class OrderMainComponent implements OnInit {
     value: 'title'
   },{
     text: 'SKU',
-    value: 'SKU'
+    value: 'sku'
   }];
 
   // MatPaginator Inputs
