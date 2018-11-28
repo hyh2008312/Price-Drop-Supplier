@@ -298,7 +298,7 @@
           <div fxLayout="row" fxLayoutAlign="start center">
             <div>Filter by Order Submission Time:</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="csShipped" placeholder="Start Date" (dateInput)="addEvent('ceShipped', $event)">
+              <input matInput [matDatepicker]="csShipped" placeholder="Start Date" (dateInput)="addEvent('csShipped', $event)">
               <mat-datepicker-toggle matSuffix [for]="csShipped"></mat-datepicker-toggle>
               <mat-datepicker #csShipped></mat-datepicker>
             </mat-form-field>
