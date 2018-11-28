@@ -30,38 +30,6 @@ export class OrderItemComponent implements OnInit {
 
   }
 
-  delete() {
-    let self = this;
-
-
-  }
-
-  publish() {
-    let self = this;
-
-
-  }
-
-  unpublish() {
-    let self = this;
-
-
-  }
-
-  edit() {
-    let tab = '';
-    switch (this.status) {
-      case 0:
-        tab = 'publish';
-        break;
-      case 1:
-        tab = 'draft';
-        break;
-      case 2:
-        tab = 'unpublish';
-        break;
-    }
-  }
 
   editSourcing() {
     let dialogRef = this.dialog.open(AddOrderStockDialogComponent, {

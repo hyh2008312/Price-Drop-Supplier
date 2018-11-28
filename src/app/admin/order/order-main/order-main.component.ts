@@ -38,6 +38,10 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 export class OrderMainComponent implements OnInit {
 
 
+  orderAll: any = false;
+  orderAllIndex = 1;
+  typeAll: any = false;
+  paymentAll: any = false;
   orderUnpaid: any = false;
   orderUnpaidIndex = 1;
   typeUnpaid: any = false;
@@ -71,6 +75,10 @@ export class OrderMainComponent implements OnInit {
   typeUndelivered: any = false;
   paymentUndelivered: any = false;
 
+  csAll: any = false;
+  ceAll: any = false;
+  psAll: any = false;
+  peAll: any = false;
   csUnpaid: any = false;
   ceUnpaid: any = false;
   csPacking: any = false;
@@ -149,8 +157,14 @@ export class OrderMainComponent implements OnInit {
   searchForm: FormGroup;
   searchPackingForm: FormGroup;
 
-  searchCategory = 'sku';
-  searchList = ['sku','username','title'];
+  searchCategory = 'OrderNumber';
+  searchList = [{
+    text: 'Order Number',
+    value: 'OrderNumber'
+  },{
+    text: 'Tracking Number',
+    value: 'ShippingNumber'
+  }];
 
   // MatPaginator Inputs
   length:number = 0;
@@ -194,6 +208,10 @@ export class OrderMainComponent implements OnInit {
 
   clearSearchKey() {
     this.searchKey = '';
+    this.orderAllIndex = 1;
+    this.changeProducts({
+      index: this.selectedIndex
+    });
   }
 
   ngOnInit():void {
@@ -220,27 +238,30 @@ export class OrderMainComponent implements OnInit {
     this.pageSize = event.pageSize;
     switch (type) {
       case 0:
-        this.orderUnpaidIndex = event.pageIndex + 1;
+        this.orderAllIndex = event.pageIndex + 1;
         break;
       case 1:
-        this.orderPackingIndex = event.pageIndex + 1;
+        this.orderUnpaidIndex = event.pageIndex + 1;
         break;
       case 2:
-        this.orderShippedIndex = event.pageIndex + 1;
+        this.orderPackingIndex = event.pageIndex + 1;
         break;
       case 3:
-        this.orderAuditIndex = event.pageIndex + 1;
+        this.orderShippedIndex = event.pageIndex + 1;
         break;
       case 4:
-        this.orderCanceledIndex = event.pageIndex + 1;
+        this.orderAuditIndex = event.pageIndex + 1;
         break;
       case 5:
-        this.orderCompletedIndex = event.pageIndex + 1;
+        this.orderCanceledIndex = event.pageIndex + 1;
         break;
       case 6:
-        this.orderRefundIndex = event.pageIndex + 1;
+        this.orderCompletedIndex = event.pageIndex + 1;
         break;
       case 7:
+        this.orderRefundIndex = event.pageIndex + 1;
+        break;
+      case 8:
         this.orderUndeliveredIndex = event.pageIndex + 1;
         break;
     }
@@ -258,7 +279,7 @@ export class OrderMainComponent implements OnInit {
   }
 
   changeProducts(event) {
-    let status = '';
+    let status: any = '';
     let page = 0;
     let order_type = this.typeUnpaid;
     let cod_status = this.paymentUpaid;
@@ -269,10 +290,18 @@ export class OrderMainComponent implements OnInit {
     let sourcing_status = false;
     switch (event.index) {
       case 0:
+        status = null;
+        page = this.orderAllIndex;
+        order_type = this.typeAll;
+        cod_status = this.paymentAll;
+        start_time = this.csAll;
+        end_time = this.ceAll;
+        break;
+      case 1:
         status = 'Unpaid';
         page = this.orderUnpaidIndex;
         break;
-      case 1:
+      case 2:
         status = 'Packing';
         page = this.orderPackingIndex;
         order_type = this.typePacking;
@@ -283,7 +312,7 @@ export class OrderMainComponent implements OnInit {
         paid_end_time = this.pePacking;
         sourcing_status = this.sourcingPacking;
         break;
-      case 2:
+      case 3:
         status = 'Shipped';
         page = this.orderShippedIndex;
         order_type = this.typeShipped;
@@ -293,7 +322,7 @@ export class OrderMainComponent implements OnInit {
         paid_start_time = this.psShipped;
         paid_end_time = this.peShipped;
         break;
-      case 3:
+      case 4:
         status = 'Audit canceled';
         page = this.orderAuditIndex;
         order_type = this.typeAudit;
@@ -303,7 +332,7 @@ export class OrderMainComponent implements OnInit {
         paid_start_time = this.psAudit;
         paid_end_time = this.peAudit;
         break;
-      case 4:
+      case 5:
         status = 'Canceled';
         page = this.orderCanceledIndex;
         order_type = this.typeCanceled;
@@ -311,7 +340,7 @@ export class OrderMainComponent implements OnInit {
         start_time = this.csCanceled;
         end_time = this.ceCanceled;
         break;
-      case 5:
+      case 6:
         status = 'Completed';
         page = this.orderCompletedIndex;
         order_type = this.typeCompleted;
@@ -321,7 +350,7 @@ export class OrderMainComponent implements OnInit {
         paid_start_time = this.psCompleted;
         paid_end_time = this.peCompleted;
         break;
-      case 6:
+      case 7:
         status = 'Refunded';
         page = this.orderRefundIndex;
         order_type = this.typeRefund;
@@ -331,7 +360,7 @@ export class OrderMainComponent implements OnInit {
         paid_start_time = this.psRefunded;
         paid_end_time = this.peRefunded;
         break;
-      case 7:
+      case 8:
         status = 'Undelivered';
         page = this.orderUndeliveredIndex;
         order_type = this.typeUndelivered;
@@ -344,10 +373,6 @@ export class OrderMainComponent implements OnInit {
       default:
     }
     let self = this;
-    if(this.isSearchResult) {
-      this.isSearchResult = false;
-      return;
-    }
 
     order_type = order_type? order_type: null;
     cod_status = cod_status? cod_status: null;
@@ -356,13 +381,13 @@ export class OrderMainComponent implements OnInit {
     paid_start_time = paid_start_time? paid_start_time: null;
     paid_end_time = paid_end_time? paid_end_time: null;
     sourcing_status = sourcing_status? sourcing_status: null;
-    this.searchKey = this.searchKey && this.searchKey != ''? this.searchKey: null;
+    const q = this.searchKey && this.searchKey != ''? this.searchKey: null;
 
     this.orderService.getSupplyOrderList({
       status,
       page,
       page_size: this.pageSize,
-      q: this.searchKey,
+      q,
       order_type,
       cod_status,
       start_time,
@@ -374,27 +399,30 @@ export class OrderMainComponent implements OnInit {
       self.length = data.count;
       switch (event.index) {
         case 0:
-          self.orderUnpaid = data.results;
+          self.orderAll = data.results;
           break;
         case 1:
-          self.orderPacking = data.results;
+          self.orderUnpaid = data.results;
           break;
         case 2:
-          self.orderShipped = data.results;
+          self.orderPacking = data.results;
           break;
         case 3:
-          self.orderAudit = data.results;
+          self.orderShipped = data.results;
           break;
         case 4:
-          self.orderCanceled = data.results;
+          self.orderAudit = data.results;
           break;
         case 5:
-          self.orderCompleted = data.results;
+          self.orderCanceled = data.results;
           break;
         case 6:
-          self.orderRefund = data.results;
+          self.orderCompleted = data.results;
           break;
         case 7:
+          self.orderRefund = data.results;
+          break;
+        case 8:
           self.orderUndelivered = data.results;
           break;
       }
@@ -407,48 +435,11 @@ export class OrderMainComponent implements OnInit {
     self.isSearchResult = true;
 
     this.orderService.getSupplyOrderResult({
-      number: this.searchKey
+      number: this.searchKey,
+      type: this.searchCategory
     }).then((data) => {
-      if(data.length> 0) {
-        switch (data[0].orderStatus) {
-          case 'Unpaid':
-            self.selectedIndex = 0;
-            self.orderUnpaid = [...data];
-            break;
-          case 'Packing':
-            self.selectedIndex = 1;
-            self.orderPacking = [...data];
-            break;
-          case 'Paid':
-            self.selectedIndex = 1;
-            self.orderPacking = [...data];
-            break;
-          case 'Shipped':
-            self.selectedIndex = 2;
-            self.orderShipped = [...data];
-            break;
-          case 'Audit canceled':
-            self.selectedIndex = 3;
-            self.orderAudit = [...data];
-            break;
-          case 'Canceled':
-            self.selectedIndex = 4;
-            self.orderCanceled = [...data];
-            break;
-          case 'Completed':
-            self.selectedIndex = 5;
-            self.orderCompleted = [...data];
-            break;
-          case 'Refunded':
-            self.selectedIndex = 6;
-            self.orderRefund = [...data];
-            break;
-          case 'Undelivered':
-            self.selectedIndex = 6;
-            self.orderUndelivered = [...data];
-            break;
-        }
-      }
+      self.length = data.length;
+      self.orderAll = [...data];
     });
   }
 
@@ -461,24 +452,27 @@ export class OrderMainComponent implements OnInit {
     let status = 'Packing';
     switch (self.selectedIndex) {
       case 0:
+        status = 'All';
+        break;
+      case 1:
         status = 'Unpaid';
         break;
-      case 2:
+      case 3:
         status = 'Shipped';
         break;
-      case 3:
+      case 4:
         status = 'Audit canceled';
         break;
-      case 4:
+      case 5:
         status = 'Canceled';
         break;
-      case 5:
+      case 6:
         status = 'Completed';
         break;
-      case 6:
+      case 7:
         status = 'Refunded';
         break;
-      case 7:
+      case 8:
         status = 'Undelivered';
         break;
     }
@@ -509,27 +503,30 @@ export class OrderMainComponent implements OnInit {
 
       switch (self.selectedIndex) {
         case 0:
-          self.orderUnpaid = [...data];
+          self.orderAll = [...data];
           break;
         case 1:
-          self.orderPacking = [...data];
+          self.orderUnpaid = [...data];
           break;
         case 2:
-          self.orderShipped = [...data];
+          self.orderPacking = [...data];
           break;
         case 3:
-          self.orderAudit = [...data];
+          self.orderShipped = [...data];
           break;
         case 4:
-          self.orderCanceled = [...data];
+          self.orderAudit = [...data];
           break;
         case 5:
-          self.orderCompleted = [...data];
+          self.orderCanceled = [...data];
           break;
         case 6:
-          self.orderRefund = [...data];
+          self.orderCompleted = [...data];
           break;
         case 7:
+          self.orderRefund = [...data];
+          break;
+        case 8:
           self.orderUndelivered = [...data];
           break;
       }
@@ -542,7 +539,7 @@ export class OrderMainComponent implements OnInit {
 
   productChange(event) {
     switch(event.status) {
-      case 3:
+      case 4:
         switch(event.event) {
           case 'audit':
             this.orderAudit.splice(event.index,1);
@@ -568,28 +565,28 @@ export class OrderMainComponent implements OnInit {
     let packing: any = [];
     let excel: any = [];
     switch (this.selectedIndex) {
-      case 0:
+      case 1:
         excel = [...this.orderUnpaid];
         break;
-      case 1:
+      case 2:
         excel = [...this.orderPacking];
         break;
-      case 2:
+      case 3:
         excel = [...this.orderShipped];
         break;
-      case 3:
+      case 4:
         excel = [...this.orderAudit];
         break;
-      case 4:
+      case 5:
         excel = [...this.orderCanceled];
         break;
-      case 5:
+      case 6:
         excel = [...this.orderCompleted];
         break;
-      case 6:
+      case 7:
         excel = [...this.orderRefund];
         break;
-      case 7:
+      case 8:
         excel = [...this.orderUndelivered];
         break;
     }
@@ -645,27 +642,30 @@ export class OrderMainComponent implements OnInit {
   typeChange($event) {
     switch (this.selectedIndex) {
       case 0:
-        this.typeUnpaid = $event;
+        this.typeAll = $event;
         break;
       case 1:
-        this.typePacking = $event;
+        this.typeUnpaid = $event;
         break;
       case 2:
-        this.typeShipped = $event;
+        this.typePacking = $event;
         break;
       case 3:
-        this.typeAudit = $event;
+        this.typeShipped = $event;
         break;
       case 4:
-        this.typeCanceled = $event;
+        this.typeAudit = $event;
         break;
       case 5:
-        this.typeCompleted = $event;
+        this.typeCanceled = $event;
         break;
       case 6:
-        this.typeRefund = $event;
+        this.typeCompleted = $event;
         break;
       case 7:
+        this.typeRefund = $event;
+        break;
+      case 8:
         this.typeUndelivered = $event;
         break;
     }
@@ -678,27 +678,30 @@ export class OrderMainComponent implements OnInit {
   paymentChange($event) {
     switch (this.selectedIndex) {
       case 0:
-        this.paymentUpaid = $event;
+        this.paymentAll = $event;
         break;
       case 1:
-        this.paymentPacking = $event;
+        this.paymentUpaid = $event;
         break;
       case 2:
-        this.paymentShipped = $event;
+        this.paymentPacking = $event;
         break;
       case 3:
-        this.paymentAudit = $event;
+        this.paymentShipped = $event;
         break;
       case 4:
-        this.paymentCanceled = $event;
+        this.paymentAudit = $event;
         break;
       case 5:
-        this.paymentCompleted = $event;
+        this.paymentCanceled = $event;
         break;
       case 6:
-        this.paymentRefund = $event;
+        this.paymentCompleted = $event;
         break;
       case 7:
+        this.paymentRefund = $event;
+        break;
+      case 8:
         this.paymentUndelivered = $event;
         break;
     }
@@ -710,7 +713,7 @@ export class OrderMainComponent implements OnInit {
 
   sourcingChange($event) {
     switch (this.selectedIndex) {
-      case 1:
+      case 2:
         this.sourcingPacking = $event;
         break;
     }
