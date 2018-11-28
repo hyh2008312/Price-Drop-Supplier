@@ -172,6 +172,9 @@ export class OrderMainComponent implements OnInit {
     value: 'sku'
   }];
 
+  searchType = 'sku';
+  searchTypeList = ['sku','username','title'];
+
   // MatPaginator Inputs
   length:number = 0;
   pageSize = 50;
