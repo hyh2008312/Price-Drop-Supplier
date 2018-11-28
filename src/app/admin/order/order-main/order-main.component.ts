@@ -355,7 +355,7 @@ export class OrderMainComponent implements OnInit {
         order_type = this.typeCompleted;
         cod_status = this.paymentCompleted;
         start_time = this.csCompleted;
-        end_time = this.ceCanceled;
+        end_time = this.ceCompleted;
         paid_start_time = this.psCompleted;
         paid_end_time = this.peCompleted;
         break;
