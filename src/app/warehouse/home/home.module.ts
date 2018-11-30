@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { HomeMainComponent } from './home-main/home-main.component';
-import { HomeCreateComponent } from './home-create/home-create.component';
+import { HomeCreateDialogComponent } from './home-create-dialog/home-create-dialog.component';
 
 import { HomeItemComponent } from './home-item/home-item.component';
 import { HomeTitleComponent } from './home-title/home-title.component';
@@ -23,7 +23,7 @@ import { HomeService } from './home.service';
   exports: [],
   declarations: [
     HomeMainComponent,
-    HomeCreateComponent,
+    HomeCreateDialogComponent,
     HomeItemComponent,
     HomeTitleComponent,
     OrderTrackingDialogComponent,
@@ -31,6 +31,7 @@ import { HomeService } from './home.service';
     ToolTipsComponent
   ],
   entryComponents: [
+    HomeCreateDialogComponent,
     OrderTrackingDialogComponent,
     OrderDetailDialogComponent,
     ToolTipsComponent
