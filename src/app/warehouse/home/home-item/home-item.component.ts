@@ -2,6 +2,7 @@ import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
 
 import { HomeService } from '../home.service';
 import { UserService } from  '../../../shared/services/user/user.service';
+import { OrderTrackingDialogComponent } from '../order-tracking-dialog/order-tracking-dialog.component';
 import { OrderDetailDialogComponent } from '../order-detail-dialog/order-detail-dialog.component';
 import { HomeEditDialogComponent } from '../home-edit-dialog/home-edit-dialog.component';
 import {MatDialog} from '@angular/material';
@@ -42,9 +43,9 @@ export class HomeItemComponent implements OnInit {
   }
 
   trackingPackage() {
-    let dialogRef = this.dialog.open(OrderDetailDialogComponent, {
+    let dialogRef = this.dialog.open(OrderTrackingDialogComponent, {
       data: {
-        trackingNumber: this.product.logisticsId
+        purchaseId: this.product.purchaseId
       }
     });
 
@@ -54,7 +55,7 @@ export class HomeItemComponent implements OnInit {
   orderDetails() {
     let dialogRef = this.dialog.open(OrderDetailDialogComponent, {
       data: {
-        purchaseId: this.product.purchaseId
+        trackingNumber: this.product.logisticsId
       }
     });
 
@@ -62,7 +63,7 @@ export class HomeItemComponent implements OnInit {
   }
 
   edit() {
-    let dialogRef = this.dialog.open(OrderDetailDialogComponent, {
+    let dialogRef = this.dialog.open(HomeEditDialogComponent, {
       data: {
         item: this.product,
         isEdit: false

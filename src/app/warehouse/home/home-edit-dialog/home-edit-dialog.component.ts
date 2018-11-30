@@ -32,7 +32,7 @@ export class HomeEditDialogComponent implements OnInit {
 
     this.purchaseForm.patchValue({
       id: this.data.item.id,
-      parchaseId: this.data.item.parchaseId
+      purchaseId: this.data.item.purchaseId
     });
 
     for(let item of this.data.item.purchaseVariants) {
