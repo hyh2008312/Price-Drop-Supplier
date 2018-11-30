@@ -106,17 +106,13 @@ export class SpecificationMainComponent implements OnInit {
       });
       if(this.categoryList[index] && this.categoryList[index].children) {
         this.subCategoryList = [...this.categoryList[index].children];
-        if(this.subCategoryList[0].children && this.subCategoryList[0].children.length > 0) {
-          this.category = [];
-        } else {
-          this.category = [...this.subCategoryList];
-          this.subCategoryList = [];
-        }
+        this.category = [...this.subCategoryList];
       } else {
         this.subCategoryList = [];
         this.category = [...this.categoryList];
       }
     }
+    console.log(this.category)
   }
 
   subCategoryChange($event) {

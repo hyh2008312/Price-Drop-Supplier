@@ -411,7 +411,6 @@ export class SpecificationEditComponent implements OnInit {
       saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `${this.lastCategoryName + '-' + new Date().getTime()}.xlsx`);
 
     }).catch((err) => {
-      console.log(err)
       this.error = err;
     });
   }
