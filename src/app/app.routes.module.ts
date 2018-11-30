@@ -17,6 +17,10 @@ const routes: Routes = [
         canActivate: [ ProtectedGuard ],
         loadChildren: 'app/admin/admin.module#AdminModule'
       }, {
+        path: 'warehouse',
+        canActivate: [ ProtectedGuard ],
+        loadChildren: 'app/warehouse/warehouse.module#WarehouseModule'
+      }, {
         path: '',
         loadChildren: 'app/landing-page/landing-page.module#LandingPageModule'
       }, {
