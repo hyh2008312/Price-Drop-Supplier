@@ -15,20 +15,18 @@ import { UserService } from  '../../../shared/services/user/user.service';
 
 export class HomeMainComponent implements OnInit {
 
-  isPendingChecked: any = false;
-
   selectedIndex: number = 0;
-  subscription: any;
 
   searchKey: any = '';
   isSearch: boolean = false;
   searchForm: FormGroup;
+
   searchList: [{
     text: '采购单号',
-    value: '111'
+    value: 'purchase'
   }, {
     text: '快递单号',
-    value: '222'
+    value: 'delivery'
   }];
 
   // MatPaginator Inputs
@@ -37,6 +35,15 @@ export class HomeMainComponent implements OnInit {
   pageSizeOptions = [25, 50];
 
   isSuperuser: boolean = false;
+
+  purchaseAll: any = false;
+  purchaseAllIndex: any = 1;
+  purchaseProccessing: any = false;
+  purchaseProccessingIndex: any = false;
+  purchaseShipped: any = false;
+  purchaseShippedIndex: any = false;
+  purchaseDelivery: any = false;
+  purchaseDeliveryIndex: any = false;
 
   constructor(
     private adminService: HomeService,
@@ -73,15 +80,76 @@ export class HomeMainComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
-  changeProducts($event) {
+  // MatPaginator Output
+  changePage(event, type) {
+    this.pageSize = event.pageSize;
+    switch (type) {
+      case 0:
+        this.purchaseAllIndex = event.pageIndex + 1;
+        break;
+      case 1:
+        this.purchaseProccessingIndex = event.pageIndex + 1;
+        break;
+      case 2:
+        this.purchaseShippedIndex = event.pageIndex + 1;
+        break;
+      case 3:
+        this.purchaseDeliveryIndex = event.pageIndex + 1;
+        break;
+    }
+    this.changePurchaseLists({index: type});
+  }
 
+  changePurchaseLists($event) {
+
+    let status: any = null;
+    let page = this.purchaseAllIndex;
+    let page_size = this.pageSize;
+    switch ($event.index) {
+      case 0:
+        break;
+      case 1:
+        status = 'Processing';
+        page = this.purchaseProccessingIndex;
+        break;
+      case 2:
+        status = 'Shipped';
+        page = this.purchaseShippedIndex;
+        break;
+      case 3:
+        status = 'Delivered';
+        page = this.purchaseDeliveryIndex;
+        break;
+    }
+
+    this.adminService.getPurchaseList({
+      status,
+      page,
+      page_size
+    }).then((data) => {
+      this.length = data.count;
+      switch ($event.index) {
+        case 0:
+          this.purchaseAll = [...data.results];
+          break;
+        case 1:
+          this.purchaseProccessing = [...data.results];
+          break;
+        case 2:
+          this.purchaseShipped = [...data.results];
+          break;
+        case 3:
+          this.purchaseDelivery = [...data.results];
+          break;
+      }
+    });
   }
 
 }

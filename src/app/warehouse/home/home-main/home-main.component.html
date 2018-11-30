@@ -9,7 +9,7 @@
         </div>
       </button>
     </div>
-    <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
+    <mat-tab-group color="primary" (selectedTabChange)="changePurchaseLists($event)"  [(selectedIndex)]="selectedIndex">
       <mat-tab label="所有" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
@@ -39,7 +39,7 @@
           <app-warehouse-home-title></app-warehouse-home-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
-          <div class="sc-product__product-list" *ngFor="let item of productPublished;let i = index;">
+          <div class="sc-product__product-list" *ngFor="let item of purchaseAll;let i = index;">
             <app-warehouse-home-item [status]="0" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
           </div>
           <mat-paginator [length]="length"
