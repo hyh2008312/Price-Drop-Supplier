@@ -1,8 +1,10 @@
 import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 
 import { HomeService } from '../home.service';
 import { UserService } from  '../../../shared/services/user/user.service';
+import { OrderDetailDialogComponent } from '../order-detail-dialog/order-detail-dialog.component';
+import { HomeEditDialogComponent } from '../home-edit-dialog/home-edit-dialog.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-warehouse-home-item',
@@ -23,8 +25,7 @@ export class HomeItemComponent implements OnInit {
   constructor(
     private adminService: HomeService,
     private userService: UserService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    private dialog: MatDialog
   ) {
     this.userService.currentUser.subscribe((data) => {
       if(data) {
@@ -41,11 +42,38 @@ export class HomeItemComponent implements OnInit {
   }
 
   trackingPackage() {
+    let dialogRef = this.dialog.open(OrderDetailDialogComponent, {
+      data: {
+        trackingNumber: this.product.logisticsId
+      }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {});
   }
 
   orderDetails() {
+    let dialogRef = this.dialog.open(OrderDetailDialogComponent, {
+      data: {
+        purchaseId: this.product.purchaseId
+      }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {});
+  }
+
+  edit() {
+    let dialogRef = this.dialog.open(OrderDetailDialogComponent, {
+      data: {
+        item: this.product,
+        isEdit: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        this.product = dialogRef.componentInstance.data.item;
+      }
+    });
   }
 
 }

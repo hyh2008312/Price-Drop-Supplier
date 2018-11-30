@@ -5,12 +5,12 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import { HomeService } from '../home.service';
 
 @Component({
-  selector: 'app-warehouse-home-create-dialog',
-  templateUrl: './home-create-dialog.component.html',
+  selector: 'app-warehouse-home-edit-dialog',
+  templateUrl: './home-edit-dialog.component.html',
   styleUrls: ['../_home.scss']
 })
 
-export class HomeCreateDialogComponent implements OnInit {
+export class HomeEditDialogComponent implements OnInit {
 
   purchaseForm : FormGroup;
   error: any = false;
@@ -18,16 +18,29 @@ export class HomeCreateDialogComponent implements OnInit {
   get purchaseInfo() { return this.purchaseForm.get('purchaseInfo') as FormArray; }
 
   constructor(
-    public dialogRef: MatDialogRef<HomeCreateDialogComponent>,
+    public dialogRef: MatDialogRef<HomeEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
     private homeService: HomeService
   ) {
 
     this.purchaseForm = this.fb.group({
+      id: ['', Validators.required],
       purchaseId: ['', Validators.required],
       purchaseInfo: this.fb.array([])
     });
+
+    this.purchaseForm.patchValue({
+      id: this.data.item.id,
+      parchaseId: this.data.item.parchaseId
+    });
+
+    for(let item of this.data.item.purchaseVariants) {
+      this.purchaseInfo.push(this.fb.group({
+        sku: [item.sku, Validators.required],
+        purchaseQuantity: [item.quantity, Validators.required]
+      }));
+    }
 
   }
 
@@ -43,10 +56,11 @@ export class HomeCreateDialogComponent implements OnInit {
     if(this.purchaseForm.invalid) {
       return;
     }
-    this.homeService.purchaseCreate(this.purchaseForm.value).then((data) => {
+    this.homeService.purchaseEdit(this.purchaseForm.value).then((data) => {
       if(data.id) {
         this.error = false;
-        this.data.isCreated = true;
+        this.data.isEdit = true;
+        this.data.item = data;
         this.close();
       } else {
         this.error = data.detail;

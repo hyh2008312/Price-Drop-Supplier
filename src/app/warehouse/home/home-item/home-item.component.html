@@ -1,6 +1,7 @@
 <div>
   <div class="sc-product__product-item-top" fxLayout="row" fxLayoutAlign="start center">
     <div>采购单号: {{product.purchaseId}}</div>
+    <div class="md-margin-left-3">下单日期: {{product.created | amDateFormat:'MMMM Do, YYYY HH:mm:ss'}}</div>
   </div>
   <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
     <div class="md-margin-right-2" fxFlex="50" fxLayout="column" fxLayoutAlign="start stretch">
@@ -39,10 +40,13 @@
         {{product.logisticsId}}
       </div>
     </div>
-    <div class="sc-product__product-price" fxFlex="10"
-         fxLayout="column" fxLayoutAlign="center center">
-      <button mat-button color="primary" (click)="trackingPackage()">Disapprove</button>
-      <button mat-button color="primary" (click)="orderDetails()">Unpublish</button>
+    <div class="sc-product__product-price sc__accent-dark" fxFlex="10"
+         fxLayout="column" fxLayoutAlign="center stretch">
+      <button mat-raised-button color="primary" (click)="edit()">编辑</button>
+      <div class="md-margin-top-1"></div>
+      <button mat-raised-button color="accent" (click)="trackingPackage()">查看物流信息</button>
+      <div class="md-margin-top-1"></div>
+      <button mat-raised-button color="accent" (click)="orderDetails()">查看采购信息</button>
     </div>
   </div>
 </div>
