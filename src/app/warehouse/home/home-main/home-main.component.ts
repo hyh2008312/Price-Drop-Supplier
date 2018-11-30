@@ -174,7 +174,7 @@ export class HomeMainComponent implements OnInit {
     });
   }
 
-  createPurchase(i) {
+  createPurchase() {
     let dialogRef = this.dialog.open(HomeCreateDialogComponent, {
       data: {
         isCreated: false
