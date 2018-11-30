@@ -4,7 +4,7 @@
       {{order.created | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY'}}
     </div>
     <div class="xb-bold md-margin-left-3" *ngIf="order.paidTime">
-      Paid Time: {{order.paidTime | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY'}}
+      Paid Time: {{order.paidTime | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY HH:mm:ss'}}
     </div>
     <div class="md-margin-left-3">Order #: {{order.number}}</div>
     <div class="md-margin-left-3" fxFlex>{{order.sumOrderNumber? 'Sum Order #:' + order.sumOrderNumber: ''}}</div>
