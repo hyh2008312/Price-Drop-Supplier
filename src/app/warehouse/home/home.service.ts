@@ -52,7 +52,7 @@ export class HomeService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/create/`;
+    const url = `${this.baseUrl.url}purchase/add/`;
 
     return this.http.post(url, product, options)
       .toPromise()

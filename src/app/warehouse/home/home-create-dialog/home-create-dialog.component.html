@@ -2,42 +2,37 @@
   <div class="sc-product-dialog__close" (click)="close()" >
     <i class="iconfontXberts icon-ic-close"></i>
   </div>
-  <div class="sc-order-dialog__title">
-    添加采购采购信息
+  <div class="sc-product-dialog__title">
+    添加采购信息
   </div>
   <form class="md-margin-top-3" [formGroup]="purchaseForm" novalidate>
     <div class="xb-bold">
       采购订单号
     </div>
-    <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <mat-form-field fxFlex>
-          <input type="text" matInput placeholder="采购订单号" formControlName="purchaseId">
-        </mat-form-field>
+        <input type="text" matInput placeholder="采购订单号" formControlName="purchaseId">
       </mat-form-field>
     </div>
-    <div class="md-margin-top-2" formArrayName="goods">
-      <div class="sc-product__create-list" fxLayout="column" *ngFor="let p of goods.attributes; let i = index">
+    <div class="xb-bold md-margin-top-2">
+      采购商品
+    </div>
+    <div class="md-margin-top-2" formArrayName="purchaseInfo">
+      <div fxLayout="column" *ngFor="let p of purchaseInfo.controls; let i = index">
         <div [formGroupName]="i">
           <div fxLayout="row" fxLayoutAlign="start center">
             <div class="md-margin-right-2" fxFlex="60" >
-              <div class="xb-bold">
-                SKU
-              </div>
               <div fxLayout="row" fxLayoutAlign="start center">
                 <mat-form-field fxFlex>
-                  <input type="text" matInput placeholder="SKU" formControlName="SKU">
+                  <input type="text" matInput placeholder="SKU" formControlName="sku">
                 </mat-form-field>
               </div>
 
             </div>
             <div fxFlex="35">
-              <div class="xb-bold">
-                数量
-              </div>
               <div class="md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
                 <mat-form-field fxFlex>
-                  <input type="number" matInput placeholder="数量" formControlName="quantity">
+                  <input type="number" matInput placeholder="数量" formControlName="purchaseQuantity">
                 </mat-form-field>
               </div>
             </div>
@@ -47,15 +42,15 @@
             </div>
           </div>
 
-          <div *ngIf="p.get('orderNumber').invalid && (p.get('orderNumber').dirty ||
-                      p.get('orderNumber').touched)" class="xb-input-error">
-            <div *ngIf="p.get('orderNumber').hasError('required')">
+          <div *ngIf="p.get('sku').invalid && (p.get('sku').dirty ||
+                      p.get('sku').touched)" class="xb-input-error">
+            <div *ngIf="p.get('sku').hasError('required')">
               This field is required.
             </div>
           </div>
-          <div *ngIf="p.get('declaredValue').invalid && (p.get('declaredValue').dirty ||
-                    p.get('declaredValue').touched)" class="xb-input-error">
-            <div *ngIf="p.get('declaredValue').hasError('required')">
+          <div *ngIf="p.get('purchaseQuantity').invalid && (p.get('purchaseQuantity').dirty ||
+                    p.get('purchaseQuantity').touched)" class="xb-input-error">
+            <div *ngIf="p.get('purchaseQuantity').hasError('required')">
               This field is required.
             </div>
           </div>
@@ -63,7 +58,7 @@
       </div>
     </div>
     <div class="md-margin-top-2">
-      <button type="button" mat-raised-button color="primary" (click)="addOrderList()">
+      <button type="button" mat-raised-button color="primary" (click)="addPurchaseItem()">
         <div fxLayout="row" fxLayoutAlign="start center">
           <i class="material-icons">add</i>
           <span class="md-margin-left-1">添加采购商品SKU</span>
@@ -71,10 +66,13 @@
       </button>
     </div>
   </form>
-  <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-raised-button color="primary" (click)="publish()">SAVE</button>
+  <div class="xb-input-error md-margin-top-2" *ngIf="error">
+    {{error}}
+  </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="publish()">发布</button>
     <div class="md-margin-left-2">
-      <button mat-button color="primary" (click)="close()">CANCEL</button>
+      <button mat-button color="primary" (click)="close()">取消</button>
     </div>
   </div>
 </div>

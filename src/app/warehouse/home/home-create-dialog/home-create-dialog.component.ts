@@ -14,8 +14,9 @@ import { OrderDetailDialogComponent } from '../order-detail-dialog/order-detail-
 export class HomeCreateDialogComponent implements OnInit {
 
   purchaseForm : FormGroup;
+  error: any = false;
 
-  get attributes() { return this.purchaseForm.get('attributes') as FormArray; }
+  get purchaseInfo() { return this.purchaseForm.get('purchaseInfo') as FormArray; }
 
   constructor(
     public dialogRef: MatDialogRef<OrderDetailDialogComponent>,
@@ -26,7 +27,7 @@ export class HomeCreateDialogComponent implements OnInit {
 
     this.purchaseForm = this.fb.group({
       purchaseId: ['', Validators.required],
-      attributes: this.fb.array([])
+      purchaseInfo: this.fb.array([])
     });
 
   }
@@ -35,10 +36,36 @@ export class HomeCreateDialogComponent implements OnInit {
 
   ngOnDestroy() {}
 
-  publish() {}
+  close() {
+    this.dialogRef.close();
+  }
+
+  publish() {
+    if(this.purchaseForm.invalid) {
+      return;
+    }
+    this.homeService.purchaseCreate(this.purchaseForm.value).then((data) => {
+      if(data.id) {
+        this.error = false;
+        this.data.isCreated = true;
+        this.close();
+      } else {
+        this.error = data.detail;
+      }
+    }).catch((error) => {
+      this.error = error;
+    });
+  }
 
   delete(i) {
-    this.attributes.removeAt(i);
+    this.purchaseInfo.removeAt(i);
+  }
+
+  addPurchaseItem() {
+    this.purchaseInfo.push(this.fb.group({
+      sku: ['', Validators.required],
+      purchaseQuantity: ['', Validators.required]
+    }));
   }
 
 }

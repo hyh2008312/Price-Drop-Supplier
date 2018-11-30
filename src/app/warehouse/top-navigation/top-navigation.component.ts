@@ -14,8 +14,8 @@ export class TopNavigationComponent implements OnInit {
 
   contents = [{
     id: 0,
-    text: 'HOME',
-    router: './dashboard',
+    text: '首页',
+    router: './home',
     isActive: false,
     staff: false
   }];
@@ -23,17 +23,11 @@ export class TopNavigationComponent implements OnInit {
   accounts = [
     {
       id: 1,
-      text: 'Logout',
+      text: '退出',
       router: '/account/login',
       isActive: false
     }
   ];
-
-  //区分为是导航选项 && 还是账户选项
-
-  isAccountNavigation: boolean = false;
-
-  isUserNavigation: boolean = false;
 
   isSuperuser: boolean = false;
 
@@ -75,8 +69,6 @@ export class TopNavigationComponent implements OnInit {
   }
 
   changeSlide(obj: any, index: number) {
-    this.isAccountNavigation = false;
-    this.isUserNavigation = false;
     for (let value of this.contents) {
       if (value.id != obj.id) {
         value.isActive = false;
@@ -94,7 +86,6 @@ export class TopNavigationComponent implements OnInit {
 
   changeAccount(obj: any, index: number) {
     this.changeShowMenu(false);
-    this.isAccountNavigation = true;
     for (let value of this.accounts) {
       if (value.id != obj.id) {
         value.isActive = false;
@@ -121,7 +112,6 @@ export class TopNavigationComponent implements OnInit {
 
   changeInnerToggle(list, index) {
     this.changeInnerSlide(false);
-    this.isAccountNavigation = true;
     for (let value of this.accounts) {
       if (value.id != list.id) {
         value.isActive = false;

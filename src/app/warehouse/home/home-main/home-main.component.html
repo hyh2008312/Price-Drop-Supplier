@@ -2,7 +2,7 @@
   <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
     <div class="sc-product__header"></div>
     <div class="md-padding-bottom-2" fxLayout="row" fxLayoutAlign="end center">
-      <button mat-raised-button color="primary" routerLink="./create">
+      <button mat-raised-button color="primary" (click)="createPurchase()">
         <div fxLayout="row" fxLayoutAlign="start center">
           <i class="material-icons">add</i>
           <span class="md-margin-left-1">创建采购信息</span>
@@ -18,7 +18,7 @@
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                      placeholder="搜索"
-                     (keyup.enter)="changeProducts({index:0})"/>
+                     (keyup.enter)="changePurchaseLists({index:0})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
                 <i class="material-icons">close</i>
@@ -46,13 +46,13 @@
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 0)"
-                         *ngIf="productPublished && productPublished.length > 0">
+                         *ngIf="purchaseAll && purchaseAll.length > 0">
           </mat-paginator>
           <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
-               *ngIf="productPublished && productPublished.length <= 0">
+               *ngIf="purchaseAll && purchaseAll.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">
               <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any products yet. </div>
+              <div class="sc-product__product-title-1 md-margin-top-4">暂无采购信息</div>
             </div>
           </div>
         </div>
@@ -62,43 +62,43 @@
           <app-warehouse-home-title></app-warehouse-home-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
-          <div class="sc-product__product-list" *ngFor="let item of productPendingApproval;let i = index;">
+          <div class="sc-product__product-list" *ngFor="let item of purchaseProccessing;let i = index;">
             <app-warehouse-home-item [status]="1" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
           </div>
           <mat-paginator [length]="length"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 1)"
-                         *ngIf="productPendingApproval && productPendingApproval.length > 0">
+                         *ngIf="purchaseProccessing && purchaseProccessing.length > 0">
           </mat-paginator>
           <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
-               *ngIf="productPendingApproval && productPendingApproval.length <= 0">
+               *ngIf="purchaseProccessing && purchaseProccessing.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">
               <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-product__product-title-1 md-margin-top-4">There is no products waiting for approval</div>
+              <div class="sc-product__product-title-1 md-margin-top-4">暂无采购信息</div>
             </div>
           </div>
         </div>
       </mat-tab>
       <mat-tab label="已发货" >
         <div class="md-margin-top-1">
-          <app-warehouse-home-title [status]="2" ></app-warehouse-home-title>
+          <app-warehouse-home-title ></app-warehouse-home-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
-          <div class="sc-product__product-list" *ngFor="let item of productDisapproved;let i = index;">
+          <div class="sc-product__product-list" *ngFor="let item of purchaseShipped;let i = index;">
             <app-warehouse-home-item [status]="2" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
           </div>
           <mat-paginator [length]="length"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 2)"
-                         *ngIf="productDisapproved && productDisapproved.length > 0">
+                         *ngIf="purchaseShipped && purchaseShipped.length > 0">
           </mat-paginator>
           <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
-               *ngIf="productDisapproved && productDisapproved.length <= 0">
+               *ngIf="purchaseShipped && purchaseShipped.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">
               <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-product__product-title-1 md-margin-top-4">There is no products being disapproved</div>
+              <div class="sc-product__product-title-1 md-margin-top-4">暂无采购信息</div>
             </div>
           </div>
         </div>
@@ -108,20 +108,20 @@
           <app-warehouse-home-title></app-warehouse-home-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
-          <div class="sc-product__product-list" *ngFor="let item of productUnpublished;let i = index;" >
+          <div class="sc-product__product-list" *ngFor="let item of purchaseDelivered;let i = index;" >
             <app-warehouse-home-item [status]="3" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
           </div>
           <mat-paginator [length]="length"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 3)"
-                         *ngIf="productUnpublished && productUnpublished.length > 0">
+                         *ngIf="purchaseDelivered && purchaseDelivered.length > 0">
           </mat-paginator>
           <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
-               *ngIf="productUnpublished && productUnpublished.length <= 0">
+               *ngIf="purchaseDelivered && purchaseDelivered.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">
               <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-product__product-title-1 md-margin-top-4">You haven't unpublished any products yet</div>
+              <div class="sc-product__product-title-1 md-margin-top-4">暂无采购信息</div>
             </div>
           </div>
         </div>

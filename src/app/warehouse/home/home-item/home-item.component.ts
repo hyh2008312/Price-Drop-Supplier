@@ -40,4 +40,12 @@ export class HomeItemComponent implements OnInit {
 
   }
 
+  trackingPackage() {
+
+  }
+
+  orderDetails() {
+
+  }
+
 }
