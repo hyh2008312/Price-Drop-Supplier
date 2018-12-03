@@ -557,7 +557,6 @@ export class OrderMainComponent implements OnInit {
   }
 
   addEvent(type: any, event:MatDatepickerInputEvent<any>) {
-    console.log(event.value._i)
     this[type] = event.value._i.year + '-'+ (event.value._i.month+1) +'-'+event.value._i.date + ' 00:00:00';
   }
 

@@ -31,6 +31,17 @@ export class SpecificationEditComponent implements OnInit {
   page: any = 1;
   length: any = 0;
   pageList: any = [1,2,3,4,5,6,7,8,9,10];
+  statusList: any = [{
+    value: 'pending',
+    text: 'Pending'
+  }, {
+    value: 'published',
+    text: 'Published'
+  }, {
+    value: 'unpublished',
+    text: 'Unpublished'
+  }];
+  status: any = 'pending';
   error: any = false;
 
   constructor(
@@ -191,7 +202,8 @@ export class SpecificationEditComponent implements OnInit {
       categoryId: this.activatedRoute.snapshot.params['id'],
       shopName: this.searchKey,
       page: this.page,
-      page_size: 500
+      page_size: 500,
+      productStatus: this.status
     }).then((data) => {
       this.length = data.count;
       this.error = false;

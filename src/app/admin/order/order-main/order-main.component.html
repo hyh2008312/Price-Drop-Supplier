@@ -661,7 +661,7 @@
             <mat-form-field class="md-margin-left-2">
               <input matInput [matDatepicker]="psRefunded" placeholder="Start Date" (dateInput)="addEvent('psRefunded', $event)">
               <mat-datepicker-toggle matSuffix [for]="psRefunded"></mat-datepicker-toggle>
-              <mat-datepicker #psCompleted></mat-datepicker>
+              <mat-datepicker #psRefunded></mat-datepicker>
             </mat-form-field>
             <div class="md-margin-left-2">to</div>
             <mat-form-field class="md-margin-left-2">
@@ -721,14 +721,14 @@
             <div>Filter by Order Submission Time:</div>
             <mat-form-field class="md-margin-left-2">
               <input matInput [matDatepicker]="csUndelivered" placeholder="Start Date" (dateInput)="addEvent('csUndelivered', $event)">
-              <mat-datepicker-toggle matSuffix [for]="csRefunded"></mat-datepicker-toggle>
-              <mat-datepicker #csRefunded></mat-datepicker>
+              <mat-datepicker-toggle matSuffix [for]="csUndelivered"></mat-datepicker-toggle>
+              <mat-datepicker #csUndelivered></mat-datepicker>
             </mat-form-field>
             <div class="md-margin-left-2">to</div>
             <mat-form-field class="md-margin-left-2">
               <input matInput [matDatepicker]="ceUndelivered" placeholder="End Date" (dateInput)="addEvent('ceUndelivered', $event)">
               <mat-datepicker-toggle matSuffix [for]="ceUndelivered"></mat-datepicker-toggle>
-              <mat-datepicker #ceRefunded></mat-datepicker>
+              <mat-datepicker #ceUndelivered></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
               <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
@@ -739,13 +739,13 @@
             <mat-form-field class="md-margin-left-2">
               <input matInput [matDatepicker]="psUndelivered" placeholder="Start Date" (dateInput)="addEvent('psUndelivered', $event)">
               <mat-datepicker-toggle matSuffix [for]="psUndelivered"></mat-datepicker-toggle>
-              <mat-datepicker #psCompleted></mat-datepicker>
+              <mat-datepicker #psUndelivered></mat-datepicker>
             </mat-form-field>
             <div class="md-margin-left-2">to</div>
             <mat-form-field class="md-margin-left-2">
               <input matInput [matDatepicker]="peUndelivered" placeholder="End Date" (dateInput)="addEvent('peUndelivered', $event)">
               <mat-datepicker-toggle matSuffix [for]="peUndelivered"></mat-datepicker-toggle>
-              <mat-datepicker #peRefunded></mat-datepicker>
+              <mat-datepicker #peUndelivered></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
               <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
