@@ -74,8 +74,8 @@
       <div class="sc__accent-dark" *ngIf="order.orderStatus == 'Audit canceled'">
         <button mat-raised-button color="accent" (click)="approveCancel()">View Detail</button>
       </div>
-      <div class="sc__accent-dark md-margin-left-3" *ngIf="order.orderStatus != 'Unpaid' && order.orderStatus != 'Canceled'">
-        <button mat-raised-button color="accent" (click)="addNote()">Add Note</button>
+      <div class="sc__accent-dark md-margin-left-2" *ngIf="order.orderStatus != 'Unpaid' && order.orderStatus != 'Canceled'">
+        <button mat-raised-button color="accent" (click)="addNote()" *ngIf="order.notes">Add Note</button>
       </div>
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">

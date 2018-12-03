@@ -390,6 +390,8 @@
   padding: 40px 28px;
   max-width: 540px;
   width: 540px;
+  max-height: 600px;
+  overflow-y: scroll;
   position: relative;
   background-color: $whiteColor;
   border-radius: 4px;
@@ -451,6 +453,10 @@
     background-color: #000;
     color: #fff;
     text-align: center;
+  }
+
+  &__width{
+    width: 210px;
   }
 
 }

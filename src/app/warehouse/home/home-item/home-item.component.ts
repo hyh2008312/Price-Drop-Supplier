@@ -55,7 +55,7 @@ export class HomeItemComponent implements OnInit {
   orderDetails() {
     let dialogRef = this.dialog.open(OrderDetailDialogComponent, {
       data: {
-        trackingNumber: this.product.logisticsId
+        id: this.product.id
       }
     });
 

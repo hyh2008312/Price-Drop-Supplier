@@ -71,9 +71,9 @@ export class HomeService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}purchase/add/${product.id}/`;
+    const url = `${this.baseUrl.url}purchase/edit/${product.id}/`;
 
-    return this.http.put(url, product, options)
+    return this.http.post(url, product, options)
       .toPromise()
       .then(response => response.json())
       .catch((error) => {
@@ -110,6 +110,25 @@ export class HomeService {
     let options = new RequestOptions({headers:headers});
 
     const url = `${this.baseUrl.url}purchase/logistics/information/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
+  getOrderDetail(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}purchase/detail/${params.id}/`;
 
     return this.http.get(url, options)
       .toPromise()

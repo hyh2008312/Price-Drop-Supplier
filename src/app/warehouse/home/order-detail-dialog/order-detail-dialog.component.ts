@@ -11,12 +11,17 @@ import { HomeService } from '../home.service';
 
 export class OrderDetailDialogComponent implements OnInit {
 
+  productItems: any;
+
+  baseInfo: any;
+  sellerContact: any;
 
   constructor(
     public dialogRef: MatDialogRef<OrderDetailDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private homeService: HomeService
   ) {
+    this.getOrderDetail(this.data.id);
   }
 
   ngOnInit():void {
@@ -27,6 +32,17 @@ export class OrderDetailDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  delete() {}
+  getOrderDetail(id) {
+    if(!id) return;
+    this.homeService.getOrderDetail({
+      id
+    }).then((data) => {
+      if(data.success) {
+        this.productItems = data.result.productItems;
+        this.baseInfo = data.result.baseInfo;
+        this.sellerContact = data.result.baseInfo.sellerContact;
+      }
+    });
+  }
 
 }
