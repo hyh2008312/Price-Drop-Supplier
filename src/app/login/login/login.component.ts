@@ -39,6 +39,10 @@ export class LoginComponent implements OnInit {
     }
   };
 
+  type = 'Supplier';
+
+  typeList = ['Supplier', 'Purchaser']
+
   facebookLoginSub: any;
   googleLoginSub: any;
 
@@ -60,6 +64,9 @@ export class LoginComponent implements OnInit {
         Validators.required
       ]],
       password: ['', [
+        Validators.required
+      ]],
+      type: ['Supplier', [
         Validators.required
       ]]
     });
@@ -115,7 +122,12 @@ export class LoginComponent implements OnInit {
       self.userService.getUser().then((data) => {
         self.userService.addUser(data);
         self.auth.inviteToken(data.isInvite);
-        self.router.navigate(['/admin']);
+        if(this.loginGroup.value.type == 'Supplier') {
+          self.router.navigate(['/admin']);
+        } else if(this.loginGroup.value.type == 'Purchaser') {
+          self.router.navigate(['/warehouse']);
+        }
+
 
       });
     }).catch((data) => {

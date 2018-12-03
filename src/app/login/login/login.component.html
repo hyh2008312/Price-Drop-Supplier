@@ -20,6 +20,13 @@
             <mat-form-field>
               <input matInput type="password" placeholder="Password" formControlName="password">
             </mat-form-field>
+            <mat-form-field>
+              <mat-select formControlName="type" placeholder="System Type" name="type">
+                <mat-option class="md-align-center" *ngFor="let item of typeList" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
             <div *ngIf="formErrors['password']" class="xb-input-error">
               {{ formErrors['password'] }}
             </div>
