@@ -15,6 +15,13 @@
         <div class="md-margin-left-2">
           {{order.created | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY'}}
         </div>
+        <div class="xb-bold sc-order__detail-margin-left" *ngIf="order.paymentMode">Payment Provider</div>
+        <div class="md-margin-left-2" *ngIf="order.paymentMode == 'cod'">
+          COD <span>{{order.shippingProvider}}</span>
+        </div>
+        <div class="md-margin-left-2" *ngIf="order.paymentMode == 'imprest'">
+          {{order.paymentStatus}}
+        </div>
       </div>
       <div class="md-margin-top-3 sc-order__detail-border-bottom">
         <app-order-detail-title></app-order-detail-title>

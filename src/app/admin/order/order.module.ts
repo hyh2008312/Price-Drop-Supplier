@@ -19,6 +19,7 @@ import { IssueRefundDialogComponent } from './issue-refund-dialog/issue-refund-d
 import { ApproveCancelDialogComponent } from './approve-cancel-dialog/approve-cancel-dialog.component';
 import { AddGatiPostDialogComponent } from './add-gati-post-dialog/add-gati-post-dialog.component';
 import { AddOrderStockDialogComponent } from './add-order-stock-dialog/add-order-stock-dialog.component';
+import { AddNoteDialogComponent } from './add-note-dialog/add-note-dialog.component';
 
 import { OrderService } from './order.service';
 
@@ -49,7 +50,8 @@ import { SharedModule } from '../../shared/shared.module';
     IssueRefundDialogComponent,
     ApproveCancelDialogComponent,
     AddGatiPostDialogComponent,
-    AddOrderStockDialogComponent
+    AddOrderStockDialogComponent,
+    AddNoteDialogComponent
   ],
   entryComponents: [
     AddTrackingInformationDialogComponent,
@@ -61,7 +63,8 @@ import { SharedModule } from '../../shared/shared.module';
     IssueRefundDialogComponent,
     ApproveCancelDialogComponent,
     AddGatiPostDialogComponent,
-    AddOrderStockDialogComponent
+    AddOrderStockDialogComponent,
+    AddNoteDialogComponent
   ],
   providers: [
     OrderService

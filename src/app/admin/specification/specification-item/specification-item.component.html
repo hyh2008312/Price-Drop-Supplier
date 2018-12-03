@@ -12,6 +12,7 @@
   </div>
   <div class="sc-product__product-action-buttons sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="15">
-    <button mat-raised-button color="primary" (click)="edit()">Edit</button>
+    <button mat-raised-button color="primary" (click)="edit()"
+            *ngIf="!product.children || product.children.length == 0">Edit</button>
   </div>
 </div>
