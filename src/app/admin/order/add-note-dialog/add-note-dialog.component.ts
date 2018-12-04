@@ -38,7 +38,7 @@ export class AddNoteDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  addOrderNotes($event, p) {
+  addOrderNotes() {
     if(this.noteForm.invalid) return;
     const self = this;
     this.orderService.addOrderNotes({
