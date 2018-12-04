@@ -1,7 +1,6 @@
 <div class="container">
   <div class="md-margin-left-2 md-margin-top-4 sc-product__create-text">
-    <span class="md-dark-secondary xb-pointer" (click)="openLeaveDialog()">PRODUCT</span>
-    <span class="md-dark-secondary">&nbsp;>&nbsp;</span><span class="xb-bold">EDIT PRODUCT</span>
+    <span class="md-dark-secondary xb-pointer" (click)="openLeaveDialog()">PRODUCT</span><span class="md-dark-secondary">&nbsp;>&nbsp;</span><span class="xb-bold">EDIT PRODUCT</span>
   </div>
   <div fxLayout="row" fxLayoutAlign="start start">
     <div class="md-margin-top-2 md-margin-right-2 sc-product__edit-tab" fxFlex="none">
@@ -191,35 +190,35 @@
           <div class="md-margin-top-3">
             <div formArrayName="variants" *ngIf="attributes && attributes.length > 0">
               <div fxLayout="row" fxLayoutAlign="start center">
-                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold"
+                <div class="sc-product__create-margin-right-3 sc-product__create-title-1 md-dark-secondary xb-bold"
                      fxFlex="12" fxLayout="row" fxLayoutAlign="start center">
                   Variants
                 </div>
-                <div class="sc-product__create-margin-right-3 sc-product__create-width-4
+                <div class="sc-product__create-margin-right-3 sc-product__create-title-1 sc-product__create-width-4
                 md-dark-secondary xb-bold md-align-center" fxFlex="none">
                   Image
                 </div>
-                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-align-center"
+                <div class="sc-product__create-margin-right-3 sc-product__create-title-1 md-dark-secondary xb-bold md-align-center"
                      fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
                   SKU
                 </div>
-                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-align-center"
+                <div class="sc-product__create-margin-right-3 sc-product__create-title-1 md-dark-secondary xb-bold md-align-center"
                      fxFlex="10" fxLayout="row" fxLayoutAlign="center center">
                   Quantity
                 </div>
-                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-align-center"
+                <div class="sc-product__create-margin-right-3 sc-product__create-title-1 md-dark-secondary xb-bold md-align-center"
                      fxFlex="12">
                   MRP
                 </div>
-                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-align-center"
+                <div class="sc-product__create-margin-right-3 sc-product__create-title-1 md-dark-secondary xb-bold md-align-center"
                      fxFlex="10">
                   Cost Price
                 </div>
-                <div class="md-dark-secondary xb-bold md-align-center"
+                <div class="md-dark-secondary xb-bold sc-product__create-title-1 md-align-center"
                      fxFlex="10">
                   Sale Price
                 </div>
-                <div class="md-dark-secondary xb-bold md-align-center"
+                <div class="md-dark-secondary xb-bold sc-product__create-title-1 md-align-center"
                      fxFlex="15">
                   Sourcing Price
                 </div>
@@ -340,27 +339,27 @@
             </div>
             <div formArrayName="variants" *ngIf="attributes.length == 0">
               <div fxLayout="row" fxLayoutAlign="start center">
-                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-caption"
+                <div class="sc-product__create-margin-right-2 sc-product__create-title-1 md-dark-secondary xb-bold md-caption"
                      fxFlex="25">
                   SKU
                 </div>
-                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center md-caption"
+                <div class="sc-product__create-margin-right-2 sc-product__create-title-1 md-dark-secondary xb-bold md-align-center md-caption"
                      fxFlex="15">
                   Quantity
                 </div>
-                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center md-caption"
+                <div class="sc-product__create-margin-right-2 sc-product__create-title-1 md-dark-secondary xb-bold md-align-center md-caption"
                      fxFlex="15">
                   MRP<br>原价
                 </div>
-                <div class="sc-product__create-margin-right-2 md-dark-secondary xb-bold md-align-center md-caption"
+                <div class="sc-product__create-margin-right-2 sc-product__create-title-1 md-dark-secondary xb-bold md-align-center md-caption"
                      fxFlex="15">
                   Cost Price<br>成本价
                 </div>
-                <div class="md-dark-secondary xb-bold md-align-center md-caption"
+                <div class="md-dark-secondary sc-product__create-title-1 xb-bold md-align-center md-caption"
                      fxFlex="15">
                   Sale Price<br>销售价
                 </div>
-                <div class="md-dark-secondary xb-bold md-align-center md-caption"
+                <div class="md-dark-secondary sc-product__create-title-1 xb-bold md-align-center md-caption"
                      fxFlex="15">
                   Sourcing Price<br>提货价
                 </div>

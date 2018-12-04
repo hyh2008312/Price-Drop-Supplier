@@ -1,10 +1,10 @@
 <div>
   <div class="sc-product__product-item-top" fxLayout="row" fxLayoutAlign="start center">
     <div>采购单号: {{product.purchaseId}}</div>
-    <div class="md-margin-left-3">下单日期: {{product.created | amDateFormat:'MMMM Do, YYYY HH:mm:ss'}}</div>
+    <div class="md-margin-left-3">下单日期: {{product.created | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
   </div>
   <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
-    <div class="md-margin-right-2" fxFlex="40" fxLayout="column" fxLayoutAlign="start stretch">
+    <div class="md-margin-right-2" fxFlex="45" fxLayout="column" fxLayoutAlign="start stretch">
       <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let item of product.purchaseVariants;let i = index;">
         <div class="sc-product__product-image" fxFlex="none">
           <img [src]="item.mainImage">
@@ -26,7 +26,7 @@
     </div>
     <div class="sc-product__product-category md-margin-right-2" fxFlex="10"
          fxLayout="column" fxLayoutAlign="center center">
-      {{product.logisticsTime | amDateFormat:'MMMM Do, YYYY HH:mm:ss'}}
+      {{product.deliveryTime | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}
     </div>
     <div class="sc-product__product-price md-margin-right-2" fxFlex="10"
          fxLayout="column" fxLayoutAlign="center center">
@@ -42,6 +42,7 @@
     </div>
     <div class="sc-product__product-price sc__accent-dark" fxFlex="10"
          fxLayout="column" fxLayoutAlign="center stretch">
+      <div class="md-margin-top-2"></div>
       <button mat-raised-button color="primary" (click)="edit()">编辑</button>
       <div class="md-margin-top-1"></div>
       <button mat-raised-button color="accent" (click)="trackingPackage()">查看物流信息</button>

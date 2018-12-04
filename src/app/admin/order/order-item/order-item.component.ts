@@ -83,12 +83,7 @@ export class OrderItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(dialogRef.componentInstance.data.isNoteAdd == true) {
-        self.productChange.emit({
-          index: self.index,
-          status: self.status,
-          order: self.order,
-          event: 'note'
-        });
+        self.order = dialogRef.componentInstance.data.order;
       }
     });
   }

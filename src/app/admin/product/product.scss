@@ -254,12 +254,12 @@
     }
 
     &-title{
-      font-size: 16px;
+      font-size: 14px;
       @include media();
     }
 
     &-title-1{
-      font-size: 14px;
+      font-size: 12px;
       @include media();
     }
 
@@ -347,8 +347,8 @@
 
   &__edit{
     &-button{
-      line-height: 54px;
-      font-size: 16px;
+      line-height: 48px;
+      font-size: 14px;
       padding: 0 16px;
       width: 224px;
       &:hover{

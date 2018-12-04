@@ -43,11 +43,12 @@ export class AddNoteDialogComponent implements OnInit {
     const self = this;
     this.orderService.addOrderNotes({
       id: this.data.order.id,
-      notes: this.noteForm.value
+      notes: this.noteForm.value.notes
     }).then((data) => {
       if(data.id) {
         self.data.isNoteAdd = true;
         self.data.order = data;
+        self.close();
       }
     });
   }
