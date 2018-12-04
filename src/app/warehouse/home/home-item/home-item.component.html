@@ -2,6 +2,7 @@
   <div class="sc-product__product-item-top" fxLayout="row" fxLayoutAlign="start center">
     <div>采购单号: {{product.purchaseId}}</div>
     <div class="md-margin-left-3">下单日期: {{product.created | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
+    <div class="md-margin-left-3" *ngIf="product.receivedTime">收货日期: {{product.receivedTime | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
   </div>
   <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
     <div class="md-margin-right-2" fxFlex="45" fxLayout="column" fxLayoutAlign="start stretch">

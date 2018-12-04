@@ -24,7 +24,7 @@ export class TopNavigationComponent implements OnInit {
     {
       id: 1,
       text: '退出',
-      router: '/account/login',
+      router: '/account/login/warehouse',
       isActive: false
     }
   ];

@@ -10,12 +10,12 @@ import { GuardLinkService } from '../../shared/services/guard-link/guard-link.se
 import { AuthService } from "angular2-social-login";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
+  selector: 'app-warehouse-login',
+  templateUrl: './warehouse-login.component.html',
   styleUrls: ['../login.scss']
 })
 
-export class LoginComponent implements OnInit {
+export class WarehouseLoginComponent implements OnInit {
 
   loginGroup : FormGroup;
 
@@ -40,6 +40,8 @@ export class LoginComponent implements OnInit {
   };
 
   type = 'Supplier';
+
+  typeList = ['Supplier', 'Purchaser']
 
   facebookLoginSub: any;
   googleLoginSub: any;
@@ -120,7 +122,7 @@ export class LoginComponent implements OnInit {
       self.userService.getUser().then((data) => {
         self.userService.addUser(data);
         self.auth.inviteToken(data.isInvite);
-        self.router.navigate(['/admin']);
+        self.router.navigate(['/warehouse']);
       });
     }).catch((data) => {
       self.loginErr = data;

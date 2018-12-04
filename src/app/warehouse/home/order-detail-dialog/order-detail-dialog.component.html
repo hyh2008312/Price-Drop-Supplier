@@ -12,9 +12,10 @@
     </div>
     <div class="md-margin-right-2" fxFlex fxLayout="column" fxLayoutAlign="space-between stretch">
       <div class="sc-product__product-title" >{{item.name}}</div>
-      <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutAlign="start center">
         <div>SKU: {{item.skuID}}</div>
-        <div><span>¥ {{item.price}}</span> x {{item.quantity}}</div>
+        <div class="md-margin-left-2" fxFlex>单价:¥ {{item.price}}</div>
+        <div> x {{item.quantity}}</div>
       </div>
     </div>
   </div>
@@ -28,6 +29,6 @@
   </div>
   <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
     <div class="md-margin-right-2 xb-bold sc-product-dialog__width">供应商的手机号</div>
-    <div>{{sellerContact.mobile || sellerContact.phone}}</div>
+    <div>{{sellerContact.mobile || sellerContact.phone }}</div>
   </div>
 </div>

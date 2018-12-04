@@ -2,34 +2,35 @@
   <div class="xb-login__scroll-inner" fxLayout="column">
     <div class="background-bg-black" fxFlex="none">
       <div class="container">
-        <app-navigation-header [status]="true"></app-navigation-header>
+        <app-navigation-header-warehouse [status]="true"></app-navigation-header-warehouse>
       </div>
     </div>
     <div  fxFlex="noshrink" fxLayout="row" fxLayoutAlign="center center">
       <div class="xb-login__container" fxLayout="column" >
-        <div class="xb-login__login-title">Log In</div>
+        <div class="xb-login__login-title">登录</div>
         <div class="xb-login__error md-margin-bottom-2" *ngIf="loginErr">{{loginErr}}</div>
         <form fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="loginGroup" (ngSubmit)="login()" novalidate>
           <div class="xb-login__width">
             <mat-form-field>
-              <input matInput placeholder="Email Address" formControlName="username">
+              <input matInput placeholder="邮箱地址" formControlName="username">
             </mat-form-field>
             <div *ngIf="formErrors['username']" class="xb-input-error">
               {{ formErrors['username'] }}
             </div>
             <mat-form-field>
-              <input matInput type="password" placeholder="Password" formControlName="password">
+              <input matInput type="password" placeholder="密码" formControlName="password">
             </mat-form-field>
             <div *ngIf="formErrors['password']" class="xb-input-error">
               {{ formErrors['password'] }}
             </div>
           </div>
-          <div fxLayout="row">
+          <div fxLayout="row" *ngIf="false">
             <a class="text-underline md-margin-bottom-3 md-dark-primary" routerLink="/account/resetPassword">Forgot password?</a>
           </div>
+          <div class="md-margin-bottom-3"></div>
           <div fxLayout="column">
             <button mat-raised-button color="primary" type="submit">
-              <div class="gtag-login-email-btn">LOG IN</div>
+              <div class="gtag-login-email-btn">登录</div>
             </button>
           </div>
         </form>
@@ -48,13 +49,10 @@
             </div>
           </button>
         </div>
-        <div class="md-margin-top-2">Don't have an account?
+        <div class="md-margin-top-2" *ngIf="false">Don't have an account?
           <a class="text-underline md-margin-left-1 md-dark-primary" routerLink="/account/signup">Sign Up</a>
         </div>
       </div>
-    </div>
-    <div>
-      <app-bottom-footer></app-bottom-footer>
     </div>
   </div>
 </div>

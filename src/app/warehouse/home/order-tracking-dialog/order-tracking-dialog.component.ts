@@ -18,7 +18,7 @@ export class OrderTrackingDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private homeService: HomeService
   ) {
-    this.getTrackingPackage(this.data.purchaseId);
+    this.getTrackingPackage(this.data.item.purchaseId);
   }
 
   ngOnInit():void {

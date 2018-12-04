@@ -33,12 +33,11 @@ export class HomeMainComponent implements OnInit {
     value: 'delivery'
   }];
 
-
   status: any = false;
 
   statusList: any = [{
     value: false,
-    text: '所有采购单'
+    text: '所有'
   }, {
     value: 'Completed',
     text: '成功入库'
@@ -100,7 +99,6 @@ export class HomeMainComponent implements OnInit {
 
   clearSearchKey() {
     this.searchKey = '';
-    this.selectedIndex = 0;
     this.changePurchaseLists({
       index: this.selectedIndex
     });
@@ -143,6 +141,7 @@ export class HomeMainComponent implements OnInit {
     let page = this.purchaseAllIndex;
     let page_size = this.pageSize;
     let delivery_status: any = this.status;
+    let received_time: any = null;
     switch ($event.index) {
       case 0:
         delivery_status = false;
@@ -160,6 +159,7 @@ export class HomeMainComponent implements OnInit {
       case 3:
         status = 'Delivered';
         page = this.purchaseDeliveredIndex;
+        received_time = true;
         break;
     }
 
@@ -177,7 +177,8 @@ export class HomeMainComponent implements OnInit {
       page_size,
       search,
       search_type,
-      delivery_status
+      delivery_status,
+      received_time
     }).then((data) => {
       this.length = data.count;
       switch ($event.index) {
