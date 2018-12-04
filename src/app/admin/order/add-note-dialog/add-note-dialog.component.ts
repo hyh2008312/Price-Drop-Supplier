@@ -21,7 +21,11 @@ export class AddNoteDialogComponent implements OnInit {
     private orderService: OrderService
   ) {
     this.noteForm = this.fb.group({
-      notes: ['']
+      notes: ['', Validators.required]
+    });
+
+    this.noteForm.patchValue({
+      notes: this.data.order.orderNotes
     });
 
   }
@@ -32,6 +36,20 @@ export class AddNoteDialogComponent implements OnInit {
 
   close():void {
     this.dialogRef.close();
+  }
+
+  addOrderNotes($event, p) {
+    if(this.noteForm.invalid) return;
+    const self = this;
+    this.orderService.addOrderNotes({
+      id: this.data.order.id,
+      notes: this.noteForm.value
+    }).then((data) => {
+      if(data.id) {
+        self.data.isNoteAdd = true;
+        self.data.order = data;
+      }
+    });
   }
 
 }

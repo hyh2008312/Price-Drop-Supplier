@@ -75,7 +75,8 @@
         <button mat-raised-button color="accent" (click)="approveCancel()">View Detail</button>
       </div>
       <div class="sc__accent-dark md-margin-left-2" *ngIf="order.orderStatus != 'Unpaid' && order.orderStatus != 'Canceled'">
-        <button mat-raised-button color="accent" (click)="addNote()" *ngIf="order.notes">Add Note</button>
+        <button mat-raised-button color="accent" (click)="addNote()" *ngIf="order.orderNotes == '' ">Add Note</button>
+        <button mat-raised-button color="accent" (click)="addNote()" *ngIf="order.orderNotes != ''">Add Note</button>
       </div>
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
@@ -100,6 +101,14 @@
       </div>
       <div>
         {{order.sourcingOrderNumber}}
+      </div>
+    </div>
+    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
+      <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
+        Order Notes
+      </div>
+      <div>
+        {{order.orderNotes}}
       </div>
     </div>
   </div>
