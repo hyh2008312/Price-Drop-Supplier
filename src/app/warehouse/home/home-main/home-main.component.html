@@ -104,6 +104,15 @@
         </div>
       </mat-tab>
       <mat-tab label="已收货">
+        <div class="unicorn-dark-theme md-margin-left-2">
+          <mat-form-field class="sc-product__product-sort">
+            <mat-select [ngModel]="status" name="sort" (ngModelChange)="changeSatus($event)">
+              <mat-option class="md-align-center" *ngFor="let item of statusList" [value]="item.value">
+                {{ item.text }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
         <div class="md-margin-top-1">
           <app-warehouse-home-title></app-warehouse-home-title>
         </div>

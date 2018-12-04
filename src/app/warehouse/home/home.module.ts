@@ -9,6 +9,7 @@ import { HomeTitleComponent } from './home-title/home-title.component';
 import { OrderTrackingDialogComponent } from './order-tracking-dialog/order-tracking-dialog.component';
 import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
 import { HomeEditDialogComponent } from './home-edit-dialog/home-edit-dialog.component';
+import { HomeCompleteDialogComponent } from './home-complete-dialog/home-complete-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { HomeRoutingModule } from './home.routes.module';
@@ -30,6 +31,7 @@ import { HomeService } from './home.service';
     OrderTrackingDialogComponent,
     OrderDetailDialogComponent,
     HomeEditDialogComponent,
+    HomeCompleteDialogComponent,
     ToolTipsComponent
   ],
   entryComponents: [
@@ -37,6 +39,7 @@ import { HomeService } from './home.service';
     OrderTrackingDialogComponent,
     OrderDetailDialogComponent,
     HomeEditDialogComponent,
+    HomeCompleteDialogComponent,
     ToolTipsComponent
   ],
   providers: [

@@ -33,6 +33,23 @@ export class HomeMainComponent implements OnInit {
     value: 'delivery'
   }];
 
+
+  status: any = false;
+
+  statusList: any = [{
+    value: false,
+    text: '所有采购单'
+  }, {
+    value: 'Completed',
+    text: '成功入库'
+  }, {
+    value: 'Quantity Issue',
+    text: '数量问题'
+  }, {
+    value: 'Quality Issue',
+    text: '货物问题'
+  }];
+
   // MatPaginator Inputs
   length:number = 0;
   pageSize = 50;
@@ -125,16 +142,20 @@ export class HomeMainComponent implements OnInit {
     let status: any = null;
     let page = this.purchaseAllIndex;
     let page_size = this.pageSize;
+    let delivery_status: any = this.status;
     switch ($event.index) {
       case 0:
+        delivery_status = false;
         break;
       case 1:
         status = 'Processing';
         page = this.purchaseProccessingIndex;
+        delivery_status = false;
         break;
       case 2:
         status = 'Shipped';
         page = this.purchaseShippedIndex;
+        delivery_status = false;
         break;
       case 3:
         status = 'Delivered';
@@ -148,13 +169,15 @@ export class HomeMainComponent implements OnInit {
       search = this.searchKey;
       search_type = this.searchCategory;
     }
+    delivery_status = delivery_status? delivery_status: null;
 
     this.adminService.getPurchaseList({
       status,
       page,
       page_size,
       search,
-      search_type
+      search_type,
+      delivery_status
     }).then((data) => {
       this.length = data.count;
       switch ($event.index) {
@@ -189,6 +212,25 @@ export class HomeMainComponent implements OnInit {
         });
       }
     });
+  }
+
+  changeSatus($event) {
+    this.status = $event;
+    this.changePurchaseLists({
+      index: this.selectedIndex
+    });
+  }
+
+  productChange(event) {
+    switch(event.status) {
+      case 2:
+        switch(event.event) {
+          case 'complete':
+            this.purchaseShipped.splice(event.index,1);
+            break;
+        }
+        break;
+    }
   }
 
 }

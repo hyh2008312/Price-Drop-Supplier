@@ -5,6 +5,7 @@ import { UserService } from  '../../../shared/services/user/user.service';
 import { OrderTrackingDialogComponent } from '../order-tracking-dialog/order-tracking-dialog.component';
 import { OrderDetailDialogComponent } from '../order-detail-dialog/order-detail-dialog.component';
 import { HomeEditDialogComponent } from '../home-edit-dialog/home-edit-dialog.component';
+import { HomeCompleteDialogComponent } from '../home-complete-dialog/home-complete-dialog.component';
 import {MatDialog} from '@angular/material';
 
 @Component({
@@ -73,6 +74,27 @@ export class HomeItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(dialogRef.componentInstance.data.isEdit == true) {
         this.product = dialogRef.componentInstance.data.item;
+      }
+    });
+  }
+
+  complete() {
+    let dialogRef = this.dialog.open(HomeCompleteDialogComponent, {
+      data: {
+        item: this.product,
+        isEdit: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        this.product = dialogRef.componentInstance.data.item;
+        this.productChange.emit({
+          index: this.index,
+          product : this.product,
+          status: this.status,
+          event: 'complete'
+        });
       }
     });
   }
