@@ -14,7 +14,7 @@ export class OrderDetailDialogComponent implements OnInit {
   productItems: any;
 
   baseInfo: any;
-  sellerContact: any;
+  sellerContact: any = {};
 
   constructor(
     public dialogRef: MatDialogRef<OrderDetailDialogComponent>,
