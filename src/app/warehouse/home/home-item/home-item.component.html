@@ -12,9 +12,12 @@
         </div>
         <div class="md-margin-right-2" fxFlex fxLayout="column" fxLayoutAlign="space-between stretch">
           <div class="sc-product__product-title" >{{item.title}}</div>
-          <div fxLayout="row" fxLayoutAlign="space-between center">
-            <div>SKU: {{item.sku}}</div>
-            <div>x {{item.quantity}}</div>
+          <div>
+            <div class="md-caption md-dark-secondary">规格: {{item.attribute}}</div>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div>SKU: {{item.sku}}</div>
+              <div>x {{item.quantity}}</div>
+            </div>
           </div>
         </div>
       </div>
