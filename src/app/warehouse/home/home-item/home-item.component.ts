@@ -78,6 +78,19 @@ export class HomeItemComponent implements OnInit {
     });
   }
 
+  delete() {
+    this.adminService.purchaseDelete({
+      id: this.product.id
+    }).then((data) => {
+      this.productChange.emit({
+        index: this.index,
+        product : this.product,
+        status: this.status,
+        event: 'delete'
+      });
+    });
+  }
+
   complete() {
     let dialogRef = this.dialog.open(HomeCompleteDialogComponent, {
       data: {
