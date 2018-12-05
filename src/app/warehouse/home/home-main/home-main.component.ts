@@ -64,6 +64,8 @@ export class HomeMainComponent implements OnInit {
   purchaseShippedIndex: any = 1;
   purchaseDelivered: any = false;
   purchaseDeliveredIndex: any = 1;
+  purchaseCanceled: any = false;
+  purchaseCanceledIndex: any = 1;
 
   constructor(
     private adminService: HomeService,
@@ -131,6 +133,9 @@ export class HomeMainComponent implements OnInit {
       case 3:
         this.purchaseDeliveredIndex = event.pageIndex + 1;
         break;
+      case 4:
+        this.purchaseCanceledIndex = event.pageIndex + 1;
+        break;
     }
     this.changePurchaseLists({index: type});
   }
@@ -160,6 +165,11 @@ export class HomeMainComponent implements OnInit {
         status = 'Delivered';
         page = this.purchaseDeliveredIndex;
         received_time = true;
+        break;
+      case 4:
+        status = 'Canceled';
+        page = this.purchaseCanceledIndex;
+        delivery_status = false;
         break;
     }
 
@@ -193,6 +203,9 @@ export class HomeMainComponent implements OnInit {
           break;
         case 3:
           this.purchaseDelivered = [...data.results];
+          break;
+        case 4:
+          this.purchaseCanceled = [...data.results];
           break;
       }
     });
