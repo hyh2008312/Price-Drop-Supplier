@@ -58,4 +58,8 @@ export class CategoryMainComponent implements OnInit {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
+  changeProducts($event) {
+
+  }
+
 }
