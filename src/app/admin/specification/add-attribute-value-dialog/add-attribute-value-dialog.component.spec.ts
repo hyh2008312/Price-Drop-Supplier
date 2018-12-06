@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddAttributeDialogComponent } from './add-attribute-dialog.component';
+import { AddAttributeDialogComponent } from './add-category-dialog.component';
 
 describe('AddAttributeDialogComponent', () => {
   let component: AddAttributeDialogComponent;

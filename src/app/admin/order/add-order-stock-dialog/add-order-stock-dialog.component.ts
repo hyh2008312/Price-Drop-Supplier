@@ -15,6 +15,8 @@ export class AddOrderStockDialogComponent implements OnInit {
   orderStockForm : FormGroup;
   sourcingSupplierList: any;
 
+  supplierList: any = ['getpricedrop', '云海创富'];
+
   constructor(
     public dialogRef: MatDialogRef<AddOrderStockDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -24,7 +26,8 @@ export class AddOrderStockDialogComponent implements OnInit {
     this.orderStockForm = this.fb.group({
       id: [''],
       sourcingSupplier: [''],
-      sourcingOrderNumber: ['']
+      sourcingOrderNumber: [''],
+      purchaseAccount: ['getpricedrop', Validators.required]
     });
 
     this.orderStockForm.patchValue({
@@ -48,7 +51,6 @@ export class AddOrderStockDialogComponent implements OnInit {
   getSourcingSupplierList() {
     this.orderService.getSourcingSupplierList().then((data) => {
       this.sourcingSupplierList = [...data];
-      console.log(this.orderStockForm.value.sourcingSupplier)
       if(!this.orderStockForm.value.sourcingSupplier) {
         this.orderStockForm.patchValue({
           sourcingSupplier: this.sourcingSupplierList[0].sourcingName

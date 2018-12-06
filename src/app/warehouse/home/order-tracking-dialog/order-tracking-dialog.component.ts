@@ -18,7 +18,7 @@ export class OrderTrackingDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private homeService: HomeService
   ) {
-    this.getTrackingPackage(this.data.item.purchaseId);
+    this.getTrackingPackage(this.data.item.id);
   }
 
   ngOnInit():void {
@@ -29,10 +29,10 @@ export class OrderTrackingDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  getTrackingPackage(purchaseId) {
-    if(!purchaseId) return;
+  getTrackingPackage(id) {
+    if(!id) return;
     this.homeService.getTrackingPackage({
-      purchase_id: purchaseId
+      id
     }).then((data) => {
       if(data.success) {
         this.logisticsId = data.logisticsTrace[0].logisticsId;

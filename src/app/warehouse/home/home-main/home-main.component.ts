@@ -23,14 +23,14 @@ export class HomeMainComponent implements OnInit {
   isSearch: boolean = false;
   searchForm: FormGroup;
 
-  searchCategory: any = 'purchase';
+  searchCategory: any = 'delivery';
 
   searchList:any = [{
-    text: '采购单号',
-    value: 'purchase'
-  }, {
     text: '快递单号',
     value: 'delivery'
+  }, {
+    text: '采购单号',
+    value: 'purchase'
   }];
 
   status: any = false;
