@@ -14,7 +14,7 @@ export class HomeEditDialogComponent implements OnInit {
 
   purchaseForm : FormGroup;
   error: any = false;
-  supplierList: any = ['getpricedrop', '云海创富'];
+  supplierList: any = ['getpricedrop', '北京云海'];
 
   get purchaseInfo() { return this.purchaseForm.get('purchaseInfo') as FormArray; }
 

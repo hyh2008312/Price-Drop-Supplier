@@ -15,7 +15,7 @@ export class AddOrderStockDialogComponent implements OnInit {
   orderStockForm : FormGroup;
   sourcingSupplierList: any;
 
-  supplierList: any = ['getpricedrop', '云海创富'];
+  supplierList: any = ['getpricedrop', '北京云海'];
 
   constructor(
     public dialogRef: MatDialogRef<AddOrderStockDialogComponent>,
