@@ -33,7 +33,8 @@ export class AddOrderStockDialogComponent implements OnInit {
     this.orderStockForm.patchValue({
       id: this.data.order.id,
       sourcingOrderNumber: this.data.order.sourcingOrderNumber,
-      sourcingSupplier: this.data.order.sourcingSupplier
+      sourcingSupplier: this.data.order.sourcingSupplier,
+      purchaseAccount: this.data.order.purchaseAccount
     });
 
     this.getSourcingSupplierList();
