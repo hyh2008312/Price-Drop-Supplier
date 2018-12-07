@@ -15,8 +15,8 @@
     }
 
     &-navigation{
-      height: 64px;
-      background-color: $whiteColor;
+      height: 48px;
+      background-color: #f9f9f9;
       padding: 0 16px;
       border-radius: 2px;
     }
@@ -64,7 +64,7 @@
     }
 
     &-title-1{
-      font-size: 16px;
+      font-size: 12px;
       @include media();
       color: rgba(0,0,0,.87);
     }
@@ -229,9 +229,8 @@
 
     &-navigation{
       position: relative;
-      height: 54px;
-      font-size: 16px;
-      background-color: $whiteColor;
+      height: 48px;
+      background-color: #f9f9f9;
       @include media();
 
       &-bg{
@@ -266,7 +265,7 @@
     }
 
     &-title-1{
-      font-size: 14px;
+      font-size: 12px;
       @include media();
     }
 
@@ -496,7 +495,6 @@
       height: 60px;
       border-radius: 4px;
       overflow: hidden;
-      margin-right: 16px;
       position: relative;
       border: 1px solid rgba(0, 0, 0, .12);
 

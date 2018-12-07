@@ -9,22 +9,17 @@
     <div class="xb-bold">
       Category Type
     </div>
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <mat-form-field fxFlex>
-        <mat-select name="category" placeholder="Select a Category Type" formControlName="categoryType">
-          <mat-option class="md-align-center" *ngFor="let item of categoryTypeList" [value]="item">
-            {{ item }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+    <div class="md-margin-top-2 md-margin-bottom-2" fxLayout="row" fxLayoutAlign="start center"
+      *ngIf="categoryForm.value.categoryType == 'first_Category'">
+      First Category
     </div>
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <div *ngIf="categoryForm.get('categoryType').invalid && (categoryForm.get('categoryType').dirty ||
-              categoryForm.get('categoryType').touched)" class="xb-input-error">
-        <div *ngIf="categoryForm.get('categoryType').hasError('required')">
-          This field is required.
-        </div>
-      </div>
+    <div class="md-margin-top-2 md-margin-bottom-2" fxLayout="row" fxLayoutAlign="start center"
+         *ngIf="categoryForm.value.categoryType == 'second_Category'">
+      Second Category
+    </div>
+    <div class="md-margin-top-2 md-margin-bottom-2" fxLayout="row" fxLayoutAlign="start center"
+         *ngIf="categoryForm.value.categoryType == 'third_Category'">
+      Third Category
     </div>
     <div class="xb-bold">
       Category Name
@@ -58,17 +53,25 @@
         </div>
       </div>
     </div>
-    <div class="xb-bold">
+    <div class="xb-bold" *ngIf="this.data.categoryType == 'third_Category'">
       Category Image
     </div>
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <app-category-image-upload-category [(previewImgFile)]="categoryForm.controls[0].value.image"
-                                        [(previewImgSrcs)]="categoryForm.controls[0].value.image"></app-category-image-upload-category>
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center" *ngIf="this.data.categoryType == 'third_Category'">
+      <app-category-image-upload-category [(previewImgFile)]="image"
+                                        [(previewImgSrcs)]="image"></app-category-image-upload-category>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" >
+      <div class="xb-bold">
+        Category Display
+      </div>
+      <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+        <mat-checkbox type="text" formControlName="show"></mat-checkbox>
+      </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
-      <div *ngIf="categoryForm.get('image').invalid && (categoryForm.get('image').dirty ||
-              categoryForm.get('image').touched)" class="xb-input-error">
-        <div *ngIf="categoryForm.get('image').hasError('required')">
+      <div *ngIf="categoryForm.get('show').invalid && (categoryForm.get('show').dirty ||
+              categoryForm.get('show').touched)" class="xb-input-error">
+        <div *ngIf="categoryForm.get('show').hasError('required')">
           This field is required.
         </div>
       </div>

@@ -14,8 +14,9 @@ export class AddCategoryDialogComponent implements OnInit {
 
   categoryForm : FormGroup;
   error: any = false;
+  image: any = false;
 
-  categoryTypeList: any = [];
+  categoryTypeList: any = ['first_Category', 'second_Category', 'third_Category'];
 
   constructor(
     public dialogRef: MatDialogRef<AddCategoryDialogComponent>,
@@ -26,9 +27,15 @@ export class AddCategoryDialogComponent implements OnInit {
     this.categoryForm = this.fb.group({
       name: ['', Validators.required],
       index: [1, Validators.required],
-      image: [],
-      categoryType: ['', Validators.required]
+      categoryType: ['', Validators.required],
+      parentId: [null],
+      show: [false]
     });
+
+    this.categoryForm.patchValue({
+      categoryType: this.data.categoryType,
+      parentId: this.data.parentId
+    })
 
   }
 
@@ -49,7 +56,7 @@ export class AddCategoryDialogComponent implements OnInit {
     this.categoryService.categoryCreate(this.categoryForm.value).then((data) => {
       if(data.id) {
         self.close();
-        self.data.isAddAttribute = true;
+        self.data.isCategoryAdd = true;
       } else {
         self.error = 'Duplicate Category!';
       }

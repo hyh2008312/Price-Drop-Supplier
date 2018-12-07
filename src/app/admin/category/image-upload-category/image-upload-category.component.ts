@@ -90,9 +90,10 @@ export class ImageUploadCategoryComponent implements OnInit {
 
   }
 
-  remove(i) {
-    this.previewImgSrcs = false;
-    this.previewImgFile = false;
+  remove() {
+    this.previewImgSrcs = '';
+    this.previewImgFile = '';
+    this.previewImgFileChange.emit(this.previewImgFile);
 
     this.upload = false;
   }

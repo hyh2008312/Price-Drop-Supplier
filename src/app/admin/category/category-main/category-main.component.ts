@@ -20,10 +20,14 @@ export class CategoryMainComponent implements OnInit {
 
   category: any = [];
 
-  categoryList: any = [];
-  subCategoryList: any = [];
+  categoryList: any = false;
+  categoryListIndex: any = 1;
 
-  promoteAll: any;
+  filterCategoryList: any = [];
+  subCategoryList: any = false;
+  subCategoryListIndex: any = 1;
+
+  parentId: any = false;
 
   selectedIndex = 0;
 
@@ -33,13 +37,16 @@ export class CategoryMainComponent implements OnInit {
   pageSizeOptions = [50];
 
   constructor(
-    private specificationService: CategoryService,
+    private categoryService: CategoryService,
     private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog
   ) {
-
+    this.changeProducts({
+      index: this.selectedIndex
+    });
+    this.getFiliterCategoryList();
   }
 
   ngOnInit():void {
@@ -58,8 +65,93 @@ export class CategoryMainComponent implements OnInit {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
-  changeProducts($event) {
+  changeProducts(event) {
+    let category_type = 'first_Category';
+    let page = this.categoryListIndex;
+    let parent_id = null;
+    switch (event.index) {
+      case 1:
+        category_type = 'second_Category';
+        page = this.subCategoryListIndex;
+        parent_id = this.parentId;
+        if(!parent_id) {
+          return
+        }
+        break;
+      default:
+        break;
+    }
 
+    const self = this;
+    this.categoryService.getCategoryList({
+      category_type,
+      page,
+      page_size: this.pageSize,
+      parent_id
+    }).then((data) => {
+      self.length = data.count;
+      switch (event.index) {
+        case 0:
+          self.categoryList = [...data.results];
+          self.filterCategoryList = [...data.results];
+          break;
+        case 1:
+          self.subCategoryList = [...data.results];
+          break;
+        default:
+          break;
+      }
+    });
+
+  }
+
+  addCategory() {
+    let categoryType = this.selectedIndex == 0? 'first_Category': 'second_Category';
+    let parentId = this.selectedIndex == 0? null: this.parentId;
+    let dialogRef = this.dialog.open(AddCategoryDialogComponent, {
+      data: {
+        parentId,
+        categoryType,
+        isCategoryAdd: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isCategoryAdd == true) {
+        this.changeProducts({index: this.selectedIndex});
+      }
+    });
+  }
+
+
+  productChange(event) {
+    switch(event.status) {
+      case 0:
+        switch(event.event) {
+          case 'edit':
+            this.getFiliterCategoryList();
+            break;
+        }
+        break;
+    }
+  }
+
+  getFiliterCategoryList() {
+    let category_type = 'first_Category';
+    const self = this;
+    this.categoryService.getFirstCategoryList({
+      category_type
+    }).then((data) => {
+       self.filterCategoryList = [...data.results];
+    });
+  }
+
+  filterChange($event) {
+    console.log($event);
+    this.parentId = $event;
+    this.changeProducts({
+      index: this.selectedIndex
+    });
   }
 
 }
