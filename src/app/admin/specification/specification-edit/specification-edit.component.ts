@@ -126,7 +126,7 @@ export class SpecificationEditComponent implements OnInit {
     if(this.searchKey == '') {
       return;
     }
-    const ws_name = 'Category-' + this.lastCategoryName.substring(0, 16) + '-' + this.categoryId;
+    const ws_name = 'Category-' + this.lastCategoryName.substring(0, 15) + '-' + this.categoryId;
     const ws_name1 = 'Template-' + this.lastCategoryName;
     const wb: WorkBook = { SheetNames: [], Sheets: {} };
 
