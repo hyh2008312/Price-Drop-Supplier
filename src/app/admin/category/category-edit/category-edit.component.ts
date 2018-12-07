@@ -84,11 +84,11 @@ export class CategoryEditComponent implements OnInit {
   getFiliterCategoryList() {
     let category_type = 'third_Category';
     const self = this;
-    let parentId = this.activatedRoute.snapshot.params['id'];
+    let parent_id = this.activatedRoute.snapshot.params['id'];
     this.categoryService.getFirstCategoryList({
       category_type,
       show: false,
-      parentId
+      parent_id
     }).then((data) => {
       self.categoryList = [...data];
     });
