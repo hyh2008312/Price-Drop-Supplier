@@ -5,6 +5,7 @@ import { CategoryEditComponent } from './category-edit/category-edit.component';
 import { CategoryTitleComponent } from './category-title/category-title.component';
 import { CategoryItemComponent } from './category-item/category-item.component';
 import { AddCategoryDialogComponent } from './add-category-dialog/add-category-dialog.component';
+import { ImageUploadCategoryComponent } from './image-upload-category/image-upload-category.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { CategoryRoutingModule } from './category.routes.module';
@@ -25,6 +26,7 @@ import { CategoryService } from './category.service';
     ToolTipsComponent,
     AddCategoryDialogComponent,
     CategoryEditComponent,
+    ImageUploadCategoryComponent
   ],
   entryComponents: [
     ToolTipsComponent,

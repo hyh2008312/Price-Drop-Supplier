@@ -2,7 +2,6 @@ import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { CategoryService } from '../category.service';
-import { UserService } from  '../../../shared/services/user/user.service';
 
 @Component({
   selector: 'app-category-item',
@@ -24,21 +23,13 @@ export class CategoryItemComponent implements OnInit {
   @Output() productChange = new EventEmitter<any>();
 
   currency: string = 'INR';
-  isSuperuser: boolean = false;
 
   constructor(
     private adminService: CategoryService,
-    private userService: UserService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    this.userService.currentUser.subscribe((data) => {
-      if(data) {
-        if(data.isStaff && data.isSuperuser) {
-          this.isSuperuser = true
-        }
-      }
-    });
+
   }
 
   ngOnInit(): void {

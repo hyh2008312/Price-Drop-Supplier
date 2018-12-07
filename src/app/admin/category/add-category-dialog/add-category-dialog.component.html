@@ -3,37 +3,72 @@
     <i class="iconfontXberts icon-ic-close"></i>
   </div>
   <div class="sc-order-dialog__title">
-    Add Attribute
+    Add Category
   </div>
-  <form class="md-margin-top-3" [formGroup]="attributeForm" novalidate>
+  <form class="md-margin-top-3" [formGroup]="categoryForm" novalidate>
     <div class="xb-bold">
-      Attribute Type
+      Category Type
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="Attribute Name" formControlName="name">
+        <mat-select name="category" placeholder="Select a Category Type" formControlName="categoryType">
+          <mat-option class="md-align-center" *ngFor="let item of categoryTypeList" [value]="item">
+            {{ item }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
-      <div *ngIf="attributeForm.get('name').invalid && (attributeForm.get('name').dirty ||
-              attributeForm.get('name').touched)" class="xb-input-error">
-        <div *ngIf="attributeForm.get('name').hasError('required')">
+      <div *ngIf="categoryForm.get('categoryType').invalid && (categoryForm.get('categoryType').dirty ||
+              categoryForm.get('categoryType').touched)" class="xb-input-error">
+        <div *ngIf="categoryForm.get('categoryType').hasError('required')">
           This field is required.
         </div>
       </div>
     </div>
     <div class="xb-bold">
-      属性类(中文名称)
+      Category Name
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="属性类" formControlName="chineseName">
+        <input type="text" matInput placeholder="Category Name" formControlName="name">
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
-      <div *ngIf="attributeForm.get('chineseName').invalid && (attributeForm.get('chineseName').dirty ||
-              attributeForm.get('chineseName').touched)" class="xb-input-error">
-        <div *ngIf="attributeForm.get('chineseName').hasError('required')">
+      <div *ngIf="categoryForm.get('name').invalid && (categoryForm.get('name').dirty ||
+              categoryForm.get('name').touched)" class="xb-input-error">
+        <div *ngIf="categoryForm.get('name').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+    </div>
+    <div class="xb-bold">
+      Category Index
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="Category Index" formControlName="index">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div *ngIf="categoryForm.get('index').invalid && (categoryForm.get('index').dirty ||
+              categoryForm.get('index').touched)" class="xb-input-error">
+        <div *ngIf="categoryForm.get('index').hasError('required')">
+          This field is required.
+        </div>
+      </div>
+    </div>
+    <div class="xb-bold">
+      Category Image
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <app-product-image-upload-variant [(previewImgFile)]="categoryForm.controls[0].value.image"
+                                        [(previewImgSrcs)]="categoryForm.controls[0].value.image"></app-product-image-upload-variant>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div *ngIf="categoryForm.get('image').invalid && (categoryForm.get('image').dirty ||
+              categoryForm.get('image').touched)" class="xb-input-error">
+        <div *ngIf="categoryForm.get('image').hasError('required')">
           This field is required.
         </div>
       </div>

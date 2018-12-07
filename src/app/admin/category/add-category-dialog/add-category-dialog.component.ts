@@ -12,19 +12,22 @@ import { CategoryService } from '../category.service';
 
 export class AddCategoryDialogComponent implements OnInit {
 
-  attributeForm : FormGroup;
+  categoryForm : FormGroup;
   error: any = false;
+
+  categoryTypeList: any = [];
 
   constructor(
     public dialogRef: MatDialogRef<AddCategoryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private specificationService: CategoryService
+    private categoryService: CategoryService
   ) {
-    this.attributeForm = this.fb.group({
+    this.categoryForm = this.fb.group({
       name: ['', Validators.required],
       index: [1, Validators.required],
-      image: []
+      image: [],
+      categoryType: ['', Validators.required]
     });
 
   }
@@ -38,20 +41,20 @@ export class AddCategoryDialogComponent implements OnInit {
   }
 
   create() {
-    if(this.attributeForm.invalid) {
+    if(this.categoryForm.invalid) {
       return;
     }
 
     let self = this;
-    this.specificationService.attributeCreate(this.attributeForm.value).then((data) => {
+    this.categoryService.categoryCreate(this.categoryForm.value).then((data) => {
       if(data.id) {
         self.close();
         self.data.isAddAttribute = true;
       } else {
-        self.error = 'Duplicate Attribute!';
+        self.error = 'Duplicate Category!';
       }
     }).catch(() => {
-      self.error = 'Duplicate Attribute!';
+      self.error = 'Duplicate Category!';
     });
   }
 }
