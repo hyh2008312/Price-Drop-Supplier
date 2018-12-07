@@ -21,8 +21,43 @@
          *ngIf="categoryForm.value.categoryType == 'third_Category'">
       Third Category
     </div>
+    <div class="md-margin-top-2 xb-bold" *ngIf="this.data.categoryType == 'third_Category'">
+      Choose a category
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" *ngIf="this.data.categoryType == 'third_Category'">
+      <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <mat-select name="category" placeholder="Select a Category" formControlName="grandParent"
+                      (valueChange)="categoryChange($event)">
+            <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item">
+              {{ item.data.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="md-margin-left-3" fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+        <mat-form-field fxFlex>
+          <mat-select name="subcategory" placeholder="Select a Subcategory" formControlName="parent"
+                      (valueChange)="subCategoryChange($event)">
+            <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item">
+              {{ item.data.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="md-margin-left-3" fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+        <mat-form-field fxFlex>
+          <mat-select name="thirdcategory" placeholder="Select a Thirdcategory" formControlName="child"
+                      (valueChange)="thirdCategoryChange($event)">
+            <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item">
+              {{ item.data.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
     <div class="xb-bold">
-      Category Name
+      Category Display Name
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
@@ -60,7 +95,7 @@
       <app-category-image-upload-category [(previewImgFile)]="image"
                                         [(previewImgSrcs)]="image"></app-category-image-upload-category>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start center" >
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center" >
       <div class="xb-bold">
         Category Display
       </div>

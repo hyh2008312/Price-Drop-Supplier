@@ -16,7 +16,9 @@ export class AddCategoryDialogComponent implements OnInit {
   error: any = false;
   image: any = false;
 
-  categoryTypeList: any = ['first_Category', 'second_Category', 'third_Category'];
+  categoryList: any = false;
+  subCategoryList: any = false;
+  thirdCategoryList: any = false;
 
   constructor(
     public dialogRef: MatDialogRef<AddCategoryDialogComponent>,
@@ -29,13 +31,21 @@ export class AddCategoryDialogComponent implements OnInit {
       index: [1, Validators.required],
       categoryType: ['', Validators.required],
       parentId: [null],
-      show: [false]
+      show: [false],
+      grandParent: [],
+      parent: [],
+      child: [],
+      categoryId: []
     });
 
     this.categoryForm.patchValue({
       categoryType: this.data.categoryType,
       parentId: this.data.parentId
-    })
+    });
+
+    if(this.data.categoryType == 'third_Category') {
+      this.getCategory();
+    }
 
   }
 
@@ -64,4 +74,74 @@ export class AddCategoryDialogComponent implements OnInit {
       self.error = 'Duplicate Category!';
     });
   }
+
+  getCategory() {
+    this.categoryService.getBaseCategoryList().then((value) => {
+      this.categoryList = [...value];
+    });
+  }
+
+  categoryChange($event) {
+    if(this.categoryList.length > 0) {
+      let index = this.categoryList.findIndex((data) => {
+        if(data.id == $event.id) {
+          return true;
+        }
+      });
+      if(this.categoryList[index] && this.categoryList[index].children) {
+        this.subCategoryList = [...this.categoryList[index].children];
+        this.thirdCategoryList = [];
+        this.categoryForm.patchValue({
+          parent: null,
+          child: null
+        });
+      } else {
+        this.subCategoryList = false;
+        this.thirdCategoryList = false;
+        this.categoryForm.patchValue({
+          parent: null,
+          child: null
+        });
+      }
+
+    }
+    this.categoryForm.patchValue({
+      name: $event.data.name,
+      categoryId: $event.id
+    });
+  }
+
+  subCategoryChange($event) {
+    if(this.subCategoryList.length > 0) {
+      let index = this.subCategoryList.findIndex((data) => {
+        if(data.id == $event.id) {
+          return true;
+        }
+      });
+      if(this.subCategoryList[index] && this.subCategoryList[index].children) {
+        this.thirdCategoryList = [...this.subCategoryList[index].children];
+        this.categoryForm.patchValue({
+          child: null
+        });
+      } else {
+        this.thirdCategoryList = false;
+        this.categoryForm.patchValue({
+          parent: null,
+          child: null
+        });
+      }
+    }
+    this.categoryForm.patchValue({
+      name: $event.data.name,
+      categoryId: $event.id
+    });
+  }
+
+  thirdCategoryChange($event) {
+    this.categoryForm.patchValue({
+      name: $event.data.name,
+      categoryId: $event.id
+    });
+  }
+
 }

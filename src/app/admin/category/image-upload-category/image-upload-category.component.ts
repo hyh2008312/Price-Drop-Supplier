@@ -77,6 +77,8 @@ export class ImageUploadCategoryComponent implements OnInit {
               // This is an upload progress event. Compute and show the % done:
               that.loading = Math.round(100 * event.loaded / event.total);
             } else if (event instanceof HttpResponse) {
+              that.closeLoading = true;
+              that.closeAnimate = true;
               that.previewImgFile = url + '/' + key;
               that.previewImgFileChange.emit(that.previewImgFile);
             }

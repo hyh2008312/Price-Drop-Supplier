@@ -140,14 +140,14 @@ export class CategoryMainComponent implements OnInit {
     let category_type = 'first_Category';
     const self = this;
     this.categoryService.getFirstCategoryList({
-      category_type
+      category_type,
+      show: true
     }).then((data) => {
-       self.filterCategoryList = [...data.results];
+       self.filterCategoryList = [...data];
     });
   }
 
   filterChange($event) {
-    console.log($event);
     this.parentId = $event;
     this.changeProducts({
       index: this.selectedIndex

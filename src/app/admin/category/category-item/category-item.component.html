@@ -36,6 +36,8 @@
     <i class="material-icons md-dark-secondary xb-pointer" (click)="edit()">edit</i>
     <div class="md-margin-left-1"></div>
     <i class="material-icons md-dark-secondary xb-pointer" (click)="delete()">delete</i>
+    <div class="md-margin-left-1" *ngIf="status == 1"></div>
+    <i class="material-icons md-dark-secondary xb-pointer" *ngIf="status == 1" routerLink="edit/{{product.id}}">visibility</i>
   </div>
 </div>
 <form class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start center" [formGroup]="categoryForm" novalidate
@@ -69,11 +71,6 @@
   </div>
   <div class="md-margin-right-2" fxFlex="10" fxLayout="row" fxLayoutAlign="center center">
       <mat-checkbox type="text" formControlName="show"></mat-checkbox>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="center center" fxFlex="15" *ngIf="!isEdit">
-    <i class="material-icons md-dark-secondary xb-pointer" (click)="edit()">edit</i>
-    <div class="md-margin-left-1"></div>
-    <i class="material-icons md-dark-secondary xb-pointer" (click)="delete()">delete</i>
   </div>
   <div class="sc-product__product-action-buttons sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center center" fxFlex="15">

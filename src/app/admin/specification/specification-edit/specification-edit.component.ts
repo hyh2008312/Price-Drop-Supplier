@@ -127,7 +127,7 @@ export class SpecificationEditComponent implements OnInit {
       return;
     }
     const ws_name = 'Category-' + this.lastCategoryName.substring(0, 15) + '-' + this.categoryId;
-    const ws_name1 = 'Template-' + this.lastCategoryName;
+    const ws_name1 = 'Template-' + this.lastCategoryName.substring(0, 22);
     const wb: WorkBook = { SheetNames: [], Sheets: {} };
 
     let tab1 = [

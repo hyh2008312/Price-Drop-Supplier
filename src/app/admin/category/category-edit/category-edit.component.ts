@@ -4,7 +4,6 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
 import { CategoryService } from '../category.service';
-import { UserService } from  '../../../shared/services/user/user.service';
 
 import { saveAs } from 'file-saver';
 import { AddCategoryDialogComponent } from '../add-category-dialog/add-category-dialog.component';
@@ -18,14 +17,11 @@ import { MatDialog } from '@angular/material';
 
 export class CategoryEditComponent implements OnInit {
 
-  category: any = [];
+  category: any = {
+    name: ''
+  };
 
-  categoryList: any = [];
-  subCategoryList: any = [];
-
-  promoteAll: any;
-
-  selectedIndex = 0;
+  categoryList: any = false;
 
   // MatPaginator Inputs
   length:number = 0;
@@ -33,13 +29,13 @@ export class CategoryEditComponent implements OnInit {
   pageSizeOptions = [50];
 
   constructor(
-    private specificationService: CategoryService,
-    private userService: UserService,
+    private categoryService: CategoryService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog
   ) {
-
+    this.getCategoryDetail();
+    this.getFiliterCategoryList();
   }
 
   ngOnInit():void {
@@ -56,6 +52,46 @@ export class CategoryEditComponent implements OnInit {
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  }
+
+  addCategory() {
+    let categoryType = 'third_Category';
+    let parentId = this.activatedRoute.snapshot.params['id'];
+    let dialogRef = this.dialog.open(AddCategoryDialogComponent, {
+      data: {
+        parentId,
+        categoryType,
+        isCategoryAdd: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isCategoryAdd == true) {
+        this.getFiliterCategoryList();
+      }
+    });
+  }
+
+  getCategoryDetail() {
+    let id = this.activatedRoute.snapshot.params['id'];
+    this.categoryService.getCategoryDetail({
+      id
+    }).then((data) => {
+      this.category = data;
+    });
+  }
+
+  getFiliterCategoryList() {
+    let category_type = 'third_Category';
+    const self = this;
+    let parentId = this.activatedRoute.snapshot.params['id'];
+    this.categoryService.getFirstCategoryList({
+      category_type,
+      show: false,
+      parentId
+    }).then((data) => {
+      self.categoryList = [...data];
+    });
   }
 
 }
