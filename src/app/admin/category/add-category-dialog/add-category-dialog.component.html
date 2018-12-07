@@ -62,8 +62,8 @@
       Category Image
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
-      <app-product-image-upload-variant [(previewImgFile)]="categoryForm.controls[0].value.image"
-                                        [(previewImgSrcs)]="categoryForm.controls[0].value.image"></app-product-image-upload-variant>
+      <app-category-image-upload-category [(previewImgFile)]="categoryForm.controls[0].value.image"
+                                        [(previewImgSrcs)]="categoryForm.controls[0].value.image"></app-category-image-upload-category>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <div *ngIf="categoryForm.get('image').invalid && (categoryForm.get('image').dirty ||
