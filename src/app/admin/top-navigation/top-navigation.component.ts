@@ -121,7 +121,7 @@ export class TopNavigationComponent implements OnInit {
     },
     {
       id: 4,
-      text: '分类管理',
+      text: '分类目录管理',
       router: './category',
       isActive: false
     }

@@ -157,6 +157,25 @@ export class CategoryService {
       });
   }
 
+  categoryDelete(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}directory/category/delete/${params.id}/`;
+
+    return this.http.delete(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   private handleError1 (error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {

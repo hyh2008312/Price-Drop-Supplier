@@ -533,6 +533,12 @@
     }
   }
 
+  &__title{
+    margin: 40px 16px 24px;
+    font-size: 24px;
+    @include media();
+  }
+
 }
 
 .sc-promotion-dialog{

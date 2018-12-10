@@ -53,7 +53,16 @@ export class CategoryItemComponent implements OnInit {
   }
 
   delete() {
-
+    this.categoryService.categoryDelete(this.product).then((data) => {
+      if(data.result == 'success') {
+        this.productChange.emit({
+          index: this.index,
+          product : this.product,
+          status: this.status,
+          event: 'delete'
+        });
+      }
+    });
   }
 
   save() {

@@ -31,7 +31,7 @@ export class AddCategoryDialogComponent implements OnInit {
       index: [1, Validators.required],
       categoryType: ['', Validators.required],
       parentId: [null],
-      show: [false],
+      show: [true],
       grandParent: [],
       parent: [],
       child: [],

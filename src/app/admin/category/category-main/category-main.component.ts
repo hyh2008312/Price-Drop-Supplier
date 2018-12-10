@@ -131,6 +131,16 @@ export class CategoryMainComponent implements OnInit {
           case 'edit':
             this.getFiliterCategoryList();
             break;
+          case 'delete':
+            this.categoryList.splice(event.index, 1);
+            break;
+        }
+        break;
+      case 1:
+        switch(event.event) {
+          case 'delete':
+            this.subCategoryList.splice(event.index, 1);
+            break;
         }
         break;
     }

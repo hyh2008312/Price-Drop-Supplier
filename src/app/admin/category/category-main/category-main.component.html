@@ -1,14 +1,16 @@
 <div class="container">
   <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
-    <div class="sc-product__header"></div>
+    <div class="sc-promote__title">
+      Catalog Management
+    </div>
 
     <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
-      <mat-tab label="Category">
+      <mat-tab label="Main Category">
         <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="end center">
           <button mat-raised-button color="primary" (click)="addCategory()">
             <div fxLayout="row" fxLayoutAlign="start center">
               <i class="material-icons">add</i>
-              <span class="md-margin-left-1">Add Category</span>
+              <span class="md-margin-left-1">Add a Main Category</span>
             </div>
           </button>
         </div>
@@ -48,7 +50,7 @@
           <button mat-raised-button color="primary" (click)="addCategory()">
             <div fxLayout="row" fxLayoutAlign="start center">
               <i class="material-icons">add</i>
-              <span class="md-margin-left-1">Add SubCategory</span>
+              <span class="md-margin-left-1">Add Detailed Category</span>
             </div>
           </button>
         </div>

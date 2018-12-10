@@ -1,10 +1,10 @@
 <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start center" *ngIf="!isEdit">
-  <div class="md-margin-right-2" fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
+  <div class="md-margin-right-2" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
     <div class="sc-product__product-title" >
       {{product.name}}
     </div>
   </div>
-  <div class=" md-margin-right-2" fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
+  <div class=" md-margin-right-2" fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
     <div class="sc-promote__promote-image">
       <img [src]="product.image"/>
     </div>
@@ -45,12 +45,12 @@
 </div>
 <form class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start center" [formGroup]="categoryForm" novalidate
   *ngIf="isEdit">
-  <div class="md-margin-right-2" fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
+  <div class="md-margin-right-2" fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
     <mat-form-field class="sc-promote__promote-width-1">
       <input type="text" matInput placeholder="Category Name" formControlName="name">
     </mat-form-field>
   </div>
-  <div class="md-margin-right-2" fxFlex="15" fxLayout="row" fxLayoutAlign="center center">
+  <div class="md-margin-right-2" fxFlex="20" fxLayout="row" fxLayoutAlign="center center">
     <app-category-image-upload-category [(previewImgFile)]="product.image"
                                         [(previewImgSrcs)]="product.image"></app-category-image-upload-category>
   </div>
