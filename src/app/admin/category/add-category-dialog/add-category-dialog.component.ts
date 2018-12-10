@@ -27,7 +27,7 @@ export class AddCategoryDialogComponent implements OnInit {
     private categoryService: CategoryService
   ) {
     this.categoryForm = this.fb.group({
-      name: ['', Validators.required],
+      name: [''],
       index: [1, Validators.required],
       categoryType: ['', Validators.required],
       parentId: [null],
