@@ -5,7 +5,7 @@
     </div>
 
     <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
-      <mat-tab label="Main Category">
+      <mat-tab label="Catalog">
         <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="end center">
           <button mat-raised-button color="primary" (click)="addCategory()">
             <div fxLayout="row" fxLayoutAlign="start center">
@@ -15,7 +15,7 @@
           </button>
         </div>
         <div class="md-margin-top-2">
-          <app-category-title ></app-category-title>
+          <app-category-title [status]="0" ></app-category-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <div class="sc-product__product-list" *ngFor="let item of categoryList;let i = index;">
@@ -36,11 +36,11 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="Subcategory" >
+      <mat-tab label="Session" >
         <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
             <mat-form-field>
-              <mat-select name="category" placeholder="Select a Category" [ngModel]="parentId" (valueChange)="filterChange($event)" >
+              <mat-select name="category" placeholder="Select a Main Category" [ngModel]="parentId" (valueChange)="filterChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of filterCategoryList" [value]="item.id">
                   {{ item.name }}
                 </mat-option>
@@ -50,12 +50,12 @@
           <button mat-raised-button color="primary" (click)="addCategory()">
             <div fxLayout="row" fxLayoutAlign="start center">
               <i class="material-icons">add</i>
-              <span class="md-margin-left-1">Add Detailed Category</span>
+              <span class="md-margin-left-1">Add a Session</span>
             </div>
           </button>
         </div>
         <div class="md-margin-top-2">
-          <app-category-title ></app-category-title>
+          <app-category-title [status]="1" ></app-category-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column" *ngIf="parentId">
           <div class="sc-product__product-list" *ngFor="let item of subCategoryList;let i = index;">

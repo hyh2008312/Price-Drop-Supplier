@@ -1,6 +1,6 @@
 <div class="container">
   <div class="md-margin-left-2 md-margin-top-4 sc-product__create-text" fxLayout="row" fxLayoutAlign="start center">
-    <span class="md-dark-secondary xb-pointer" routerLink="../../">Subcategory</span>
+    <span class="md-dark-secondary xb-pointer" routerLink="../../">Catalog</span>
     <span class="md-dark-secondary">&nbsp;>&nbsp;</span><span class="xb-bold" fxFlex>{{category.name}}</span>
     <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="end center">
       <button mat-raised-button color="primary" (click)="addCategory()">
@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="md-margin-top-2">
-    <app-category-title ></app-category-title>
+    <app-category-title [status]="2" ></app-category-title>
   </div>
   <div class="sc-product__product-bg" fxLayout="column">
     <div class="sc-product__product-list" *ngFor="let item of categoryList;let i = index;">
