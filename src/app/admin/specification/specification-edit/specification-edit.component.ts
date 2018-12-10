@@ -50,7 +50,6 @@ export class SpecificationEditComponent implements OnInit {
     private dialog: MatDialog,
     private fb: FormBuilder
   ) {
-    this.getAttributeList();
     this.getValueList();
     this.getProductDetail();
     this.categoryId = this.activatedRoute.snapshot.params['id'];
@@ -78,12 +77,6 @@ export class SpecificationEditComponent implements OnInit {
         this.lastCategoryName = data.parentName;
       }
       this.promoteAll = [...data.specificationList];
-    });
-  }
-
-  getAttributeList() {
-    this.adminService.getAttributeList().then((data) => {
-      this.attributeList = [...data];
     });
   }
 
@@ -394,11 +387,7 @@ export class SpecificationEditComponent implements OnInit {
         excel1.push(template);
 
         let template1 = [];
-        for(let im of this.attributeList) {
-          if(itm.name  == im.name) {
-            template1.push(im.chineseName);
-          }
-        }
+        template1.push(itm.chineseName);
 
         for(let bm of attrValues) {
           for(let cm of this.valueList) {
