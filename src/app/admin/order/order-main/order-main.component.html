@@ -830,6 +830,65 @@
             </div>
           </div>
         </mat-tab>
+        <mat-tab label="Expired">
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">Sort by Order Type: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="typeExpired" name="type" (valueChange)="typeChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of typeList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div>Filter by Order Submission Time:</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="csExpired" placeholder="Start Date" (dateInput)="addEvent('csExpired', $event)">
+              <mat-datepicker-toggle matSuffix [for]="csExpired"></mat-datepicker-toggle>
+              <mat-datepicker #csExpired></mat-datepicker>
+            </mat-form-field>
+            <div class="md-margin-left-2">to</div>
+            <mat-form-field class="md-margin-left-2">
+              <input matInput [matDatepicker]="ceExpired" placeholder="End Date" (dateInput)="addEvent('ceExpired', $event)">
+              <mat-datepicker-toggle matSuffix [for]="ceExpired"></mat-datepicker-toggle>
+              <mat-datepicker #ceExpired></mat-datepicker>
+            </mat-form-field>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+            </div>
+          </div>
+          <div class="md-margin-top-2">
+            <app-order-title [status]="9" ></app-order-title>
+          </div>
+          <div class="sc-order__product-bg" fxLayout="column">
+            <mat-paginator class="md-margin-top-2" [length]="length"
+                           [pageSize]="pageSize"
+                           [pageSizeOptions]="pageSizeOptions"
+                           (page)="changePage($event, 9)"
+                           *ngIf="orderExpired && orderExpired.length > 0">
+            </mat-paginator>
+            <div class="md-margin-bottom-2">
+              <div class="sc-order__product-list" *ngFor="let item of orderExpired;let i = index;" >
+                <app-order-item [status]="9" [index]="i" (productChange)="productChange($event)" [order]="item"></app-order-item>
+              </div>
+            </div>
+            <mat-paginator [length]="length"
+                           [pageSize]="pageSize"
+                           [pageSizeOptions]="pageSizeOptions"
+                           (page)="changePage($event, 9)"
+                           *ngIf="orderExpired && orderExpired.length > 0">
+            </mat-paginator>
+            <div class="sc-order__product-none" fxLayout="row" fxLayoutAlign="center center"
+                 *ngIf="orderExpired && orderExpired.length <= 0">
+              <div fxLayout="column" fxLayoutAlign="center center">
+                <i class="iconfontXberts icon-ic-empty"></i>
+                <div class="sc-order__product-title-1 md-margin-top-4">No orders found</div>
+                <span>You can find orders by changing your search or filtering options.</span>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
       </mat-tab-group>
     </div>
   </div>

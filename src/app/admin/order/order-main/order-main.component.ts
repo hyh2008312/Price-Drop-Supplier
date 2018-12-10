@@ -74,6 +74,10 @@ export class OrderMainComponent implements OnInit {
   orderUndeliveredIndex = 1;
   typeUndelivered: any = false;
   paymentUndelivered: any = false;
+  typeExpired: any = false;
+  paymentExpired: any = false;
+  orderExpired: any = false;
+  orderExpiredIndex: any = 1;
 
   csAll: any = false;
   ceAll: any = false;
@@ -107,6 +111,8 @@ export class OrderMainComponent implements OnInit {
   ceUndelivered: any = false;
   psUndelivered: any = false;
   peUndelivered: any = false;
+  csExpired: any = false;
+  ceExpired: any = false;
 
   typeList: any = [{
     text: 'All',
@@ -272,6 +278,9 @@ export class OrderMainComponent implements OnInit {
       case 8:
         this.orderUndeliveredIndex = event.pageIndex + 1;
         break;
+      case 8:
+        this.orderExpiredIndex = event.pageIndex + 1;
+        break;
     }
     this.changeProducts({index: type});
   }
@@ -378,7 +387,16 @@ export class OrderMainComponent implements OnInit {
         paid_start_time = this.psUndelivered;
         paid_end_time = this.peUndelivered;
         break;
+      case 9:
+        status = 'Expired';
+        page = this.orderExpiredIndex;
+        order_type = this.typeExpired;
+        cod_status = this.paymentExpired;
+        start_time = this.csExpired;
+        end_time = this.ceExpired;
+        break;
       default:
+        break;
     }
     let self = this;
 
@@ -433,6 +451,9 @@ export class OrderMainComponent implements OnInit {
         case 8:
           self.orderUndelivered = data.results;
           break;
+        case 9:
+          self.orderExpired = data.results;
+          break;
       }
     });
 
@@ -482,6 +503,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 8:
         status = 'Undelivered';
+        break;
+      case 8:
+        status = 'Expired';
         break;
     }
 
@@ -536,6 +560,9 @@ export class OrderMainComponent implements OnInit {
           break;
         case 8:
           self.orderUndelivered = [...data];
+          break;
+        case 9:
+          self.orderExpired = [...data];
           break;
       }
     });
@@ -595,6 +622,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 8:
         excel = [...this.orderUndelivered];
+        break;
+      case 9:
+        excel = [...this.orderExpired];
         break;
     }
 
@@ -676,6 +706,9 @@ export class OrderMainComponent implements OnInit {
       case 8:
         this.typeUndelivered = $event;
         break;
+      case 9:
+        this.typeExpired = $event;
+        break;
     }
 
     this.changeProducts({
@@ -711,6 +744,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 8:
         this.paymentUndelivered = $event;
+        break;
+      case 9:
+        this.paymentExpired = $event;
         break;
     }
 
