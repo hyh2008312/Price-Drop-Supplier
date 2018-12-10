@@ -63,6 +63,8 @@ export class AddCategoryDialogComponent implements OnInit {
     }
 
     let self = this;
+    let params = this.categoryForm.value;
+    params.image = this.image;
     this.categoryService.categoryCreate(this.categoryForm.value).then((data) => {
       if(data.id) {
         self.close();
