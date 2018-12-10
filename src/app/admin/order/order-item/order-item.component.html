@@ -111,5 +111,13 @@
         {{order.orderNotes}}
       </div>
     </div>
+    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
+      <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
+        Order Tracking
+      </div>
+      <div>
+        {{order.shippingNumber}} {{order.shippingNumber ? order.shippingProvider: ''}}
+      </div>
+    </div>
   </div>
 </div>

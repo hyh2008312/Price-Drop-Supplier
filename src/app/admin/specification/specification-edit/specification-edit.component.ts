@@ -27,6 +27,7 @@ export class SpecificationEditComponent implements OnInit {
   categoryId: any;
   searchKey: any = '';
   searchForm: FormGroup;
+  ready: any = false;
 
   page: any = 1;
   length: any = 0;
@@ -83,6 +84,7 @@ export class SpecificationEditComponent implements OnInit {
   getValueList() {
     this.adminService.getAttributeValueList().then((data) => {
       this.valueList = [...data];
+      this.ready = 'Download is ready!'
     });
   }
 
