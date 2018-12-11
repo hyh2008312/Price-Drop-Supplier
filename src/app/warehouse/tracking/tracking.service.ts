@@ -62,7 +62,7 @@ export class TrackingService {
       });
   }
 
-  purchaseEdit(product:any): Promise<any> {
+  pickEdit(product:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ export class TrackingService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}purchase/edit/${product.id}/`;
+    const url = `${this.baseUrl.url}purchase/pick/edit/${product.id}/`;
 
     return this.http.post(url, product, options)
       .toPromise()
@@ -81,7 +81,7 @@ export class TrackingService {
       });
   }
 
-  purchaseComplete(product:any): Promise<any> {
+  pickStatus(product:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -90,7 +90,7 @@ export class TrackingService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}purchase/confirm/${product.id}/`;
+    const url = `${this.baseUrl.url}purchase/update/pick/status/${product.id}/`;
 
     return this.http.post(url, product, options)
       .toPromise()
@@ -100,7 +100,7 @@ export class TrackingService {
       });
   }
 
-  getPurchaseList(params:any): Promise<any> {
+  getPickList(params:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -119,8 +119,7 @@ export class TrackingService {
       });
   }
 
-  getTrackingPackage(params:any): Promise<any> {
-
+  pickDelete(params) {
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
@@ -128,46 +127,9 @@ export class TrackingService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}purchase/logistics/information/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}purchase/delete/pick/${params.id}/`;
 
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
-  }
-
-  getOrderDetail(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}purchase/detail/${params.id}/`;
-
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
-  }
-
-  purchaseDelete(params) {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}purchase/delete/${params.id}/`;
-
-    return this.http.delete(url, options)
+    return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
       .catch((error) => {

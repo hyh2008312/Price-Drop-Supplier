@@ -56,24 +56,30 @@ export class TrackingItemComponent implements OnInit {
   }
 
   delete() {
-    this.adminService.purchaseDelete({
+    this.adminService.pickDelete(this.product).then((data) => {
+      if(this.status == 0) {
+        this.product = data;
+      } else {
+        this.productChange.emit({
+          index: this.index,
+          product : this.product,
+          status: this.status,
+          event: 'delete'
+        });
+      }
+    });
+  }
+
+  changeStatus() {
+    this.adminService.pickStatus({
       id: this.product.id
     }).then((data) => {
       this.productChange.emit({
         index: this.index,
-        product : this.product,
+        product: this.product,
         status: this.status,
-        event: 'delete'
+        event: 'change'
       });
-    });
-  }
-
-  complete() {
-    this.productChange.emit({
-      index: this.index,
-      product : this.product,
-      status: this.status,
-      event: 'complete'
     });
   }
 

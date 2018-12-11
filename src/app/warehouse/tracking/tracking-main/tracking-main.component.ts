@@ -150,7 +150,7 @@ export class TrackingMainComponent implements OnInit {
       search_type = this.searchCategory;
     }
 
-    this.adminService.getPurchaseList({
+    this.adminService.getPickList({
       status,
       page,
       page_size,
@@ -195,24 +195,30 @@ export class TrackingMainComponent implements OnInit {
 
   productChange(event) {
     switch(event.status) {
-      case 0:
-        switch(event.event) {
-          case 'delete':
-            this.purchaseAll.splice(event.index,1);
-            break;
-        }
-        break;
       case 1:
         switch(event.event) {
           case 'delete':
             this.purchaseProccessing.splice(event.index,1);
             break;
+          case 'change':
+            this.purchaseDeleted.splice(event.index,1);
+            break;
         }
         break;
       case 2:
         switch(event.event) {
+          case 'change':
+            this.purchaseDeleted.splice(event.index,1);
+            break;
+        }
+        break;
+      case 3:
+        switch(event.event) {
+          case 'delete':
+            this.purchaseDeleted.splice(event.index,1);
+            break;
           case 'complete':
-            this.purchaseShipped.splice(event.index,1);
+            this.purchaseDeleted.splice(event.index,1);
             break;
         }
         break;

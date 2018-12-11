@@ -29,7 +29,7 @@ export class TrackingEditDialogComponent implements OnInit {
       internationalCarrier: ['GATI', Validators.required],
       pickNumber: ['', Validators.required],
       internationalTrackingNumber: ['', Validators.required],
-      pickVariants: this.fb.array([])
+      pickInfo: this.fb.array([])
     });
 
     this.purchaseForm.patchValue({
@@ -59,7 +59,7 @@ export class TrackingEditDialogComponent implements OnInit {
     if(this.purchaseForm.invalid) {
       return;
     }
-    this.homeService.purchaseEdit(this.purchaseForm.value).then((data) => {
+    this.homeService.pickEdit(this.purchaseForm.value).then((data) => {
       if(data && data.id) {
         this.error = false;
         this.data.isEdit = true;

@@ -14,13 +14,13 @@ export class TopNavigationComponent implements OnInit {
 
   contents = [{
     id: 0,
-    text: '采购',
+    text: '采购单',
     router: './home',
     isActive: false,
     staff: false
   }, {
     id: 1,
-    text: '拣货',
+    text: '拣货单',
     router: './tracking',
     isActive: false,
     staff: false

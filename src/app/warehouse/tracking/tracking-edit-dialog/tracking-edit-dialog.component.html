@@ -22,8 +22,8 @@
         <input type="text" matInput placeholder="运单号" formControlName="internationalTrackingNumber">
       </mat-form-field>
     </div>
-    <div class="md-margin-top-2" formArrayName="pickVariants">
-      <div fxLayout="column" *ngFor="let p of pickVariants.controls; let i = index">
+    <div class="md-margin-top-2" formArrayName="pickInfo">
+      <div fxLayout="column" *ngFor="let p of pickInfo.controls; let i = index">
         <div [formGroupName]="i">
           <div fxLayout="row" fxLayoutAlign="start center">
             <div class="md-margin-right-2" fxFlex="60" >
