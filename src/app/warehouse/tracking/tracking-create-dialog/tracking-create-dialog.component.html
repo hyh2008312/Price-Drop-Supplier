@@ -11,7 +11,7 @@
     </div>
     <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="拣货单号" formControlName="purchaseId">
+        <input type="text" matInput placeholder="拣货单号" formControlName="pickNumber">
       </mat-form-field>
     </div>
     <div class="xb-bold">
@@ -19,14 +19,14 @@
     </div>
     <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="运单号" formControlName="purchaseId">
+        <input type="text" matInput placeholder="运单号" formControlName="internationalTrackingNumber">
       </mat-form-field>
     </div>
     <div class="xb-bold md-margin-top-2">
       拣货商品
     </div>
-    <div class="md-margin-top-2" formArrayName="purchaseInfo">
-      <div fxLayout="column" *ngFor="let p of purchaseInfo.controls; let i = index">
+    <div class="md-margin-top-2" formArrayName="pickInfo">
+      <div fxLayout="column" *ngFor="let p of pickInfo.controls; let i = index">
         <div [formGroupName]="i">
           <div fxLayout="row" fxLayoutAlign="start center">
             <div class="md-margin-right-2" fxFlex="60" >
@@ -40,7 +40,7 @@
             <div fxFlex="35">
               <div class="md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
                 <mat-form-field fxFlex>
-                  <input type="number" matInput placeholder="数量" formControlName="purchaseQuantity">
+                  <input type="number" matInput placeholder="数量" formControlName="pickQuantity">
                 </mat-form-field>
               </div>
             </div>
@@ -56,9 +56,9 @@
               This field is required.
             </div>
           </div>
-          <div *ngIf="p.get('purchaseQuantity').invalid && (p.get('purchaseQuantity').dirty ||
-                    p.get('purchaseQuantity').touched)" class="xb-input-error">
-            <div *ngIf="p.get('purchaseQuantity').hasError('required')">
+          <div *ngIf="p.get('pickQuantity').invalid && (p.get('pickQuantity').dirty ||
+                    p.get('pickQuantity').touched)" class="xb-input-error">
+            <div *ngIf="p.get('pickQuantity').hasError('required')">
               This field is required.
             </div>
           </div>

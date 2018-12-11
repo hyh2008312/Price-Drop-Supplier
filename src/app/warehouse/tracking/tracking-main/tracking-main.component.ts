@@ -23,14 +23,14 @@ export class TrackingMainComponent implements OnInit {
   isSearch: boolean = false;
   searchForm: FormGroup;
 
-  searchCategory: any = 'delivery';
+  searchCategory: any = 'international_tracking_number';
 
   searchList:any = [{
     text: '运单号',
-    value: 'delivery'
+    value: 'international_tracking_number'
   }, {
     text: '检货单号',
-    value: 'purchase'
+    value: 'pick_number'
   }];
 
   // MatPaginator Inputs
@@ -46,8 +46,8 @@ export class TrackingMainComponent implements OnInit {
   purchaseProccessingIndex: any = 1;
   purchaseShipped: any = false;
   purchaseShippedIndex: any = 1;
-  purchaseDelivered: any = false;
-  purchaseDeliveredIndex: any = 1;
+  purchaseDeleted: any = false;
+  purchaseDeletedIndex: any = 1;
 
   constructor(
     private adminService: TrackingService,
@@ -113,7 +113,7 @@ export class TrackingMainComponent implements OnInit {
         this.purchaseShippedIndex = event.pageIndex + 1;
         break;
       case 3:
-        this.purchaseDeliveredIndex = event.pageIndex + 1;
+        this.purchaseDeletedIndex = event.pageIndex + 1;
         break;
     }
     this.changePurchaseLists({index: type});
@@ -129,16 +129,16 @@ export class TrackingMainComponent implements OnInit {
       case 0:
         break;
       case 1:
-        status = 'Processing';
+        status = 'Pending Packaging';
         page = this.purchaseProccessingIndex;
         break;
       case 2:
-        status = 'Shipped';
+        status = 'Packaging Completed';
         page = this.purchaseShippedIndex;
         break;
       case 3:
-        status = 'Delivered';
-        page = this.purchaseDeliveredIndex;
+        status = 'Package Deleted';
+        page = this.purchaseDeletedIndex;
         received_time = true;
         break;
     }
@@ -170,7 +170,7 @@ export class TrackingMainComponent implements OnInit {
           this.purchaseShipped = [...data.results];
           break;
         case 3:
-          this.purchaseDelivered = [...data.results];
+          this.purchaseDeleted = [...data.results];
           break;
       }
     });

@@ -181,17 +181,17 @@
           <app-warehouse-tracking-title></app-warehouse-tracking-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
-          <div class="sc-product__product-list" *ngFor="let item of purchaseDelivered;let i = index;" >
+          <div class="sc-product__product-list" *ngFor="let item of purchaseDeleted;let i = index;" >
             <app-warehouse-tracking-item [status]="3" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-tracking-item>
           </div>
           <mat-paginator [length]="length"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 3)"
-                         *ngIf="purchaseDelivered && purchaseDelivered.length > 0">
+                         *ngIf="purchaseDeleted && purchaseDeleted.length > 0">
           </mat-paginator>
           <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
-               *ngIf="purchaseDelivered && purchaseDelivered.length <= 0">
+               *ngIf="purchaseDeleted && purchaseDeleted.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">
               <i class="iconfontXberts icon-ic-empty"></i>
               <div class="sc-product__product-title-1 md-margin-top-4">暂无采购信息</div>

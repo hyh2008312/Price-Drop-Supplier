@@ -3,22 +3,27 @@
     <i class="iconfontXberts icon-ic-close"></i>
   </div>
   <div class="sc-product-dialog__title">
-    编辑采购信息
+    编辑拣货信息
   </div>
   <form class="md-margin-top-3" [formGroup]="purchaseForm" novalidate>
     <div class="xb-bold">
-      采购订单号
+      拣货单号
     </div>
     <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="采购订单号" formControlName="purchaseId">
+        <input type="text" matInput placeholder="拣货单号" formControlName="pickNumber">
       </mat-form-field>
     </div>
-    <div class="xb-bold md-margin-top-2">
-      采购商品
+    <div class="xb-bold">
+      运单号
     </div>
-    <div class="md-margin-top-2" formArrayName="purchaseInfo">
-      <div fxLayout="column" *ngFor="let p of purchaseInfo.controls; let i = index">
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="运单号" formControlName="internationalTrackingNumber">
+      </mat-form-field>
+    </div>
+    <div class="md-margin-top-2" formArrayName="pickVariants">
+      <div fxLayout="column" *ngFor="let p of pickVariants.controls; let i = index">
         <div [formGroupName]="i">
           <div fxLayout="row" fxLayoutAlign="start center">
             <div class="md-margin-right-2" fxFlex="60" >
@@ -32,7 +37,7 @@
             <div fxFlex="35">
               <div class="md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
                 <mat-form-field fxFlex>
-                  <input type="number" matInput placeholder="数量" formControlName="purchaseQuantity">
+                  <input type="number" matInput placeholder="数量" formControlName="pickQuantity">
                 </mat-form-field>
               </div>
             </div>
@@ -48,9 +53,9 @@
               This field is required.
             </div>
           </div>
-          <div *ngIf="p.get('purchaseQuantity').invalid && (p.get('purchaseQuantity').dirty ||
-                    p.get('purchaseQuantity').touched)" class="xb-input-error">
-            <div *ngIf="p.get('purchaseQuantity').hasError('required')">
+          <div *ngIf="p.get('pickQuantity').invalid && (p.get('pickQuantity').dirty ||
+                    p.get('pickQuantity').touched)" class="xb-input-error">
+            <div *ngIf="p.get('pickQuantity').hasError('required')">
               This field is required.
             </div>
           </div>
@@ -61,18 +66,9 @@
       <button type="button" mat-raised-button color="primary" (click)="addPurchaseItem()">
         <div fxLayout="row" fxLayoutAlign="start center">
           <i class="material-icons">add</i>
-          <span class="md-margin-left-1">添加采购商品SKU</span>
+          <span class="md-margin-left-1">添加拣货商品SKU</span>
         </div>
       </button>
-    </div>
-    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
-      <mat-form-field fxFlex>
-        <mat-select name="supplierProvider" placeholder="选择采购账号" formControlName="purchaseAccount">
-          <mat-option class="md-align-center" *ngFor="let item of supplierList" [value]="item">
-            {{ item }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
     </div>
   </form>
   <div class="xb-input-error md-margin-top-2" *ngIf="error">

@@ -43,7 +43,7 @@ export class TrackingService {
     return array.join('&');
   }
 
-  purchaseCreate(product:any): Promise<any> {
+  pickCreate(product:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -52,7 +52,7 @@ export class TrackingService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}purchase/add/`;
+    const url = `${this.baseUrl.url}purchase/pick/add/`;
 
     return this.http.post(url, product, options)
       .toPromise()
@@ -109,7 +109,7 @@ export class TrackingService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}purchase/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}purchase/pick/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()

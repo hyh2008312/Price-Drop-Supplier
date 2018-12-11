@@ -3,7 +3,6 @@ import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
 import { TrackingService } from '../tracking.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 import { TrackingEditDialogComponent } from '../tracking-edit-dialog/tracking-edit-dialog.component';
-import { TrackingCompleteDialogComponent } from '../tracking-complete-dialog/tracking-complete-dialog.component';
 import {MatDialog} from '@angular/material';
 
 @Component({
@@ -70,23 +69,11 @@ export class TrackingItemComponent implements OnInit {
   }
 
   complete() {
-    let dialogRef = this.dialog.open(TrackingCompleteDialogComponent, {
-      data: {
-        item: this.product,
-        isEdit: false
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(dialogRef.componentInstance.data.isEdit == true) {
-        this.product = dialogRef.componentInstance.data.item;
-        this.productChange.emit({
-          index: this.index,
-          product : this.product,
-          status: this.status,
-          event: 'complete'
-        });
-      }
+    this.productChange.emit({
+      index: this.index,
+      product : this.product,
+      status: this.status,
+      event: 'complete'
     });
   }
 

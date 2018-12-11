@@ -14,9 +14,8 @@ export class TrackingEditDialogComponent implements OnInit {
 
   purchaseForm : FormGroup;
   error: any = false;
-  supplierList: any = ['getpricedrop', '北京云海'];
 
-  get purchaseInfo() { return this.purchaseForm.get('purchaseInfo') as FormArray; }
+  get pickInfo() { return this.purchaseForm.get('pickInfo') as FormArray; }
 
   constructor(
     public dialogRef: MatDialogRef<TrackingEditDialogComponent>,
@@ -27,21 +26,22 @@ export class TrackingEditDialogComponent implements OnInit {
 
     this.purchaseForm = this.fb.group({
       id: ['', Validators.required],
-      purchaseId: ['', Validators.required],
-      purchaseInfo: this.fb.array([]),
-      purchaseAccount: ['getpricedrop', Validators.required]
+      internationalCarrier: ['GATI', Validators.required],
+      pickNumber: ['', Validators.required],
+      internationalTrackingNumber: ['', Validators.required],
+      pickVariants: this.fb.array([])
     });
 
     this.purchaseForm.patchValue({
       id: this.data.item.id,
-      purchaseId: this.data.item.purchaseId,
-      purchaseAccount: this.data.item.purchaseAccount
+      pickNumber: this.data.item.pickNumber,
+      internationalTrackingNumber: this.data.item.internationalTrackingNumber,
     });
 
-    for(let item of this.data.item.purchaseVariants) {
-      this.purchaseInfo.push(this.fb.group({
+    for(let item of this.data.item.pickVariants) {
+      this.pickInfo.push(this.fb.group({
         sku: [item.sku, Validators.required],
-        purchaseQuantity: [item.quantity, Validators.required]
+        pickQuantity: [item.quantity, Validators.required]
       }));
     }
 
@@ -60,7 +60,7 @@ export class TrackingEditDialogComponent implements OnInit {
       return;
     }
     this.homeService.purchaseEdit(this.purchaseForm.value).then((data) => {
-      if(data.id) {
+      if(data && data.id) {
         this.error = false;
         this.data.isEdit = true;
         this.data.item = data;
@@ -74,13 +74,13 @@ export class TrackingEditDialogComponent implements OnInit {
   }
 
   delete(i) {
-    this.purchaseInfo.removeAt(i);
+    this.pickInfo.removeAt(i);
   }
 
   addPurchaseItem() {
-    this.purchaseInfo.push(this.fb.group({
+    this.pickInfo.push(this.fb.group({
       sku: ['', Validators.required],
-      purchaseQuantity: ['', Validators.required]
+      pickQuantity: ['', Validators.required]
     }));
   }
 

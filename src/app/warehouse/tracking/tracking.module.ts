@@ -7,7 +7,6 @@ import { TrackingItemComponent } from './tracking-item/tracking-item.component';
 import { TrackingTitleComponent } from './tracking-title/tracking-title.component';
 
 import { TrackingEditDialogComponent } from './tracking-edit-dialog/tracking-edit-dialog.component';
-import { TrackingCompleteDialogComponent } from './tracking-complete-dialog/tracking-complete-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { TrackingRoutingModule } from './tracking.routes.module';
@@ -27,13 +26,11 @@ import { TrackingService } from './tracking.service';
     TrackingItemComponent,
     TrackingTitleComponent,
     TrackingEditDialogComponent,
-    TrackingCompleteDialogComponent,
     ToolTipsComponent
   ],
   entryComponents: [
     TrackingCreateDialogComponent,
     TrackingEditDialogComponent,
-    TrackingCompleteDialogComponent,
     ToolTipsComponent
   ],
   providers: [
