@@ -1,8 +1,8 @@
 <div>
   <div class="sc-product__product-item-top" fxLayout="row" fxLayoutAlign="start center">
     <div>拣货单号: {{product.pickNumber}}</div>
-    <div class="md-margin-left-3">创建日期: {{product.created | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
-    <div class="md-margin-left-3" *ngIf="product.pickStatus == 'Packaging Completed'">拣货日期: {{product.packagingTime | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
+    <div class="md-margin-left-3">创建日期: {{product.created | amTz:'Asia/Beijing' | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
+    <div class="md-margin-left-3" *ngIf="product.pickStatus == 'Packaging Completed'">拣货日期: {{product.packagingTime | amTz:'Asia/Beijing' | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
   </div>
   <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
     <div class="md-margin-right-2" fxFlex="60" fxLayout="column" fxLayoutAlign="start stretch">

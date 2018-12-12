@@ -40,6 +40,8 @@ export class OrderTrackingDialogComponent implements OnInit {
       if(data.success) {
         this.logisticsId = data.logisticsTrace[0].logisticsId;
         this.trackingSteps = data.logisticsTrace[0].logisticsSteps;
+      } else {
+        this.trackingSteps = [];
       }
     });
   }
