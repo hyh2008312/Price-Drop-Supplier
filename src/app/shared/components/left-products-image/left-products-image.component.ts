@@ -4,22 +4,19 @@ import { ICarouselConfig, AnimationConfig } from '../angular4-carousel/index';
 @Component({
   selector: 'app-left-products-image',
   templateUrl: './left-products-image.component.html',
-  styleUrls: ['./left-products-image.scss']
+  styleUrls: ['./_left-products-image.scss']
 })
-
 
 export class LeftProductsImageComponent implements OnInit {
 
   @Input() public images:any = [];
-  @Input() public selectedImage: any;
-  @Input() public imageSources: string[] = [];
 
   public config: ICarouselConfig = {
     verifyBeforeLoad: true,
     log: false,
     animation: true,
     animationType: AnimationConfig.SLIDE,
-    autoplay: true,
+    autoplay: false,
     autoplayDelay: 5000,
     stopAutoplayMinWidth: 0
   };
@@ -31,10 +28,6 @@ export class LeftProductsImageComponent implements OnInit {
   }
 
   ngOnInit():void {
-  }
-
-  selectImage(image: any) {
-    this.selectedImage = image;
   }
 
   slideChange(event) {

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Inject, NgZone} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { ICarouselConfig, AnimationConfig } from '../../../shared/components/angular4-carousel/index';
 
 @Component({
   selector: 'app-warehouse-home-image-dialog',
@@ -8,6 +9,16 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 })
 
 export class HomeImageDialogComponent implements OnInit {
+
+  public config: ICarouselConfig = {
+    verifyBeforeLoad: true,
+    log: false,
+    animation: true,
+    animationType: AnimationConfig.SLIDE,
+    autoplay: false,
+    autoplayDelay: 5000,
+    stopAutoplayMinWidth: 0
+  };
 
   constructor(
     public dialogRef: MatDialogRef<HomeImageDialogComponent>,

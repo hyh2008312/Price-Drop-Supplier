@@ -11,4 +11,7 @@
     <div>{{item.acceptTime | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
     <div class="md-margin-top-1">{{item.remark}}</div>
   </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="!trackingSteps">
+    <mat-progress-spinner [color]="color" [mode]="mode" [value]="value"></mat-progress-spinner>
+  </div>
 </div>

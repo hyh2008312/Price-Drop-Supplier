@@ -12,6 +12,9 @@ export class OrderTrackingDialogComponent implements OnInit {
 
   trackingSteps: any = false;
   logisticsId: any = '';
+  color = 'accent';
+  mode = 'indeterminate';
+  value = 50;
 
   constructor(
     public dialogRef: MatDialogRef<OrderTrackingDialogComponent>,

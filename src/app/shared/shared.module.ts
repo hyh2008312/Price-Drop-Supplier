@@ -75,7 +75,8 @@ import {
   MatPaginatorModule,
   MatSnackBarModule,
   MatSidenavModule,
-  MatDatepickerModule
+  MatDatepickerModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 import { GoogleClientId, FacebookClientId } from '../config/app.api';
@@ -117,7 +118,8 @@ let providers = {
     Angular2SocialLoginModule,
     MatSidenavModule,
     MatDatepickerModule,
-    ClipboardModule
+    ClipboardModule,
+    MatProgressSpinnerModule
   ],
   declarations: [
     SafeHtmlPipe,
@@ -214,6 +216,7 @@ let providers = {
     MatSidenavModule,
     MatDatepickerModule,
     ClipboardModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     FollowService,

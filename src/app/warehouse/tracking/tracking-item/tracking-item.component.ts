@@ -94,7 +94,6 @@ export class TrackingItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {});
   }
 
-
   copy($event) {
     this.openCopyBar();
   }
