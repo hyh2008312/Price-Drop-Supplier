@@ -8,7 +8,7 @@
     <div class="md-margin-right-2" fxFlex="60" fxLayout="column" fxLayoutAlign="start stretch">
       <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let item of product.pickVariants;let i = index;">
         <div class="sc-product__product-image" fxFlex="none">
-          <img [src]="item.mainImage" (click)="openLargeImage(item)">
+          <img class="xb-pointer" [src]="item.mainImage" (click)="openLargeImage(item)">
         </div>
         <div class="md-margin-right-2" fxFlex fxLayout="column" fxLayoutAlign="space-between stretch">
           <div class="sc-product__product-title md-dark-secondary" >{{item.title}}</div>
