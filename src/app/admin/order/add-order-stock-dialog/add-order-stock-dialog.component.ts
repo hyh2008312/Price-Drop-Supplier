@@ -26,7 +26,7 @@ export class AddOrderStockDialogComponent implements OnInit {
     this.orderStockForm = this.fb.group({
       id: [''],
       sourcingSupplier: [''],
-      sourcingOrderNumber: [''],
+      sourcingOrderNumber: ['', Validators.required],
       purchaseAccount: ['getpricedrop', Validators.required]
     });
 

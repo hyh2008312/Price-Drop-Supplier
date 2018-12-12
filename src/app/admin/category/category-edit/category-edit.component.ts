@@ -94,4 +94,16 @@ export class CategoryEditComponent implements OnInit {
     });
   }
 
+  productChange(event) {
+    switch(event.status) {
+      case 2:
+        switch(event.event) {
+          case 'delete':
+            this.categoryList.splice(event.index, 1);
+            break;
+        }
+        break;
+    }
+  }
+
 }
