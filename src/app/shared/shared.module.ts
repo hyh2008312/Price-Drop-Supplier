@@ -46,6 +46,7 @@ import { S3UploaderService } from './services/s3-upload/s3-upload.service';
 import { QuillEditorModule } from 'ngx-quill-editor';
 import { AngularCropperjsModule } from 'angular-cropperjs';
 import { CarouselModule } from './components/angular4-carousel/index';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import { LoginDialogComponent } from '../login/login/login-dialog.component';
 import { SignUpDialogComponent } from '../login/sign-up/sign-up-dialog.component';
@@ -115,7 +116,8 @@ let providers = {
     MatSnackBarModule,
     Angular2SocialLoginModule,
     MatSidenavModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    ClipboardModule
   ],
   declarations: [
     SafeHtmlPipe,
@@ -210,7 +212,8 @@ let providers = {
     MatPaginatorModule,
     MatSnackBarModule,
     MatSidenavModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    ClipboardModule,
   ],
   providers: [
     FollowService,

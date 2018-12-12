@@ -6,7 +6,9 @@ import { OrderTrackingDialogComponent } from '../order-tracking-dialog/order-tra
 import { OrderDetailDialogComponent } from '../order-detail-dialog/order-detail-dialog.component';
 import { HomeEditDialogComponent } from '../home-edit-dialog/home-edit-dialog.component';
 import { HomeCompleteDialogComponent } from '../home-complete-dialog/home-complete-dialog.component';
-import {MatDialog} from '@angular/material';
+import { HomeImageDialogComponent } from '../home-image-dialog/home-image-dialog.component';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
 
 @Component({
   selector: 'app-warehouse-home-item',
@@ -27,7 +29,8 @@ export class HomeItemComponent implements OnInit {
   constructor(
     private adminService: HomeService,
     private userService: UserService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     this.userService.currentUser.subscribe((data) => {
       if(data) {
@@ -109,6 +112,26 @@ export class HomeItemComponent implements OnInit {
           event: 'complete'
         });
       }
+    });
+  }
+
+  openLargeImage(data) {
+    let dialogRef = this.dialog.open(HomeImageDialogComponent, {
+      data: data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {});
+  }
+
+  copy($event) {
+    this.openCopyBar();
+  }
+
+  openCopyBar() {
+    this.snackBar.openFromComponent(ToolTipsComponent, {
+      data: 'Successfully Copied!',
+      duration: 1500,
+      verticalPosition: 'top'
     });
   }
 

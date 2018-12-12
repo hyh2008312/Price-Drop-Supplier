@@ -10,6 +10,7 @@ import { OrderTrackingDialogComponent } from './order-tracking-dialog/order-trac
 import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
 import { HomeEditDialogComponent } from './home-edit-dialog/home-edit-dialog.component';
 import { HomeCompleteDialogComponent } from './home-complete-dialog/home-complete-dialog.component';
+import { HomeImageDialogComponent } from './home-image-dialog/home-image-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { HomeRoutingModule } from './home.routes.module';
@@ -32,6 +33,7 @@ import { HomeService } from './home.service';
     OrderDetailDialogComponent,
     HomeEditDialogComponent,
     HomeCompleteDialogComponent,
+    HomeImageDialogComponent,
     ToolTipsComponent
   ],
   entryComponents: [
@@ -40,6 +42,7 @@ import { HomeService } from './home.service';
     OrderDetailDialogComponent,
     HomeEditDialogComponent,
     HomeCompleteDialogComponent,
+    HomeImageDialogComponent,
     ToolTipsComponent
   ],
   providers: [

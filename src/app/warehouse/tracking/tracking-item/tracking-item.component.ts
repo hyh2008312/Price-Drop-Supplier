@@ -3,7 +3,9 @@ import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
 import { TrackingService } from '../tracking.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 import { TrackingEditDialogComponent } from '../tracking-edit-dialog/tracking-edit-dialog.component';
-import {MatDialog} from '@angular/material';
+import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
+import { TrackingImageDialogComponent } from '../tracking-image-dialog/tracking-image-dialog.component';
+import { MatDialog, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-warehouse-tracking-item',
@@ -24,7 +26,8 @@ export class TrackingItemComponent implements OnInit {
   constructor(
     private adminService: TrackingService,
     private userService: UserService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     this.userService.currentUser.subscribe((data) => {
       if(data) {
@@ -80,6 +83,27 @@ export class TrackingItemComponent implements OnInit {
         status: this.status,
         event: 'change'
       });
+    });
+  }
+
+  openLargeImage(data) {
+    let dialogRef = this.dialog.open(TrackingImageDialogComponent, {
+      data: data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {});
+  }
+
+
+  copy($event) {
+    this.openCopyBar();
+  }
+
+  openCopyBar() {
+    this.snackBar.openFromComponent(ToolTipsComponent, {
+      data: 'Successfully Copied!',
+      duration: 1500,
+      verticalPosition: 'top'
     });
   }
 
