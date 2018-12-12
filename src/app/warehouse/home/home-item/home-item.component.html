@@ -11,11 +11,13 @@
           <img [src]="item.mainImage">
         </div>
         <div class="md-margin-right-2" fxFlex fxLayout="column" fxLayoutAlign="space-between stretch">
-          <div class="sc-product__product-title" >{{item.title}}</div>
-          <div class="md-caption" fxLayout="row" fxLayoutAlign="start end">
-            <div>SKU: {{item.sku}}</div>
-            <div class="md-margin-left-2" fxFlex>规格: {{item.attribute}}</div>
-            <div>x {{item.quantity}}</div>
+          <div class="sc-product__product-title md-dark-secondary" >{{item.title}}</div>
+          <div>
+            <div class="xb-bold">SKU编码: {{item.sku}}</div>
+            <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+              <div>规格: {{item.attribute}}</div>
+              <div>x {{item.quantity}}</div>
+            </div>
           </div>
         </div>
       </div>
