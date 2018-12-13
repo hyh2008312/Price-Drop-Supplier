@@ -66,11 +66,8 @@ export class PromoteMainComponent implements OnInit {
   }
 
   selectProduct() {
-    let index = this.category.findIndex((data) => {
-      return data.id == this.categoryId;
-    });
 
-    const categoryList = this.category[index].children;
+    const categoryList = this.selectCategoryList(this.category, this.categoryId);
 
     let dialogRef = this.dialog.open(SelectProductDialogComponent, {
       data: {
@@ -87,6 +84,21 @@ export class PromoteMainComponent implements OnInit {
         self.getPromotionDetail();
       }
     });
+  }
+
+  selectCategoryList(list, id) {
+    let newList = [];
+    for(let item of list) {
+      if(item.id == id) {
+        return item.children;
+      }
+      if(item.children && item.children.length > 0) {
+        for(let im of item.children) {
+          newList.push(im);
+        }
+      }
+    }
+    return this.selectCategoryList(newList, id);
   }
 
   categoryChange($event) {
