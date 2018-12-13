@@ -13,7 +13,7 @@
     <div class="md-margin-right-2" fxFlex fxLayout="column" fxLayoutAlign="space-between stretch">
       <div class="sc-product__product-title" >{{item.name}}</div>
       <div fxLayout="row" fxLayoutAlign="start center">
-        <div>SKU: {{item.skuID}}</div>
+        <div>SKU: {{item.skuId || item.skuID}}</div>
         <div class="md-margin-left-2" fxFlex>单价:¥ {{item.price}}</div>
         <div> x {{item.quantity}}</div>
       </div>
