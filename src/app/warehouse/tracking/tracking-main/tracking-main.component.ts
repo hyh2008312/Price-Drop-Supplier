@@ -201,14 +201,14 @@ export class TrackingMainComponent implements OnInit {
             this.purchaseProccessing.splice(event.index,1);
             break;
           case 'change':
-            this.purchaseDeleted.splice(event.index,1);
+            this.purchaseProccessing.splice(event.index,1);
             break;
         }
         break;
       case 2:
         switch(event.event) {
           case 'change':
-            this.purchaseDeleted.splice(event.index,1);
+            this.purchaseShipped.splice(event.index,1);
             break;
         }
         break;
