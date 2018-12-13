@@ -18,7 +18,8 @@
               <i class="material-icons md-dark-secondary sc-product__product-title md-margin-left-1 xb-pointer" ngxClipboard [cbContent]="item.sku" (cbOnSuccess)="copy($event)">file_copy</i>
             </div>
             <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
-              <div>规格: {{item.attribute}}</div>
+              <div>订单: {{item.orderNumber}}</div>
+              <div class="md-margin-left-2">规格: {{item.attribute}}</div>
               <div class="md-margin-left-1">x {{item.quantity}}</div>
             </div>
           </div>

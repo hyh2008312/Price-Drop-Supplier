@@ -41,6 +41,7 @@ export class TrackingEditDialogComponent implements OnInit {
     for(let item of this.data.item.pickVariants) {
       this.pickInfo.push(this.fb.group({
         sku: [item.sku, Validators.required],
+        orderNumber: [item.orderNumber, Validators.required],
         pickQuantity: [item.quantity, Validators.required]
       }));
     }
@@ -80,6 +81,7 @@ export class TrackingEditDialogComponent implements OnInit {
   addPurchaseItem() {
     this.pickInfo.push(this.fb.group({
       sku: ['', Validators.required],
+      orderNumber: ['', Validators.required],
       pickQuantity: ['', Validators.required]
     }));
   }

@@ -65,6 +65,7 @@ export class TrackingCreateDialogComponent implements OnInit {
   addPurchaseItem() {
     this.pickInfo.push(this.fb.group({
       sku: ['', Validators.required],
+      orderNumber: ['', Validators.required],
       pickQuantity: ['', Validators.required]
     }));
   }
