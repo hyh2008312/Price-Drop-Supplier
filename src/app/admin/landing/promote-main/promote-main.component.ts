@@ -67,7 +67,11 @@ export class PromoteMainComponent implements OnInit {
 
   selectProduct() {
 
-    const categoryList = this.selectCategoryList(this.category, this.categoryId);
+    let categoryList: any = []
+    const newCategory = this.selectCategoryList(this.category, this.categoryId);
+    for(let item of newCategory) {
+      categoryList.push(item);
+    }
 
     let dialogRef = this.dialog.open(SelectProductDialogComponent, {
       data: {
