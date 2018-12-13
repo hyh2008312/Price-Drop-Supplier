@@ -31,6 +31,9 @@ export class TrackingMainComponent implements OnInit {
   }, {
     text: '检货单号',
     value: 'pick_number'
+  }, {
+    text: '订单号',
+    value: 'order_number'
   }];
 
   // MatPaginator Inputs
