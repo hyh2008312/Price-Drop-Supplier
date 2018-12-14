@@ -142,7 +142,7 @@ export class TrackingService {
     if (error instanceof Response) {
       if(error.status == 401) {
         if(target) {
-          target.router.navigate(['/account/login']);
+          target.router.navigate(['/account/login/warehouse']);
         }
         return Promise.reject(401);
       }
