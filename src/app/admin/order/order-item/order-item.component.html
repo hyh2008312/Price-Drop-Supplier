@@ -49,7 +49,10 @@
       </div>
       <div class="sc-order__product-height-1 xb-bold" fxFlex="30"
            fxLayout="column" fxLayoutAlign="center center">
-        {{order.paymentMode == 'cod' ? 'Cod' : 'Prepaid'}}
+        <div>{{order.paymentMode == 'cod' ? 'Cod' : 'Prepaid'}}</div>
+        <div class="md-margin-top-1" *ngIf="order.paymentMode == 'imprest'">
+          {{order.paymentStatus}}
+        </div>
       </div>
       <div class="sc-order__product-height-1 xb-bold" fxFlex="35"
            fxLayout="column" fxLayoutAlign="center center">
@@ -60,10 +63,10 @@
   <div class="sc-order__product-item-3">
     <div fxLayout="row" fxLayoutAlign="start start">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        Email & Phone
+        Email
       </div>
       <div fxFlex="">
-        {{order.email}} - {{order.phoneNumber}}
+        {{order.email}}
       </div>
       <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started'">
         <button mat-raised-button color="accent" (click)="editSourcing()">Mark as Sourcing</button>
@@ -81,13 +84,21 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
+        Phone
+      </div>
+      <div fxFlex="">
+        {{order.phoneNumber}}
+      </div>
+    </div>
+    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
+      <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
         Address
       </div>
       <div>
         {{order.address}}
       </div>
     </div>
-    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
+    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.sourcingOrderNumber">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
         Sourcing Number
       </div>
@@ -95,7 +106,7 @@
         {{order.sourcingOrderNumber}}
       </div>
     </div>
-    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
+    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start"  *ngIf="order.orderNotes">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
         Order Notes
       </div>
@@ -103,7 +114,7 @@
         {{order.orderNotes}}
       </div>
     </div>
-    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
+    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.shippingNumber">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
         Order Tracking
       </div>
