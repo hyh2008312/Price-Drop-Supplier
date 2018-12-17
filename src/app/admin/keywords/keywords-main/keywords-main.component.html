@@ -3,16 +3,29 @@
     <div class="xb-account__header">
       Keywords
     </div>
-    <app-admin-keywords-title></app-admin-keywords-title>
-    <div class="md-margin-top-2"></div>
-    <div *ngFor="let item of keywordsList;let i = index;">
-      <app-admin-keywords-item [item]="item" [index]="i"></app-admin-keywords-item>
-    </div>
-    <mat-paginator [length]="length"
-                   [pageSize]="pageSize"
-                   [pageSizeOptions]="pageSizeOptions"
-                   (page)="changePage($event)"
-                   *ngIf="keywordsList && keywordsList.length > 0">
-    </mat-paginator>
+    <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
+      <mat-tab label="Keywords">
+        <div class="md-margin-top-2"></div>
+        <app-admin-keywords-title></app-admin-keywords-title>
+        <div class="md-margin-top-2"></div>
+        <div *ngFor="let item of keywordsList;let i = index;">
+          <app-admin-keywords-item [item]="item" [index]="i"></app-admin-keywords-item>
+        </div>
+        <mat-paginator [length]="length"
+                       [pageSize]="pageSize"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="changePage($event)"
+                       *ngIf="keywordsList && keywordsList.length > 0">
+        </mat-paginator>
+      </mat-tab>
+      <mat-tab label="Most Searched Words">
+        <div class="md-margin-top-2"></div>
+        <app-admin-hotword-title></app-admin-hotword-title>
+        <div class="md-margin-top-2"></div>
+        <div *ngFor="let item of hotwordList;let i = index;">
+          <app-admin-hotword-item [item]="item" [index]="i"></app-admin-hotword-item>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>

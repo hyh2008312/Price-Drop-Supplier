@@ -14,8 +14,11 @@ import {KeywordsService} from "../keywords.service";
 export class KeywordsMainComponent implements OnInit {
 
 
+  selectedIndex: any = 0;
+
   keywordsListIndex = 1;
   keywordsList: any;
+  hotwordList: any;
 
   // MatPaginator Inputs
   length:number = 0;
@@ -44,14 +47,25 @@ export class KeywordsMainComponent implements OnInit {
   }
 
   changeLists() {
-    let page = this.keywordsListIndex;
+    let page: any = '';
+    switch (this.selectedIndex) {
+      case 0:
+        page = this.keywordsListIndex;
 
-    this.accountService.getKeywordsList({
-      page,
-      page_size: this.pageSize
-    }).then((data) => {
-      this.length = data.count;
-      this.keywordsList = [...data.results];
-    })
+        this.accountService.getKeywordsList({
+          page,
+          page_size: this.pageSize
+        }).then((data) => {
+          this.length = data.count;
+          this.keywordsList = [...data.results];
+        });
+        break;
+      case 1:
+
+        this.accountService.getHotwordList().then((data) => {
+          this.hotwordList = [...data];
+        });
+        break;
+    }
   }
 }

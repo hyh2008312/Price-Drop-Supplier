@@ -51,6 +51,7 @@ export class SpecificationEditComponent implements OnInit {
     private dialog: MatDialog,
     private fb: FormBuilder
   ) {
+    this.getAttributeList();
     this.getValueList();
     this.getProductDetail();
     this.categoryId = this.activatedRoute.snapshot.params['id'];
@@ -78,6 +79,12 @@ export class SpecificationEditComponent implements OnInit {
         this.lastCategoryName = data.parentName;
       }
       this.promoteAll = [...data.specificationList];
+    });
+  }
+
+  getAttributeList() {
+    this.adminService.getAttributeList().then((data) => {
+      this.attributeList = [...data];
     });
   }
 
@@ -262,7 +269,7 @@ export class SpecificationEditComponent implements OnInit {
               break;
           }
 
-          product.push(_itm.stock);
+          product.push(_itm.availableStock);
           product.push(item.categories[0].fullName);
           product.push('');
           product.push(item.chineseTitle);
