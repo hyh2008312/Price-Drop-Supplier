@@ -34,6 +34,10 @@ export class KeywordsMainComponent implements OnInit {
   ceAll: any;
   startDate: any;
   endDate: any;
+  isLoading: boolean = false;
+  color: any = 'accent';
+  mode: any = 'indeterminate';
+  value: any = 20;
 
   selectedIndex: any = 0;
 
@@ -112,13 +116,13 @@ export class KeywordsMainComponent implements OnInit {
   }
 
   filterDate() {
+    this.isLoading = true;
     let start_time = this.csAll;
     let end_time = this.ceAll;
     this.accountService.getNewKeywordsList({
       start_time,
       end_time
     }).then((data) => {
-
       let keywords: any = {};
       for(let item of data) {
         if(!keywords[item['keyword']]) {
@@ -153,6 +157,7 @@ export class KeywordsMainComponent implements OnInit {
         return 0;
       });
       this.length = this.keywordsList.length;
+      this.isLoading = false;
     });
   }
 

@@ -47,6 +47,9 @@
           <div class="sc__accent-dark md-margin-left-2">
             <button mat-raised-button color="accent" (click)="cancel()">Cancel</button>
           </div>
+          <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="isLoading">
+            <mat-progress-spinner [color]="color" [mode]="mode" [value]="value" [diameter]="value"></mat-progress-spinner>
+          </div>
         </div>
         <div class="md-margin-top-2"></div>
         <app-admin-keywords-title></app-admin-keywords-title>
