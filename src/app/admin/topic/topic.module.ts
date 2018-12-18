@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { PromoteMainComponent } from './promote-main/promote-main.component';
 import { PromoteCreateComponent } from './promote-create/promote-create.component';
+import { PromoteCreateOneComponent } from './promote-create-1/promote-create-1.component';
 import { PromoteEditComponent } from './promote-edit/promote-edit.component';
 
 import { PromoteItemComponent } from './promote-item/promote-item.component';
@@ -44,7 +45,8 @@ import { TopicService } from './topic.service';
     ChangeVariantDialogComponent,
     ProductVariantItemComponent,
     ProductVariantTitleComponent,
-    ImageUploadMainComponent
+    ImageUploadMainComponent,
+    PromoteCreateOneComponent
   ],
   entryComponents: [
     SelectProductDialogComponent,
