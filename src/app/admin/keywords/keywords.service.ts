@@ -60,6 +60,23 @@ export class KeywordsService {
         .catch(this.handleError);
   }
 
+  getNewKeywordsList(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}statistics/record/search/key/new/list/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
   getHotwordList(): Promise<any> {
 
     let headers = new Headers({
@@ -69,7 +86,7 @@ export class KeywordsService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}statistics/record/search/key/list/`;
+    const url = `${this.baseUrl.url}statistics/search/key/list/`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -89,6 +106,58 @@ export class KeywordsService {
     const url = `${this.baseUrl.url}statistics/record/search/key/record/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  hotwordCreate(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}statistics/search/key/add/`;
+
+    return this.http.post(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  hotwordDelete(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}statistics/search/key/delete/${params.id}/`;
+
+    return this.http.delete(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+
+  hotwordEdit(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}statistics/search/key/update/${params.id}/`;
+
+    return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
