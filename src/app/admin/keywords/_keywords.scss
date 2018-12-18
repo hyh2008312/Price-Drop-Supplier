@@ -100,3 +100,23 @@
   }
 
 }
+
+.sc-product{
+  &__product{
+
+    &-none{
+      padding: 96px 0;
+      background-color: $whiteColor;
+      border-radius: 4px;
+      span{
+        margin-top: 16px;
+        @include media();
+      }
+      i{
+        font-size: 96px;
+        line-height: 96px;
+        color: rgba(0,0,0,.38);
+      }
+    }
+  }
+}
