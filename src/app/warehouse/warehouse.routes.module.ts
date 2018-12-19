@@ -14,6 +14,9 @@ const routes: Routes = [
         path: 'tracking',
         loadChildren: './tracking/tracking.module#TrackingModule'
       }, {
+        path: 'inventory',
+        loadChildren: './inventory/inventory.module#InventoryModule'
+      }, {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'

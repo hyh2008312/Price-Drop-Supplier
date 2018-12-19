@@ -104,13 +104,15 @@ export class HomeItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(dialogRef.componentInstance.data.isEdit == true) {
+        if(this.product.purchaseStatus != dialogRef.componentInstance.data.item.purchaseStatus) {
+          this.productChange.emit({
+            index: this.index,
+            product : this.product,
+            status: this.status,
+            event: 'complete'
+          });
+        }
         this.product = dialogRef.componentInstance.data.item;
-        this.productChange.emit({
-          index: this.index,
-          product : this.product,
-          status: this.status,
-          event: 'complete'
-        });
       }
     });
   }

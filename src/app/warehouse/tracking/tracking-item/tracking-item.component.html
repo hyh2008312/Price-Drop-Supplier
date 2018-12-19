@@ -46,10 +46,10 @@
       <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging'" (click)="edit()">编辑</button>
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging'" ></div>
       <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Pending Packaging'"
-              (click)="changeStatus()">标为已完成</button>
+              (click)="changeStatus()">已打包出库</button>
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Packaging Completed'" ></div>
       <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Packaging Completed'"
-              (click)="changeStatus()">取消已完成</button>
+              (click)="changeStatus()">取消打包出库</button>
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Packaging Completed'"></div>
       <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Packaging Completed'"
               (click)="delete()">删除</button>

@@ -62,6 +62,8 @@ export class HomeMainComponent implements OnInit {
   purchaseProccessingIndex: any = 1;
   purchaseShipped: any = false;
   purchaseShippedIndex: any = 1;
+  purchasePartiallyDelivered: any = false;
+  purchasePartiallyDeliveredIndex: any = 1;
   purchaseDelivered: any = false;
   purchaseDeliveredIndex: any = 1;
   purchaseCanceled: any = false;
@@ -131,9 +133,12 @@ export class HomeMainComponent implements OnInit {
         this.purchaseShippedIndex = event.pageIndex + 1;
         break;
       case 3:
-        this.purchaseDeliveredIndex = event.pageIndex + 1;
+        this.purchasePartiallyDeliveredIndex = event.pageIndex + 1;
         break;
       case 4:
+        this.purchaseDeliveredIndex = event.pageIndex + 1;
+        break;
+      case 5:
         this.purchaseCanceledIndex = event.pageIndex + 1;
         break;
     }
@@ -162,11 +167,16 @@ export class HomeMainComponent implements OnInit {
         delivery_status = false;
         break;
       case 3:
+        status = 'Partially Delivered';
+        page = this.purchasePartiallyDeliveredIndex;
+        received_time = true;
+        break;
+      case 4:
         status = 'Delivered';
         page = this.purchaseDeliveredIndex;
         received_time = true;
         break;
-      case 4:
+      case 5:
         status = 'Canceled';
         page = this.purchaseCanceledIndex;
         delivery_status = false;
@@ -202,9 +212,12 @@ export class HomeMainComponent implements OnInit {
           this.purchaseShipped = [...data.results];
           break;
         case 3:
-          this.purchaseDelivered = [...data.results];
+          this.purchasePartiallyDelivered = [...data.results];
           break;
         case 4:
+          this.purchaseDelivered = [...data.results];
+          break;
+        case 5:
           this.purchaseCanceled = [...data.results];
           break;
       }
@@ -255,6 +268,20 @@ export class HomeMainComponent implements OnInit {
         switch(event.event) {
           case 'complete':
             this.purchaseShipped.splice(event.index,1);
+            break;
+        }
+        break;
+      case 3:
+        switch(event.event) {
+          case 'complete':
+            this.purchasePartiallyDelivered.splice(event.index,1);
+            break;
+        }
+        break;
+      case 4:
+        switch(event.event) {
+          case 'complete':
+            this.purchaseDelivered.splice(event.index,1);
             break;
         }
         break;

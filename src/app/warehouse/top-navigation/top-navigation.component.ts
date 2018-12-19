@@ -24,6 +24,12 @@ export class TopNavigationComponent implements OnInit {
     router: './tracking',
     isActive: false,
     staff: false
+  }, {
+    id: 2,
+    text: '库存管理',
+    router: './inventory',
+    isActive: false,
+    staff: false
   }];
 
   accounts = [

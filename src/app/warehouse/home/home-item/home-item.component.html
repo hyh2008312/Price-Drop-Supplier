@@ -19,7 +19,7 @@
             </div>
             <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
               <div>规格: {{item.attribute}}</div>
-              <div class="md-margin-left-1">x {{item.quantity}}</div>
+              <div class="md-margin-left-1">采购数量: {{item.quantity}}</div>
             </div>
           </div>
         </div>
@@ -29,11 +29,9 @@
          fxLayout="column" fxLayoutAlign="center center">
       <div *ngIf="product.purchaseStatus == 'Processing'">未发货</div>
       <div *ngIf="product.purchaseStatus == 'Shipped'">已发货</div>
-      <div *ngIf="product.purchaseStatus == 'Delivered'">已收货</div>
+      <div *ngIf="product.purchaseStatus == 'Partially Delivered'">部分收货</div>
+      <div *ngIf="product.purchaseStatus == 'Delivered'">全部收货</div>
       <div *ngIf="product.purchaseStatus == 'Canceled'">已取消</div>
-      <div class="md-margin-top-1" *ngIf="product.deliveryStatus == 'Completed'">成功入库</div>
-      <div class="md-margin-top-1" *ngIf="product.deliveryStatus == 'Quantity Issue'">数量问题</div>
-      <div class="md-margin-top-1" *ngIf="product.deliveryStatus == 'Quality Issue'">货物问题</div>
     </div>
     <div class="sc-product__product-category md-margin-right-2" fxFlex="10"
          fxLayout="column" fxLayoutAlign="center center">
@@ -55,8 +53,9 @@
          fxLayout="column" fxLayoutAlign="center stretch">
       <div class="md-margin-top-2"></div>
       <button mat-raised-button color="primary" *ngIf="product.purchaseStatus == 'Processing'" (click)="edit()">编辑</button>
-      <button mat-raised-button color="primary" *ngIf="product.purchaseStatus == 'Shipped'" (click)="complete()">点击确认收货</button>
-      <button mat-raised-button color="primary" *ngIf="product.purchaseStatus == 'Delivered'" (click)="complete()">查看收货情况</button>
+      <button mat-raised-button color="primary" *ngIf="product.purchaseStatus == 'Shipped'" (click)="complete()">到货入库</button>
+      <button mat-raised-button color="primary" *ngIf="product.purchaseStatus == 'Partially Delivered'" (click)="complete()">到货入库</button>
+      <button mat-raised-button color="primary" *ngIf="product.purchaseStatus == 'Delivered'" (click)="complete()">查看入库情况</button>
       <div class="md-margin-top-1"></div>
       <button mat-raised-button color="accent" (click)="trackingPackage()">查看物流信息</button>
       <div class="md-margin-top-1"></div>
@@ -65,5 +64,8 @@
       <button mat-raised-button color="primary" *ngIf="product.purchaseStatus == 'Processing' || product.purchaseStatus == 'Canceled'"
               (click)="delete()">删除</button>
     </div>
+  </div>
+  <div class="sc-product__product-item-bottom" fxLayout="row" fxLayoutAlign="start center" *ngIf="product.notes">
+    <div>备注: {{product.notes}}</div>
   </div>
 </div>

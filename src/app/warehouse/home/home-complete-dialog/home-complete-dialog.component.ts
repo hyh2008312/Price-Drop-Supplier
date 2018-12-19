@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Inject, NgZone} from '@angular/core';
 import { FormBuilder, FormGroup, Validators , FormArray } from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 import { HomeService } from '../home.service';
 
@@ -14,16 +14,8 @@ export class HomeCompleteDialogComponent implements OnInit {
 
   purchaseForm : FormGroup;
   error: any = false;
-  status: any = [{
-    value: 'Completed',
-    text: '成功入库'
-  }, {
-    value: 'Quantity Issue',
-    text: '数量问题'
-  }, {
-    value: 'Quality Issue',
-    text: '货物问题'
-  }];
+
+  get purchaseVariants() { return this.purchaseForm.get('purchaseVariants') as FormArray; }
 
   constructor(
     public dialogRef: MatDialogRef<HomeCompleteDialogComponent>,
@@ -34,15 +26,27 @@ export class HomeCompleteDialogComponent implements OnInit {
 
     this.purchaseForm = this.fb.group({
       id: ['', Validators.required],
-      status: ['', Validators.required],
+      purchaseVariants: this.fb.array([]),
       notes: ['']
     });
 
     this.purchaseForm.patchValue({
       id: this.data.item.id,
-      status: this.data.item.deliveryStatus,
-      notes: this.data.item.notes,
-    })
+      notes: this.data.item.notes
+    });
+
+    for(let item of this.data.item.purchaseVariants) {
+      this.purchaseVariants.push(this.fb.group({
+        id: [item.id],
+        mainImage: [item.mainImage],
+        title: [item.title],
+        attribute: [item.attribute],
+        sku: [item.sku],
+        quantity: [item.quantity],
+        receiveQuantity: [item.receiveQuantity, [Validators.required, Validators.max(item.quantity)]],
+      }));
+    }
+
   }
 
   ngOnInit() {}
