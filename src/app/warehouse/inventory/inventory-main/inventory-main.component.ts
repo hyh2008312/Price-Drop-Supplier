@@ -76,7 +76,7 @@ export class InventoryMainComponent implements OnInit {
 
   changePage(event) {
     this.pageSize = event.pageSize;
-    this.inventoryAllIndex = event.index + 1;
+    this.inventoryAllIndex = event.pageIndex + 1;
     this.changeInventoryLists({index: this.selectedIndex});
   }
 
