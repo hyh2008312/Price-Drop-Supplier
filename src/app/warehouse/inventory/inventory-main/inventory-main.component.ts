@@ -90,7 +90,7 @@ export class InventoryMainComponent implements OnInit {
 
     this.inventoryService.getInventoryList({
       page: this.inventoryAllIndex,
-      pageSize: this.pageSize,
+      page_size: this.pageSize,
       search,
       search_type
     }).then((data) => {
