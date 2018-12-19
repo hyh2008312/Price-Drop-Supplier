@@ -1,12 +1,10 @@
 import { Component, OnInit, OnDestroy, Inject, NgZone} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, NavigationStart, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
 import { InventoryService } from '../inventory.service';
-import { UserService } from  '../../../shared/services/user/user.service';
-import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-warehouse-inventory-main',
@@ -40,21 +38,11 @@ export class InventoryMainComponent implements OnInit {
   inventoryAllIndex: any = 1;
 
   constructor(
-    private adminService: InventoryService,
-    private userService: UserService,
+    private inventoryService: InventoryService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
-    private dialog: MatDialog
+    private fb: FormBuilder
   ) {
-
-    this.userService.currentUser.subscribe((data) => {
-      if(data) {
-        if(data.isStaff && data.isSuperuser) {
-          this.isSuperuser = true
-        }
-      }
-    });
 
     this.searchForm = this.fb.group({
       searchKey: ['']
@@ -62,6 +50,9 @@ export class InventoryMainComponent implements OnInit {
 
     this.searchForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
+    this.changeInventoryLists({
+      index: this.selectedIndex
+    });
   }
 
   onValueChanged(data) {
@@ -85,11 +76,27 @@ export class InventoryMainComponent implements OnInit {
 
   changePage(event) {
     this.pageSize = event.pageSize;
+    this.inventoryAllIndex = event.index + 1;
     this.changeInventoryLists({index: this.selectedIndex});
   }
 
   changeInventoryLists($event) {
+    let search: any = null;
+    let search_type: any = null;
+    if(this.searchKey && this.searchKey != '') {
+      search = this.searchKey;
+      search_type = this.searchCategory;
+    }
 
+    this.inventoryService.getInventoryList({
+      page: this.inventoryAllIndex,
+      pageSize: this.pageSize,
+      search,
+      search_type
+    }).then((data) => {
+      this.length = data.count;
+      this.inventoryAll = [...data.results];
+    })
   }
 
 

@@ -1,8 +1,9 @@
 import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
 
 import { InventoryService } from '../inventory.service';
-import { UserService } from  '../../../shared/services/user/user.service';
+import { InventoryImageDialogComponent } from '../inventory-image-dialog/inventory-image-dialog.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
+import {ToolTipsComponent} from '../tool-tips/tool-tips.component';
 
 @Component({
   selector: 'app-warehouse-inventory-item',
@@ -22,22 +23,33 @@ export class InventoryItemComponent implements OnInit {
 
   constructor(
     private inventoryService: InventoryService,
-    private userService: UserService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
-  ) {
-    this.userService.currentUser.subscribe((data) => {
-      if(data) {
-        if(data.isStaff && data.isSuperuser) {
-          this.isSuperuser = true
-        }
-      }
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
 
 
+  }
+
+  openLargeImage(data) {
+    let dialogRef = this.dialog.open(InventoryImageDialogComponent, {
+      data: data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {});
+  }
+
+  copy($event) {
+    this.openCopyBar();
+  }
+
+  openCopyBar() {
+    this.snackBar.openFromComponent(ToolTipsComponent, {
+      data: 'Successfully Copied!',
+      duration: 1500,
+      verticalPosition: 'top'
+    });
   }
 
 }

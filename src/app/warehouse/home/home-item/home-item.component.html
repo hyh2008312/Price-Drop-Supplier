@@ -20,6 +20,8 @@
             <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
               <div>规格: {{item.attribute}}</div>
               <div class="md-margin-left-1">采购数量: {{item.quantity}}</div>
+              <div class="md-margin-left-1" [ngClass]="{'sc-product__product-red': item.receiveQuantity < item.quantity}"
+                   *ngIf="product.purchaseStatus == 'Partially Delivered' || product.purchaseStatus == 'Delivered'">实际到货数量: {{item.receiveQuantity}}</div>
             </div>
           </div>
         </div>

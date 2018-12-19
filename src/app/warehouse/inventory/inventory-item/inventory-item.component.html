@@ -1,31 +1,30 @@
 <div>
   <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
-    <div class="md-margin-right-2" fxFlex="45" fxLayout="column" fxLayoutAlign="start stretch">
-      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let item of product.purchaseVariants;let i = index;">
+    <div class="md-margin-right-2" fxFlex="45">
+      <div fxLayout="row" fxLayoutAlign="start center">
         <div class="sc-product__product-image" fxFlex="none">
-          <img class="xb-pointer" [src]="item.mainImage" (click)="openLargeImage(item)">
+          <img class="xb-pointer" [src]="product.mainImage" (click)="openLargeImage(product)">
         </div>
-        <div class="md-margin-right-2" fxFlex fxLayout="column" fxLayoutAlign="space-between stretch">
-          <div class="sc-product__product-title md-dark-secondary" >{{item.title}}</div>
-          <div>
-            <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
-              <div class="xb-bold">SKU编码: {{item.sku}}</div>
-              <i class="material-icons md-dark-secondary sc-product__product-title md-margin-left-1 xb-pointer" ngxClipboard [cbContent]="item.sku" (cbOnSuccess)="copy($event)">file_copy</i>
-            </div>
-            <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
-              <div>规格: {{item.attribute}}</div>
-              <div class="md-margin-left-1">x {{item.quantity}}</div>
-            </div>
-          </div>
+        <div class="md-margin-right-2">
+          <div class="sc-product__product-title" >{{product.title}}</div>
         </div>
       </div>
     </div>
     <div class="sc-product__product-id md-margin-right-2" fxFlex="20"
          fxLayout="column" fxLayoutAlign="center center">
-      <div>1000</div>
+      {{product.attribute}}
     </div>
-    <div class="sc-product__product-price sc__accent-dark" fxFlex="10"
-         fxLayout="column" fxLayoutAlign="center stretch">
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="25"
+         fxLayout="column" fxLayoutAlign="center center">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="xb-bold">SKU编码: {{product.sku}}</div>
+        <i class="material-icons md-dark-secondary sc-product__product-title md-margin-left-1 xb-pointer"
+           ngxClipboard [cbContent]="product.sku" (cbOnSuccess)="copy($event)">file_copy</i>
+      </div>
+    </div>
+    <div class="sc-product__product-id" fxFlex="10"
+         fxLayout="column" fxLayoutAlign="center center">
+      {{product.quantity}}
     </div>
   </div>
 </div>

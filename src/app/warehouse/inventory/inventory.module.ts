@@ -4,6 +4,8 @@ import { InventoryMainComponent } from './inventory-main/inventory-main.componen
 
 import { InventoryItemComponent } from './inventory-item/inventory-item.component';
 import { InventoryTitleComponent } from './inventory-title/inventory-title.component';
+import { InventoryImageDialogComponent } from './inventory-image-dialog/inventory-image-dialog.component';
+import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { InventoryRoutingModule } from './inventory.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -19,9 +21,14 @@ import { InventoryService } from './inventory.service';
   declarations: [
     InventoryMainComponent,
     InventoryItemComponent,
-    InventoryTitleComponent
+    InventoryTitleComponent,
+    InventoryImageDialogComponent,
+    ToolTipsComponent
   ],
-  entryComponents: [],
+  entryComponents: [
+    InventoryImageDialogComponent,
+    ToolTipsComponent
+  ],
   providers: [
     InventoryService
   ]

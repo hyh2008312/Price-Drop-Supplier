@@ -30,20 +30,20 @@
           <app-warehouse-inventory-title></app-warehouse-inventory-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
-          <div class="sc-product__product-list" *ngFor="let item of purchaseAll;let i = index;">
+          <div class="sc-product__product-list" *ngFor="let item of inventoryAll;let i = index;">
             <app-warehouse-inventory-item [status]="0" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-inventory-item>
           </div>
           <mat-paginator [length]="length"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event)"
-                         *ngIf="purchaseAll && purchaseAll.length > 0">
+                         *ngIf="inventoryAll && inventoryAll.length > 0">
           </mat-paginator>
           <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
-               *ngIf="purchaseAll && purchaseAll.length <= 0">
+               *ngIf="inventoryAll && inventoryAll.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">
-              <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-product__product-title-1 md-margin-top-4">暂无采购信息</div>
+              <i class="iconfontXberts icon-ic-empty"></i>kuc
+              <div class="sc-product__product-title-1 md-margin-top-4">暂无库存信息</div>
             </div>
           </div>
         </div>
