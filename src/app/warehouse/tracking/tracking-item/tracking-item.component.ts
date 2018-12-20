@@ -77,13 +77,15 @@ export class TrackingItemComponent implements OnInit {
     this.adminService.pickStatus({
       id: this.product.id
     }).then((data) => {
-      this.product = data;
-      this.productChange.emit({
-        index: this.index,
-        product: this.product,
-        status: this.status,
-        event: 'change'
-      });
+      if(data.id) {
+        this.product = data;
+        this.productChange.emit({
+          index: this.index,
+          product: this.product,
+          status: this.status,
+          event: 'change'
+        });
+      }
     });
   }
 

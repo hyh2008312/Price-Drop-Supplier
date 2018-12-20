@@ -11,7 +11,7 @@ const routes: Routes = [
   }, {
     path: 'create', component: PromoteCreateComponent
   }, {
-    path: 'edit/:id', component: PromoteEditComponent
+    path: 'edit/:templateId/:id', component: PromoteEditComponent
   }
 ];
 

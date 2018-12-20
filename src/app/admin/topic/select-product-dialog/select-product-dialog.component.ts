@@ -19,6 +19,8 @@ export class SelectProductDialogComponent implements OnInit {
   searchForm: FormGroup;
 
   cat: any;
+  min: any;
+  max: any;
 
   promotionProduct: any;
 
@@ -60,21 +62,25 @@ export class SelectProductDialogComponent implements OnInit {
 
   getPromoteProduct() {
     let param: any = {};
+    let min_price: any = this.min && this.min != ''? this.min: null;
+    let max_price: any = this.max && this.max != ''? this.max: null;
     if(this.searchKey != '') {
       param = {
         cat: this.cat,
         q: this.searchKey,
         qt: 'product',
-        topicId: this.data.promotionId,
         page: this.page,
-        page_size: this.pageSize
+        page_size: this.pageSize,
+        min_price,
+        max_price
       };
     } else {
       param = {
         cat: this.cat,
-        topicId: this.data.promotionId,
         page: this.page,
-        page_size: this.pageSize
+        page_size: this.pageSize,
+        min_price,
+        max_price
       }
     }
 

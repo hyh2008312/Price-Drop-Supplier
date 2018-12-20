@@ -50,7 +50,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/list/`;
+    const url = `${this.baseUrl.url}activity/create/`;
 
     return this.http.post(url, promotion, options)
       .toPromise()
@@ -67,9 +67,9 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/detail/${promotion.id}/`;
+    const url = `${this.baseUrl.url}activity/edit/${promotion.id}/`;
 
-    return this.http.put(url, promotion, options)
+    return this.http.post(url, promotion, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
@@ -84,7 +84,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/detail/${promotion.id}/`;
+    const url = `${this.baseUrl.url}activity/edit/${promotion.id}/`;
 
     return this.http.delete(url, options)
       .toPromise()
@@ -101,26 +101,9 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/create/${promotion.id}/`;
+    const url = `${this.baseUrl.url}activity/create/product/`;
 
     return this.http.post(url, promotion, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  changePromotionDiscounts(promotion:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/promotion/batch/${promotion.id}/`;
-
-    return this.http.put(url, promotion, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
@@ -135,7 +118,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/create/${params.id}/`;
+    const url = `${this.baseUrl.url}activity/delete/product/${params.id}/`;
 
     return this.http.delete(url, options)
       .toPromise()
@@ -221,9 +204,9 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/detail/${promotion.id}/`;
+    const url = `${this.baseUrl.url}activity/update/status/${promotion.id}/`;
 
-    return this.http.put(url, promotion, options)
+    return this.http.post(url, promotion, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
@@ -238,7 +221,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/web/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}activity/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -255,7 +238,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/products/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}activity/search/product/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -272,9 +255,43 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/products/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}activity/tab/detail/${params.id}/`;
 
     return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  changeTabName(promotion:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}activity/tab/edit/${promotion.id}/`;
+
+    return this.http.post(url, promotion, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  deleteTabName(promotion:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}activity/tab/edit/${promotion.id}/`;
+
+    return this.http.delete(url, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
@@ -289,7 +306,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/detail/${params.id}/`;
+    const url = `${this.baseUrl.url}activity/detail/${params.id}/`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -309,6 +326,40 @@ export class TopicService {
     const url = `${this.baseUrl.url}product/list/category/`;
 
     return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  getTemplateTypeList(): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}activity/template/type/list/`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  addSubeventName(params: any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}activity/tab/create/`;
+
+    return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);

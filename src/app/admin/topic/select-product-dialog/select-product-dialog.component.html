@@ -14,6 +14,21 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <div class="md-margin-left-2 unicorn-dark-theme">
+      <mat-form-field class="sc-promotion-dialog__width-1">
+        <input matInput type="text" placeholder="Min Price" [(ngModel)]="min">
+      </mat-form-field>
+    </div>
+    <div class="md-margin-left-2 unicorn-dark-theme">
+      <mat-form-field class="sc-promotion-dialog__width-1">
+        <input matInput type="text" placeholder="Max Price" [(ngModel)]="max">
+      </mat-form-field>
+    </div>
+    <div class="md-margin-left-2 sc__accent-dark">
+      <button mat-raised-button color="primary" type="button" (click)="getPromoteProduct()">
+        Confirm
+      </button>
+    </div>
     <div class="md-margin-left-4" fxLayout="row" fxLayoutAlign="end center" fxFlex>
       <form class="sc-promotion-dialog__search" [formGroup]="searchForm"
             fxLayout="row" fxLayoutAlign="start center" >

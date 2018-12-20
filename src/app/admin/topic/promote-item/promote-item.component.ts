@@ -56,10 +56,11 @@ export class PromoteItemComponent implements OnInit {
 
   publish() {
     let self = this;
-    let status = false;
+    let status = 'unpublished';
     switch (this.status) {
       case 1:
-        status = true;
+        status = 'published';
+        break;
     }
     let params = {
       id: this.promote.id,

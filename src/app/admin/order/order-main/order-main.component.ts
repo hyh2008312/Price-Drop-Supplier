@@ -276,10 +276,10 @@ export class OrderMainComponent implements OnInit {
         this.orderRefundIndex = event.pageIndex + 1;
         break;
       case 8:
-        this.orderUndeliveredIndex = event.pageIndex + 1;
-        break;
-      case 8:
         this.orderExpiredIndex = event.pageIndex + 1;
+        break;
+      case 9:
+        this.orderUndeliveredIndex = event.pageIndex + 1;
         break;
     }
     this.changeProducts({index: type});
@@ -378,6 +378,14 @@ export class OrderMainComponent implements OnInit {
         paid_end_time = this.peRefunded;
         break;
       case 8:
+        status = 'Expired';
+        page = this.orderExpiredIndex;
+        order_type = this.typeExpired;
+        cod_status = this.paymentExpired;
+        start_time = this.csExpired;
+        end_time = this.ceExpired;
+        break;
+      case 9:
         status = 'Undelivered';
         page = this.orderUndeliveredIndex;
         order_type = this.typeUndelivered;
@@ -386,14 +394,6 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceUndelivered;
         paid_start_time = this.psUndelivered;
         paid_end_time = this.peUndelivered;
-        break;
-      case 9:
-        status = 'Expired';
-        page = this.orderExpiredIndex;
-        order_type = this.typeExpired;
-        cod_status = this.paymentExpired;
-        start_time = this.csExpired;
-        end_time = this.ceExpired;
         break;
       default:
         break;
@@ -449,10 +449,10 @@ export class OrderMainComponent implements OnInit {
           self.orderRefund = data.results;
           break;
         case 8:
-          self.orderUndelivered = data.results;
+          self.orderExpired = data.results;
           break;
         case 9:
-          self.orderExpired = data.results;
+          self.orderUndelivered = data.results;
           break;
       }
     });
@@ -502,10 +502,10 @@ export class OrderMainComponent implements OnInit {
         status = 'Refunded';
         break;
       case 8:
-        status = 'Undelivered';
-        break;
-      case 8:
         status = 'Expired';
+        break;
+      case 9:
+        status = 'Undelivered';
         break;
     }
 
@@ -558,10 +558,10 @@ export class OrderMainComponent implements OnInit {
         case 7:
           self.orderRefund = [...data];
           break;
-        case 8:
+        case 9:
           self.orderUndelivered = [...data];
           break;
-        case 9:
+        case 8:
           self.orderExpired = [...data];
           break;
       }
@@ -621,10 +621,10 @@ export class OrderMainComponent implements OnInit {
         excel = [...this.orderRefund];
         break;
       case 8:
-        excel = [...this.orderUndelivered];
+        excel = [...this.orderExpired];
         break;
       case 9:
-        excel = [...this.orderExpired];
+        excel = [...this.orderUndelivered];
         break;
     }
 
@@ -704,11 +704,12 @@ export class OrderMainComponent implements OnInit {
         this.typeRefund = $event;
         break;
       case 8:
-        this.typeUndelivered = $event;
-        break;
-      case 9:
         this.typeExpired = $event;
         break;
+      case 9:
+        this.typeUndelivered = $event;
+        break;
+
     }
 
     this.changeProducts({
@@ -743,10 +744,10 @@ export class OrderMainComponent implements OnInit {
         this.paymentRefund = $event;
         break;
       case 8:
-        this.paymentUndelivered = $event;
+        this.paymentExpired = $event;
         break;
       case 9:
-        this.paymentExpired = $event;
+        this.paymentUndelivered = $event;
         break;
     }
 

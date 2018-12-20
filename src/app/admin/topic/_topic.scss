@@ -126,6 +126,23 @@
         @include transform(translate(-50%, -50%));
       }
     }
+
+    &-image-1{
+      width: 135px;
+      height: 60px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-right: 16px;
+      position: relative;
+      border: 1px solid rgba(0,0,0,.12);
+
+      >img{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        @include transform(translate(-50%, -50%));
+      }
+    }
   }
 
   &__create{
@@ -175,6 +192,18 @@
     }
   }
 
+  &__subevent{
+    padding: 28px 40px;
+    width: 800px;
+    overflow-y: scroll;
+    position: relative;
+    background-color: $whiteColor;
+    border-radius: 4px;
+    @include xb-xs-screen{
+      padding: 16px 16px;
+    }
+  }
+
   &__close{
     position: absolute;
     left: calc(100% - 36px);
@@ -196,6 +225,10 @@
 
   &__width{
     width: 172px;
+  }
+
+  &__width-1{
+    width: 60px;
   }
 
   &__search{
