@@ -104,11 +104,9 @@ export class ProductProductItemComponent implements OnInit {
 
   selectPromotionProduct() {
     let params: any ={};
-    params.id = this.promoteId;
-    params.products = [this.promote.productId];
+    params.id = this.promote.id;
 
     this.promoteService.addPromotionProduct(params).then(((data) => {
-      this.promote = data;
       this.promotionChange.emit({
         index: this.index,
         promote : data,

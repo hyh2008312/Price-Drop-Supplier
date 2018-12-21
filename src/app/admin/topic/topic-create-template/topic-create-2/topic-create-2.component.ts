@@ -141,8 +141,11 @@ export class TopicCreateTwoComponent implements OnInit {
       case 'delete':
         this.promotionProducts.splice(event.index, 1);
         break;
-      case 'discount':
-        this.promotionProducts[event.index] = event.promote;
+      case 'changed':
+        this.getPromotionProductList({
+          index: this.selectedIndex
+        });
+        break;
     }
   }
 

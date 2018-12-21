@@ -101,7 +101,7 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}activity/create/product/`;
+    const url = `${this.baseUrl.url}activity/edit/product/${promotion.id}/`;
 
     return this.http.post(url, promotion, options)
       .toPromise()
