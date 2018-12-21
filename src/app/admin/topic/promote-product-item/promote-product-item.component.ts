@@ -106,7 +106,7 @@ export class ProductProductItemComponent implements OnInit {
     let params: any ={};
     params.id = this.promote.id;
 
-    this.promoteService.addPromotionProduct(params).then(((data) => {
+    this.promoteService.editPromotionProduct(params).then(((data) => {
       this.promotionChange.emit({
         index: this.index,
         promote : data,

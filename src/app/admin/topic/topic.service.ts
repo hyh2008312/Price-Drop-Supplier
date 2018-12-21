@@ -101,6 +101,23 @@ export class TopicService {
 
     let options = new RequestOptions({headers:headers});
 
+    const url = `${this.baseUrl.url}activity/create/product/`;
+
+    return this.http.post(url, promotion, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  editPromotionProduct(promotion:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
     const url = `${this.baseUrl.url}activity/edit/product/${promotion.id}/`;
 
     return this.http.post(url, promotion, options)
