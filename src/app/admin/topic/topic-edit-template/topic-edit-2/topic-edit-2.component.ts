@@ -27,7 +27,10 @@ export class TopicEditTwoComponent implements OnInit {
   @Input() templateId: any = 1;
   @Output() isEditChange = new EventEmitter<any>();
 
-  pageSizeOptions = [12];
+  // MatPaginator Inputs
+  length:number = 0;
+  pageSize = 50;
+  pageSizeOptions = [50];
 
   promotionProducts: any = [];
 
@@ -64,6 +67,9 @@ export class TopicEditTwoComponent implements OnInit {
 
     this.getPromotionDetail()
   }
+
+  // MatPaginator Output
+  changePage(event) {}
 
   getPromotionDetail(isLast?: any) {
     let id = this.id;
@@ -178,6 +184,7 @@ export class TopicEditTwoComponent implements OnInit {
       id
     }).then((data) => {
       this.promotionProducts = [...data.activityProducts];
+      this.length = this.promotionProducts.length;
     });
   }
 

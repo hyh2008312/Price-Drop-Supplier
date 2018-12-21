@@ -27,8 +27,6 @@ export class TopicEditOneComponent implements OnInit {
   @Input() templateId: any = 1;
   @Output() isEditChange = new EventEmitter<any>();
 
-  pageSizeOptions = [12];
-
   promotionProducts: any = [];
 
   categoryList: any;
@@ -38,6 +36,11 @@ export class TopicEditOneComponent implements OnInit {
   subevents: any = false;
 
   tabName: any = '';
+
+  // MatPaginator Inputs
+  length:number = 0;
+  pageSize = 50;
+  pageSizeOptions = [50];
 
   constructor(
     private promoteService: TopicService,
@@ -59,6 +62,9 @@ export class TopicEditOneComponent implements OnInit {
 
     this.getPromotionDetail()
   }
+
+  // MatPaginator Output
+  changePage(event) {}
 
   getPromotionDetail(isLast?: any) {
     let id = this.id;
@@ -168,6 +174,7 @@ export class TopicEditOneComponent implements OnInit {
       id
     }).then((data) => {
       this.promotionProducts = [...data.activityProducts];
+      this.length = this.promotionProducts.length;
     });
   }
 

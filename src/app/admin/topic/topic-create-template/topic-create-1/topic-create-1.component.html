@@ -118,6 +118,12 @@
             <app-promote-product-item [promote]="item" [index]="i" [promoteId]="item.id"
                                       (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
           </div>
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event)"
+                         *ngIf="promotionProducts && promotionProducts.length > 0">
+          </mat-paginator>
         </div>
       </mat-tab>
   </mat-tab-group>

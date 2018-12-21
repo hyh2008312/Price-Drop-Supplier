@@ -31,11 +31,11 @@ export class TopicCreateOneComponent implements OnInit {
 
   page = 1;
 
-  pageSize = 6;
+  pageSize = 50;
 
   length = 1;
 
-  pageSizeOptions = [12];
+  pageSizeOptions = [50];
 
   promotionProducts: any = [];
 
@@ -145,8 +145,8 @@ export class TopicCreateOneComponent implements OnInit {
     this.promoteService.getSelectedPromotionProductList({
       id
     }).then((data) => {
-      this.length = data.activityProducts.length;
       this.promotionProducts = [...data.activityProducts];
+      this.length = this.promotionProducts.length;
     });
   }
 

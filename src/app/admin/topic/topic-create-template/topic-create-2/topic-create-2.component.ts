@@ -31,11 +31,11 @@ export class TopicCreateTwoComponent implements OnInit {
 
   page = 1;
 
-  pageSize = 6;
+  pageSize = 50;
 
   length = 1;
 
-  pageSizeOptions = [12];
+  pageSizeOptions = [50];
 
   promotionProducts: any = [];
 
