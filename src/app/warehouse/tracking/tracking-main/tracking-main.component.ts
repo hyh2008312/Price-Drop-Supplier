@@ -9,10 +9,25 @@ import { UserService } from  '../../../shared/services/user/user.service';
 import { TrackingCreateDialogComponent } from '../tracking-create-dialog/tracking-create-dialog.component';
 import {MatDialog} from '@angular/material';
 
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+
 @Component({
   selector: 'app-warehouse-tracking-main',
   templateUrl: './tracking-main.component.html',
-  styleUrls: ['../_tracking.scss']
+  styleUrls: ['../_tracking.scss'],
+  providers: [
+    // The locale would typically be provided on the root module of your application. We do it at
+    // the component level here, due to limitations of our example generation script.
+    {provide: MAT_DATE_LOCALE, useValue: 'zh-CN'},
+
+    // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
+    // `MatMomentDateModule` in your applications root module. We provide it at the component level
+    // here, due to limitations of our example generation script.
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 })
 
 export class TrackingMainComponent implements OnInit {
@@ -45,8 +60,16 @@ export class TrackingMainComponent implements OnInit {
 
   purchaseAll: any = false;
   purchaseAllIndex: any = 1;
+  csProcessing: any;
+  ceProcessing: any;
+  asProcessing: any;
+  aeProcessing: any;
   purchaseProccessing: any = false;
   purchaseProccessingIndex: any = 1;
+  csShipped: any;
+  ceShipped: any;
+  asShipped: any;
+  aeShipped: any;
   purchaseShipped: any = false;
   purchaseShippedIndex: any = 1;
   purchaseDeleted: any = false;
@@ -128,16 +151,25 @@ export class TrackingMainComponent implements OnInit {
     let page = this.purchaseAllIndex;
     let page_size = this.pageSize;
     let received_time: any = null;
+    let create_start_time: any = null;
+    let create_end_time: any = null;
+    let packing_start_time: any = null;
+    let packing_end_time: any = null;
+
     switch ($event.index) {
       case 0:
         break;
       case 1:
         status = 'Pending Packaging';
         page = this.purchaseProccessingIndex;
+        create_start_time = this.csProcessing;
+        create_end_time = this.ceProcessing;
         break;
       case 2:
         status = 'Packaging Completed';
         page = this.purchaseShippedIndex;
+        packing_start_time = this.csShipped;
+        packing_end_time = this.ceShipped;
         break;
       case 3:
         status = 'Package Deleted';
@@ -159,7 +191,11 @@ export class TrackingMainComponent implements OnInit {
       page_size,
       search,
       search_type,
-      received_time
+      received_time,
+      create_start_time,
+      create_end_time,
+      packing_start_time,
+      packing_end_time
     }).then((data) => {
       this.length = data.count;
       switch ($event.index) {
@@ -224,6 +260,29 @@ export class TrackingMainComponent implements OnInit {
             this.purchaseDeleted.splice(event.index,1);
             break;
         }
+        break;
+    }
+  }
+
+  addEvent(type: any, event:MatDatepickerInputEvent<any>) {
+    this[type] = event.value._i.year + '-'+ (event.value._i.month+1) +'-'+event.value._i.date + ' 00:00:00';
+  }
+
+  filterDate() {
+    this.changePurchaseLists({
+      index: this.selectedIndex
+    });
+  }
+
+  cancelDate(type) {
+    switch (type) {
+      case 1:
+        this.csProcessing = null;
+        this.ceProcessing = null;
+        break;
+      case 2:
+        this.csProcessing = null;
+        this.ceProcessing = null;
         break;
     }
   }

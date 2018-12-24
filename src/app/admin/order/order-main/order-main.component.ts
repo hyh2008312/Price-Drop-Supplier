@@ -32,7 +32,7 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
     // here, due to limitations of our example generation script.
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
-  ],
+  ]
 })
 
 export class OrderMainComponent implements OnInit {
