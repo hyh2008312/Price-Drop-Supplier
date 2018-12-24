@@ -8,6 +8,7 @@ import { TrackingTitleComponent } from './tracking-title/tracking-title.componen
 
 import { TrackingEditDialogComponent } from './tracking-edit-dialog/tracking-edit-dialog.component';
 import { TrackingImageDialogComponent } from './tracking-image-dialog/tracking-image-dialog.component';
+import { AddNotesDialogComponent } from './add-notes-dialog/add-notes-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { TrackingRoutingModule } from './tracking.routes.module';
@@ -28,13 +29,15 @@ import { TrackingService } from './tracking.service';
     TrackingTitleComponent,
     TrackingEditDialogComponent,
     TrackingImageDialogComponent,
-    ToolTipsComponent
+    ToolTipsComponent,
+    AddNotesDialogComponent
   ],
   entryComponents: [
     TrackingCreateDialogComponent,
     TrackingEditDialogComponent,
     TrackingImageDialogComponent,
-    ToolTipsComponent
+    ToolTipsComponent,
+    AddNotesDialogComponent
   ],
   providers: [
     TrackingService

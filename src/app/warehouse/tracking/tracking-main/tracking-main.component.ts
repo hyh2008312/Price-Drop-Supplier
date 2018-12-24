@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Inject, NgZone} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router,NavigationStart, ActivatedRoute} from '@angular/router';
+import { Router, NavigationStart, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
@@ -277,12 +277,12 @@ export class TrackingMainComponent implements OnInit {
   cancelDate(type) {
     switch (type) {
       case 1:
-        this.csProcessing = null;
-        this.ceProcessing = null;
+        this.asProcessing = null;
+        this.aeProcessing = null;
         break;
       case 2:
-        this.csProcessing = null;
-        this.ceProcessing = null;
+        this.asShipped = null;
+        this.aeShipped = null;
         break;
     }
   }

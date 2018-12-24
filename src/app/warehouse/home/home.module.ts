@@ -12,6 +12,7 @@ import { HomeEditDialogComponent } from './home-edit-dialog/home-edit-dialog.com
 import { HomeCompleteDialogComponent } from './home-complete-dialog/home-complete-dialog.component';
 import { HomeImageDialogComponent } from './home-image-dialog/home-image-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
+import { AddAttentionDialogComponent } from './add-attention-dialog/add-attention-dialog.component';
 
 import { HomeRoutingModule } from './home.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -34,7 +35,8 @@ import { HomeService } from './home.service';
     HomeEditDialogComponent,
     HomeCompleteDialogComponent,
     HomeImageDialogComponent,
-    ToolTipsComponent
+    ToolTipsComponent,
+    AddAttentionDialogComponent
   ],
   entryComponents: [
     HomeCreateDialogComponent,
@@ -43,7 +45,8 @@ import { HomeService } from './home.service';
     HomeEditDialogComponent,
     HomeCompleteDialogComponent,
     HomeImageDialogComponent,
-    ToolTipsComponent
+    ToolTipsComponent,
+    AddAttentionDialogComponent
   ],
   providers: [
     HomeService

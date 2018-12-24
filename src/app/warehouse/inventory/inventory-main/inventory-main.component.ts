@@ -86,6 +86,9 @@ export class InventoryMainComponent implements OnInit {
     if(this.searchKey && this.searchKey != '') {
       search = this.searchKey;
       search_type = this.searchCategory;
+      if($event.type == 'search') {
+        this.inventoryAllIndex = 1;
+      }
     }
 
     this.inventoryService.getInventoryList({

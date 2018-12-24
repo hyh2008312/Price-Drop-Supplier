@@ -9,7 +9,7 @@
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                      placeholder="搜索"
-                     (keyup.enter)="changeInventoryLists({index:0})"/>
+                     (keyup.enter)="changeInventoryLists({index:0, type: 'search'})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
                 <i class="material-icons">close</i>

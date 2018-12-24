@@ -7,6 +7,7 @@ import { OrderDetailDialogComponent } from '../order-detail-dialog/order-detail-
 import { HomeEditDialogComponent } from '../home-edit-dialog/home-edit-dialog.component';
 import { HomeCompleteDialogComponent } from '../home-complete-dialog/home-complete-dialog.component';
 import { HomeImageDialogComponent } from '../home-image-dialog/home-image-dialog.component';
+import { AddAttentionDialogComponent } from '../add-attention-dialog/add-attention-dialog.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
 
@@ -41,10 +42,7 @@ export class HomeItemComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-
-
-  }
+  ngOnInit(): void {}
 
   trackingPackage() {
     let dialogRef = this.dialog.open(OrderTrackingDialogComponent, {
@@ -54,6 +52,21 @@ export class HomeItemComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {});
+  }
+
+  openAttentionDialog() {
+    let dialogRef = this.dialog.open(AddAttentionDialogComponent, {
+      data: {
+        item: this.product,
+        isEdit: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        this.product = dialogRef.componentInstance.data.item;
+      }
+    });
   }
 
   orderDetails() {

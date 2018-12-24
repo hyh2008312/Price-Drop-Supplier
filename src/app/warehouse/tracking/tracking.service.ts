@@ -137,6 +137,24 @@ export class TrackingService {
       });
   }
 
+  addNotes(params) {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}purchase/pick/edit/notes/${params.id}/`;
+
+    return this.http.post(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   private handleError (error: Response | any, target?: any) {
     let errMsg: string;
     if (error instanceof Response) {

@@ -6,6 +6,7 @@ import { TrackingEditDialogComponent } from '../tracking-edit-dialog/tracking-ed
 import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
 import { TrackingImageDialogComponent } from '../tracking-image-dialog/tracking-image-dialog.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
+import { AddNotesDialogComponent } from '../add-notes-dialog/add-notes-dialog.component';
 
 @Component({
   selector: 'app-warehouse-tracking-item',
@@ -85,6 +86,23 @@ export class TrackingItemComponent implements OnInit {
           status: this.status,
           event: 'change'
         });
+      }
+    });
+  }
+
+  openNotesDialog() {
+    console.log(this.product);
+
+    let dialogRef = this.dialog.open(AddNotesDialogComponent, {
+      data: {
+        item: this.product,
+        isEdit: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        this.product = dialogRef.componentInstance.data.item;
       }
     });
   }
