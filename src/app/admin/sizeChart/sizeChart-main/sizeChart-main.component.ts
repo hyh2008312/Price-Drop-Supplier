@@ -10,6 +10,7 @@ import { saveAs } from 'file-saver';
 import {MatDialog} from '@angular/material';
 
 import { SelectProductDialogComponent } from  '../select-product-dialog/select-product-dialog.component';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-sizeChart-main',
@@ -45,6 +46,9 @@ export class SizeChartMainComponent implements OnInit {
   pageSize = 50;
   pageSizeOptions = [50];
 
+  searchKey: any = '';
+  isSearch: boolean = false;
+
   constructor(
     private sizeChartService: SizeChartService,
     private userService: UserService,
@@ -52,6 +56,7 @@ export class SizeChartMainComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog
   ) {
+
     this.getCategory();
     this.getSizeChartList();
     this.getCategoryList();
@@ -63,6 +68,13 @@ export class SizeChartMainComponent implements OnInit {
       index: self.selectedIndex
     });
 
+  }
+
+  clearSearchKey() {
+    this.searchKey = '';
+    this.changeProducts({
+      index: this.selectedIndex
+    });
   }
 
   ngOnDestroy() {
@@ -101,7 +113,7 @@ export class SizeChartMainComponent implements OnInit {
       case 0:
         page = this.sizeChartProductIndex;
         let chart_id = this.sizeChartId? this.sizeChartId: null;
-        let product_title = this.productTitle? this.productTitle: null;
+        let product_title = this.searchKey? this.searchKey: null;
         let category_id = this.categoryId? this.categoryId: null;
         this.sizeChartService.getSizeChartProductList({
           page,
@@ -148,6 +160,10 @@ export class SizeChartMainComponent implements OnInit {
   getSizeChartList() {
     this.sizeChartService.getSizeChartAllList().then((data) => {
       this.sizChartList = [...data];
+      this.sizChartList.unshift({
+        name: 'All',
+        id: false
+      })
     });
   }
 
@@ -161,7 +177,6 @@ export class SizeChartMainComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(dialogRef.componentInstance.data.isEdit)
       if(dialogRef.componentInstance.data.isEdit == true) {
         this.sizeChartProductIndex = 1;
         this.changeProducts({

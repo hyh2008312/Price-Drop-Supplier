@@ -56,6 +56,19 @@
                 </mat-select>
               </mat-form-field>
             </div>
+            <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="end center" fxFlex>
+              <div class="sc-product__search"
+                    fxLayout="row" fxLayoutAlign="start center" >
+                <i class="material-icons">search</i>
+                <input type="text" [(ngModel)]="searchKey"
+                       placeholder="Search by Product Title"
+                       (keyup.enter)="changeProducts({index: 0})"/>
+                <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                     *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                  <i class="material-icons">close</i>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="sc-promote__promote-bg md-margin-top-2">
             <app-sizeChart-product-title [status]="0" ></app-sizeChart-product-title>
