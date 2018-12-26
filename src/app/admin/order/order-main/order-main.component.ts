@@ -38,6 +38,14 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 export class OrderMainComponent implements OnInit {
 
 
+  category: any;
+  subcategory: any;
+  thirdcategory: any;
+  subCategoryList: any = [];
+  thirdCategoryList: any = [];
+  categoryList: any = [];
+  categoryId: any;
+
   orderAll: any = false;
   orderAllIndex = 1;
   typeAll: any = false;
@@ -241,6 +249,8 @@ export class OrderMainComponent implements OnInit {
         index: self.selectedIndex
       });
     });
+
+    this.getCategory();
   }
 
   ngOnDestroy() {
@@ -308,18 +318,29 @@ export class OrderMainComponent implements OnInit {
     switch (event.index) {
       case 0:
         status = null;
+        if(event.resetPage) {
+          this.orderAllIndex = 1;
+        }
         page = this.orderAllIndex;
         order_type = this.typeAll;
         cod_status = this.paymentAll;
         start_time = this.csAll;
         end_time = this.ceAll;
+        paid_start_time = this.psAll;
+        paid_end_time = this.peAll;
         break;
       case 1:
         status = 'Unpaid';
+        if(event.resetPage) {
+          this.orderUnpaidIndex = 1;
+        }
         page = this.orderUnpaidIndex;
         break;
       case 2:
         status = 'Packing';
+        if(event.resetPage) {
+          this.orderPackingIndex = 1;
+        }
         page = this.orderPackingIndex;
         order_type = this.typePacking;
         cod_status = this.paymentPacking;
@@ -331,6 +352,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 3:
         status = 'Shipped';
+        if(event.resetPage) {
+          this.orderShippedIndex = 1;
+        }
         page = this.orderShippedIndex;
         order_type = this.typeShipped;
         cod_status = this.paymentShipped;
@@ -341,6 +365,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 4:
         status = 'Audit canceled';
+        if(event.resetPage) {
+          this.orderAuditIndex = 1;
+        }
         page = this.orderAuditIndex;
         order_type = this.typeAudit;
         cod_status = this.paymentAudit;
@@ -351,6 +378,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 5:
         status = 'Canceled';
+        if(event.resetPage) {
+          this.orderCanceledIndex = 1;
+        }
         page = this.orderCanceledIndex;
         order_type = this.typeCanceled;
         cod_status = this.paymentCanceled;
@@ -359,6 +389,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 6:
         status = 'Completed';
+        if(event.resetPage) {
+          this.orderCompletedIndex = 1;
+        }
         page = this.orderCompletedIndex;
         order_type = this.typeCompleted;
         cod_status = this.paymentCompleted;
@@ -369,6 +402,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 7:
         status = 'Refunded';
+        if(event.resetPage) {
+          this.orderRefundIndex = 1;
+        }
         page = this.orderRefundIndex;
         order_type = this.typeRefund;
         cod_status = this.paymentRefund;
@@ -378,6 +414,9 @@ export class OrderMainComponent implements OnInit {
         paid_end_time = this.peRefunded;
         break;
       case 8:
+        if(event.resetPage) {
+          this.orderExpiredIndex = 1;
+        }
         status = 'Expired';
         page = this.orderExpiredIndex;
         order_type = this.typeExpired;
@@ -387,6 +426,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 9:
         status = 'Undelivered';
+        if(event.resetPage) {
+          this.orderUndeliveredIndex = 1;
+        }
         page = this.orderUndeliveredIndex;
         order_type = this.typeUndelivered;
         cod_status = this.paymentUndelivered;
@@ -408,6 +450,7 @@ export class OrderMainComponent implements OnInit {
     paid_end_time = paid_end_time? paid_end_time: null;
     sourcing_status = sourcing_status? sourcing_status: null;
     const q = this.searchKey && this.searchKey != ''? this.searchKey: null;
+    let category_id = this.categoryId? this.categoryId: null;
 
     this.orderService.getSupplyOrderList({
       status,
@@ -420,7 +463,8 @@ export class OrderMainComponent implements OnInit {
       end_time,
       paid_start_time,
       paid_end_time,
-      sourcing_status
+      sourcing_status,
+      category_id
     }).then((data) => {
       self.length = data.count;
       switch (event.index) {
@@ -589,7 +633,8 @@ export class OrderMainComponent implements OnInit {
 
   filterDate() {
     this.changeProducts({
-      index: this.selectedIndex
+      index: this.selectedIndex,
+      resetPage: true
     });
   }
 
@@ -713,7 +758,8 @@ export class OrderMainComponent implements OnInit {
     }
 
     this.changeProducts({
-      index: this.selectedIndex
+      index: this.selectedIndex,
+      resetPage: true
     });
   }
 
@@ -752,7 +798,8 @@ export class OrderMainComponent implements OnInit {
     }
 
     this.changeProducts({
-      index: this.selectedIndex
+      index: this.selectedIndex,
+      resetPage: true
     });
   }
 
@@ -764,7 +811,60 @@ export class OrderMainComponent implements OnInit {
     }
 
     this.changeProducts({
-      index: this.selectedIndex
+      index: this.selectedIndex,
+      resetPage: true
+    });
+  }
+
+  categoryChange($event) {
+    if(this.categoryList.length > 0) {
+      let index = this.categoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.categoryList[index] && this.categoryList[index].children) {
+        this.subCategoryList = [...this.categoryList[index].children];
+      } else {
+        this.subCategoryList = [];
+      }
+      this.thirdCategoryList = [];
+    }
+    this.categoryId = $event;
+    this.changeProducts({index: this.selectedIndex, resetPage: true});
+  }
+
+  subCategoryChange($event) {
+    if(this.subCategoryList.length > 0) {
+      let index = this.subCategoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.subCategoryList[index] && this.subCategoryList[index].children) {
+        this.thirdCategoryList = [...this.subCategoryList[index].children];
+      } else {
+        this.thirdCategoryList = [];
+      }
+    }
+    this.categoryId = $event;
+    this.changeProducts({index: this.selectedIndex, resetPage: true});
+  }
+
+  thirdCategoryChange($event) {
+    this.categoryId = $event;
+    this.changeProducts({index: this.selectedIndex, resetPage: true});
+  }
+
+  getCategory() {
+    this.orderService.getCategoryList().then((data) => {
+      this.categoryList = [...data];
+      this.categoryList.unshift({
+        id: false,
+        data: {
+          name: 'All'
+        }
+      })
     });
   }
 }

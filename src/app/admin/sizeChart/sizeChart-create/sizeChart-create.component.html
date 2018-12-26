@@ -32,6 +32,11 @@
             </div>
           </div>
         </div>
+        <div class="md-margin-top-2">
+          <div class="sc-promote__promote-text md-margin-bottom-2 xb-bold">Size Chart Picture</div>
+          <app-sizeChart-image-upload-additional [(previewImgFile)]="image"
+                                       [(previewImgSrcs)]="image"></app-sizeChart-image-upload-additional>
+        </div>
       </div>
     </form>
     <div class="md-margin-top-3 sc-promote__create-bg" *ngIf="sizeChart.length == 0">
@@ -108,7 +113,7 @@
       </mat-tab>
     </mat-tab-group>
     </div>
-    <div class="md-padding-top-3" fxLayout="row" fxLayoutAlign="center center">
+    <div class="md-padding-top-3 md-padding-bottom-3" fxLayout="row" fxLayoutAlign="center center">
       <button mat-raised-button color="primary" type="button" (click)="save()">
         SAVE
       </button>

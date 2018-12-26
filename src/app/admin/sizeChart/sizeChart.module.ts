@@ -13,6 +13,7 @@ import { SelectMultiProductDialogComponent } from './select-multi-product-dialog
 import { SelectProductTitleComponent } from './select-product-title/select-product-title.component';
 import { SelectProductItemComponent } from './select-product-item/select-product-item.component';
 import { PaginationComponent } from  './pagination/pagination.component';
+import { ImageUploadAdditionalComponent } from './image-upload-additional/image-upload-additional.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { SizeChartRoutingModule } from './sizeChart.routes.module';
@@ -40,7 +41,8 @@ import { SizeChartService } from './sizeChart.service';
     SelectProductTitleComponent,
     SelectProductItemComponent,
     PaginationComponent,
-    SelectMultiProductDialogComponent
+    SelectMultiProductDialogComponent,
+    ImageUploadAdditionalComponent
   ],
   entryComponents: [
     ToolTipsComponent,
