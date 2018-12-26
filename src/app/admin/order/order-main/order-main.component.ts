@@ -306,6 +306,11 @@ export class OrderMainComponent implements OnInit {
   }
 
   changeProducts(event) {
+    if(event.tab) {
+      this.subCategoryList = [];
+      this.thirdCategoryList = [];
+      this.categoryId = null;
+    }
     let status: any = '';
     let page = 0;
     let order_type = this.typeUnpaid;
