@@ -252,7 +252,7 @@ export class SizeChartService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/size/chart/${product.id}/`;
+    const url = `${this.baseUrl.url}product/size/chart/delete/${product.id}/`;
 
     return this.http.delete(url, options)
       .toPromise()
