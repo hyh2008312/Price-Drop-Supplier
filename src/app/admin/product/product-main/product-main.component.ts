@@ -542,18 +542,23 @@ export class ProductMainComponent implements OnInit {
     if(this.isSuperuser) {
       switch (this.selectedIndex) {
         case 0:
+          this.productPublishedIndex = 1;
           this.catPublished = $event;
           break;
         case 1:
+          this.productPendingApprovalIndex = 1;
           this.catPending = $event;
           break;
         case 2:
+          this.productDisapprovedIndex = 1;
           this.catDisapproved = $event;
           break;
         case 3:
+          this.productUnpublishedIndex = 1;
           this.catUnpublished = $event;
           break;
         case 4:
+          this.productDraftIndex = 1;
           this.catDraft = $event;
           break;
         default:
@@ -562,15 +567,19 @@ export class ProductMainComponent implements OnInit {
     } else {
       switch (this.selectedIndex) {
         case 0:
+          this.productPublishedIndex = 1;
           this.catPublished = $event;
           break;
         case 1:
+          this.productPendingApprovalIndex = 1;
           this.catPending = $event;
           break;
         case 2:
+          this.productUnpublishedIndex = 1;
           this.catUnpublished = $event;
           break;
         case 3:
+          this.productDraftIndex = 1;
           this.catDraft = $event;
           break;
       }
@@ -594,18 +603,23 @@ export class ProductMainComponent implements OnInit {
     if(this.isSuperuser) {
       switch (this.selectedIndex) {
         case 0:
+          this.productPublishedIndex = 1;
           this.catPublished = $event;
           break;
         case 1:
+          this.productPendingApprovalIndex = 1;
           this.catPending = $event;
           break;
         case 2:
+          this.productDisapprovedIndex = 1;
           this.catDisapproved = $event;
           break;
         case 3:
+          this.productUnpublishedIndex = 1;
           this.catUnpublished = $event;
           break;
         case 4:
+          this.productDraftIndex = 1;
           this.catDraft = $event;
           break;
         default:
@@ -614,15 +628,19 @@ export class ProductMainComponent implements OnInit {
     } else {
       switch (this.selectedIndex) {
         case 0:
+          this.productPublishedIndex = 1;
           this.catPublished = $event;
           break;
         case 1:
+          this.productPendingApprovalIndex = 1;
           this.catPending = $event;
           break;
         case 2:
+          this.productUnpublishedIndex = 1;
           this.catUnpublished = $event;
           break;
         case 3:
+          this.productDraftIndex = 1;
           this.catDraft = $event;
           break;
       }
@@ -634,18 +652,23 @@ export class ProductMainComponent implements OnInit {
     if(this.isSuperuser) {
       switch (this.selectedIndex) {
         case 0:
+          this.productPublishedIndex = 1;
           this.catPublished = $event;
           break;
         case 1:
+          this.productPendingApprovalIndex = 1;
           this.catPending = $event;
           break;
         case 2:
+          this.productDisapprovedIndex = 1;
           this.catDisapproved = $event;
           break;
         case 3:
+          this.productUnpublishedIndex = 1;
           this.catUnpublished = $event;
           break;
         case 4:
+          this.productDraftIndex = 1;
           this.catDraft = $event;
           break;
         default:
@@ -654,15 +677,19 @@ export class ProductMainComponent implements OnInit {
     } else {
       switch (this.selectedIndex) {
         case 0:
+          this.productPublishedIndex = 1;
           this.catPublished = $event;
           break;
         case 1:
+          this.productPendingApprovalIndex = 1;
           this.catPending = $event;
           break;
         case 2:
+          this.productUnpublishedIndex = 1;
           this.catUnpublished = $event;
           break;
         case 3:
+          this.productDraftIndex = 1;
           this.catDraft = $event;
           break;
       }
@@ -686,18 +713,23 @@ export class ProductMainComponent implements OnInit {
     if(this.isSuperuser) {
       switch (this.selectedIndex) {
         case 0:
+          this.productPublishedIndex = 1;
           this.sortPublished = $event;
           break;
         case 1:
+          this.productPendingApprovalIndex = 1;
           this.sortPending = $event;
           break;
         case 2:
+          this.productDisapprovedIndex = 1;
           this.sortDisapproved = $event;
           break;
         case 3:
+          this.productUnpublishedIndex = 1;
           this.sortUnpublished = $event;
           break;
         case 4:
+          this.productDraftIndex = 1;
           this.sortDraft = $event;
           break;
         default:
@@ -706,15 +738,19 @@ export class ProductMainComponent implements OnInit {
     } else {
       switch (this.selectedIndex) {
         case 0:
+          this.productPublishedIndex = 1;
           this.sortPublished = $event;
           break;
         case 1:
+          this.productPendingApprovalIndex = 1;
           this.sortPending = $event;
           break;
         case 2:
+          this.productUnpublishedIndex = 1;
           this.sortUnpublished = $event;
           break;
         case 3:
+          this.productDraftIndex = 1;
           this.sortDraft = $event;
           break;
       }
