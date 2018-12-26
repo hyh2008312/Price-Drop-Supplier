@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddTabDialogComponent } from './add-tab-dialog.component';
+import { SizeChartMainComponent } from './sizeChart-main.component';
 
-describe('AddTabDialogComponent', () => {
-  let component: AddTabDialogComponent;
-  let fixture: ComponentFixture<AddTabDialogComponent>;
+describe('SizeChartMainComponent', () => {
+  let component: SizeChartMainComponent;
+  let fixture: ComponentFixture<SizeChartMainComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddTabDialogComponent ]
+      declarations: [ SizeChartMainComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddTabDialogComponent);
+    fixture = TestBed.createComponent(SizeChartMainComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

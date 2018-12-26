@@ -12,6 +12,9 @@ import {MatDialog} from '@angular/material';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {utils, WorkBook, write} from 'xlsx';
+
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-warehouse-tracking-main',
@@ -285,6 +288,54 @@ export class TrackingMainComponent implements OnInit {
         this.aeShipped = null;
         break;
     }
+  }
+
+  export(): void {
+    const ws_name = '拣货订单及物流';
+    const wb: WorkBook = { SheetNames: [], Sheets: {} };
+    let packing: any = [];
+    let excel: any = [];
+    switch (this.selectedIndex) {
+      case 1:
+        excel = [...this.purchaseProccessing];
+        break;
+      case 2:
+        excel = [...this.purchaseShipped];
+        break;
+    }
+
+    for(let item of excel) {
+      let orderItem: any = {};
+      for( let itm of item.pickVariants) {
+        orderItem['订单号'] = itm.orderNumber;
+        orderItem['运单号'] = item.internationalTrackingNumber;
+        orderItem['物流公司'] = item.internationalCarrier;
+        orderItem['创建日期'] = item.created.split('T')[0];
+        orderItem['拣货日期'] = item.packagingTime ? item.packagingTime.split('T')[0]: '';
+        packing.push(orderItem);
+      }
+
+    }
+
+    const ws: any = utils.json_to_sheet(packing);
+    wb.SheetNames.push(ws_name);
+    wb.Sheets[ws_name] = ws;
+    const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+    function s2ab(s) {
+      const buf = new ArrayBuffer(s.length);
+      const view = new Uint8Array(buf);
+      for (let i = 0; i !== s.length; ++i) {
+        view[i] = s.charCodeAt(i) & 0xFF;
+      }
+      return buf;
+    }
+
+    saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), '拣货单号表' +
+      new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
+      '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate())
+      + '.xlsx');
+
   }
 
 }

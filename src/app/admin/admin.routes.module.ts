@@ -54,6 +54,9 @@ const routes: Routes = [
         path: 'category',
         loadChildren: './category/category.module#CategoryModule'
       }, {
+        path: 'sizeChart',
+        loadChildren: './sizeChart/sizeChart.module#SizeChartModule'
+      }, {
         path: '',
         redirectTo: 'product',
         pathMatch: 'full'

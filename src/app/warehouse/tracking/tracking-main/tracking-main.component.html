@@ -59,6 +59,9 @@
       </mat-tab>
       <mat-tab label="等待拣货">
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div class="sc__accent-dark" *ngIf="isSuperuser">
+            <button mat-raised-button color="pimary" (click)="export()">Export</button>
+          </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >
@@ -126,6 +129,9 @@
       </mat-tab>
       <mat-tab label="拣货已完成" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div class="sc__accent-dark" *ngIf="isSuperuser">
+            <button mat-raised-button color="pimary" (click)="export()">Export</button>
+          </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >

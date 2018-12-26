@@ -124,6 +124,12 @@ export class TopNavigationComponent implements OnInit {
       text: '分类目录管理',
       router: './category',
       isActive: false
+    },
+    {
+      id: 5,
+      text: '尺码表管理',
+      router: './sizeChart',
+      isActive: false
     }
   ];
 

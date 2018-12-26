@@ -23,7 +23,7 @@
           <div class="md-margin-left-2 unicorn-dark-theme">
             <mat-form-field class="sc-product__product-sort">
               <mat-select [ngModel]="sortPublished" name="sort" (valueChange)="sortChange($event)">
-                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                <mat-option class="md-align-center" *ngFor="let item of statusList" [value]="item.value">
                   {{ item.text }}
                 </mat-option>
               </mat-select>
