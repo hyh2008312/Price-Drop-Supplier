@@ -66,7 +66,7 @@ export class SizeChartEditComponent implements OnInit {
         name: data.name,
         note: data.sizeChart.note
       });
-      this.sizeChart = data.sizeChart
+      this.sizeChart = data.sizeChart.table
     });
   }
 
@@ -76,8 +76,10 @@ export class SizeChartEditComponent implements OnInit {
     }
 
     let params: any = this.sizeChartForm.value;
-    params.sizeChart = this.sizeChart;
-    params.sizeChart.note = this.sizeChartForm.value.note;
+    params.sizeChart = {
+      table: this.sizeChart,
+      note: this.sizeChartForm.value.note
+    };
 
     this.sizeChartService.editSizeChart(params).then((data) => {
       this.openSnackBar();

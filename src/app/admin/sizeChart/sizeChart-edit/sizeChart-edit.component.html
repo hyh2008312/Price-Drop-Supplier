@@ -22,6 +22,16 @@
             This field is required.
           </div>
         </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <div class="sc-promote__promote-text xb-bold">Size Chart Note</div>
+            <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+              <mat-form-field fxFlex>
+                <input matInput type="text" placeholder="" formControlName="note">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
       </div>
     </form>
     <div class="md-margin-top-3 sc-promote__create-bg" *ngIf="sizeChart.length == 0">
