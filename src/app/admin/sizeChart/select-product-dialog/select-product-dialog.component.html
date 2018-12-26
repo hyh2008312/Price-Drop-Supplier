@@ -4,25 +4,6 @@
   </div>
   <div class="sc-promotion-dialog__title">Select Product</div>
   <div fxLayout="row" fxLayoutAlign="start center">
-    <div>Product Id</div>
-    <div class="md-margin-left-2 unicorn-dark-theme">
-      <mat-form-field class="sc-promotion-dialog__width-1">
-        <input matInput type="number" placeholder="Min Id" [(ngModel)]="min">
-      </mat-form-field>
-    </div>
-    <div class="md-margin-left-2 unicorn-dark-theme">
-      <mat-form-field class="sc-promotion-dialog__width-1">
-        <input matInput type="number" placeholder="Max Id" [(ngModel)]="max">
-      </mat-form-field>
-    </div>
-    <div class="md-margin-left-2 sc__accent-dark">
-      <button mat-raised-button color="primary" type="button" (click)="confirm()">
-        <i class="material-icons">add</i>
-        <span class="md-margin-left-1">Add Size Chart Product</span>
-      </button>
-    </div>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="start center">
     <div class="unicorn-dark-theme">
       <mat-form-field class="sc-promotion-dialog__width">
         <mat-select [ngModel]="cat" placeholder="Filter by Category" name="Category"
@@ -48,8 +29,8 @@
       <div class="sc-product__search-margin-top unicorn-dark-theme">
         <mat-form-field class="sc-product__product-sort">
           <mat-select [(ngModel)]="searchCategory" name="sort">
-            <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item">
-              {{ item }}
+            <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+              {{ item.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>

@@ -10,7 +10,7 @@ import { saveAs } from 'file-saver';
 import {MatDialog} from '@angular/material';
 
 import { SelectProductDialogComponent } from  '../select-product-dialog/select-product-dialog.component';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import { SelectMultiProductDialogComponent } from  '../select-multi-product-dialog/select-multi-product-dialog.component';
 
 @Component({
   selector: 'app-sizeChart-main',
@@ -171,6 +171,24 @@ export class SizeChartMainComponent implements OnInit {
     let dialogRef = this.dialog.open(SelectProductDialogComponent, {
       data: {
         categoryList: this.catList,
+        promotionId: this.sizeChartId,
+        isEdit: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        this.sizeChartProductIndex = 1;
+        this.changeProducts({
+          index: this.selectedIndex
+        });
+      }
+    });
+  }
+
+  addProductsById() {
+    let dialogRef = this.dialog.open(SelectMultiProductDialogComponent, {
+      data: {
         promotionId: this.sizeChartId,
         isEdit: false
       }

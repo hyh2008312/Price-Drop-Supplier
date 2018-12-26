@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { SizeChartService } from '../sizeChart.service';
-import { MatSnackBar } from '@angular/material';
-import {ToolTipsComponent} from '../tool-tips/tool-tips.component';
 
 @Component({
   selector: 'app-sizeChart-select-product-dialog',
@@ -31,14 +29,19 @@ export class SelectProductDialogComponent implements OnInit {
   pageSize = 6;
 
   searchCategory: any = 'product';
-  searchList: any = ['product', 'shop'];
+  searchList: any = [{
+    name: 'product',
+    value: 'product'
+  }, {
+    name: 'supplier',
+    value: 'shop'
+  }];
 
   constructor(
     public dialogRef: MatDialogRef<SelectProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private sizeChartService: SizeChartService,
-    private fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private fb: FormBuilder
   ) {
 
     this.searchForm = this.fb.group({
@@ -109,39 +112,4 @@ export class SelectProductDialogComponent implements OnInit {
     }
   }
 
-  confirm() {
-    let params: any = {};
-    params.chartId = this.data.promotionId;
-    params.productId = [];
-
-    if(this.min && this.max) {
-      for(let i = this.min; i <= this.max;i++) {
-        params.productId.push(i);
-      }
-    } else if( this.min) {
-      params.productId.push(this.min);
-    } else if( this.max) {
-      params.productId.push(this.max);
-    } else {
-      this.openSnackBar('The Product Id field is empty!');
-      return;
-    }
-
-    this.sizeChartService.addProduct(params).then(((data) => {
-      if(data.detail) {
-        this.openSnackBar(data.detail);
-      } else {
-        this.openSnackBar('Add successfully!');
-        this.data.isEdit = true;
-      }
-    }));
-  }
-
-  openSnackBar(str: any) {
-    this.snackBar.openFromComponent(ToolTipsComponent, {
-      data: str,
-      duration: 4000,
-      verticalPosition: 'top'
-    });
-  }
 }

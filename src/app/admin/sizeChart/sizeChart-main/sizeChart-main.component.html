@@ -3,7 +3,7 @@
     <div class="sc-product__header"></div>
 
     <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
-      <mat-tab label="Products Sort by Size Chart">
+      <mat-tab label="Products by Size Chart">
         <div class="md-margin-top-2">
           <div fxLayout="row" fxLayoutAlign="start center">
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
@@ -16,11 +16,19 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="md-margin-right-2" *ngIf="sizeChartId" fxFlex fxLayout="row" fxLayoutAlign="end center">
+
+            <div class="md-margin-right-2 unicorn-dark-theme" *ngIf="sizeChartId" fxFlex fxLayout="row" fxLayoutAlign="end center">
+              <button mat-raised-button color="primary" (click)="addProductsById()">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <i class="material-icons">add</i>
+                  <span class="md-margin-left-1">Add Size Chart by Product Id</span>
+                </div>
+              </button>
+              <div class="md-margin-right-2"></div>
               <button mat-raised-button color="primary" (click)="addProducts()">
                 <div fxLayout="row" fxLayoutAlign="start center">
                   <i class="material-icons">add</i>
-                  <span class="md-margin-left-1">Add Size Chart Product</span>
+                  <span class="md-margin-left-1">Add Size Chart to Product</span>
                 </div>
               </button>
             </div>
@@ -61,7 +69,7 @@
                     fxLayout="row" fxLayoutAlign="start center" >
                 <i class="material-icons">search</i>
                 <input type="text" [(ngModel)]="searchKey"
-                       placeholder="Search by Product Title"
+                       placeholder="Search by Product Name"
                        (keyup.enter)="changeProducts({index: 0})"/>
                 <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                      *ngIf="searchKey != ''" (click)="clearSearchKey()">

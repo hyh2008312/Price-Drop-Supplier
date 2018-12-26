@@ -9,6 +9,7 @@ import { SizeChartProductTitleComponent } from './sizeChart-product-title/sizeCh
 import { SizeChartProductItemComponent } from './sizeChart-product-item/sizeChart-product-item.component';
 import { AddTabDialogComponent } from './add-tab-dialog/add-tab-dialog.component';
 import { SelectProductDialogComponent } from './select-product-dialog/select-product-dialog.component';
+import { SelectMultiProductDialogComponent } from './select-multi-product-dialog/select-multi-product-dialog.component';
 import { SelectProductTitleComponent } from './select-product-title/select-product-title.component';
 import { SelectProductItemComponent } from './select-product-item/select-product-item.component';
 import { PaginationComponent } from  './pagination/pagination.component';
@@ -38,12 +39,14 @@ import { SizeChartService } from './sizeChart.service';
     SelectProductDialogComponent,
     SelectProductTitleComponent,
     SelectProductItemComponent,
-    PaginationComponent
+    PaginationComponent,
+    SelectMultiProductDialogComponent
   ],
   entryComponents: [
     ToolTipsComponent,
     AddTabDialogComponent,
-    SelectProductDialogComponent
+    SelectProductDialogComponent,
+    SelectMultiProductDialogComponent
   ],
   providers: [
     SizeChartService
