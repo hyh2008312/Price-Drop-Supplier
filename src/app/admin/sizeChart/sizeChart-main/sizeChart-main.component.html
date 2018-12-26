@@ -87,7 +87,7 @@
             <mat-paginator [length]="length"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
-                           (page)="changePage($event, 1)"
+                           (page)="changePage($event, 0)"
                            *ngIf="sizeChartProduct && sizeChartProduct.length > 0">
             </mat-paginator>
             <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"

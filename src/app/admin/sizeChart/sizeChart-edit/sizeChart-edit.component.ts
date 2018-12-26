@@ -46,7 +46,8 @@ export class SizeChartEditComponent implements OnInit {
 
     this.sizeChartForm = this.fb.group({
       chartId: [''],
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      note: ['']
     });
 
     this.getDetail();
@@ -62,7 +63,8 @@ export class SizeChartEditComponent implements OnInit {
     }).then((data) => {
       this.sizeChartForm.patchValue({
         chartId: data.id,
-        name: data.name
+        name: data.name,
+        note: data.sizeChart.note
       });
       this.sizeChart = data.sizeChart
     });
@@ -75,6 +77,7 @@ export class SizeChartEditComponent implements OnInit {
 
     let params: any = this.sizeChartForm.value;
     params.sizeChart = this.sizeChart;
+    params.sizeChart.note = this.sizeChartForm.value.note;
 
     this.sizeChartService.editSizeChart(params).then((data) => {
       this.openSnackBar();

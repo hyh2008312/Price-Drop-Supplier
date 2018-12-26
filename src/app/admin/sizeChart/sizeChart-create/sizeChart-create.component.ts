@@ -42,7 +42,8 @@ export class SizeChartCreateComponent implements OnInit {
   ) {
 
     this.sizeChartForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      note: ['']
     });
   }
 
@@ -54,6 +55,7 @@ export class SizeChartCreateComponent implements OnInit {
   save() {
     let params: any = this.sizeChartForm.value;
     params.sizeChart = this.sizeChart;
+    params.sizeChart.note = this.sizeChartForm.value.note;
 
     this.sizeChartService.createSizeChart(params).then((data) => {
       this.router.navigate(['../'], { replaceUrl: true, relativeTo: this.activatedRoute});
