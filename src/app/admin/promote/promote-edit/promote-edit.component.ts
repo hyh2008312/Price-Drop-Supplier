@@ -50,7 +50,7 @@ export class PromoteEditComponent implements OnInit {
       id
     }).then((data) => {
       this.campaign = data;
-      this.promotionProducts = data.product;
+      this.promotionProducts = [...data.product];
     });
   }
 
