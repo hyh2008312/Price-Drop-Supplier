@@ -272,6 +272,14 @@ export class TrackingMainComponent implements OnInit {
   }
 
   filterDate() {
+    switch (this.selectedIndex) {
+      case 1:
+        this.purchaseProccessingIndex = 1;
+        break;
+      case 2:
+        this.purchaseShippedIndex = 1;
+        break;
+    }
     this.changePurchaseLists({
       index: this.selectedIndex
     });
@@ -280,12 +288,24 @@ export class TrackingMainComponent implements OnInit {
   cancelDate(type) {
     switch (type) {
       case 1:
+        this.csProcessing = null;
+        this.ceProcessing = null;
         this.asProcessing = null;
         this.aeProcessing = null;
+        this.purchaseProccessingIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
         break;
       case 2:
+        this.csShipped = null;
+        this.ceShipped = null;
         this.asShipped = null;
         this.aeShipped = null;
+        this.purchaseShippedIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
         break;
     }
   }
@@ -305,8 +325,8 @@ export class TrackingMainComponent implements OnInit {
     }
 
     for(let item of excel) {
-      let orderItem: any = {};
       for( let itm of item.pickVariants) {
+        let orderItem: any = {};
         orderItem['订单号'] = itm.orderNumber;
         orderItem['运单号'] = item.internationalTrackingNumber;
         orderItem['物流公司'] = item.internationalCarrier;
@@ -314,7 +334,6 @@ export class TrackingMainComponent implements OnInit {
         orderItem['拣货日期'] = item.packagingTime ? item.packagingTime.split('T')[0]: '';
         packing.push(orderItem);
       }
-
     }
 
     const ws: any = utils.json_to_sheet(packing);

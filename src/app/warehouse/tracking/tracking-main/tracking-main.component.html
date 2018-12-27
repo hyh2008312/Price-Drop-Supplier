@@ -156,9 +156,9 @@
           </div>
         </div>
         <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-          <div>创建时间: </div>
+          <div>拣货时间: </div>
           <mat-form-field class="md-margin-left-2">
-            <input matInput [matDatepicker]="csShipped" [(ngModel)]="asShipped" placeholder="开始日期" (dateInput)="addEvent('csProcessing', $event)">
+            <input matInput [matDatepicker]="csShipped" [(ngModel)]="asShipped" placeholder="开始日期" (dateInput)="addEvent('csShipped', $event)">
             <mat-datepicker-toggle matSuffix [for]="csShipped"></mat-datepicker-toggle>
             <mat-datepicker #csShipped></mat-datepicker>
           </mat-form-field>
