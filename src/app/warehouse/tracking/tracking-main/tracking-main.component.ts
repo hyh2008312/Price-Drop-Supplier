@@ -139,6 +139,20 @@ export class TrackingMainComponent implements OnInit {
 
   clearSearchKey() {
     this.searchKey = '';
+    switch (this.selectedIndex) {
+      case 0:
+        this.purchaseAllIndex = 1;
+        break;
+      case 1:
+        this.purchaseProccessingIndex = 1;
+        break;
+      case 2:
+        this.purchaseShippedIndex = 1;
+        break;
+      case 3:
+        this.purchaseDeletedIndex = 1;
+        break;
+    }
     this.changePurchaseLists({
       index: this.selectedIndex
     });
