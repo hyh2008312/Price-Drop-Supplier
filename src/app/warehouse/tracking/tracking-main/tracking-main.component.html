@@ -12,6 +12,24 @@
     <mat-tab-group color="primary" (selectedTabChange)="changePurchaseLists($event)"  [(selectedIndex)]="selectedIndex">
       <mat-tab label="所有" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">是否带电: </div>
+            <mat-form-field class="md-margin-right-2 sc-product__product-sort">
+              <mat-select [ngModel]="btAll" name="type" (valueChange)="btChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of btList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="md-margin-right-2">是否COD: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="codAll" name="payment" (valueChange)="codChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of codList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >
@@ -39,7 +57,7 @@
           <app-warehouse-tracking-title></app-warehouse-tracking-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
-          <mat-paginator [length]="length"
+          <mat-paginator class="md-margin-top-2" [length]="length"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 0)"
@@ -67,6 +85,24 @@
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <div class="sc__accent-dark" *ngIf="isSuperuser">
             <button mat-raised-button color="pimary" (click)="export()">Export</button>
+          </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">是否带电: </div>
+            <mat-form-field class="md-margin-right-2 sc-product__product-sort">
+              <mat-select [ngModel]="btProcessing" name="type" (valueChange)="btChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of btList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="md-margin-right-2">是否COD: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="codProcessing" name="payment" (valueChange)="codChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of codList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
@@ -115,7 +151,7 @@
           <app-warehouse-tracking-title></app-warehouse-tracking-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
-          <mat-paginator [length]="length"
+          <mat-paginator class="md-margin-top-2" [length]="length"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 1)"
@@ -143,6 +179,24 @@
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <div class="sc__accent-dark" *ngIf="isSuperuser">
             <button mat-raised-button color="pimary" (click)="export()">Export</button>
+          </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">是否带电: </div>
+            <mat-form-field class="md-margin-right-2 sc-product__product-sort">
+              <mat-select [ngModel]="btShipped" name="type" (valueChange)="btChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of btList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="md-margin-right-2">是否COD: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="codShipped" name="payment" (valueChange)="codChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of codList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
@@ -191,7 +245,7 @@
           <app-warehouse-tracking-title ></app-warehouse-tracking-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
-          <mat-paginator [length]="length"
+          <mat-paginator class="md-margin-top-2" [length]="length"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 2)"
@@ -245,7 +299,7 @@
           <app-warehouse-tracking-title></app-warehouse-tracking-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
-          <mat-paginator [length]="length"
+          <mat-paginator class="md-margin-top-2" [length]="length"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 3)"

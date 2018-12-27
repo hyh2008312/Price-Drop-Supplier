@@ -61,18 +61,45 @@ export class TrackingMainComponent implements OnInit {
 
   isSuperuser: boolean = false;
 
+  btList: any = [{
+    value: false,
+    text: '所有'
+  }, {
+    value: '1',
+    text: '带电'
+  }, {
+    value: '0',
+    text: '不带电'
+  }];
+  codList: any = [{
+    value: false,
+    text: '所有'
+  }, {
+    value: '1',
+    text: '是COD'
+  }, {
+    value: '0',
+    text: '不是COD'
+  }];
+
+  btAll: any = false;
+  codAll: any = false;
   purchaseAll: any = false;
   purchaseAllIndex: any = 1;
   csProcessing: any;
   ceProcessing: any;
   asProcessing: any;
   aeProcessing: any;
+  btProcessing: any = false;
+  codProcessing: any = false;
   purchaseProccessing: any = false;
   purchaseProccessingIndex: any = 1;
   csShipped: any;
   ceShipped: any;
   asShipped: any;
   aeShipped: any;
+  btShipped: any = false;
+  codShipped: any = false;
   purchaseShipped: any = false;
   purchaseShippedIndex: any = 1;
   purchaseDeleted: any = false;
@@ -158,17 +185,25 @@ export class TrackingMainComponent implements OnInit {
     let create_end_time: any = null;
     let packing_start_time: any = null;
     let packing_end_time: any = null;
+    let is_battery: any = null;
+    let is_cod: any = null;
 
     switch ($event.index) {
       case 0:
+        is_battery = this.btAll;
+        is_cod = this.codAll;
         break;
       case 1:
+        is_battery = this.btProcessing;
+        is_cod = this.codProcessing;
         status = 'Pending Packaging';
         page = this.purchaseProccessingIndex;
         create_start_time = this.csProcessing;
         create_end_time = this.ceProcessing;
         break;
       case 2:
+        is_battery = this.btShipped;
+        is_cod = this.codShipped;
         status = 'Packaging Completed';
         page = this.purchaseShippedIndex;
         packing_start_time = this.csShipped;
@@ -187,6 +222,8 @@ export class TrackingMainComponent implements OnInit {
       search = this.searchKey;
       search_type = this.searchCategory;
     }
+    is_battery = is_battery? is_battery: null;
+    is_cod = is_cod? is_cod: null;
 
     this.adminService.getPickList({
       status,
@@ -198,7 +235,9 @@ export class TrackingMainComponent implements OnInit {
       create_start_time,
       create_end_time,
       packing_start_time,
-      packing_end_time
+      packing_end_time,
+      is_battery,
+      is_cod
     }).then((data) => {
       this.length = data.count;
       switch ($event.index) {
@@ -302,6 +341,58 @@ export class TrackingMainComponent implements OnInit {
         this.ceShipped = null;
         this.asShipped = null;
         this.aeShipped = null;
+        this.purchaseShippedIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+    }
+  }
+
+  btChange($event) {
+    switch (this.selectedIndex) {
+      case 0:
+        this.btAll = $event;
+        this.purchaseAllIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 1:
+        this.btProcessing = $event;
+        this.purchaseProccessingIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 2:
+        this.btShipped = $event;
+        this.purchaseShippedIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+    }
+  }
+
+  codChange($event) {
+    switch (this.selectedIndex) {
+      case 0:
+        this.codAll = $event;
+        this.purchaseAllIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 1:
+        this.codProcessing = $event;
+        this.purchaseProccessingIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 2:
+        this.codShipped = $event;
         this.purchaseShippedIndex = 1;
         this.changePurchaseLists({
           index: this.selectedIndex
