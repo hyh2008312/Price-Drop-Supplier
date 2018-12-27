@@ -62,13 +62,13 @@
 
       </app-promote-product-title>
       <ng-container *ngIf="campaign.flashStatus != 'Ended'">
-        <div class="sc-promote__promote-list" *ngFor="let item of campaign.product;let i = index;">
+        <div class="sc-promote__promote-list" *ngFor="let item of promotionProducts;let i = index;">
           <app-promote-product-item [promote]="item" [index]="i" [status]="1" [promoteId]="promotionId"
                                     (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
         </div>
       </ng-container>
       <ng-container *ngIf="campaign.flashStatus == 'Ended'">
-        <div class="sc-promote__promote-list" *ngFor="let item of campaign.product;let i = index;">
+        <div class="sc-promote__promote-list" *ngFor="let item of promotionProducts;let i = index;">
           <app-promote-product-item [promote]="item" [index]="i" [status]="2"
                                     (promotionChange)="changePromotionProduct($event)"></app-promote-product-item>
         </div>
