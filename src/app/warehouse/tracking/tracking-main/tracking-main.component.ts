@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Inject, NgZone} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, NavigationStart, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import { TrackingService } from '../tracking.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 import { TrackingCreateDialogComponent } from '../tracking-create-dialog/tracking-create-dialog.component';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';

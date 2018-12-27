@@ -119,6 +119,7 @@
           </div>
           <div class="sc-order__product-bg" fxLayout="column">
             <mat-paginator class="md-margin-top-2" [length]="length"
+                           [pageIndex]="orderAllIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 0)"
@@ -130,6 +131,7 @@
               </div>
             </div>
             <mat-paginator [length]="length"
+                           [pageIndex]="orderAllIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 0)"
@@ -224,6 +226,7 @@
           </div>
           <div class="sc-order__product-bg" fxLayout="column">
             <mat-paginator class="md-margin-top-2" [length]="length"
+                           [pageIndex]="orderUnpaidIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 1)"
@@ -235,6 +238,7 @@
               </div>
             </div>
             <mat-paginator [length]="length"
+                           [pageIndex]="orderUnpaidIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 1)"
@@ -379,6 +383,7 @@
           </div>
           <div class="sc-order__product-bg" fxLayout="column">
             <mat-paginator class="md-margin-top-2" [length]="length"
+                           [pageIndex]="orderPackingIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 2)"
@@ -390,6 +395,7 @@
               </div>
             </div>
             <mat-paginator [length]="length"
+                           [pageIndex]="orderPackingIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 2)"
@@ -523,6 +529,7 @@
           </div>
           <div class="sc-order__product-bg" fxLayout="column">
             <mat-paginator class="md-margin-top-2" [length]="length"
+                           [pageIndex]="orderShippedIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 3)"
@@ -534,6 +541,7 @@
               </div>
             </div>
             <mat-paginator [length]="length"
+                           [pageIndex]="orderShippedIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 3)"
@@ -640,6 +648,7 @@
           </div>
           <div class="sc-order__product-bg" fxLayout="column">
             <mat-paginator class="md-margin-top-2" [length]="length"
+                           [pageIndex]="orderAuditIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 4)"
@@ -651,6 +660,7 @@
               </div>
             </div>
             <mat-paginator [length]="length"
+                           [pageIndex]="orderAuditIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 4)"
@@ -740,6 +750,7 @@
           </div>
           <div class="sc-order__product-bg" fxLayout="column">
             <mat-paginator class="md-margin-top-2" [length]="length"
+                           [pageIndex]="orderCanceledIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 5)"
@@ -751,6 +762,7 @@
               </div>
             </div>
             <mat-paginator [length]="length"
+                           [pageIndex]="orderCanceledIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 5)"
@@ -884,6 +896,7 @@
           </div>
           <div class="sc-order__product-bg" fxLayout="column">
             <mat-paginator class="md-margin-top-2" [length]="length"
+                           [pageIndex]="orderCompletedIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 6)"
@@ -895,6 +908,7 @@
               </div>
             </div>
             <mat-paginator [length]="length"
+                           [pageIndex]="orderCompletedIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 6)"
@@ -1001,6 +1015,7 @@
           </div>
           <div class="sc-order__product-bg" fxLayout="column">
             <mat-paginator class="md-margin-top-2" [length]="length"
+                           [pageIndex]="orderRefundIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 7)"
@@ -1012,6 +1027,7 @@
               </div>
             </div>
             <mat-paginator [length]="length"
+                           [pageIndex]="orderRefundIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 7)"
@@ -1093,6 +1109,7 @@
           </div>
           <div class="sc-order__product-bg" fxLayout="column">
             <mat-paginator class="md-margin-top-2" [length]="length"
+                           [pageIndex]="orderExpiredIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 8)"
@@ -1104,6 +1121,7 @@
               </div>
             </div>
             <mat-paginator [length]="length"
+                           [pageIndex]="orderExpiredIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 8)"
@@ -1210,6 +1228,7 @@
           </div>
           <div class="sc-order__product-bg" fxLayout="column">
             <mat-paginator class="md-margin-top-2" [length]="length"
+                           [pageIndex]="orderUndeliveredIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 9)"
@@ -1221,6 +1240,7 @@
               </div>
             </div>
             <mat-paginator [length]="length"
+                           [pageIndex]="orderUndeliveredIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            (page)="changePage($event, 9)"

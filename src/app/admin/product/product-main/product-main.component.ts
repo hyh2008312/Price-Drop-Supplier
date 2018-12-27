@@ -34,7 +34,6 @@ export class ProductMainComponent implements OnInit {
     text: 'Price High to Low'
   }];
 
-
   productPublished: any = false;
   productPublishedIndex = 1;
   catPublished: any = false;
@@ -119,6 +118,53 @@ export class ProductMainComponent implements OnInit {
 
   clearSearchKey() {
     this.searchKey = '';
+    if(this.isSuperuser) {
+      switch (this.selectedIndex) {
+        case 0:
+          this.productPublishedIndex = 1;
+          break;
+        case 1:
+          this.productPendingApprovalIndex = 1;
+          break;
+        case 2:
+          this.productDisapprovedIndex = 1;
+          break;
+        case 3:
+          this.productUnpublishedIndex = 1;
+          break;
+        case 4:
+          this.productDraftIndex = 1;
+          break;
+        case 5:
+          this.productDropsIndex = 1;
+          break;
+        case 6:
+          this.productSelectedIndex = 1;
+          break;
+        default:
+          break;
+      }
+    } else {
+      switch (this.selectedIndex) {
+        case 0:
+          this.productPublishedIndex = 1;
+          break;
+        case 1:
+          this.productPendingApprovalIndex = 1;
+          break;
+        case 2:
+          this.productUnpublishedIndex = 1;
+          break;
+        case 3:
+          this.productDraftIndex = 1;
+          break;
+        case 4:
+          this.productDropsIndex = 1;
+          break;
+      }
+    }
+
+    this.changeProducts({index: this.selectedIndex}, this.isSuperuser);
   }
 
   ngOnInit():void {

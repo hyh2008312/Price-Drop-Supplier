@@ -43,6 +43,7 @@
             <app-warehouse-home-item [status]="0" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="purchaseAllIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 0)"
@@ -90,6 +91,7 @@
             <app-warehouse-home-item [status]="1" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="purchaseProccessingIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 1)"
@@ -137,6 +139,7 @@
             <app-warehouse-home-item [status]="2" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="purchaseShippedIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 2)"
@@ -184,6 +187,7 @@
             <app-warehouse-home-item [status]="3" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="purchasePartiallyDeliveredIndex-1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 3)"
@@ -231,6 +235,7 @@
             <app-warehouse-home-item [status]="4" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="purchaseDeliveredIndex-1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 4)"
@@ -287,6 +292,7 @@
             <app-warehouse-home-item [status]="4" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-home-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="purchaseCanceledIndex-1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 4)"

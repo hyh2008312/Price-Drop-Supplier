@@ -23,7 +23,7 @@
           <div class="md-margin-left-2 unicorn-dark-theme">
             <mat-form-field class="sc-product__product-sort">
               <mat-select [ngModel]="sortPublished" name="sort" (valueChange)="sortChange($event)">
-                <mat-option class="md-align-center" *ngFor="let item of statusList" [value]="item.value">
+                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
                   {{ item.text }}
                 </mat-option>
               </mat-select>
@@ -92,6 +92,7 @@
             <app-product-item [status]="0" [index]="i" (productChange)="productChange($event)" [product]="item"></app-product-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="productPublishedIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 0)"
@@ -182,6 +183,7 @@
             <app-product-item [status]="1" [index]="i" (productChange)="productChange($event)" [product]="item"></app-product-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="productPendingApprovalIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 1)"
@@ -271,6 +273,7 @@
             <app-product-item [status]="2" [index]="i" (productChange)="productChange($event)" [product]="item"></app-product-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="productDisapprovedIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 2)"
@@ -360,6 +363,7 @@
             <app-product-item [status]="3" [index]="i" (productChange)="productChange($event)" [product]="item"></app-product-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="productUnpublishedIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 3)"
@@ -449,6 +453,7 @@
             <app-product-item [status]="4" [index]="i" (productChange)="productChange($event)" [product]="item"></app-product-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="productDraftIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 4)"
@@ -472,6 +477,7 @@
             <app-product-item [status]="5" [index]="i" (productChange)="productChange($event)" [product]="item"></app-product-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="productDropsIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 5)"
@@ -529,6 +535,7 @@
             <app-product-item [status]="6" [index]="i" (productChange)="productChange($event)" [product]="item"></app-product-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="productSelectedIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 6)"
@@ -620,6 +627,7 @@
             <app-product-item [status]="0" [index]="i" (productChange)="productChange($event)" [product]="item"></app-product-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="productPublishedIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 0)"
@@ -709,6 +717,7 @@
             <app-product-item [status]="1" [index]="i" (productChange)="productChange($event)" [product]="item"></app-product-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="productPendingApprovalIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 1)"
@@ -789,6 +798,7 @@
             <app-product-item [status]="3" [index]="i" (productChange)="productChange($event)" [product]="item"></app-product-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="productUnpublishedIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 1)"
@@ -878,6 +888,7 @@
             <app-product-item [status]="4" [index]="i" (productChange)="productChange($event)" [product]="item"></app-product-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="productDraftIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 2)"

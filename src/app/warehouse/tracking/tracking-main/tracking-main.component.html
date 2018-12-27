@@ -58,6 +58,7 @@
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <mat-paginator class="md-margin-top-2" [length]="length"
+                         [pageIndex]="purchaseAllIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 0)"
@@ -67,6 +68,7 @@
             <app-warehouse-tracking-item [status]="0" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-tracking-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="purchaseAllIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 0)"
@@ -152,6 +154,7 @@
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <mat-paginator class="md-margin-top-2" [length]="length"
+                         [pageIndex]="purchaseProccessingIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 1)"
@@ -161,6 +164,7 @@
             <app-warehouse-tracking-item [status]="1" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-tracking-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="purchaseProccessingIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 1)"
@@ -246,6 +250,7 @@
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <mat-paginator class="md-margin-top-2" [length]="length"
+                         [pageIndex]="purchaseShippedIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 2)"
@@ -255,6 +260,7 @@
             <app-warehouse-tracking-item [status]="2" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-tracking-item>
           </div>
           <mat-paginator [length]="length"
+                         [pageIndex]="purchaseShippedIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 2)"
@@ -299,7 +305,8 @@
           <app-warehouse-tracking-title></app-warehouse-tracking-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
-          <mat-paginator class="md-margin-top-2" [length]="length"
+          <mat-paginator #pgDelete class="md-margin-top-2" [length]="length"
+                         [pageIndex]="purchaseDeletedIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 3)"
@@ -308,7 +315,8 @@
           <div class="sc-product__product-list" *ngFor="let item of purchaseDeleted;let i = index;" >
             <app-warehouse-tracking-item [status]="3" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-tracking-item>
           </div>
-          <mat-paginator [length]="length"
+          <mat-paginator #pgDelete [length]="length"
+                         [pageIndex]="purchaseDeletedIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event, 3)"
