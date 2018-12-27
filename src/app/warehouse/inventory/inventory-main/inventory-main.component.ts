@@ -61,6 +61,10 @@ export class InventoryMainComponent implements OnInit {
 
   clearSearchKey() {
     this.searchKey = '';
+    this.inventoryAllIndex = 1;
+    this.changeInventoryLists({
+      index: this.selectedIndex
+    });
   }
 
   ngOnInit():void {
