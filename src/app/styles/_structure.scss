@@ -6,13 +6,16 @@ html {
   min-height: 100%;
 
   ::-webkit-scrollbar {
-    width: 4px;
+    width: 8px;
+
   }
   ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    @include box-shadow(0 0 0 2px rgba(0,0,0,.19));
-    background-color: rgba(0,0,0,.19);
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.38);
+    &:hover{
+      background-color: rgba(0,0,0,.54);
+    }
   }
 }
 
