@@ -39,6 +39,12 @@
           <app-warehouse-tracking-title></app-warehouse-tracking-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 0)"
+                         *ngIf="purchaseAll && purchaseAll.length > 0">
+          </mat-paginator>
           <div class="sc-product__product-list" *ngFor="let item of purchaseAll;let i = index;">
             <app-warehouse-tracking-item [status]="0" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-tracking-item>
           </div>
@@ -109,6 +115,12 @@
           <app-warehouse-tracking-title></app-warehouse-tracking-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 1)"
+                         *ngIf="purchaseProccessing && purchaseProccessing.length > 0">
+          </mat-paginator>
           <div class="sc-product__product-list" *ngFor="let item of purchaseProccessing;let i = index;">
             <app-warehouse-tracking-item [status]="1" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-tracking-item>
           </div>
@@ -179,6 +191,12 @@
           <app-warehouse-tracking-title ></app-warehouse-tracking-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 2)"
+                         *ngIf="purchaseShipped && purchaseShipped.length > 0">
+          </mat-paginator>
           <div class="sc-product__product-list" *ngFor="let item of purchaseShipped;let i = index;">
             <app-warehouse-tracking-item [status]="2" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-tracking-item>
           </div>
@@ -227,6 +245,12 @@
           <app-warehouse-tracking-title></app-warehouse-tracking-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
+          <mat-paginator [length]="length"
+                         [pageSize]="pageSize"
+                         [pageSizeOptions]="pageSizeOptions"
+                         (page)="changePage($event, 3)"
+                         *ngIf="purchaseDeleted && purchaseDeleted.length > 0">
+          </mat-paginator>
           <div class="sc-product__product-list" *ngFor="let item of purchaseDeleted;let i = index;" >
             <app-warehouse-tracking-item [status]="3" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-tracking-item>
           </div>

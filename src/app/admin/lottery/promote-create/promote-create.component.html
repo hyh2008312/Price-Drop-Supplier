@@ -181,7 +181,7 @@
         <div class="sc-promote__promote-text xb-bold">Add Second Prize for This Campaign:</div>
         <div class="unicorn-dark-theme md-margin-left-3">
           <mat-form-field class="sc-promotion-dialog__width">
-            <mat-select [ngModel]="secondPrize" placeholder="Choose Gift Card" name="Second Prize">
+            <mat-select [(ngModel)]="secondPrize" placeholder="Choose Gift Card" name="Second Prize">
               <mat-option class="md-align-center" *ngFor="let item of cardList" [value]="item.name">
                 {{ item.name }}
               </mat-option>
