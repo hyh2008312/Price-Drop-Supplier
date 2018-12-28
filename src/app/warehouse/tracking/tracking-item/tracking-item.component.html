@@ -19,8 +19,8 @@
             </div>
             <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
               <div>订单: {{item.orderNumber}}</div>
-              <div class="md-margin-left-2">规格: {{item.attribute}}</div>
-              <div class="md-margin-left-1">x {{item.quantity}}</div>
+              <div class="md-margin-left-2" *ngIf="item.attribute != ''">规格: {{item.attribute}}</div>
+              <div class="md-margin-left-2 sc-product__product-red">数量: {{item.quantity}}</div>
             </div>
           </div>
         </div>

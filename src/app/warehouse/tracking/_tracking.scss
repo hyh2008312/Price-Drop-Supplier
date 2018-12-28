@@ -9,6 +9,10 @@
   &__product{
     position: relative;
 
+    &-red{
+      color: red;
+    }
+
     &-sort{
       width: 140px;
       text-align: center;
