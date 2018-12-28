@@ -32,7 +32,7 @@ export class ReviewComponent implements OnInit {
 
   // MatPaginator Inputs
   length:number = 0;
-  pageSize = 2;
+  pageSize = 50;
   pageSizeOptions = [50];
   scoreList: any = [{
     text: 'All',
