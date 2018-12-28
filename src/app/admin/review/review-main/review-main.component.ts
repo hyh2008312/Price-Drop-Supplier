@@ -32,7 +32,7 @@ export class ReviewComponent implements OnInit {
 
   // MatPaginator Inputs
   length:number = 0;
-  pageSize = 50;
+  pageSize = 2;
   pageSizeOptions = [50];
   scoreList: any = [{
     text: 'All',
@@ -59,8 +59,8 @@ export class ReviewComponent implements OnInit {
 
   searchForm: FormGroup;
 
-  searchCategory = 'sku';
-  searchList = ['sku','product'];
+  searchCategory = 'order';
+  searchList = ['order','product'];
 
   constructor(
     private reviewService: ReviewService,
@@ -95,9 +95,9 @@ export class ReviewComponent implements OnInit {
   }
 
   // MatPaginator Output
-  changePage(event, type) {
+  changePage(event) {
     this.pageSize = event.pageSize;
-    switch (type) {
+    switch (this.selectedIndex) {
       case 0:
         this.reviewPendingApprovalIndex = event.pageIndex + 1;
         break;
@@ -108,7 +108,7 @@ export class ReviewComponent implements OnInit {
         this.reviewUnpublishedIndex = event.pageIndex + 1;
         break;
     }
-    this.changeProducts({index: type});
+    this.changeProducts({index: this.selectedIndex});
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -172,17 +172,20 @@ export class ReviewComponent implements OnInit {
   productChange($event) {
     switch ($event.status) {
       case 0:
-        if($event.event == 'delete') {
+        if($event.event == 'published') {
+          this.reviewPendingApproval.splice($event.index,1);
+        }
+        if($event.event == 'unpublished') {
           this.reviewPendingApproval.splice($event.index,1);
         }
       break;
       case 1:
-        if($event.event == 'delete') {
+        if($event.event == 'unpublished') {
           this.reviewPublished.splice($event.index,1);
         }
       break;
       case 2:
-        if($event.event == 'delete') {
+        if($event.event == 'published') {
           this.reviewUnpublished.splice($event.index,1);
         }
         break;

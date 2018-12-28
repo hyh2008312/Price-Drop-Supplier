@@ -1,7 +1,11 @@
 <div class="sc-product__product-height" fxLayout="row" fxLayoutAlign="start center" >
-  <div class="xb-bold">
+  <div class="xb-bold md-margin-right-2" fxFlex="40" >
     Order Number: {{product.orderNumber}}
   </div>
+  <div class="xb-bold md-margin-right-2" fxFlex="50" >
+    Review Time: {{product.created | amTz:'Asia/Kolkata' | amDateFormat:'MMM Do, YYYY HH:mm:ss'}}
+  </div>
+  <div fxFlex="10"></div>
 </div>
 <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
   <div class="md-margin-right-2" fxFlex="40" fxLayout="row" fxLayoutAlign="space-between stretch">

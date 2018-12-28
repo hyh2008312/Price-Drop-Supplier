@@ -62,6 +62,25 @@ export class ReviewService {
       });
   }
 
+  changeReviewStatus(params): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}comment/verify/comment/modify/status/`;
+
+    return this.http.put(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   private handleError1 (error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {

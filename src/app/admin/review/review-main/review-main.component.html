@@ -24,7 +24,7 @@
                 <i class="material-icons">search</i>
                 <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                        placeholder="Search"
-                       (keyup.enter)="changeProducts({index:0}, isSuperuser)"/>
+                       (keyup.enter)="changeProducts({index:0})"/>
                 <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                      *ngIf="searchKey != ''" (click)="clearSearchKey()">
                   <i class="material-icons">close</i>
@@ -51,7 +51,7 @@
                            [pageIndex]="reviewPendingApprovalIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
-                           (page)="changePage($event, 0)"
+                           (page)="changePage($event)"
                            *ngIf="reviewPendingApproval && reviewPendingApproval.length > 0">
             </mat-paginator>
             <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
@@ -83,7 +83,7 @@
                 <i class="material-icons">search</i>
                 <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                        placeholder="Search"
-                       (keyup.enter)="changeProducts({index:0}, isSuperuser)"/>
+                       (keyup.enter)="changeProducts({index:1})"/>
                 <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                      *ngIf="searchKey != ''" (click)="clearSearchKey()">
                   <i class="material-icons">close</i>
@@ -110,7 +110,7 @@
                            [pageIndex]="reviewPublishedIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
-                           (page)="changePage($event, 0)"
+                           (page)="changePage($event)"
                            *ngIf="reviewPublished && reviewPublished.length > 0">
             </mat-paginator>
             <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
@@ -144,7 +144,7 @@
                   <i class="material-icons">search</i>
                   <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                          placeholder="Search"
-                         (keyup.enter)="changeProducts({index:0}, isSuperuser)"/>
+                         (keyup.enter)="changeProducts({index:2})"/>
                   <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                        *ngIf="searchKey != ''" (click)="clearSearchKey()">
                     <i class="material-icons">close</i>
@@ -169,7 +169,7 @@
                            [pageIndex]="reviewUnpublishedIndex - 1"
                            [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
-                           (page)="changePage($event, 0)"
+                           (page)="changePage($event)"
                            *ngIf="reviewUnpublished && reviewUnpublished.length > 0">
             </mat-paginator>
             <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"

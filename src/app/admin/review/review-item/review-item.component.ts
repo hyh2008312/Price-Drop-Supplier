@@ -36,9 +36,35 @@ export class ReviewItemComponent implements OnInit {
 
   }
 
-  publish() {}
+  publish() {
+    let params: any = {
+      id: this.product.id,
+      commentStatus: 'published'
+    };
+    this.reviewService.changeReviewStatus(params).then((data) => {
+      this.productChange.emit({
+        index: this.index,
+        product : data,
+        status: this.status,
+        event: 'published'
+      });
+    });
+  }
 
-  unpublish() {}
+  unpublish() {
+    let params: any = {
+      id: this.product.id,
+      commentStatus: 'unpublished'
+    };
+    this.reviewService.changeReviewStatus(params).then((data) => {
+      this.productChange.emit({
+        index: this.index,
+        product : data,
+        status: this.status,
+        event: 'unpublished'
+      });
+    });
+  }
 
   openLargeImage(data) {
     let dialogRef = this.dialog.open(ReviewImageDialogComponent, {
