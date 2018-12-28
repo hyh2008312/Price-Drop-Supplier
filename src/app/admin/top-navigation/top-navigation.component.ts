@@ -130,6 +130,12 @@ export class TopNavigationComponent implements OnInit {
       text: '尺码表管理',
       router: './sizeChart',
       isActive: false
+    },
+    {
+      id: 6,
+      text: '用户评论',
+      router: './review',
+      isActive: false
     }
   ];
 
