@@ -41,10 +41,10 @@
   </div>
   <div class="sc-product__product-action-buttons sc__accent-dark"
        fxLayout="column" fxLayoutAlign="center stretch" fxFlex="10">
-    <button mat-raised-button color="primary" *ngIf="product.commentStatusJudge == 'pending' || product.commentStatusJudge == 'unpublished'"
+    <button mat-raised-button color="primary" *ngIf="product.commentStatus == 'pending' || product.commentStatus == 'unpublished'"
             (click)="publish()">Publish</button>
     <div class="md-margin-top-1"></div>
-    <button mat-raised-button color="primary" *ngIf="product.commentStatusJudge == 'pending' || product.commentStatusJudge == 'published'"
+    <button mat-raised-button color="primary" *ngIf="product.commentStatus == 'pending' || product.commentStatus == 'published'"
             (click)="unpublish()">Unpublish</button>
   </div>
 </div>
