@@ -59,8 +59,20 @@ export class ReviewComponent implements OnInit {
 
   searchForm: FormGroup;
 
-  searchCategory = 'order';
-  searchList = ['order','product'];
+  searchCategory = 'user_name';
+  searchList = [{
+    text: "Username",
+    value: 'user_name'
+  }, {
+    text: 'Order Number',
+    value: 'order_id'
+  }, {
+    text: 'Product Name',
+    value: 'variant_title'
+  }, {
+    text: 'SKU',
+    value: 'sku'
+  }];
 
   constructor(
     private reviewService: ReviewService,
@@ -119,6 +131,8 @@ export class ReviewComponent implements OnInit {
     let page = 0;
     let comment_status = 'pending';
     let product_score = this.reviewPendingScore;
+    let search = this.searchKey && this.searchKey != ''? this.searchKey: null;
+    let search_type = this.searchKey && this.searchKey != ''? this.searchCategory: null;
     switch (event.index) {
       case 0:
         page = this.reviewPendingApprovalIndex;
@@ -127,6 +141,8 @@ export class ReviewComponent implements OnInit {
           comment_status,
           product_score,
           page,
+          search,
+          search_type,
           page_size: this.pageSize
         }).then((data) => {
           this.length = data.count;
@@ -142,6 +158,8 @@ export class ReviewComponent implements OnInit {
           comment_status,
           product_score,
           page,
+          search,
+          search_type,
           page_size: this.pageSize
         }).then((data) => {
           this.length = data.count;
@@ -157,6 +175,8 @@ export class ReviewComponent implements OnInit {
           comment_status,
           product_score,
           page,
+          search,
+          search_type,
           page_size: this.pageSize
         }).then((data) => {
           this.length = data.count;
