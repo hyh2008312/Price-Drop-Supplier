@@ -115,9 +115,18 @@ export class SizeChartCreateComponent implements OnInit {
 
     // Add our fruit
     if ((value || '').trim()) {
-      p.value.push({
-        value: $event.value
-      });
+      const _val = value.split(',');
+      if(_val.length > 1) {
+        for(let item of _val) {
+          p.value.push({
+            value: item
+          });
+        }
+      } else {
+        p.value.push({
+          value: value
+        });
+      }
     }
 
     // Reset the input value
