@@ -33,8 +33,8 @@
               <div class="sc-product__search-margin-top unicorn-dark-theme">
                 <mat-form-field class="sc-product__product-sort">
                   <mat-select [(ngModel)]="searchCategory" name="sort">
-                    <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item">
-                      {{ item }}
+                    <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+                      {{ item.text }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -92,8 +92,8 @@
               <div class="sc-product__search-margin-top unicorn-dark-theme">
                 <mat-form-field class="sc-product__product-sort">
                   <mat-select [(ngModel)]="searchCategory" name="sort">
-                    <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item">
-                      {{ item }}
+                    <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+                      {{ item.text }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
