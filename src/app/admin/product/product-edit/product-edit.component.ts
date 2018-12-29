@@ -190,8 +190,10 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
         aliasColor: data.aliasColor,
         aliasSize: data.aliasSize
       });
+      let i = 0;
       for(let item of data.variants) {
         this.addProductList(item);
+        i++;
       }
     });
 
@@ -483,14 +485,22 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
   addProductList(variant) {
     let attribute = '';
     let index = 0;
+    let _attr = this.fb.array([]);
     for(let item of variant.attributeValues) {
+      _attr.push(this.fb.group({
+        id: [item.id],
+        name: [item.name],
+        value: [item.value, Validators.required]
+      }));
       attribute += index != 0?', ' +item.value.trim():item.value.trim();
       index++;
     }
+
     this.product.push(this.fb.group({
       id: [variant.id],
       isEdit: [false],
       attributes: [attribute],
+      attributeValues: _attr,
       mainImage: [variant.mainImage?variant.mainImage: ''],
       sku: [variant.sku, Validators.required],
       variantStockrecord: [variant.variantStockrecord, Validators.required],
@@ -500,6 +510,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
       costPrice: [variant.costPrice],
       sourcingPrice:  [variant.sourcingPrice],
     }));
+
   }
 
   editVariant(p) {
@@ -509,8 +520,15 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
       });
     } else {
       this.adminService.changeVariant(p.value).then((data) => {
+        let attribute = '';
+        let index = 0;
+        for(let item of data.attributeValues) {
+          attribute += index != 0?', ' +item.value.trim():item.value.trim();
+          index++;
+        }
         p.patchValue({
           isEdit: !p.value.isEdit,
+          attributes: attribute,
           mainImage: data.mainImage
         });
       });

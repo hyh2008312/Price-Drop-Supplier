@@ -129,7 +129,7 @@
           <div class="md-margin-top-2" formArrayName="productSpecification">
             <div *ngFor="let p of specification.controls; let i = index;">
               <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center">
-                <div class="sc-product__create-margin-right-3 sc-product__create-text-2" fxFlex="20">
+                <div class="sc-product__create-margin-right-3 sc-product__create-text-2"  fxFlex="20">
                   {{p.value.name}}
                 </div>
                 <div *ngIf="p.value.specificationValues.length > 0" class="sc-product__create-margin-right-3" fxFlex="80" fxLayout="row" fxLayoutAlign="start center">
@@ -228,8 +228,18 @@
               </div>
               <div fxLayout="column" fxLayoutAlign="start stretch" *ngFor="let p of product.controls; let i = index;">
                 <div class="md-margin-top-2" [formGroupName]="i" fxLayout="row" fxLayoutAlign="start center" *ngIf="p.value.isEdit">
-                  <div class="sc-product__create-margin-right-3 sc-product__create-text-2" fxFlex="12">
-                    {{p.value.attributes}}
+                  <!--<div class="sc-product__create-margin-right-3 sc-product__create-text-2" *ngIf="!isSuperUser" fxFlex="12">-->
+                    <!--{{p.value.attributes}}-->
+                  <!--</div>-->
+                  <div class="sc-product__create-margin-right-3 sc-product__create-text-2" fxFlex="12"
+                   formArrayName="attributeValues">
+                    <div *ngFor="let g of p.controls.attributeValues.controls; let j = index;">
+                      <div>{{g.value.name}}</div>
+                      <mat-form-field class="sc-product__create-width-100" [formGroupName]="j">
+                        <input class="md-align-center" type="text" matInput formControlName="value">
+                      </mat-form-field>
+                    </div>
+
                   </div>
                   <div class="sc-product__create-margin-right-3 sc-product__create-width-4" fxFlex="none">
                     <app-product-image-upload-variant [(previewImgFile)]="p.value.mainImage"
@@ -337,7 +347,7 @@
                 </div>
               </div>
             </div>
-            <div formArrayName="variants" *ngIf="attributes.length == 0">
+            <div formArrayName="variants" *ngIf="attributes && attributes.length == 0">
               <div fxLayout="row" fxLayoutAlign="start center">
                 <div class="sc-product__create-margin-right-2 sc-product__create-title-1 md-dark-secondary xb-bold md-caption"
                      fxFlex="25">
