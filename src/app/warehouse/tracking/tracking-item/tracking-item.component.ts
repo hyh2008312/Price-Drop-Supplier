@@ -7,6 +7,8 @@ import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
 import { TrackingImageDialogComponent } from '../tracking-image-dialog/tracking-image-dialog.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { AddNotesDialogComponent } from '../add-notes-dialog/add-notes-dialog.component';
+import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
+import { ConfirmPackageDialogComponent } from '../confirm-package-dialog/confirm-package-dialog.component';
 
 @Component({
   selector: 'app-warehouse-tracking-item',
@@ -60,32 +62,71 @@ export class TrackingItemComponent implements OnInit {
   }
 
   delete() {
-    this.adminService.pickDelete(this.product).then((data) => {
-      if(this.status == 0) {
-        this.product = data;
-      } else {
-        this.productChange.emit({
-          index: this.index,
-          product : this.product,
-          status: this.status,
-          event: 'delete'
-        });
+    let title = '';
+    let content = '';
+    if(this.product.pickStatus == 'Pending Packaging' || this.product.pickStatus == 'Packaging Completed') {
+      title = '确认删除';
+      content = '是否确认删除？';
+    } else if(this.product.pickStatus == 'Package Deleted') {
+      title = '取消删除';
+      content = '是否取消删除？';
+    }
+    let dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      data: {
+        item: this.product,
+        isEdit: false,
+        title,
+        content
       }
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        if(this.status == 0) {
+          this.product = dialogRef.componentInstance.data.item;
+        } else {
+          this.productChange.emit({
+            index: this.index,
+            product : this.product,
+            status: this.status,
+            event: 'delete'
+          });
+        }
+
+      }
+    });
+
   }
 
   changeStatus() {
-    this.adminService.pickStatus({
-      id: this.product.id
-    }).then((data) => {
-      if(data.id) {
-        this.product = data;
+    let title = '';
+    let content = '';
+    if(this.product.pickStatus == 'Pending Packaging') {
+      title = '已打包出库';
+      content = '是否确认已打包出库？';
+    } else if(this.product.pickStatus == 'Packaging Completed') {
+      title = '取消打包出库';
+      content = '是否取消打包出库？';
+    }
+    let dialogRef = this.dialog.open(ConfirmPackageDialogComponent, {
+      data: {
+        item: this.product,
+        isEdit: false,
+        title,
+        content
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        this.product = dialogRef.componentInstance.data.item;
         this.productChange.emit({
           index: this.index,
           product: this.product,
           status: this.status,
           event: 'change'
         });
+
       }
     });
   }

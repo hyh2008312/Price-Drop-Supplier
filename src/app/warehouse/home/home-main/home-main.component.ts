@@ -31,6 +31,9 @@ export class HomeMainComponent implements OnInit {
   }, {
     text: '采购单号',
     value: 'purchase'
+  }, {
+    text: 'SKU',
+    value: 'sku'
   }];
 
   status: any = false;

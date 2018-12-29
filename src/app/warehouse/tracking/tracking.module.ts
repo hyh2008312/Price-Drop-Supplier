@@ -9,6 +9,8 @@ import { TrackingTitleComponent } from './tracking-title/tracking-title.componen
 import { TrackingEditDialogComponent } from './tracking-edit-dialog/tracking-edit-dialog.component';
 import { TrackingImageDialogComponent } from './tracking-image-dialog/tracking-image-dialog.component';
 import { AddNotesDialogComponent } from './add-notes-dialog/add-notes-dialog.component';
+import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-delete-dialog.component';
+import { ConfirmPackageDialogComponent } from './confirm-package-dialog/confirm-package-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { TrackingRoutingModule } from './tracking.routes.module';
@@ -30,14 +32,18 @@ import { TrackingService } from './tracking.service';
     TrackingEditDialogComponent,
     TrackingImageDialogComponent,
     ToolTipsComponent,
-    AddNotesDialogComponent
+    AddNotesDialogComponent,
+    ConfirmDeleteDialogComponent,
+    ConfirmPackageDialogComponent
   ],
   entryComponents: [
     TrackingCreateDialogComponent,
     TrackingEditDialogComponent,
     TrackingImageDialogComponent,
     ToolTipsComponent,
-    AddNotesDialogComponent
+    AddNotesDialogComponent,
+    ConfirmDeleteDialogComponent,
+    ConfirmPackageDialogComponent
   ],
   providers: [
     TrackingService
