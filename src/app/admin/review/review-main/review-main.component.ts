@@ -65,7 +65,7 @@ export class ReviewComponent implements OnInit {
     value: 'user_name'
   }, {
     text: 'Order Number',
-    value: 'order_id'
+    value: 'order_number'
   }, {
     text: 'Product Name',
     value: 'variant_title'
