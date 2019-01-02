@@ -11,6 +11,7 @@ import { TrackingImageDialogComponent } from './tracking-image-dialog/tracking-i
 import { AddNotesDialogComponent } from './add-notes-dialog/add-notes-dialog.component';
 import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-delete-dialog.component';
 import { ConfirmPackageDialogComponent } from './confirm-package-dialog/confirm-package-dialog.component';
+import { ConfirmNotFoundDialogComponent } from './confirm-not-found-dialog/confirm-not-found-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { TrackingRoutingModule } from './tracking.routes.module';
@@ -34,7 +35,8 @@ import { TrackingService } from './tracking.service';
     ToolTipsComponent,
     AddNotesDialogComponent,
     ConfirmDeleteDialogComponent,
-    ConfirmPackageDialogComponent
+    ConfirmPackageDialogComponent,
+    ConfirmNotFoundDialogComponent
   ],
   entryComponents: [
     TrackingCreateDialogComponent,
@@ -43,7 +45,8 @@ import { TrackingService } from './tracking.service';
     ToolTipsComponent,
     AddNotesDialogComponent,
     ConfirmDeleteDialogComponent,
-    ConfirmPackageDialogComponent
+    ConfirmPackageDialogComponent,
+    ConfirmNotFoundDialogComponent
   ],
   providers: [
     TrackingService

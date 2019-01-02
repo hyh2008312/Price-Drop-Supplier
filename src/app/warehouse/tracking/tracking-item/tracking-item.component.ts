@@ -9,6 +9,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { AddNotesDialogComponent } from '../add-notes-dialog/add-notes-dialog.component';
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 import { ConfirmPackageDialogComponent } from '../confirm-package-dialog/confirm-package-dialog.component';
+import { ConfirmNotFoundDialogComponent } from '../confirm-not-found-dialog/confirm-not-found-dialog.component';
 
 @Component({
   selector: 'app-warehouse-tracking-item',
@@ -101,7 +102,7 @@ export class TrackingItemComponent implements OnInit {
   changeStatus() {
     let title = '';
     let content = '';
-    if(this.product.pickStatus == 'Pending Packaging') {
+    if(this.product.pickStatus == 'Pending Packaging' || this.product.pickStatus == 'Not Found') {
       title = '已打包出库';
       content = '是否确认已打包出库？';
     } else if(this.product.pickStatus == 'Packaging Completed') {
@@ -131,8 +132,38 @@ export class TrackingItemComponent implements OnInit {
     });
   }
 
+  notFountStatus() {
+    let title = '';
+    let content = '';
+    if(this.product.pickStatus == 'Pending Packaging') {
+      title = '找不到产品';
+      content = '是否确认找不到产品？';
+    }
+
+    let dialogRef = this.dialog.open(ConfirmNotFoundDialogComponent, {
+      data: {
+        item: this.product,
+        isEdit: false,
+        title,
+        content
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        this.product = dialogRef.componentInstance.data.item;
+        this.productChange.emit({
+          index: this.index,
+          product: this.product,
+          status: this.status,
+          event: 'change'
+        });
+
+      }
+    });
+  }
+
   openNotesDialog() {
-    console.log(this.product);
 
     let dialogRef = this.dialog.open(AddNotesDialogComponent, {
       data: {

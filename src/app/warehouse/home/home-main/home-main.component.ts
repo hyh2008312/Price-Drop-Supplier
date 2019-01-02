@@ -52,6 +52,22 @@ export class HomeMainComponent implements OnInit {
     text: '货物问题'
   }];
 
+  processingDaysList: any = [{
+    value: false,
+    text: '所有'
+  }, {
+    value: '2',
+    text: '超过2天未发货'
+  }];
+
+  shippedDaysList: any = [{
+    value: false,
+    text: '所有'
+  }, {
+    value: '4',
+    text: '超过4天未发货'
+  }];
+
   // MatPaginator Inputs
   length:number = 0;
   pageSize = 50;
@@ -63,8 +79,10 @@ export class HomeMainComponent implements OnInit {
   purchaseAllIndex: any = 1;
   purchaseProccessing: any = false;
   purchaseProccessingIndex: any = 1;
+  processingDays: any = false;
   purchaseShipped: any = false;
   purchaseShippedIndex: any = 1;
+  shippedDays: any = false;
   purchasePartiallyDelivered: any = false;
   purchasePartiallyDeliveredIndex: any = 1;
   purchaseDelivered: any = false;
@@ -175,6 +193,9 @@ export class HomeMainComponent implements OnInit {
     let page_size = this.pageSize;
     let delivery_status: any = this.status;
     let received_time: any = null;
+    let processing_days: any = null;
+    let shipped_days: any = null;
+
     switch ($event.index) {
       case 0:
         delivery_status = false;
@@ -183,11 +204,13 @@ export class HomeMainComponent implements OnInit {
         status = 'Processing';
         page = this.purchaseProccessingIndex;
         delivery_status = false;
+        processing_days = this.processingDays? this.processingDays: null;
         break;
       case 2:
         status = 'Shipped';
         page = this.purchaseShippedIndex;
         delivery_status = false;
+        shipped_days = this.shippedDays? this.shippedDays: null;
         break;
       case 3:
         status = 'Partially Delivered';
@@ -221,7 +244,9 @@ export class HomeMainComponent implements OnInit {
       search,
       search_type,
       delivery_status,
-      received_time
+      received_time,
+      processing_days,
+      shipped_days
     }).then((data) => {
       this.length = data.count;
       switch ($event.index) {
@@ -264,11 +289,24 @@ export class HomeMainComponent implements OnInit {
     });
   }
 
-  changeSatus($event) {
-    this.status = $event;
-    this.changePurchaseLists({
-      index: this.selectedIndex
-    });
+  changeDays($event) {
+    switch (this.selectedIndex) {
+      case 1:
+        this.processingDays = $event;
+        this.purchaseProccessing = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 2:
+        this.shippedDays = $event;
+        this.purchaseShipped = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+    }
+
   }
 
   productChange(event) {

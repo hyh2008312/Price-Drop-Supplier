@@ -31,6 +31,7 @@
       <div *ngIf="product.pickStatus == 'Pending Packaging'">等待拣货</div>
       <div *ngIf="product.pickStatus == 'Packaging Completed'">拣货已完成</div>
       <div *ngIf="product.pickStatus == 'Package Deleted'">已删除</div>
+      <div *ngIf="product.pickStatus == 'Not Found'">找不到产品</div>
     </div>
     <div class="sc-product__product-category md-margin-right-2" fxFlex="15"
          fxLayout="column" fxLayoutAlign="center center">
@@ -54,14 +55,17 @@
       <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging'" (click)="edit()">编辑</button>
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging'" ></div>
       <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging'" (click)="openNotesDialog()">备注</button>
-      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging'" ></div>
-      <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Pending Packaging'"
+      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Not Found'" ></div>
+      <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Not Found'"
               (click)="changeStatus()">已打包出库</button>
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Packaging Completed'" ></div>
       <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Packaging Completed'"
               (click)="changeStatus()">取消打包出库</button>
-      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Packaging Completed'"></div>
-      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Packaging Completed'"
+      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging'" ></div>
+      <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Pending Packaging'"
+              (click)="notFountStatus()">找不到产品</button>
+      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Packaging Completed' || product.pickStatus == 'Not Found'"></div>
+      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Packaging Completed' || product.pickStatus == 'Not Found'"
               (click)="delete()">删除</button>
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Package Deleted'"></div>
       <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Package Deleted'"

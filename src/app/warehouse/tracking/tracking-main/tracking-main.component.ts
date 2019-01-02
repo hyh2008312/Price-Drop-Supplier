@@ -52,6 +52,9 @@ export class TrackingMainComponent implements OnInit {
   }, {
     text: '订单号',
     value: 'order_number'
+  }, {
+    text: 'SKU',
+    value: 'sku'
   }];
 
   // MatPaginator Inputs
@@ -81,11 +84,19 @@ export class TrackingMainComponent implements OnInit {
     value: '0',
     text: '不是COD'
   }];
+  sortList: any = [{
+    value: 'true',
+    text: '正序'
+  }, {
+    value: 'false',
+    text: '逆序'
+  }];
 
   btAll: any = false;
   codAll: any = false;
   purchaseAll: any = false;
   purchaseAllIndex: any = 1;
+  sortAll: any = 'true';
   csProcessing: any;
   ceProcessing: any;
   asProcessing: any;
@@ -94,6 +105,7 @@ export class TrackingMainComponent implements OnInit {
   codProcessing: any = false;
   purchaseProccessing: any = false;
   purchaseProccessingIndex: any = 1;
+  sortProcessing: any = 'true';
   csShipped: any;
   ceShipped: any;
   asShipped: any;
@@ -104,6 +116,16 @@ export class TrackingMainComponent implements OnInit {
   purchaseShippedIndex: any = 1;
   purchaseDeleted: any = false;
   purchaseDeletedIndex: any = 1;
+  sortShipped: any = 'true';
+  csNotFound: any;
+  ceNotFound: any;
+  asNotFound: any;
+  aeNotFound: any;
+  btNotFound: any = false;
+  codNotFound: any = false;
+  purchaseNotFound: any = false;
+  purchaseNotFoundIndex: any = 1;
+  sortNotFound: any = 'true';
 
   constructor(
     private adminService: TrackingService,
@@ -152,6 +174,9 @@ export class TrackingMainComponent implements OnInit {
       case 3:
         this.purchaseDeletedIndex = 1;
         break;
+      case 4:
+        this.purchaseNotFoundIndex = 1;
+        break;
     }
     this.changePurchaseLists({
       index: this.selectedIndex
@@ -185,6 +210,9 @@ export class TrackingMainComponent implements OnInit {
       case 3:
         this.purchaseDeletedIndex = event.pageIndex + 1;
         break;
+      case 4:
+        this.purchaseNotFoundIndex = event.pageIndex + 1;
+        break;
     }
     this.changePurchaseLists({index: type});
   }
@@ -201,11 +229,13 @@ export class TrackingMainComponent implements OnInit {
     let packing_end_time: any = null;
     let is_battery: any = null;
     let is_cod: any = null;
+    let is_positive_sequence: any = null;
 
     switch ($event.index) {
       case 0:
         is_battery = this.btAll;
         is_cod = this.codAll;
+        is_positive_sequence = this.sortAll;
         break;
       case 1:
         is_battery = this.btProcessing;
@@ -214,6 +244,7 @@ export class TrackingMainComponent implements OnInit {
         page = this.purchaseProccessingIndex;
         create_start_time = this.csProcessing;
         create_end_time = this.ceProcessing;
+        is_positive_sequence = this.sortProcessing;
         break;
       case 2:
         is_battery = this.btShipped;
@@ -222,11 +253,21 @@ export class TrackingMainComponent implements OnInit {
         page = this.purchaseShippedIndex;
         packing_start_time = this.csShipped;
         packing_end_time = this.ceShipped;
+        is_positive_sequence = this.sortShipped;
         break;
       case 3:
         status = 'Package Deleted';
         page = this.purchaseDeletedIndex;
         received_time = true;
+        break;
+      case 4:
+        is_battery = this.btNotFound;
+        is_cod = this.codNotFound;
+        status = 'Not Found';
+        page = this.purchaseNotFoundIndex;
+        create_start_time = this.csNotFound;
+        create_end_time = this.ceNotFound;
+        is_positive_sequence = this.sortNotFound;
         break;
     }
 
@@ -251,7 +292,8 @@ export class TrackingMainComponent implements OnInit {
       packing_start_time,
       packing_end_time,
       is_battery,
-      is_cod
+      is_cod,
+      is_positive_sequence
     }).then((data) => {
       this.length = data.count;
       switch ($event.index) {
@@ -266,6 +308,9 @@ export class TrackingMainComponent implements OnInit {
           break;
         case 3:
           this.purchaseDeleted = [...data.results];
+          break;
+        case 4:
+          this.purchaseNotFound = [...data.results];
           break;
       }
     });
@@ -317,6 +362,16 @@ export class TrackingMainComponent implements OnInit {
             break;
         }
         break;
+      case 4:
+        switch(event.event) {
+          case 'delete':
+            this.purchaseNotFound.splice(event.index,1);
+            break;
+          case 'change':
+            this.purchaseNotFound.splice(event.index,1);
+            break;
+        }
+        break;
     }
   }
 
@@ -360,6 +415,16 @@ export class TrackingMainComponent implements OnInit {
           index: this.selectedIndex
         });
         break;
+      case 4:
+        this.csNotFound = null;
+        this.ceNotFound = null;
+        this.asNotFound = null;
+        this.aeNotFound = null;
+        this.purchaseNotFoundIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
     }
   }
 
@@ -382,6 +447,13 @@ export class TrackingMainComponent implements OnInit {
       case 2:
         this.btShipped = $event;
         this.purchaseShippedIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 4:
+        this.btNotFound = $event;
+        this.purchaseNotFoundIndex = 1;
         this.changePurchaseLists({
           index: this.selectedIndex
         });
@@ -412,6 +484,46 @@ export class TrackingMainComponent implements OnInit {
           index: this.selectedIndex
         });
         break;
+      case 4:
+        this.codNotFound = $event;
+        this.purchaseNotFoundIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+    }
+  }
+
+  sortChange($event) {
+    switch (this.selectedIndex) {
+      case 0:
+        this.sortAll = $event;
+        this.purchaseAllIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 1:
+        this.sortProcessing = $event;
+        this.purchaseProccessingIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 2:
+        this.sortShipped = $event;
+        this.purchaseShippedIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 4:
+        this.sortNotFound = $event;
+        this.purchaseNotFoundIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
     }
   }
 
@@ -425,6 +537,9 @@ export class TrackingMainComponent implements OnInit {
         excel = [...this.purchaseProccessing];
         break;
       case 2:
+        excel = [...this.purchaseShipped];
+        break;
+      case 4:
         excel = [...this.purchaseShipped];
         break;
     }
