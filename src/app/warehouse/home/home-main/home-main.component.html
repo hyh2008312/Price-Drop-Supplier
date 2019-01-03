@@ -69,7 +69,7 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div class="md-margin-left-2">创建时间: </div>
+          <div class="md-margin-left-2">下单时间: </div>
           <mat-form-field class="sc-product__product-sort md-margin-left-2">
             <mat-select [ngModel]="sortProcessing" name="sort" (valueChange)="sortChange($event)" >
               <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
@@ -134,7 +134,7 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div class="md-margin-left-2">创建时间: </div>
+          <div class="md-margin-left-2">下单时间: </div>
           <mat-form-field class="sc-product__product-sort md-margin-left-2">
             <mat-select [ngModel]="sortShipped" name="sort" (valueChange)="sortChange($event)" >
               <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
