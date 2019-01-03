@@ -56,7 +56,7 @@ export class HomeMainComponent implements OnInit {
     value: false,
     text: '所有'
   }, {
-    value: '2',
+    value: 2,
     text: '超过2天未发货'
   }];
 
@@ -64,7 +64,7 @@ export class HomeMainComponent implements OnInit {
     value: false,
     text: '所有'
   }, {
-    value: '4',
+    value: 4,
     text: '超过4天未收货'
   }];
 
@@ -307,14 +307,14 @@ export class HomeMainComponent implements OnInit {
     switch (this.selectedIndex) {
       case 1:
         this.processingDays = $event;
-        this.purchaseProccessing = 1;
+        this.purchaseProccessingIndex = 1;
         this.changePurchaseLists({
           index: this.selectedIndex
         });
         break;
       case 2:
         this.shippedDays = $event;
-        this.purchaseShipped = 1;
+        this.purchaseShippedIndex = 1;
         this.changePurchaseLists({
           index: this.selectedIndex
         });
