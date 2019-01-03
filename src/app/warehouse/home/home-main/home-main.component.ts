@@ -65,7 +65,15 @@ export class HomeMainComponent implements OnInit {
     text: '所有'
   }, {
     value: '4',
-    text: '超过4天未发货'
+    text: '超过4天未收货'
+  }];
+
+  sortList: any = [{
+    value: 'true',
+    text: '正序'
+  }, {
+    value: 'false',
+    text: '逆序'
   }];
 
   // MatPaginator Inputs
@@ -80,9 +88,11 @@ export class HomeMainComponent implements OnInit {
   purchaseProccessing: any = false;
   purchaseProccessingIndex: any = 1;
   processingDays: any = false;
+  sortProcessing: any = 'true';
   purchaseShipped: any = false;
   purchaseShippedIndex: any = 1;
   shippedDays: any = false;
+  sortShipped: any = 'false';
   purchasePartiallyDelivered: any = false;
   purchasePartiallyDeliveredIndex: any = 1;
   purchaseDelivered: any = false;
@@ -195,6 +205,7 @@ export class HomeMainComponent implements OnInit {
     let received_time: any = null;
     let processing_days: any = null;
     let shipped_days: any = null;
+    let is_positive_sequence: any = null;
 
     switch ($event.index) {
       case 0:
@@ -205,12 +216,14 @@ export class HomeMainComponent implements OnInit {
         page = this.purchaseProccessingIndex;
         delivery_status = false;
         processing_days = this.processingDays? this.processingDays: null;
+        is_positive_sequence = this.sortProcessing? this.sortProcessing: null;
         break;
       case 2:
         status = 'Shipped';
         page = this.purchaseShippedIndex;
         delivery_status = false;
         shipped_days = this.shippedDays? this.shippedDays: null;
+        is_positive_sequence = this.sortShipped? this.sortShipped: null;
         break;
       case 3:
         status = 'Partially Delivered';
@@ -246,7 +259,8 @@ export class HomeMainComponent implements OnInit {
       delivery_status,
       received_time,
       processing_days,
-      shipped_days
+      shipped_days,
+      is_positive_sequence
     }).then((data) => {
       this.length = data.count;
       switch ($event.index) {
@@ -345,6 +359,25 @@ export class HomeMainComponent implements OnInit {
             this.purchaseDelivered.splice(event.index,1);
             break;
         }
+        break;
+    }
+  }
+
+  sortChange($event) {
+    switch (this.selectedIndex) {
+      case 1:
+        this.sortProcessing = $event;
+        this.purchaseProccessingIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 2:
+        this.sortShipped = $event;
+        this.purchaseShippedIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
         break;
     }
   }

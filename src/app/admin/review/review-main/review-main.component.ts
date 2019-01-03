@@ -175,7 +175,7 @@ export class ReviewComponent implements OnInit {
           comment_status,
           product_score,
           page,
-          search,
+          search: encodeURI(search),
           search_type,
           page_size: this.pageSize
         }).then((data) => {

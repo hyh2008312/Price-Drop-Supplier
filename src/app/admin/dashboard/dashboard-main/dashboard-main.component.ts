@@ -4,8 +4,6 @@ import {Router, NavigationStart, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
-import {AdminService} from '../../admin.service';
-import {UserService} from '../../../shared/services/user/user.service';
 import {DashboardService} from "../dashboard.service";
 
 @Component({
