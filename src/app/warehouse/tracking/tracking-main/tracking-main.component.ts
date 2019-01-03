@@ -275,6 +275,7 @@ export class TrackingMainComponent implements OnInit {
     let search_type: any = null;
     if(this.searchKey && this.searchKey != '') {
       search = this.searchKey;
+      search = encodeURIComponent(search);
       search_type = this.searchCategory;
     }
     is_battery = is_battery? is_battery: null;

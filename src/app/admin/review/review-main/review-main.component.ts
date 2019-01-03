@@ -132,6 +132,9 @@ export class ReviewComponent implements OnInit {
     let comment_status = 'pending';
     let product_score = this.reviewPendingScore;
     let search = this.searchKey && this.searchKey != ''? this.searchKey: null;
+    if(search) {
+      search = encodeURIComponent(search)
+    }
     let search_type = this.searchKey && this.searchKey != ''? this.searchCategory: null;
     switch (event.index) {
       case 0:
@@ -175,7 +178,7 @@ export class ReviewComponent implements OnInit {
           comment_status,
           product_score,
           page,
-          search: encodeURI(search),
+          search,
           search_type,
           page_size: this.pageSize
         }).then((data) => {

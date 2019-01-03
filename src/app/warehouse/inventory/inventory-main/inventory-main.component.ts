@@ -89,6 +89,7 @@ export class InventoryMainComponent implements OnInit {
     let search_type: any = null;
     if(this.searchKey && this.searchKey != '') {
       search = this.searchKey;
+      search = encodeURIComponent(search);
       search_type = this.searchCategory;
       if($event.type == 'search') {
         this.inventoryAllIndex = 1;
