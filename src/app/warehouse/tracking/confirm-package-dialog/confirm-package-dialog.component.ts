@@ -12,6 +12,8 @@ import { TrackingService } from '../tracking.service';
 
 export class ConfirmPackageDialogComponent implements OnInit {
 
+  disabled: boolean = false;
+
   constructor(
     public dialogRef: MatDialogRef<ConfirmPackageDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -29,9 +31,11 @@ export class ConfirmPackageDialogComponent implements OnInit {
   }
 
   confirm() {
+    this.disabled = true;
     this.homeService.pickStatus({
       id: this.data.item.id
     }).then((data) => {
+      this.disabled = false;
       if(data.id) {
         this.data.item = data;
         this.data.isEdit = true;

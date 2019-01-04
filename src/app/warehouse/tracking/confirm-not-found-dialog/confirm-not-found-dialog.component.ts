@@ -11,6 +11,8 @@ import { TrackingService } from '../tracking.service';
 
 export class ConfirmNotFoundDialogComponent implements OnInit {
 
+  disabled: boolean = false;
+
   constructor(
     public dialogRef: MatDialogRef<ConfirmNotFoundDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -28,9 +30,11 @@ export class ConfirmNotFoundDialogComponent implements OnInit {
   }
 
   confirm() {
+    this.disabled = true;
     this.homeService.pickStatusChange({
       id: this.data.item.id
     }).then((data) => {
+      this.disabled = false;
       if(data.id) {
         this.data.item = data;
         this.data.isEdit = true;

@@ -9,7 +9,7 @@
     {{data.content}}
   </div>
   <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-raised-button color="primary" (click)="confirm()">确认</button>
+    <button mat-raised-button color="primary" [disabled]="disabled" (click)="confirm()">确认</button>
     <div class="md-margin-left-2">
       <button mat-button color="primary" (click)="close()">取消</button>
     </div>

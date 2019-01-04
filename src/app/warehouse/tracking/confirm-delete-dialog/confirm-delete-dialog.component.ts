@@ -12,6 +12,8 @@ import { TrackingService } from '../tracking.service';
 
 export class ConfirmDeleteDialogComponent implements OnInit {
 
+  disabled: boolean = false;
+
   constructor(
     public dialogRef: MatDialogRef<ConfirmDeleteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -29,7 +31,9 @@ export class ConfirmDeleteDialogComponent implements OnInit {
   }
 
   confirm() {
+    this.disabled = true;
     this.homeService.pickDelete(this.data.item).then((data) => {
+      this.disabled = false;
       this.data.item = data;
       this.data.isEdit = true;
       this.close();
