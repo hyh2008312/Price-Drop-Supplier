@@ -167,4 +167,15 @@ export class SizeChartEditComponent implements OnInit {
       verticalPosition: 'top'
     });
   }
+
+  // generateInch($event, item) {
+  //   let chart: any = {};
+  //   if(item.name.includes('(cm)')) {
+  //     let tab = item.name.split('(cm)');
+  //
+  //     chart.name = tab[0] + '(in)';
+  //   }
+  //   this.sizeChart.unshift(item);
+  //   this.selectedIndex = 1;
+  // }
 }

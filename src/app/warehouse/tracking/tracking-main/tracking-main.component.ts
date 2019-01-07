@@ -590,12 +590,11 @@ export class TrackingMainComponent implements OnInit {
       for(let i = 0; i < item.pickVariants.length; i++) {
         const itm = item.pickVariants[i];
         let orderItem: any = {};
+        orderItem['运单号'] = item.internationalTrackingNumber;
         if(i == 0) {
-          orderItem['运单号'] = item.internationalTrackingNumber;
           orderItem['物流公司'] = item.internationalCarrier;
           orderItem['创建日期'] = item.created.split('T')[0];
         } else {
-          orderItem['运单号'] = '';
           orderItem['物流公司'] = '';
           orderItem['创建日期'] = '';
         }
