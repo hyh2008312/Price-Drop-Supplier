@@ -87,26 +87,26 @@ export class HomeMainComponent implements OnInit {
 
   purchaseAll: any = false;
   purchaseAllIndex: any = 1;
-  wbAll: any;
+  wbAll: any = false;
   purchaseProccessing: any = false;
   purchaseProccessingIndex: any = 1;
   processingDays: any = false;
   sortProcessing: any = 'true';
-  wbProcessing: any;
+  wbProcessing: any = false;
   purchaseShipped: any = false;
   purchaseShippedIndex: any = 1;
   shippedDays: any = false;
   sortShipped: any = 'false';
-  wbShipped: any;
+  wbShipped: any = false;
   purchasePartiallyDelivered: any = false;
   purchasePartiallyDeliveredIndex: any = 1;
   wbPartiallyDelivered: any;
   purchaseDelivered: any = false;
   purchaseDeliveredIndex: any = 1;
-  wbDelivered: any;
+  wbDelivered: any = false;
   purchaseCanceled: any = false;
   purchaseCanceledIndex: any = 1;
-  wbCanceled: any;
+  wbCanceled: any = false;
 
   constructor(
     private adminService: HomeService,
@@ -216,10 +216,12 @@ export class HomeMainComponent implements OnInit {
     let processing_days: any = null;
     let shipped_days: any = null;
     let is_positive_sequence: any = null;
+    let warehouse_id : any = null;
 
     switch ($event.index) {
       case 0:
         delivery_status = false;
+        warehouse_id = this.wbAll? this.wbAll: null;
         break;
       case 1:
         status = 'Processing';
@@ -227,6 +229,7 @@ export class HomeMainComponent implements OnInit {
         delivery_status = false;
         processing_days = this.processingDays? this.processingDays: null;
         is_positive_sequence = this.sortProcessing? this.sortProcessing: null;
+        warehouse_id = this.wbProcessing? this.wbProcessing: null;
         break;
       case 2:
         status = 'Shipped';
@@ -234,21 +237,25 @@ export class HomeMainComponent implements OnInit {
         delivery_status = false;
         shipped_days = this.shippedDays? this.shippedDays: null;
         is_positive_sequence = this.sortShipped? this.sortShipped: null;
+        warehouse_id = this.wbShipped? this.wbShipped: null;
         break;
       case 3:
         status = 'Partially Delivered';
         page = this.purchasePartiallyDeliveredIndex;
         received_time = true;
+        warehouse_id = this.wbPartiallyDelivered? this.wbPartiallyDelivered: null;
         break;
       case 4:
         status = 'Delivered';
         page = this.purchaseDeliveredIndex;
         received_time = true;
+        warehouse_id = this.wbDelivered? this.wbDelivered: null;
         break;
       case 5:
         status = 'Canceled';
         page = this.purchaseCanceledIndex;
         delivery_status = false;
+        warehouse_id = this.wbCanceled? this.wbCanceled: null;
         break;
     }
 
@@ -271,7 +278,8 @@ export class HomeMainComponent implements OnInit {
       received_time,
       processing_days,
       shipped_days,
-      is_positive_sequence
+      is_positive_sequence,
+      warehouse_id
     }).then((data) => {
       this.length = data.count;
       switch ($event.index) {
