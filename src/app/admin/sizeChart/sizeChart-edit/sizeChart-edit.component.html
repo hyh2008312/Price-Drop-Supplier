@@ -62,20 +62,18 @@
             {{item.name == ''? 'Empty Subevent': item.name}}
           </ng-template>
           <div class="md-margin-top-3 sc-promote__create-text sc__accent-dark" fxLayout="row" fxLayoutAlign="start center">
-            <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
-              <div class="sc-promote__promote-text xb-bold md-margin-right-2">Edit Tab Name:</div>
-              <mat-form-field >
-                <input matInput type="text" placeholder="" [(ngModel)]="item.name">
-              </mat-form-field>
-              <div class="md-margin-left-2"></div>
-              <button mat-raised-button color="accent" type="button" (click)="deleteName($event)">
-                Delete This Tab
-              </button>
-              <div class="md-margin-left-2"></div>
-              <button mat-raised-button color="primary" *ngIf="false" type="button" (click)="generateInch($event, item)">
-                Add New Inch Tab
-              </button>
-            </div>
+            <div class="sc-promote__promote-text xb-bold md-margin-right-2">Edit Tab Name:</div>
+            <mat-form-field >
+              <input matInput type="text" placeholder="" [(ngModel)]="item.name">
+            </mat-form-field>
+            <div class="md-margin-left-2"></div>
+            <button mat-raised-button color="accent" type="button" (click)="deleteName($event)">
+              Delete This Tab
+            </button>
+            <div class="md-margin-left-2"></div>
+            <button mat-raised-button color="primary" type="button" (click)="generateInch($event, item)">
+              Generate Inch Tab
+            </button>
           </div>
           <div class="md-margin-top-2 sc-promote__create-bg">
             <div *ngFor="let p of item.children; let i = index;">

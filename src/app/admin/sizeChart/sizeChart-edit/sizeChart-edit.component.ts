@@ -85,7 +85,7 @@ export class SizeChartEditComponent implements OnInit {
     };
 
     this.sizeChartService.editSizeChart(params).then((data) => {
-      this.openSnackBar();
+      this.openSnackBar('Successfully Saved!');
     });
   }
 
@@ -160,22 +160,63 @@ export class SizeChartEditComponent implements OnInit {
 
   }
 
-  openSnackBar() {
+  openSnackBar(str) {
     this.snackBar.openFromComponent(ToolTipsComponent, {
-      data: 'Successfully Saved!',
+      data: str,
       duration: 4000,
       verticalPosition: 'top'
     });
   }
 
-  // generateInch($event, item) {
-  //   let chart: any = {};
-  //   if(item.name.includes('(cm)')) {
-  //     let tab = item.name.split('(cm)');
-  //
-  //     chart.name = tab[0] + '(in)';
-  //   }
-  //   this.sizeChart.unshift(item);
-  //   this.selectedIndex = 1;
-  // }
+  generateInch($event, item) {
+    if (!item.name.includes('(cm)')) {
+      this.openSnackBar('This Tab cannot generate inch table!');
+      return;
+    }
+    let chart: any = {};
+    let tab = item.name.split('(cm)');
+    chart.name = tab[0] + '(in)';
+    chart.children = [];
+    for (let i = 0; i < item.children.length; i++) {
+      const itm = item.children[i];
+      let _itm: any = {};
+      if (i == 0) {
+        if (itm.name.includes('(cm)')) {
+          let itm1: any = itm.name.split('(cm)');
+          _itm.name = itm1 + '(in)';
+        } else {
+          _itm.name = itm.name;
+        }
+        _itm.value = [];
+        for (let j = 0; j < itm.value.length; j++) {
+          let _itm1: any = {};
+          let im = itm.value[j];
+          if (im.value.includes('(cm)')) {
+            _itm1.value = im.value.split('(cm)')[0] + '(in)';
+          } else {
+            _itm1.value = im.value;
+          }
+          _itm.value.push(_itm1);
+        }
+      } else {
+        _itm.name = itm.name;
+        _itm.value = [];
+        for (let j = 0; j < itm.value.length; j++) {
+          let _itm1: any = {};
+          let im = itm.value[j];
+          if (im.value.includes('-')) {
+            _itm1.value = (parseFloat(im.value.split('-')[0]) / 2.54).toFixed(1) + '-' + (parseFloat(im.value.split('-')[1]) / 2.54).toFixed(1);
+          } else {
+            _itm1.value = (parseFloat(im.value) / 2.54).toFixed(1);
+          }
+          _itm.value.push(_itm1);
+        }
+      }
+
+      chart.children.push(_itm);
+
+    }
+    this.sizeChart.unshift(chart);
+    this.selectedIndex = 0;
+  }
 }
