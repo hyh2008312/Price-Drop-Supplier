@@ -15,6 +15,8 @@ export class AddOrderStockDialogComponent implements OnInit {
   orderStockForm : FormGroup;
   sourcingSupplierList: any;
 
+  warehouseList: any;
+
   supplierList: any = ['getpricedrop', '北京云海'];
 
   constructor(
@@ -27,17 +29,20 @@ export class AddOrderStockDialogComponent implements OnInit {
       id: [''],
       sourcingSupplier: [''],
       sourcingOrderNumber: ['', Validators.required],
-      purchaseAccount: ['getpricedrop', Validators.required]
+      purchaseAccount: ['getpricedrop', Validators.required],
+      warehouseId: ['', Validators.required],
     });
 
     this.orderStockForm.patchValue({
       id: this.data.order.id,
       sourcingOrderNumber: this.data.order.sourcingOrderNumber,
       sourcingSupplier: this.data.order.sourcingSupplier,
-      purchaseAccount: this.data.order.purchaseAccount
+      purchaseAccount: this.data.order.purchaseAccount,
+      warehouseId: this.data.order.warehouseId
     });
 
     this.getSourcingSupplierList();
+    this.getWarehouseList();
 
   }
 
@@ -75,5 +80,10 @@ export class AddOrderStockDialogComponent implements OnInit {
     });
   }
 
+  getWarehouseList() {
+    this.orderService.getWarehouseList().then((data) => {
+      this.warehouseList = [...data];
+    });
+  }
 
 }

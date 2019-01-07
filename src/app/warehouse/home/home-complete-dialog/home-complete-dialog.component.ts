@@ -15,6 +15,8 @@ export class HomeCompleteDialogComponent implements OnInit {
   purchaseForm : FormGroup;
   error: any = false;
 
+  warehouseList: any;
+
   get purchaseVariants() { return this.purchaseForm.get('purchaseVariants') as FormArray; }
 
   constructor(
@@ -27,6 +29,7 @@ export class HomeCompleteDialogComponent implements OnInit {
     this.purchaseForm = this.fb.group({
       id: ['', Validators.required],
       purchaseVariants: this.fb.array([]),
+      warehouse: [''],
       notes: ['']
     });
 
@@ -72,6 +75,12 @@ export class HomeCompleteDialogComponent implements OnInit {
       }
     }).catch((error) => {
       this.error = error;
+    });
+  }
+
+  getWarehouseList() {
+    this.homeService.getWarehouseList().then((data) => {
+      this.warehouseList = [...data];
     });
   }
 

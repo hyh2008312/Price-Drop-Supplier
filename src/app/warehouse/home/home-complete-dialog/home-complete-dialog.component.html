@@ -65,6 +65,16 @@
       </div>
     </div>
     <div class="xb-bold md-margin-top-2">
+      仓库
+    </div>
+    <mat-form-field>
+      <mat-select formControlName="warehouse" name="warehouse">
+        <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+          {{ item.warehouseName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="xb-bold">
       备注
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">

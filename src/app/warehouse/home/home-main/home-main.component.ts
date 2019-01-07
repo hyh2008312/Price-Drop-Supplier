@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import { HomeService } from '../home.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 import { HomeCreateDialogComponent } from '../home-create-dialog/home-create-dialog.component';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-warehouse-home-main',
@@ -52,6 +52,8 @@ export class HomeMainComponent implements OnInit {
     text: '货物问题'
   }];
 
+  warehouseList: any;
+
   processingDaysList: any = [{
     value: false,
     text: '所有'
@@ -85,20 +87,26 @@ export class HomeMainComponent implements OnInit {
 
   purchaseAll: any = false;
   purchaseAllIndex: any = 1;
+  wbAll: any;
   purchaseProccessing: any = false;
   purchaseProccessingIndex: any = 1;
   processingDays: any = false;
   sortProcessing: any = 'true';
+  wbProcessing: any;
   purchaseShipped: any = false;
   purchaseShippedIndex: any = 1;
   shippedDays: any = false;
   sortShipped: any = 'false';
+  wbShipped: any;
   purchasePartiallyDelivered: any = false;
   purchasePartiallyDeliveredIndex: any = 1;
+  wbPartiallyDelivered: any;
   purchaseDelivered: any = false;
   purchaseDeliveredIndex: any = 1;
+  wbDelivered: any;
   purchaseCanceled: any = false;
   purchaseCanceledIndex: any = 1;
+  wbCanceled: any;
 
   constructor(
     private adminService: HomeService,
@@ -108,6 +116,8 @@ export class HomeMainComponent implements OnInit {
     private fb: FormBuilder,
     private dialog: MatDialog
   ) {
+
+    this.getWarehouseList();
 
     this.userService.currentUser.subscribe((data) => {
       if(data) {
@@ -381,6 +391,63 @@ export class HomeMainComponent implements OnInit {
         });
         break;
     }
+  }
+
+  warehouseChange($event) {
+    switch (this.selectedIndex) {
+      case 0:
+        this.wbAll = $event;
+        this.purchaseProccessingIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 1:
+        this.wbProcessing = $event;
+        this.purchaseProccessingIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 2:
+        this.wbShipped = $event;
+        this.purchaseShippedIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 3:
+        this.wbPartiallyDelivered = $event;
+        this.purchasePartiallyDeliveredIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 4:
+        this.wbDelivered = $event;
+        this.purchaseDeliveredIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 5:
+        this.wbCanceled = $event;
+        this.purchaseDeliveredIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+    }
+  }
+
+  getWarehouseList() {
+    this.adminService.getWarehouseList().then((data) => {
+      this.warehouseList = [...data];
+      this.warehouseList.unshift({
+        id: false,
+        warehouseName: '所有'
+      })
+    });
   }
 
 }

@@ -16,6 +16,7 @@ export class HomeCreateDialogComponent implements OnInit {
   error: any = false;
 
   supplierList: any = ['getpricedrop', '北京云海'];
+  warehouseList: any;
 
   get purchaseInfo() { return this.purchaseForm.get('purchaseInfo') as FormArray; }
 
@@ -29,8 +30,11 @@ export class HomeCreateDialogComponent implements OnInit {
     this.purchaseForm = this.fb.group({
       purchaseId: ['', Validators.required],
       purchaseInfo: this.fb.array([]),
-      purchaseAccount: ['getpricedrop', Validators.required]
+      purchaseAccount: ['getpricedrop', Validators.required],
+      warehouseId: ['', Validators.required]
     });
+
+    this.getWarehouseList();
 
   }
 
@@ -68,6 +72,12 @@ export class HomeCreateDialogComponent implements OnInit {
       sku: ['', Validators.required],
       purchaseQuantity: ['', Validators.required]
     }));
+  }
+
+  getWarehouseList() {
+    this.homeService.getWarehouseList().then((data) => {
+      this.warehouseList = [...data];
+    });
   }
 
 }

@@ -25,7 +25,7 @@ export class AddTrackingInformationDialogComponent implements OnInit {
     private fb: FormBuilder,
     private orderService: OrderService
   ) {
-    this.getShippingList()
+    this.getShippingList();
     this.trackingForm = this.fb.group({
       shippingNumber: ['', Validators.required],
       shippingId: ['']
@@ -67,7 +67,7 @@ export class AddTrackingInformationDialogComponent implements OnInit {
   getShippingList() {
     this.orderService.getSupplyShippingList().then((data) => {
       this.shippingList = [...data];
-    })
+    });
   }
 
 }

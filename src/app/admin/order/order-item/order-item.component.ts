@@ -28,9 +28,7 @@ export class OrderItemComponent implements OnInit {
 
   ngOnInit(): void {
 
-
   }
-
 
   editSourcing() {
     let dialogRef = this.dialog.open(AddOrderStockDialogComponent, {
