@@ -3,6 +3,13 @@
     <mat-tab-group color="primary" (selectedTabChange)="changeInventoryLists($event)"  [(selectedIndex)]="selectedIndex">
       <mat-tab label="所有" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-select [ngModel]="quantity" name="sort" (valueChange)="quantityChange($event)" >
+              <mat-option class="md-align-center" *ngFor="let item of quantityList" [value]="item.value">
+                {{ item.text }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >

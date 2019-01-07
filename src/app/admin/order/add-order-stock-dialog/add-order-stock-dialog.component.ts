@@ -30,7 +30,7 @@ export class AddOrderStockDialogComponent implements OnInit {
       sourcingSupplier: [''],
       sourcingOrderNumber: ['', Validators.required],
       purchaseAccount: ['getpricedrop', Validators.required],
-      warehouseId: ['', Validators.required],
+      warehouseId: [''],
     });
 
     this.orderStockForm.patchValue({

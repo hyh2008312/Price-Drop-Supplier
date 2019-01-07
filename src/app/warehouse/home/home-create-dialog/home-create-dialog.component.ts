@@ -31,7 +31,7 @@ export class HomeCreateDialogComponent implements OnInit {
       purchaseId: ['', Validators.required],
       purchaseInfo: this.fb.array([]),
       purchaseAccount: ['getpricedrop', Validators.required],
-      warehouseId: ['', Validators.required]
+      warehouseId: ['']
     });
 
     this.getWarehouseList();

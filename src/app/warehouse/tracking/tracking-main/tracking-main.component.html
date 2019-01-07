@@ -162,8 +162,13 @@
             <button mat-raised-button color="accent" (click)="cancelDate(1)">重置</button>
           </div>
         </div>
-        <div class="sc__accent-dark md-margin-left-2 md-margin-bottom-1" *ngIf="isSuperuser">
-          <button mat-raised-button color="pimary" (click)="export()">导出Excel</button>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="sc__accent-dark md-margin-left-2 md-margin-bottom-1" *ngIf="isSuperuser">
+            <button mat-raised-button color="pimary" (click)="export()">导出Excel</button>
+          </div>
+          <div class="sc__accent-dark md-margin-left-2 md-margin-bottom-1">
+            <button mat-raised-button color="pimary" (click)="exportNew()">导出拣货单</button>
+          </div>
         </div>
         <div class="md-margin-top-1">
           <app-warehouse-tracking-title></app-warehouse-tracking-title>
@@ -197,9 +202,6 @@
       </mat-tab>
       <mat-tab label="拣货已完成" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
-          <div class="sc__accent-dark md-margin-right-2" *ngIf="isSuperuser">
-            <button mat-raised-button color="pimary" (click)="export()">导出Excel</button>
-          </div>
           <div class="unicorn-dark-theme" fxLayout="row" fxLayoutAlign="start center">
             <div class="md-margin-right-2">是否带电: </div>
             <mat-form-field class="md-margin-right-2 sc-product__product-sort">
@@ -269,6 +271,15 @@
             <button mat-raised-button color="accent" (click)="cancelDate(2)">重置</button>
           </div>
         </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="sc__accent-dark md-margin-left-2 md-margin-bottom-1" *ngIf="isSuperuser">
+            <button mat-raised-button color="pimary" (click)="export()">导出Excel</button>
+          </div>
+          <div class="sc__accent-dark md-margin-left-2 md-margin-bottom-1">
+            <button mat-raised-button color="pimary" (click)="exportNew()">导出拣货单</button>
+          </div>
+        </div>
+
         <div class="md-margin-top-1">
           <app-warehouse-tracking-title ></app-warehouse-tracking-title>
         </div>

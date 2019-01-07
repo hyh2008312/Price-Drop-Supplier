@@ -27,6 +27,15 @@ export class InventoryMainComponent implements OnInit {
     value: 'sku'
   }];
 
+  quantity: any = 1;
+  quantityList: any = [{
+    text: '库存大于1',
+    value: 1
+  }, {
+    text: '库存为0',
+    value: 0
+  }];
+
   // MatPaginator Inputs
   length:number = 0;
   pageSize = 50;
@@ -100,11 +109,21 @@ export class InventoryMainComponent implements OnInit {
       page: this.inventoryAllIndex,
       page_size: this.pageSize,
       search,
-      search_type
+      search_type,
+      quantity: this.quantity
     }).then((data) => {
       this.length = data.count;
       this.inventoryAll = [...data.results];
     })
+  }
+
+  quantityChange($event) {
+    this.quantity = $event;
+    this.inventoryAllIndex = 1;
+    this.changeInventoryLists({
+      indxe: this.inventoryAllIndex
+    });
+
   }
 
 

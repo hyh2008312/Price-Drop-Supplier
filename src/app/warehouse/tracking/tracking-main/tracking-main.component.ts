@@ -562,20 +562,68 @@ export class TrackingMainComponent implements OnInit {
     wb.Sheets[ws_name] = ws;
     const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
 
-    function s2ab(s) {
-      const buf = new ArrayBuffer(s.length);
-      const view = new Uint8Array(buf);
-      for (let i = 0; i !== s.length; ++i) {
-        view[i] = s.charCodeAt(i) & 0xFF;
-      }
-      return buf;
-    }
-
-    saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), '拣货单号表' +
+    saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), '拣货单号表' +
       new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
       '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate())
       + '.xlsx');
 
+  }
+
+  exportNew(): void {
+    const ws_name = '拣货订单及物流';
+    const wb: WorkBook = { SheetNames: [], Sheets: {} };
+    let packing: any = [];
+    let excel: any = [];
+    switch (this.selectedIndex) {
+      case 1:
+        excel = [...this.purchaseProccessing];
+        break;
+      case 2:
+        excel = [...this.purchaseShipped];
+        break;
+      case 4:
+        excel = [...this.purchaseShipped];
+        break;
+    }
+
+    for(let item of excel) {
+      for(let i = 0; i < item.pickVariants.length; i++) {
+        const itm = item.pickVariants[i];
+        let orderItem: any = {};
+        if(i == 0) {
+          orderItem['运单号'] = item.internationalTrackingNumber;
+          orderItem['物流公司'] = item.internationalCarrier;
+          orderItem['创建日期'] = item.created.split('T')[0];
+        } else {
+          orderItem['运单号'] = '';
+          orderItem['物流公司'] = '';
+          orderItem['创建日期'] = '';
+        }
+        orderItem['sku'] = itm.sku;
+        orderItem['拣货数量'] = itm.quantity;
+        packing.push(orderItem);
+      }
+    }
+
+    const ws: any = utils.json_to_sheet(packing);
+    wb.SheetNames.push(ws_name);
+    wb.Sheets[ws_name] = ws;
+    const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+    saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), '拣货单号表' +
+      new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
+      '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate())
+      + '.xlsx');
+
+  }
+
+  s2ab(s) {
+    const buf = new ArrayBuffer(s.length);
+    const view = new Uint8Array(buf);
+    for (let i = 0; i !== s.length; ++i) {
+      view[i] = s.charCodeAt(i) & 0xFF;
+    }
+    return buf;
   }
 
 }
