@@ -23,6 +23,18 @@
       </mat-form-field>
     </div>
     <div class="xb-bold md-margin-top-2">
+      仓库
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <mat-select name="warehouse" placeholder="选择仓库" formControlName="warehouseId">
+          <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+            {{ item.warehouseName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="xb-bold md-margin-top-2">
       拣货商品
     </div>
     <div class="md-margin-top-2" formArrayName="pickInfo">

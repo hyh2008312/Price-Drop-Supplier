@@ -2,12 +2,12 @@
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import { OrderService } from '../order.service';
+import { LotteryService } from '../lottery.service';
 
 @Component({
-  selector: 'app-order-add-order-stock-dialog',
+  selector: 'app-lottery-add-order-stock-dialog',
   templateUrl: './add-order-stock-dialog.component.html',
-  styleUrls: ['../order.scss']
+  styleUrls: ['../_lottery.scss']
 })
 
 export class AddOrderStockDialogComponent implements OnInit {
@@ -24,7 +24,7 @@ export class AddOrderStockDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<AddOrderStockDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private orderService: OrderService
+    private lotteryService: LotteryService
   ) {
     this.orderStockForm = this.fb.group({
       id: [''],
@@ -56,7 +56,7 @@ export class AddOrderStockDialogComponent implements OnInit {
   }
 
   getSourcingSupplierList() {
-    this.orderService.getSourcingSupplierList().then((data) => {
+    this.lotteryService.getSourcingSupplierList().then((data) => {
       this.sourcingSupplierList = [...data];
       if(!this.orderStockForm.value.sourcingSupplier) {
         this.orderStockForm.patchValue({
@@ -72,22 +72,20 @@ export class AddOrderStockDialogComponent implements OnInit {
     }
 
     let self = this;
-    this.orderService.changeOrderSourcing(this.orderStockForm.value).then((data) => {
-      if(data && data.id) {
+    this.lotteryService.changeOrderSourcing(this.orderStockForm.value).then((data) => {
+      if(data.id) {
         self.error = false;
         self.data.isOrderStockEdit = true;
         self.data.order = data;
         self.close();
       } else {
-        this.error =  data.detail;
+        self.error = data.detail;
       }
-    }).catch((data) => {
-      this.error = data;
     });
   }
 
   getWarehouseList() {
-    this.orderService.getWarehouseList().then((data) => {
+    this.lotteryService.getWarehouseList().then((data) => {
       this.warehouseList = [...data];
     });
   }

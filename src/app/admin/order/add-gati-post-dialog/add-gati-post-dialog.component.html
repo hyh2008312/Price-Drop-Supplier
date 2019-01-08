@@ -96,6 +96,18 @@
       </div>
     </div>
     <div class="xb-bold">
+      Warehouse
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <mat-select name="warehouse" placeholder="选择仓库" formControlName="warehouseId">
+          <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+            {{ item.warehouseName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="xb-bold">
       Domestic Tracking Number
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
@@ -112,6 +124,9 @@
       </mat-form-field>
     </div>
   </form>
+  <div class="xb-input-error md-margin-top-2" *ngIf="error">
+    {{error}}
+  </div>
   <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
     <button mat-raised-button color="primary" (click)="changeTracking()">SAVE</button>
     <div class="md-margin-left-2">

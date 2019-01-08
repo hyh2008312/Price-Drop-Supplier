@@ -14,6 +14,7 @@ export class TrackingEditDialogComponent implements OnInit {
 
   purchaseForm : FormGroup;
   error: any = false;
+  warehouseList: any;
 
   get pickInfo() { return this.purchaseForm.get('pickInfo') as FormArray; }
 
@@ -24,18 +25,22 @@ export class TrackingEditDialogComponent implements OnInit {
     private homeService: TrackingService
   ) {
 
+    this.getWarehouseList();
+
     this.purchaseForm = this.fb.group({
       id: ['', Validators.required],
       internationalCarrier: ['GATI', Validators.required],
       pickNumber: ['', Validators.required],
       internationalTrackingNumber: ['', Validators.required],
-      pickInfo: this.fb.array([])
+      pickInfo: this.fb.array([]),
+      warehouseId: ['', Validators.required],
     });
 
     this.purchaseForm.patchValue({
       id: this.data.item.id,
       pickNumber: this.data.item.pickNumber,
       internationalTrackingNumber: this.data.item.internationalTrackingNumber,
+      warehouseId: this.data.item.warehouseId
     });
 
     for(let item of this.data.item.pickVariants) {
@@ -86,4 +91,9 @@ export class TrackingEditDialogComponent implements OnInit {
     }));
   }
 
+  getWarehouseList() {
+    this.homeService.getWarehouseList().then((data) => {
+      this.warehouseList = [...data];
+    });
+  }
 }

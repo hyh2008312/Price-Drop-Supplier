@@ -10,9 +10,17 @@
         </div>
       </div>
     </div>
-    <div class="sc-product__product-id md-margin-right-2" fxFlex="20"
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="20" *ngIf="status == 0"
          fxLayout="column" fxLayoutAlign="center center">
       {{product.attribute}}
+    </div>
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 1"
+         fxLayout="column" fxLayoutAlign="center center">
+      {{product.attribute}}
+    </div>
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 1"
+         fxLayout="column" fxLayoutAlign="center center">
+      {{product.warehouseName}}
     </div>
     <div class="sc-product__product-id md-margin-right-2" fxFlex="25"
          fxLayout="column" fxLayoutAlign="center center">

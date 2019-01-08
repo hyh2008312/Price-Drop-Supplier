@@ -8,6 +8,8 @@ import {Input, Output, Component, OnInit, EventEmitter} from '@angular/core';
 
 export class InventoryTitleComponent implements OnInit {
 
+  @Input() status: any = 0;
+
   constructor(
   ) { }
 

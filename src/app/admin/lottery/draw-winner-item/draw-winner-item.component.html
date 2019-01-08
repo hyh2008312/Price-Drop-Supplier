@@ -73,8 +73,15 @@
       <div fxFlex="">
         {{promote.order.orderStatus}}
       </div>
-      <div class="sc__accent-dark" *ngIf="promote.order.orderStatus == 'Paid' || promote.order.orderStatus == 'Packing' || promote.order.orderStatus == 'Shipped'">
-        <button mat-raised-button color="accent" (click)="editTracking()">Edit Tracking</button>
+      <div class="sc__accent-dark" *ngIf="(promote.order.orderStatus == 'Paid' || promote.order.orderStatus == 'Packing') && promote.order.sourcingStatus == 'Not Started'">
+        <button mat-raised-button color="accent" (click)="editSourcing()">Mark as Sourcing</button>
+      </div>
+      <div class="sc__accent-dark" *ngIf="(promote.order.orderStatus == 'Paid' || promote.order.orderStatus == 'Packing') && promote.order.sourcingStatus == 'Started'">
+        <button mat-raised-button color="primary" (click)="editSourcing()"> View Sourcing Details</button>
+      </div>
+      <div class="sc__accent-dark md-margin-left-1" *ngIf="promote.order.orderStatus != 'Unpaid' && promote.order.orderStatus != 'Canceled'">
+        <button mat-raised-button color="accent" (click)="addNote()" *ngIf="promote.order.orderNotes == '' ">Add Note</button>
+        <button mat-raised-button color="primary" (click)="addNote()" *ngIf="promote.order.orderNotes != ''">Edit Note</button>
       </div>
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">

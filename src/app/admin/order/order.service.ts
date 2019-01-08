@@ -194,9 +194,7 @@ export class OrderService {
     return this.http.put(url, tracking, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch(this.handleError);
   }
 
   changeGATITrackingInformation(tracking:any): Promise<any> {
@@ -441,9 +439,7 @@ export class OrderService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch(this.handleError);
   }
 
   changeOrderStockInformation(params: any): Promise<any> {

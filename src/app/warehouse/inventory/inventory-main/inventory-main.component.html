@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="md-margin-top-1">
-          <app-warehouse-inventory-title></app-warehouse-inventory-title>
+          <app-warehouse-inventory-title [status]="0"></app-warehouse-inventory-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <div class="sc-product__product-list" *ngFor="let item of inventoryAll;let i = index;">
@@ -66,8 +66,9 @@
             </mat-select>
           </mat-form-field>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">选择仓库</div>
             <mat-form-field class="sc-product__product-sort md-margin-left-2">
-              <mat-select name="仓库" placeholder="选择仓库" [ngModel]="warehouseId" (valueChange)="warehouseChange($event)">
+              <mat-select name="仓库" [ngModel]="warehouseId" (valueChange)="warehouseChange($event)">
                 <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
                   {{ item.warehouseName }}
                 </mat-option>
@@ -98,7 +99,7 @@
           </div>
         </div>
         <div class="md-margin-top-1">
-          <app-warehouse-inventory-title></app-warehouse-inventory-title>
+          <app-warehouse-inventory-title [status]="1"></app-warehouse-inventory-title>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <div class="sc-product__product-list" *ngFor="let item of inventoryWare;let i = index;">

@@ -50,7 +50,7 @@ export class InventoryMainComponent implements OnInit {
   quantityWare: any = 1;
   inventoryWareIndex: any = 1;
 
-  warehouseId: any;
+  warehouseId: any = false;
   warehouseList: any;
 
   constructor(
@@ -174,13 +174,22 @@ export class InventoryMainComponent implements OnInit {
   warehouseChange($event) {
     switch (this.selectedIndex) {
       case 1:
-
+        this.warehouseId = $event;
+        this.inventoryWareIndex = 1;
+        break;
     }
+    this.changeInventoryLists({
+      index: this.selectedIndex
+    });
   }
 
   getWarehouseList() {
     this.inventoryService.getWarehouseList().then((data) => {
       this.warehouseList = [...data];
+      this.warehouseList.unshift({
+        id: false,
+        warehouseName: '所有'
+      });
     });
   }
 

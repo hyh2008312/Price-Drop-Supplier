@@ -31,6 +31,9 @@ export class AddGatiPostDialogComponent implements OnInit {
 
   currencyRate: any = 74;
 
+  warehouseList: any;
+  error: any = false;
+
   get goods() { return this.trackingForm.get('goods') as FormArray; }
 
   constructor(
@@ -39,12 +42,16 @@ export class AddGatiPostDialogComponent implements OnInit {
     private fb: FormBuilder,
     private orderService: OrderService
   ) {
+
+    this.getWarehouseList();
+
     this.trackingForm = this.fb.group({
       depotCode: ['', Validators.required],
       goods: this.fb.array([]),
       notes: [''],
       serviceCode: ['general', Validators.required],
-      domesticExp: ['']
+      domesticExp: [''],
+      warehouseId: ['']
     });
 
     this.addOrderList();
@@ -65,10 +72,14 @@ export class AddGatiPostDialogComponent implements OnInit {
 
     let self = this;
     this.orderService.changeGATITrackingInformation(this.trackingForm.value).then((data) => {
-      self.close();
-      if(data.id) {
+
+      if(data && data.detail) {
+        self.error = data.detail;
+      } else {
+        self.close();
         self.data.isShippingNumberEdit = true;
         self.data.order = data;
+        self.error = false;
       }
     });
   }
@@ -96,5 +107,10 @@ export class AddGatiPostDialogComponent implements OnInit {
     });
   }
 
+  getWarehouseList() {
+    this.orderService.getWarehouseList().then((data) => {
+      this.warehouseList = [...data];
+    });
+  }
 
 }

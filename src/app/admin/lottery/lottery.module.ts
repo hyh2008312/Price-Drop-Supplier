@@ -24,6 +24,9 @@ import { OrderDetailTitleComponent } from './order-detail-title/order-detail-tit
 import { OrderDetailItemComponent } from './order-detail-item/order-detail-item.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
+import { AddOrderStockDialogComponent } from './add-order-stock-dialog/add-order-stock-dialog.component';
+import { AddNoteDialogComponent } from './add-note-dialog/add-note-dialog.component';
+
 import { LotteryRoutingModule } from './lottery.routes.module';
 import { SharedModule } from '../../shared/shared.module';
 
@@ -58,12 +61,16 @@ import { LotteryService } from './lottery.service';
     AddTrackingInformationDialogComponent,
     OrderDetailTitleComponent,
     OrderDetailItemComponent,
-    ToolTipsComponent
+    ToolTipsComponent,
+    AddOrderStockDialogComponent,
+    AddNoteDialogComponent
   ],
   entryComponents: [
     SelectProductDialogComponent,
     AddTrackingInformationDialogComponent,
-    ToolTipsComponent
+    ToolTipsComponent,
+    AddOrderStockDialogComponent,
+    AddNoteDialogComponent
   ],
   providers: [
     LotteryService

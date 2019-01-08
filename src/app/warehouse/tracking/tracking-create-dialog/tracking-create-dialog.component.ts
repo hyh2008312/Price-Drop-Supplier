@@ -14,6 +14,7 @@ export class TrackingCreateDialogComponent implements OnInit {
 
   purchaseForm : FormGroup;
   error: any = false;
+  warehouseList: any;
 
   get pickInfo() { return this.purchaseForm.get('pickInfo') as FormArray; }
 
@@ -24,11 +25,14 @@ export class TrackingCreateDialogComponent implements OnInit {
     private homeService: TrackingService
   ) {
 
+    this.getWarehouseList();
+
     this.purchaseForm = this.fb.group({
       pickNumber: ['', Validators.required],
       internationalCarrier: ['GATI', Validators.required],
       internationalTrackingNumber: ['', Validators.required],
-      pickInfo: this.fb.array([])
+      pickInfo: this.fb.array([]),
+      warehouseId: ['', Validators.required],
     });
 
   }
@@ -68,6 +72,12 @@ export class TrackingCreateDialogComponent implements OnInit {
       orderNumber: ['', Validators.required],
       pickQuantity: ['', Validators.required]
     }));
+  }
+
+  getWarehouseList() {
+    this.homeService.getWarehouseList().then((data) => {
+      this.warehouseList = [...data];
+    });
   }
 
 }
