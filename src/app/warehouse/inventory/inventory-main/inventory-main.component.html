@@ -1,7 +1,7 @@
 <div class="container">
   <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
     <mat-tab-group color="primary" (selectedTabChange)="changeInventoryLists($event)"  [(selectedIndex)]="selectedIndex">
-      <mat-tab label="按SKU" >
+      <mat-tab label="按SKU查看库存" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <mat-form-field class="sc-product__product-sort md-margin-left-2">
             <mat-select [ngModel]="quantityAll" name="sort" (valueChange)="quantityChange($event)" >
@@ -56,7 +56,7 @@
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="按仓库" >
+      <mat-tab label="按仓库查看库存" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <mat-form-field class="sc-product__product-sort md-margin-left-2">
             <mat-select [ngModel]="quantityWare" name="sort" (valueChange)="quantityChange($event)" >

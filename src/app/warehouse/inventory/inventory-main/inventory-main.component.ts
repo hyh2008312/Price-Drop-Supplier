@@ -30,10 +30,10 @@ export class InventoryMainComponent implements OnInit {
 
   quantityList: any = [{
     text: '库存大于1',
-    value: 1
+    value: '1'
   }, {
     text: '库存为0',
-    value: 0
+    value: '0'
   }];
 
   // MatPaginator Inputs
@@ -44,10 +44,10 @@ export class InventoryMainComponent implements OnInit {
   isSuperuser: boolean = false;
 
   inventoryAll: any = false;
-  quantityAll: any = 1;
+  quantityAll: any = '1';
   inventoryAllIndex: any = 1;
   inventoryWare: any = false;
-  quantityWare: any = 1;
+  quantityWare: any = '1';
   inventoryWareIndex: any = 1;
 
   warehouseId: any = false;
