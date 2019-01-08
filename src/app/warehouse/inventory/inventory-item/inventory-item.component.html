@@ -41,14 +41,14 @@
     <div class="sc-product__product-id md-margin-right-2" fxFlex="5" *ngIf="status == 1 && isEdit"
          fxLayout="row" fxLayoutAlign="center center">
       <mat-form-field fxFlex>
-        <textarea type="number" matInput  placeholder="备注" [(ngModel)]="product.quantity"></textarea>
+        <textarea type="number" matInput [(ngModel)]="product.quantity"></textarea>
       </mat-form-field>
     </div>
-    <div class="sc-product__product-id" fxFlex="10" *ngIf="status == 1"
+    <div class="sc-product__product-id sc__accent-dark" fxFlex="10" *ngIf="status == 1"
          fxLayout="column" fxLayoutAlign="center center">
       <i class="material-icons md-dark-secondary xb-pointer" *ngIf="!isEdit" (click)="edit()">edit</i>
-      <button mat-raised-button color="accent" *ngIf="isEdit"
-              (click)="changeStatus()">保存</button>
+      <button mat-raised-button color="primary" *ngIf="isEdit"
+              (click)="edit()">保存</button>
     </div>
   </div>
 </div>

@@ -31,7 +31,7 @@ export class HomeCompleteDialogComponent implements OnInit {
     this.purchaseForm = this.fb.group({
       id: ['', Validators.required],
       purchaseVariants: this.fb.array([]),
-      warehouse: [''],
+      warehouseId: [''],
       notes: ['']
     });
 
