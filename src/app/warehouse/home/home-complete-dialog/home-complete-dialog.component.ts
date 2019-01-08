@@ -26,6 +26,8 @@ export class HomeCompleteDialogComponent implements OnInit {
     private homeService: HomeService
   ) {
 
+    this.getWarehouseList();
+
     this.purchaseForm = this.fb.group({
       id: ['', Validators.required],
       purchaseVariants: this.fb.array([]),

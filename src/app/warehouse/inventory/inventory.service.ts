@@ -111,7 +111,7 @@ export class InventoryService {
 
     const url = `${this.baseUrl.url}/purchase/update/warehouse/inventory/${params.id}/`;
 
-    return this.http.get(url, options)
+    return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
       .catch((error) => {

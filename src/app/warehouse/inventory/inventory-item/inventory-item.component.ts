@@ -20,6 +20,7 @@ export class InventoryItemComponent implements OnInit {
 
   currency: string = 'INR';
   isSuperuser: boolean = false;
+  isEdit: boolean = false;
 
   constructor(
     private inventoryService: InventoryService,
@@ -50,6 +51,17 @@ export class InventoryItemComponent implements OnInit {
       duration: 1500,
       verticalPosition: 'top'
     });
+  }
+
+  edit() {
+    if(!this.isEdit) {
+      this.isEdit = true;
+    } else {
+      this.inventoryService.editInventory(this.product).then((data) => {
+        this.product = data;
+        this.isEdit = false;
+      });
+    }
   }
 
 }
