@@ -40,7 +40,7 @@
     </div>
     <div class="sc-product__product-id md-margin-right-2" fxFlex="5" *ngIf="status == 1 && isEdit"
          fxLayout="row" fxLayoutAlign="center center">
-      <mat-form-field fxFlex>
+      <mat-form-field class="sc-product__create-width">
         <textarea type="number" matInput [(ngModel)]="product.quantity"></textarea>
       </mat-form-field>
     </div>

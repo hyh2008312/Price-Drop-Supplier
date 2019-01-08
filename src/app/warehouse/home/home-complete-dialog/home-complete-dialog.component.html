@@ -68,7 +68,7 @@
       仓库
     </div>
     <mat-form-field>
-      <mat-select formControlName="warehouse" name="warehouse">
+      <mat-select formControlName="warehouseId" name="warehouse">
         <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
           {{ item.warehouseName }}
         </mat-option>
