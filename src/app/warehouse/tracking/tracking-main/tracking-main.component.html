@@ -169,11 +169,14 @@
           <div class="sc__accent-dark md-margin-left-2 md-margin-bottom-1">
             <button mat-raised-button color="pimary" (click)="exportNew()">导出拣货单</button>
           </div>
+          <div class="sc__accent-dark md-margin-left-2 md-margin-bottom-1">
+            <button mat-raised-button color="pimary" (click)="captureScreen()">导出PDF</button>
+          </div>
         </div>
         <div class="md-margin-top-1">
           <app-warehouse-tracking-title></app-warehouse-tracking-title>
         </div>
-        <div class="sc-product__product-bg" fxLayout="column">
+        <div class="sc-product__product-bg" fxLayout="column" id="contentToConvert">
           <mat-paginator class="md-margin-top-2" [length]="length"
                          [pageIndex]="purchaseProccessingIndex - 1"
                          [pageSize]="pageSize"
@@ -471,5 +474,7 @@
         </div>
       </mat-tab>
     </mat-tab-group>
+
   </div>
 </div>
+<table class="container" style="padding: 24px;" id="table" align="center"></table>

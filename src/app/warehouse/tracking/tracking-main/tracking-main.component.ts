@@ -13,6 +13,8 @@ import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-mome
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {utils, WorkBook, write} from 'xlsx';
+import * as jspdf from 'jspdf';
+import * as html2canvas from 'html2canvas';
 
 import { saveAs } from 'file-saver';
 
@@ -624,5 +626,62 @@ export class TrackingMainComponent implements OnInit {
     }
     return buf;
   }
+
+  captureScreen() {
+    let data = document.getElementById('table');
+    let excel: any = [...this.purchaseProccessing];
+
+    let html = '';
+    html+='<tr>' +
+      '<td style="width:80px;font-size: 14px;line-height: 24px;font-weight:bold;text-align: center;">运单号</td>' +
+      '<td style="width:80px;font-size: 14px;line-height: 24px;font-weight:bold;text-align: center;">图片</td>' +
+      '<td style="width:80px;font-size: 14px;line-height: 24px;font-weight:bold;text-align: center;">物流公司</td>' +
+      '<td style="width:80px;font-size: 14px;line-height: 24px;font-weight:bold;text-align: center;">创建日期</td>' +
+      '<td style="width:80px;font-size: 14px;line-height: 24px;font-weight:bold;text-align: center;">sku</td>' +
+      '<td style="width:80px;font-size: 14px;line-height: 24px;font-weight:bold;text-align: center;">拣货数量</td>' +
+      '</tr>';
+    for(let item of excel) {
+      for(let i = 0; i < item.pickVariants.length; i++) {
+        html+='<tr>';
+        const itm = item.pickVariants[i];
+        html += `<td style="width:80px;font-size: 10px;text-align: center;">${item.internationalTrackingNumber}</td>`;
+        html += `<td style="width:80px;font-size: 10px;text-align: center;"><img style="border: 1px solid rgba(0, 0, 0, .12);" src="${itm.mainImage}" width="80" height="80"></td>`;
+        if(i == 0) {
+          html += `<td style="width:80px;font-size: 10px;text-align: center;">${item.internationalCarrier}</td>`;
+          html += `<td style="width:80px;font-size: 10px;text-align: center;">${item.created.split('T')[0]}</td>`;
+        } else {
+          html += `<td style="width:80px;font-size: 10px;text-align: center;"></td>`;
+          html += `<td style="width:80px;font-size: 10px;text-align: center;"></td>`;
+        }
+        html += `<td style="width:80px;font-size: 10px;text-align: center;">${itm.sku}</td>`;
+        html += `<td style="width:80px;font-size: 10px;text-align: center;">${itm.quantity}</td>`;
+        html += '</tr>';
+      }
+    }
+
+    data.insertAdjacentHTML('afterbegin', html);
+    html2canvas(data, {
+      useCORS: true
+    }).then(canvas => {
+      // Few necessary setting options
+      let imgWidth = 208;
+      let pageHeight = 295;
+      let imgHeight = canvas.height * imgWidth / canvas.width;
+      let heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+      let position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      pdf.save('拣货单号表' +
+        new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
+        '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate())
+        + '.pdf'); // Generated PDF
+      data.innerHTML = '';
+    }).catch((data) => {
+      console.log(data)
+    });
+  }
+
 
 }
