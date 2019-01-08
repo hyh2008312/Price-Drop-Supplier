@@ -37,7 +37,8 @@ export class HomeCompleteDialogComponent implements OnInit {
 
     this.purchaseForm.patchValue({
       id: this.data.item.id,
-      notes: this.data.item.notes
+      notes: this.data.item.notes,
+      warehouseId: this.data.item.warehouseId
     });
 
     for(let item of this.data.item.purchaseVariants) {
