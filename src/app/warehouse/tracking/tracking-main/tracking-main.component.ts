@@ -99,6 +99,7 @@ export class TrackingMainComponent implements OnInit {
   purchaseAll: any = false;
   purchaseAllIndex: any = 1;
   sortAll: any = 'true';
+  wbAll: any = false;
   csProcessing: any;
   ceProcessing: any;
   asProcessing: any;
@@ -107,6 +108,7 @@ export class TrackingMainComponent implements OnInit {
   codProcessing: any = false;
   purchaseProccessing: any = false;
   purchaseProccessingIndex: any = 1;
+  wbProcessing: any = false;
   sortProcessing: any = 'true';
   csShipped: any;
   ceShipped: any;
@@ -114,11 +116,13 @@ export class TrackingMainComponent implements OnInit {
   aeShipped: any;
   btShipped: any = false;
   codShipped: any = false;
+  wbShipped: any = false;
   purchaseShipped: any = false;
   purchaseShippedIndex: any = 1;
   purchaseDeleted: any = false;
   purchaseDeletedIndex: any = 1;
   sortShipped: any = 'true';
+  wbDeleted: any = false;
   csNotFound: any;
   ceNotFound: any;
   asNotFound: any;
@@ -128,6 +132,9 @@ export class TrackingMainComponent implements OnInit {
   purchaseNotFound: any = false;
   purchaseNotFoundIndex: any = 1;
   sortNotFound: any = 'true';
+  wbNotFound: any = false;
+
+  warehouseList: any;
 
   constructor(
     private adminService: TrackingService,
@@ -137,6 +144,8 @@ export class TrackingMainComponent implements OnInit {
     private fb: FormBuilder,
     private dialog: MatDialog
   ) {
+
+    this.getWarehouseList();
 
     this.userService.currentUser.subscribe((data) => {
       if(data) {
@@ -232,12 +241,14 @@ export class TrackingMainComponent implements OnInit {
     let is_battery: any = null;
     let is_cod: any = null;
     let is_positive_sequence: any = null;
+    let warehouse_id: any = null;
 
     switch ($event.index) {
       case 0:
         is_battery = this.btAll;
         is_cod = this.codAll;
         is_positive_sequence = this.sortAll;
+        warehouse_id = this.wbAll;
         break;
       case 1:
         is_battery = this.btProcessing;
@@ -247,6 +258,7 @@ export class TrackingMainComponent implements OnInit {
         create_start_time = this.csProcessing;
         create_end_time = this.ceProcessing;
         is_positive_sequence = this.sortProcessing;
+        warehouse_id = this.wbProcessing;
         break;
       case 2:
         is_battery = this.btShipped;
@@ -256,11 +268,13 @@ export class TrackingMainComponent implements OnInit {
         packing_start_time = this.csShipped;
         packing_end_time = this.ceShipped;
         is_positive_sequence = this.sortShipped;
+        warehouse_id = this.wbShipped;
         break;
       case 3:
         status = 'Package Deleted';
         page = this.purchaseDeletedIndex;
         received_time = true;
+        warehouse_id = this.wbDeleted;
         break;
       case 4:
         is_battery = this.btNotFound;
@@ -270,6 +284,7 @@ export class TrackingMainComponent implements OnInit {
         create_start_time = this.csNotFound;
         create_end_time = this.ceNotFound;
         is_positive_sequence = this.sortNotFound;
+        warehouse_id = this.wbNotFound;
         break;
     }
 
@@ -282,6 +297,7 @@ export class TrackingMainComponent implements OnInit {
     }
     is_battery = is_battery? is_battery: null;
     is_cod = is_cod? is_cod: null;
+    warehouse_id = warehouse_id? warehouse_id: null;
 
     this.adminService.getPickList({
       status,
@@ -296,7 +312,8 @@ export class TrackingMainComponent implements OnInit {
       packing_end_time,
       is_battery,
       is_cod,
-      is_positive_sequence
+      is_positive_sequence,
+      warehouse_id
     }).then((data) => {
       this.length = data.count;
       switch ($event.index) {
@@ -530,6 +547,46 @@ export class TrackingMainComponent implements OnInit {
     }
   }
 
+  warehouseChange($event) {
+    switch (this.selectedIndex) {
+      case 0:
+        this.wbAll = $event;
+        this.purchaseAllIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 1:
+        this.wbProcessing = $event;
+        this.purchaseProccessingIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 2:
+        this.wbShipped = $event;
+        this.purchaseShippedIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 3:
+        this.wbDeleted = $event;
+        this.purchaseShippedIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 4:
+        this.wbNotFound = $event;
+        this.purchaseNotFoundIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+    }
+  }
+
   export(): void {
     const ws_name = '拣货订单及物流';
     const wb: WorkBook = { SheetNames: [], Sheets: {} };
@@ -683,5 +740,14 @@ export class TrackingMainComponent implements OnInit {
     });
   }
 
+  getWarehouseList() {
+    this.adminService.getWarehouseList().then((data) => {
+      this.warehouseList = [...data];
+      this.warehouseList.unshift({
+        id: false,
+        warehouseName: '所有'
+      });
+    });
+  }
 
 }

@@ -29,14 +29,6 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">创建时间: </div>
-            <mat-form-field class="sc-product__product-sort">
-              <mat-select [ngModel]="sortAll" name="sort" (valueChange)="sortChange($event)" >
-                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
-                  {{ item.text }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
           </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
@@ -60,6 +52,27 @@
               </mat-form-field>
             </div>
           </div>
+        </div>
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div class="unicorn-dark-theme" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">创建时间: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="sortAll" name="sort" (valueChange)="sortChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="md-margin-left-2 md-margin-right-2">仓库: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="wbAll" name="warehouse" (valueChange)="warehouseChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+                  {{ item.warehouseName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
         </div>
         <div class="md-margin-top-1">
           <app-warehouse-tracking-title></app-warehouse-tracking-title>
@@ -110,14 +123,6 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">创建时间: </div>
-            <mat-form-field class="sc-product__product-sort">
-              <mat-select [ngModel]="sortProcessing" name="sort" (valueChange)="sortChange($event)" >
-                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
-                  {{ item.text }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
           </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
@@ -141,6 +146,27 @@
               </mat-form-field>
             </div>
           </div>
+        </div>
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div class="unicorn-dark-theme" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">创建时间: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="sortProcessing" name="sort" (valueChange)="sortChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="md-margin-left-2 md-margin-right-2">仓库: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="wbProcessing" name="warehouse" (valueChange)="warehouseChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+                  {{ item.warehouseName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
         </div>
         <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
           <div>创建时间: </div>
@@ -222,14 +248,6 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">创建时间: </div>
-            <mat-form-field class="sc-product__product-sort">
-              <mat-select [ngModel]="sortShipped" name="sort" (valueChange)="sortChange($event)" >
-                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
-                  {{ item.text }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
           </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
@@ -253,6 +271,27 @@
               </mat-form-field>
             </div>
           </div>
+        </div>
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div class="unicorn-dark-theme" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">创建时间: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="sortShipped" name="sort" (valueChange)="sortChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="md-margin-left-2 md-margin-right-2">仓库: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="wbShipped" name="warehouse" (valueChange)="warehouseChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+                  {{ item.warehouseName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
         </div>
         <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
           <div>拣货时间: </div>
@@ -315,7 +354,16 @@
       </mat-tab>
       <mat-tab label="已删除">
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
-          <div class="unicorn-dark-theme md-margin-left-2"></div>
+          <div class="unicorn-dark-theme" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-left-2 md-margin-right-2">仓库: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="wbDeleted" name="warehouse" (valueChange)="warehouseChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+                  {{ item.warehouseName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >
@@ -388,14 +436,6 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">创建时间: </div>
-            <mat-form-field class="sc-product__product-sort">
-              <mat-select [ngModel]="sortNotFound" name="sort" (valueChange)="sortChange($event)" >
-                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
-                  {{ item.text }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
           </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
@@ -419,6 +459,27 @@
               </mat-form-field>
             </div>
           </div>
+        </div>
+        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
+          <div class="unicorn-dark-theme" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">创建时间: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="sortNotFound" name="sort" (valueChange)="sortChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of sortList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="md-margin-left-2 md-margin-right-2">仓库: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="wbNotFound" name="warehouse" (valueChange)="warehouseChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+                  {{ item.warehouseName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
         </div>
         <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
           <div>创建时间: </div>
