@@ -27,7 +27,7 @@ export class InventoryMainComponent implements OnInit {
     value: 'sku'
   }];
 
-  quantity: any = 1;
+
   quantityList: any = [{
     text: '库存大于1',
     value: 1
@@ -44,7 +44,14 @@ export class InventoryMainComponent implements OnInit {
   isSuperuser: boolean = false;
 
   inventoryAll: any = false;
+  quantityAll: any = 1;
   inventoryAllIndex: any = 1;
+  inventoryWare: any = false;
+  quantityWare: any = 1;
+  inventoryWareIndex: any = 1;
+
+  warehouseId: any;
+  warehouseList: any;
 
   constructor(
     private inventoryService: InventoryService,
@@ -52,6 +59,8 @@ export class InventoryMainComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {
+
+    this.getWarehouseList();
 
     this.searchForm = this.fb.group({
       searchKey: ['']
@@ -96,6 +105,9 @@ export class InventoryMainComponent implements OnInit {
   changeInventoryLists($event) {
     let search: any = null;
     let search_type: any = null;
+    let page = this.inventoryAllIndex;
+    let quantity: any = null;
+
     if(this.searchKey && this.searchKey != '') {
       search = this.searchKey;
       search = encodeURIComponent(search);
@@ -105,25 +117,71 @@ export class InventoryMainComponent implements OnInit {
       }
     }
 
-    this.inventoryService.getInventoryList({
-      page: this.inventoryAllIndex,
-      page_size: this.pageSize,
-      search,
-      search_type,
-      quantity: this.quantity
-    }).then((data) => {
-      this.length = data.count;
-      this.inventoryAll = [...data.results];
-    })
+    switch (this.selectedIndex) {
+      case 0:
+        quantity = this.quantityAll;
+        quantity = quantity? quantity: null;
+        this.inventoryService.getInventoryList({
+          page,
+          page_size: this.pageSize,
+          search,
+          search_type,
+          quantity
+        }).then((data) => {
+          this.length = data.count;
+          this.inventoryAll = [...data.results];
+        });
+        break;
+      case 1:
+        page = this.inventoryWareIndex;
+        quantity = this.quantityWare;
+        quantity = quantity? quantity: null;
+        let warehouse_id: any = this.warehouseId? this.warehouseId: null;
+        this.inventoryService.getWarehouseInventoryList({
+          page,
+          page_size: this.pageSize,
+          search,
+          search_type,
+          quantity,
+          warehouse_id
+        }).then((data) => {
+          this.length = data.count;
+          this.inventoryWare = [...data.results];
+        });
+        break;
+    }
+
   }
 
   quantityChange($event) {
-    this.quantity = $event;
-    this.inventoryAllIndex = 1;
+    switch (this.selectedIndex) {
+      case 0:
+        this.quantityAll = $event;
+        this.inventoryAllIndex = 1;
+        break;
+      case 1:
+        this.quantityWare = $event;
+        this.inventoryWareIndex = 1;
+        break;
+    }
+
     this.changeInventoryLists({
-      indxe: this.inventoryAllIndex
+      index: this.selectedIndex
     });
 
+  }
+
+  warehouseChange($event) {
+    switch (this.selectedIndex) {
+      case 1:
+
+    }
+  }
+
+  getWarehouseList() {
+    this.inventoryService.getWarehouseList().then((data) => {
+      this.warehouseList = [...data];
+    });
   }
 
 

@@ -28,3 +28,8 @@
     </div>
   </div>
 </div>
+<div class="sc-product__product-item-1" fxLayout="row" fxLayoutAlign="start center" *ngIf="status == 0">
+  <div class="md-margin-right-2" *ngFor="let item of product.warehouseInventory">
+    <div>{{item.warehouseName}}: {{item.quantity}}件</div>
+  </div>
+</div>

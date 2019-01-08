@@ -55,6 +55,15 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <mat-select name="supplierProvider" placeholder="Select a Supplier Account" formControlName="purchaseAccount">
+          <mat-option class="md-align-center" *ngFor="let item of supplierList" [value]="item">
+            {{ item }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </form>
   <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
     <button mat-raised-button color="primary" (click)="changeOrderSourcing()">SAVE</button>

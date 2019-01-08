@@ -10,6 +10,7 @@ import { OrderTrackingDialogComponent } from './order-tracking-dialog/order-trac
 import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
 import { HomeEditDialogComponent } from './home-edit-dialog/home-edit-dialog.component';
 import { HomeCompleteDialogComponent } from './home-complete-dialog/home-complete-dialog.component';
+import { HomeWrongDialogComponent } from './home-wrong-dialog/home-wrong-dialog.component';
 import { HomeImageDialogComponent } from './home-image-dialog/home-image-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 import { AddAttentionDialogComponent } from './add-attention-dialog/add-attention-dialog.component';
@@ -36,7 +37,8 @@ import { HomeService } from './home.service';
     HomeCompleteDialogComponent,
     HomeImageDialogComponent,
     ToolTipsComponent,
-    AddAttentionDialogComponent
+    AddAttentionDialogComponent,
+    HomeWrongDialogComponent
   ],
   entryComponents: [
     HomeCreateDialogComponent,
@@ -46,7 +48,8 @@ import { HomeService } from './home.service';
     HomeCompleteDialogComponent,
     HomeImageDialogComponent,
     ToolTipsComponent,
-    AddAttentionDialogComponent
+    AddAttentionDialogComponent,
+    HomeWrongDialogComponent
   ],
   providers: [
     HomeService

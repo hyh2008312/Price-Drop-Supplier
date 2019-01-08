@@ -6,6 +6,7 @@ import { OrderTrackingDialogComponent } from '../order-tracking-dialog/order-tra
 import { OrderDetailDialogComponent } from '../order-detail-dialog/order-detail-dialog.component';
 import { HomeEditDialogComponent } from '../home-edit-dialog/home-edit-dialog.component';
 import { HomeCompleteDialogComponent } from '../home-complete-dialog/home-complete-dialog.component';
+import { HomeWrongDialogComponent } from '../home-wrong-dialog/home-wrong-dialog.component';
 import { HomeImageDialogComponent } from '../home-image-dialog/home-image-dialog.component';
 import { AddAttentionDialogComponent } from '../add-attention-dialog/add-attention-dialog.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
@@ -123,6 +124,29 @@ export class HomeItemComponent implements OnInit {
             product : this.product,
             status: this.status,
             event: 'complete'
+          });
+        }
+        this.product = dialogRef.componentInstance.data.item;
+      }
+    });
+  }
+
+  wrong() {
+    let dialogRef = this.dialog.open(HomeWrongDialogComponent, {
+      data: {
+        item: this.product,
+        isEdit: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        if(this.product.purchaseStatus != dialogRef.componentInstance.data.item.purchaseStatus) {
+          this.productChange.emit({
+            index: this.index,
+            product : this.product,
+            status: this.status,
+            event: 'wrong'
           });
         }
         this.product = dialogRef.componentInstance.data.item;

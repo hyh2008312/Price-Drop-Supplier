@@ -104,6 +104,9 @@ export class HomeMainComponent implements OnInit {
   purchaseDelivered: any = false;
   purchaseDeliveredIndex: any = 1;
   wbDelivered: any = false;
+  purchaseWrong: any = false;
+  purchaseWrongIndex: any = 1;
+  wbWrong: any = false;
   purchaseCanceled: any = false;
   purchaseCanceledIndex: any = 1;
   wbCanceled: any = false;
@@ -161,6 +164,9 @@ export class HomeMainComponent implements OnInit {
         this.purchaseDeliveredIndex = 1;
         break;
       case 5:
+        this.purchaseWrongIndex = 1;
+        break;
+      case 6:
         this.purchaseCanceledIndex = 1;
         break;
     }
@@ -200,6 +206,9 @@ export class HomeMainComponent implements OnInit {
         this.purchaseDeliveredIndex = event.pageIndex + 1;
         break;
       case 5:
+        this.purchaseWrongIndex = event.pageIndex + 1;
+        break;
+      case 6:
         this.purchaseCanceledIndex = event.pageIndex + 1;
         break;
     }
@@ -252,6 +261,12 @@ export class HomeMainComponent implements OnInit {
         warehouse_id = this.wbDelivered? this.wbDelivered: null;
         break;
       case 5:
+        status = 'Wrong Item';
+        page = this.purchaseWrongIndex;
+        processing_days = this.processingDays? this.processingDays: null;
+        warehouse_id = this.wbProcessing? this.wbProcessing: null;
+        break;
+      case 6:
         status = 'Canceled';
         page = this.purchaseCanceledIndex;
         delivery_status = false;
@@ -299,6 +314,9 @@ export class HomeMainComponent implements OnInit {
           this.purchaseDelivered = [...data.results];
           break;
         case 5:
+          this.purchaseWrong = [...data.results];
+          break;
+        case 6:
           this.purchaseCanceled = [...data.results];
           break;
       }
@@ -363,6 +381,9 @@ export class HomeMainComponent implements OnInit {
           case 'complete':
             this.purchaseShipped.splice(event.index,1);
             break;
+          case 'wrong':
+            this.purchaseShipped.splice(event.index,1);
+            break;
         }
         break;
       case 3:
@@ -376,6 +397,20 @@ export class HomeMainComponent implements OnInit {
         switch(event.event) {
           case 'complete':
             this.purchaseDelivered.splice(event.index,1);
+            break;
+        }
+        break;
+      case 5:
+        switch(event.event) {
+          case 'complete':
+            this.purchaseWrong.splice(event.index,1);
+            break;
+        }
+        break;
+      case 6:
+        switch(event.event) {
+          case 'delete':
+            this.purchaseWrong.splice(event.index,1);
             break;
         }
         break;
@@ -439,6 +474,13 @@ export class HomeMainComponent implements OnInit {
         });
         break;
       case 5:
+        this.wbWrong = $event;
+        this.purchaseWrongIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 6:
         this.wbCanceled = $event;
         this.purchaseDeliveredIndex = 1;
         this.changePurchaseLists({

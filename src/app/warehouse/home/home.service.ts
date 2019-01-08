@@ -100,6 +100,25 @@ export class HomeService {
       });
   }
 
+  purchaseWrong(product:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}purchase/wrong/${product.id}/`;
+
+    return this.http.post(url, product, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   getPurchaseList(params:any): Promise<any> {
 
     let headers = new Headers({
