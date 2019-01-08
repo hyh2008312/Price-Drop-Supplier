@@ -100,7 +100,7 @@ export class HomeMainComponent implements OnInit {
   wbShipped: any = false;
   purchasePartiallyDelivered: any = false;
   purchasePartiallyDeliveredIndex: any = 1;
-  wbPartiallyDelivered: any;
+  wbPartiallyDelivered: any = false;
   purchaseDelivered: any = false;
   purchaseDeliveredIndex: any = 1;
   wbDelivered: any = false;
