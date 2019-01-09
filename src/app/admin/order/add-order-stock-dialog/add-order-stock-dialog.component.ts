@@ -39,7 +39,7 @@ export class AddOrderStockDialogComponent implements OnInit {
       sourcingOrderNumber: this.data.order.sourcingOrderNumber,
       sourcingSupplier: this.data.order.sourcingSupplier,
       purchaseAccount: this.data.order.purchaseAccount,
-      warehouseId: this.data.order.warehouseId
+      warehouseId: this.data.order.warehouseId || 1
     });
 
     this.getSourcingSupplierList();
