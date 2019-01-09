@@ -689,30 +689,56 @@ export class TrackingMainComponent implements OnInit {
     let excel: any = [...this.purchaseProccessing];
 
     let html = '';
-    html+='<tr>' +
-      '<td style="width:80px;font-size: 14px;line-height: 24px;font-weight:bold;text-align: center;">运单号</td>' +
-      '<td style="width:80px;font-size: 14px;line-height: 24px;font-weight:bold;text-align: center;">图片</td>' +
-      '<td style="width:80px;font-size: 14px;line-height: 24px;font-weight:bold;text-align: center;">物流公司</td>' +
-      '<td style="width:80px;font-size: 14px;line-height: 24px;font-weight:bold;text-align: center;">创建日期</td>' +
-      '<td style="width:80px;font-size: 14px;line-height: 24px;font-weight:bold;text-align: center;">sku</td>' +
-      '<td style="width:80px;font-size: 14px;line-height: 24px;font-weight:bold;text-align: center;">拣货数量</td>' +
+    html+='<tr style="height: 129px;">' +
+      '<td style="width:40px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">序号</td>' +
+      '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">运单号</td>' +
+      '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">sku</td>' +
+      '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">拣货数量</td>' +
+      '<td style="width:120px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">图片</td>' +
+      '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">规格</td>' +
+      '<td style="width:80px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">带电／不带电</td>' +
+      '<td style="width:80px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">COD／非COD</td>' +
+      '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">物流公司</td>' +
       '</tr>';
+
+
+    let number = 1;
+
     for(let item of excel) {
       for(let i = 0; i < item.pickVariants.length; i++) {
-        html+='<tr>';
+        html+='<tr style="height: 129px;">';
         const itm = item.pickVariants[i];
-        html += `<td style="width:80px;font-size: 10px;text-align: center;">${item.internationalTrackingNumber}</td>`;
-        html += `<td style="width:80px;font-size: 10px;text-align: center;"><img style="border: 1px solid rgba(0, 0, 0, .12);" src="${itm.mainImage}" width="80" height="80"></td>`;
+        html += `<td style="width:40px;font-size: 16px;text-align: center;">${number}</td>`;
+        html += `<td style="width:60px;font-size: 16px;text-align: center;">${item.internationalTrackingNumber}</td>`;
+        html += `<td style="width:80px;font-size: 16px;text-align: center;">${itm.sku}</td>`;
+        html += `<td style="width:60px;font-size: 16px;text-align: center;">${itm.quantity}</td>`;
+        html += `<td style="width:120px;font-size: 16px;text-align: center;"><img style="border: 1px solid rgba(0, 0, 0, .12);" src="${itm.mainImage}" width="120" height="120"></td>`;
+        html += `<td style="width:60px;font-size: 16px;text-align: center;">${itm.attribute}</td>`;
+        html += `<td style="width:80px;font-size: 16px;text-align: center;">${item.isBattery ? "BAT带电" : "不带电"}</td>`;
+        html += `<td style="width:80px;font-size: 16px;text-align: center;">${item.isCod ? "COD" : "非COD"}</td>`;
         if(i == 0) {
-          html += `<td style="width:80px;font-size: 10px;text-align: center;">${item.internationalCarrier}</td>`;
-          html += `<td style="width:80px;font-size: 10px;text-align: center;">${item.created.split('T')[0]}</td>`;
+          html += `<td style="width:60px;font-size: 16px;text-align: center;">${item.internationalCarrier}</td>`;
         } else {
-          html += `<td style="width:80px;font-size: 10px;text-align: center;"></td>`;
-          html += `<td style="width:80px;font-size: 10px;text-align: center;"></td>`;
+          html += `<td style="width:60px;font-size: 16px;text-align: center;"></td>`;
         }
-        html += `<td style="width:80px;font-size: 10px;text-align: center;">${itm.sku}</td>`;
-        html += `<td style="width:80px;font-size: 10px;text-align: center;">${itm.quantity}</td>`;
+
         html += '</tr>';
+
+        if(number > 1 && number % 12 == 0) {
+          html+='<tr style="height: 129px;">' +
+            '<td style="width:40px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">序号</td>' +
+            '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">运单号</td>' +
+            '<td style="width:80px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">sku</td>' +
+            '<td style="width:40px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">拣货数量</td>' +
+            '<td style="width:120px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">图片</td>' +
+            '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">规格</td>' +
+            '<td style="width:80px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">带电／不带电</td>' +
+            '<td style="width:80px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">COD／非COD</td>' +
+            '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">物流公司</td>' +
+            '</tr>';
+        }
+
+        number++;
       }
     }
 
@@ -729,7 +755,22 @@ export class TrackingMainComponent implements OnInit {
       const contentDataURL = canvas.toDataURL('image/png')
       let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
       let position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      if(heightLeft < pageHeight) {
+        pdf.addImage(contentDataURL, 'JPEG', 0, 0, imgWidth,imgHeight);
+      } else {
+        while(heightLeft > 0) {
+          //arg3-->距离左边距;arg4-->距离上边距;arg5-->宽度;arg6-->高度
+          pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight)
+          heightLeft -= pageHeight;
+          position -= 295;
+          //避免添加空白页
+          if(heightLeft > 0) {
+            //注②
+            pdf.addPage();
+          }
+        }
+      }
+
       pdf.save('拣货单号表' +
         new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
         '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate())

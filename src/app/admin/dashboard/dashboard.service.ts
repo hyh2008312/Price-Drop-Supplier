@@ -43,63 +43,18 @@ export class DashboardService {
     return array.join('&');
   }
 
-
-  /*客服私信列表*/
-  getMessageList(params: any) {
+  getDataList(params: any) {
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
     this.createAuthorizationHeader(headers);
     let options = new RequestOptions({headers: headers});
-    const url = `${this.baseUrl.url}order/supplier/message/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}statistics/show/data/?${this.serializeParams(params)}`;
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
   }
-
-  /*客服私信详情*/
-  getMessageDetail(lineId: any) {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-    let options = new RequestOptions({headers: headers});
-    const url = `${this.baseUrl.url}order/supplier/message/${lineId}/`;
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  /*客服回复消息*/
-  startReplyMessage(params: any, lineId: any) {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-    let options = new RequestOptions({headers: headers});
-    const url = `${this.baseUrl.url}order/supplier/message/${lineId}/`;
-    return this.http.put(url, params, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  /*关闭私信消息（解决问题）*/
-  startCloseMessage(lineId: any) {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-    let options = new RequestOptions({headers: headers});
-    const url = `${this.baseUrl.url}order/supplier/message/${lineId}/`;
-    return this.http.delete(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
 
   private handleError(error: Response | any) {
     let errMsg: string;
