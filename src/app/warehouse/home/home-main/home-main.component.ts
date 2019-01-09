@@ -88,6 +88,7 @@ export class HomeMainComponent implements OnInit {
   purchaseAll: any = false;
   purchaseAllIndex: any = 1;
   wbAll: any = false;
+  sortAll: any = 'true';
   purchaseProccessing: any = false;
   purchaseProccessingIndex: any = 1;
   processingDays: any = false;
@@ -101,12 +102,15 @@ export class HomeMainComponent implements OnInit {
   purchasePartiallyDelivered: any = false;
   purchasePartiallyDeliveredIndex: any = 1;
   wbPartiallyDelivered: any = false;
+  sortPartiallyDelivered: any = 'true';
   purchaseDelivered: any = false;
   purchaseDeliveredIndex: any = 1;
   wbDelivered: any = false;
+  sortDelivered: any = 'true';
   purchaseWrong: any = false;
   purchaseWrongIndex: any = 1;
   wbWrong: any = false;
+  sortWrong: any = 'true';
   purchaseCanceled: any = false;
   purchaseCanceledIndex: any = 1;
   wbCanceled: any = false;
@@ -230,6 +234,7 @@ export class HomeMainComponent implements OnInit {
     switch ($event.index) {
       case 0:
         delivery_status = false;
+        is_positive_sequence = this.sortAll? this.sortAll: null;
         warehouse_id = this.wbAll? this.wbAll: null;
         break;
       case 1:
@@ -252,6 +257,7 @@ export class HomeMainComponent implements OnInit {
         status = 'Partially Delivered';
         page = this.purchasePartiallyDeliveredIndex;
         received_time = true;
+        is_positive_sequence = this.sortPartiallyDelivered? this.sortPartiallyDelivered: null;
         warehouse_id = this.wbPartiallyDelivered? this.wbPartiallyDelivered: null;
         break;
       case 4:
@@ -259,12 +265,13 @@ export class HomeMainComponent implements OnInit {
         page = this.purchaseDeliveredIndex;
         received_time = true;
         warehouse_id = this.wbDelivered? this.wbDelivered: null;
+        is_positive_sequence = this.sortDelivered? this.sortDelivered: null;
         break;
       case 5:
         status = 'Wrong Item';
         page = this.purchaseWrongIndex;
-        processing_days = this.processingDays? this.processingDays: null;
-        warehouse_id = this.wbProcessing? this.wbProcessing: null;
+        warehouse_id = this.wbWrong? this.wbWrong: null;
+        is_positive_sequence = this.sortWrong? this.sortWrong: null;
         break;
       case 6:
         status = 'Canceled';
@@ -419,6 +426,13 @@ export class HomeMainComponent implements OnInit {
 
   sortChange($event) {
     switch (this.selectedIndex) {
+      case 0:
+        this.sortAll = $event;
+        this.purchaseProccessingIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
       case 1:
         this.sortProcessing = $event;
         this.purchaseProccessingIndex = 1;
@@ -429,6 +443,27 @@ export class HomeMainComponent implements OnInit {
       case 2:
         this.sortShipped = $event;
         this.purchaseShippedIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 3:
+        this.sortPartiallyDelivered = $event;
+        this.purchaseProccessingIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 4:
+        this.sortDelivered = $event;
+        this.purchaseProccessingIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 5:
+        this.sortWrong = $event;
+        this.purchaseProccessingIndex = 1;
         this.changePurchaseLists({
           index: this.selectedIndex
         });

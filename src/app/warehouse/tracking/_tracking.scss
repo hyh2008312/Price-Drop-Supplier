@@ -430,9 +430,10 @@
   }
 
   &__title-1{
-    font-size: 24px;
-    line-height: 32px;
-    @include media();
+    font-size: 16px;
+    line-height: 24px;
+    color: red;
+    text-align: center;
   }
 
   &__content{

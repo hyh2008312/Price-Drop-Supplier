@@ -67,7 +67,7 @@
           </mat-form-field>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="md-margin-right-2">选择仓库</div>
-            <mat-form-field class="sc-product__product-sort md-margin-left-2">
+            <mat-form-field class="sc-product__product-sort">
               <mat-select name="仓库" [ngModel]="warehouseId" (valueChange)="warehouseChange($event)">
                 <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
                   {{ item.warehouseName }}
