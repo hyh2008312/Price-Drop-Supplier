@@ -44,7 +44,7 @@
     <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#15aabb'}" fxFlex.gt-sm="24" fxFlex.sm="48"
          fxFlex.xs="100">
       <i class="iconfontXberts icon-pic-order"></i>
-      <div class="xb-dashboard__card-data">{{statistics.averageOrderValue}}</div>
+      <div class="xb-dashboard__card-data">{{statistics.averageOrderValue | currency: currency: true}}</div>
       <div class="xb-dashboard__card-word" fxLayout="row" fxLayoutAlign="start start">
         <div>Average Order Value</div>
         <div class="xb-dashboard__wenhao-bg">

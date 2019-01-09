@@ -110,6 +110,9 @@ export class AddGatiPostDialogComponent implements OnInit {
   getWarehouseList() {
     this.orderService.getWarehouseList().then((data) => {
       this.warehouseList = [...data];
+      this.trackingForm.patchValue({
+        warehouseId: this.warehouseList[0].id
+      })
     });
   }
 
