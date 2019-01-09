@@ -51,7 +51,7 @@
            fxLayout="column" fxLayoutAlign="center center">
         <div>{{order.paymentMode == 'cod' ? 'Cod' : 'Prepaid'}}</div>
         <div class="md-margin-top-1" *ngIf="order.paymentMode == 'imprest'">
-          {{order.paymentStatus}}
+          {{order.paymentType}}
         </div>
       </div>
       <div class="sc-order__product-height-1 xb-bold" fxFlex="35"
