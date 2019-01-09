@@ -28,6 +28,14 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 export class DashboardMainComponent implements OnInit {
 
+  overViewListCategory: any = ['Yesterday', 'Last 7 days', 'Last 14 days', 'Last 30 days', 'All Time'];
+  overViewCategory: string = 'Yesterday';
+
+  topProductListCategory: any = ['Yesterday', 'Last 7 days', 'Last 14 days', 'Last 30 days', 'All Time'];
+  topProductCategory: string = 'Yesterday';
+
+  topProductSortListCategory: any = ['Total Earnings', 'Total Orders', 'Total Sales', 'Total Pageviews', 'Total Visitors', 'Conversion Rate'];
+  topProductSortCategory: string = 'Total Earnings';
 
   // MatPaginator Inputs
   length: number = 32;
@@ -75,6 +83,25 @@ export class DashboardMainComponent implements OnInit {
 
   filterDate() {
     this.getDataList();
+  }
+
+  textList: any = [1, 2, 3, 4, 5];
+
+
+  showTwo: boolean = false;
+  showSeven: boolean = false;
+  showEight: boolean = false;
+
+  changeTwo(flag: boolean) {
+    this.showTwo = flag;
+  }
+
+  changeSeven(flag: boolean) {
+    this.showSeven = flag;
+  }
+
+  changeEight(flag: boolean) {
+    this.showEight = flag;
   }
 
 }

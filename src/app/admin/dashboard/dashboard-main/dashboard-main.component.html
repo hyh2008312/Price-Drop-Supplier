@@ -29,22 +29,6 @@
       <div class="xb-dashboard__card-data">{{statistics.totalSales | currency: currency: true}}</div>
       <div class="xb-dashboard__card-word">Total Sales</div>
     </div>
-    <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#00bdb4'}" fxFlex.gt-sm="24" fxFlex.sm="48"
-         fxFlex.xs="100">
-      <i class="iconfontXberts icon-pic-earning"></i>
-      <div class="xb-dashboard__card-data">$1000</div>
-      <div class="xb-dashboard__card-word" fxLayout="row" fxLayoutAlign="start start">
-        <div>Total Earnings</div>
-        <div class="xb-dashboard__wenhao-bg">
-          <i class="iconfontXberts icon-wenhao xb-dashboard__wenhao" (mouseenter)="changeTwo(true)"
-             (mouseleave)="changeTwo(false)"></i>
-          <div class="xb-dashboard__wenhao-content" *ngIf="showTwo">
-            <div class="xb-dashboard__wenhao-triangle-up"></div>
-            <div class="xb-dashboard__wenhao—word" style="padding-left: 9px;">总收益 = 销售额 - 平台佣金 - 网红佣金</div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#ffc502'}" fxFlex.gt-sm="24" fxFlex.sm="48"
          fxFlex.xs="100">
       <i class="iconfontXberts icon-pic-cart1"></i>
@@ -57,34 +41,6 @@
       <div class="xb-dashboard__card-data">{{statistics.totalSoldUnits}}</div>
       <div class="xb-dashboard__card-word">Total Sold Units</div>
     </div>
-    <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#663fb5'}" fxFlex.gt-sm="24" fxFlex.sm="48"
-         fxFlex.xs="100">
-      <i class="iconfontXberts icon-pic-view1"></i>
-      <div class="xb-dashboard__card-data">$1000</div>
-      <div class="xb-dashboard__card-word">Total Product Views</div>
-    </div>
-    <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#40ad33'}" fxFlex.gt-sm="24" fxFlex.sm="48"
-         fxFlex.xs="100">
-      <i class="iconfontXberts icon-pic-visitor"></i>
-      <div class="xb-dashboard__card-data">$1000</div>
-      <div class="xb-dashboard__card-word">Total Visitors</div>
-    </div>
-    <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#e53715'}" fxFlex.gt-sm="24" fxFlex.sm="48"
-         fxFlex.xs="100">
-      <i class="iconfontXberts icon-pic-rate"></i>
-      <div class="xb-dashboard__card-data">$1000</div>
-      <div class="xb-dashboard__card-word" fxLayout="row" fxLayoutAlign="start start">
-        <div>Conversion Rate</div>
-        <div class="xb-dashboard__wenhao-bg">
-          <i class="iconfontXberts icon-wenhao xb-dashboard__wenhao" (mouseenter)="changeSeven(true)"
-             (mouseleave)="changeSeven(false)"></i>
-          <div class="xb-dashboard__wenhao-content" style="right:-88px" *ngIf="showSeven">
-            <div class="xb-dashboard__wenhao-triangle-up" style="margin-left: 148px;"></div>
-            <div class="xb-dashboard__wenhao—word" style="padding-left: 21px;">订单转化率 = 购买次数／浏览次数</div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#15aabb'}" fxFlex.gt-sm="24" fxFlex.sm="48"
          fxFlex.xs="100">
       <i class="iconfontXberts icon-pic-order"></i>
@@ -96,7 +52,7 @@
              (mouseleave)="changeEight(false)"></i>
           <div class="xb-dashboard__wenhao-content" style="right: -64px;" *ngIf="showEight">
             <div class="xb-dashboard__wenhao-triangle-up" style="margin-left: 172px;"></div>
-            <div class="xb-dashboard__wenhao—word" style="padding-left: 30px;">客单价 = total sales / toal orders</div>
+            <div class="xb-dashboard__wenhao—word" style="padding-left: 30px;">Average order value = total sales / total orders</div>
           </div>
         </div>
       </div>
