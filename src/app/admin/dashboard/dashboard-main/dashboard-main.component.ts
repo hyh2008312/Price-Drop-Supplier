@@ -52,6 +52,8 @@ export class DashboardMainComponent implements OnInit {
     'totalOrders': 0,
     'averageOrderValue': 0,
     'totalSoldUnits': 0,
+    'refundOrder': 0,
+    'refundAmounts': 0
   };
   currency:string = 'INR';
 
@@ -82,6 +84,14 @@ export class DashboardMainComponent implements OnInit {
   }
 
   filterDate() {
+    this.getDataList();
+  }
+
+  resetDate() {
+    this.psAll = null;
+    this.peAll = null;
+    this.csAll = null;
+    this.ceAll = null;
     this.getDataList();
   }
 
