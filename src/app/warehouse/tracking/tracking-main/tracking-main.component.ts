@@ -703,22 +703,31 @@ export class TrackingMainComponent implements OnInit {
 
 
     let number = 1;
+    let index = 1;
 
     for(let item of excel) {
       for(let i = 0; i < item.pickVariants.length; i++) {
         html+='<tr style="height: 129px;">';
         const itm = item.pickVariants[i];
-        html += `<td style="width:40px;font-size: 16px;text-align: center;">${number}</td>`;
+
+        if(i == 0) {
+          html += `<td style="width:40px;font-size: 16px;text-align: center;">${index}</td>`;
+          index++;
+        } else {
+          html += `<td style="width:40px;font-size: 16px;text-align: center;"></td>`;
+        }
         html += `<td style="width:60px;font-size: 16px;text-align: center;">${item.internationalTrackingNumber}</td>`;
         html += `<td style="width:80px;font-size: 16px;text-align: center;">${itm.sku}</td>`;
         html += `<td style="width:60px;font-size: 16px;text-align: center;">${itm.quantity}</td>`;
         html += `<td style="width:120px;font-size: 16px;text-align: center;"><img style="border: 1px solid rgba(0, 0, 0, .12);" src="${itm.mainImage}" width="120" height="120"></td>`;
         html += `<td style="width:60px;font-size: 16px;text-align: center;">${itm.attribute}</td>`;
-        html += `<td style="width:80px;font-size: 16px;text-align: center;">${item.isBattery ? "BAT带电" : "不带电"}</td>`;
-        html += `<td style="width:80px;font-size: 16px;text-align: center;">${item.isCod ? "COD" : "非COD"}</td>`;
         if(i == 0) {
+          html += `<td style="width:80px;font-size: 16px;text-align: center;">${item.isBattery ? "BAT带电" : "不带电"}</td>`;
+          html += `<td style="width:80px;font-size: 16px;text-align: center;">${item.isCod ? "COD" : "非COD"}</td>`;
           html += `<td style="width:60px;font-size: 16px;text-align: center;">${item.internationalCarrier}</td>`;
         } else {
+          html += `<td style="width:80px;font-size: 16px;text-align: center;"></td>`;
+          html += `<td style="width:80px;font-size: 16px;text-align: center;"></td>`;
           html += `<td style="width:60px;font-size: 16px;text-align: center;"></td>`;
         }
 
