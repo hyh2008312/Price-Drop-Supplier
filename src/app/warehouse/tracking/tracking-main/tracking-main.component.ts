@@ -689,16 +689,16 @@ export class TrackingMainComponent implements OnInit {
     let excel: any = [...this.purchaseProccessing];
 
     let html = '';
-    html+='<tr style="height: 129px;">' +
-      '<td style="width:40px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">序号</td>' +
-      '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">运单号</td>' +
-      '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">sku</td>' +
-      '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">拣货数量</td>' +
-      '<td style="width:120px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">图片</td>' +
-      '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">规格</td>' +
-      '<td style="width:80px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">带电／不带电</td>' +
-      '<td style="width:80px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">COD／非COD</td>' +
-      '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">物流公司</td>' +
+    html+='<tr style="height: 131px;">' +
+      '<td style="width:40px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">序号</td>' +
+      '<td style="width:60px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">运单号</td>' +
+      '<td style="width:140px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">SKU</td>' +
+      '<td style="width:40px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">拣货数量</td>' +
+      '<td style="width:120px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">图片</td>' +
+      '<td style="width:100px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">规格</td>' +
+      '<td style="width:60px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">带电／不带电</td>' +
+      '<td style="width:60px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">COD／非COD</td>' +
+      '<td style="width:40px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">物流公司</td>' +
       '</tr>';
 
 
@@ -707,43 +707,43 @@ export class TrackingMainComponent implements OnInit {
 
     for(let item of excel) {
       for(let i = 0; i < item.pickVariants.length; i++) {
-        html+='<tr style="height: 129px;">';
+        html+='<tr style="height: 131px;">';
         const itm = item.pickVariants[i];
 
         if(i == 0) {
           html += `<td style="width:40px;font-size: 16px;text-align: center;">${index}</td>`;
           index++;
         } else {
-          html += `<td style="width:40px;font-size: 16px;text-align: center;"></td>`;
+          html += `<td style="width:40px;font-size: 20px;text-align: center;"></td>`;
         }
-        html += `<td style="width:60px;font-size: 16px;text-align: center;">${item.internationalTrackingNumber}</td>`;
-        html += `<td style="width:80px;font-size: 16px;text-align: center;">${itm.sku}</td>`;
-        html += `<td style="width:60px;font-size: 16px;text-align: center;">${itm.quantity}</td>`;
-        html += `<td style="width:120px;font-size: 16px;text-align: center;"><img style="border: 1px solid rgba(0, 0, 0, .12);" src="${itm.mainImage}" width="120" height="120"></td>`;
-        html += `<td style="width:60px;font-size: 16px;text-align: center;">${itm.attribute}</td>`;
+        html += `<td style="width:60px;font-size: 20px;text-align: center;">${item.internationalTrackingNumber}</td>`;
+        html += `<td style="width:140px;word-wrap:break-word;font-size: 20px;text-align: center;">${itm.sku}</td>`;
+        html += `<td style="width:40px;font-size: 20px;text-align: center;">${itm.quantity}</td>`;
+        html += `<td style="width:120px;font-size: 20px;text-align: center;"><img style="border: 1px solid rgba(0, 0, 0, .12);" src="${itm.mainImage}" width="120" height="120"></td>`;
+        html += `<td style="width:100px;word-wrap:break-word;font-size: 20px;text-align: center;">${itm.attribute}</td>`;
         if(i == 0) {
-          html += `<td style="width:80px;font-size: 16px;text-align: center;">${item.isBattery ? "BAT带电" : "不带电"}</td>`;
-          html += `<td style="width:80px;font-size: 16px;text-align: center;">${item.isCod ? "COD" : "非COD"}</td>`;
+          html += `<td style="width:60px;font-size: 20px;text-align: center;">${item.isBattery ? "BAT带电" : "不带电"}</td>`;
+          html += `<td style="width:60px;font-size: 20px;text-align: center;">${item.isCod ? "COD" : "非COD"}</td>`;
           html += `<td style="width:60px;font-size: 16px;text-align: center;">${item.internationalCarrier}</td>`;
         } else {
-          html += `<td style="width:80px;font-size: 16px;text-align: center;"></td>`;
-          html += `<td style="width:80px;font-size: 16px;text-align: center;"></td>`;
-          html += `<td style="width:60px;font-size: 16px;text-align: center;"></td>`;
+          html += `<td style="width:60px;font-size: 20px;text-align: center;"></td>`;
+          html += `<td style="width:60px;font-size: 20px;text-align: center;"></td>`;
+          html += `<td style="width:40px;font-size: 16px;text-align: center;"></td>`;
         }
 
         html += '</tr>';
 
         if(number > 1 && number % 12 == 0) {
-          html+='<tr style="height: 129px;">' +
-            '<td style="width:40px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">序号</td>' +
-            '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">运单号</td>' +
-            '<td style="width:80px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">sku</td>' +
-            '<td style="width:40px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">拣货数量</td>' +
-            '<td style="width:120px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">图片</td>' +
-            '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">规格</td>' +
-            '<td style="width:80px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">带电／不带电</td>' +
-            '<td style="width:80px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">COD／非COD</td>' +
-            '<td style="width:60px;font-size: 16px;line-height: 24px;font-weight:bold;text-align: center;">物流公司</td>' +
+          html+='<tr style="height: 131px;">' +
+            '<td style="width:40px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">序号</td>' +
+            '<td style="width:40px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">运单号</td>' +
+            '<td style="width:140px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">SKU</td>' +
+            '<td style="width:40px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">拣货数量</td>' +
+            '<td style="width:120px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">图片</td>' +
+            '<td style="width:100px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">规格</td>' +
+            '<td style="width:60px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">带电／不带电</td>' +
+            '<td style="width:60px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">COD／非COD</td>' +
+            '<td style="width:40px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: center;">物流公司</td>' +
             '</tr>';
         }
 
