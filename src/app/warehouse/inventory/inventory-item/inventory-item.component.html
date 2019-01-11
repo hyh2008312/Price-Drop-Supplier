@@ -34,10 +34,10 @@
       </mat-form-field>
     </div>
     <div class="sc-product__product-id md-margin-right-2" fxFlex="10" fxLayout="column" fxLayoutAlign="center center">
-      {{product.quantity}}
+      {{product.freezeQuantity}}
     </div>
     <div class="sc-product__product-id md-margin-right-2" fxFlex="10" fxLayout="column" fxLayoutAlign="center center">
-      {{product.quantity - product.quantity}}
+      {{product.quantity - product.freezeQuantity}}
     </div>
     <div class="sc-product__product-id sc__accent-dark" fxFlex="10" *ngIf="status == 1"
          fxLayout="column" fxLayoutAlign="center center">
@@ -51,7 +51,9 @@
   </div>
 </div>
 <div class="sc-product__product-item-1" fxLayout="row" fxLayoutAlign="start center" *ngIf="status == 0">
-  <div class="md-margin-right-2" *ngFor="let item of product.warehouseInventory">
-    <div>{{item.warehouseName}}: {{item.quantity}}件</div>
+  <div class="md-margin-right-3" *ngFor="let item of product.warehouseInventory" fxLayout="row" fxLayoutAlign="start center">
+    <div>{{item.warehouseName}}</div>
+    <div class="md-margin-left-1">库存: {{item.quantity}}件</div>
+    <div class="md-margin-left-1">锁定: {{item.freezeQuantity}}件</div>
   </div>
 </div>
