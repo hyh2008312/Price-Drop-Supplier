@@ -63,6 +63,13 @@
                        (page)="changePage($event)"
                        *ngIf="keywordsList && keywordsList.length > 0">
         </mat-paginator>
+        <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+             *ngIf="keywordsList && keywordsList.length <= 0">
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <i class="iconfontXberts icon-ic-empty"></i>
+            <div class="sc-product__product-title-1 md-margin-top-4">You haven't published any keywords yet. </div>
+          </div>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </div>

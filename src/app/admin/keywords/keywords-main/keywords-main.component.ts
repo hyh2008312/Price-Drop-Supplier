@@ -81,8 +81,12 @@ export class KeywordsMainComponent implements OnInit {
         break;
       case 1:
         page = this.keywordsListIndex;
+        let start_time = this.csAll? this.csAll: null;
+        let end_time = this.ceAll? this.ceAll: null;
 
         this.accountService.getKeywordsList({
+          start_time,
+          end_time,
           page,
           page_size: this.pageSize
         }).then((data) => {
@@ -116,49 +120,56 @@ export class KeywordsMainComponent implements OnInit {
   }
 
   filterDate() {
-    this.isLoading = true;
-    let start_time = this.csAll;
-    let end_time = this.ceAll;
-    this.accountService.getNewKeywordsList({
-      start_time,
-      end_time
-    }).then((data) => {
-      let keywords: any = {};
-      for(let item of data) {
-        if(!keywords[item['keyword']]) {
-          keywords[item['keyword']] = {
-            id: item['keyId'],
-            keyWords: item['keyword'],
-            count: 1,
-            created: item['created']
-          }
-        } else {
-          keywords[item['keyword']].count++;
-        }
-
-      }
-      this.keywordsList = [];
-      for(let itm in keywords) {
-        this.keywordsList.push(keywords[itm]);
-      }
-      this.keywordsList.sort((a, b) => {
-        if(new Date(a.created).getTime() < new Date(a.created).getTime()) {
-          return 1;
-        } else if(new Date(a.created).getTime() > new Date(b.created).getTime()) {
-          return -1;
-        }
-        return 0;
-      }).sort((a, b) => {
-        if(a.count < b.count) {
-          return 1;
-        } else if(a.count > b.count) {
-          return -1;
-        }
-        return 0;
-      });
-      this.length = this.keywordsList.length;
-      this.isLoading = false;
-    });
+    this.changeLists();
+    // this.isLoading = true;
+    // let start_time = this.csAll;
+    // let end_time = this.ceAll;
+    //
+    // let page = this.keywordsListIndex;
+    //
+    // this.accountService.getNewKeywordsList({
+    //   start_time,
+    //   end_time,
+    //   page,
+    //   page_size: this.pageSize
+    // }).then((data) => {
+    //   let keywords: any = {};
+    //   for(let item of data) {
+    //     if(!keywords[item['keyword']]) {
+    //       keywords[item['keyword']] = {
+    //         id: item['keyId'],
+    //         keyWords: item['keyword'],
+    //         count: 1,
+    //         created: item['created']
+    //       }
+    //     } else {
+    //       keywords[item['keyword']].count++;
+    //     }
+    //
+    //   }
+    //   this.keywordsList = [];
+    //   for(let itm in keywords) {
+    //     this.keywordsList.push(keywords[itm]);
+    //   }
+    //   this.keywordsList.sort((a, b) => {
+    //     if(new Date(a.created).getTime() < new Date(a.created).getTime()) {
+    //       return 1;
+    //     } else if(new Date(a.created).getTime() > new Date(b.created).getTime()) {
+    //       return -1;
+    //     }
+    //     return 0;
+    //   }).sort((a, b) => {
+    //     if(a.count < b.count) {
+    //       return 1;
+    //     } else if(a.count > b.count) {
+    //       return -1;
+    //     }
+    //     return 0;
+    //   });
+    //
+    //   this.length = this.keywordsList.length;
+    //   this.isLoading = false;
+    // });
   }
 
   addEvent(type: any, event:MatDatepickerInputEvent<any>) {
