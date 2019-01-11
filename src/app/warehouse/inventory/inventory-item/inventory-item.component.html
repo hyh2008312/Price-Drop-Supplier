@@ -1,52 +1,52 @@
 <div>
   <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
-    <div class="md-margin-right-2" fxFlex="40">
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <div class="sc-product__product-image" fxFlex="none">
-          <img class="xb-pointer" [src]="product.mainImage" (click)="openLargeImage(product)">
-        </div>
-        <div class="md-margin-right-2">
-          <div class="sc-product__product-title" >{{product.title}}</div>
-        </div>
+    <div class="md-margin-right-2" fxFlex="40" fxLayout="row" fxLayoutAlign="start stretch">
+      <div class="sc-product__product-image" fxFlex="none">
+        <img class="xb-pointer" [src]="product.mainImage" (click)="openLargeImage(product)">
       </div>
-    </div>
-    <div class="sc-product__product-id md-margin-right-2" fxFlex="20" *ngIf="status == 0"
-         fxLayout="column" fxLayoutAlign="center center">
-      {{product.attribute}}
-    </div>
-    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 1"
-         fxLayout="column" fxLayoutAlign="center center">
-      {{product.attribute}}
+      <div fxLayout="column" fxLayoutAlign="space-between start" fxFlex>
+        <div class="sc-product__product-title" >{{product.title}}</div>
+        <div>规格: {{product.attribute}}</div>
+      </div>
     </div>
     <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 1"
          fxLayout="column" fxLayoutAlign="center center">
       {{product.warehouseName}}
     </div>
-    <div class="sc-product__product-id md-margin-right-2 sc__accent-dark" fxFlex="25"
+    <div class="sc-product__product-id md-margin-right-2 sc__accent-dark" fxFlex="20"
          fxLayout="column" fxLayoutAlign="center center">
       <div class="xb-bold md-margin-bottom-1">{{product.sku}}</div>
       <button mat-raised-button color="primary"
            ngxClipboard [cbContent]="product.sku" (cbOnSuccess)="copy($event)">点击复制SKU</button>
     </div>
-    <div class="sc-product__product-id" fxFlex="15" *ngIf="status == 0"
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 0"
          fxLayout="column" fxLayoutAlign="center center">
       {{product.quantity}}
     </div>
-    <div class="sc-product__product-id md-margin-right-2" fxFlex="5" *ngIf="status == 1 && !isEdit"
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 1 && !isEdit"
          fxLayout="column" fxLayoutAlign="center center">
       {{product.quantity}}
     </div>
-    <div class="sc-product__product-id md-margin-right-2" fxFlex="5" *ngIf="status == 1 && isEdit"
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 1 && isEdit"
          fxLayout="row" fxLayoutAlign="center center">
       <mat-form-field class="sc-product__create-width">
         <input type="number" matInput [(ngModel)]="product.quantity" />
       </mat-form-field>
+    </div>
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" fxLayout="column" fxLayoutAlign="center center">
+      {{product.quantity}}
+    </div>
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" fxLayout="column" fxLayoutAlign="center center">
+      {{product.quantity - product.quantity}}
     </div>
     <div class="sc-product__product-id sc__accent-dark" fxFlex="10" *ngIf="status == 1"
          fxLayout="column" fxLayoutAlign="center center">
       <i class="material-icons md-dark-secondary xb-pointer" *ngIf="!isEdit" (click)="edit()">edit</i>
       <button mat-raised-button color="primary" *ngIf="isEdit"
               (click)="edit()">保存</button>
+    </div>
+    <div class="sc-product__product-id sc__accent-dark" fxFlex="10" *ngIf="status == 0"
+         fxLayout="column" fxLayoutAlign="center center">
     </div>
   </div>
 </div>
