@@ -10,9 +10,7 @@
       采购订单号
     </div>
     <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
-      <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="采购订单号" formControlName="purchaseId">
-      </mat-form-field>
+      {{purchaseForm.get('purchaseId').value}}
     </div>
     <div class="xb-bold md-margin-top-2">
       采购商品
