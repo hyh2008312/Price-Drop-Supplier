@@ -3,7 +3,7 @@
     <mat-tab-group color="primary" (selectedTabChange)="changeInventoryLists($event)"  [(selectedIndex)]="selectedIndex">
       <mat-tab label="按SKU查看库存" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
-          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+          <mat-form-field class="sc-product__product-sort">
             <mat-select [ngModel]="quantityAll" name="sort" (valueChange)="quantityChange($event)" >
               <mat-option class="md-align-center" *ngFor="let item of quantityList" [value]="item.value">
                 {{ item.text }}
@@ -33,6 +33,11 @@
             </div>
           </div>
         </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="sc__accent-dark md-margin-left-2 md-margin-bottom-1" *ngIf="isSuperuser">
+            <button mat-raised-button color="pimary" (click)="export()">导出Excel</button>
+          </div>
+        </div>
         <div class="md-margin-top-1">
           <app-warehouse-inventory-title [status]="0"></app-warehouse-inventory-title>
         </div>
@@ -58,7 +63,7 @@
       </mat-tab>
       <mat-tab label="按仓库查看库存" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
-          <mat-form-field class="sc-product__product-sort md-margin-left-2">
+          <mat-form-field class="sc-product__product-sort">
             <mat-select [ngModel]="quantityWare" name="sort" (valueChange)="quantityChange($event)" >
               <mat-option class="md-align-center" *ngFor="let item of quantityList" [value]="item.value">
                 {{ item.text }}
@@ -96,6 +101,11 @@
                 </mat-select>
               </mat-form-field>
             </div>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="sc__accent-dark md-margin-left-2 md-margin-bottom-1" *ngIf="isSuperuser">
+            <button mat-raised-button color="pimary" (click)="export()">导出Excel</button>
           </div>
         </div>
         <div class="md-margin-top-1">

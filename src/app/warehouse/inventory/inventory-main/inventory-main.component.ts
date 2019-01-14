@@ -5,6 +5,10 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
 import { InventoryService } from '../inventory.service';
+import {utils, WorkBook, write} from 'xlsx';
+
+import { saveAs } from 'file-saver';
+import {UserService} from '../../../shared/services/user/user.service';
 
 @Component({
   selector: 'app-warehouse-inventory-main',
@@ -57,8 +61,17 @@ export class InventoryMainComponent implements OnInit {
     private inventoryService: InventoryService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService
   ) {
+
+    this.userService.currentUser.subscribe((data) => {
+      if(data) {
+        if(data.isStaff && data.isSuperuser) {
+          this.isSuperuser = true
+        }
+      }
+    });
 
     this.getWarehouseList();
 
@@ -193,5 +206,50 @@ export class InventoryMainComponent implements OnInit {
     });
   }
 
+  export(): void {
+    const ws_name = '库存清单';
+    const wb: WorkBook = { SheetNames: [], Sheets: {} };
+    let packing: any = [];
+    let excel: any = [];
+    switch (this.selectedIndex) {
+      case 0:
+        excel = [...this.inventoryAll];
+        break;
+      case 1:
+        excel = [...this.inventoryWare];
+        break;
+    }
+
+    for(let item of excel) {
+      let orderItem: any = {};
+      orderItem['标题'] = item.title;
+      orderItem['规格'] = item.attribute;
+      orderItem['SKU编号'] = item.sku;
+      orderItem['总库存'] = item.quantity;
+      orderItem['锁定库存'] = item.freezeQuantity;
+      orderItem['剩余库存'] = item.quantity - item.freezeQuantity;
+      packing.push(orderItem);
+    }
+
+    const ws: any = utils.json_to_sheet(packing);
+    wb.SheetNames.push(ws_name);
+    wb.Sheets[ws_name] = ws;
+    const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+    saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), '库存表' +
+      new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
+      '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate())
+      + '.xlsx');
+
+  }
+
+  s2ab(s) {
+    const buf = new ArrayBuffer(s.length);
+    const view = new Uint8Array(buf);
+    for (let i = 0; i !== s.length; ++i) {
+      view[i] = s.charCodeAt(i) & 0xFF;
+    }
+    return buf;
+  }
 
 }
