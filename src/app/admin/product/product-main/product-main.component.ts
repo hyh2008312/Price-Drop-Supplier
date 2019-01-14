@@ -67,7 +67,7 @@ export class ProductMainComponent implements OnInit {
   unpublishedSortList = ['Date', 'Most Views', 'Most Orders', 'Highest Conversion'];
 
   searchCategory = 'sku';
-  searchList = ['sku','product'];
+  searchList = ['sku', 'product', 'shop'];
 
   isPendingChecked: any = false;
 
