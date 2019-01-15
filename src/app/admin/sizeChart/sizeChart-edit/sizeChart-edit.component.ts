@@ -91,7 +91,8 @@ export class SizeChartEditComponent implements OnInit {
     params.sizeChart = {
       table: this.sizeChart,
       note: this.sizeChartForm.value.note,
-      image: this.image
+      image: this.image,
+      imageList
     };
 
     this.sizeChartService.editSizeChart(params).then((data) => {
