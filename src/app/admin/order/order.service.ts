@@ -74,7 +74,7 @@ export class OrderService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}order/number/cost/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}purchase/order/tariffs/calculate/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()

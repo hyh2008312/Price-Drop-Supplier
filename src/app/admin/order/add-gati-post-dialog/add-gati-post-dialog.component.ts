@@ -99,9 +99,9 @@ export class AddGatiPostDialogComponent implements OnInit {
     this.orderService.getOrderNumberCost({
       order_number: $event
     }).then((data) => {
-      if(data.id) {
+      if(data) {
         p.patchValue({
-          declaredValue: (data.lines[0].sourcingPrice / 2 / 74).toFixed(2)
+          declaredValue: data.tariffsPrice
         });
       }
     });
