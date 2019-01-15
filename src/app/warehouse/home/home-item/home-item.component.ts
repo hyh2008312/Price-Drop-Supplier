@@ -9,6 +9,7 @@ import { HomeCompleteDialogComponent } from '../home-complete-dialog/home-comple
 import { HomeWrongDialogComponent } from '../home-wrong-dialog/home-wrong-dialog.component';
 import { HomeImageDialogComponent } from '../home-image-dialog/home-image-dialog.component';
 import { AddAttentionDialogComponent } from '../add-attention-dialog/add-attention-dialog.component';
+import { AddTrackingDialogComponent } from '../add-tracking-dialog/add-tracking-dialog.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
 
@@ -162,6 +163,21 @@ export class HomeItemComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {});
   }
 
+  changeTrackingNumber() {
+    let dialogRef = this.dialog.open(AddTrackingDialogComponent, {
+      data: {
+        item: this.product,
+        isEdit: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        this.product = dialogRef.componentInstance.data.item;
+      }
+    });
+  }
+
   copy($event) {
     this.openCopyBar();
   }
@@ -172,6 +188,15 @@ export class HomeItemComponent implements OnInit {
       duration: 1500,
       verticalPosition: 'top'
     });
+  }
+
+  transformLogistic(item) {
+    if(item) {
+      return item.split(',');
+    } else {
+      return [];
+    }
+
   }
 
 }

@@ -15,6 +15,7 @@ import { HomeWrongDialogComponent } from './home-wrong-dialog/home-wrong-dialog.
 import { HomeImageDialogComponent } from './home-image-dialog/home-image-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 import { AddAttentionDialogComponent } from './add-attention-dialog/add-attention-dialog.component';
+import { AddTrackingDialogComponent } from './add-tracking-dialog/add-tracking-dialog.component';
 
 import { HomeRoutingModule } from './home.routes.module';
 import { SharedModule } from '../../shared/shared.module';
@@ -40,7 +41,8 @@ import { HomeService } from './home.service';
     ToolTipsComponent,
     AddAttentionDialogComponent,
     HomeWrongDialogComponent,
-    HomeTitleFixedComponent
+    HomeTitleFixedComponent,
+    AddTrackingDialogComponent
   ],
   entryComponents: [
     HomeCreateDialogComponent,
@@ -51,7 +53,8 @@ import { HomeService } from './home.service';
     HomeImageDialogComponent,
     ToolTipsComponent,
     AddAttentionDialogComponent,
-    HomeWrongDialogComponent
+    HomeWrongDialogComponent,
+    AddTrackingDialogComponent
   ],
   providers: [
     HomeService

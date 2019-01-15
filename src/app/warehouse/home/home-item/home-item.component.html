@@ -48,8 +48,8 @@
     </div>
     <div class="sc-product__product-price" fxFlex="15"
          fxLayout="column" fxLayoutAlign="center center">
-      <div>
-        {{product.logisticsId}}
+      <div class="md-margin-top-1" *ngFor="let item of transformLogistic(product.logisticsId)">
+        {{item}}
       </div>
     </div>
     <div class="sc-product__product-price sc__accent-dark" fxFlex="10"
@@ -66,6 +66,8 @@
       <button mat-raised-button color="primary" *ngIf="product.purchaseStatus == 'Processing' && isSuperuser" (click)="openAttentionDialog()">注意事项</button>
       <button mat-raised-button color="primary" *ngIf="product.purchaseStatus == 'Shipped' && isSuperuser" (click)="openAttentionDialog()">注意事项</button>
       <button mat-raised-button color="primary" *ngIf="product.purchaseStatus == 'Partially Delivered' && isSuperuser" (click)="openAttentionDialog()">注意事项</button>
+      <div class="md-margin-top-1" *ngIf="(product.purchaseStatus == 'Shipped' || product.purchaseStatus == 'Partially Delivered' || product.purchaseStatus == 'Wrong Item') && isSuperuser" ></div>
+      <button mat-raised-button color="accent" *ngIf="(product.purchaseStatus == 'Shipped' || product.purchaseStatus == 'Partially Delivered' || product.purchaseStatus == 'Wrong Item') && isSuperuser" (click)="changeTrackingNumber()">修改快递单号</button>
       <div class="md-margin-top-1"></div>
       <button mat-raised-button color="accent" (click)="trackingPackage()">查看物流信息</button>
       <div class="md-margin-top-1"></div>

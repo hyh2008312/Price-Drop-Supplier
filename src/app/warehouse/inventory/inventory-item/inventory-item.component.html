@@ -53,7 +53,8 @@
 <div class="sc-product__product-item-1" fxLayout="row" fxLayoutAlign="start center" *ngIf="status == 0">
   <div class="md-margin-right-3" *ngFor="let item of product.warehouseInventory" fxLayout="row" fxLayoutAlign="start center">
     <div>{{item.warehouseName}}</div>
-    <div class="md-margin-left-1">库存: <span class="sc-product__product-red">{{item.quantity}}</span> 件</div>
-    <div class="md-margin-left-1">锁定: <span class="sc-product__product-red">{{item.freezeQuantity}}</span> 件</div>
+    <div class="md-margin-left-1">总库存: <span class="sc-product__product-red">{{item.quantity}}</span> 件</div>
+    <div class="md-margin-left-1">锁定库存: <span class="sc-product__product-red">{{item.freezeQuantity}}</span> 件</div>
+    <div class="md-margin-left-1">剩余库存: <span class="sc-product__product-red">{{item.quantity - item.freezeQuantity}}</span> 件</div>
   </div>
 </div>
