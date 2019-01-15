@@ -64,6 +64,16 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="Sourcing Price (RMB)" formControlName="purchasePrice">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="Purchase URL" formControlName="purchaseUrl">
+      </mat-form-field>
+    </div>
   </form>
   <div class="xb-input-error md-margin-top-2" *ngIf="error">
     {{error}}
