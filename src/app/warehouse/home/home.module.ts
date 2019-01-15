@@ -5,6 +5,7 @@ import { HomeCreateDialogComponent } from './home-create-dialog/home-create-dial
 
 import { HomeItemComponent } from './home-item/home-item.component';
 import { HomeTitleComponent } from './home-title/home-title.component';
+import { HomeTitleFixedComponent } from './home-title-fixed/home-title-fixed.component';
 
 import { OrderTrackingDialogComponent } from './order-tracking-dialog/order-tracking-dialog.component';
 import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
@@ -38,7 +39,8 @@ import { HomeService } from './home.service';
     HomeImageDialogComponent,
     ToolTipsComponent,
     AddAttentionDialogComponent,
-    HomeWrongDialogComponent
+    HomeWrongDialogComponent,
+    HomeTitleFixedComponent
   ],
   entryComponents: [
     HomeCreateDialogComponent,

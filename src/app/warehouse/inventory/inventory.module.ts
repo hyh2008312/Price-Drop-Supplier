@@ -4,6 +4,7 @@ import { InventoryMainComponent } from './inventory-main/inventory-main.componen
 
 import { InventoryItemComponent } from './inventory-item/inventory-item.component';
 import { InventoryTitleComponent } from './inventory-title/inventory-title.component';
+import { InventoryTitleFixedComponent } from './inventory-title-fixed/inventory-title-fixed.component';
 import { InventoryImageDialogComponent } from './inventory-image-dialog/inventory-image-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
@@ -23,7 +24,8 @@ import { InventoryService } from './inventory.service';
     InventoryItemComponent,
     InventoryTitleComponent,
     InventoryImageDialogComponent,
-    ToolTipsComponent
+    ToolTipsComponent,
+    InventoryTitleFixedComponent
   ],
   entryComponents: [
     InventoryImageDialogComponent,

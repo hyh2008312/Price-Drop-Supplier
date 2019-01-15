@@ -80,7 +80,11 @@ export class DashboardMainComponent implements OnInit {
   }
 
   addEvent(type: any, event:MatDatepickerInputEvent<any>) {
-    this[type] = event.value._i.year + '-'+ (event.value._i.month+1) +'-'+event.value._i.date + ' 00:00:00';
+    if(event.value) {
+      this[type] = event.value._i.year + '-'+ (event.value._i.month+1) +'-'+event.value._i.date + ' 00:00:00';
+    } else {
+      this[type] = null;
+    }
   }
 
   filterDate() {

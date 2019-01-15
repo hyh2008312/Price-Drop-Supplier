@@ -75,7 +75,8 @@
 
         </div>
         <div class="md-margin-top-1">
-          <app-warehouse-tracking-title></app-warehouse-tracking-title>
+          <app-warehouse-tracking-title [status]="0" (onScrollChange)="scrollChange($event)"></app-warehouse-tracking-title>
+          <app-warehouse-tracking-title-fixed [status]="0" *ngIf="showNav"></app-warehouse-tracking-title-fixed>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <mat-paginator class="md-margin-top-2" [length]="length"
@@ -200,7 +201,8 @@
           </div>
         </div>
         <div class="md-margin-top-1">
-          <app-warehouse-tracking-title></app-warehouse-tracking-title>
+          <app-warehouse-tracking-title [status]="1" (onScrollChange)="scrollChange($event)"></app-warehouse-tracking-title>
+          <app-warehouse-tracking-title-fixed [status]="1" *ngIf="showNav"></app-warehouse-tracking-title-fixed>
         </div>
         <div class="sc-product__product-bg" fxLayout="column" id="contentToConvert">
           <mat-paginator class="md-margin-top-2" [length]="length"
@@ -321,9 +323,9 @@
             <button mat-raised-button color="pimary" (click)="exportNew()">导出拣货单</button>
           </div>
         </div>
-
         <div class="md-margin-top-1">
-          <app-warehouse-tracking-title ></app-warehouse-tracking-title>
+          <app-warehouse-tracking-title [status]="2" (onScrollChange)="scrollChange($event)"></app-warehouse-tracking-title>
+          <app-warehouse-tracking-title-fixed [status]="2" *ngIf="showNav"></app-warehouse-tracking-title-fixed>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <mat-paginator class="md-margin-top-2" [length]="length"
@@ -388,7 +390,8 @@
           </div>
         </div>
         <div class="md-margin-top-1">
-          <app-warehouse-tracking-title></app-warehouse-tracking-title>
+          <app-warehouse-tracking-title [status]="3" (onScrollChange)="scrollChange($event)"></app-warehouse-tracking-title>
+          <app-warehouse-tracking-title-fixed [status]="3" *ngIf="showNav"></app-warehouse-tracking-title-fixed>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <mat-paginator #pgDelete class="md-margin-top-2" [length]="length"
@@ -505,7 +508,8 @@
           <button mat-raised-button color="pimary" (click)="export()">导出Excel</button>
         </div>
         <div class="md-margin-top-1">
-          <app-warehouse-tracking-title></app-warehouse-tracking-title>
+          <app-warehouse-tracking-title [status]="4" (onScrollChange)="scrollChange($event)"></app-warehouse-tracking-title>
+          <app-warehouse-tracking-title-fixed [status]="4" *ngIf="showNav"></app-warehouse-tracking-title-fixed>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <mat-paginator class="md-margin-top-2" [length]="length"

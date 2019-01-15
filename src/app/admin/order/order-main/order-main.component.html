@@ -12,7 +12,7 @@
                 <i class="material-icons">search</i>
                 <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                        placeholder="Search by"
-                       (keyup.enter)="searchResultProducts()"/>
+                       (keyup.enter)="changeProducts({index: 0})"/>
                 <div class="sc-order__search-close" fxLayout="row" fxLayoutAlign="center center"
                      *ngIf="searchKey != ''" (click)="clearSearchKey()">
                   <i class="material-icons">close</i>
@@ -20,8 +20,8 @@
               </form>
               <div class="sc-product__search-margin-top unicorn-dark-theme">
                 <mat-form-field class="sc-product__product-sort">
-                  <mat-select [(ngModel)]="searchCategory" name="sort">
-                    <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
+                  <mat-select [(ngModel)]="searchType" name="sort">
+                    <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item.value">
                       {{ item.text }}
                     </mat-option>
                   </mat-select>
@@ -263,22 +263,22 @@
               <button mat-raised-button color="pimary" (click)="createTracking()">Add GATI Tracking</button>
             </div>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
-              <form class="sc-product__search" [formGroup]="searchPackingForm"
+              <form class="sc-product__search" [formGroup]="searchForm"
                     fxLayout="row" fxLayoutAlign="start center" >
                 <i class="material-icons">search</i>
-                <input type="text" formControlName="searchPackingKey" [(ngModel)]="searchPackingKey"
+                <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                        placeholder="Search"
-                       (keyup.enter)="searchPackingResult()"/>
+                       (keyup.enter)="changeProducts({index: 2})"/>
                 <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
-                     *ngIf="searchPackingKey != ''" (click)="clearSearchPackingKey()">
+                     *ngIf="searchKey != ''" (click)="clearSearchKey()">
                   <i class="material-icons">close</i>
                 </div>
               </form>
               <div class="sc-product__search-margin-top unicorn-dark-theme">
                 <mat-form-field class="sc-product__product-sort">
                   <mat-select [(ngModel)]="searchType" name="sort">
-                    <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item">
-                      {{ item }}
+                    <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item.value">
+                      {{ item.text }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -417,22 +417,22 @@
               <button mat-raised-button color="pimary" (click)="export()">Export</button>
             </div>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
-              <form class="sc-product__search" [formGroup]="searchPackingForm"
+              <form class="sc-product__search" [formGroup]="searchForm"
                     fxLayout="row" fxLayoutAlign="start center" >
                 <i class="material-icons">search</i>
-                <input type="text" formControlName="searchPackingKey" [(ngModel)]="searchPackingKey"
+                <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                        placeholder="Search"
-                       (keyup.enter)="searchPackingResult()"/>
+                       (keyup.enter)="changeProducts({index: 3})"/>
                 <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
-                     *ngIf="searchPackingKey != ''" (click)="clearSearchPackingKey()">
+                     *ngIf="searchKey != ''" (click)="clearSearchKey()">
                   <i class="material-icons">close</i>
                 </div>
               </form>
               <div class="sc-product__search-margin-top unicorn-dark-theme">
                 <mat-form-field class="sc-product__product-sort">
                   <mat-select [(ngModel)]="searchType" name="sort">
-                    <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item">
-                      {{ item }}
+                    <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item.value">
+                      {{ item.text }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -563,22 +563,22 @@
               <button mat-raised-button color="pimary" (click)="export()">Export</button>
             </div>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
-              <form class="sc-product__search" [formGroup]="searchPackingForm"
+              <form class="sc-product__search" [formGroup]="searchForm"
                     fxLayout="row" fxLayoutAlign="start center" >
                 <i class="material-icons">search</i>
-                <input type="text" formControlName="searchPackingKey" [(ngModel)]="searchPackingKey"
+                <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                        placeholder="Search"
-                       (keyup.enter)="searchPackingResult()"/>
+                       (keyup.enter)="changeProducts({index: 4})"/>
                 <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
-                     *ngIf="searchPackingKey != ''" (click)="clearSearchPackingKey()">
+                     *ngIf="searchKey != ''" (click)="clearSearchKey()">
                   <i class="material-icons">close</i>
                 </div>
               </form>
               <div class="sc-product__search-margin-top unicorn-dark-theme">
                 <mat-form-field class="sc-product__product-sort">
                   <mat-select [(ngModel)]="searchType" name="sort">
-                    <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item">
-                      {{ item }}
+                    <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item.value">
+                      {{ item.text }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -811,22 +811,22 @@
               <button mat-raised-button color="pimary" (click)="export()">Export</button>
             </div>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
-              <form class="sc-product__search" [formGroup]="searchPackingForm"
+              <form class="sc-product__search" [formGroup]="searchForm"
                     fxLayout="row" fxLayoutAlign="start center" >
                 <i class="material-icons">search</i>
-                <input type="text" formControlName="searchPackingKey" [(ngModel)]="searchPackingKey"
+                <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
                        placeholder="Search"
-                       (keyup.enter)="searchPackingResult()"/>
+                       (keyup.enter)="changeProducts({index: 6})"/>
                 <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
-                     *ngIf="searchPackingKey != ''" (click)="clearSearchPackingKey()">
+                     *ngIf="searchKey != ''" (click)="clearSearchKey()">
                   <i class="material-icons">close</i>
                 </div>
               </form>
               <div class="sc-product__search-margin-top unicorn-dark-theme">
                 <mat-form-field class="sc-product__product-sort">
                   <mat-select [(ngModel)]="searchType" name="sort">
-                    <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item">
-                      {{ item }}
+                    <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item.value">
+                      {{ item.text }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>

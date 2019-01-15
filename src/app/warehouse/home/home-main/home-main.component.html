@@ -52,7 +52,8 @@
           </div>
         </div>
         <div class="md-margin-top-1">
-          <app-warehouse-home-title></app-warehouse-home-title>
+          <app-warehouse-home-title [status]="0" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
+          <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <div class="sc-product__product-list" *ngFor="let item of purchaseAll;let i = index;">
@@ -125,7 +126,8 @@
           </div>
         </div>
         <div class="md-margin-top-1">
-          <app-warehouse-home-title></app-warehouse-home-title>
+          <app-warehouse-home-title [status]="1" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
+          <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <div class="sc-product__product-list" *ngFor="let item of purchaseProccessing;let i = index;">
@@ -198,7 +200,8 @@
           </div>
         </div>
         <div class="md-margin-top-1">
-          <app-warehouse-home-title ></app-warehouse-home-title>
+          <app-warehouse-home-title [status]="2" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
+          <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <div class="sc-product__product-list" *ngFor="let item of purchaseShipped;let i = index;">
@@ -262,7 +265,8 @@
           </div>
         </div>
         <div class="md-margin-top-1">
-          <app-warehouse-home-title></app-warehouse-home-title>
+          <app-warehouse-home-title [status]="3" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
+          <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <div class="sc-product__product-list" *ngFor="let item of purchasePartiallyDelivered;let i = index;" >
@@ -326,7 +330,8 @@
           </div>
         </div>
         <div class="md-margin-top-1">
-          <app-warehouse-home-title></app-warehouse-home-title>
+          <app-warehouse-home-title [status]="4" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
+          <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <div class="sc-product__product-list" *ngFor="let item of purchaseDelivered;let i = index;" >
@@ -390,7 +395,8 @@
           </div>
         </div>
         <div class="md-margin-top-1">
-          <app-warehouse-home-title></app-warehouse-home-title>
+          <app-warehouse-home-title [status]="5" [status]="2" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
+          <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <div class="sc-product__product-list" *ngFor="let item of purchaseWrong;let i = index;" >
@@ -446,7 +452,8 @@
           </div>
         </div>
         <div class="md-margin-top-1">
-          <app-warehouse-home-title></app-warehouse-home-title>
+          <app-warehouse-home-title [status]="6" [status]="3" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
+          <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <div class="sc-product__product-list" *ngFor="let item of purchaseCanceled;let i = index;" >

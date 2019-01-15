@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Inject, NgZone} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router,NavigationStart, ActivatedRoute} from '@angular/router';
+import { Router, NavigationStart, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
@@ -34,6 +34,9 @@ export class HomeMainComponent implements OnInit {
   }, {
     text: 'SKU',
     value: 'sku'
+  }, {
+    text: '订单号',
+    value: 'order_number'
   }];
 
   status: any = false;
@@ -114,6 +117,8 @@ export class HomeMainComponent implements OnInit {
   purchaseCanceled: any = false;
   purchaseCanceledIndex: any = 1;
   wbCanceled: any = false;
+
+  showNav: any = false;
 
   constructor(
     private adminService: HomeService,
@@ -533,6 +538,10 @@ export class HomeMainComponent implements OnInit {
         warehouseName: '所有'
       })
     });
+  }
+
+  scrollChange($event) {
+    this.showNav = $event;
   }
 
 }

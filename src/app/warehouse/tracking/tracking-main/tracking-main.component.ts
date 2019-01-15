@@ -136,6 +136,8 @@ export class TrackingMainComponent implements OnInit {
 
   warehouseList: any;
 
+  showNav: any = false;
+
   constructor(
     private adminService: TrackingService,
     private userService: UserService,
@@ -396,7 +398,11 @@ export class TrackingMainComponent implements OnInit {
   }
 
   addEvent(type: any, event:MatDatepickerInputEvent<any>) {
-    this[type] = event.value._i.year + '-'+ (event.value._i.month+1) +'-'+event.value._i.date + ' 00:00:00';
+    if(event.value) {
+      this[type] = event.value._i.year + '-'+ (event.value._i.month+1) +'-'+event.value._i.date + ' 00:00:00';
+    } else {
+      this[type] = null;
+    }
   }
 
   filterDate() {
@@ -798,6 +804,10 @@ export class TrackingMainComponent implements OnInit {
         warehouseName: '所有'
       });
     });
+  }
+
+  scrollChange($event) {
+    this.showNav = $event;
   }
 
 }

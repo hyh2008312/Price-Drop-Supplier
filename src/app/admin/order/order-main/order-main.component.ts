@@ -162,32 +162,31 @@ export class OrderMainComponent implements OnInit {
   selectedIndex: number = 0;
   subscription: any;
 
-  searchKey: any = '';
-  searchPackingKey: any = '';
+  searchKey: any;
   isSearch: boolean = false;
-  isSearchResult: boolean = false;
-  isSearchPackingResult: boolean = false;
-  searchResult: any;
   searchForm: FormGroup;
   searchPackingForm: FormGroup;
 
-  searchCategory = 'OrderNumber';
-  searchList = [{
+  searchType = 'sku';
+  searchTypeList = [{
     text: 'Order Number',
     value: 'OrderNumber'
-  },{
+  }, {
     text: 'Tracking Number',
     value: 'ShippingNumber'
-  },{
-    text: 'Product Title',
-    value: 'title'
-  },{
+  }, {
     text: 'SKU',
     value: 'sku'
+  }, {
+    text: 'User Name',
+    value: 'username'
+  }, {
+    text: 'Product Name',
+    value: 'title'
+  }, {
+    text: 'Sourcing Number',
+    value: 'sourcing_order_number'
   }];
-
-  searchType = 'sku';
-  searchTypeList = ['sku','username','title'];
 
   // MatPaginator Inputs
   length:number = 0;
@@ -208,10 +207,6 @@ export class OrderMainComponent implements OnInit {
       searchKey: ['']
     });
 
-    this.searchPackingForm = this.fb.group({
-      searchPackingKey: ['']
-    });
-
     this.searchForm.valueChanges.subscribe(data => this.onValueChanged(data));
 
     this.userService.currentUser.subscribe((data) => {
@@ -226,14 +221,6 @@ export class OrderMainComponent implements OnInit {
 
   onValueChanged(data) {
     this.isSearch = false;
-  }
-
-  clearSearchKey() {
-    this.searchKey = '';
-    this.orderAllIndex = 1;
-    this.changeProducts({
-      index: this.selectedIndex
-    });
   }
 
   ngOnInit():void {
@@ -299,12 +286,6 @@ export class OrderMainComponent implements OnInit {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
   }
 
-  changeReturnRequest($event) {
-    this.changeProducts({
-      index: 3
-    });
-  }
-
   changeProducts(event) {
     if(event.tab) {
       this.subCategoryList = [];
@@ -320,10 +301,19 @@ export class OrderMainComponent implements OnInit {
     let paid_start_time = false;
     let paid_end_time = false;
     let sourcing_status = false;
+    const search = this.searchKey && this.searchKey != ''? this.searchKey: null;
+    let search_type = '';
+    if(search) {
+      search_type = this.searchType;
+    }
+
     switch (event.index) {
       case 0:
         status = null;
         if(event.resetPage) {
+          this.orderAllIndex = 1;
+        }
+        if(search) {
           this.orderAllIndex = 1;
         }
         page = this.orderAllIndex;
@@ -339,11 +329,17 @@ export class OrderMainComponent implements OnInit {
         if(event.resetPage) {
           this.orderUnpaidIndex = 1;
         }
+        if(search) {
+          this.orderUnpaidIndex = 1;
+        }
         page = this.orderUnpaidIndex;
         break;
       case 2:
         status = 'Packing';
         if(event.resetPage) {
+          this.orderPackingIndex = 1;
+        }
+        if(search) {
           this.orderPackingIndex = 1;
         }
         page = this.orderPackingIndex;
@@ -360,6 +356,9 @@ export class OrderMainComponent implements OnInit {
         if(event.resetPage) {
           this.orderShippedIndex = 1;
         }
+        if(search) {
+          this.orderShippedIndex = 1;
+        }
         page = this.orderShippedIndex;
         order_type = this.typeShipped;
         cod_status = this.paymentShipped;
@@ -371,6 +370,9 @@ export class OrderMainComponent implements OnInit {
       case 4:
         status = 'Audit canceled';
         if(event.resetPage) {
+          this.orderAuditIndex = 1;
+        }
+        if(search) {
           this.orderAuditIndex = 1;
         }
         page = this.orderAuditIndex;
@@ -386,6 +388,9 @@ export class OrderMainComponent implements OnInit {
         if(event.resetPage) {
           this.orderCanceledIndex = 1;
         }
+        if(search) {
+          this.orderCanceledIndex = 1;
+        }
         page = this.orderCanceledIndex;
         order_type = this.typeCanceled;
         cod_status = this.paymentCanceled;
@@ -395,6 +400,9 @@ export class OrderMainComponent implements OnInit {
       case 6:
         status = 'Completed';
         if(event.resetPage) {
+          this.orderCompletedIndex = 1;
+        }
+        if(search) {
           this.orderCompletedIndex = 1;
         }
         page = this.orderCompletedIndex;
@@ -410,6 +418,9 @@ export class OrderMainComponent implements OnInit {
         if(event.resetPage) {
           this.orderRefundIndex = 1;
         }
+        if(search) {
+          this.orderRefundIndex = 1;
+        }
         page = this.orderRefundIndex;
         order_type = this.typeRefund;
         cod_status = this.paymentRefund;
@@ -422,6 +433,9 @@ export class OrderMainComponent implements OnInit {
         if(event.resetPage) {
           this.orderExpiredIndex = 1;
         }
+        if(search) {
+          this.orderExpiredIndex = 1;
+        }
         status = 'Expired';
         page = this.orderExpiredIndex;
         order_type = this.typeExpired;
@@ -432,6 +446,9 @@ export class OrderMainComponent implements OnInit {
       case 9:
         status = 'Undelivered';
         if(event.resetPage) {
+          this.orderUndeliveredIndex = 1;
+        }
+        if(search) {
           this.orderUndeliveredIndex = 1;
         }
         page = this.orderUndeliveredIndex;
@@ -454,14 +471,15 @@ export class OrderMainComponent implements OnInit {
     paid_start_time = paid_start_time? paid_start_time: null;
     paid_end_time = paid_end_time? paid_end_time: null;
     sourcing_status = sourcing_status? sourcing_status: null;
-    const q = this.searchKey && this.searchKey != ''? this.searchKey: null;
+
     let category_id = this.categoryId? this.categoryId: null;
 
     this.orderService.getSupplyOrderList({
       status,
       page,
       page_size: this.pageSize,
-      q,
+      search,
+      search_type,
       order_type,
       cod_status,
       start_time,
@@ -508,117 +526,46 @@ export class OrderMainComponent implements OnInit {
 
   }
 
-  searchResultProducts() {
-    let self = this;
-    self.isSearchResult = true;
 
-    this.orderService.getSupplyOrderResult({
-      number: this.searchKey,
-      type: this.searchCategory
-    }).then((data) => {
-      self.length = data.length;
-      self.orderAll = [...data];
-    });
-  }
-
-  searchPackingResult() {
-    let self = this;
-    self.isSearchPackingResult = true;
-
-    if(self.searchPackingKey == '') return;
-
-    let status = 'Packing';
-    switch (self.selectedIndex) {
+  clearSearchKey() {
+    this.searchKey = '';
+    switch (this.selectedIndex) {
       case 0:
-        status = 'All';
+        this.orderAllIndex = 1;
         break;
       case 1:
-        status = 'Unpaid';
+        this.orderUnpaidIndex = 1;
+        break;
+      case 2:
+        this.orderPackingIndex = 1;
         break;
       case 3:
-        status = 'Shipped';
+        this.orderShippedIndex = 1;
         break;
       case 4:
-        status = 'Audit canceled';
+        this.orderAuditIndex = 1;
         break;
       case 5:
-        status = 'Canceled';
+        this.orderCanceledIndex = 1;
         break;
       case 6:
-        status = 'Completed';
+        this.orderCompletedIndex = 1;
         break;
       case 7:
-        status = 'Refunded';
+        this.orderRefundIndex = 1;
         break;
       case 8:
-        status = 'Expired';
+        this.orderExpiredIndex = 1;
         break;
       case 9:
-        status = 'Undelivered';
+        this.orderUndeliveredIndex = 1;
+        break;
+      default:
         break;
     }
-
-    let params: any = {
-      status,
-      sku: self.searchPackingKey
-    };
-
-    switch(this.searchCategory) {
-      case 'username':
-        params = {
-          status,
-          username: self.searchPackingKey
-        };
-        break;
-      case 'title':
-        params = {
-          status,
-          title: self.searchPackingKey
-        };
-        break;
-    }
-
-    this.orderService.getSupplyOrderPackingResult(params).then((data) => {
-
-      self.length = data.length;
-
-      switch (self.selectedIndex) {
-        case 0:
-          self.orderAll = [...data];
-          break;
-        case 1:
-          self.orderUnpaid = [...data];
-          break;
-        case 2:
-          self.orderPacking = [...data];
-          break;
-        case 3:
-          self.orderShipped = [...data];
-          break;
-        case 4:
-          self.orderAudit = [...data];
-          break;
-        case 5:
-          self.orderCanceled = [...data];
-          break;
-        case 6:
-          self.orderCompleted = [...data];
-          break;
-        case 7:
-          self.orderRefund = [...data];
-          break;
-        case 9:
-          self.orderUndelivered = [...data];
-          break;
-        case 8:
-          self.orderExpired = [...data];
-          break;
-      }
+    this.changeProducts({
+      index: this.selectedIndex
     });
-  }
-
-  clearSearchPackingKey() {
-    this.searchPackingKey = '';
   }
 
   productChange(event) {
@@ -633,7 +580,11 @@ export class OrderMainComponent implements OnInit {
   }
 
   addEvent(type: any, event:MatDatepickerInputEvent<any>) {
-    this[type] = event.value._i.year + '-'+ (event.value._i.month+1) +'-'+event.value._i.date + ' 00:00:00';
+    if(event.value) {
+      this[type] = event.value._i.year + '-'+ (event.value._i.month+1) +'-'+event.value._i.date + ' 00:00:00';
+    } else {
+      this[type] = null;
+    }
   }
 
   filterDate() {

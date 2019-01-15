@@ -5,6 +5,7 @@ import { TrackingCreateDialogComponent } from './tracking-create-dialog/tracking
 
 import { TrackingItemComponent } from './tracking-item/tracking-item.component';
 import { TrackingTitleComponent } from './tracking-title/tracking-title.component';
+import { TrackingTitleFixedComponent } from './tracking-title-fixed/tracking-title-fixed.component';
 
 import { TrackingEditDialogComponent } from './tracking-edit-dialog/tracking-edit-dialog.component';
 import { TrackingImageDialogComponent } from './tracking-image-dialog/tracking-image-dialog.component';
@@ -36,7 +37,8 @@ import { TrackingService } from './tracking.service';
     AddNotesDialogComponent,
     ConfirmDeleteDialogComponent,
     ConfirmPackageDialogComponent,
-    ConfirmNotFoundDialogComponent
+    ConfirmNotFoundDialogComponent,
+    TrackingTitleFixedComponent
   ],
   entryComponents: [
     TrackingCreateDialogComponent,

@@ -31,7 +31,6 @@ export class InventoryMainComponent implements OnInit {
     value: 'sku'
   }];
 
-
   quantityList: any = [{
     text: '库存大于1',
     value: '1'
@@ -56,6 +55,8 @@ export class InventoryMainComponent implements OnInit {
 
   warehouseId: any = false;
   warehouseList: any;
+
+  showNav: any = false;
 
   constructor(
     private inventoryService: InventoryService,
@@ -250,6 +251,10 @@ export class InventoryMainComponent implements OnInit {
       view[i] = s.charCodeAt(i) & 0xFF;
     }
     return buf;
+  }
+
+  scrollChange($event) {
+    this.showNav = $event;
   }
 
 }
