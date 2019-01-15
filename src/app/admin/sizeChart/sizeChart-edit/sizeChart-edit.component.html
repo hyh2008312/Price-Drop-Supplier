@@ -37,6 +37,11 @@
           <app-sizeChart-image-upload-additional [(previewImgFile)]="image"
                                                  [(previewImgSrcs)]="image"></app-sizeChart-image-upload-additional>
         </div>
+        <div class="md-margin-top-2">
+          <div class="sc-promote__promote-text md-margin-bottom-2 xb-bold">Size Chart Picture List</div>
+          <app-sizeChart-image-upload-multi [(previewImgFile)]="imageList"
+                                            [(previewImgSrcs)]="imageList"></app-sizeChart-image-upload-multi>
+        </div>
       </div>
     </form>
     <div class="md-margin-top-3 sc-promote__create-bg" *ngIf="sizeChart.length == 0">

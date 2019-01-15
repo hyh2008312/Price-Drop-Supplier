@@ -35,6 +35,7 @@ export class SizeChartEditComponent implements OnInit {
 
   separatorKeysCodes = [ENTER, 188];
   image: any;
+  imageList: any = ['', '', '', '', ''];
 
   constructor(
     private sizeChartService: SizeChartService,
@@ -68,6 +69,7 @@ export class SizeChartEditComponent implements OnInit {
         note: data.sizeChart.note,
       });
       this.image = data.sizeChart.image;
+      this.imageList = data.sizeChart.imageList && data.sizeChart.imageList.length > 0? data.sizeChart.imageList: this.imageList;
       this.sizeChart = data.sizeChart.table
     });
   }
@@ -78,6 +80,14 @@ export class SizeChartEditComponent implements OnInit {
     }
 
     let params: any = this.sizeChartForm.value;
+
+    let imageList: any = [];
+    for(let item of this.imageList) {
+      if(item && item != '') {
+        imageList.push(item);
+      }
+    }
+
     params.sizeChart = {
       table: this.sizeChart,
       note: this.sizeChartForm.value.note,

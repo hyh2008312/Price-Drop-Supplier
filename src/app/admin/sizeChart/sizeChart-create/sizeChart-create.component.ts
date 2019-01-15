@@ -33,6 +33,7 @@ export class SizeChartCreateComponent implements OnInit {
 
   separatorKeysCodes = [ENTER, 188];
   image: any;
+  imageList: any = ['', '', '', '', ''];
 
   constructor(
     private sizeChartService: SizeChartService,
@@ -55,10 +56,18 @@ export class SizeChartCreateComponent implements OnInit {
 
   save() {
     let params: any = this.sizeChartForm.value;
+    let imageList: any = [];
+    for(let item of this.imageList) {
+      if(item && item != '') {
+        imageList.push(item);
+      }
+    }
+
     params.sizeChart = {
       table: this.sizeChart,
       note: this.sizeChartForm.value.note,
-      image: this.image
+      image: this.image,
+      imageList
     };
 
     this.sizeChartService.createSizeChart(params).then((data) => {
