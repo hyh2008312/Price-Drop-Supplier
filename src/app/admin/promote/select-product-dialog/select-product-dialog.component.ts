@@ -72,7 +72,7 @@ export class SelectProductDialogComponent implements OnInit {
     if(this.searchKey != '') {
       param = {
         cat: this.cat,
-        q: this.searchKey,
+        q: encodeURIComponent(this.searchKey),
         qt: 'product',
         pid: this.data.promotionId,
         page: this.page,

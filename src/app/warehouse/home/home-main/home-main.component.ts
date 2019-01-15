@@ -8,11 +8,25 @@ import { HomeService } from '../home.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 import { HomeCreateDialogComponent } from '../home-create-dialog/home-create-dialog.component';
 import { MatDialog } from '@angular/material';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 @Component({
   selector: 'app-warehouse-home-main',
   templateUrl: './home-main.component.html',
-  styleUrls: ['../_home.scss']
+  styleUrls: ['../_home.scss'],
+  providers: [
+    // The locale would typically be provided on the root module of your application. We do it at
+    // the component level here, due to limitations of our example generation script.
+    {provide: MAT_DATE_LOCALE, useValue: 'zh-CN'},
+
+    // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
+    // `MatMomentDateModule` in your applications root module. We provide it at the component level
+    // here, due to limitations of our example generation script.
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 })
 
 export class HomeMainComponent implements OnInit {
@@ -102,14 +116,25 @@ export class HomeMainComponent implements OnInit {
   shippedDays: any = false;
   sortShipped: any = 'false';
   wbShipped: any = false;
+
   purchasePartiallyDelivered: any = false;
   purchasePartiallyDeliveredIndex: any = 1;
   wbPartiallyDelivered: any = false;
   sortPartiallyDelivered: any = 'true';
+  csPurchasePartiallyDelivered: any;
+  cePurchasePartiallyDelivered: any;
+  asPurchasePartiallyDelivered: any;
+  aePurchasePartiallyDelivered: any;
+
   purchaseDelivered: any = false;
   purchaseDeliveredIndex: any = 1;
   wbDelivered: any = false;
   sortDelivered: any = 'true';
+  csPurchaseDelivered: any;
+  cePurchaseDelivered: any;
+  asPurchaseDelivered: any;
+  aePurchaseDelivered: any;
+
   purchaseWrong: any = false;
   purchaseWrongIndex: any = 1;
   wbWrong: any = false;
@@ -235,6 +260,8 @@ export class HomeMainComponent implements OnInit {
     let shipped_days: any = null;
     let is_positive_sequence: any = null;
     let warehouse_id : any = null;
+    let start_time: any = null;
+    let end_time: any = null;
 
     switch ($event.index) {
       case 0:
@@ -264,6 +291,8 @@ export class HomeMainComponent implements OnInit {
         received_time = true;
         is_positive_sequence = this.sortPartiallyDelivered? this.sortPartiallyDelivered: null;
         warehouse_id = this.wbPartiallyDelivered? this.wbPartiallyDelivered: null;
+        start_time = this.csPurchasePartiallyDelivered? this.csPurchasePartiallyDelivered: null;
+        end_time = this.cePurchasePartiallyDelivered? this.cePurchasePartiallyDelivered: null;
         break;
       case 4:
         status = 'Delivered';
@@ -271,6 +300,8 @@ export class HomeMainComponent implements OnInit {
         received_time = true;
         warehouse_id = this.wbDelivered? this.wbDelivered: null;
         is_positive_sequence = this.sortDelivered? this.sortDelivered: null;
+        start_time = this.csPurchaseDelivered? this.csPurchaseDelivered: null;
+        end_time = this.cePurchaseDelivered? this.cePurchaseDelivered: null;
         break;
       case 5:
         status = 'Wrong Item';
@@ -306,7 +337,9 @@ export class HomeMainComponent implements OnInit {
       processing_days,
       shipped_days,
       is_positive_sequence,
-      warehouse_id
+      warehouse_id,
+      start_time,
+      end_time
     }).then((data) => {
       this.length = data.count;
       switch ($event.index) {
@@ -469,6 +502,53 @@ export class HomeMainComponent implements OnInit {
       case 5:
         this.sortWrong = $event;
         this.purchaseProccessingIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+    }
+  }
+
+  addEvent(type: any, event:MatDatepickerInputEvent<any>) {
+    if(event.value) {
+      this[type] = event.value._i.year + '-'+ (event.value._i.month+1) +'-'+event.value._i.date + ' 00:00:00';
+    } else {
+      this[type] = null;
+    }
+  }
+
+  filterDate() {
+    switch (this.selectedIndex) {
+      case 3:
+        this.purchasePartiallyDeliveredIndex = 1;
+        break;
+      case 4:
+        this.purchaseDeliveredIndex = 1;
+        break;
+    }
+    this.changePurchaseLists({
+      index: this.selectedIndex
+    });
+  }
+
+  cancelDate(type) {
+    switch (type) {
+      case 3:
+        this.csPurchasePartiallyDelivered = null;
+        this.cePurchasePartiallyDelivered = null;
+        this.asPurchasePartiallyDelivered = null;
+        this.aePurchasePartiallyDelivered = null;
+        this.purchasePartiallyDeliveredIndex = 1;
+        this.changePurchaseLists({
+          index: this.selectedIndex
+        });
+        break;
+      case 4:
+        this.csPurchaseDelivered = null;
+        this.csPurchaseDelivered = null;
+        this.csPurchaseDelivered = null;
+        this.csPurchaseDelivered = null;
+        this.purchaseDeliveredIndex = 1;
         this.changePurchaseLists({
           index: this.selectedIndex
         });

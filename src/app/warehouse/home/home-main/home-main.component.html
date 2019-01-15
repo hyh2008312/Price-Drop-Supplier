@@ -264,6 +264,26 @@
             </div>
           </div>
         </div>
+        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+          <div>收货日期: </div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="csPurchasePartiallyDelivered" [(ngModel)]="asPurchasePartiallyDelivered" placeholder="开始日期" (dateInput)="addEvent('csPurchasePartiallyDelivered', $event)">
+            <mat-datepicker-toggle matSuffix [for]="csPurchasePartiallyDelivered"></mat-datepicker-toggle>
+            <mat-datepicker #csPurchasePartiallyDelivered></mat-datepicker>
+          </mat-form-field>
+          <div class="md-margin-left-2">to</div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="cePurchasePartiallyDelivered" [(ngModel)]="aePurchasePartiallyDelivered" placeholder="结束日期" (dateInput)="addEvent('cePurchasePartiallyDelivered', $event)">
+            <mat-datepicker-toggle matSuffix [for]="cePurchasePartiallyDelivered"></mat-datepicker-toggle>
+            <mat-datepicker #cePurchasePartiallyDelivered></mat-datepicker>
+          </mat-form-field>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+          </div>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="accent" (click)="cancelDate(3)">重置</button>
+          </div>
+        </div>
         <div class="md-margin-top-1">
           <app-warehouse-home-title [status]="3" (onScrollChange)="scrollChange($event)"></app-warehouse-home-title>
           <app-warehouse-home-title-fixed *ngIf="showNav"></app-warehouse-home-title-fixed>
@@ -327,6 +347,26 @@
                 </mat-select>
               </mat-form-field>
             </div>
+          </div>
+        </div>
+        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+          <div>收货日期: </div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="csPurchaseDelivered" [(ngModel)]="asPurchaseDelivered" placeholder="开始日期" (dateInput)="addEvent('csPurchaseDelivered', $event)">
+            <mat-datepicker-toggle matSuffix [for]="csPurchaseDelivered"></mat-datepicker-toggle>
+            <mat-datepicker #csPurchaseDelivered></mat-datepicker>
+          </mat-form-field>
+          <div class="md-margin-left-2">to</div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="cePurchaseDelivered" [(ngModel)]="aePurchaseDelivered" placeholder="结束日期" (dateInput)="addEvent('cePurchaseDelivered', $event)">
+            <mat-datepicker-toggle matSuffix [for]="cePurchaseDelivered"></mat-datepicker-toggle>
+            <mat-datepicker #cePurchaseDelivered></mat-datepicker>
+          </mat-form-field>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+          </div>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="accent" (click)="cancelDate(4)">重置</button>
           </div>
         </div>
         <div class="md-margin-top-1">
