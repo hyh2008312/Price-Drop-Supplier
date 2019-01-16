@@ -86,6 +86,9 @@ export class OrderMainComponent implements OnInit {
   paymentExpired: any = false;
   orderExpired: any = false;
   orderExpiredIndex: any = 1;
+  orderNotStart: any = false;
+  typeNotStart: any = false;
+  paymentNotStart: any = false;
 
   csAll: any = false;
   ceAll: any = false;
@@ -121,6 +124,10 @@ export class OrderMainComponent implements OnInit {
   peUndelivered: any = false;
   csExpired: any = false;
   ceExpired: any = false;
+  csNotStart: any = false;
+  ceNotStart: any = false;
+  psNotStart: any = false;
+  peNotStart: any = false;
 
   typeList: any = [{
     text: '所有',
@@ -460,6 +467,15 @@ export class OrderMainComponent implements OnInit {
         paid_start_time = this.psUndelivered;
         paid_end_time = this.peUndelivered;
         break;
+      case 10:
+        status = 'Packing';
+        order_type = this.typeNotStart;
+        cod_status = this.paymentNotStart;
+        start_time = this.csNotStart;
+        end_time = this.ceNotStart;
+        paid_start_time = this.psNotStart;
+        paid_end_time = this.peNotStart;
+        break;
       default:
         break;
     }
@@ -475,55 +491,79 @@ export class OrderMainComponent implements OnInit {
 
     let category_id = this.categoryId? this.categoryId: null;
 
-    this.orderService.getSupplyOrderList({
-      status,
-      page,
-      page_size: this.pageSize,
-      search,
-      search_type,
-      order_type,
-      cod_status,
-      start_time,
-      end_time,
-      paid_start_time,
-      paid_end_time,
-      sourcing_status,
-      category_id
-    }).then((data) => {
-      self.length = data.count;
-      switch (event.index) {
-        case 0:
-          self.orderAll = data.results;
-          break;
-        case 1:
-          self.orderUnpaid = data.results;
-          break;
-        case 2:
-          self.orderPacking = data.results;
-          break;
-        case 3:
-          self.orderShipped = data.results;
-          break;
-        case 4:
-          self.orderAudit = data.results;
-          break;
-        case 5:
-          self.orderCanceled = data.results;
-          break;
-        case 6:
-          self.orderCompleted = data.results;
-          break;
-        case 7:
-          self.orderRefund = data.results;
-          break;
-        case 8:
-          self.orderExpired = data.results;
-          break;
-        case 9:
-          self.orderUndelivered = data.results;
-          break;
-      }
-    });
+    if(event.index < 10) {
+      this.orderService.getSupplyOrderList({
+        status,
+        page,
+        page_size: this.pageSize,
+        search,
+        search_type,
+        order_type,
+        cod_status,
+        start_time,
+        end_time,
+        paid_start_time,
+        paid_end_time,
+        sourcing_status,
+        category_id
+      }).then((data) => {
+        self.length = data.count;
+        switch (event.index) {
+          case 0:
+            self.orderAll = data.results;
+            break;
+          case 1:
+            self.orderUnpaid = data.results;
+            break;
+          case 2:
+            self.orderPacking = data.results;
+            break;
+          case 3:
+            self.orderShipped = data.results;
+            break;
+          case 4:
+            self.orderAudit = data.results;
+            break;
+          case 5:
+            self.orderCanceled = data.results;
+            break;
+          case 6:
+            self.orderCompleted = data.results;
+            break;
+          case 7:
+            self.orderRefund = data.results;
+            break;
+          case 8:
+            self.orderExpired = data.results;
+            break;
+          case 9:
+            self.orderUndelivered = data.results;
+            break;
+        }
+      });
+    } else {
+      this.orderService.getSupplyOrderRecommendList({
+        status,
+        search,
+        search_type,
+        order_type,
+        cod_status,
+        start_time,
+        end_time,
+        paid_start_time,
+        paid_end_time,
+        sourcing_status,
+        category_id
+      }).then((data) => {
+        self.length = data.count;
+        switch (event.index) {
+          case 10:
+            self.orderNotStart = data.results;
+            break;
+        }
+      });
+    }
+
 
   }
 
@@ -628,6 +668,9 @@ export class OrderMainComponent implements OnInit {
       case 9:
         excel = [...this.orderUndelivered];
         break;
+      case 10:
+        excel = [...this.orderNotStart];
+        break;
     }
 
     for(let item of excel) {
@@ -712,7 +755,9 @@ export class OrderMainComponent implements OnInit {
       case 9:
         this.typeUndelivered = $event;
         break;
-
+      case 10:
+        this.typeNotStart = $event;
+        break;
     }
 
     this.changeProducts({
@@ -752,6 +797,9 @@ export class OrderMainComponent implements OnInit {
         break;
       case 9:
         this.paymentUndelivered = $event;
+        break;
+      case 10:
+        this.paymentNotStart = $event;
         break;
     }
 
