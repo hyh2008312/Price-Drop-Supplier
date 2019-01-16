@@ -302,7 +302,7 @@ export class OrderMainComponent implements OnInit {
     let paid_end_time = false;
     let sourcing_status = false;
     const search = this.searchKey && this.searchKey != ''? this.searchKey: null;
-    let search_type = '';
+    let search_type: any = null;
     if(search) {
       search_type = this.searchType;
     }

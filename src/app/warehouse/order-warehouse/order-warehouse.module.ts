@@ -6,6 +6,7 @@ import { OrderReturnDetailComponent } from './order-return-detail/order-return-d
 
 import { OrderItemComponent } from './order-item/order-item.component';
 import { OrderTitleComponent } from './order-title/order-title.component';
+import { OrderTitleFixedComponent } from './order-title-fixed/order-title-fixed.component';
 import { OrderDetailItemComponent } from './order-detail-item/order-detail-item.component';
 import { OrderDetailTitleComponent } from './order-detail-title/order-detail-title.component';
 import { OrderDetailTrackingItemComponent } from './order-detail-tracking-item/order-detail-tracking-item.component';
@@ -51,7 +52,8 @@ import { SharedModule } from '../../shared/shared.module';
     ApproveCancelDialogComponent,
     AddGatiPostDialogComponent,
     AddOrderStockDialogComponent,
-    AddNoteDialogComponent
+    AddNoteDialogComponent,
+    OrderTitleFixedComponent
   ],
   entryComponents: [
     AddTrackingInformationDialogComponent,
@@ -64,7 +66,8 @@ import { SharedModule } from '../../shared/shared.module';
     ApproveCancelDialogComponent,
     AddGatiPostDialogComponent,
     AddOrderStockDialogComponent,
-    AddNoteDialogComponent
+    AddNoteDialogComponent,
+    OrderTitleFixedComponent
   ],
   providers: [
     OrderService

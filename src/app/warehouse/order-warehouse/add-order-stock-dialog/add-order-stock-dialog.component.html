@@ -3,10 +3,10 @@
     <i class="iconfontXberts icon-ic-close"></i>
   </div>
   <div class="sc-order-dialog__title">
-    Order Sourcing
+    订单采购信息
   </div>
   <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
-    <div>Order #: {{data.order.number}}</div>
+    <div>订单号 #: {{data.order.number}}</div>
     <div class="md-margin-left-3" fxFlex>{{data.order.sumOrderNumber? 'Sum Order #:' + data.order.sumOrderNumber: ''}}</div>
   </div>
   <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
@@ -27,7 +27,7 @@
     <div fxLayout="row" fxLayoutAlign="start center">
       <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
         <mat-form-field fxFlex>
-          <input type="text" matInput placeholder="Sourcing Number" formControlName="sourcingOrderNumber">
+          <input type="text" matInput placeholder="采购单号" formControlName="sourcingOrderNumber">
         </mat-form-field>
       </div>
     </div>
@@ -39,7 +39,7 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <mat-select name="shippingProvider" placeholder="Select a Provider" formControlName="sourcingSupplier">
+        <mat-select name="shippingProvider" placeholder="选择采购平台" formControlName="sourcingSupplier">
           <mat-option class="md-align-center" *ngFor="let item of sourcingSupplierList" [value]="item.sourcingName">
             {{ item.sourcingName }}
           </mat-option>
@@ -48,7 +48,7 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <mat-select name="warehouse" placeholder="Select a Warehouse" formControlName="warehouseId">
+        <mat-select name="warehouse" placeholder="选择仓库" formControlName="warehouseId">
           <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
             {{ item.warehouseName }}
           </mat-option>
@@ -57,7 +57,7 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <mat-select name="supplierProvider" placeholder="Select a Supplier Account" formControlName="purchaseAccount">
+        <mat-select name="supplierProvider" placeholder="选择采购账号" formControlName="purchaseAccount">
           <mat-option class="md-align-center" *ngFor="let item of supplierList" [value]="item">
             {{ item }}
           </mat-option>
@@ -66,12 +66,12 @@
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="Sourcing Price (RMB)" formControlName="purchasePrice">
+        <input type="text" matInput placeholder="采购价格(RMB)" formControlName="purchasePrice">
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="Purchase URL" formControlName="purchaseUrl">
+        <input type="text" matInput placeholder="采购链接" formControlName="purchaseUrl">
       </mat-form-field>
     </div>
   </form>
@@ -79,9 +79,9 @@
     {{error}}
   </div>
   <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-raised-button color="primary" (click)="changeOrderSourcing()">SAVE</button>
+    <button mat-raised-button color="primary" (click)="changeOrderSourcing()">保存</button>
     <div class="md-margin-left-2">
-      <button mat-button color="primary" (click)="close()">CANCEL</button>
+      <button mat-button color="primary" (click)="close()">取消</button>
     </div>
   </div>
 </div>

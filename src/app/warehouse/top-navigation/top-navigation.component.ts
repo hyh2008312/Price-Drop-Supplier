@@ -12,7 +12,7 @@ import { UserService } from '../../shared/services/user/user.service';
 
 export class TopNavigationComponent implements OnInit {
 
-  contents = [{
+  contents: any = [{
     id: 0,
     text: '采购单',
     router: './home',
@@ -30,9 +30,15 @@ export class TopNavigationComponent implements OnInit {
     router: './inventory',
     isActive: false,
     staff: false
+  }, {
+    id: 3,
+    text: '订单管理',
+    router: './order-warehouse',
+    isActive: false,
+    staff: true
   }];
 
-  accounts = [
+  accounts: any = [
     {
       id: 1,
       text: '退出',

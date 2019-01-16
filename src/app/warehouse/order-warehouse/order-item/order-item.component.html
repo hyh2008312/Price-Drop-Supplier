@@ -1,14 +1,14 @@
 <div fxLayout="column" fxLayoutAlign="start stretch">
   <div class="sc-order__product-height" fxLayout="row" fxLayoutAlign="start center" >
     <div class="xb-bold">
-      {{order.created | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY'}}
+      创建日期:{{order.created | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY'}}
     </div>
     <div class="xb-bold md-margin-left-3" *ngIf="order.paidTime">
-      Paid Time: {{order.paidTime | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY HH:mm:ss'}}
+      支付日期: {{order.paidTime | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY HH:mm:ss'}}
     </div>
-    <div class="md-margin-left-3">Order #: {{order.number}}</div>
-    <div class="md-margin-left-3" fxFlex>{{order.sumOrderNumber? 'Sum Order #:' + order.sumOrderNumber: ''}}</div>
-    <a class="sc-product__color text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/{{order.id}}" target="_blank">View Details</a>
+    <div class="md-margin-left-3">订单号 #: {{order.number}}</div>
+    <div class="md-margin-left-3" fxFlex>{{order.sumOrderNumber? '购物车订单号 #:' + order.sumOrderNumber: ''}}</div>
+    <a class="sc-product__color text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/{{order.id}}" target="_blank">查看订单详情</a>
   </div>
   <div class="sc-order__product-item-1" fxLayout="row" fxLayoutAlign="start start">
     <div fxLayout="column" fxFlex="70" fxLayoutAlign="start stretch">
@@ -69,22 +69,22 @@
         {{order.email}}
       </div>
       <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started'">
-        <button mat-raised-button color="accent" (click)="editSourcing()">Mark as Sourcing</button>
+        <button mat-raised-button color="accent" (click)="editSourcing()">标记为已采购</button>
       </div>
       <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Started'">
-        <button mat-raised-button color="primary" (click)="editSourcing()"> View Sourcing Details</button>
+        <button mat-raised-button color="primary" (click)="editSourcing()">查看采购详情</button>
       </div>
       <div class="sc__accent-dark" *ngIf="order.orderStatus == 'Audit canceled'">
-        <button mat-raised-button color="accent" (click)="approveCancel()">View Detail</button>
+        <button mat-raised-button color="accent" (click)="approveCancel()">查看详情</button>
       </div>
       <div class="sc__accent-dark md-margin-left-1" *ngIf="order.orderStatus != 'Unpaid' && order.orderStatus != 'Canceled'">
-        <button mat-raised-button color="accent" (click)="addNote()" *ngIf="order.orderNotes == '' ">Add Note</button>
-        <button mat-raised-button color="primary" (click)="addNote()" *ngIf="order.orderNotes != ''">Edit Note</button>
+        <button mat-raised-button color="accent" (click)="addNote()" *ngIf="order.orderNotes == '' ">添加备注</button>
+        <button mat-raised-button color="primary" (click)="addNote()" *ngIf="order.orderNotes != ''">编辑备注</button>
       </div>
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        Phone
+        手机号
       </div>
       <div fxFlex="">
         {{order.phoneNumber}}
@@ -92,7 +92,7 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        Address
+        地址
       </div>
       <div>
         {{order.address}}
@@ -100,7 +100,7 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.sourcingOrderNumber">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        Sourcing Number
+        采购单号
       </div>
       <div>
         {{order.sourcingOrderNumber}}
@@ -108,7 +108,7 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start"  *ngIf="order.orderNotes">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        Order Notes
+        备注
       </div>
       <div>
         {{order.orderNotes}}
@@ -116,7 +116,7 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.shippingNumber">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        Order Tracking
+        运单号
       </div>
       <div>
         {{order.shippingNumber}}
@@ -124,7 +124,7 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.shippingNumber">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        Carrier
+        物流
       </div>
       <div>
         {{order.shippingProvider}}

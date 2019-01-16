@@ -123,37 +123,37 @@ export class OrderMainComponent implements OnInit {
   ceExpired: any = false;
 
   typeList: any = [{
-    text: 'All',
+    text: '所有',
     value: false
   }, {
-    text: 'Normal',
+    text: '普通订单',
     value: 'Normal'
   }, {
-    text: 'Cut',
+    text: '砍价订单',
     value: 'Cut'
   }, {
-    text: 'Flash',
+    text: '闪购订单',
     value: 'Flash'
   }];
   paymentList: any = [{
-    text: 'All',
+    text: '所有',
     value: false
   }, {
-    text: 'Cod',
+    text: '货到付款',
     value: 'cod'
   }, {
-    text: 'Prepaid',
+    text: '在线支付',
     value: 'imprest'
   }];
 
   sourcingList: any = [{
-    text: 'All',
+    text: '所有',
     value: false
   }, {
-    text: 'Not Started',
+    text: '未采购',
     value: 'Not Started'
   }, {
-    text: 'Started',
+    text: '已采购',
     value: 'Started'
   }];
 
@@ -165,26 +165,25 @@ export class OrderMainComponent implements OnInit {
   searchKey: any;
   isSearch: boolean = false;
   searchForm: FormGroup;
-  searchPackingForm: FormGroup;
 
   searchType = 'sku';
   searchTypeList = [{
-    text: 'Order Number',
+    text: '订单号',
     value: 'OrderNumber'
   }, {
-    text: 'Tracking Number',
+    text: '运单号',
     value: 'ShippingNumber'
   }, {
     text: 'SKU',
     value: 'sku'
   }, {
-    text: 'User Name',
+    text: '客户昵称',
     value: 'username'
   }, {
-    text: 'Product Name',
+    text: '商品名字',
     value: 'title'
   }, {
-    text: 'Sourcing Number',
+    text: '采购单号',
     value: 'sourcing_order_number'
   }];
 
@@ -194,6 +193,8 @@ export class OrderMainComponent implements OnInit {
   pageSizeOptions = [50];
 
   isSuperuser: any = false;
+
+  showNav: any = false;
 
   constructor(
     private orderService: OrderService,
@@ -302,7 +303,7 @@ export class OrderMainComponent implements OnInit {
     let paid_end_time = false;
     let sourcing_status = false;
     const search = this.searchKey && this.searchKey != ''? this.searchKey: null;
-    let search_type = '';
+    let search_type: any = null;
     if(search) {
       search_type = this.searchType;
     }
@@ -666,7 +667,8 @@ export class OrderMainComponent implements OnInit {
       return buf;
     }
 
-    saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), 'exported.xlsx');
+    saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), '订单' + new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
+      '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate()) +'.xlsx');
 
   }
 
@@ -822,5 +824,9 @@ export class OrderMainComponent implements OnInit {
         }
       })
     });
+  }
+
+  scrollChange($event) {
+    this.showNav = $event;
   }
 }
