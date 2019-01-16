@@ -19,7 +19,7 @@ export class RepeatOrderDirective implements AfterViewInit {
 
   public changeViewSize() {
     this.renderer.setElementStyle(this.el.nativeElement, "-webkit-box-ordinal-group", this.index);
-    this.renderer.setElementStyle(this.el.nativeElement, "-webkit-order", this.index);
+    this.renderer.setElementStyle(this.el.nativeElement, "-webkit-order-warehouse", this.index);
     this.renderer.setElementStyle(this.el.nativeElement, "order", this.index);
   }
 

@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {MainComponent} from './main/main.component';
-import {WarehouseOrderModule} from './order/order.module';
 
 const routes: Routes = [
   {
@@ -18,8 +17,8 @@ const routes: Routes = [
         path: 'inventory',
         loadChildren: './inventory/inventory.module#InventoryModule'
       }, {
-        path: 'order',
-        loadChildren: './order/order.module#WarehouseOrderModule'
+        path: 'order-warehouse',
+        loadChildren: './order-warehouse/order-warehouse.module#OrderWarehouseModule'
       }, {
         path: '',
         redirectTo: 'home',

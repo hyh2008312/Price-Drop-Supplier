@@ -23,13 +23,13 @@ import { AddNoteDialogComponent } from './add-note-dialog/add-note-dialog.compon
 
 import { OrderService } from './order.service';
 
-import { OrderRoutingModule } from './order.routes.module';
+import { OrderWarehouseRoutingModule } from './order-warehouse.routes.module';
 import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
     SharedModule,
-    OrderRoutingModule
+    OrderWarehouseRoutingModule
   ],
   exports: [],
   declarations: [
@@ -70,5 +70,5 @@ import { SharedModule } from '../../shared/shared.module';
     OrderService
   ]
 })
-export class WarehouseOrderModule { }
+export class OrderWarehouseModule { }
 
