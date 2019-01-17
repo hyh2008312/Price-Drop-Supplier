@@ -83,6 +83,25 @@ export class OrderService {
       });
   }
 
+  getSkuInventoryList(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}purchase/order/inventory/list/`;
+
+    return this.http.post(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   getOrderNumberCost(params:any): Promise<any> {
 
     let headers = new Headers({

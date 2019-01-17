@@ -61,25 +61,27 @@
     </div>
   </div>
   <div class="sc-order__product-item-3">
-    <div fxLayout="row" fxLayoutAlign="start start">
+    <div fxLayout="row" fxLayoutAlign="start center">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
         Email
       </div>
       <div fxFlex="">
         {{order.email}}
       </div>
-      <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started'">
-        <button mat-raised-button color="accent" (click)="editSourcing()">标记为已采购</button>
-      </div>
-      <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Started'">
-        <button mat-raised-button color="primary" (click)="editSourcing()">查看采购详情</button>
-      </div>
-      <div class="sc__accent-dark" *ngIf="order.orderStatus == 'Audit canceled'">
-        <button mat-raised-button color="accent" (click)="approveCancel()">查看详情</button>
-      </div>
-      <div class="sc__accent-dark md-margin-left-1" *ngIf="order.orderStatus != 'Unpaid' && order.orderStatus != 'Canceled'">
-        <button mat-raised-button color="accent" (click)="addNote()" *ngIf="order.orderNotes == '' ">添加备注</button>
-        <button mat-raised-button color="primary" (click)="addNote()" *ngIf="order.orderNotes != ''">编辑备注</button>
+      <div *ngIf="status != 9" fxLayout="row" fxLayoutAlign="start center">
+        <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started'">
+          <button mat-raised-button color="accent" (click)="editSourcing()">标记为已采购</button>
+        </div>
+        <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Started'">
+          <button mat-raised-button color="primary" (click)="editSourcing()">查看采购详情</button>
+        </div>
+        <div class="sc__accent-dark" *ngIf="order.orderStatus == 'Audit canceled'">
+          <button mat-raised-button color="accent" (click)="approveCancel()">查看详情</button>
+        </div>
+        <div class="sc__accent-dark md-margin-left-1" *ngIf="order.orderStatus != 'Unpaid' && order.orderStatus != 'Canceled'">
+          <button mat-raised-button color="accent" (click)="addNote()" *ngIf="order.orderNotes == '' ">添加备注</button>
+          <button mat-raised-button color="primary" (click)="addNote()" *ngIf="order.orderNotes != ''">编辑备注</button>
+        </div>
       </div>
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
@@ -128,6 +130,14 @@
       </div>
       <div>
         {{order.shippingProvider}}
+      </div>
+    </div>
+    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.recommendWarehouse">
+      <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
+        推荐仓库
+      </div>
+      <div>
+        {{order.recommendWarehouse.warehouseName}}
       </div>
     </div>
   </div>

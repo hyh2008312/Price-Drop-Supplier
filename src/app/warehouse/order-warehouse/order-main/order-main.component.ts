@@ -87,6 +87,7 @@ export class OrderMainComponent implements OnInit {
   orderExpired: any = false;
   orderExpiredIndex: any = 1;
   orderNotStart: any = false;
+  orderNotStartIndex: any = 1;
   typeNotStart: any = false;
   paymentNotStart: any = false;
 
@@ -283,9 +284,9 @@ export class OrderMainComponent implements OnInit {
       case 8:
         this.orderExpiredIndex = event.pageIndex + 1;
         break;
-      case 9:
-        this.orderUndeliveredIndex = event.pageIndex + 1;
-        break;
+      // case 9:
+      //   this.orderUndeliveredIndex = event.pageIndex + 1;
+      //   break;
     }
     this.changeProducts({index: type});
   }
@@ -451,23 +452,23 @@ export class OrderMainComponent implements OnInit {
         start_time = this.csExpired;
         end_time = this.ceExpired;
         break;
+      // case 9:
+      //   status = 'Undelivered';
+      //   if(event.resetPage) {
+      //     this.orderUndeliveredIndex = 1;
+      //   }
+      //   if(search) {
+      //     this.orderUndeliveredIndex = 1;
+      //   }
+      //   page = this.orderUndeliveredIndex;
+      //   order_type = this.typeUndelivered;
+      //   cod_status = this.paymentUndelivered;
+      //   start_time = this.csUndelivered;
+      //   end_time = this.ceUndelivered;
+      //   paid_start_time = this.psUndelivered;
+      //   paid_end_time = this.peUndelivered;
+      //   break;
       case 9:
-        status = 'Undelivered';
-        if(event.resetPage) {
-          this.orderUndeliveredIndex = 1;
-        }
-        if(search) {
-          this.orderUndeliveredIndex = 1;
-        }
-        page = this.orderUndeliveredIndex;
-        order_type = this.typeUndelivered;
-        cod_status = this.paymentUndelivered;
-        start_time = this.csUndelivered;
-        end_time = this.ceUndelivered;
-        paid_start_time = this.psUndelivered;
-        paid_end_time = this.peUndelivered;
-        break;
-      case 10:
         status = 'Packing';
         order_type = this.typeNotStart;
         cod_status = this.paymentNotStart;
@@ -491,7 +492,7 @@ export class OrderMainComponent implements OnInit {
 
     let category_id = this.categoryId? this.categoryId: null;
 
-    if(event.index < 10) {
+    if(event.index < 9) {
       this.orderService.getSupplyOrderList({
         status,
         page,
@@ -536,9 +537,9 @@ export class OrderMainComponent implements OnInit {
           case 8:
             self.orderExpired = data.results;
             break;
-          case 9:
-            self.orderUndelivered = data.results;
-            break;
+          // case 9:
+          //   self.orderUndelivered = data.results;
+          //   break;
         }
       });
     } else {
@@ -555,18 +556,15 @@ export class OrderMainComponent implements OnInit {
         sourcing_status,
         category_id
       }).then((data) => {
-        self.length = data.count;
         switch (event.index) {
-          case 10:
-            self.orderNotStart = data.results;
+          case 9:
+            self.getSKUOrders(data);
+            //self.orderNotStart = data;
             break;
         }
       });
     }
-
-
   }
-
 
   clearSearchKey() {
     this.searchKey = '';
@@ -598,9 +596,9 @@ export class OrderMainComponent implements OnInit {
       case 8:
         this.orderExpiredIndex = 1;
         break;
-      case 9:
-        this.orderUndeliveredIndex = 1;
-        break;
+      // case 9:
+      //   this.orderUndeliveredIndex = 1;
+      //   break;
       default:
         break;
     }
@@ -665,10 +663,10 @@ export class OrderMainComponent implements OnInit {
       case 8:
         excel = [...this.orderExpired];
         break;
+      // case 9:
+      //   excel = [...this.orderUndelivered];
+      //   break;
       case 9:
-        excel = [...this.orderUndelivered];
-        break;
-      case 10:
         excel = [...this.orderNotStart];
         break;
     }
@@ -752,10 +750,10 @@ export class OrderMainComponent implements OnInit {
       case 8:
         this.typeExpired = $event;
         break;
+      // case 9:
+      //   this.typeUndelivered = $event;
+      //   break;
       case 9:
-        this.typeUndelivered = $event;
-        break;
-      case 10:
         this.typeNotStart = $event;
         break;
     }
@@ -795,10 +793,10 @@ export class OrderMainComponent implements OnInit {
       case 8:
         this.paymentExpired = $event;
         break;
+      // case 9:
+      //   this.paymentUndelivered = $event;
+      //   break;
       case 9:
-        this.paymentUndelivered = $event;
-        break;
-      case 10:
         this.paymentNotStart = $event;
         break;
     }
@@ -877,4 +875,45 @@ export class OrderMainComponent implements OnInit {
   scrollChange($event) {
     this.showNav = $event;
   }
+
+  getSKUOrders(res) {
+    let skus: any = {};
+    for (let item of res) {
+      if (!skus[item.lines[0].sku]) {
+        skus[item.lines[0].sku] = {};
+        skus[item.lines[0].sku].itms = [];
+        skus[item.lines[0].sku].itms.push(item);
+      } else {
+        skus[item.lines[0].sku].itms.push(item);
+      }
+    }
+
+    let sku: any = [];
+    for( let key in skus) {
+      sku.push(key);
+    }
+
+    this.orderService.getSkuInventoryList({
+      sku
+    }).then((data) => {
+      let orderNotStart: any = [];
+      for(let item of data) {
+        const orders = skus[item.sku].itms;
+        let inventory: any = item.warehouseInventory;
+        for(let im of orders) {
+          for (let g of inventory) {
+            if(im.lines[0].quantity <= g.quantity - g.freezeQuantity) {
+              g.quantity -= im.lines[0].quantity;
+              orderNotStart.push(im);
+              im.recommendWarehouse = g;
+            }
+          }
+
+        }
+      }
+      this.orderNotStart = [...orderNotStart];
+      this.length = this.orderNotStart.length;
+    });
+  }
+
 }
