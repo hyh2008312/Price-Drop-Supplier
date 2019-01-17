@@ -58,6 +58,11 @@ export class InventoryMainComponent implements OnInit {
 
   showNav: any = false;
 
+  isLoading: boolean = false;
+  color: any = 'accent';
+  mode: any = 'indeterminate';
+  value: any = 20;
+
   constructor(
     private inventoryService: InventoryService,
     private router: Router,
@@ -241,6 +246,43 @@ export class InventoryMainComponent implements OnInit {
       new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
       '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate())
       + '.xlsx');
+
+  }
+
+  exportAll(): void {
+    const ws_name = '总库存清单';
+    const wb: WorkBook = { SheetNames: [], Sheets: {} };
+    let packing: any = [];
+    let excel: any = [];
+
+    this.isLoading = true;
+    this.inventoryService.getAllInventoryList().then((data) => {
+      this.isLoading = false;
+
+      excel = [...data];
+
+      for(let item of excel) {
+        let orderItem: any = {};
+        orderItem['标题'] = item.title;
+        orderItem['规格'] = item.attribute;
+        orderItem['SKU编号'] = item.sku;
+        orderItem['总库存'] = item.quantity;
+        orderItem['锁定库存'] = item.freezeQuantity;
+        orderItem['剩余库存'] = item.quantity - item.freezeQuantity;
+        packing.push(orderItem);
+      }
+
+      const ws: any = utils.json_to_sheet(packing);
+      wb.SheetNames.push(ws_name);
+      wb.Sheets[ws_name] = ws;
+      const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+      saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), '总库存清单' +
+        new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
+        '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate())
+        + '.xlsx');
+
+    });
 
   }
 
