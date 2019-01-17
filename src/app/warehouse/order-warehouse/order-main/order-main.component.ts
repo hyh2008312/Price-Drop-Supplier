@@ -900,18 +900,41 @@ export class OrderMainComponent implements OnInit {
       for(let item of data) {
         const orders = skus[item.sku].itms;
         let inventory: any = item.warehouseInventory;
+        inventory.sort((a, b) => {
+          return (b.quantity - b.freezeQuantity) < (a.quantity - a.freezeQuantity)
+        });
         for(let im of orders) {
+          let isReocommend: any = false;
           for (let g of inventory) {
             if(im.lines[0].quantity <= g.quantity - g.freezeQuantity) {
               g.quantity -= im.lines[0].quantity;
-              orderNotStart.push(im);
               im.recommendWarehouse = g;
+              isReocommend = true;
+              break;
             }
           }
-
+          if(isReocommend) {
+            orderNotStart.push(im);
+          }
         }
       }
-      this.orderNotStart = [...orderNotStart];
+
+      let orderEmail: any = {};
+      for (let item of orderNotStart) {
+        if (!orderEmail[item.email]) {
+          orderEmail[item.email] = {};
+          orderEmail[item.email].itms = [];
+          orderEmail[item.email].itms.push(item);
+        } else {
+          orderEmail[item.email].itms.push(item);
+        }
+      }
+      this.orderNotStart = [];
+      for(let key in orderEmail) {
+        for(let im of orderEmail[key].itms) {
+          this.orderNotStart.push(im);
+        }
+      }
       this.length = this.orderNotStart.length;
     });
   }
