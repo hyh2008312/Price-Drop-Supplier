@@ -1221,6 +1221,14 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <div class="md-margin-right-2">采购状态: </div>
+            <mat-form-field>
+              <mat-select [ngModel]="sourcingPacking" name="sourcing" (valueChange)="sourcingChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of sourcingList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>订单创建时间: </div>

@@ -243,7 +243,7 @@ export class OrderService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}order/create/gati/shipping/`;
+    const url = `${this.baseUrl.url}purchase/create/gati/shipping/`;
 
     return this.http.put(url, tracking, options)
       .toPromise()

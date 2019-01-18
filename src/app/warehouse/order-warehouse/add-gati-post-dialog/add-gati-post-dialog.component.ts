@@ -77,8 +77,7 @@ export class AddGatiPostDialogComponent implements OnInit {
         self.error = data.detail;
       } else {
         self.close();
-        self.data.isShippingNumberEdit = true;
-        self.data.order = data;
+        self.data.isEdit = true;
         self.error = false;
       }
     });

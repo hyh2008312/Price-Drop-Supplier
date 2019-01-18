@@ -476,6 +476,7 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceNotStart;
         paid_start_time = this.psNotStart;
         paid_end_time = this.peNotStart;
+        sourcing_status = this.sourcingPacking;
         break;
       default:
         break;
@@ -715,10 +716,21 @@ export class OrderMainComponent implements OnInit {
 
   createTracking() {
     let dialogRef = this.dialog.open(AddGatiPostDialogComponent, {
-      data: {}
+      data: {
+        isEdit: false
+      }
     });
 
-    dialogRef.afterClosed().subscribe(result => {});
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        if(this.selectedIndex == 2) {
+          this.orderShippedIndex = 1;
+        }
+        this.changeProducts({
+          index: this.selectedIndex
+        });
+      }
+    });
   }
 
   typeChange($event) {

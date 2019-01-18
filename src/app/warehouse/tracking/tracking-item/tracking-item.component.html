@@ -59,9 +59,9 @@
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Not Found'" ></div>
       <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Not Found'"
               (click)="changeStatus()">已打包出库</button>
-      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Packaging Completed'" ></div>
-      <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Packaging Completed'"
-              (click)="changeStatus()">取消打包出库</button>
+      <!--<div class="md-margin-top-1" *ngIf="product.pickStatus == 'Packaging Completed'" ></div>-->
+      <!--<button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Packaging Completed'"-->
+              <!--(click)="changeStatus()">取消打包出库</button>-->
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging'" ></div>
       <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Pending Packaging'"
               (click)="notFountStatus()">找不到产品</button>
