@@ -692,6 +692,9 @@ export class OrderMainComponent implements OnInit {
       orderItem.phoneNumber = item.phoneNumber;
       orderItem.email = item.email;
       orderItem.paymentAmount = item.paymentAmount;
+      orderItem.TrackingNumber = item.shippingNumber;
+      orderItem.shippingProvider = item.shippingProvider;
+      orderItem.notes = item.orderNotes;
       packing.push(orderItem);
     }
 
