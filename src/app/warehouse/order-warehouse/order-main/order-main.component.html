@@ -1325,7 +1325,7 @@
                            *ngIf="orderNotStart && orderNotStart.length > 0">
             </mat-paginator>
             <div class="sc-order__product-none" fxLayout="row" fxLayoutAlign="center center"
-                 *ngIf="orderPacking && orderPacking.length <= 0">
+                 *ngIf="orderNotStart && orderNotStart.length <= 0">
               <div fxLayout="column" fxLayoutAlign="center center">
                 <i class="iconfontXberts icon-ic-empty"></i>
                 <div class="sc-order__product-title-1 md-margin-top-4">No orders found</div>
