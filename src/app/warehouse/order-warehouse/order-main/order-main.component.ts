@@ -204,6 +204,11 @@ export class OrderMainComponent implements OnInit {
 
   showNav: any = false;
 
+  isLoading: boolean = false;
+  color: any = 'accent';
+  mode: any = 'indeterminate';
+  value: any = 20;
+
   constructor(
     private orderService: OrderService,
     private userService: UserService,
@@ -544,6 +549,7 @@ export class OrderMainComponent implements OnInit {
         }
       });
     } else {
+      this.isLoading = true;
       this.orderService.getSupplyOrderRecommendList({
         status,
         search,
@@ -951,6 +957,7 @@ export class OrderMainComponent implements OnInit {
         }
       }
       this.length = this.orderNotStart.length;
+      this.isLoading = false;
     });
   }
 

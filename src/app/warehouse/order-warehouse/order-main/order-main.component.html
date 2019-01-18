@@ -1181,6 +1181,9 @@
             <div class="md-margin-left-3 sc__accent-dark" *ngIf="isSuperuser">
               <button mat-raised-button color="pimary" (click)="createTracking()">创建GATI拣货单</button>
             </div>
+            <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="isLoading">
+              <mat-progress-spinner [color]="color" [mode]="mode" [value]="value" [diameter]="value"></mat-progress-spinner>
+            </div>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
               <form class="sc-product__search" [formGroup]="searchForm"
                     fxLayout="row" fxLayoutAlign="start center" >
