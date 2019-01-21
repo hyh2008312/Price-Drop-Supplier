@@ -83,6 +83,8 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
 
   isFirstLoad: boolean = false;
 
+  productStatus: any = '';
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -175,6 +177,8 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
         this.additionalList.push('');
         this.additionalSrcs.push('');
       }
+
+      this.productStatus = data.status;
     });
 
     this.adminService.getCategoryList().then((value) => {
@@ -675,6 +679,31 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
       data: 'Successfully Saved!',
       duration: 4000,
       verticalPosition: 'top'
+    });
+  }
+
+  publish() {
+    let self = this;
+    let id = this.activatedRoute.snapshot.params['id'];
+
+    self.adminService.publishProduct({
+      id,
+      status: 'published'
+    }).then((data) => {
+      this.productStatus = 'published';
+    });
+
+  }
+
+  unpublish() {
+    let self = this;
+    let id = this.activatedRoute.snapshot.params['id'];
+
+    self.adminService.publishProduct({
+      id,
+      status: 'unpublished'
+    }).then((data) => {
+      this.productStatus = 'unpublished';
     });
   }
 }
