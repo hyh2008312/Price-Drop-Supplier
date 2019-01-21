@@ -7,8 +7,9 @@
         <span class="xb-bold">EDIT PRODUCT</span>
       </div>
       <div class="md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
-        <div class="md-margin-right-2">Status: {{productStatus}}</div>
-        <button mat-raised-button *ngIf="productStatus != 'published'" color="primary" type="button" (click)="publish()">
+        <div>Status: {{productStatus}}</div>
+        <div class="md-margin-left-2"></div>
+        <button mat-raised-button *ngIf="productStatus == 'unpublished'" color="primary" type="button" (click)="publish()">
           Publish
         </button>
         <button mat-raised-button *ngIf="productStatus == 'published'" color="primary" type="button" (click)="unpublish()">
