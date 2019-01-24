@@ -12,7 +12,7 @@ import {UserService} from '../../shared/services/user/user.service';
 
 export class TopNavigationComponent implements OnInit {
 
-  contents = [{
+  contents: any = [{
     id: 0,
     text: 'HOME',
     router: './dashboard',
@@ -55,40 +55,22 @@ export class TopNavigationComponent implements OnInit {
     staff: true
   }];
 
-  accounts = [
+  accounts: any = [
     {
       id: 0,
-      text: 'Payment Settings',
-      router: './account/paymentsettings',
-      isActive: false
-    },
-    {
-      id: 1,
-      text: 'Account Balance',
-      router: './account/balance',
-      isActive: false
-    },
-    {
-      id: 2,
-      text: 'Disputes',
-      router: './account/balance',
-      isActive: false
-    },
-    {
-      id: 4,
       text: 'Sellers Settings',
       router: './address',
       isActive: false
     },
     {
-      id: 5,
+      id: 1,
       text: 'Logout',
       router: './account/balance',
       isActive: false
     }
   ];
 
-  users = [
+  users: any = [
     {
       id: 0,
       text: '用户审核',

@@ -9,7 +9,11 @@ import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-mome
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
+import {CategoryListDialogComponent} from "../category-list-dialog/category-list-dialog.component";
+
 import { graphic } from 'echarts';
+import {AddOrderStockDialogComponent} from '../../order/add-order-stock-dialog/add-order-stock-dialog.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-customer-service-main',
@@ -50,7 +54,55 @@ export class DashboardMainComponent implements OnInit {
   psPro: any = false;
   pePro: any = false;
 
-  options: any;
+  loadingOpts = {
+    text: 'Loading',
+    color: '#00bdfc',
+    textColor: '#ff0000',
+    maskColor: 'rgba(255, 255, 255, 0.6)',
+    zlevel: 0
+  };
+
+  options: any = {
+    tooltip : {
+      trigger: 'axis'
+    },
+    xAxis: {
+      axisLabel: {
+        textStyle: {
+          color: '#919aa7'
+        }
+      },
+      axisTick: {
+        show: false
+      },
+      axisLine: {
+        show: true,
+        lineStyle: {
+          color: '#48b',
+          width: 1,
+          type: 'solid'
+        }
+      }
+    },
+    yAxis: {
+      axisLine: {
+        show: true,
+        lineStyle: {
+          color: '#48b',
+          width: 1,
+          type: 'solid'
+        }
+      },
+      axisTick: {
+        show: false
+      },
+      axisLabel: {
+        textStyle: {
+          color: '#919aa7'
+        }
+      }
+    }
+  };
 
   options1: any;
 
@@ -70,10 +122,15 @@ export class DashboardMainComponent implements OnInit {
   };
   currency:string = 'INR';
 
-  constructor(private router: Router,
-              private dashboardService: DashboardService,
-              private activatedRoute: ActivatedRoute,
-              private fb: FormBuilder) {
+  isCateLoading: any = false;
+
+  constructor(
+    private router: Router,
+    private dashboardService: DashboardService,
+    private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private dialog: MatDialog
+  ) {
 
   }
 
@@ -132,48 +189,75 @@ export class DashboardMainComponent implements OnInit {
   }
 
   getCharts() {
-    const dataAxis = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
-    const data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
-    const yMax = 1200;
-    const dataShadow = [];
 
-    for (let i = 0; i < data.length; i++) {
-      dataShadow.push(yMax);
-    }
+    this.isCateLoading = true;
+    this.dashboardService.getCategoryMainProductList().then((res) => {
+      const dataAxis = [];
+      const data = [];
+      const dataShow = [];
 
-    this.options = {
-      xAxis: {
-        data: dataAxis,
-        axisLabel: {
-          inside: true,
-          textStyle: {
-            color: '#fff'
+      for (let i = 0; i < res.length; i++) {
+        const item = res[i];
+        dataAxis.push(item.name);
+        data.push(item.count);
+        dataShow.push({
+          name: item.name,
+          value: item.count,
+          xAxis: i,
+          yAxis: item.count
+        });
+      }
+
+      this.options = {
+        tooltip : {
+          trigger: 'item'
+        },
+        xAxis: {
+          data: dataAxis,
+          axisLabel: {
+            interval: 0,
+            textStyle: {
+              color: 'rgba(0,0,0,0.87)'
+            }
+          },
+          axisTick: {
+            show: false
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#48b',
+              width: 1,
+              type: 'solid'
+            }
           }
         },
-        axisTick: {
-          show: false
-        },
-        axisLine: {
-          show: false
-        },
-        z: 10
-      },
-      yAxis: {
-        axisLine: {
-          show: false
-        },
-        axisTick: {
-          show: false
-        },
-        axisLabel: {
-          textStyle: {
-            color: '#999'
+        yAxis: {
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#48b',
+              width: 1,
+              type: 'solid'
+            }
+          },
+          axisTick: {
+            show: false
+          },
+          axisLabel: {
+            textStyle: {
+              color: 'rgba(0,0,0,0.87)'
+            }
           }
-        }
-      },
-      series: [
-        {
+        },
+        series: [{
+          name: 'Number of listings by Category',
           type: 'bar',
+          barWidth: '32',
+          symbol: 'droplet',
+          showSymbol: true,
+          hoverAnimation: false,
+          data: data,
           itemStyle: {
             normal: {
               color: new graphic.LinearGradient(
@@ -183,7 +267,8 @@ export class DashboardMainComponent implements OnInit {
                   { offset: 0.5, color: '#188df0' },
                   { offset: 1, color: '#188df0' }
                 ]
-              )
+              ),
+              barBorderRadius: [16, 16, 0, 0]
             },
             emphasis: {
               color: new graphic.LinearGradient(
@@ -193,61 +278,100 @@ export class DashboardMainComponent implements OnInit {
                   { offset: 0.7, color: '#2378f7' },
                   { offset: 1, color: '#83bff6' }
                 ]
-              )
+              ),
+              barBorderRadius: [16, 16, 0, 0]
             }
           },
-          data: data
-        }
-      ]
-    };
+          markPoint: {
+            large: true,
+            data: dataShow,
+            itemStyle: {
+              normal: {
+                color: '#663eb1'
+              }
+            }
+          }
+        }]
+      };
+      this.isCateLoading = false;
+    });
+
   }
 
   getCharts1() {
-    const dataAxis = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
+    const dataAxis = ['Jewellery & Watches', 'Jewellery & Watches', 'Jewellery & Watches', 'Jewellery & Watches', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'RCoats & Jackets', 'Coats & Jackets', 'Coats & Jackets'];
     const data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
     const yMax = 1200;
     const dataShadow = [];
+    const dataShow = [];
 
     for (let i = 0; i < data.length; i++) {
       dataShadow.push(yMax);
+      dataShow.push({
+        name: dataAxis[i],
+        value: data[i],
+        xAxis: i,
+        yAxis: data[i]
+      });
     }
 
     this.options1 = {
+      tooltip : {
+        trigger: 'axis'
+      },
       xAxis: {
         data: dataAxis,
         axisLabel: {
-          inside: true,
           textStyle: {
-            color: '#fff'
+            color: '#919aa7'
           }
         },
         axisTick: {
           show: false
         },
         axisLine: {
-          show: false
-        },
-        z: 10
+          show: true,
+          lineStyle: {
+            color: '#48b',
+            width: 1,
+            type: 'solid'
+          }
+        }
       },
       yAxis: {
         axisLine: {
-          show: false
+          show: true,
+          lineStyle: {
+            color: '#48b',
+            width: 1,
+            type: 'solid'
+          }
         },
         axisTick: {
           show: false
         },
         axisLabel: {
           textStyle: {
-            color: '#999'
+            color: '#919aa7'
           }
         }
       },
       series: [{
-        name: 'Mocking Data',
+        name: 'Product Number',
         type: 'line',
-        showSymbol: false,
+        barWidth: '10',
+        showSymbol: true,
         hoverAnimation: false,
-        data: data
+        data: data,
+        itemStyle: {
+          normal: {
+            color: '#663eb1'
+          }
+        },
+        markPoint: {
+          large: true,
+          data: dataShow
+        }
       }]
     };
   }
@@ -298,6 +422,18 @@ export class DashboardMainComponent implements OnInit {
           name: 'All'
         }
       })
+    });
+  }
+
+  openDialog() {
+    let dialogRef = this.dialog.open(CategoryListDialogComponent, {
+      data: {}
+    });
+
+    let self = this;
+
+    dialogRef.afterClosed().subscribe(result => {
+
     });
   }
 

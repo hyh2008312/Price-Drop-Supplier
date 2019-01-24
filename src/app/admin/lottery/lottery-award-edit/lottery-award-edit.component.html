@@ -96,7 +96,11 @@
           <div formArrayName="variants" >
             <div *ngFor="let p of product.controls; let i = index;">
               <div [formGroupName]="i" fxLayout="column">
-                <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <div class="md-margin-right-2 sc-product__create-title">SKU</div>
+                  <div>{{p.value.sku}}</div>
+                </div>
+                <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="space-between center">
                   <div fxFlex="46" fxLayout="row" fxLayoutAlign="start center">
                     <div class="md-margin-right-2 sc-product__create-title">MRP</div>
                     <mat-form-field fxFlex>

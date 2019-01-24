@@ -1,6 +1,6 @@
 <div class="container">
   <div class="xb-dashboard__top" fxLayout="row" fxLayoutAlign="space-between center">
-    <div class="xb-dashboard__top-title">Overview</div>
+    <div class="xb-dashboard__top-title">Orders</div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="end center">
         <div>Filter by Start Time: </div>
@@ -86,59 +86,41 @@
   </div>
   <div class="md-margin-top-2">
     <div class="md-margin-bottom-2" fxLayout="row" fxLayoutAlign="start center">
-      <div class="xb-dashboard__top-title" fxFlex="">Products of All Categories</div>
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="end center">
-          <div>Filter by Start Time: </div>
-          <mat-form-field class="md-margin-left-2">
-            <input matInput [matDatepicker]="csCate" [(ngModel)]="psCate" placeholder="Start Date" (dateInput)="addEvent('csCate', $event)">
-            <mat-datepicker-toggle matSuffix [for]="csCate"></mat-datepicker-toggle>
-            <mat-datepicker #csCate></mat-datepicker>
-          </mat-form-field>
-          <div class="md-margin-left-2">to</div>
-          <mat-form-field class="md-margin-left-2">
-            <input matInput [matDatepicker]="ceCate" [(ngModel)]="peCate" placeholder="End Date" (dateInput)="addEvent('ceCate', $event)">
-            <mat-datepicker-toggle matSuffix [for]="ceCate"></mat-datepicker-toggle>
-            <mat-datepicker #ceCate></mat-datepicker>
-          </mat-form-field>
-          <div class="sc__accent-dark md-margin-left-2">
-            <button mat-raised-button color="pimary" (click)="filterDateCate()">Confirm</button>
-          </div>
-          <div class="sc__accent-dark md-margin-left-2">
-            <button mat-raised-button color="accent" (click)="resetDateCate()">Reset</button>
-          </div>
-        </div>
-      </div>
+      <div class="xb-dashboard__top-title" fxFlex="">Number of Listings by Category</div>
+      <button mat-button color="primary" (click)="openDialog()">SEE DETAILS</button>
     </div>
-    <div echarts [options]="options" class="xb-dashboard__data"></div>
+    <div class="xb-dashboard__data-card">
+      <div echarts [options]="options" [loading]="isCateLoading" [loadingOpts]="loadingOpts" class="xb-dashboard__data"></div>
+    </div>
   </div>
-  <div class="md-margin-top-2">
+  <div class="md-margin-top-2 md-margin-bottom-2">
     <div class="md-margin-bottom-2" fxLayout="row" fxLayoutAlign="start center">
-      <div class="xb-dashboard__top-title" fxFlex="">New Product Trend</div>
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="end center">
-          <div>Filter by Start Time: </div>
-          <mat-form-field class="md-margin-left-2">
-            <input matInput [matDatepicker]="csPro" [(ngModel)]="psPro" placeholder="Start Date" (dateInput)="addEvent('csPro', $event)">
-            <mat-datepicker-toggle matSuffix [for]="csPro"></mat-datepicker-toggle>
-            <mat-datepicker #csPro></mat-datepicker>
-          </mat-form-field>
-          <div class="md-margin-left-2">to</div>
-          <mat-form-field class="md-margin-left-2">
-            <input matInput [matDatepicker]="cePro" [(ngModel)]="pePro" placeholder="End Date" (dateInput)="addEvent('cePro', $event)">
-            <mat-datepicker-toggle matSuffix [for]="cePro"></mat-datepicker-toggle>
-            <mat-datepicker #cePro></mat-datepicker>
-          </mat-form-field>
-          <div class="sc__accent-dark md-margin-left-2">
-            <button mat-raised-button color="pimary" (click)="filterDateCate()">Confirm</button>
-          </div>
-          <div class="sc__accent-dark md-margin-left-2">
-            <button mat-raised-button color="accent" (click)="resetDateCate()">Reset</button>
-          </div>
+      <div class="xb-dashboard__top-title" fxFlex="">Incremental Listings</div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="end center">
+        <div>Filter by Start Time: </div>
+        <mat-form-field class="md-margin-left-2">
+          <input matInput [matDatepicker]="csPro" [(ngModel)]="psPro" placeholder="Start Date" (dateInput)="addEvent('csPro', $event)">
+          <mat-datepicker-toggle matSuffix [for]="csPro"></mat-datepicker-toggle>
+          <mat-datepicker #csPro></mat-datepicker>
+        </mat-form-field>
+        <div class="md-margin-left-2">to</div>
+        <mat-form-field class="md-margin-left-2">
+          <input matInput [matDatepicker]="cePro" [(ngModel)]="pePro" placeholder="End Date" (dateInput)="addEvent('cePro', $event)">
+          <mat-datepicker-toggle matSuffix [for]="cePro"></mat-datepicker-toggle>
+          <mat-datepicker #cePro></mat-datepicker>
+        </mat-form-field>
+        <div class="sc__accent-dark md-margin-left-2">
+          <button mat-raised-button color="pimary" (click)="filterDateCate()">Confirm</button>
+        </div>
+        <div class="sc__accent-dark md-margin-left-2">
+          <button mat-raised-button color="accent" (click)="resetDateCate()">Reset</button>
         </div>
       </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="md-margin-left-2">Filter by Category: </div>
       <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
         <mat-form-field fxFlex>
           <mat-select name="category" placeholder="Select a Category"
@@ -170,6 +152,8 @@
         </mat-form-field>
       </div>
     </div>
-    <div echarts [options]="options1" class="xb-dashboard__data"></div>
+    <div class="xb-dashboard__data-card">
+      <div echarts [options]="options1" class="xb-dashboard__data"></div>
+    </div>
   </div>
 </div>

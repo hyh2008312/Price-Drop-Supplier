@@ -6,6 +6,7 @@ import {DashboardService} from "./dashboard.service";
 import {DashboardTitleComponent} from "./dashboard-title/dashboard-title.component";
 import {DashboardMainComponent} from "./dashboard-main/dashboard-main.component";
 import {DashboardItemComponent} from "./dashboard-item/dashboard-item.component";
+import {CategoryListDialogComponent} from "./category-list-dialog/category-list-dialog.component";
 
 @NgModule({
   imports: [
@@ -16,9 +17,12 @@ import {DashboardItemComponent} from "./dashboard-item/dashboard-item.component"
   declarations: [
     DashboardTitleComponent,
     DashboardMainComponent,
-    DashboardItemComponent
+    DashboardItemComponent,
+    CategoryListDialogComponent
   ],
-  entryComponents: [],
+  entryComponents: [
+    CategoryListDialogComponent
+  ],
   providers: [DashboardService]
 })
 export class DashboardModule {

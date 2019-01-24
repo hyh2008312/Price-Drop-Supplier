@@ -9,7 +9,7 @@
         <div>规格: {{product.attribute}}</div>
       </div>
     </div>
-    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 1"
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 0"
          fxLayout="column" fxLayoutAlign="center center">
       {{product.warehouseName}}
     </div>
@@ -19,15 +19,15 @@
       <button mat-raised-button color="primary"
            ngxClipboard [cbContent]="product.sku" (cbOnSuccess)="copy($event)">点击复制SKU</button>
     </div>
-    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 0"
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 1"
          fxLayout="column" fxLayoutAlign="center center">
       {{product.quantity}}
     </div>
-    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 1 && !isEdit"
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 0 && !isEdit"
          fxLayout="column" fxLayoutAlign="center center">
       {{product.quantity}}
     </div>
-    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 1 && isEdit"
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="10" *ngIf="status == 0 && isEdit"
          fxLayout="row" fxLayoutAlign="center center">
       <mat-form-field class="sc-product__create-width">
         <input type="number" matInput [(ngModel)]="product.quantity" />
@@ -39,18 +39,19 @@
     <div class="sc-product__product-id md-margin-right-2" fxFlex="10" fxLayout="column" fxLayoutAlign="center center">
       {{product.quantity - product.freezeQuantity}}
     </div>
-    <div class="sc-product__product-id sc__accent-dark" fxFlex="10" *ngIf="status == 1"
+    <div class="sc-product__product-id sc__accent-dark" fxFlex="10" *ngIf="status == 0"
          fxLayout="column" fxLayoutAlign="center center">
-      <i class="material-icons md-dark-secondary xb-pointer" *ngIf="!isEdit" (click)="edit()">edit</i>
+      <button mat-raised-button color="primary" *ngIf="!isEdit"
+              (click)="edit()">编辑</button>
       <button mat-raised-button color="primary" *ngIf="isEdit"
               (click)="edit()">保存</button>
     </div>
-    <div class="sc-product__product-id sc__accent-dark" fxFlex="10" *ngIf="status == 0"
+    <div class="sc-product__product-id sc__accent-dark" fxFlex="10" *ngIf="status == 1"
          fxLayout="column" fxLayoutAlign="center center">
     </div>
   </div>
 </div>
-<div class="sc-product__product-item-1" fxLayout="row" fxLayoutAlign="start center" *ngIf="status == 0">
+<div class="sc-product__product-item-1" fxLayout="row" fxLayoutAlign="start center" *ngIf="status == 1">
   <div class="md-margin-right-3" *ngFor="let item of product.warehouseInventory" fxLayout="row" fxLayoutAlign="start center">
     <div>{{item.warehouseName}}</div>
     <div class="md-margin-left-1">总库存: <span class="sc-product__product-red">{{item.quantity}}</span> 件</div>

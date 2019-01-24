@@ -154,7 +154,7 @@ export class InventoryMainComponent implements OnInit {
           this.inventoryAll = [...data.results];
         });
         break;
-      case 2:
+      case 0:
         page = this.inventoryWareIndex;
         quantity = this.quantityWare;
         quantity = quantity? quantity: null;
