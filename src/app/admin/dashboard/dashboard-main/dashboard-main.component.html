@@ -85,31 +85,91 @@
     </div>
   </div>
   <div class="md-margin-top-2">
-    <div fxLayout="row" fxLayoutAlign="start center">
-    <div class="xb-dashboard__top-title" fxFlex="">Products of All Categories</div>
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="end center">
-        <div>Filter by Start Time: </div>
-        <mat-form-field class="md-margin-left-2">
-          <input matInput [matDatepicker]="csCate" [(ngModel)]="psCate" placeholder="Start Date" (dateInput)="addEvent('csCate', $event)">
-          <mat-datepicker-toggle matSuffix [for]="csCate"></mat-datepicker-toggle>
-          <mat-datepicker #csCate></mat-datepicker>
-        </mat-form-field>
-        <div class="md-margin-left-2">to</div>
-        <mat-form-field class="md-margin-left-2">
-          <input matInput [matDatepicker]="ceCate" [(ngModel)]="peCate" placeholder="End Date" (dateInput)="addEvent('ceCate', $event)">
-          <mat-datepicker-toggle matSuffix [for]="ceCate"></mat-datepicker-toggle>
-          <mat-datepicker #ceCate></mat-datepicker>
-        </mat-form-field>
-        <div class="sc__accent-dark md-margin-left-2">
-          <button mat-raised-button color="pimary" (click)="filterDateCate()">Confirm</button>
-        </div>
-        <div class="sc__accent-dark md-margin-left-2">
-          <button mat-raised-button color="accent" (click)="resetDateCate()">Reset</button>
+    <div class="md-margin-bottom-2" fxLayout="row" fxLayoutAlign="start center">
+      <div class="xb-dashboard__top-title" fxFlex="">Products of All Categories</div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="end center">
+          <div>Filter by Start Time: </div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="csCate" [(ngModel)]="psCate" placeholder="Start Date" (dateInput)="addEvent('csCate', $event)">
+            <mat-datepicker-toggle matSuffix [for]="csCate"></mat-datepicker-toggle>
+            <mat-datepicker #csCate></mat-datepicker>
+          </mat-form-field>
+          <div class="md-margin-left-2">to</div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="ceCate" [(ngModel)]="peCate" placeholder="End Date" (dateInput)="addEvent('ceCate', $event)">
+            <mat-datepicker-toggle matSuffix [for]="ceCate"></mat-datepicker-toggle>
+            <mat-datepicker #ceCate></mat-datepicker>
+          </mat-form-field>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="pimary" (click)="filterDateCate()">Confirm</button>
+          </div>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="accent" (click)="resetDateCate()">Reset</button>
+          </div>
         </div>
       </div>
     </div>
-    </div>
     <div echarts [options]="options" class="xb-dashboard__data"></div>
+  </div>
+  <div class="md-margin-top-2">
+    <div class="md-margin-bottom-2" fxLayout="row" fxLayoutAlign="start center">
+      <div class="xb-dashboard__top-title" fxFlex="">New Product Trend</div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="end center">
+          <div>Filter by Start Time: </div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="csPro" [(ngModel)]="psPro" placeholder="Start Date" (dateInput)="addEvent('csPro', $event)">
+            <mat-datepicker-toggle matSuffix [for]="csPro"></mat-datepicker-toggle>
+            <mat-datepicker #csPro></mat-datepicker>
+          </mat-form-field>
+          <div class="md-margin-left-2">to</div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="cePro" [(ngModel)]="pePro" placeholder="End Date" (dateInput)="addEvent('cePro', $event)">
+            <mat-datepicker-toggle matSuffix [for]="cePro"></mat-datepicker-toggle>
+            <mat-datepicker #cePro></mat-datepicker>
+          </mat-form-field>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="pimary" (click)="filterDateCate()">Confirm</button>
+          </div>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="accent" (click)="resetDateCate()">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+        <mat-form-field fxFlex>
+          <mat-select name="category" placeholder="Select a Category"
+                      (valueChange)="categoryChange($event)">
+            <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+              {{ item.data.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+        <mat-form-field fxFlex>
+          <mat-select name="subcategory" placeholder="Select a Subcategory"
+                      (valueChange)="subCategoryChange($event)">
+            <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+              {{ item.data.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+        <mat-form-field fxFlex>
+          <mat-select name="thirdcategory" placeholder="Select a ThirdCategory"
+                      (valueChange)="thirdCategoryChange($event)">
+            <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
+              {{ item.data.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div echarts [options]="options1" class="xb-dashboard__data"></div>
   </div>
 </div>

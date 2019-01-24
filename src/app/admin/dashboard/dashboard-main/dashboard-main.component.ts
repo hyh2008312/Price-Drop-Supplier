@@ -30,15 +30,6 @@ import { graphic } from 'echarts';
 
 export class DashboardMainComponent implements OnInit {
 
-  overViewListCategory: any = ['Yesterday', 'Last 7 days', 'Last 14 days', 'Last 30 days', 'All Time'];
-  overViewCategory: string = 'Yesterday';
-
-  topProductListCategory: any = ['Yesterday', 'Last 7 days', 'Last 14 days', 'Last 30 days', 'All Time'];
-  topProductCategory: string = 'Yesterday';
-
-  topProductSortListCategory: any = ['Total Earnings', 'Total Orders', 'Total Sales', 'Total Pageviews', 'Total Visitors', 'Conversion Rate'];
-  topProductSortCategory: string = 'Total Earnings';
-
   // MatPaginator Inputs
   length: number = 32;
   pageSize = 12;
@@ -54,7 +45,18 @@ export class DashboardMainComponent implements OnInit {
   psCate: any = false;
   peCate: any = false;
 
+  csPro: any;
+  cePro: any;
+  psPro: any = false;
+  pePro: any = false;
+
   options: any;
+
+  options1: any;
+
+  categoryList: any = [];
+  subCategoryList: any = [];
+  thirdCategoryList: any = [];
 
   statistics: any = {
     "totalSales": 0,
@@ -77,7 +79,9 @@ export class DashboardMainComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCharts();
+    this.getCharts1();
     this.getDataList();
+    this.getCategory();
   }
 
   getDataList() {
@@ -197,5 +201,105 @@ export class DashboardMainComponent implements OnInit {
       ]
     };
   }
+
+  getCharts1() {
+    const dataAxis = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
+    const data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
+    const yMax = 1200;
+    const dataShadow = [];
+
+    for (let i = 0; i < data.length; i++) {
+      dataShadow.push(yMax);
+    }
+
+    this.options1 = {
+      xAxis: {
+        data: dataAxis,
+        axisLabel: {
+          inside: true,
+          textStyle: {
+            color: '#fff'
+          }
+        },
+        axisTick: {
+          show: false
+        },
+        axisLine: {
+          show: false
+        },
+        z: 10
+      },
+      yAxis: {
+        axisLine: {
+          show: false
+        },
+        axisTick: {
+          show: false
+        },
+        axisLabel: {
+          textStyle: {
+            color: '#999'
+          }
+        }
+      },
+      series: [{
+        name: 'Mocking Data',
+        type: 'line',
+        showSymbol: false,
+        hoverAnimation: false,
+        data: data
+      }]
+    };
+  }
+
+  categoryChange($event) {
+    if(this.categoryList.length > 0) {
+      let index = this.categoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.categoryList[index] && this.categoryList[index].children) {
+        this.subCategoryList = [...this.categoryList[index].children];
+      } else {
+        this.subCategoryList = [];
+      }
+      this.thirdCategoryList = [];
+    }
+
+  }
+
+  subCategoryChange($event) {
+    if(this.subCategoryList.length > 0) {
+      let index = this.subCategoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.subCategoryList[index] && this.subCategoryList[index].children) {
+        this.thirdCategoryList = [...this.subCategoryList[index].children];
+      } else {
+        this.thirdCategoryList = [];
+      }
+    }
+
+  }
+
+  thirdCategoryChange($event) {
+
+  }
+
+  getCategory() {
+    this.dashboardService.getCategoryList().then((data) => {
+      this.categoryList = [...data];
+      this.categoryList.unshift({
+        id: false,
+        data: {
+          name: 'All'
+        }
+      })
+    });
+  }
+
 
 }

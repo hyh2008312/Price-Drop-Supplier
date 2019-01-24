@@ -32,7 +32,10 @@ export class InventoryMainComponent implements OnInit {
   }];
 
   quantityList: any = [{
-    text: '库存大于1',
+    text: '所有',
+    value: false
+  }, {
+    text: '库存大于0',
     value: '1'
   }, {
     text: '库存为0',
@@ -137,7 +140,7 @@ export class InventoryMainComponent implements OnInit {
     }
 
     switch (this.selectedIndex) {
-      case 0:
+      case 1:
         quantity = this.quantityAll;
         quantity = quantity? quantity: null;
         this.inventoryService.getInventoryList({
@@ -151,7 +154,7 @@ export class InventoryMainComponent implements OnInit {
           this.inventoryAll = [...data.results];
         });
         break;
-      case 1:
+      case 2:
         page = this.inventoryWareIndex;
         quantity = this.quantityWare;
         quantity = quantity? quantity: null;
@@ -174,11 +177,11 @@ export class InventoryMainComponent implements OnInit {
 
   quantityChange($event) {
     switch (this.selectedIndex) {
-      case 0:
+      case 1:
         this.quantityAll = $event;
         this.inventoryAllIndex = 1;
         break;
-      case 1:
+      case 0:
         this.quantityWare = $event;
         this.inventoryWareIndex = 1;
         break;
@@ -192,7 +195,7 @@ export class InventoryMainComponent implements OnInit {
 
   warehouseChange($event) {
     switch (this.selectedIndex) {
-      case 1:
+      case 0:
         this.warehouseId = $event;
         this.inventoryWareIndex = 1;
         break;
@@ -218,10 +221,10 @@ export class InventoryMainComponent implements OnInit {
     let packing: any = [];
     let excel: any = [];
     switch (this.selectedIndex) {
-      case 0:
+      case 1:
         excel = [...this.inventoryAll];
         break;
-      case 1:
+      case 0:
         excel = [...this.inventoryWare];
         break;
     }
