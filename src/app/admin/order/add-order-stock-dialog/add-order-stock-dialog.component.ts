@@ -29,11 +29,12 @@ export class AddOrderStockDialogComponent implements OnInit {
     this.orderStockForm = this.fb.group({
       id: [''],
       sourcingSupplier: [''],
-      sourcingOrderNumber: ['', Validators.required],
-      purchaseAccount: ['getpricedrop', Validators.required],
-      warehouseId: [1, Validators.required],
-      purchasePrice: ['', Validators.required],
-      purchaseUrl: ['', Validators.required]
+      sourcingOrderNumber: [''],
+      purchaseAccount: ['getpricedrop'],
+      warehouseId: [1],
+      purchasePrice: [''],
+      purchaseUrl: [''],
+
     });
 
     this.orderStockForm.patchValue({

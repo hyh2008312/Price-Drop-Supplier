@@ -38,24 +38,18 @@ export class TopNavigationComponent implements OnInit {
     staff: false
   }, {
     id: 4,
-    text: 'CUSTOMER SUPPORT',
-    router: './customerService',
-    isActive: false,
-    staff: false
-  }, {
-    id: 5,
     text: 'EVENTS',
     router: './event',
     isActive: false,
     staff: true
   }, {
-    id: 6,
+    id: 5,
     text: 'LUCKY DRAW',
     router: './lottery',
     isActive: false,
     staff: true
   }, {
-    id: 7,
+    id: 6,
     text: 'NOTIFICATION',
     isActive: false,
     staff: true

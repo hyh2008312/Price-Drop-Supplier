@@ -54,6 +54,8 @@ import { ResetPasswordComponent } from '../login/reset-password/reset-password.c
 import { ResetPasswordConfirmComponent } from '../login/reset-password-confirm/reset-password-confirm.component';
 import { InviteCodeComponent } from "../login/invite-code/invite-code.component";
 
+import { NgxEchartsModule } from 'ngx-echarts';
+
 import { LoginService } from '../login/login.service';
 
 import { Angular2SocialLoginModule } from "angular2-social-login";
@@ -119,7 +121,8 @@ let providers = {
     MatSidenavModule,
     MatDatepickerModule,
     ClipboardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxEchartsModule
   ],
   declarations: [
     SafeHtmlPipe,
@@ -216,7 +219,8 @@ let providers = {
     MatSidenavModule,
     MatDatepickerModule,
     ClipboardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxEchartsModule
   ],
   providers: [
     FollowService,

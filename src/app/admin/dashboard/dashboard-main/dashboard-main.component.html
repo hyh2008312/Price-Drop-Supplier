@@ -71,77 +71,45 @@
       <div class="xb-dashboard__card-data">{{statistics.refundAmounts | currency: currency: true}}</div>
       <div class="xb-dashboard__card-word">Total Refund Amounts</div>
     </div>
-    <div class="xb-dashboard__card" fxFlex.gt-sm="24" fxFlex.sm="48"
+    <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#184cc4'}" fxFlex.gt-sm="24" fxFlex.sm="48"
          fxFlex.xs="100">
+      <i class="iconfontXberts icon-pic-refund-order"></i>
+      <div class="xb-dashboard__card-data">{{statistics.cancelOrder}}</div>
+      <div class="xb-dashboard__card-word">Total Canceled Orders</div>
     </div>
-    <div class="xb-dashboard__card" fxFlex.gt-sm="24" fxFlex.sm="48"
+    <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#ff68a9'}" fxFlex.gt-sm="24" fxFlex.sm="48"
          fxFlex.xs="100">
+      <i class="iconfontXberts icon-pic-refund"></i>
+      <div class="xb-dashboard__card-data">{{statistics.cancelAmounts | currency: currency: true}}</div>
+      <div class="xb-dashboard__card-word">Total Chargeback Amounts</div>
     </div>
   </div>
-  <div class="md-padding-top-3" fxLayout="row" fxLayoutAlign="space-between start" *ngIf="false">
-    <div class="xb-dashboard__top-title">Action Required</div>
-  </div>
-  <div class="xb-dashboard__action" fxLayout="row" fxLayoutAlign="space-around center" *ngIf="false">
-    <div>
-      <div class="xb-dashboard__action-data">23</div>
-      <div class="xb-dashboard__action-word">Unfulfilled Orders</div>
-    </div>
-    <div>
-      <div class="xb-dashboard__action-data">43</div>
-      <div class="xb-dashboard__action-word">Pending Support Tickets</div>
-    </div>
-    <div>
-      <div class="xb-dashboard__action-data">24</div>
-      <div class="xb-dashboard__action-word">Pending Return Requests</div>
-    </div>
-    <div>
-      <div class="xb-dashboard__action-data">43</div>
-      <div class="xb-dashboard__action-word">Items Sold Out</div>
-    </div>
-  </div>
-  <div class="xb-dashboard__top" fxLayout="row" fxLayoutAlign="space-between center" *ngIf="false">
-    <div class="xb-dashboard__top-title">Top Selling Products</div>
+  <div class="md-margin-top-2">
     <div fxLayout="row" fxLayoutAlign="start center">
-      <div class="xb-dashboard__mgrignt48px" fxLayout="row" fxLayoutAlign="start center">
-        <div class="xb-dashboard__top-category-title">Date Range</div>
-        <div class="unicorn-dark-theme">
-          <mat-form-field class="xb-dashboard-category">
-            <mat-select class="xb-dashboard-category__name" [(value)]="topProductCategory">
-              <mat-option *ngFor="let viewCategory of topProductListCategory"
-                          [value]="viewCategory">{{viewCategory}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+    <div class="xb-dashboard__top-title" fxFlex="">Products of All Categories</div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="end center">
+        <div>Filter by Start Time: </div>
+        <mat-form-field class="md-margin-left-2">
+          <input matInput [matDatepicker]="csCate" [(ngModel)]="psCate" placeholder="Start Date" (dateInput)="addEvent('csCate', $event)">
+          <mat-datepicker-toggle matSuffix [for]="csCate"></mat-datepicker-toggle>
+          <mat-datepicker #csCate></mat-datepicker>
+        </mat-form-field>
+        <div class="md-margin-left-2">to</div>
+        <mat-form-field class="md-margin-left-2">
+          <input matInput [matDatepicker]="ceCate" [(ngModel)]="peCate" placeholder="End Date" (dateInput)="addEvent('ceCate', $event)">
+          <mat-datepicker-toggle matSuffix [for]="ceCate"></mat-datepicker-toggle>
+          <mat-datepicker #ceCate></mat-datepicker>
+        </mat-form-field>
+        <div class="sc__accent-dark md-margin-left-2">
+          <button mat-raised-button color="pimary" (click)="filterDateCate()">Confirm</button>
         </div>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <div class="xb-dashboard__top-category-title">Sort By</div>
-        <div class="unicorn-dark-theme">
-          <mat-form-field class="xb-dashboard-category">
-            <mat-select class="xb-dashboard-category__name" [(value)]="topProductSortCategory">
-              <mat-option *ngFor="let viewCategory of topProductSortListCategory"
-                          [value]="viewCategory">{{viewCategory}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <div class="sc__accent-dark md-margin-left-2">
+          <button mat-raised-button color="accent" (click)="resetDateCate()">Reset</button>
         </div>
       </div>
     </div>
-
-  </div>
-  <div *ngIf="false">
-    <app-dashboard-title></app-dashboard-title>
-  </div>
-  <ng-container *ngIf="false">
-    <div [ngStyle]="{'background-color':'white'}" *ngFor="let aa of textList">
-      <app-dashboard-item></app-dashboard-item>
-      <div class="xb-dashboard-item__line"></div>
     </div>
-  </ng-container>
-  <div [ngStyle]="{'background-color':'white'}" *ngIf="false">
-    <mat-paginator [length]="length"
-                   [pageSize]="pageSize"
-                   [pageSizeOptions]="pageSizeOptions">
-    </mat-paginator>
+    <div echarts [options]="options" class="xb-dashboard__data"></div>
   </div>
 </div>
