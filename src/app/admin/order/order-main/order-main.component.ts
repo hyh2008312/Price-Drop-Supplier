@@ -165,7 +165,6 @@ export class OrderMainComponent implements OnInit {
   searchKey: any;
   isSearch: boolean = false;
   searchForm: FormGroup;
-  searchPackingForm: FormGroup;
 
   searchType = 'sku';
   searchTypeList = [{
@@ -186,6 +185,9 @@ export class OrderMainComponent implements OnInit {
   }, {
     text: 'Sourcing Number',
     value: 'sourcing_order_number'
+  }, {
+    text: 'Email',
+    value: 'OwnerEmail'
   }];
 
   // MatPaginator Inputs

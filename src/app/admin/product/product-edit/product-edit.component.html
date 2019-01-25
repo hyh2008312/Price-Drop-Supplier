@@ -295,7 +295,7 @@
                       <input class="md-align-center" type="text" matInput formControlName="sourcingPrice">
                     </mat-form-field>
                   </div>
-                  <div class="sc-product__create-width-3" fxLayout="row" fxLayoutAlign="center center" fxFlex="none" (click)="editVariant(p)">
+                  <div class="sc-product__create-width-3" fxLayout="row" fxLayoutAlign="center center" fxFlex="none" (click)="editVariant(p, i)">
                     <div class="md-margin-left-2">
                       <button mat-raised-button color="primary" type="button">
                         SAVE
@@ -482,7 +482,7 @@
                   </div>
                   <div class="sc-product__create-width-3" fxLayout="row" fxLayoutAlign="start center" fxFlex="none">
                     <div class="md-margin-left-2">
-                      <i class="material-icons md-dark-secondary xb-pointer" (click)="editVariant(p)">edit</i>
+                      <i class="material-icons md-dark-secondary xb-pointer" (click)="editVariant(p, i)">edit</i>
                     </div>
                   </div>
                 </div>

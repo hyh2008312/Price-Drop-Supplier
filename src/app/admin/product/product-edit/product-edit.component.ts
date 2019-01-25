@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterContentChecked, Inject, NgZone} from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
-import { FormBuilder, FormGroup, Validators , FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators , FormArray, AbstractControl } from '@angular/forms';
 import { Router, ActivatedRoute} from '@angular/router';
 import { MatDialog } from '@angular/material';
 
@@ -517,24 +517,44 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
 
   }
 
-  editVariant(p) {
+  editVariant(p, i) {
     if(!p.value.isEdit) {
       p.patchValue({
         isEdit: !p.value.isEdit
       });
     } else {
       this.adminService.changeVariant(p.value).then((data) => {
+        this.product.removeAt(i);
         let attribute = '';
         let index = 0;
+        let _attr = this.fb.array([]);
         for(let item of data.attributeValues) {
+          _attr.push(this.fb.group({
+            id: [item.id],
+            name: [item.name],
+            value: [item.value, Validators.required]
+          }));
           attribute += index != 0?', ' +item.value.trim():item.value.trim();
           index++;
         }
-        p.patchValue({
-          isEdit: !p.value.isEdit,
-          attributes: attribute,
-          mainImage: data.mainImage
-        });
+
+        this.product.insert(0, this.fb.group({
+          id: [data.id],
+          isEdit: [false],
+          attributes: [attribute],
+          attributeValues: _attr,
+          mainImage: [data.mainImage ? data.mainImage : ''],
+          sku: [data.sku, Validators.required],
+          variantStockrecord: [data.variantStockrecord, Validators.required],
+          saleUnitPrice: [data.saleUnitPrice, Validators.required],
+          lowestPrice: [data.lowestPrice, Validators.required],
+          unitPrice: [data.unitPrice],
+          costPrice: [data.costPrice],
+          sourcingPrice: [data.sourcingPrice],
+        }));
+
+
+
       });
     }
   }
