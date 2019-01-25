@@ -1,6 +1,6 @@
-import {Component, OnInit, OnDestroy, Inject, NgZone} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router, NavigationStart, ActivatedRoute} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {Router, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
@@ -12,8 +12,8 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {CategoryListDialogComponent} from "../category-list-dialog/category-list-dialog.component";
 
 import { graphic } from 'echarts';
-import {AddOrderStockDialogComponent} from '../../order/add-order-stock-dialog/add-order-stock-dialog.component';
 import {MatDialog} from '@angular/material';
+import {UserService} from '../../../shared/services/user/user.service';
 
 @Component({
   selector: 'app-customer-service-main',
@@ -124,14 +124,24 @@ export class DashboardMainComponent implements OnInit {
 
   isCateLoading: any = false;
 
+  isSuperuser: any = false;
+
   constructor(
     private router: Router,
     private dashboardService: DashboardService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private userService: UserService
   ) {
 
+    this.userService.currentUser.subscribe((data) => {
+      if(data) {
+        if(data.isStaff && data.isSuperuser) {
+          this.isSuperuser = true
+        }
+      }
+    });
   }
 
   ngOnInit(): void {
