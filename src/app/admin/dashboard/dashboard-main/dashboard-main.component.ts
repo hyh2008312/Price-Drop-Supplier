@@ -106,6 +106,7 @@ export class DashboardMainComponent implements OnInit {
 
   options1: any;
 
+  category: any = false;
   categoryList: any = [];
   subCategoryList: any = [];
   thirdCategoryList: any = [];
@@ -123,6 +124,7 @@ export class DashboardMainComponent implements OnInit {
   currency:string = 'INR';
 
   isCateLoading: any = false;
+  isDateLoading: any = false;
 
   isSuperuser: any = false;
 
@@ -175,7 +177,7 @@ export class DashboardMainComponent implements OnInit {
   }
 
   filterDateCate() {
-
+    this.getCharts1();
   }
 
   resetDateCate() {
@@ -309,81 +311,96 @@ export class DashboardMainComponent implements OnInit {
   }
 
   getCharts1() {
-    const dataAxis = ['Jewellery & Watches', 'Jewellery & Watches', 'Jewellery & Watches', 'Jewellery & Watches', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'Coats & Jackets', 'RCoats & Jackets', 'Coats & Jackets', 'Coats & Jackets'];
-    const data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
-    const yMax = 1200;
-    const dataShadow = [];
-    const dataShow = [];
 
-    for (let i = 0; i < data.length; i++) {
-      dataShadow.push(yMax);
-      dataShow.push({
-        name: dataAxis[i],
-        value: data[i],
-        xAxis: i,
-        yAxis: data[i]
-      });
-    }
 
-    this.options1 = {
-      tooltip : {
-        trigger: 'axis'
-      },
-      xAxis: {
-        data: dataAxis,
-        axisLabel: {
-          textStyle: {
-            color: '#919aa7'
+    this.isDateLoading = true;
+    let category_id = this.category? this.category: null;
+    let create_start_time = this.csPro? this.csPro: null;
+    let create_end_time = this.cePro? this.cePro: null;
+    this.dashboardService.getCategoryDateProductList({
+      category_id,
+      create_start_time,
+      create_end_time
+    }).then((res) => {
+      const dataAxis = [];
+      const data = [];
+      const dataShow = [];
+
+      for (let i = 0; i < res.length; i++) {
+        const item = res[i];
+        const date = item.date.split('T')[0].split('-');
+        dataAxis.push(date[1] +'-'+ date[2]);
+        data.push(item.count);
+        dataShow.push({
+          name: date[0] +'-'+ date[1] +'-'+ date[2],
+          value: item.count,
+          xAxis: i,
+          yAxis: item.count
+        });
+      }
+
+      this.options1 = {
+        tooltip : {
+          trigger: 'axis'
+        },
+        xAxis: {
+          data: dataAxis,
+          axisLabel: {
+            textStyle: {
+              color: 'rgba(0,0,0,0.87)'
+            }
+          },
+          axisTick: {
+            show: false
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#48b',
+              width: 1,
+              type: 'solid'
+            }
           }
         },
-        axisTick: {
-          show: false
-        },
-        axisLine: {
-          show: true,
-          lineStyle: {
-            color: '#48b',
-            width: 1,
-            type: 'solid'
-          }
-        }
-      },
-      yAxis: {
-        axisLine: {
-          show: true,
-          lineStyle: {
-            color: '#48b',
-            width: 1,
-            type: 'solid'
+        yAxis: {
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: '#48b',
+              width: 1,
+              type: 'solid'
+            }
+          },
+          axisTick: {
+            show: false
+          },
+          axisLabel: {
+            textStyle: {
+              color: 'rgba(0,0,0,0.87)'
+            }
           }
         },
-        axisTick: {
-          show: false
-        },
-        axisLabel: {
-          textStyle: {
-            color: '#919aa7'
+        series: [{
+          name: 'Product Number',
+          type: 'line',
+          barWidth: '10',
+          showSymbol: true,
+          hoverAnimation: false,
+          data: data,
+          itemStyle: {
+            normal: {
+              color: '#663eb1'
+            }
+          },
+          markPoint: {
+            large: true,
+            data: dataShow
           }
-        }
-      },
-      series: [{
-        name: 'Product Number',
-        type: 'line',
-        barWidth: '10',
-        showSymbol: true,
-        hoverAnimation: false,
-        data: data,
-        itemStyle: {
-          normal: {
-            color: '#663eb1'
-          }
-        },
-        markPoint: {
-          large: true,
-          data: dataShow
-        }
-      }]
-    };
+        }]
+      };
+      this.isDateLoading = false;
+    });
+
   }
 
   categoryChange($event) {
@@ -401,6 +418,8 @@ export class DashboardMainComponent implements OnInit {
       this.thirdCategoryList = [];
     }
 
+    this.category = $event;
+    this.getCharts1();
   }
 
   subCategoryChange($event) {
@@ -417,10 +436,13 @@ export class DashboardMainComponent implements OnInit {
       }
     }
 
+    this.category = $event;
+    this.getCharts1();
   }
 
   thirdCategoryChange($event) {
-
+    this.category = $event;
+    this.getCharts1();
   }
 
   getCategory() {

@@ -180,14 +180,17 @@ export class OrderMainComponent implements OnInit {
     text: 'User Name',
     value: 'username'
   }, {
+    text: 'Phone',
+    value: 'PhoneNumber'
+  }, {
+    text: 'Email',
+    value: 'OwnerEmail'
+  }, {
     text: 'Product Name',
     value: 'title'
   }, {
     text: 'Sourcing Number',
     value: 'sourcing_order_number'
-  }, {
-    text: 'Email',
-    value: 'OwnerEmail'
   }];
 
   // MatPaginator Inputs
