@@ -117,8 +117,8 @@ export class DashboardMainComponent implements OnInit {
     'totalSoldUnits': 0,
     'refundOrder': 0,
     'refundAmounts': 0,
-    'cancelOrder': 0,
-    'cancelAmounts': 0
+    'canceledSingular': 0,
+    'canceledAmount': 0
   };
   currency:string = 'INR';
 
