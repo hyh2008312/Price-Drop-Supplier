@@ -12,6 +12,11 @@ import { DashboardService } from '../dashboard.service';
 export class CategoryListDialogComponent implements OnInit {
 
   list: any;
+  isLoading: any = false;
+  color = 'accent';
+  mode = 'indeterminate';
+  value = 50;
+
   constructor(
     public dialogRef: MatDialogRef<CategoryListDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -21,13 +26,19 @@ export class CategoryListDialogComponent implements OnInit {
   }
 
   ngOnInit():void {
-    this.dashboardService.getCategoryMainProductDetailList().then((res) => {
-      this.list = [...res];
-    });
+    this.getCategory();
   }
 
   close():void {
     this.dialogRef.close();
+  }
+
+  getCategory() {
+    this.isLoading = true;
+    this.dashboardService.getCategoryMainProductDetailList().then((res) => {
+      this.isLoading = false;
+      this.list = [...res];
+    });
   }
 
 
