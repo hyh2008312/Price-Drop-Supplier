@@ -326,17 +326,21 @@ export class DashboardMainComponent implements OnInit {
       const data = [];
       const dataShow = [];
 
+      let index = 0;
       for (let i = 0; i < res.length; i++) {
         const item = res[i];
         const date = item.date.split('T')[0].split('-');
-        dataAxis.push(date[1] +'-'+ date[2]);
-        data.push(item.count);
-        dataShow.push({
-          name: date[0] +'-'+ date[1] +'-'+ date[2],
-          value: item.count,
-          xAxis: i,
-          yAxis: item.count
-        });
+        if(item.count > 0) {
+          dataAxis.push(date[1] +'-'+ date[2]);
+          data.push(item.count);
+          dataShow.push({
+            name: date[0] +'-'+ date[1] +'-'+ date[2],
+            value: item.count,
+            xAxis: index,
+            yAxis: item.count
+          });
+          index++;
+        }
       }
 
       this.options1 = {
