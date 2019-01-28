@@ -84,7 +84,7 @@ export class ProductCreateComponent implements OnInit {
 
   productForm : FormGroup;
 
-  countries: Object[];
+  countries: any;
 
   // Enter, comma
   separatorKeysCodes = [ENTER, 188];
@@ -573,6 +573,9 @@ export class ProductCreateComponent implements OnInit {
 
     this.adminService.getCountryList().then((data) => {
       this.countries = data;
+      this.productForm.patchValue({
+        countryId: this.countries[0].id
+      })
     });
 
   }

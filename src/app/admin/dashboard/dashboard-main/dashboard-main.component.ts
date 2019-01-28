@@ -11,6 +11,10 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 import {CategoryListDialogComponent} from "../category-list-dialog/category-list-dialog.component";
 
+import { utils, write, WorkBook } from 'xlsx';
+
+import { saveAs } from 'file-saver';
+
 import { graphic } from 'echarts';
 import {MatDialog} from '@angular/material';
 import {UserService} from '../../../shared/services/user/user.service';
@@ -106,10 +110,16 @@ export class DashboardMainComponent implements OnInit {
 
   options1: any;
 
+  cate: any = false;
+  cateList: any = [];
+  subCateList: any = [];
+  thirdCateList: any = [];
+
   category: any = false;
   categoryList: any = [];
   subCategoryList: any = [];
   thirdCategoryList: any = [];
+  lastCategoryName: any;
 
   statistics: any = {
     "totalSales": 0,
@@ -127,6 +137,8 @@ export class DashboardMainComponent implements OnInit {
   isDateLoading: any = false;
 
   isSuperuser: any = false;
+
+  inList: any;
 
   constructor(
     private router: Router,
@@ -322,6 +334,7 @@ export class DashboardMainComponent implements OnInit {
       create_start_time,
       create_end_time
     }).then((res) => {
+      this.inList = res;
       const dataAxis = [];
       const data = [];
       const dataShow = [];
@@ -385,7 +398,7 @@ export class DashboardMainComponent implements OnInit {
           }
         },
         series: [{
-          name: 'Product Number',
+          name: 'Number of Listings',
           type: 'line',
           barWidth: '10',
           showSymbol: true,
@@ -407,10 +420,10 @@ export class DashboardMainComponent implements OnInit {
 
   }
 
-  categoryChange($event) {
+  categoryChange($event: any) {
     if(this.categoryList.length > 0) {
       let index = this.categoryList.findIndex((data) => {
-        if(data.id == $event) {
+        if(data.id == $event.id) {
           return true;
         }
       });
@@ -422,14 +435,15 @@ export class DashboardMainComponent implements OnInit {
       this.thirdCategoryList = [];
     }
 
-    this.category = $event;
+    this.category = $event.id;
+    this.lastCategoryName = $event.data.name;
     this.getCharts1();
   }
 
-  subCategoryChange($event) {
+  subCategoryChange($event: any) {
     if(this.subCategoryList.length > 0) {
       let index = this.subCategoryList.findIndex((data) => {
-        if(data.id == $event) {
+        if(data.id == $event.id) {
           return true;
         }
       });
@@ -440,13 +454,57 @@ export class DashboardMainComponent implements OnInit {
       }
     }
 
-    this.category = $event;
+    this.category = $event.id;
+    this.lastCategoryName = $event.data.name;
     this.getCharts1();
   }
 
-  thirdCategoryChange($event) {
-    this.category = $event;
+  thirdCategoryChange($event: any) {
+    this.category = $event.id;
+    this.lastCategoryName = $event.data.name;
     this.getCharts1();
+  }
+
+  cateChange($event) {
+    if(this.cateList.length > 0) {
+      let index = this.cateList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.cateList[index] && this.cateList[index].children) {
+        this.subCateList = [...this.cateList[index].children];
+      } else {
+        this.subCateList = [];
+      }
+      this.thirdCateList = [];
+    }
+
+    this.cate = $event;
+    this.getDataList();
+  }
+
+  subCateChange($event) {
+    if(this.subCateList.length > 0) {
+      let index = this.subCateList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.subCateList[index] && this.subCateList[index].children) {
+        this.thirdCateList = [...this.subCateList[index].children];
+      } else {
+        this.thirdCateList = [];
+      }
+    }
+
+    this.cate = $event;
+    this.getDataList();
+  }
+
+  thirdCateChange($event) {
+    this.cate = $event;
+    this.getDataList();
   }
 
   getCategory() {
@@ -457,7 +515,16 @@ export class DashboardMainComponent implements OnInit {
         data: {
           name: 'All'
         }
-      })
+      });
+      this.cateList = [...data];
+      this.cateList.unshift({
+        id: false,
+        data: {
+          name: 'All'
+        }
+      });
+
+      this.lastCategoryName = 'All';
     });
   }
 
@@ -473,5 +540,81 @@ export class DashboardMainComponent implements OnInit {
     });
   }
 
+  export(): void {
+    const ws_name = 'Products-' + this.lastCategoryName.substring(0, 18);
+    const wb: WorkBook = { SheetNames: [], Sheets: {} };
+
+    let tab1 = [
+      "Published Date",
+      "Number of Listings"
+    ];
+
+    let table = tab1;
+
+    let excel: any = [];
+
+    excel.push(table);
+
+    for(let i = 0; i < this.inList.length; i++) {
+      const item = this.inList[i];
+      let cate = [];
+      cate.push(item.date.split('T')[0]);
+      cate.push(item.count);
+      excel.push(cate);
+    }
+
+    const ws: any = utils.json_to_sheet(excel, {skipHeader: true});
+    wb.SheetNames.push(ws_name);
+    wb.Sheets[ws_name] = ws;
+
+    const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+    saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `${this.lastCategoryName + '-' + new Date().getTime()}.xlsx`);
+
+  }
+
+  s2ab(s) {
+    const buf = new ArrayBuffer(s.length);
+    const view = new Uint8Array(buf);
+    for (let i = 0; i !== s.length; ++i) {
+      view[i] = s.charCodeAt(i) & 0xFF;
+    }
+    return buf;
+  }
+
+  ExportAllCategory() {
+    this.dashboardService.getCategoryMainProductDetailList().then((res) => {
+      const ws_name = 'All Categories';
+      const wb: WorkBook = { SheetNames: [], Sheets: {} };
+
+      let tab1 = [
+        "Category Name",
+        "Number of Listings"
+      ];
+
+      let table = tab1;
+
+      let excel: any = [];
+
+      excel.push(table);
+
+      for(let i = 0; i < res.length; i++) {
+        const item = res[i];
+        let cate = [];
+        cate.push(item.name);
+        cate.push(item.count);
+        excel.push(cate);
+      }
+
+      const ws: any = utils.json_to_sheet(excel, {skipHeader: true});
+      wb.SheetNames.push(ws_name);
+      wb.Sheets[ws_name] = ws;
+
+      const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+      saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `All-${new Date().getTime()}.xlsx`);
+
+    });
+  }
 
 }

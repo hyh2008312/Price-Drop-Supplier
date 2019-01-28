@@ -14,13 +14,13 @@
     {{product.totalStockrecord}}</div>
   <div class="sc-product__product-category md-margin-right-2" fxFlex="15"
        fxLayout="column" fxLayoutAlign="center center">
-    <div class="sc-product__product-price-sale" *ngIf="product.saleUnitPrice>0">
+    <div *ngIf="product.saleUnitPrice>0">
       MRP: {{ product.saleUnitPrice | currency: currency: true }}</div>
     <div *ngIf="product.costPrice>0">
       Cost: {{ product.costPrice | currency: currency: true  }}
     </div>
-    <div *ngIf="product.unitPrice>0">
-      Sale: {{ product.unitPrice | currency: currency: true  }}
+    <div class="sc-product__product-price-sale" *ngIf="product.unitPrice>0">
+      Selling Price: {{ product.unitPrice | currency: currency: true  }}
     </div>
     <div *ngIf="product.lowestPrice>=0">
       lowest: {{ product.lowestPrice | currency: currency: true  }}
