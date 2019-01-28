@@ -6,6 +6,8 @@ import { AddNoteDialogComponent } from '../add-note-dialog/add-note-dialog.compo
 import { AddOrderStockDialogComponent } from '../add-order-stock-dialog/add-order-stock-dialog.component';
 import { MatDialog } from '@angular/material';
 
+import { UserService } from  '../../../shared/services/user/user.service';
+
 @Component({
   selector: 'app-order-item',
   templateUrl: './order-item.component.html',
@@ -20,11 +22,21 @@ export class OrderItemComponent implements OnInit {
   @Output() productChange = new EventEmitter<any>();
 
   currency: string = 'INR';
+  isSuperuser: any = false;
 
   constructor(
     private adminService: OrderService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+    private userService: UserService
+  ) {
+    this.userService.currentUser.subscribe((data) => {
+      if(data) {
+        if(data.isStaff && data.isSuperuser) {
+          this.isSuperuser = true
+        }
+      }
+    });
+  }
 
   ngOnInit(): void {
 
