@@ -65,7 +65,7 @@ export class TopNavigationComponent implements OnInit {
     {
       id: 1,
       text: 'Logout',
-      router: './account/balance',
+      router: '/account/login',
       isActive: false
     }
   ];
