@@ -185,7 +185,8 @@ export class DashboardMainComponent implements OnInit {
       create_start_time,
       create_end_time
     }).then((res) => {
-      const ws_name = `${create_start_time.split(' ')[0] + ' ' + create_end_time.split(' ')[0]}`;
+      const ws_name = `${(create_start_time?create_start_time.split(' ')[0]: 'yesterday') + ' '
+      + (create_end_time?create_end_time.split(' ')[0]:'')}`;
       const wb: WorkBook = { SheetNames: [], Sheets: {} };
 
       let table = [
@@ -210,7 +211,7 @@ export class DashboardMainComponent implements OnInit {
         let cate = [];
         cate.push(item.name);
         cate.push('');
-        cate.push(item.totalSale);
+        cate.push(item.totalSales);
         cate.push(item.grossSales);
         cate.push(item.totalOrders);
         cate.push(item.grossOrder);
