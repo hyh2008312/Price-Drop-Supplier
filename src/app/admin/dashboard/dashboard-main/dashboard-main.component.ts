@@ -178,6 +178,61 @@ export class DashboardMainComponent implements OnInit {
     });
   }
 
+  exportCateDataList() {
+    let create_start_time: any = this.csAll? this.csAll: null;
+    let create_end_time: any = this.ceAll? this.ceAll: null;
+    this.dashboardService.getCateDataList({
+      create_start_time,
+      create_end_time
+    }).then((res) => {
+      const ws_name = `${create_start_time.split(' ')[0] + ' ' + create_end_time.split(' ')[0]}`;
+      const wb: WorkBook = { SheetNames: [], Sheets: {} };
+
+      let table = [
+        "Category",
+        "Category UV",
+        "Total Sales",
+        "Gross Sales",
+        "Total Orders",
+        "Cross Order",
+        "product Qty-",
+        "new product Qty-",
+        "CR (order/UV)",
+        "Avg. Order Sales"
+      ];
+
+      let excel: any = [];
+
+      excel.push(table);
+
+      for(let i = 0; i < res.length; i++) {
+        const item = res[i];
+        let cate = [];
+        cate.push(item.name);
+        cate.push('');
+        cate.push(item.totalSale);
+        cate.push(item.grossSales);
+        cate.push(item.totalOrders);
+        cate.push(item.grossOrders);
+        cate.push(item.product);
+        cate.push(item.newProduct);
+        cate.push('');
+        cate.push(item.averageOrderValue);
+        excel.push(cate);
+      }
+
+      const ws: any = utils.json_to_sheet(excel, {skipHeader: true});
+      wb.SheetNames.push(ws_name);
+      wb.Sheets[ws_name] = ws;
+
+      const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+      saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }),
+        'Sales By Category.xlsx');
+
+    });
+  }
+
   addEvent(type: any, event:MatDatepickerInputEvent<any>) {
     if(event.value) {
       this[type] = event.value._i.year + '-'+ (event.value._i.month+1) +'-'+event.value._i.date + ' 00:00:00';

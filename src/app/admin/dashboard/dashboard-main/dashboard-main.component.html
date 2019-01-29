@@ -16,10 +16,13 @@
       <mat-datepicker #ceAll></mat-datepicker>
     </mat-form-field>
     <div class="sc__accent-dark md-margin-left-2">
-      <button mat-raised-button color="pimary" (click)="filterDate()">Confirm</button>
+      <button mat-raised-button color="primary" (click)="filterDate()">Confirm</button>
     </div>
     <div class="sc__accent-dark md-margin-left-2">
       <button mat-raised-button color="accent" (click)="resetDate()">Reset</button>
+    </div>
+    <div class="sc__accent-dark md-margin-left-2" *ngIf="isSuperuser">
+      <button mat-raised-button color="primary" (click)="exportCateDataList()">export</button>
     </div>
   </div>
   <div fxLayout="row" fxLayoutAlign="start center">
@@ -170,7 +173,7 @@
           <mat-datepicker #cePro></mat-datepicker>
         </mat-form-field>
         <div class="sc__accent-dark md-margin-left-2">
-          <button mat-raised-button color="pimary" (click)="filterDateCate()">Confirm</button>
+          <button mat-raised-button color="primary" (click)="filterDateCate()">Confirm</button>
         </div>
         <div class="sc__accent-dark md-margin-left-2">
           <button mat-raised-button color="accent" (click)="resetDateCate()">Reset</button>
