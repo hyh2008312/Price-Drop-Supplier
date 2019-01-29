@@ -168,11 +168,11 @@ export class DashboardMainComponent implements OnInit {
   getDataList() {
     let create_start_time: any = this.csAll? this.csAll: null;
     let create_end_time: any = this.ceAll? this.ceAll: null;
-    let category_id: any = this.cate? this.cate: null;
+    let category: any = this.cate? this.cate: null;
     this.dashboardService.getDataList({
       create_start_time,
       create_end_time,
-      category_id
+      category
     }).then((data) => {
       this.statistics = data;
     });
