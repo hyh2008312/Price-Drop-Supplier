@@ -68,7 +68,7 @@
       <div fxFlex="">
         {{order.email}}
       </div>
-      <div *ngIf="isSuperuser">
+      <div *ngIf="isSuperuser" fxLayout="row" fxLayoutAlign="start center">
         <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started'">
           <button mat-raised-button color="accent" (click)="editSourcing()">Mark as Sourcing</button>
         </div>

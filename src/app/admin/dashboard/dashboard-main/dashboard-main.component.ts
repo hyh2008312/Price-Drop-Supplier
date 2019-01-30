@@ -196,6 +196,8 @@ export class DashboardMainComponent implements OnInit {
         "Gross Sales",
         "Total Orders",
         "Gross Orders",
+        "Total Sold Units",
+        "Gross Sold Units",
         "product Qty-",
         "new product Qty-",
         "CR (order/UV)",
@@ -215,6 +217,8 @@ export class DashboardMainComponent implements OnInit {
         cate.push(item.grossSales);
         cate.push(item.totalOrders);
         cate.push(item.grossOrders);
+        cate.push(item.totalSoldUnits);
+        cate.push(item.grossSoldUnits);
         cate.push(item.product);
         cate.push(item.newProduct);
         cate.push('');
