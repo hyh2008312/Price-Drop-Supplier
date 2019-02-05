@@ -271,6 +271,25 @@ export class ProductService {
       });
   }
 
+  getPdfProduct(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/supplier/b2c/list/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   getSelectedProductList(params:any): Promise<any> {
 
     let headers = new Headers({
@@ -792,6 +811,24 @@ export class ProductService {
     let options = new RequestOptions({headers:headers});
 
     const url = `${this.baseUrl.url}product/batch/upload/`;
+
+    return this.http.post(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
+  uploadCreatedProduct(params: any): Promise<any>  {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/new/create/`;
 
     return this.http.post(url, params, options)
       .toPromise()

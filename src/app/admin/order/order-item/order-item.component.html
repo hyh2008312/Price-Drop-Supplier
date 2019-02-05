@@ -108,6 +108,14 @@
         {{order.sourcingOrderNumber}}
       </div>
     </div>
+    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.sourcingStatus == 'Out of stock'">
+      <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
+        Out of Stock
+      </div>
+      <div>
+        {{order.sourcingNote}}
+      </div>
+    </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start"  *ngIf="order.orderNotes">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
         Order Notes

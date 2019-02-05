@@ -4,6 +4,7 @@ import { OrderService } from '../order.service';
 import { ApproveCancelDialogComponent } from '../approve-cancel-dialog/approve-cancel-dialog.component';
 import { AddNoteDialogComponent } from '../add-note-dialog/add-note-dialog.component';
 import { AddOrderStockDialogComponent } from '../add-order-stock-dialog/add-order-stock-dialog.component';
+import { AddOrderOutStockDialogComponent } from '../add-order-out-stock-dialog/add-order-out-stock-dialog.component';
 import { MatDialog } from '@angular/material';
 
 @Component({
@@ -32,6 +33,23 @@ export class OrderItemComponent implements OnInit {
 
   editSourcing() {
     let dialogRef = this.dialog.open(AddOrderStockDialogComponent, {
+      data: {
+        order: this.order,
+        isOrderStockEdit: false
+      }
+    });
+
+    let self = this;
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isOrderStockEdit == true) {
+        self.order = dialogRef.componentInstance.data.order;
+      }
+    });
+  }
+
+  editStock() {
+    let dialogRef = this.dialog.open(AddOrderOutStockDialogComponent, {
       data: {
         order: this.order,
         isOrderStockEdit: false

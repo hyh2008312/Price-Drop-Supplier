@@ -29,6 +29,10 @@
               </mat-select>
             </mat-form-field>
           </div>
+
+          <div class="sc__accent-dark md-margin-left-2" *ngIf="isSuperuser">
+            <button mat-raised-button color="pimary" (click)="captureScreen()">导出Excel</button>
+          </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >
@@ -906,3 +910,4 @@
     </mat-tab-group>
   </div>
 </div>
+<table class="container" id="table" align="center"  border="0" cellspacing="0" cellpadding="0" style="table-layout: fixed;"></table>

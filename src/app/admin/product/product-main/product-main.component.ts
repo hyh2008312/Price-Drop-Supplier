@@ -11,6 +11,9 @@ import { AddUploadDialogComponent } from '../add-upload-dialog/add-upload-dialog
 import { ProductTipsComponent } from '../product-tips/product-tips.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
 
+import * as jspdf from 'jspdf';
+import * as html2canvas from 'html2canvas';
+
 @Component({
   selector: 'app-product-main',
   templateUrl: './product-main.component.html',
@@ -59,6 +62,8 @@ export class ProductMainComponent implements OnInit {
   productDrops: any = false;
   productDropsIndex = 1;
 
+  productList: any = false;
+
   publishedSorted = 'Date';
   pendingSorted = 'Under Review';
   unpublishedSorted = 'Date';
@@ -86,6 +91,10 @@ export class ProductMainComponent implements OnInit {
   isSuperuser: boolean = false;
 
   userPermission: any = [false, true, true, false, false, true, false];
+
+  cateA: any = '';
+  cateB: any = '';
+  cateC: any = '';
 
   constructor(
     private adminService: ProductService,
@@ -575,13 +584,18 @@ export class ProductMainComponent implements OnInit {
     if(this.categoryList.length > 0) {
       let index = this.categoryList.findIndex((data) => {
         if(data.id == $event) {
+          this.cateA = data.data.name;
           return true;
         }
       });
       if(this.categoryList[index] && this.categoryList[index].children) {
         this.subCategoryList = [...this.categoryList[index].children];
+        this.cateB = null;
+        this.cateC = null;
       } else {
         this.subCategoryList = [];
+        this.cateB = null;
+        this.cateC = null;
       }
       this.thirdCategoryList = [];
     }
@@ -637,13 +651,16 @@ export class ProductMainComponent implements OnInit {
     if(this.subCategoryList.length > 0) {
       let index = this.subCategoryList.findIndex((data) => {
         if(data.id == $event) {
+          this.cateB = data.data.name;
           return true;
         }
       });
       if(this.subCategoryList[index] && this.subCategoryList[index].children) {
         this.thirdCategoryList = [...this.subCategoryList[index].children];
+        this.cateC = null;
       } else {
         this.thirdCategoryList = [];
+        this.cateC = null;
       }
     }
     if(this.isSuperuser) {
@@ -695,6 +712,12 @@ export class ProductMainComponent implements OnInit {
   }
 
   thirdCategoryChange($event) {
+    let index = this.thirdCategoryList.findIndex((data) => {
+      if(data.id == $event) {
+        this.cateC = data.data.name;
+        return true;
+      }
+    });
     if(this.isSuperuser) {
       switch (this.selectedIndex) {
         case 0:
@@ -804,4 +827,107 @@ export class ProductMainComponent implements OnInit {
     this.changeProducts({index: this.selectedIndex}, this.isSuperuser);
   }
 
+
+
+  captureScreen() {
+
+    this.adminService.getPdfProduct({
+      category_id: this.catPublished
+    }).then((res) => {
+      if(res && res.length > 0) {
+        let index = 1;
+        this.getPdf(index, res);
+      }
+    })
+
+  }
+
+  getPdf(index, res) {
+    let data = document.getElementById('table');
+    let excel: any = [];
+
+    for(let i = 0; i < res.length; i++) {
+      if(i >= (index - 1) * 120 && i <= index * 120) {
+        excel.push(res[i]);
+      }
+    }
+
+    let html = '';
+    html+= '<tr style="height: 131px;">' +
+      '<td style="width:550px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: left;padding: 0 32px;">Product</td>' +
+      '<td style="width:650px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: left;padding: 0 8px;">Images</td>'
+    '</tr>';
+
+
+    let number = 1;
+
+    for(let item of excel) {
+      html+='<tr>';
+      html += `<td style="width:550px;word-wrap:break-word;text-align: left;padding: 8px 32px; vertical-align:top;">
+              <div style="max-height: 56px;font-size: 20px;line-height: 28px;overflow: hidden;">${item.title}</div></td>`;
+      html += '<td style="width:650px;height: 131px;font-size: 20px;text-align: left;" rowspan="2">'
+      for(let i = 0; i < item.images.length; i++) {
+        if(i < 5) {
+          const im = item.images[i];
+          html += `<img style="border: 1px solid rgba(0, 0, 0, .12); border-radius: 2px; margin-left: 8px;" src="${im}" width="120" height="120">`
+        }
+      }
+      html += '</td>';
+      html+='</tr>';
+      html+='<tr>';
+      html += `<td style="width:550px;font-size: 20px;padding: 8px 32px;font-weight: bold;vertical-align:top;">SPU: ${item.spu}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: ₹${parseInt(item.b2cUnitPrice)}</td>`;
+      html += '</tr>';
+
+      if(number > 1 && number % 12 == 0) {
+        html+= '<tr style="height: 131px;">' +
+          '<td style="width:550px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: left;padding: 0 32px;">Product</td>' +
+          '<td style="width:650px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: left;padding: 0 8px;">Images</td>'
+        '</tr>';
+      }
+
+      number++;
+    }
+
+    data.insertAdjacentHTML('afterbegin', html);
+    html2canvas(data, {
+      useCORS: true
+    }).then(canvas => {
+      // Few necessary setting options
+      let imgWidth = 208;
+      let pageHeight = 295;
+      let imgHeight = canvas.height * imgWidth / canvas.width;
+      let heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+      let position = 0;
+      if(heightLeft < pageHeight) {
+        pdf.addImage(contentDataURL, 'JPEG', 0, 0, imgWidth,imgHeight);
+      } else {
+        while(heightLeft > 0) {
+          //arg3-->距离左边距;arg4-->距离上边距;arg5-->宽度;arg6-->高度
+          pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight)
+          heightLeft -= pageHeight;
+          position -= 295;
+          //避免添加空白页
+          if(heightLeft > 0) {
+            //注②
+            pdf.addPage();
+          }
+        }
+      }
+
+      pdf.save(`${this.cateA}${this.cateB? '-'+this.cateB:''}${this.cateC? '-'+this.cateC:''}-${index}.pdf`); // Generated PDF
+      data.innerHTML = '';
+
+      if(index * 120 < res.length - 1) {
+        index++;
+        this.getPdf(index, res);
+      } else {
+        console.log("It's OK");
+      }
+    }).catch((data) => {
+      console.log(data)
+    });
+  }
 }

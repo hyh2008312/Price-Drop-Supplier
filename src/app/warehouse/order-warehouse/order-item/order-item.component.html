@@ -70,6 +70,12 @@
       </div>
       <div *ngIf="status != 9" fxLayout="row" fxLayoutAlign="start center">
         <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started'">
+          <button mat-raised-button color="accent" (click)="editStock()">标记为缺货</button>
+        </div>
+        <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started'">
+          <button mat-raised-button color="accent" (click)="editSourcing()">标记为已采购</button>
+        </div>
+        <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Out of stock'">
           <button mat-raised-button color="accent" (click)="editSourcing()">标记为已采购</button>
         </div>
         <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Started'">
@@ -98,6 +104,14 @@
       </div>
       <div>
         {{order.address}}
+      </div>
+    </div>
+    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.sourcingStatus == 'Out of stock'">
+      <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
+        缺货状态
+      </div>
+      <div>
+        {{order.sourcingNote}}
       </div>
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.sourcingOrderNumber">
