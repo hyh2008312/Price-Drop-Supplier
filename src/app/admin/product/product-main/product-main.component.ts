@@ -99,6 +99,9 @@ export class ProductMainComponent implements OnInit {
   cateB: any = '';
   cateC: any = '';
 
+  min: any;
+  max: any;
+
   constructor(
     private adminService: ProductService,
     private userService: UserService,
@@ -831,10 +834,13 @@ export class ProductMainComponent implements OnInit {
   }
 
   export(): void {
-
+    let min_price: any = this.min? this.min: null;
+    let max_price: any = this.max? this.max: null;
 
     this.adminService.getPdfProduct({
-      category_id: this.catPublished
+      category_id: this.catPublished,
+      min_price,
+      max_price
     }).then((res) => {
       if(res && res.length > 0) {
         const ws_name = 'catalog';
@@ -847,7 +853,7 @@ export class ProductMainComponent implements OnInit {
           orderItem.Category = this.cateA;
           orderItem.Subcategory = this.cateB;
           orderItem.Thirdcategory = this.cateC;
-          orderItem.Spu = item.spu;
+          orderItem.SPU = item.spu;
           orderItem.Title = item.title;
           for(let i = 0; i < item.images.length; i++) {
             if(i < 5) {
