@@ -13,6 +13,9 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 
 import * as jspdf from 'jspdf';
 import * as html2canvas from 'html2canvas';
+import {utils, WorkBook, write} from 'xlsx';
+
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-product-main',
@@ -827,7 +830,77 @@ export class ProductMainComponent implements OnInit {
     this.changeProducts({index: this.selectedIndex}, this.isSuperuser);
   }
 
+  export(): void {
 
+
+    this.adminService.getPdfProduct({
+      category_id: this.catPublished
+    }).then((res) => {
+      if(res && res.length > 0) {
+        const ws_name = 'catalog';
+        const wb: WorkBook = { SheetNames: [], Sheets: {} };
+        let packing: any = [];
+        let excel: any = [...res];
+
+        for(let item of excel) {
+          let orderItem: any = {};
+          orderItem.Category = this.cateA;
+          orderItem.Subcategory = this.cateB;
+          orderItem.Thirdcategory = this.cateC;
+          orderItem.Spu = item.spu;
+          orderItem.Title = item.title;
+          for(let i = 0; i < item.images.length; i++) {
+            if(i < 5) {
+              const im = item.images[i];
+              orderItem['Picture_' + i] = im;
+            }
+          }
+          for(let i = 0; i < item.variants.length; i++) {
+            const im = item.variants[i];
+            orderItem.SKU = im.sku;
+            orderItem.MainImage = im.mainImage;
+            orderItem.Size = '';
+            orderItem.Color = '';
+            for(let em of im.attributeValues) {
+              if(em.name == 'Size') {
+                orderItem.Size = em.value;
+              }
+              if(em.name == 'Color') {
+                orderItem.Color = em.value;
+              }
+            }
+            orderItem.Selling_Price = parseInt((im.unitPrice * 0.9).toString());
+            orderItem.MRP = parseInt((im.saleUnitPrice).toString());
+            orderItem.Souring_Cost = parseInt(im.sourcingPrice);
+          }
+          for(let i = 0; i < item.productSpecification.length; i++) {
+            const im = item.productSpecification[i];
+            orderItem[im.name] = im.content;
+          }
+          packing.push(orderItem);
+        }
+
+        const ws: any = utils.json_to_sheet(packing);
+        wb.SheetNames.push(ws_name);
+        wb.Sheets[ws_name] = ws;
+        const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+        saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `${this.cateA}${this.cateB? '-'+this.cateB:''}${this.cateC? '-'+this.cateC:''}.xlsx`);
+      }
+    });
+
+
+
+  }
+
+  s2ab(s) {
+    const buf = new ArrayBuffer(s.length);
+    const view = new Uint8Array(buf);
+    for (let i = 0; i !== s.length; ++i) {
+      view[i] = s.charCodeAt(i) & 0xFF;
+    }
+    return buf;
+  }
 
   captureScreen() {
 
@@ -838,7 +911,7 @@ export class ProductMainComponent implements OnInit {
         let index = 1;
         this.getPdf(index, res);
       }
-    })
+    });
 
   }
 
