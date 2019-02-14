@@ -34,14 +34,15 @@
           <div *ngIf="order.orderType=='Cut'">{{order.totalExclTax | currency: currency: true}}</div>
           <div *ngIf="order.orderType=='Normal'">{{(order.paymentAmount * 100 + order.voucherShare * 100 - order.shippingExclTax * 100) / 100 | currency: currency: true}}</div>
           <div *ngIf="order.orderType=='Flash'">{{(order.paymentAmount * 100 + order.voucherShare * 100 - order.shippingExclTax * 100) / 100 | currency: currency: true}}</div>
+          <div *ngIf="order.orderType=='Drop'">{{(order.paymentAmount * 100 + order.voucherShare * 100 - order.shippingExclTax * 100) / 100 | currency: currency: true}}</div>
           <div class="md-margin-top-1">{{order.shippingExclTax | currency: currency: true}}</div>
           <div class="md-margin-top-1">{{0 | currency: currency: true}}</div>
           <div class="md-margin-top-1" *ngIf="order.orderType == 'Cut'">- ₹{{((order.totalExclTax * 100 + order.shippingExclTax * 100 - order.paymentAmount * 100) / 100).toFixed(2)}}</div>
-          <div class="md-margin-top-1" *ngIf="(order.orderType == 'Normal'|| order.orderType == 'Flash') && order.voucherShare > 0">- ₹{{order.voucherShare}}</div>
+          <div class="md-margin-top-1" *ngIf="(order.orderType == 'Normal'|| order.orderType == 'Flash' || order.orderType == 'Drop') && order.voucherShare > 0">- ₹{{order.voucherShare}}</div>
 
           <div class="md-margin-top-1" *ngIf="order.balanceUsed && order.balance > 0">- ₹{{order.balance}}</div>
           <div class="md-margin-top-1" *ngIf="order.paymentDiscount>0">- ₹{{order.paymentDiscount}}</div>
-          <div class="md-margin-top-1">{{order.paymentAmount  | currency: currency: true}}</div>
+          <div class="md-margin-top-1">{{order.realAmount  | currency: currency: true}}</div>
         </div>
       </div>
     </div>

@@ -50,7 +50,7 @@ export class LandingService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/supplier/category/product/home/list/`;
+    const url = `${this.baseUrl.url}product/supplier/category/product/home/list/v2/`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -143,40 +143,6 @@ export class LandingService {
       .catch(this.handleError);
   }
 
-  changePromotionProductVariant(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/promotion/stock/${params.id}/`;
-
-    return this.http.put(url, params, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  deletePromotionProductVariant(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/promotion/stock/${params.id}/`;
-
-    return this.http.delete(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
   savePromotionProduct(params:any): Promise<any> {
 
     let headers = new Headers({
@@ -194,58 +160,6 @@ export class LandingService {
       .catch(this.handleError);
   }
 
-
-  endPromotion(promotion:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/promotion/disable/${promotion.id}/`;
-
-    return this.http.put(url, promotion, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  publishPromotion(promotion:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/topic/detail/${promotion.id}/`;
-
-    return this.http.put(url, promotion, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  getPromotionList(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/topic/web/list/?${this.serializeParams(params)}`;
-
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
   getPromotionProductList(params:any): Promise<any> {
 
     let headers = new Headers({
@@ -256,23 +170,6 @@ export class LandingService {
     let options = new RequestOptions({headers:headers});
 
     const url = `${this.baseUrl.url}product/supplier/list/?${this.serializeParams(params)}`;
-
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
-  }
-
-  getSelectedPromotionProductList(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/topic/products/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()

@@ -134,7 +134,11 @@ export class OrderMainComponent implements OnInit {
   }, {
     text: 'Flash',
     value: 'Flash'
+  }, {
+    text: 'Drop',
+    value: 'Drop'
   }];
+
   paymentList: any = [{
     text: 'All',
     value: false

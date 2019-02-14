@@ -67,7 +67,7 @@ export class PromoteMainComponent implements OnInit {
 
   selectProduct() {
 
-    let categoryList: any = []
+    let categoryList: any = [];
     const newCategory = this.selectCategoryList(this.category, this.categoryId);
     for(let item of newCategory) {
       categoryList.push(item);
