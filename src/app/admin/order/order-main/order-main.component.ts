@@ -157,6 +157,9 @@ export class OrderMainComponent implements OnInit {
     text: 'Not Started',
     value: 'Not Started'
   }, {
+    text: 'Out of Stock',
+    value: 'Out of stock'
+  }, {
     text: 'Started',
     value: 'Started'
   }];

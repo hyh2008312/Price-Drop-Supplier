@@ -161,6 +161,9 @@ export class OrderMainComponent implements OnInit {
     text: '未采购',
     value: 'Not Started'
   }, {
+    text: '缺货',
+    value: 'Out of stock'
+  }, {
     text: '已采购',
     value: 'Started'
   }];
