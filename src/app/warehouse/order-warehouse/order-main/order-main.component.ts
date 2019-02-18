@@ -138,7 +138,7 @@ export class OrderMainComponent implements OnInit {
     value: 'Normal'
   }, {
     text: '砍价订单',
-    value: 'Drops'
+    value: 'Drop'
   }, {
     text: '闪购订单',
     value: 'Flash'
