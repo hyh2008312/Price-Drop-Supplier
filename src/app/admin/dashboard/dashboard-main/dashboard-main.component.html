@@ -58,14 +58,11 @@
       </mat-form-field>
     </div>
   </div>
-  <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+  <div fxLayout="row wrap" fxLayoutAlign="space-between center" *ngIf="!isSuperuser">
     <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#3f51b5'}" fxFlex.gt-sm="24" fxFlex.sm="48"
          fxFlex.xs="100">
       <i class="iconfontXberts icon-pic-sales"></i>
-      <div class="xb-dashboard__card-data" *ngIf="isSuperuser">
-        {{(statistics.totalSales + statistics.canceledAmount) | currency: currency: true}}
-      </div>
-      <div class="xb-dashboard__card-data" *ngIf="!isSuperuser">
+      <div class="xb-dashboard__card-data" >
         {{statistics.totalSales | currency: currency: true}}
       </div>
       <div class="xb-dashboard__card-word">Total Sales</div>
@@ -117,11 +114,65 @@
     </div>
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="space-between center" *ngIf="isSuperuser">
+    <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#3f51b5'}" fxFlex.gt-sm="24" fxFlex.sm="48"
+         fxFlex.xs="100">
+      <i class="iconfontXberts icon-pic-sales"></i>
+      <div class="xb-dashboard__card-data" >
+        {{statistics.totalSales | currency: currency: true}}
+      </div>
+      <div class="xb-dashboard__card-word">Total Sales</div>
+    </div>
+    <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#ffc502'}" fxFlex.gt-sm="24" fxFlex.sm="48"
+         fxFlex.xs="100">
+      <i class="iconfontXberts icon-pic-cart1"></i>
+      <div class="xb-dashboard__card-data" >{{statistics.totalOrders + statistics.canceledSingular}}</div>
+      <div class="xb-dashboard__card-word">Total Orders</div>
+    </div>
+    <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#40ad33'}" fxFlex.gt-sm="24" fxFlex.sm="48"
+         fxFlex.xs="100">
+      <i class="iconfontXberts icon-pic-present"></i>
+      <div class="xb-dashboard__card-data">{{statistics.totalSoldUnits  + statistics.cancelSoldUnits}}</div>
+      <div class="xb-dashboard__card-word">Total Sold Units</div>
+    </div>
+    <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#15aabb'}" fxFlex.gt-sm="24" fxFlex.sm="48"
+         fxFlex.xs="100">
+      <i class="iconfontXberts icon-pic-order"></i>
+      <div class="xb-dashboard__card-data">{{statistics.averageOrderValue | currency: currency: true}}</div>
+      <div class="xb-dashboard__card-word" fxLayout="row" fxLayoutAlign="start start">
+        <div>Average Order Value</div>
+        <div class="xb-dashboard__wenhao-bg">
+          <i class="iconfontXberts icon-wenhao xb-dashboard__wenhao" (mouseenter)="changeEight(true)"
+             (mouseleave)="changeEight(false)"></i>
+          <div class="xb-dashboard__wenhao-content" style="right: -64px;" *ngIf="showEight">
+            <div class="xb-dashboard__wenhao-triangle-up" style="margin-left: 172px;"></div>
+            <div class="xb-dashboard__wenhao—word" style="padding-left: 30px;">Average order value = total sales / total orders</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#663fb5'}" fxFlex.gt-sm="24" fxFlex.sm="48"
+         fxFlex.xs="100">
+      <i class="iconfontXberts icon-pic-refund-order"></i>
+      <div class="xb-dashboard__card-data">{{statistics.refundOrder}}</div>
+      <div class="xb-dashboard__card-word">Total Refund Orders</div>
+    </div>
+    <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#e53715'}" fxFlex.gt-sm="24" fxFlex.sm="48"
+         fxFlex.xs="100">
+      <i class="iconfontXberts icon-pic-refund"></i>
+      <div class="xb-dashboard__card-data">{{statistics.refundAmounts | currency: currency: true}}</div>
+      <div class="xb-dashboard__card-word">Total Refund Amounts</div>
+    </div>
     <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#663fb5'}" fxFlex.gt-sm="24" fxFlex.sm="48"
          fxFlex.xs="100">
       <i class="iconfontXberts icon-pic-refund-order"></i>
       <div class="xb-dashboard__card-data">{{statistics.totalOrders}}</div>
       <div class="xb-dashboard__card-word">Gross Sales Orders</div>
+    </div>
+    <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#15aabb'}" fxFlex.gt-sm="24" fxFlex.sm="48"
+         fxFlex.xs="100">
+      <i class="iconfontXberts icon-pic-present"></i>
+      <div class="xb-dashboard__card-data">{{statistics.totalSoldUnits}}</div>
+      <div class="xb-dashboard__card-word">Gross Sold Units</div>
     </div>
     <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#e53715'}" fxFlex.gt-sm="24" fxFlex.sm="48"
          fxFlex.xs="100">
@@ -135,11 +186,21 @@
       <div class="xb-dashboard__card-data">{{statistics.canceledSingular}}</div>
       <div class="xb-dashboard__card-word">Total Canceled Orders</div>
     </div>
+    <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#15aabb'}" fxFlex.gt-sm="24" fxFlex.sm="48"
+         fxFlex.xs="100">
+      <i class="iconfontXberts icon-pic-present"></i>
+      <div class="xb-dashboard__card-data">{{statistics.cancelSoldUnits}}</div>
+      <div class="xb-dashboard__card-word">Gross Sold Units</div>
+    </div>
     <div class="xb-dashboard__card" [ngStyle]="{'background-color':'#ff68a9'}" fxFlex.gt-sm="24" fxFlex.sm="48"
          fxFlex.xs="100">
       <i class="iconfontXberts icon-pic-refund"></i>
       <div class="xb-dashboard__card-data">{{statistics.canceledAmount | currency: currency: true}}</div>
       <div class="xb-dashboard__card-word">Total Chargeback Amounts</div>
+    </div>
+    <div fxFlex.gt-sm="24" fxFlex.sm="48" fxFlex.xs="100">
+    </div>
+    <div fxFlex.gt-sm="24" fxFlex.sm="48" fxFlex.xs="100">
     </div>
   </div>
   <div class="md-margin-top-2" *ngIf="isSuperuser">

@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-import {Subject, BehaviorSubject} from 'rxjs';
 
 import {BaseApi} from '../../config/app.api';
 import {AuthenticationService} from '../../shared/services/authentication/authentication.service';

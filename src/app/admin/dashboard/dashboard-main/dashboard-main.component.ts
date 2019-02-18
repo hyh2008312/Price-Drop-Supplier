@@ -126,6 +126,7 @@ export class DashboardMainComponent implements OnInit {
     'totalOrders': 0,
     'averageOrderValue': 0,
     'totalSoldUnits': 0,
+    'cancelSoldUnits': 0,
     'refundOrder': 0,
     'refundAmounts': 0,
     'canceledSingular': 0,
