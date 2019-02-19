@@ -13,7 +13,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 
 import * as jspdf from 'jspdf';
 import * as html2canvas from 'html2canvas';
-import {utils, WorkBook, write} from 'xlsx';
+import {read, utils, WorkBook, WorkSheet, write} from 'xlsx';
 
 import { saveAs } from 'file-saver';
 
@@ -1008,5 +1008,195 @@ export class ProductMainComponent implements OnInit {
     }).catch((data) => {
       console.log(data)
     });
+  }
+
+  onFileChange(evt: any) {
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>(evt.target);
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    const reader: FileReader = new FileReader();
+    reader.onload = (e: any) => {
+      /* read workbook */
+      const bstr: string = e.target.result;
+      const wb: WorkBook = read(bstr, {type: 'binary'});
+
+
+      this.getSheets(wb, 0)
+
+    };
+    reader.readAsBinaryString(target.files[0]);
+  }
+
+  getSheets(wb, index) {
+    if(index < wb.SheetNames.length) {
+      /* grab first sheet */
+      const wsname: string = wb.SheetNames[index];
+      const ws: WorkSheet = wb.Sheets[wsname];
+
+      /* save data */
+      const newData: any = <any[][]>(utils.sheet_to_json(ws, {header: 1}));
+
+      let spu = [];
+      for(let i = 0; i < newData.length; i++) {
+        const item = newData[i];
+        if(i > 0) {
+          if(item[0]) {
+            spu.push(item[0]);
+          }
+        }
+      }
+
+      this.adminService.getPdfNewProduct({spu}).then((res) => {
+        this.getExcel(1, res, wsname, index, wb);
+      })
+    } else {
+      console.log('all is OK');
+    }
+
+  }
+
+  getPdf1(index, res, wbname, idx, wb) {
+    let data = document.getElementById('table');
+    let excel: any = [];
+
+    for(let i = 0; i < res.length; i++) {
+      if(i >= (index - 1) * 120 && i <= index * 120) {
+        excel.push(res[i]);
+      }
+    }
+
+    let html = '';
+    html+= '<tr style="height: 131px;">' +
+      '<td style="width:550px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: left;padding: 0 32px;">Product</td>' +
+      '<td style="width:650px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: left;padding: 0 8px;">Images</td>'
+    '</tr>';
+
+
+    let number = 1;
+
+    for(let item of excel) {
+      html+='<tr>';
+      html += `<td style="width:550px;word-wrap:break-word;text-align: left;padding: 8px 32px; vertical-align:top;">
+              <div style="max-height: 56px;font-size: 20px;line-height: 28px;overflow: hidden;">${item.title}</div></td>`;
+      html += '<td style="width:650px;height: 131px;font-size: 20px;text-align: left;" rowspan="2">'
+      for(let i = 0; i < item.images.length; i++) {
+        if(i < 5) {
+          const im = item.images[i];
+          html += `<img style="border: 1px solid rgba(0, 0, 0, .12); border-radius: 2px; margin-left: 8px;" src="${im}" width="120" height="120">`
+        }
+      }
+      html += '</td>';
+      html+='</tr>';
+      html+='<tr>';
+      html += `<td style="width:550px;font-size: 20px;padding: 8px 32px;font-weight: bold;vertical-align:top;">SPU: ${item.spu}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: ₹${parseInt(item.b2cUnitPrice)}</td>`;
+      html += '</tr>';
+
+      if(number > 1 && number % 12 == 0) {
+        html+= '<tr style="height: 131px;">' +
+          '<td style="width:550px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: left;padding: 0 32px;">Product</td>' +
+          '<td style="width:650px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: left;padding: 0 8px;">Images</td>'
+        '</tr>';
+      }
+
+      number++;
+    }
+
+    data.insertAdjacentHTML('afterbegin', html);
+    html2canvas(data, {
+      useCORS: true
+    }).then(canvas => {
+      // Few necessary setting options
+      let imgWidth = 208;
+      let pageHeight = 295;
+      let imgHeight = canvas.height * imgWidth / canvas.width;
+      let heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+      let position = 0;
+      if(heightLeft < pageHeight) {
+        pdf.addImage(contentDataURL, 'JPEG', 0, 0, imgWidth,imgHeight);
+      } else {
+        while(heightLeft > 0) {
+          //arg3-->距离左边距;arg4-->距离上边距;arg5-->宽度;arg6-->高度
+          pdf.addImage(contentDataURL, 'JPEG', 0, position, imgWidth, imgHeight)
+          heightLeft -= pageHeight;
+          position -= 295;
+          //避免添加空白页
+          if(heightLeft > 0) {
+            //注②
+            pdf.addPage();
+          }
+        }
+      }
+
+      pdf.save(`${wbname} - ${index}.pdf`); // Generated PDF
+      data.innerHTML = '';
+
+      if(index * 120 < res.length - 1) {
+        index++;
+        this.getPdf1(index, res, wbname, idx, wb);
+      } else {
+        console.log(wbname + " - It's OK");
+        idx++;
+        this.getSheets(wb, idx);
+      }
+    }).catch((data) => {
+      console.log(data)
+    });
+  }
+
+  getExcel(index, res, wbname, idx, wb) {
+
+    const _wb: WorkBook = { SheetNames: [], Sheets: {} };
+    let excel: any = [...res];
+    let packing: any = [];
+
+    for(let item of excel) {
+      let orderItem: any = {};
+      orderItem.Category = this.cateA;
+      orderItem.Subcategory = this.cateB;
+      orderItem.Thirdcategory = this.cateC;
+      orderItem.SPU = item.spu;
+      orderItem.Title = item.title;
+      for(let i = 0; i < item.images.length; i++) {
+        if(i < 5) {
+          const im = item.images[i];
+          orderItem['Picture_' + i] = im;
+        }
+      }
+      for(let i = 0; i < item.variants.length; i++) {
+        const im = item.variants[i];
+        orderItem.SKU = im.sku;
+        orderItem.MainImage = im.mainImage;
+        orderItem.Size = '';
+        orderItem.Color = '';
+        for(let em of im.attributeValues) {
+          if(em.name == 'Size') {
+            orderItem.Size = em.value;
+          }
+          if(em.name == 'Color') {
+            orderItem.Color = em.value;
+          }
+        }
+        orderItem.Selling_Price = parseInt((im.unitPrice * 0.9).toString());
+        orderItem.MRP = parseInt((im.saleUnitPrice).toString());
+        orderItem.Souring_Cost = parseInt(im.sourcingPrice);
+      }
+      for(let i = 0; i < item.productSpecification.length; i++) {
+        const im = item.productSpecification[i];
+        orderItem[im.name] = im.content;
+      }
+      packing.push(orderItem);
+    }
+
+    const ws: any = utils.json_to_sheet(packing);
+    _wb.SheetNames.push(wbname);
+    _wb.Sheets[wbname] = ws;
+    const wbout = write(_wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+    saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `${wbname}.xlsx`);
+
+    this.getSheets(wb, idx);
   }
 }
