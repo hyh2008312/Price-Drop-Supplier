@@ -1148,46 +1148,67 @@ export class ProductMainComponent implements OnInit {
 
   getExcel(index, res, wbname, idx, wb) {
 
+
     const _wb: WorkBook = { SheetNames: [], Sheets: {} };
     let excel: any = [...res];
     let packing: any = [];
 
     for(let item of excel) {
-      let orderItem: any = {};
-      orderItem.Category = this.cateA;
-      orderItem.Subcategory = this.cateB;
-      orderItem.Thirdcategory = this.cateC;
-      orderItem.SPU = item.spu;
-      orderItem.Title = item.title;
-      for(let i = 0; i < item.images.length; i++) {
-        if(i < 5) {
-          const im = item.images[i];
-          orderItem['Picture_' + i] = im;
-        }
-      }
       for(let i = 0; i < item.variants.length; i++) {
+        let orderItem: any = {};
         const im = item.variants[i];
+        orderItem[''] = '';
+        orderItem['User ID'] = '';
         orderItem.SKU = im.sku;
-        orderItem.MainImage = im.mainImage;
-        orderItem.Size = '';
-        orderItem.Color = '';
+        orderItem['Unique Code'] = '';
+        orderItem.Brand = '';
+        orderItem['Product Title'] = item.title;
+        orderItem.MRP = parseInt((im.saleUnitPrice).toString());
+        orderItem['Selling Price'] = parseInt((im.unitPrice * 0.9).toString());
+        orderItem['Shipping Charge'] = parseInt(item.shipping?item.shipping.priceItem:0);
+        orderItem['L1'] = '';
+        orderItem['L2'] = '';
+        orderItem['L3'] = '';
+        orderItem['Color'] = '';
+        orderItem['Fabric'] = '';
+        orderItem['Type'] = wbname;
+        orderItem['Size'] = '';
+        orderItem['Chest'] = '';
         for(let em of im.attributeValues) {
-          if(em.name == 'Size') {
-            orderItem.Size = em.value;
-          }
           if(em.name == 'Color') {
-            orderItem.Color = em.value;
+            orderItem.Color = em.value
           }
         }
-        orderItem.Selling_Price = parseInt((im.unitPrice * 0.9).toString());
-        orderItem.MRP = parseInt((im.saleUnitPrice).toString());
-        orderItem.Souring_Cost = parseInt(im.sourcingPrice);
+        orderItem['Inventory'] = 500;
+        orderItem['Style'] = '';
+        orderItem['Design Type'] = '';
+        orderItem['Description'] = '';
+        orderItem[`Image - 1 URL`] = '';
+        orderItem[`Image - 2 URL`] = '';
+        orderItem[`Image - 3 URL`] = '';
+        orderItem[`Image - 4 URL`] = '';
+        orderItem[`Image - 5 URL`] = '';
+        for(let i = 0; i < item.images.length; i++) {
+          if(i < 5) {
+            const im = item.images[i];
+            orderItem[`Image - ${i+1} URL`] = im;
+          }
+        }
+
+        for(let fm of item.productSpecification) {
+          if(fm.name == 'Material' || 'Clothing Fabric' || 'Dress Material') {
+            orderItem['Fabric'] = fm.content;
+          }
+          if(fm.name == 'Shop By Age') {
+            orderItem['Size'] = fm.content;
+          }
+          if(fm.name == 'Brand') {
+            orderItem['Brand'] = fm.content;
+          }
+        }
+        packing.push(orderItem);
       }
-      for(let i = 0; i < item.productSpecification.length; i++) {
-        const im = item.productSpecification[i];
-        orderItem[im.name] = im.content;
-      }
-      packing.push(orderItem);
+
     }
 
     const ws: any = utils.json_to_sheet(packing);
@@ -1197,6 +1218,7 @@ export class ProductMainComponent implements OnInit {
 
     saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `${wbname}.xlsx`);
 
+    idx++;
     this.getSheets(wb, idx);
   }
 }
