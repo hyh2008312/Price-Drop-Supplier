@@ -12,6 +12,8 @@ import {SelectProductDialogComponent} from '../select-product-dialog/select-prod
 
 export class PromoteMainComponent implements OnInit {
 
+  selectedIndex: number = 0;
+
   currency: string = 'USD';
 
   categoryList: any = [];
