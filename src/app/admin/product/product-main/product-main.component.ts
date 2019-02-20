@@ -1174,9 +1174,13 @@ export class ProductMainComponent implements OnInit {
         orderItem['Type'] = wbname;
         orderItem['Size'] = '';
         orderItem['Chest'] = '';
+        orderItem['Length'] = '';
         for(let em of im.attributeValues) {
           if(em.name == 'Color') {
-            orderItem.Color = em.value
+            orderItem.Color = em.value;
+          }
+          if(em.name == 'Size') {
+            orderItem['Length'] = (parseInt(em.value) / 2.54).toFixed(1);
           }
         }
         orderItem['Inventory'] = 500;
@@ -1196,7 +1200,7 @@ export class ProductMainComponent implements OnInit {
         }
 
         for(let fm of item.productSpecification) {
-          if(fm.name == 'Material' || 'Clothing Fabric' || 'Dress Material') {
+          if(fm.name == 'Material' || fm.name == 'Clothing Fabric' || fm.name == 'Dress Material') {
             orderItem['Fabric'] = fm.content;
           }
           if(fm.name == 'Shop By Age') {
@@ -1206,6 +1210,7 @@ export class ProductMainComponent implements OnInit {
             orderItem['Brand'] = fm.content;
           }
         }
+        orderItem['Product Id'] = item.id;
         packing.push(orderItem);
       }
 
