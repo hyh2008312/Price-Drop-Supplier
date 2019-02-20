@@ -1,6 +1,6 @@
  import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { OrderService } from '../order.service';
 
@@ -16,7 +16,7 @@ export class AddOrderOutStockDialogComponent implements OnInit {
 
   notesList: any = [
     'SKU没库存，可换其他颜色 － Color not available & Suggest to choose other color',
-    '产品已停售，选择其他产品 － Product not available & Suggest to choose different product'
+    '产品不合适，选择其他产品 － Product not available & Suggest to choose different product'
   ];
   error: any = false;
 
