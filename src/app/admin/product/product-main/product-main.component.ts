@@ -849,19 +849,20 @@ export class ProductMainComponent implements OnInit {
         let excel: any = [...res];
 
         for(let item of excel) {
-          let orderItem: any = {};
-          orderItem.Category = this.cateA;
-          orderItem.Subcategory = this.cateB;
-          orderItem.Thirdcategory = this.cateC;
-          orderItem.SPU = item.spu;
-          orderItem.Title = item.title;
-          for(let i = 0; i < item.images.length; i++) {
-            if(i < 5) {
-              const im = item.images[i];
-              orderItem['Picture_' + i] = im;
-            }
-          }
+
           for(let i = 0; i < item.variants.length; i++) {
+            let orderItem: any = {};
+            orderItem.Category = this.cateA;
+            orderItem.Subcategory = this.cateB;
+            orderItem.Thirdcategory = this.cateC;
+            orderItem.SPU = item.spu;
+            orderItem.Title = item.title;
+            for(let i = 0; i < item.images.length; i++) {
+              if(i < 5) {
+                const im = item.images[i];
+                orderItem['Picture_' + i] = im;
+              }
+            }
             const im = item.variants[i];
             orderItem.SKU = im.sku;
             orderItem.MainImage = im.mainImage;
@@ -878,12 +879,13 @@ export class ProductMainComponent implements OnInit {
             orderItem.Selling_Price = parseInt((im.unitPrice * 0.9).toString());
             orderItem.MRP = parseInt((im.saleUnitPrice).toString());
             orderItem.Souring_Cost = parseInt(im.sourcingPrice);
+            for(let i = 0; i < item.productSpecification.length; i++) {
+              const im = item.productSpecification[i];
+              orderItem[im.name] = im.content;
+            }
+            packing.push(orderItem);
           }
-          for(let i = 0; i < item.productSpecification.length; i++) {
-            const im = item.productSpecification[i];
-            orderItem[im.name] = im.content;
-          }
-          packing.push(orderItem);
+
         }
 
         const ws: any = utils.json_to_sheet(packing);
