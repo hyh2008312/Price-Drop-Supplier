@@ -1,12 +1,12 @@
 import { Component, OnInit, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-landing-promote-product-title',
-  templateUrl: './promote-product-title.component.html',
+  selector: 'app-landing-promote-category-title',
+  templateUrl: './promote-category-title.component.html',
   styleUrls: ['../_landing.scss']
 })
 
-export class PromoteProductTitleComponent implements OnInit {
+export class PromoteCategoryTitleComponent implements OnInit {
   @Input() status:number = 0;
 
   constructor() { }

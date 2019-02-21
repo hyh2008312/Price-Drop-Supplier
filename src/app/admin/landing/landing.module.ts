@@ -4,6 +4,8 @@ import { PromoteMainComponent } from './promote-main/promote-main.component';
 import { PromoteTitleComponent } from './promote-title/promote-title.component';
 import { PromoteProductTitleComponent } from  './promote-product-title/promote-product-title.component';
 import { ProductProductItemComponent } from  './promote-product-item/promote-product-item.component';
+import { PromoteCategoryTitleComponent } from  './promote-category-title/promote-category-title.component';
+import { ProductCategoryItemComponent } from  './promote-category-item/promote-category-item.component';
 import { SelectProductDialogComponent } from  './select-product-dialog/select-product-dialog.component';
 import { SelectProductTitleComponent } from  './select-product-title/select-product-title.component';
 import { SelectProductItemComponent } from  './select-product-item/select-product-item.component';
@@ -28,7 +30,9 @@ import { LandingService } from './landing.service';
     SelectProductDialogComponent,
     SelectProductTitleComponent,
     SelectProductItemComponent,
-    PaginationComponent
+    PaginationComponent,
+    PromoteCategoryTitleComponent,
+    ProductCategoryItemComponent
   ],
   entryComponents: [
     SelectProductDialogComponent

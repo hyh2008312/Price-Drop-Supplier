@@ -4,12 +4,12 @@ import { MatDialog } from '@angular/material';
 import { LandingService } from '../landing.service';
 
 @Component({
-  selector: 'app-landing-promote-product-item',
-  templateUrl: './promote-product-item.component.html',
+  selector: 'app-landing-promote-category-item',
+  templateUrl: './promote-category-item.component.html',
   styleUrls: ['../_landing.scss']
 })
 
-export class ProductProductItemComponent implements OnInit {
+export class ProductCategoryItemComponent implements OnInit {
 
   @Input() status: number = 0;
   @Input() promote: any={};
@@ -68,12 +68,4 @@ export class ProductProductItemComponent implements OnInit {
     });
   }
 
-  changeDiscount($event) {
-    this.promote.discount = $event;
-    this.promotionChange.emit({
-      index: this.index,
-      event: 'discount',
-      promote: this.promote
-    });
-  }
 }
