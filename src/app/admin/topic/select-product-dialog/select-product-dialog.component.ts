@@ -28,6 +28,9 @@ export class SelectProductDialogComponent implements OnInit {
   page = 1;
   pageSize = 6;
 
+  searchCategory: any = 'product';
+  searchList: any = ['product', 'spu', 'shop'];
+
   constructor(
     public dialogRef: MatDialogRef<SelectProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -68,7 +71,7 @@ export class SelectProductDialogComponent implements OnInit {
       param = {
         cat: this.cat,
         q: this.searchKey,
-        qt: 'product',
+        qt: this.searchCategory,
         page: this.page,
         page_size: this.pageSize,
         min_price,

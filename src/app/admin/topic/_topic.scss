@@ -170,7 +170,7 @@
 .sc-promotion-dialog{
 
   padding: 28px 40px;
-  width: 800px;
+  width: 1000px;
   height: 600px;
   overflow-y: scroll;
   position: relative;
@@ -263,6 +263,19 @@
         line-height: 12px;
         color: $whiteColor;
       }
+    }
+
+    &-result{
+      color: $primaryColor;
+    }
+
+    &-margin-top{
+      margin-top: -3px;
+    }
+
+    &-sort{
+      width: 80px;
+      text-align: center;
     }
   }
 
