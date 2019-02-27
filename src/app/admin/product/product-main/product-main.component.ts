@@ -7,6 +7,10 @@ import 'rxjs/add/operator/map';
 import { ProductService } from '../product.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 
+import { ImageUploadPreviewService } from "../../../shared/components/image-upload-preview/image-upload-preview.service";
+import { S3UploaderService } from "../../../shared/services/s3-upload/s3-upload.service";
+import { HttpEventType, HttpResponse} from "@angular/common/http";
+
 import { AddUploadDialogComponent } from '../add-upload-dialog/add-upload-dialog.component';
 import { ProductTipsComponent } from '../product-tips/product-tips.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
@@ -16,6 +20,8 @@ import * as html2canvas from 'html2canvas';
 import {read, utils, WorkBook, WorkSheet, write} from 'xlsx';
 
 import { saveAs } from 'file-saver';
+
+import { s } from '../product';
 
 @Component({
   selector: 'app-product-main',
@@ -109,7 +115,9 @@ export class ProductMainComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private previewImageService: ImageUploadPreviewService,
+    private s3UploaderService: S3UploaderService
   ) {
 
     this.userService.currentUser.subscribe((data) => {
@@ -1029,6 +1037,22 @@ export class ProductMainComponent implements OnInit {
     reader.readAsBinaryString(target.files[0]);
   }
 
+  onFileChange1(evt: any) {
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>(evt.target);
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    const reader: FileReader = new FileReader();
+    reader.onload = (e: any) => {
+      /* read workbook */
+      const bstr: string = e.target.result;
+      const wb: WorkBook = read(bstr, {type: 'binary'});
+
+      this.getSheets1(wb);
+
+    };
+    reader.readAsBinaryString(target.files[0]);
+  }
+
   getSheets(wb, index) {
     if(index < wb.SheetNames.length) {
       /* grab first sheet */
@@ -1113,7 +1137,7 @@ export class ProductMainComponent implements OnInit {
       let imgHeight = canvas.height * imgWidth / canvas.width;
       let heightLeft = imgHeight;
 
-      const contentDataURL = canvas.toDataURL('image/png')
+      const contentDataURL = canvas.toDataURL('image/png');
       let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
       let position = 0;
       if(heightLeft < pageHeight) {
@@ -1228,4 +1252,261 @@ export class ProductMainComponent implements OnInit {
     idx++;
     this.getSheets(wb, idx);
   }
+
+  getImages: any = [];
+
+  getSheets1(wb) {
+    const wsname: string = wb.SheetNames[0];
+    const ws: WorkSheet = wb.Sheets[wsname];
+
+    /* save data */
+    const newData: any = <any[][]>(utils.sheet_to_json(ws, {header: 1}));
+
+    console.log(newData)
+    let pack = [];
+    for(let i = 0; i < newData.length; i++) {
+      const item = newData[i];
+      if(i >= 1) {
+        let obj: any = {};
+        obj.spu = item[4];
+        let idx = s.findIndex((value) => {
+          if(value.spu == obj.spu) {
+            return true;
+          }
+        });
+        const _item = s[idx];
+        for(let i = 0; i < _item.images.length; i++ ) {
+          const fm = _item.images[i];
+          if(i < 5) {
+            obj['images_' + (i+1)] = fm;
+          }
+        }
+        pack.push(obj);
+      }
+    }
+
+
+    this.getContentTxt2(pack, wsname);
+
+    // let index = 1;
+    // this.getContentTxt1(newData[index], index, newData, wsname);
+
+  }
+
+  getContentTxt(obj, file, index, newData, wbname) {
+    if(index >= 2) {
+      const _wb: WorkBook = { SheetNames: [], Sheets: {} };
+
+      const ws: any = utils.json_to_sheet(this.getImages);
+      _wb.SheetNames.push(wbname);
+      _wb.Sheets[wbname] = ws;
+      const wbout = write(_wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+      saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `${wbname}.xlsx`);
+      console.log('All is done');
+      return;
+    }
+
+    const that = this;
+    //新建图片
+    let image = new Image();
+    //解决canvas无法读取画布问题
+    image.crossOrigin = 'Anonymous';
+
+    //通加载图片完毕保证快速读取
+    image.onload = () => {
+
+      const bulb: any = this.getBase64Image(image);
+      bulb.toBlob((res) => {
+        that.s3UploaderService.upload({
+          type: 'product/main',
+          fileName: file,
+          use: 'cover',
+          width: image.width,
+          height: image.height
+        }).then((data) => {
+          let url = data.url;
+          let key = data.name;
+
+          that.s3UploaderService.uploadToS3(res, data).subscribe((event) => {
+            // Via this API, you get access to the raw event stream.
+            // Look for upload progress events.
+            if (event.type === HttpEventType.UploadProgress) {
+              // This is an upload progress event. Compute and show the % done:
+            } else if (event instanceof HttpResponse) {
+              this.getImages.push({images:url + '/' + key});
+              index++;
+              this.getContentTxt(newData[index], file, index, newData, wbname);
+            }
+          });
+        });
+      }, "image/jpeg", 5);
+    };
+
+    image.src = obj[13];
+  }
+
+  getContentTxt2(data, wbname) {
+    const _wb: WorkBook = { SheetNames: [], Sheets: {} };
+
+    const ws: any = utils.json_to_sheet(data);
+    _wb.SheetNames.push(wbname);
+    _wb.Sheets[wbname] = ws;
+    const wbout = write(_wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+    saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `${wbname}.xlsx`);
+    console.log('All is done');
+  }
+
+  getContentTxt1(obj, index, newData, wbname) {
+    if(index >= newData.length) {
+      const _wb: WorkBook = { SheetNames: [], Sheets: {} };
+
+      const ws: any = utils.json_to_sheet(this.getImages);
+      _wb.SheetNames.push(wbname);
+      _wb.Sheets[wbname] = ws;
+      const wbout = write(_wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+      saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `${wbname}.xlsx`);
+      console.log('All is done');
+      return;
+    }
+    if(index >= 1) {
+      //新建图片
+      let image = new Image();
+      //解决canvas无法读取画布问题
+      image.crossOrigin = 'Anonymous';
+
+      //通加载图片完毕保证快速读取
+      image.onload = () => {
+        let pixels = this.searchImage(image, image.width, image.height);
+        let similar = 0;
+        let selectedIdx = 0;
+        let _index = 0;
+        this.getImage(index, pixels, similar, _index, selectedIdx, newData, wbname);
+      };
+
+      image.src = obj[13];
+    }
+  }
+
+  getImage(index, pixels, similar, _index, selectedIdx, newData, wsname) {
+    let idx = s.findIndex((value) => {
+      if(value.spu == newData[index][4]) {
+        return true;
+      }
+    });
+    const item = s[idx];
+    if(_index >= item.color_image.length) {
+      let em: any = {};
+      em.spu = item.spu;
+      let imgs: any = item.color_image[selectedIdx].split('160x160.');
+      em.images = imgs.join('');
+      for(let i = 0; i < item.images.length; i++ ) {
+        const fm = item.images[i];
+        if(i < 4) {
+          em['images_' + (i+1)] = fm;
+        }
+      }
+      this.getImages.push(em);
+
+      index++;
+      this.getContentTxt1(newData[index], index, newData, wsname);
+      return;
+    }
+
+    //新建图片
+    let image = new Image();
+    //解决canvas无法读取画布问题
+    image.crossOrigin = 'Anonymous';
+
+    //通加载图片完毕保证快速读取
+    image.onload = () => {
+      let pixels2 = this.searchImage(image, image.width, image.height);
+      let a = this.compare(pixels, pixels2, image.width, image.height);
+      if(similar < a) {
+        similar = a;
+        selectedIdx = _index;
+      }
+      _index++;
+      this.getImage(index, pixels, similar, _index, selectedIdx, newData, wsname);
+    };
+
+    //通加载图片完毕保证快速读取
+    image.onerror = () => {
+      _index++;
+      this.getImage(index, pixels, similar, _index, selectedIdx, newData, wsname);
+    };
+
+    image.src = item.color_image[_index];
+    if(image.src == '') {
+      _index++;
+      this.getImage(index, pixels, similar, _index, selectedIdx, newData, wsname);
+    }
+  }
+
+  getBase64Image(img){
+    let canvas = document.createElement("canvas");
+    const ratio = img.width / 800 > img.height / 800 ? img.width / 800: img.height / 800;
+    canvas.width = img.width / ratio;
+    canvas.height = img.height / ratio;
+
+    let ctx: CanvasRenderingContext2D = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+    return canvas;
+  }
+
+  searchImage(image1, tmplw, tmplh) {
+    let canvas = document.createElement('canvas'),
+      ctx = canvas.getContext('2d'),
+      sw = image1.width,  // 原图宽度
+      sh = image1.height,  // 原图高度
+      tw = tmplw || 8,  // 模板宽度
+      th = tmplh || 8;  // 模板高度
+    canvas.width = tw;
+    canvas.height = th;
+    ctx.drawImage(image1, 0, 0, sw, sh, 0, 0, tw, th);
+    let pixels = ctx.getImageData(0, 0, tw, th);
+    return this.toGrayBinary(pixels, true, null, true);
+  }
+
+  compare(pixels, pixels2, tw, th) {
+    let similar = 0;
+    for (let i = 0, len = tw * th; i < len; i++) {
+      if (pixels[i] == pixels2[i]) similar++;
+    }
+    similar = (similar / (tw * th)) * 100;
+    return similar;
+  }
+
+  toGrayBinary(pixels, binary, value, sn) {
+    let r, g, b, avg = 0, len = pixels.data.length, s = '';
+    for (let i = 0; i < len; i += 4) {
+      avg += (.299 * pixels.data[i] + .587 * pixels.data[i + 1] + .114 * pixels.data[i + 2]);
+    }
+    avg /= (len / 4);
+    for (let i = 0; i < len; i += 4) {
+      r = .299 * pixels.data[i],
+        g = .587 * pixels.data[i + 1],
+        b = .114 * pixels.data[i + 2];
+      if (binary) {
+        if ((r + g + b) >= (value || avg)) {
+          g = 255;
+          if (sn) s += '1';
+        } else {
+          g = 0;
+          if (sn) s += '0';
+        }
+        g = (r + g + b) > (value || avg) ? 255 : 0;
+      } else {
+        g = r + g + b;
+      }
+      pixels.data[i] = g,
+        pixels.data[i + 1] = g,
+        pixels.data[i + 2] = g;
+    }
+    if (sn) return s;
+    else return pixels;
+  }
+
 }

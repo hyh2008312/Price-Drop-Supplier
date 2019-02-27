@@ -21,6 +21,7 @@ import { ApproveCancelDialogComponent } from './approve-cancel-dialog/approve-ca
 import { AddGatiPostDialogComponent } from './add-gati-post-dialog/add-gati-post-dialog.component';
 import { AddOrderStockDialogComponent } from './add-order-stock-dialog/add-order-stock-dialog.component';
 import { AddOrderOutStockDialogComponent } from './add-order-out-stock-dialog/add-order-out-stock-dialog.component';
+import { ConfirmAddressDialogComponent } from './confirm-address-dialog/confirm-address-dialog.component';
 import { AddNoteDialogComponent } from './add-note-dialog/add-note-dialog.component';
 
 import { OrderService } from './order.service';
@@ -55,7 +56,8 @@ import { SharedModule } from '../../shared/shared.module';
     AddOrderStockDialogComponent,
     AddNoteDialogComponent,
     OrderTitleFixedComponent,
-    AddOrderOutStockDialogComponent
+    AddOrderOutStockDialogComponent,
+    ConfirmAddressDialogComponent
   ],
   entryComponents: [
     AddTrackingInformationDialogComponent,
@@ -70,7 +72,8 @@ import { SharedModule } from '../../shared/shared.module';
     AddOrderStockDialogComponent,
     AddNoteDialogComponent,
     OrderTitleFixedComponent,
-    AddOrderOutStockDialogComponent
+    AddOrderOutStockDialogComponent,
+    ConfirmAddressDialogComponent
   ],
   providers: [
     OrderService

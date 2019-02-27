@@ -5,6 +5,7 @@ import { ApproveCancelDialogComponent } from '../approve-cancel-dialog/approve-c
 import { AddNoteDialogComponent } from '../add-note-dialog/add-note-dialog.component';
 import { AddOrderStockDialogComponent } from '../add-order-stock-dialog/add-order-stock-dialog.component';
 import { AddOrderOutStockDialogComponent } from '../add-order-out-stock-dialog/add-order-out-stock-dialog.component';
+import { ConfirmAddressDialogComponent } from '../confirm-address-dialog/confirm-address-dialog.component';
 import { MatDialog } from '@angular/material';
 
 @Component({
@@ -43,6 +44,23 @@ export class OrderItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(dialogRef.componentInstance.data.isOrderStockEdit == true) {
+        self.order = dialogRef.componentInstance.data.order;
+      }
+    });
+  }
+
+  editAddress() {
+    let dialogRef = this.dialog.open(ConfirmAddressDialogComponent, {
+      data: {
+        order: this.order,
+        isOrderAddressEdit: false
+      }
+    });
+
+    let self = this;
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isOrderAddressEdit == true) {
         self.order = dialogRef.componentInstance.data.order;
       }
     });

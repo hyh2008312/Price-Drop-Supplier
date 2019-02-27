@@ -165,7 +165,10 @@ export class OrderMainComponent implements OnInit {
     value: 'Out of stock'
   }, {
     text: '已采购',
-    value: 'Started'
+    value: 'Started',
+  }, {
+    text: '地址待确认',
+    value: 'Address Pending Confirm'
   }];
 
   sourcingPacking: any = false;

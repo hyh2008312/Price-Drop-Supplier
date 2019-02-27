@@ -83,6 +83,25 @@ export class OrderService {
       });
   }
 
+  getIndiaStateList(): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}/address/state/list/`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
+
   getSkuInventoryList(params:any): Promise<any> {
 
     let headers = new Headers({
@@ -495,8 +514,7 @@ export class OrderService {
       .catch(this.handleError);
   }
 
-  changeOrderStockInformation(params: any): Promise<any> {
-
+  editAddress(params:any): Promise<any> {
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
@@ -504,14 +522,12 @@ export class OrderService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}order/shipping/number/${params.id}/`;
+    const url = `${this.baseUrl.url}order/supplier/update/address/${params.id}/`;
 
-    return this.http.put(url, params, options)
+    return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch(this.handleError);
   }
 
   addOrderNotes(params: any): Promise<any> {

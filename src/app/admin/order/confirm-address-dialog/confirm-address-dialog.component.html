@@ -1,0 +1,68 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-order-dialog__title">
+    确认发货地址
+  </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+    <div>订单号 #: {{data.order.number}}</div>
+    <div class="md-margin-left-3" fxFlex>{{data.order.sumOrderNumber? 'Sum Order #:' + data.order.sumOrderNumber: ''}}</div>
+  </div>
+  <form class="md-margin-top-3" [formGroup]="orderStockForm" novalidate>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="用户名" formControlName="username">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div class="md-margin-right-2">+91</div>
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="手机号" formControlName="phoneNumber">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="邮编" formControlName="postcode">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="地址1" formControlName="line1">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="地址2" formControlName="line2">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="地址3" formControlName="line3">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="城市" formControlName="city">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-form-field fxFlex>
+        <mat-select name="shippingProvider" placeholder="州" formControlName="state">
+          <mat-option class="md-align-center" *ngFor="let item of state" [value]="item.name">
+            {{ item.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+  <div class="xb-input-error md-margin-top-2" *ngIf="error">
+    {{error}}
+  </div>
+  <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="changeOrderAddress()">确认</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">取消</button>
+    </div>
+  </div>
+</div>

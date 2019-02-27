@@ -1,0 +1,14 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-order-dialog__title">
+    该订单地址需要客服审核验证？
+  </div>
+  <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="changeOrderAddress()">不需要</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">需要验证</button>
+    </div>
+  </div>
+</div>

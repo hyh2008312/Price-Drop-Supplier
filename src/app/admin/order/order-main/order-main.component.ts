@@ -154,7 +154,7 @@ export class OrderMainComponent implements OnInit {
     text: 'All',
     value: false
   }, {
-    text: 'Not Started',
+    text: 'Pending Sourcing',
     value: 'Not Started'
   }, {
     text: 'Out of Stock',
@@ -162,6 +162,9 @@ export class OrderMainComponent implements OnInit {
   }, {
     text: 'Started',
     value: 'Started'
+  }, {
+    text: 'Address Pending Confirm',
+    value: 'Address Pending Confirm'
   }];
 
   sourcingPacking: any = false;

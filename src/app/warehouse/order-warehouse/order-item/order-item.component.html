@@ -75,10 +75,28 @@
         <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started'">
           <button mat-raised-button color="accent" (click)="editSourcing()">标记为已采购</button>
         </div>
+        <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started'">
+          <button mat-raised-button color="accent" (click)="editSourcing()">地址待确认</button>
+        </div>
+        <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Address Pending Confirm'">
+          <button mat-raised-button color="primary" (click)="editAddress()">确认地址</button>
+        </div>
+        <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Address Pending Confirm'">
+          <button mat-raised-button color="accent" (click)="editStock()">标记为缺货</button>
+        </div>
+        <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Address Pending Confirm'">
+          <button mat-raised-button color="accent" (click)="editSourcing()">标记为已采购</button>
+        </div>
         <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Out of stock'">
+          <button mat-raised-button color="primary" (click)="editStock()">查看缺货标记</button>
+        </div>
+        <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Out of stock'">
           <button mat-raised-button color="accent" (click)="editSourcing()">标记为已采购</button>
         </div>
         <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Started'">
+          <button mat-raised-button color="accent" (click)="editStock()">标记为缺货</button>
+        </div>
+        <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Started'">
           <button mat-raised-button color="primary" (click)="editSourcing()">查看采购详情</button>
         </div>
         <div class="sc__accent-dark" *ngIf="order.orderStatus == 'Audit canceled'">
