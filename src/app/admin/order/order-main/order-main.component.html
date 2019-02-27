@@ -311,6 +311,16 @@
               </mat-select>
             </mat-form-field>
           </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">Sort by: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="outOfStock" name="type" (valueChange)="outOfStockChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of outOfStockList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>Filter by Order Submission Time: </div>
             <mat-form-field class="md-margin-left-2">

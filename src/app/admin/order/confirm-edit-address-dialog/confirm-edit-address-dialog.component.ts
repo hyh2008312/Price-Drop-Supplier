@@ -4,9 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { OrderService } from '../order.service';
 
 @Component({
-  selector: 'app-warehouse-order-confirm-edit-address-dialog',
+  selector: 'app-admin-order-confirm-edit-address-dialog',
   templateUrl: './confirm-edit-address-dialog.component.html',
-  styleUrls: ['../_order.scss']
+  styleUrls: ['../order.scss']
 })
 
 export class ConfirmEditAddressDialogComponent implements OnInit {

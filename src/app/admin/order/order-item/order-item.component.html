@@ -69,42 +69,14 @@
         {{order.email}}
       </div>
       <div *ngIf="isSuperuser" fxLayout="row" fxLayoutAlign="start center">
-        <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started'">
-          <button mat-raised-button color="accent" (click)="editSourcing()">Address Pending Confirm</button>
+        <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started' && !order.sourcingAddressNote">
+          <button mat-raised-button color="accent" (click)="editState()">Address Pending Confirm</button>
         </div>
         <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Address Pending Confirm'">
           <button mat-raised-button color="primary" (click)="editAddress()">Address Confirmed</button>
         </div>
-        <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Address Pending Confirm'">
-          <button mat-raised-button color="accent" (click)="editStock()">标记为缺货</button>
-        </div>
-        <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Address Pending Confirm'">
-          <button mat-raised-button color="accent" (click)="editSourcing()">标记为已采购</button>
-        </div>
-        <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Out of stock'">
-          <button mat-raised-button color="primary" (click)="editStock()">查看缺货标记</button>
-        </div>
-        <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Out of stock'">
-          <button mat-raised-button color="accent" (click)="editSourcing()">标记为已采购</button>
-        </div>
-        <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Started'">
-          <button mat-raised-button color="accent" (click)="editStock()">标记为缺货</button>
-        </div>
-        <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Started'">
-          <button mat-raised-button color="primary" (click)="editSourcing()">查看采购详情</button>
-        </div>
-        <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started'">
-          <button mat-raised-button color="accent" (click)="editSourcing()">Mark as Sourcing</button>
-        </div>
-        <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Started'">
-          <button mat-raised-button color="primary" (click)="editSourcing()"> View Sourcing Details</button>
-        </div>
         <div class="sc__accent-dark" *ngIf="order.orderStatus == 'Audit canceled'">
           <button mat-raised-button color="accent" (click)="approveCancel()">View Detail</button>
-        </div>
-        <div class="sc__accent-dark md-margin-left-1" *ngIf="order.orderStatus != 'Unpaid' && order.orderStatus != 'Canceled'">
-          <button mat-raised-button color="accent" (click)="addNote()" *ngIf="order.orderNotes == '' ">Add Note</button>
-          <button mat-raised-button color="primary" (click)="addNote()" *ngIf="order.orderNotes != ''">Edit Note</button>
         </div>
       </div>
     </div>
@@ -146,6 +118,14 @@
       </div>
       <div>
         {{order.orderNotes}}
+      </div>
+    </div>
+    <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start"  *ngIf="order.sourcingAddressNote">
+      <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
+        Address Notes
+      </div>
+      <div>
+        {{order.sourcingAddressNote}}
       </div>
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.shippingNumber">

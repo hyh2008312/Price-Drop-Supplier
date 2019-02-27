@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="md-margin-top-4 sc-promote__create-text">
+    <span class="md-dark-secondary xb-pointer" routerLink="../">Landing</span>
+    <span class="md-dark-secondary">></span> <span class="xb-bold">Create Floor</span>
+  </div>
+  <form [formGroup]="landingForm" novalidate>
+    <div class="md-margin-top-1 sc-promote__create-bg">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Activity Name</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="" formControlName="name">
+            </mat-form-field>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="48">
+          <div class="sc-promote__promote-text xb-bold">Color Name</div>
+          <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="" formControlName="color">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="md-margin-top-2">
+        <div class="sc-promote__promote-text md-margin-bottom-2 xb-bold">Activity Banner</div>
+        <app-topic-image-upload-main [(previewImgFile)]="image"
+                                     [(previewImgSrcs)]="image"></app-topic-image-upload-main>
+      </div>
+    </div>
+
+    <div class="md-margin-top-3" fxLayout="row" fxLayoutAlign="center center">
+      <button mat-raised-button color="primary" type="button" (click)="continue()">
+        SAVE
+      </button>
+      <div class="md-margin-left-2">
+        <button mat-button color="primary" type="button" routerLink="../">
+          CANCEL
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

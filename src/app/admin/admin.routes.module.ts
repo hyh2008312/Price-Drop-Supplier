@@ -60,6 +60,9 @@ const routes: Routes = [
         path: 'review',
         loadChildren: './review/review.module#ReviewModule'
       }, {
+        path: 'hotProduct',
+        loadChildren: './hot-product/hot-product.module#HotProductModule'
+      }, {
         path: '',
         redirectTo: 'product',
         pathMatch: 'full'

@@ -35,7 +35,8 @@ export class ConfirmAddressDialogComponent implements OnInit {
       line2: ['', Validators.required],
       line3: [''],
       city: ['', Validators.required],
-      state: ['', Validators.required]
+      state: ['', Validators.required],
+      notes: ['']
     });
 
     this.orderStockForm.patchValue({
@@ -49,6 +50,16 @@ export class ConfirmAddressDialogComponent implements OnInit {
       city: this.data.order.city,
       state: this.data.order.state
     });
+
+    if(!this.data.order.sourcingAddressNote) {
+      this.orderStockForm.patchValue({
+        notes: 'Address Confirmed - 地址已确认'
+      });
+    } else {
+      this.orderStockForm.patchValue({
+        notes: this.data.order.sourcingAddressNote
+      });
+    }
 
   }
 

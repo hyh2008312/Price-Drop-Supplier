@@ -7,6 +7,8 @@ import { AddOrderStockDialogComponent } from '../add-order-stock-dialog/add-orde
 import { MatDialog } from '@angular/material';
 
 import { UserService } from  '../../../shared/services/user/user.service';
+import { ConfirmEditAddressDialogComponent } from '../confirm-edit-address-dialog/confirm-edit-address-dialog.component';
+import { ConfirmAddressDialogComponent } from '../confirm-address-dialog/confirm-address-dialog.component';
 
 @Component({
   selector: 'app-order-item',
@@ -54,6 +56,40 @@ export class OrderItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(dialogRef.componentInstance.data.isOrderStockEdit == true) {
+        self.order = dialogRef.componentInstance.data.order;
+      }
+    });
+  }
+
+  editAddress() {
+    let dialogRef = this.dialog.open(ConfirmAddressDialogComponent, {
+      data: {
+        order: this.order,
+        isOrderAddressEdit: false
+      }
+    });
+
+    let self = this;
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isOrderAddressEdit == true) {
+        self.order = dialogRef.componentInstance.data.order;
+      }
+    });
+  }
+
+  editState() {
+    let dialogRef = this.dialog.open(ConfirmEditAddressDialogComponent, {
+      data: {
+        order: this.order,
+        isPurchaseStateEdit: false
+      }
+    });
+
+    let self = this;
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isPurchaseStateEdit == true) {
         self.order = dialogRef.componentInstance.data.order;
       }
     });

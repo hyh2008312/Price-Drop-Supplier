@@ -157,14 +157,25 @@ export class OrderMainComponent implements OnInit {
     text: 'Pending Sourcing',
     value: 'Not Started'
   }, {
+    text: 'Address Pending Confirm',
+    value: 'Address Pending Confirm'
+  }, {
     text: 'Out of Stock',
     value: 'Out of stock'
   }, {
-    text: 'Started',
+    text: 'Sourcing Completed',
     value: 'Started'
+  }];
+
+
+  outOfStock: any = 'Out of Stock Time';
+
+  outOfStockList: any = [{
+    text: 'Out of Stock Time',
+    value: 'Out of Stock Time'
   }, {
-    text: 'Address Pending Confirm',
-    value: 'Address Pending Confirm'
+    text: 'Order Paid Time',
+    value: 'Order Paid Time'
   }];
 
   sourcingPacking: any = false;
@@ -316,6 +327,7 @@ export class OrderMainComponent implements OnInit {
     let paid_start_time = false;
     let paid_end_time = false;
     let sourcing_status = false;
+    let sort: any = null;
     const search = this.searchKey && this.searchKey != ''? this.searchKey: null;
     let search_type: any = null;
     if(search) {
@@ -365,6 +377,7 @@ export class OrderMainComponent implements OnInit {
         paid_start_time = this.psPacking;
         paid_end_time = this.pePacking;
         sourcing_status = this.sourcingPacking;
+        sort = this.outOfStock;
         break;
       case 3:
         status = 'Shipped';
@@ -502,7 +515,8 @@ export class OrderMainComponent implements OnInit {
       paid_start_time,
       paid_end_time,
       sourcing_status,
-      category_id
+      category_id,
+      sort
     }).then((data) => {
       self.length = data.count;
       switch (event.index) {
@@ -778,6 +792,19 @@ export class OrderMainComponent implements OnInit {
     switch (this.selectedIndex) {
       case 2:
         this.sourcingPacking = $event;
+        break;
+    }
+
+    this.changeProducts({
+      index: this.selectedIndex,
+      resetPage: true
+    });
+  }
+
+  outOfStockChange($event) {
+    switch (this.selectedIndex) {
+      case 2:
+        this.outOfStock = $event;
         break;
     }
 
