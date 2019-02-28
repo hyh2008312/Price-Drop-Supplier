@@ -7,12 +7,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-admin-landing-create',
-  templateUrl: './landing-create.component.html',
+  selector: 'app-admin-landing-edit',
+  templateUrl: './landing-edit.component.html',
   styleUrls: ['../_landing.scss']
 })
 
-export class LandingCreateComponent implements OnInit {
+export class LandingEditComponent implements OnInit {
 
   landingForm: FormGroup;
   src: any;
@@ -21,6 +21,7 @@ export class LandingCreateComponent implements OnInit {
   categoryList: any;
   subCategoryList: any;
   thirdCategoryList: any;
+  categoryId: any;
 
   constructor(
     private promoteService: LandingService,
@@ -30,20 +31,56 @@ export class LandingCreateComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
 
-    this.getCategoryList();
-
     this.landingForm = this.fb.group({
+      id: [],
       width: ['', Validators.required],
       color: ['', Validators.required],
       sort: [1, Validators.required],
+      grantParentId: [''],
+      parentId: [''],
+      childId: [''],
       categoryId: ['',  Validators.required],
       isShow: [false,  Validators.required]
     });
+
+
+    this.getCategoryDetail();
+
   }
 
   getCategoryList() {
     this.promoteService.getCategoryList().then((data) => {
       this.categoryList = [...data];
+      for(let item of this.categoryList) {
+        if(item.id == this.categoryId) {
+          this.landingForm.patchValue({
+            grantParentId: item.id
+          });
+        } else {
+          if(item.children && item.children.length > 0) {
+            for(let em of item.children) {
+              if(em.id == this.categoryId) {
+                this.subCategoryList = item.children;
+                this.landingForm.patchValue({
+                  parentId: em.id
+                });
+              } else {
+                if(em.children && em.children.length > 0) {
+                  for(let fm of em.children) {
+                    if(fm.id == this.categoryId) {
+                      this.thirdCategoryList = em.children;
+                      this.landingForm.patchValue({
+                        children: fm.id
+                      });
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+        }
+      }
     });
   }
 
@@ -66,6 +103,28 @@ export class LandingCreateComponent implements OnInit {
         categoryId: $event
       });
     }
+  }
+
+  getCategoryDetail() {
+    let id = this.activatedRoute.snapshot.params['id'];
+
+    this.promoteService.getCategoryDetail({
+      id
+    }).then((res) => {
+      this.landingForm.patchValue({
+        id: res.id,
+        width: res.width,
+        color: res.color,
+        sort: res.sort,
+        categoryId: res.categoryId,
+        isShow: res.isShow
+      });
+      this.categoryId = res.categoryId;
+      this.src = res.src;
+      this.bgSrc = res.bgSrc;
+
+      this.getCategoryList();
+    })
   }
 
   subCategoryChange($event) {
@@ -103,8 +162,8 @@ export class LandingCreateComponent implements OnInit {
     let params: any = this.landingForm.value;
     params.src = this.src;
     params.bgSrc = this.bgSrc;
-    this.promoteService.createCategory(params).then(() => {
-      this.router.navigate(['../'], { replaceUrl: true, relativeTo: this.activatedRoute});
+    this.promoteService.editCategory(params).then(() => {
+      this.router.navigate(['../../'], { replaceUrl: true, relativeTo: this.activatedRoute});
     });
   }
 

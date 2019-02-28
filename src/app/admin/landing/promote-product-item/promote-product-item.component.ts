@@ -44,6 +44,7 @@ export class ProductProductItemComponent implements OnInit {
       id: this.promote.id
     }).then((data) => {
       this.promotionChange.emit({
+        status: self.status,
         index: self.index,
         event: 'delete',
         promote: data
@@ -61,6 +62,7 @@ export class ProductProductItemComponent implements OnInit {
     this.promoteService.savePromotionProduct(params).then((data) => {
       self.isEdit = false;
       self.promotionChange.emit({
+        status: self.status,
         index: self.index,
         event: 'save',
         promote: data
@@ -71,6 +73,7 @@ export class ProductProductItemComponent implements OnInit {
   changeDiscount($event) {
     this.promote.discount = $event;
     this.promotionChange.emit({
+      status: self.status,
       index: this.index,
       event: 'discount',
       promote: this.promote

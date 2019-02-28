@@ -1,6 +1,6 @@
 <div class="container">
   <div class="md-margin-top-4 sc-promote__create-text">
-    <span class="md-dark-secondary xb-pointer" routerLink="../">Landing</span>
+    <span class="md-dark-secondary xb-pointer" routerLink="../../">Landing</span>
     <span class="md-dark-secondary">></span> <span class="xb-bold">Create a Featured Category</span>
   </div>
   <form [formGroup]="landingForm" novalidate>
@@ -12,7 +12,7 @@
         <div fxLayout="row" fxLayoutAlign="start center">
           <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
             <mat-form-field fxFlex>
-              <mat-select name="category" placeholder="Select a Category"
+              <mat-select name="category" placeholder="Select a Category" formControlName="grantParentId"
                           (valueChange)="categoryChange($event)">
                 <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
                   {{ item.data.name }}
@@ -22,7 +22,7 @@
           </div>
           <div class="md-margin-left-3" fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
             <mat-form-field fxFlex>
-              <mat-select name="subcategory" placeholder="Select a Subcategory"
+              <mat-select name="subcategory" placeholder="Select a Subcategory" formControlName="parentId"
                           (valueChange)="subCategoryChange($event)">
                 <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
                   {{ item.data.name }}
@@ -32,7 +32,7 @@
           </div>
           <div class="md-margin-left-3" fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
             <mat-form-field fxFlex>
-              <mat-select name="thirdcategory" placeholder="Select a Thirdcategory"
+              <mat-select name="thirdcategory" placeholder="Select a Thirdcategory" formControlName="childId"
                           (valueChange)="thirdCategoryChange($event)">
                 <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                   {{ item.data.name }}

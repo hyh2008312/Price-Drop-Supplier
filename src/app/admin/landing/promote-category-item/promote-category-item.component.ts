@@ -40,10 +40,11 @@ export class ProductCategoryItemComponent implements OnInit {
 
   delete() {
     let self = this;
-    this.promoteService.deletePromotionProduct({
+    this.promoteService.deletePromotionCategory({
       id: this.promote.id
     }).then((data) => {
       this.promotionChange.emit({
+        status: self.status,
         index: self.index,
         event: 'delete',
         promote: data
@@ -51,21 +52,6 @@ export class ProductCategoryItemComponent implements OnInit {
     });
   }
 
-  edit() {
-    this.isEdit = !this.isEdit;
-  }
 
-  save() {
-    let self = this;
-    let params:any = this.promote;
-    this.promoteService.savePromotionProduct(params).then((data) => {
-      self.isEdit = false;
-      self.promotionChange.emit({
-        index: self.index,
-        event: 'save',
-        promote: data
-      });
-    });
-  }
 
 }

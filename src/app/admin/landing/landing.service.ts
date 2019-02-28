@@ -58,7 +58,7 @@ export class LandingService {
       .catch(this.handleError);
   }
 
-  promotionEdit(promotion:any): Promise<any> {
+  getHomeList(): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -67,15 +67,15 @@ export class LandingService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/detail/${promotion.id}/`;
+    const url = `${this.baseUrl.url}product/supplier/home/category/list/`;
 
-    return this.http.put(url, promotion, options)
+    return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
   }
 
-  deletePromotion(promotion:any): Promise<any> {
+  createCategory(promotion:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -84,7 +84,58 @@ export class LandingService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/detail/${promotion.id}/`;
+    const url = `${this.baseUrl.url}product/supplier/create/home/category/`;
+
+    return this.http.post(url, promotion, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  editCategory(promotion:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/supplier/update/home/category/${promotion.id}/`;
+
+    return this.http.post(url, promotion, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  getCategoryDetail(promotion:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/supplier/detail/home/category/${promotion.id}/`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
+  deletePromotionCategory(promotion:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/supplier/update/home/category/${promotion.id}/`;
 
     return this.http.delete(url, options)
       .toPromise()

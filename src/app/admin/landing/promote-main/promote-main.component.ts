@@ -24,6 +24,8 @@ export class PromoteMainComponent implements OnInit {
 
   categoryId: any;
 
+  homeList: any = [];
+
   constructor(
     private promoteService: LandingService,
     private dialog: MatDialog
@@ -34,6 +36,18 @@ export class PromoteMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  getCategoryPromote($event) {
+    switch (this.selectedIndex) {
+      case 0:
+        this.getPromotionDetail();
+        this.getCategoryList();
+        break;
+      case 1:
+        this.getHomeList();
+        break;
+    }
   }
 
   getPromotionDetail() {
@@ -52,13 +66,31 @@ export class PromoteMainComponent implements OnInit {
     });
   }
 
+  getHomeList() {
+    this.promoteService.getHomeList().then((res) => {
+      this.homeList = [...res];
+    })
+  }
+
 
   changePromotionProduct(event) {
-    switch (event.event) {
-      case 'delete':
-        this.promotionProducts.splice(event.index, 1);
+    switch (event.status) {
+      case 0:
+        switch (event.event) {
+          case 'delete':
+            this.promotionProducts.splice(event.index, 1);
+            break;
+        }
+        break;
+      case 1:
+        switch (event.event) {
+          case 'delete':
+            this.homeList.splice(event.index, 1);
+            break;
+        }
         break;
     }
+
   }
 
   getCategoryList() {
