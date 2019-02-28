@@ -71,17 +71,11 @@ export class ProductMainComponent implements OnInit {
   productDrops: any = false;
   productDropsIndex = 1;
 
-  productList: any = false;
-
   publishedSorted = 'Date';
-  pendingSorted = 'Under Review';
-  unpublishedSorted = 'Date';
   publishedSortList = ['Date', 'Most Views', 'Most Orders', 'Highest Conversion'];
-  pendingSortList = ['Under Review', 'Disapproved'];
-  unpublishedSortList = ['Date', 'Most Views', 'Most Orders', 'Highest Conversion'];
 
   searchCategory = 'sku';
-  searchList = ['sku', 'product', 'shop'];
+  searchList = ['sku', 'product', 'shop', 'spu'];
 
   isPendingChecked: any = false;
 

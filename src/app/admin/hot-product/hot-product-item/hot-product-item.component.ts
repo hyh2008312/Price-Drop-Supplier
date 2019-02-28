@@ -38,7 +38,7 @@ export class HotProductItemComponent implements OnInit {
     }
   }
 
-  delete() {
+  add() {
     let self = this;
     this.promoteService.deletePromotionProduct({
       id: this.promote.id

@@ -112,14 +112,17 @@ export class TopNavigationComponent implements OnInit {
       text: '用户评论',
       router: './review',
       isActive: false
+    },
+    {
+      id: 7,
+      text: '热门产品管理',
+      router: './hotProduct',
+      isActive: false
     }
   ];
 
 
   //是否显示我的账户的东西
-  isShowMenu: boolean = false;
-
-  isShowUserMenu: boolean = false;
 
   //区分为是导航选项 && 还是账户选项
 

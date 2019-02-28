@@ -531,46 +531,53 @@
           <div class="md-margin-top-3">
             <div >
               <div fxLayout="row" fxLayoutAlign="start center">
-                <div class="sc-product__create-margin-right-1 sc-product__create-width-6 md-dark-secondary xb-bold md-caption"
-                     fxFlex="none" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold md-caption" fxFlex="10"
+                     fxLayout="row" fxLayoutAlign="start center">
                   Country
                 </div>
-                <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold md-caption" fxFlex="15">
+                <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold md-caption" fxFlex="10">
                   Method
                 </div>
                 <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold md-caption"
                      fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
                   Carrier
                 </div>
-                <div class="sc-product__create-margin-right-3 md-dark-secondary xb-bold md-caption"
-                     fxFlex="15" fxLayout="row" fxLayoutAlign="start center">
+                <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold md-caption"
+                     fxFlex="10" fxLayout="row" fxLayoutAlign="start center">
                   Cost
                 </div>
-                <div class="md-dark-secondary xb-bold md-caption"
-                     fxFlex="15">
+                <div class="sc-product__create-margin-right-1 md-dark-secondary xb-bold md-caption"
+                     fxFlex="20">
                   Time
+                </div>
+                <div class="md-dark-secondary xb-bold md-caption"
+                     fxFlex="20">
+                  Processing Time
                 </div>
                 <div class="sc-product__create-width-3" fxFlex="none"></div>
               </div>
               <div fxLayout="column" fxLayoutAlign="start stretch" >
-                <div class="sc-product__edit-line" fxLayout="row" fxLayoutAlign="start center"
+                <div fxLayout="row" fxLayoutAlign="start center"
                      *ngFor="let p of productShippingList; let i = index;">
-                  <div class="sc-product__create-margin-right-1 sc-product__create-width-6 sc-product__create-text-2" fxFlex="none">
+                  <div class="sc-product__create-margin-right-1" fxFlex="10">
                     <ng-container *ngFor="let item of countries">
                       <div *ngIf="item.id == p.countryId">{{item.name}}</div>
                     </ng-container>
                   </div>
-                  <div class="sc-product__create-margin-right-1" fxFlex="15">
+                  <div class="sc-product__create-margin-right-1" fxFlex="10">
                     {{p.type}}
                   </div>
                   <div class="sc-product__create-margin-right-1" fxFlex="15" >
                     {{p.shippingName}}
                   </div>
-                  <div class="sc-product__create-margin-right-3" fxFlex="15">
+                  <div class="sc-product__create-margin-right-1" fxFlex="10">
                     {{p.priceItem}}
                   </div>
-                  <div fxFlex="15">
+                  <div class="sc-product__create-margin-right-1" fxFlex="20">
                     {{p.shippingTimeMin}} - {{p.shippingTimeMax}} business days
+                  </div>
+                  <div fxFlex="20">
+                    {{p.processingTimeMin}} - {{p.processingTimeMax}} days
                   </div>
                   <div class="sc-product__create-width-3" fxLayout="row" fxLayoutAlign="start center" fxFlex="none">
                     <div class="md-margin-left-2">

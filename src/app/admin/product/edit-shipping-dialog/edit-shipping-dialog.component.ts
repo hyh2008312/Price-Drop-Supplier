@@ -63,7 +63,9 @@ export class EditShippingDialogComponent implements OnInit {
       checked: [false, Validators.required],
       shippingTime: ['', Validators.required],
       shippingTimeMin: ['', Validators.required],
-      shippingTimeMax: ['', Validators.required]
+      shippingTimeMax: ['', Validators.required],
+      processingTimeMin: ['', Validators.required],
+      processingTimeMax: ['', Validators.required]
     });
 
     this.countries = this.data.countries;

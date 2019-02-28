@@ -16,6 +16,4 @@ export class HotProductTitleComponent implements OnInit {
 
   }
 
-
-
 }

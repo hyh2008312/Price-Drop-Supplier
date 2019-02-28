@@ -227,7 +227,9 @@ export class ProductCreateComponent implements OnInit {
       checked: [false, Validators.required],
       shippingTime: ['', Validators.required],
       shippingTimeMin: [0, Validators.required],
-      shippingTimeMax: [0, Validators.required]
+      shippingTimeMax: [0, Validators.required],
+      processingTimeMin: [0, Validators.required],
+      processingTimeMax: [0, Validators.required]
     }));
   }
 
@@ -244,7 +246,9 @@ export class ProductCreateComponent implements OnInit {
       shippingTime: 0,
       checked: false,
       shippingTimeMin: 0,
-      shippingTimeMax: 0
+      shippingTimeMax: 0,
+      processingTimeMin: 0,
+      processingTimeMax: 0
     });
   }
 

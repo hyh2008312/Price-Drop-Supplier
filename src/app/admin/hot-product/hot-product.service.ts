@@ -41,7 +41,7 @@ export class HotProductService {
     return array.join('&');
   }
 
-  categoryProducts(): Promise<any> {
+  productRank(): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ export class HotProductService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/supplier/category/product/home/list/v2/`;
+    const url = `${this.baseUrl.url}product/hotpush/convert/rate/`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -58,7 +58,7 @@ export class HotProductService {
       .catch(this.handleError);
   }
 
-  promotionEdit(promotion:any): Promise<any> {
+  addProduct(promotion:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -67,15 +67,15 @@ export class HotProductService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/detail/${promotion.id}/`;
+    const url = `${this.baseUrl.url}/product/hotpush/add/del/${promotion.id}/`;
 
-    return this.http.put(url, promotion, options)
+    return this.http.post(url, promotion, options)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
   }
 
-  deletePromotion(promotion:any): Promise<any> {
+  deleteProductn(promotion:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -84,7 +84,7 @@ export class HotProductService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/topic/detail/${promotion.id}/`;
+    const url = `${this.baseUrl.url}product/hotpush/add/del/${promotion.id}/`;
 
     return this.http.delete(url, options)
       .toPromise()
