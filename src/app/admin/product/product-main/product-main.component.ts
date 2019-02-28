@@ -1256,34 +1256,34 @@ export class ProductMainComponent implements OnInit {
     /* save data */
     const newData: any = <any[][]>(utils.sheet_to_json(ws, {header: 1}));
 
-    console.log(newData)
-    let pack = [];
-    for(let i = 0; i < newData.length; i++) {
-      const item = newData[i];
-      if(i >= 1) {
-        let obj: any = {};
-        obj.spu = item[4];
-        let idx = s.findIndex((value) => {
-          if(value.spu == obj.spu) {
-            return true;
-          }
-        });
-        const _item = s[idx];
-        for(let i = 0; i < _item.images.length; i++ ) {
-          const fm = _item.images[i];
-          if(i < 5) {
-            obj['images_' + (i+1)] = fm;
-          }
-        }
-        pack.push(obj);
-      }
-    }
+    // console.log(newData)
+    // let pack = [];
+    // for(let i = 0; i < newData.length; i++) {
+    //   const item = newData[i];
+    //   if(i >= 1) {
+    //     let obj: any = {};
+    //     obj.spu = item[2];
+    //     let idx = s.findIndex((value) => {
+    //       if(value.spu == obj.spu) {
+    //         return true;
+    //       }
+    //     });
+    //     const _item = s[idx];
+    //     for(let i = 0; i < _item.images.length; i++ ) {
+    //       const fm = _item.images[i];
+    //       if(i < 5) {
+    //         obj['images_' + (i+1)] = fm;
+    //       }
+    //     }
+    //     pack.push(obj);
+    //   }
+    // }
+    //
+    //
+    // this.getContentTxt2(pack, wsname);
 
-
-    this.getContentTxt2(pack, wsname);
-
-    // let index = 1;
-    // this.getContentTxt1(newData[index], index, newData, wsname);
+    let index = 1;
+    this.getContentTxt1(newData[index], index, newData, wsname);
 
   }
 
@@ -1334,10 +1334,10 @@ export class ProductMainComponent implements OnInit {
             }
           });
         });
-      }, "image/jpeg", 5);
+      }, "image/jpeg", 1);
     };
 
-    image.src = obj[13];
+    image.src = obj[24];
   }
 
   getContentTxt2(data, wbname) {
@@ -1380,13 +1380,13 @@ export class ProductMainComponent implements OnInit {
         this.getImage(index, pixels, similar, _index, selectedIdx, newData, wbname);
       };
 
-      image.src = obj[13];
+      image.src = obj[24];
     }
   }
 
   getImage(index, pixels, similar, _index, selectedIdx, newData, wsname) {
     let idx = s.findIndex((value) => {
-      if(value.spu == newData[index][4]) {
+      if(value.spu == newData[index][2]) {
         return true;
       }
     });
