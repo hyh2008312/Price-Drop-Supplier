@@ -13,7 +13,6 @@ export class PromoteProductItemComponent implements OnInit {
 
   @Input() status: number = 0;
   @Input() promote: any={};
-  @Input() promoteId: any;
   @Input() index: number = 0;
   @Output() promotionChange = new EventEmitter<any>();
 
@@ -30,13 +29,6 @@ export class PromoteProductItemComponent implements OnInit {
 
   }
 
-  get price() {
-    if(this.promote.discount <= 100 &&  this.promote.discount > 0) {
-      return this.promote.productPrice * this.promote.discount / 100;
-    } else {
-      return this.promote.productPrice;
-    }
-  }
 
   delete() {
     let self = this;
@@ -46,23 +38,6 @@ export class PromoteProductItemComponent implements OnInit {
       this.promotionChange.emit({
         index: self.index,
         event: 'delete',
-        promote: data
-      });
-    });
-  }
-
-  edit() {
-    this.isEdit = !this.isEdit;
-  }
-
-  save() {
-    let self = this;
-    let params:any = this.promote;
-    this.promoteService.savePromotionProduct(params).then((data) => {
-      self.isEdit = false;
-      self.promotionChange.emit({
-        index: self.index,
-        event: 'save',
         promote: data
       });
     });

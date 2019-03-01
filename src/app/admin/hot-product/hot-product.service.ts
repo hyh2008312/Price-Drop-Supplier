@@ -58,6 +58,23 @@ export class HotProductService {
       .catch(this.handleError);
   }
 
+  topProduct(): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/hotpush/list/`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
   addProduct(promotion:any): Promise<any> {
 
     let headers = new Headers({
@@ -67,7 +84,7 @@ export class HotProductService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}/product/hotpush/add/del/${promotion.id}/`;
+    const url = `${this.baseUrl.url}product/hotpush/add/del/${promotion.id}/`;
 
     return this.http.post(url, promotion, options)
       .toPromise()
@@ -75,7 +92,7 @@ export class HotProductService {
       .catch(this.handleError);
   }
 
-  deleteProductn(promotion:any): Promise<any> {
+  deleteProduct(promotion:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'

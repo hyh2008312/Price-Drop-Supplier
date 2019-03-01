@@ -1256,7 +1256,8 @@ export class ProductMainComponent implements OnInit {
     /* save data */
     const newData: any = <any[][]>(utils.sheet_to_json(ws, {header: 1}));
 
-    // console.log(newData)
+
+    console.log(newData)
     // let pack = [];
     // for(let i = 0; i < newData.length; i++) {
     //   const item = newData[i];
@@ -1281,7 +1282,7 @@ export class ProductMainComponent implements OnInit {
     //
     //
     // this.getContentTxt2(pack, wsname);
-
+    //
     let index = 1;
     this.getContentTxt1(newData[index], index, newData, wsname);
 
@@ -1380,13 +1381,13 @@ export class ProductMainComponent implements OnInit {
         this.getImage(index, pixels, similar, _index, selectedIdx, newData, wbname);
       };
 
-      image.src = obj[24];
+      image.src = obj[23];
     }
   }
 
   getImage(index, pixels, similar, _index, selectedIdx, newData, wsname) {
     let idx = s.findIndex((value) => {
-      if(value.spu == newData[index][2]) {
+      if(value.spu == newData[index][1]) {
         return true;
       }
     });
@@ -1398,7 +1399,7 @@ export class ProductMainComponent implements OnInit {
       em.images = imgs.join('');
       for(let i = 0; i < item.images.length; i++ ) {
         const fm = item.images[i];
-        if(i < 4) {
+        if(i < 5) {
           em['images_' + (i+1)] = fm;
         }
       }

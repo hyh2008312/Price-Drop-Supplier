@@ -3,12 +3,12 @@
     Popular Products & Drops
   </div>
   <div>
-    <mat-tab-group color="primary"  [(selectedIndex)]="selectedIndex">
+    <mat-tab-group color="primary"  [(selectedIndex)]="selectedIndex" (selectedTabChange)="changeProducts($event)">
       <mat-tab label="Top Products Based on Conversion">
         <div class="md-margin-top-2 sc-promote__promote-bg">
           <app-admin-hot-product-title></app-admin-hot-product-title>
           <div class="sc-promote__promote-list" *ngFor="let item of productRank;let i = index;">
-            <app-admin-hot-product-item [promote]="item" [index]="i" [status]="0" [promoteId]="promotionId"
+            <app-admin-hot-product-item [promote]="item" [index]="i" [status]="0"
                                       (promotionChange)="changePromotionProduct($event)"></app-admin-hot-product-item>
           </div>
           <div class="sc-promote__promote-none" fxLayout="row" fxLayoutAlign="center center"
@@ -22,7 +22,18 @@
       </mat-tab>
       <mat-tab label="Add Products for Popular Drops" >
         <div class="md-margin-top-2 sc-promote__promote-bg">
-
+          <app-admin-hot-product-promote-product-title></app-admin-hot-product-promote-product-title>
+          <div class="sc-promote__promote-list" *ngFor="let item of topProduct;let i = index;">
+            <app-admin-hot-product-promote-product-item [promote]="item" [index]="i" [status]="0"
+                                        (promotionChange)="changePromotionProduct($event)"></app-admin-hot-product-promote-product-item>
+          </div>
+          <div class="sc-promote__promote-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="productRank && productRank.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-promote__promote-title-1 md-margin-top-4">You haven't any top product yet. </div>
+            </div>
+          </div>
         </div>
       </mat-tab>
     </mat-tab-group>
