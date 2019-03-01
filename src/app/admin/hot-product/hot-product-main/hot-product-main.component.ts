@@ -20,12 +20,14 @@ export class HotProductMainComponent implements OnInit {
   topProduct: any;
 
   categoryId: any;
+  category: any;
 
   constructor(
     private promoteService: HotProductService,
     private dialog: MatDialog
   ) {
     this.getProductRankList();
+    this.getCategoryList();
   }
 
   ngOnInit(): void {
@@ -60,7 +62,7 @@ export class HotProductMainComponent implements OnInit {
       case 1:
         switch (event.event) {
           case 'delete':
-            this.productRank.splice(event.index, 1);
+            this.topProduct.splice(event.index, 1);
             break;
         }
         break;
@@ -71,18 +73,25 @@ export class HotProductMainComponent implements OnInit {
 
     let dialogRef = this.dialog.open(SelectProductDialogComponent, {
       data: {
+        category: this.category,
         isEdit: false
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if(dialogRef.componentInstance.data.isEdit == true) {
-
+        this.changeProducts({
+          index: 2
+        });
       }
     });
   }
 
-
+  getCategoryList() {
+    this.promoteService.getCategoryList().then((data) => {
+      this.category = [...data];
+    });
+  }
 
 
 }

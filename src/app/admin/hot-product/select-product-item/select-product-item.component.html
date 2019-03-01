@@ -2,9 +2,12 @@
   <div class="md-margin-right-2 sc-promote__promote-image" fxFlex="none" fxLayout="column" fxLayoutAlign="center stretch">
     <img [src]="promote.mainImage">
   </div>
-  <div class="md-margin-right-2" fxFlex="45" fxLayout="column" fxLayoutAlign="center stretch">
+  <div class="md-margin-right-2" fxFlex="45" fxLayout="column" fxLayoutAlign="space-between start">
     <div class="sc-promote__promote-text">
       {{promote.title}}
+    </div>
+    <div class="sc-promote__promote-text">
+      SPU: {{promote.spu}}
     </div>
   </div>
   <div class="xb-input-error" *ngIf="error">{{error}}</div>

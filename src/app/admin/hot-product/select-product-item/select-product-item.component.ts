@@ -28,12 +28,11 @@ export class SelectProductItemComponent implements OnInit {
 
   selectPromotionProduct() {
     let params: any ={};
-    params.productId = this.promote.id;
-    params.categoryId = this.categoryId;
+    params.id = this.promote.id;
 
-    this.promoteService.addPromotionProduct(params).then(((data) => {
+    this.promoteService.addProduct(params).then(((data) => {
 
-      if(data && data.id) {
+      if(data && data.status == 'success') {
         this.promote = data;
         this.promoteChange.emit({
           index: this.index,
@@ -57,12 +56,5 @@ export class SelectProductItemComponent implements OnInit {
     });
   }
 
-  countOff (s, o) {
-    if (o > 0) {
-      return Math.floor((o - s) / o * 100) + '% OFF'
-    } else {
-      return ''
-    }
-  }
 
 }

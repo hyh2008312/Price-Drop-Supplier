@@ -186,7 +186,7 @@ export class HotProductService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}product/supplier/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}drops/hotpush/candidate/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()

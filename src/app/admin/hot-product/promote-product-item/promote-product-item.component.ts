@@ -32,10 +32,11 @@ export class PromoteProductItemComponent implements OnInit {
 
   delete() {
     let self = this;
-    this.promoteService.deletePromotionProduct({
+    this.promoteService.deleteProduct({
       id: this.promote.id
     }).then((data) => {
       this.promotionChange.emit({
+        status: self.status,
         index: self.index,
         event: 'delete',
         promote: data

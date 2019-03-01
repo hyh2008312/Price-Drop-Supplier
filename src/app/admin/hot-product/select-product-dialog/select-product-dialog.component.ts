@@ -21,10 +21,24 @@ export class SelectProductDialogComponent implements OnInit {
   categoryList: any = [];
   subCategoryList: any = [];
   thirdCategoryList: any = [];
+  searchCategory = 'product';
+
+  searchList: any = [{
+    text: 'Product Name',
+    value: 'product'
+  }, {
+    text: 'SPU',
+    value: 'spu'
+  }, {
+    text: 'Shop Name',
+    value: 'shop'
+  }];
 
   error: any = false;
 
   cat: any;
+  min: any;
+  max: any;
 
   promotionProduct: any;
 
@@ -43,13 +57,12 @@ export class SelectProductDialogComponent implements OnInit {
       searchKey: ['']
     });
 
-    this.subCategoryList = this.data.categoryList;
-    this.cat = this.data.categoryId;
+    this.categoryList = this.data.category;
 
-    this.subCategoryList.unshift({
-      id: this.cat,
+    this.categoryList.unshift({
+      id: false,
       data: {
-        name: 'ALL'
+        name: 'All'
       }
     });
 
@@ -77,25 +90,25 @@ export class SelectProductDialogComponent implements OnInit {
 
   getPromoteProduct() {
     let param: any = {};
+    let min_price: any = this.min && this.min != ''? this.min: null;
+    let max_price: any = this.max && this.max != ''? this.max: null;
     if(this.searchKey != '') {
       param = {
-        status: 'published',
-        cat: this.cat,
-        q: this.searchKey,
-        qt: 'spu',
-        topicId: this.data.promotionId,
+        category: this.cat,
+        search: this.searchKey,
+        search_type: this.searchCategory,
         page: this.page,
         page_size: this.pageSize,
-        sort: 'public_date'
+        min_price,
+        max_price
       };
     } else {
       param = {
-        status: 'published',
-        cat: this.cat,
-        topicId: this.data.promotionId,
+        category: this.cat,
         page: this.page,
         page_size: this.pageSize,
-        sort: 'public_date'
+        min_price,
+        max_price
       }
     }
 
@@ -123,6 +136,24 @@ export class SelectProductDialogComponent implements OnInit {
       this.promotionProduct.splice(event.index,1);
     } else if(event.event == 'error') {
       this.error = event.promote;
+    }
+  }
+
+  categoryChange($event) {
+    if(this.categoryList.length > 0) {
+      let index = this.categoryList.findIndex((data) => {
+        if(data.id == $event) {
+          return true;
+        }
+      });
+      if(this.categoryList[index] && this.categoryList[index].children) {
+        this.subCategoryList = [...this.categoryList[index].children];
+      } else {
+        this.subCategoryList = false;
+        this.thirdCategoryList = false;
+      }
+      this.cat = $event;
+      this.getPromoteProduct();
     }
   }
 

@@ -12,7 +12,6 @@ import { UserService } from  '../../../shared/services/user/user.service';
 
 export class PromoteMainComponent implements OnInit {
 
-
   promoteAll: any = false;
   promoteAllIndex = 1;
   promoteScheduled: any = false;
