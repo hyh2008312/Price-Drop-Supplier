@@ -14,7 +14,7 @@ export class HomeEditDialogComponent implements OnInit {
 
   purchaseForm : FormGroup;
   error: any = false;
-  supplierList: any = ['getpricedrop', '北京云海'];
+  supplierList: any = ['北京云海创富科技', 'getpricedrop', '北京云海'];
   warehouseList: any;
 
   get purchaseInfo() { return this.purchaseForm.get('purchaseInfo') as FormArray; }
@@ -32,7 +32,7 @@ export class HomeEditDialogComponent implements OnInit {
       id: ['', Validators.required],
       purchaseId: ['', Validators.required],
       purchaseInfo: this.fb.array([]),
-      purchaseAccount: ['getpricedrop', Validators.required],
+      purchaseAccount: ['北京云海创富科技', Validators.required],
       warehouseId: ['']
     });
 

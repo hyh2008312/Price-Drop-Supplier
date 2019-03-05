@@ -13,6 +13,7 @@ import { utils, write, WorkBook } from 'xlsx';
 
 import { saveAs } from 'file-saver';
 import { AddGatiPostDialogComponent } from '../add-gati-post-dialog/add-gati-post-dialog.component';
+import { AddOrderDialogComponent } from '../add-order-dialog/add-order-dialog.component';
 
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
@@ -215,6 +216,9 @@ export class OrderMainComponent implements OnInit {
   mode: any = 'indeterminate';
   value: any = 20;
 
+  channelId: any = false;
+  channelList: any;
+
   constructor(
     private orderService: OrderService,
     private userService: UserService,
@@ -236,6 +240,8 @@ export class OrderMainComponent implements OnInit {
         }
       }
     });
+
+    this.getChannelList();
 
   }
 
@@ -321,6 +327,7 @@ export class OrderMainComponent implements OnInit {
     let paid_start_time = false;
     let paid_end_time = false;
     let sourcing_status = false;
+    let order_source_channel_id: any = null;
     const search = this.searchKey && this.searchKey != ''? this.searchKey: null;
     let search_type: any = null;
     if(search) {
@@ -370,6 +377,7 @@ export class OrderMainComponent implements OnInit {
         paid_start_time = this.psPacking;
         paid_end_time = this.pePacking;
         sourcing_status = this.sourcingPacking;
+        order_source_channel_id = this.channelId;
         break;
       case 3:
         status = 'Shipped';
@@ -501,6 +509,7 @@ export class OrderMainComponent implements OnInit {
     paid_start_time = paid_start_time? paid_start_time: null;
     paid_end_time = paid_end_time? paid_end_time: null;
     sourcing_status = sourcing_status? sourcing_status: null;
+    order_source_channel_id = order_source_channel_id? order_source_channel_id: null;
 
     let category_id = this.categoryId? this.categoryId: null;
 
@@ -518,7 +527,8 @@ export class OrderMainComponent implements OnInit {
         paid_start_time,
         paid_end_time,
         sourcing_status,
-        category_id
+        category_id,
+        order_source_channel_id
       }).then((data) => {
         self.length = data.count;
         switch (event.index) {
@@ -748,6 +758,22 @@ export class OrderMainComponent implements OnInit {
     });
   }
 
+  createOrder() {
+    let dialogRef = this.dialog.open(AddOrderDialogComponent, {
+      data: {
+        isEdit: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        this.changeProducts({
+          index: this.selectedIndex
+        });
+      }
+    });
+  }
+
   typeChange($event) {
     switch (this.selectedIndex) {
       case 0:
@@ -838,6 +864,19 @@ export class OrderMainComponent implements OnInit {
     switch (this.selectedIndex) {
       case 2:
         this.sourcingPacking = $event;
+        break;
+    }
+
+    this.changeProducts({
+      index: this.selectedIndex,
+      resetPage: true
+    });
+  }
+
+  channelChange($event) {
+    switch (this.selectedIndex) {
+      case 2:
+        this.channelId = $event;
         break;
     }
 
@@ -964,6 +1003,20 @@ export class OrderMainComponent implements OnInit {
       }
       this.length = this.orderNotStart.length;
       this.isLoading = false;
+    });
+  }
+
+  getChannelList() {
+    this.orderService.getChannelList().then((data) => {
+      this.channelList = [...data];
+      this.channelList.unshift({
+        id: '0',
+        name: 'PriceDrop'
+      });
+      this.channelList.unshift({
+        id: false,
+        name: '所有'
+      });
     });
   }
 

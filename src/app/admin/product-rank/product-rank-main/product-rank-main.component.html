@@ -1,0 +1,93 @@
+<div class="container unicorn-dark-theme">
+  <div class="sc-promote__title">
+    Product Ranking
+  </div>
+  <div>
+    <mat-tab-group color="primary"  [(selectedIndex)]="selectedIndex" (selectedTabChange)="changeProducts($event)">
+      <mat-tab label="Top Products Based on Sales">
+        <div class="md-margin-top-2 md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+          <div>Filter by Start Time: </div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="csAll" [(ngModel)]="psAll" placeholder="Start Date" (dateInput)="addEvent('csAll', $event)">
+            <mat-datepicker-toggle matSuffix [for]="csAll"></mat-datepicker-toggle>
+            <mat-datepicker #csAll></mat-datepicker>
+          </mat-form-field>
+          <div class="md-margin-left-2">to</div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="ceAll" [(ngModel)]="peAll" placeholder="End Date" (dateInput)="addEvent('ceAll', $event)">
+            <mat-datepicker-toggle matSuffix [for]="ceAll"></mat-datepicker-toggle>
+            <mat-datepicker #ceAll></mat-datepicker>
+          </mat-form-field>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="primary" (click)="filterDate()">Confirm</button>
+          </div>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="accent" (click)="resetDate()">Reset</button>
+          </div>
+        </div>
+        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+          <div fxFlex="30" fxLayout="row" fxLayoutAlign="start center">
+            <mat-form-field fxFlex>
+              <mat-select name="category" placeholder="Select a Category"
+                          (valueChange)="categoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="subcategory" placeholder="Select a Subcategory"
+                          (valueChange)="subCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="md-margin-left-3" fxFlex="30" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
+            <mat-form-field fxFlex>
+              <mat-select name="thirdcategory" placeholder="Select a Thirdcategory"
+                          (valueChange)="thirdCategoryChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
+                  {{ item.data.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="md-margin-top-2 sc-promote__promote-bg">
+          <app-admin-product-rank-title [status]="0"></app-admin-product-rank-title>
+          <div class="sc-promote__promote-list" *ngFor="let item of productRank;let i = index;">
+            <app-admin-product-rank-item [promote]="item" [index]="i" [status]="0"
+                                      (promotionChange)="changePromotionProduct($event)"></app-admin-product-rank-item>
+          </div>
+          <div class="sc-promote__promote-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="productRank && productRank.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-promote__promote-title-1 md-margin-top-4">You haven't any top product yet. </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Top Products Based on Conversion" >
+        <div class="md-margin-top-2 sc-promote__promote-bg">
+          <app-admin-product-rank-title [status]="1"></app-admin-product-rank-title>
+          <div class="sc-promote__promote-list" *ngFor="let item of topProduct;let i = index;">
+            <app-admin-product-rank-item [promote]="item" [index]="i" [status]="1"
+                                         (promotionChange)="changePromotionProduct($event)"></app-admin-product-rank-item>
+          </div>
+          <div class="sc-promote__promote-none" fxLayout="row" fxLayoutAlign="center center"
+               *ngIf="topProduct && topProduct.length <= 0">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <i class="iconfontXberts icon-ic-empty"></i>
+              <div class="sc-promote__promote-title-1 md-margin-top-4">You haven't any top product yet. </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

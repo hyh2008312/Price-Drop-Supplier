@@ -115,8 +115,14 @@ export class TopNavigationComponent implements OnInit {
     },
     {
       id: 7,
-      text: '热门产品管理',
+      text: '热推商品设置',
       router: './hotProduct',
+      isActive: false
+    },
+    {
+      id: 8,
+      text: '商品排行榜',
+      router: './rank',
       isActive: false
     }
   ];

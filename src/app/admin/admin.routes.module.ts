@@ -63,6 +63,9 @@ const routes: Routes = [
         path: 'hotProduct',
         loadChildren: './hot-product/hot-product.module#HotProductModule'
       }, {
+        path: 'rank',
+        loadChildren: './product-rank/product-rank.module#ProductRankModule'
+      }, {
         path: '',
         redirectTo: 'product',
         pathMatch: 'full'

@@ -204,7 +204,7 @@ export class SpecificationEditComponent implements OnInit {
       categoryId: this.activatedRoute.snapshot.params['id'],
       shopName: this.searchKey,
       page: this.page,
-      page_size: 500,
+      page_size: 400,
       productStatus: this.status
     }).then((data) => {
       this.length = data.count;

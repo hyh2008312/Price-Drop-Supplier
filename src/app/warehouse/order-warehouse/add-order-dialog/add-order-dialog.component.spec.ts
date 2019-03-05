@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PromoteProductItemComponent } from './promote-product-item.component';
+import { AddOrderDialogComponent } from './add-order-dialog.component';
 
-describe('PromoteProductItemComponent', () => {
-  let component: PromoteProductItemComponent;
-  let fixture: ComponentFixture<PromoteProductItemComponent>;
+describe('AddOrderDialogComponent', () => {
+  let component: AddOrderDialogComponent;
+  let fixture: ComponentFixture<AddOrderDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PromoteProductItemComponent ]
+      declarations: [ AddOrderDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PromoteProductItemComponent);
+    fixture = TestBed.createComponent(AddOrderDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

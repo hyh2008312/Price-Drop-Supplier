@@ -7,6 +7,7 @@
       支付日期: {{order.paidTime | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY HH:mm:ss'}}
     </div>
     <div class="md-margin-left-3">订单号 #: {{order.number}}</div>
+    <div class="md-margin-left-3" *ngIf="order.orderSourceName">第三方订单号: {{order.orderSourceName}} - {{order.thirdPartyOrderNumber}}</div>
     <div class="md-margin-left-3" fxFlex>{{order.sumOrderNumber? '总订单号 #:' + order.sumOrderNumber: ''}}</div>
     <a class="sc-product__color text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/{{order.id}}" target="_blank">查看订单详情</a>
   </div>
@@ -43,7 +44,7 @@
       </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="start start" fxFlex="30">
-      <div class="md-margin-right-2 sc-order__product-height-1 xb-bold" fxFlex="35"
+      <div class="md-margin-right-2 sc-order__product-height-1 md-align-center" fxFlex="35"
            fxLayout="column" fxLayoutAlign="center center">
         {{order.username}}
       </div>

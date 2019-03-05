@@ -17,7 +17,7 @@ export class AddOrderStockDialogComponent implements OnInit {
 
   warehouseList: any;
 
-  supplierList: any = ['getpricedrop', '北京云海'];
+  supplierList: any = ['北京云海创富科技', 'getpricedrop', '北京云海'];
   error: any = false;
 
   constructor(
@@ -30,7 +30,7 @@ export class AddOrderStockDialogComponent implements OnInit {
       id: [''],
       sourcingSupplier: [''],
       sourcingOrderNumber: ['', Validators.required],
-      purchaseAccount: ['getpricedrop', Validators.required],
+      purchaseAccount: ['北京云海创富科技', Validators.required],
       warehouseId: [1, Validators.required],
       purchasePrice: ['', Validators.required],
       purchaseUrl: ['', Validators.required]

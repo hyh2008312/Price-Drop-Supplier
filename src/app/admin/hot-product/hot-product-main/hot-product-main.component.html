@@ -36,10 +36,10 @@
                                         (promotionChange)="changePromotionProduct($event)"></app-admin-hot-product-promote-product-item>
           </div>
           <div class="sc-promote__promote-none" fxLayout="row" fxLayoutAlign="center center"
-               *ngIf="productRank && productRank.length <= 0">
+               *ngIf="topProduct && topProduct.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">
               <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-promote__promote-title-1 md-margin-top-4">You haven't any top product yet. </div>
+              <div class="sc-promote__promote-title-1 md-margin-top-4">You haven't published any popular product yet. </div>
             </div>
           </div>
         </div>

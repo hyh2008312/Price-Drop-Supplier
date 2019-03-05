@@ -22,12 +22,6 @@
     <div class="sc-product__product-price-sale" *ngIf="product.unitPrice>0">
       Selling Price: {{ product.unitPrice | currency: currency: true  }}
     </div>
-    <div *ngIf="product.lowestPrice>=0">
-      lowest: {{ product.lowestPrice | currency: currency: true  }}
-    </div>
-    <div class="line-through" *ngIf="product.lowestPrice == 0 && product.saleUnitPrice == 0">
-      &nbsp;&nbsp;&nbsp;
-    </div>
   </div>
   <div class="sc-product__product-price md-margin-right-2" fxFlex="10"
        fxLayout="column" fxLayoutAlign="space-around center">

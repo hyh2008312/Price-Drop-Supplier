@@ -178,6 +178,9 @@ export class OrderMainComponent implements OnInit {
     value: 'Order Paid Time'
   }];
 
+  channelId: any;
+  channelList: any;
+
   sourcingPacking: any = false;
 
   selectedIndex: number = 0;
@@ -242,6 +245,8 @@ export class OrderMainComponent implements OnInit {
         }
       }
     });
+
+    this.getChannelList();
 
   }
 
@@ -329,6 +334,7 @@ export class OrderMainComponent implements OnInit {
     let sourcing_status = false;
     let sort: any = null;
     const search = this.searchKey && this.searchKey != ''? this.searchKey: null;
+    let order_source_channel_id: any = null;
     let search_type: any = null;
     if(search) {
       search_type = this.searchType;
@@ -378,6 +384,7 @@ export class OrderMainComponent implements OnInit {
         paid_end_time = this.pePacking;
         sourcing_status = this.sourcingPacking;
         sort = this.outOfStock;
+        order_source_channel_id = this.channelId;
         break;
       case 3:
         status = 'Shipped';
@@ -499,6 +506,7 @@ export class OrderMainComponent implements OnInit {
     paid_start_time = paid_start_time? paid_start_time: null;
     paid_end_time = paid_end_time? paid_end_time: null;
     sourcing_status = sourcing_status? sourcing_status: null;
+    order_source_channel_id = order_source_channel_id? order_source_channel_id: null;
 
     let category_id = this.categoryId? this.categoryId: null;
 
@@ -516,7 +524,8 @@ export class OrderMainComponent implements OnInit {
       paid_end_time,
       sourcing_status,
       category_id,
-      sort
+      sort,
+      order_source_channel_id
     }).then((data) => {
       self.length = data.count;
       switch (event.index) {
@@ -814,6 +823,19 @@ export class OrderMainComponent implements OnInit {
     });
   }
 
+  channelChange($event) {
+    switch (this.selectedIndex) {
+      case 2:
+        this.channelId = $event;
+        break;
+    }
+
+    this.changeProducts({
+      index: this.selectedIndex,
+      resetPage: true
+    });
+  }
+
   categoryChange($event) {
     if(this.categoryList.length > 0) {
       let index = this.categoryList.findIndex((data) => {
@@ -863,6 +885,20 @@ export class OrderMainComponent implements OnInit {
           name: 'All'
         }
       })
+    });
+  }
+
+  getChannelList() {
+    this.orderService.getChannelList().then((data) => {
+      this.channelList = [...data];
+      this.channelList.unshift({
+        id: '0',
+        name: 'PriceDrop'
+      });
+      this.channelList.unshift({
+        id: false,
+        name: 'All'
+      });
     });
   }
 }
