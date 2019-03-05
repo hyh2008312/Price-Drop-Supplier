@@ -31,6 +31,8 @@ export class ProductRankMainComponent implements OnInit {
 
   csAll: any;
   ceAll: any;
+  psAll: any;
+  peAll: any;
 
   productRank: any;
   topProduct: any;
