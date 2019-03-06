@@ -118,6 +118,35 @@
             </mat-form-field>
           </div>
         </div>
+        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center" *ngIf="isSuperuser">
+          <div>Filter by Date: </div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="csAll" [(ngModel)]="psAll" placeholder="Start Date" (dateInput)="addEvent('csAll', $event)">
+            <mat-datepicker-toggle matSuffix [for]="csAll"></mat-datepicker-toggle>
+            <mat-datepicker #csAll></mat-datepicker>
+          </mat-form-field>
+          <div class="md-margin-left-2">to</div>
+          <mat-form-field class="md-margin-left-2">
+            <input matInput [matDatepicker]="ceAll" [(ngModel)]="peAll" placeholder="End Date" (dateInput)="addEvent('ceAll', $event)">
+            <mat-datepicker-toggle matSuffix [for]="ceAll"></mat-datepicker-toggle>
+            <mat-datepicker #ceAll></mat-datepicker>
+          </mat-form-field>
+          <div class="sc__accent-dark md-margin-left-2">
+            <button mat-raised-button color="accent" (click)="resetDate()">Reset</button>
+          </div>
+        </div>
+        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center" *ngIf="isSuperuser">
+          <div>Filter by</div>
+          <div class="md-margin-left-2 unicorn-dark-theme">
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [(ngModel)]="shopName" name="Shop Name">
+                <mat-option class="md-align-center" *ngFor="let item of shopNameList" [value]="item.value">
+                  {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
         <div class="md-margin-top-1">
           <app-product-title [status]="0" ></app-product-title>
         </div>

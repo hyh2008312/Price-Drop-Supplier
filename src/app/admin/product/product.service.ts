@@ -57,9 +57,7 @@ export class ProductService {
     return this.http.post(url, product, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   productDraftCreate(product:any): Promise<any> {
@@ -76,28 +74,7 @@ export class ProductService {
     return this.http.post(url, product, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
-  }
-
-  addProduct(product:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/add/${product.id}/`;
-
-    return this.http.put(url, product, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   publishDraft(product:any): Promise<any> {
@@ -114,9 +91,7 @@ export class ProductService {
     return this.http.put(url, product, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   saveDraft(product:any): Promise<any> {
@@ -133,28 +108,7 @@ export class ProductService {
     return this.http.put(url, product, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
-  }
-
-  addDraft(product:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/draft/add/${product.id}/`;
-
-    return this.http.put(url, product, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   publishProduct(product:any): Promise<any> {
@@ -171,9 +125,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   publishProducts(product:any): Promise<any> {
@@ -190,9 +142,7 @@ export class ProductService {
     return this.http.post(url, product, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   disapproveProduct(product:any): Promise<any> {
@@ -209,9 +159,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   addProductToSelected(product:any): Promise<any> {
@@ -228,9 +176,7 @@ export class ProductService {
     return this.http.post(url, product, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   deleteProductToSelected(product:any): Promise<any> {
@@ -247,9 +193,7 @@ export class ProductService {
     return this.http.delete(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getProductList(params:any): Promise<any> {
@@ -266,9 +210,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getPdfProduct(params:any): Promise<any> {
@@ -285,9 +227,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getPdfNewProduct(params:any): Promise<any> {
@@ -304,9 +244,7 @@ export class ProductService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getSelectedProductList(params:any): Promise<any> {
@@ -323,9 +261,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getDropsProductList(params:any): Promise<any> {
@@ -342,9 +278,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   changeDrop(params: any): Promise<any> {
@@ -361,9 +295,7 @@ export class ProductService {
     return this.http.put(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getProductDetail(params:any): Promise<any> {
@@ -380,9 +312,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getVariantList(): Promise<any> {
@@ -399,28 +329,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
-  }
-
-  createVariantKey(attribute: any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/attribute/create/`;
-
-    return this.http.post(url, attribute, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getProductBasic(params:any): Promise<any> {
@@ -437,9 +346,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   changeProductBasic(params: any): Promise<any> {
@@ -456,47 +363,7 @@ export class ProductService {
     return this.http.put(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
-  }
-
-  getProductCommission(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/commission/update/${params.id}/`;
-
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
-  }
-
-  changeProductCommission(params: any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/commission/update/${params.id}/`;
-
-    return this.http.put(url, params, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getProductShipping(params:any): Promise<any> {
@@ -513,9 +380,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   changeProductShipping(params: any): Promise<any> {
@@ -532,9 +397,7 @@ export class ProductService {
     return this.http.put(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getLogisticShipping(params:any): Promise<any> {
@@ -551,9 +414,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   changeLogisticShipping(params: any): Promise<any> {
@@ -570,9 +431,7 @@ export class ProductService {
     return this.http.put(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   changeAttributesValue(params: any): Promise<any> {
@@ -589,9 +448,7 @@ export class ProductService {
     return this.http.put(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getShippingList(country: any): Promise<any> {
@@ -608,9 +465,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   addShipping(params:any): Promise<any> {
@@ -627,9 +482,7 @@ export class ProductService {
     return this.http.put(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getProductVariantList(params: any): Promise<any> {
@@ -646,9 +499,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   addNewVariant(params:any): Promise<any> {
@@ -665,9 +516,7 @@ export class ProductService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   changeVariant(params:any): Promise<any> {
@@ -684,28 +533,7 @@ export class ProductService {
     return this.http.put(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
-  }
-
-  changeAttributes(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/basic/update/detail/${params.id}/`;
-
-    return this.http.post(url, params, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   deleteVariant(params:any): Promise<any> {
@@ -722,9 +550,7 @@ export class ProductService {
     return this.http.delete(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   deleteShipping(params:any): Promise<any> {
@@ -741,9 +567,7 @@ export class ProductService {
     return this.http.delete(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   editShipping(params:any): Promise<any> {
@@ -760,9 +584,7 @@ export class ProductService {
     return this.http.put(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getCategoryList(): Promise<any> {
@@ -779,9 +601,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getCountryList(): Promise<any> {
@@ -798,9 +618,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getCategoryAttributeDetail(params: any): Promise<any>  {
@@ -816,9 +634,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   uploadEditedProduct(params: any): Promise<any>  {
@@ -834,27 +650,7 @@ export class ProductService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
-  }
-
-  uploadCreatedProduct(params: any): Promise<any>  {
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}product/new/create/`;
-
-    return this.http.post(url, params, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getAttributeList(params: any): Promise<any>  {
@@ -870,9 +666,7 @@ export class ProductService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   editAttributeList(params: any): Promise<any>  {
@@ -910,6 +704,9 @@ export class ProductService {
         if(err.error) {
           errMsg = "Sorry! Server is busy now!";
         }
+      }
+      if(error.status == 409) {
+        return Promise.reject(errMsg);
       }
     } else {
       errMsg = error.msg ? error.msg : error.toString();

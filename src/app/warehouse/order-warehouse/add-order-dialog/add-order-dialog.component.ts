@@ -78,9 +78,6 @@ export class AddOrderDialogComponent implements OnInit {
   getWarehouseList() {
     this.orderService.getChannelList().then((data) => {
       this.channelList = [...data];
-      this.trackingForm.patchValue({
-        thirdPartyId: this.channelList[0].id
-      })
     });
   }
 

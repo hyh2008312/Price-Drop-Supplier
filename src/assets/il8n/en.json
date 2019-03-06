@@ -1,0 +1,11 @@
+{
+  "NAV": {
+    "TITLE1": "SUPPLY CHAIN"
+  }
+  "HOME": {
+    "TITLE1": "PURCHASE ORDERS",
+    "TITLE2": "PICKUP ORDERS",
+    "TITLE3": "INVENTORY",
+    "TITLE4": "ORDERS"
+  }
+}

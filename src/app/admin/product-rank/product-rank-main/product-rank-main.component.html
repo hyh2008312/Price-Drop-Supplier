@@ -6,7 +6,7 @@
     <mat-tab-group color="primary"  [(selectedIndex)]="selectedIndex" (selectedTabChange)="changeProducts($event)">
       <mat-tab label="Top Products Based on Sales">
         <div class="md-margin-top-2 md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-          <div>Filter by Start Time: </div>
+          <div>Filter by Date: </div>
           <mat-form-field class="md-margin-left-2">
             <input matInput [matDatepicker]="csAll" [(ngModel)]="psAll" placeholder="Start Date" (dateInput)="addEvent('csAll', $event)">
             <mat-datepicker-toggle matSuffix [for]="csAll"></mat-datepicker-toggle>

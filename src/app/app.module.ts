@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule }        from '@angular/common';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule,JsonpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
 
@@ -20,6 +21,10 @@ import { AuthenticationModule } from './shared/services/authentication/index';
 import { UserModule } from './shared/services/user/user.module';
 import { GuardLinkService } from './shared/services/guard-link/guard-link.service';
 
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/il8n/', '.json');
+}
+
 @NgModule({
   declarations: [
     AppComponent
@@ -33,7 +38,14 @@ import { GuardLinkService } from './shared/services/guard-link/guard-link.servic
     BrowserAnimationsModule,
     AuthenticationModule,
     UserModule,
-    Angulartics2Module.forRoot([ Angulartics2GoogleTagManager ])
+    Angulartics2Module.forRoot([ Angulartics2GoogleTagManager ]),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [BaseApi, SystemConstant, DataApi, BlogCover, HttpClientModule, GuardLinkService],
   bootstrap: [AppComponent]

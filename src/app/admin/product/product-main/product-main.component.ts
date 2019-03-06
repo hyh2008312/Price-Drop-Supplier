@@ -22,11 +22,25 @@ import {read, utils, WorkBook, WorkSheet, write} from 'xlsx';
 import { saveAs } from 'file-saver';
 
 import { s } from '../product';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-product-main',
   templateUrl: './product-main.component.html',
-  styleUrls: ['../product.scss']
+  styleUrls: ['../product.scss'],
+  providers: [
+    // The locale would typically be provided on the root module of your application. We do it at
+    // the component level here, due to limitations of our example generation script.
+    {provide: MAT_DATE_LOCALE, useValue: 'en'},
+
+    // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
+    // `MatMomentDateModule` in your applications root module. We provide it at the component level
+    // here, due to limitations of our example generation script.
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ]
 })
 
 export class ProductMainComponent implements OnInit {
@@ -93,14 +107,32 @@ export class ProductMainComponent implements OnInit {
 
   isSuperuser: boolean = false;
 
-  userPermission: any = [false, true, true, false, false, true, false];
-
   cateA: any = '';
   cateB: any = '';
   cateC: any = '';
 
   min: any;
   max: any;
+
+  csAll: any;
+  ceAll: any;
+  psAll: any;
+  peAll: any;
+
+  shopName: any = false;
+  shopNameList: any = [{
+    value: false,
+    text: 'All'
+  }, {
+    value: '1688',
+    text: '1688'
+  }, {
+    value: 'clubfactory',
+    text: 'ClubFactory'
+  }, {
+    value: 'pricedrop',
+    text: 'Other'
+  }];
 
   constructor(
     private adminService: ProductService,
@@ -838,11 +870,17 @@ export class ProductMainComponent implements OnInit {
   export(): void {
     let min_price: any = this.min? this.min: null;
     let max_price: any = this.max? this.max: null;
+    let start_time = this.csAll? this.csAll: null;
+    let end_time = this.ceAll? this.ceAll: null;
+    let filter_type = this.shopName? this.shopName: null;
 
     this.adminService.getPdfProduct({
       category_id: this.catPublished,
       min_price,
-      max_price
+      max_price,
+      start_time,
+      end_time,
+      filter_type
     }).then((res) => {
       if(res && res.length > 0) {
         const ws_name = 'catalog';
@@ -1502,6 +1540,19 @@ export class ProductMainComponent implements OnInit {
     }
     if (sn) return s;
     else return pixels;
+  }
+
+  addEvent(type: any, event:MatDatepickerInputEvent<any>) {
+    if(event.value) {
+      this[type] = event.value._i.year + '-'+ (event.value._i.month+1) +'-'+event.value._i.date + ' 00:00:00';
+    } else {
+      this[type] = null;
+    }
+  }
+
+  resetDate() {
+    this.csAll = null;
+    this.ceAll = null;
   }
 
 }
