@@ -922,11 +922,11 @@ export class ProductMainComponent implements OnInit {
             orderItem.Selling_Price = parseInt((im.unitPrice * 0.9).toString());
             orderItem.MRP = parseInt((im.saleUnitPrice).toString());
             orderItem.Souring_Cost = parseInt(im.sourcingPrice);
+            orderItem.Supplier_Name = item.shopName;
             for(let i = 0; i < item.productSpecification.length; i++) {
               const im = item.productSpecification[i];
               orderItem[im.name] = im.content;
             }
-            orderItem["Supplier Name"] = item.shopName;
             packing.push(orderItem);
           }
 
