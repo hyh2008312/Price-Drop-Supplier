@@ -874,9 +874,10 @@ export class ProductMainComponent implements OnInit {
     let end_time = this.ceAll? this.ceAll: null;
     let filter_type = this.shopName? this.shopName: null;
     let shop_name = this.searchCategory == 'shop' && this.searchKey && this.searchKey != ''? this.searchKey: null;
+    let category_id = this.catPublished? this.catPublished: null;
 
     this.adminService.getPdfProduct({
-      category_id: this.catPublished,
+      category_id,
       min_price,
       max_price,
       start_time,
@@ -925,6 +926,7 @@ export class ProductMainComponent implements OnInit {
               const im = item.productSpecification[i];
               orderItem[im.name] = im.content;
             }
+            orderItem["Supplier Name"] = item.shopName;
             packing.push(orderItem);
           }
 
