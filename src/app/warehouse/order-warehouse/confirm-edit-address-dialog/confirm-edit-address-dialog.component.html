@@ -3,12 +3,12 @@
     <i class="iconfontXberts icon-ic-close"></i>
   </div>
   <div class="sc-order-dialog__title">
-    该订单地址需要客服审核验证？
+    {{'ORDERS.DIALOG1.TITLE1' | translate }}
   </div>
   <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-button color="primary" (click)="close()">不需要</button>
+    <button mat-button color="primary" (click)="close()">{{'ORDERS.DIALOG1.BUTTON1' | translate }}</button>
     <div class="md-margin-left-2">
-      <button mat-raised-button color="primary" (click)="changeOrderAddress()">需要验证</button>
+      <button mat-raised-button color="primary" (click)="changeOrderAddress()">{{'ORDERS.DIALOG1.BUTTON2' | translate }}</button>
     </div>
   </div>
 </div>

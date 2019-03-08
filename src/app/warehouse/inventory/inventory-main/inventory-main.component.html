@@ -1,21 +1,21 @@
 <div class="container">
   <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
     <mat-tab-group color="primary" (selectedTabChange)="changeInventoryLists($event)" [(selectedIndex)]="selectedIndex">
-      <mat-tab label="按仓库查看库存" >
+      <mat-tab label="{{'INVENTORY.TITLE1'|translate}}" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <mat-form-field class="sc-product__product-sort">
             <mat-select [ngModel]="quantityWare" name="sort" (valueChange)="quantityChange($event)" >
               <mat-option class="md-align-center" *ngFor="let item of quantityList" [value]="item.value">
-                {{ item.text }}
+                {{ item.text | translate }}
               </mat-option>
             </mat-select>
           </mat-form-field>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div class="md-margin-right-2">选择仓库</div>
+            <div class="md-margin-right-2">{{'INVENTORY.TITLE4'|translate}}</div>
             <mat-form-field class="sc-product__product-sort">
               <mat-select name="仓库" [ngModel]="warehouseId" (valueChange)="warehouseChange($event)">
                 <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
-                  {{ item.warehouseName }}
+                  {{ item.warehouseName | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -25,7 +25,7 @@
                   fxLayout="row" fxLayoutAlign="start center" >
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-                     placeholder="搜索"
+                     placeholder="{{'INVENTORY.TITLE5'|translate}}"
                      (keyup.enter)="changeInventoryLists({index:1, type: 'search'})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
@@ -36,7 +36,7 @@
               <mat-form-field class="sc-product__product-sort">
                 <mat-select [(ngModel)]="searchCategory" name="sort">
                   <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
-                    {{ item.text }}
+                    {{ item.text | translate  }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -67,17 +67,17 @@
                *ngIf="inventoryWare && inventoryWare.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">
               <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-product__product-title-1 md-margin-top-4">暂无库存信息</div>
+              <div class="sc-product__product-title-1 md-margin-top-4">{{'INVENTORY.TITLE3' | translate}}</div>
             </div>
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="按SKU查看库存" >
+      <mat-tab label="{{'INVENTORY.TITLE2'|translate}}" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <mat-form-field class="sc-product__product-sort">
             <mat-select [ngModel]="quantityAll" name="sort" (valueChange)="quantityChange($event)" >
               <mat-option class="md-align-center" *ngFor="let item of quantityList" [value]="item.value">
-                {{ item.text }}
+                {{ item.text | translate }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -86,7 +86,7 @@
                   fxLayout="row" fxLayoutAlign="start center" >
               <i class="material-icons">search</i>
               <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-                     placeholder="搜索"
+                     placeholder="{{'INVENTORY.TITLE5'|translate}}"
                      (keyup.enter)="changeInventoryLists({index:0, type: 'search'})"/>
               <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                    *ngIf="searchKey != ''" (click)="clearSearchKey()">
@@ -97,7 +97,7 @@
               <mat-form-field class="sc-product__product-sort">
                 <mat-select [(ngModel)]="searchCategory" name="sort">
                   <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item.value">
-                    {{ item.text }}
+                    {{ item.text | translate  }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -134,7 +134,7 @@
                *ngIf="inventoryAll && inventoryAll.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">
               <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-product__product-title-1 md-margin-top-4">暂无库存信息</div>
+              <div class="sc-product__product-title-1 md-margin-top-4">{{'INVENTORY.TITLE3' | translate}}</div>
             </div>
           </div>
         </div>

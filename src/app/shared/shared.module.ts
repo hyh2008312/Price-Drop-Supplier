@@ -2,6 +2,7 @@ import { NgModule }            from '@angular/core';
 import { CommonModule }        from '@angular/common';
 import { FormsModule, ReactiveFormsModule }         from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from "@ngx-translate/core";
 
 import { FlexLayoutModule }    from '@angular/flex-layout';
 import { MomentModule }        from 'angular2-moment';
@@ -122,7 +123,8 @@ let providers = {
     MatDatepickerModule,
     ClipboardModule,
     MatProgressSpinnerModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    TranslateModule
   ],
   declarations: [
     SafeHtmlPipe,
@@ -220,7 +222,8 @@ let providers = {
     MatDatepickerModule,
     ClipboardModule,
     MatProgressSpinnerModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    TranslateModule
   ],
   providers: [
     FollowService,

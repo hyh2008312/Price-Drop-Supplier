@@ -132,43 +132,44 @@ export class OrderMainComponent implements OnInit {
   peNotStart: any = false;
 
   typeList: any = [{
-    text: '所有',
+    text: 'ORDERS.TYPELIST.TITLE1',
     value: false
   }, {
-    text: '普通订单',
+    text: 'ORDERS.TYPELIST.TITLE2',
     value: 'Normal'
   }, {
-    text: '砍价订单',
+    text: 'ORDERS.TYPELIST.TITLE3',
     value: 'Drop'
   }, {
-    text: '闪购订单',
+    text: 'ORDERS.TYPELIST.TITLE4',
     value: 'Flash'
   }];
+
   paymentList: any = [{
-    text: '所有',
+    text: 'ORDERS.PAYMENTLIST.TITLE1',
     value: false
   }, {
-    text: '货到付款',
+    text: 'ORDERS.PAYMENTLIST.TITLE2',
     value: 'cod'
   }, {
-    text: '在线支付',
+    text: 'ORDERS.PAYMENTLIST.TITLE3',
     value: 'imprest'
   }];
 
   sourcingList: any = [{
-    text: '所有',
+    text: 'ORDERS.SOURCINGLIST.TITLE1',
     value: false
   }, {
-    text: '未采购',
+    text: 'ORDERS.SOURCINGLIST.TITLE2',
     value: 'Not Started'
   }, {
-    text: '地址待确认',
+    text: 'ORDERS.SOURCINGLIST.TITLE3',
     value: 'Address Pending Confirm'
   }, {
-    text: '缺货',
+    text: 'ORDERS.SOURCINGLIST.TITLE4',
     value: 'Out of stock'
   }, {
-    text: '已采购',
+    text: 'ORDERS.SOURCINGLIST.TITLE5',
     value: 'Started',
   }];
 
@@ -183,22 +184,22 @@ export class OrderMainComponent implements OnInit {
 
   searchType = 'sku';
   searchTypeList = [{
-    text: '订单号',
+    text: 'ORDERS.SEARCHTYPELIST.TITLE1',
     value: 'OrderNumber'
   }, {
-    text: '运单号',
+    text: 'ORDERS.SEARCHTYPELIST.TITLE2',
     value: 'ShippingNumber'
   }, {
-    text: 'SKU',
+    text: 'ORDERS.SEARCHTYPELIST.TITLE3',
     value: 'sku'
   }, {
-    text: '客户昵称',
+    text: 'ORDERS.SEARCHTYPELIST.TITLE4',
     value: 'username'
   }, {
-    text: '商品名字',
+    text: 'ORDERS.SEARCHTYPELIST.TITLE5',
     value: 'title'
   }, {
-    text: '采购单号',
+    text: 'ORDERS.SEARCHTYPELIST.TITLE6',
     value: 'sourcing_order_number'
   }];
 
@@ -1015,7 +1016,7 @@ export class OrderMainComponent implements OnInit {
       });
       this.channelList.unshift({
         id: false,
-        name: '所有'
+        name: 'ORDERS.TITLE1'
       });
     });
   }

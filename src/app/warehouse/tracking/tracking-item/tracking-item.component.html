@@ -1,13 +1,13 @@
 <div>
   <div class="sc-product__product-item-top" fxLayout="row" fxLayoutAlign="start center">
-    <div>拣货单号: {{product.pickNumber}}</div>
-    <div class="md-margin-left-3">创建日期: {{product.created | amTz:'Asia/Shanghai' | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
-    <div class="md-margin-left-3" *ngIf="product.pickStatus == 'Packaging Completed'">拣货日期: {{product.packagingTime | amTz:'Asia/Shanghai' | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
-    <div class="md-margin-left-3" *ngIf="product.warehouseName">仓库: {{product.warehouseName}}</div>
+    <div>{{'PACKAGING.ITEM.TITLE1'|translate}}: {{product.pickNumber}}</div>
+    <div class="md-margin-left-3">{{'PACKAGING.ITEM.TITLE2'|translate}}: {{product.created | amTz:'Asia/Shanghai' | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
+    <div class="md-margin-left-3" *ngIf="product.pickStatus == 'Packaging Completed'">{{'PACKAGING.ITEM.TITLE3'|translate}}: {{product.packagingTime | amTz:'Asia/Shanghai' | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
+    <div class="md-margin-left-3" *ngIf="product.warehouseName">{{'PACKAGING.ITEM.TITLE4'|translate}}: {{product.warehouseName}}</div>
   </div>
   <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
     <div class="md-margin-right-2" fxFlex="60" fxLayout="column" fxLayoutAlign="start stretch">
-      <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let item of product.pickVariants;let i = index;">
+      <div class="md-padding-top-2" fxLayout="row" fxLayoutAlign="start stretch" *ngFor="let item of product.pickVariants;let i = index;">
         <div class="sc-product__product-image" fxFlex="none">
           <img class="xb-pointer" [src]="item.mainImage" (click)="openLargeImage(item)">
         </div>
@@ -15,13 +15,13 @@
           <div class="sc-product__product-title md-dark-secondary" >{{item.title}}</div>
           <div>
             <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
-              <div class="xb-bold">SKU编码: {{item.sku}}</div>
+              <div class="xb-bold">{{'PACKAGING.ITEM.TITLE5'|translate}}: {{item.sku}}</div>
               <i class="material-icons md-dark-secondary sc-product__product-title md-margin-left-1 xb-pointer" ngxClipboard [cbContent]="item.sku" (cbOnSuccess)="copy($event)">file_copy</i>
             </div>
             <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
-              <div>订单: {{item.orderNumber}}</div>
-              <div class="md-margin-left-2" *ngIf="item.attribute != ''">规格: {{item.attribute}}</div>
-              <div class="md-margin-left-2 sc-product__product-red">数量: {{item.quantity}}</div>
+              <div>{{'PACKAGING.ITEM.TITLE6'|translate}}: {{item.orderNumber}}</div>
+              <div class="md-margin-left-2" *ngIf="item.attribute != ''">{{'PACKAGING.ITEM.TITLE7'|translate}}: {{item.attribute}}</div>
+              <div class="md-margin-left-2 sc-product__product-red">{{'PACKAGING.ITEM.TITLE8'|translate}}: {{item.quantity}}</div>
             </div>
           </div>
         </div>
@@ -29,10 +29,10 @@
     </div>
     <div class="sc-product__product-id md-margin-right-2" fxFlex="10"
          fxLayout="column" fxLayoutAlign="center center">
-      <div *ngIf="product.pickStatus == 'Pending Packaging'">等待拣货</div>
-      <div *ngIf="product.pickStatus == 'Packaging Completed'">已拣货出库</div>
-      <div *ngIf="product.pickStatus == 'Package Deleted'">已删除</div>
-      <div *ngIf="product.pickStatus == 'Not Found'">找不到产品</div>
+      <div *ngIf="product.pickStatus == 'Pending Packaging'">{{'PACKAGING.ITEM.TITLE9'|translate}}</div>
+      <div *ngIf="product.pickStatus == 'Packaging Completed'">{{'PACKAGING.ITEM.TITLE10'|translate}}</div>
+      <div *ngIf="product.pickStatus == 'Package Deleted'">{{'PACKAGING.ITEM.TITLE11'|translate}}</div>
+      <div *ngIf="product.pickStatus == 'Not Found'">{{'PACKAGING.ITEM.TITLE12'|translate}}</div>
     </div>
     <div class="sc-product__product-category md-margin-right-2" fxFlex="10"
          fxLayout="column" fxLayoutAlign="center center">
@@ -44,36 +44,32 @@
     </div>
     <div class="sc-product__product-category md-margin-right-2" fxFlex="5"
          fxLayout="column" fxLayoutAlign="center center">
-      {{ product.isBattery? '是':'否' }}
+      {{ (product.isBattery? 'PACKAGING.ITEM.TITLE13':'PACKAGING.ITEM.TITLE14') | translate }}
     </div>
     <div class="sc-product__product-category md-margin-right-2" fxFlex="5"
          fxLayout="column" fxLayoutAlign="center center">
-      {{ product.isCod? '是':'否' }}
+      {{ (product.isCod? 'PACKAGING.ITEM.TITLE13':'PACKAGING.ITEM.TITLE14') | translate }}
     </div>
-    <div class="sc-product__product-price sc__accent-dark" fxFlex="10"
+    <div class="sc-product__product-price sc__accent-dark md-padding-top-2 md-padding-bottom-2" fxFlex="10"
          fxLayout="column" fxLayoutAlign="center stretch">
-      <div class="md-margin-top-2"></div>
-      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging'" (click)="edit()">编辑</button>
+      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging'" (click)="edit()">{{'PACKAGING.ITEM.BUTTON1'|translate}}</button>
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging'" ></div>
-      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging'" (click)="openNotesDialog()">备注</button>
+      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging'" (click)="openNotesDialog()">{{'PACKAGING.ITEM.BUTTON2'|translate}}</button>
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Not Found'" ></div>
       <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Not Found'"
-              (click)="changeStatus()">已拣货出库</button>
-      <!--<div class="md-margin-top-1" *ngIf="product.pickStatus == 'Packaging Completed'" ></div>-->
-      <!--<button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Packaging Completed'"-->
-              <!--(click)="changeStatus()">取消打包出库</button>-->
+              (click)="changeStatus()">{{'PACKAGING.ITEM.BUTTON3'|translate}}</button>
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging'" ></div>
       <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Pending Packaging'"
-              (click)="notFountStatus()">找不到产品</button>
+              (click)="notFountStatus()">{{'PACKAGING.ITEM.BUTTON4'|translate}}</button>
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Packaging Completed' || product.pickStatus == 'Not Found'"></div>
       <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Packaging Completed' || product.pickStatus == 'Not Found'"
-              (click)="delete()">删除</button>
+              (click)="delete()">{{'PACKAGING.ITEM.BUTTON5'|translate}}</button>
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Package Deleted'"></div>
-      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Package Deleted'"
-              (click)="delete()">取消删除</button>
+      <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Package Deleted'"
+              (click)="delete()">{{'PACKAGING.ITEM.BUTTON6'|translate}}</button>
     </div>
   </div>
   <div class="sc-product__product-item-bottom" *ngIf="product.notes">
-    <div *ngIf="product.notes">备注: {{product.notes}}</div>
+    <div *ngIf="product.notes">{{'PACKAGING.ITEM.TITLE14'|translate}}: {{product.notes}}</div>
   </div>
 </div>

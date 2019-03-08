@@ -6,6 +6,311 @@
     "TITLE1": "采购单",
     "TITLE2": "捡货单",
     "TITLE3": "库存管理",
-    "TITLE4": "订单管理"
+    "TITLE4": "订单管理",
+    "TITLE5": "我的账户",
+    "TITLE6": "退出"
+  },
+  "SOURCING": {
+    "TITLE1": "所有",
+    "TITLE2": "未发货",
+    "TITLE3": "已发货",
+    "TITLE4": "部分收货",
+    "TITLE5": "全部收货",
+    "TITLE6": "货物不符",
+    "TITLE7": "已取消"
+  },
+  "PACKAGING": {
+    "TITLE1": "所有",
+    "TITLE2": "等待捡货",
+    "TITLE3": "已捡货出库",
+    "TITLE4": "删除",
+    "TITLE5": "找不到产品",
+    "SUBTITLE": {
+      "TITLE1": "捡货单信息",
+      "TITLE2": "捡货状态",
+      "TITLE3": "运单号",
+      "TITLE4": "物流公司",
+      "TITLE5": "是否带电",
+      "TITLE6": "是否COD",
+      "TITLE7": "操作"
+    },
+    "SUBTITLE1": {
+      "TITLE1": "是否带电",
+      "TITLE2": "是否COD",
+      "TITLE3": "创建时间",
+      "TITLE4": "仓库",
+      "TITLE5": "暂无采购信息",
+      "TITLE6": "到",
+      "TITLE7": "捡货时间",
+      "TITLE8": "搜索",
+      "TITLE9": "开始日期",
+      "TITLE10": "结束日期",
+      "TITLE11": "创建时间",
+      "BUTTON1": "确定",
+      "BUTTON2": "重置",
+      "BUTTON3": "导出Excel",
+      "BUTTON4": "导出捡货单",
+      "BUTTON5": "导出PDF",
+      "BUTTON6": "创建捡货信息"
+    },
+    "SEARCHLIST": {
+      "TITLE1": "运单号",
+      "TITLE2": "检货单号",
+      "TITLE3": "订单号",
+      "TITLE4": "SKU"
+    },
+    "BATTERYLIST": {
+      "TITLE1": "所有",
+      "TITLE2": "带电",
+      "TITLE3": "不带电"
+    },
+    "CODLIST": {
+      "TITLE1": "所有",
+      "TITLE2": "是COD",
+      "TITLE3": "不是COD"
+    },
+    "SORTLIST": {
+      "TITLE1": "正序",
+      "TITLE2": "逆序"
+    },
+    "ITEM": {
+      "TITLE1": "捡货单号",
+      "TITLE2": "创建日期",
+      "TITLE3": "捡货日期",
+      "TITLE4": "仓库",
+      "TITLE5": "SKU编码",
+      "TITLE6": "订单",
+      "TITLE7": "规格",
+      "TITLE8": "数量",
+      "TITLE9": "等待拣货",
+      "TITLE10": "已拣货出库",
+      "TITLE11": "已删除",
+      "TITLE12": "找不到产品",
+      "TITLE13": "是",
+      "TITLE14": "否",
+      "TITLE15": "备注",
+      "BUTTON1": "编辑",
+      "BUTTON2": "添加备注",
+      "BUTTON3": "已拣货出库",
+      "BUTTON4": "找不到产品",
+      "BUTTON5": "删除",
+      "BUTTON6": "取消删除"
+    },
+    "DIALOG": {
+      "TITLE1": "添加备注",
+      "TITLE2": "备注",
+      "BUTTON1": "保存",
+      "BUTTON2": "取消"
+    },
+    "DIALOG1": {
+      "TITLE1": "添加捡货信息",
+      "TITLE2": "捡货单号",
+      "TITLE3": "运单号",
+      "TITLE4": "仓库",
+      "TITLE5": "选择仓库",
+      "TITLE6": "捡货商品",
+      "TITLE7": "订单号",
+      "TITLE8": "数量",
+      "TITLE9": "编辑捡货信息",
+      "BUTTON1": "保存",
+      "BUTTON2": "取消",
+      "BUTTON3": "添加捡货商品"
+    },
+    "DIALOG2": {
+      "TITLE1": "已打包出库",
+      "TITLE2": "是否确认已打包出库？",
+      "TITLE3": "该拣货单的商品数量大于1，请确认是否遗漏？",
+      "TITLE4": "已确认无误",
+      "TITLE5": "取消打包出库",
+      "TITLE6": "是否取消打包出库？",
+      "BUTTON1": "确认",
+      "BUTTON2": "取消"
+    },
+    "DIALOG3": {
+      "TITLE1": "找不到产品",
+      "TITLE2": "是否确认找不到产品?",
+      "BUTTON1": "确认",
+      "BUTTON2": "取消"
+    },
+    "DIALOG4": {
+      "TITLE1": "确认删除",
+      "TITLE2": "是否确认删除?",
+      "TITLE3": "取消删除",
+      "TITLE4": "是否取消删除?",
+      "BUTTON1": "确认",
+      "BUTTON2": "取消"
+    }
+  },
+  "INVENTORY": {
+    "TITLE1": "按仓库查看库存",
+    "TITLE2": "按SKU查看库存",
+    "TITLE3": "暂无库存信息",
+    "TITLE4": "选择仓库",
+    "TITLE5": "搜索",
+    "BUTTON1": "导出Excel",
+    "BUTTON2": "导出所有库存的Excel",
+    "SUBTITLE": {
+      "TITLE1": "商品信息",
+      "TITLE2": "仓库",
+      "TITLE3": "SKU",
+      "TITLE4": "总库存",
+      "TITLE5": "锁定库存",
+      "TITLE6": "剩余库存",
+      "TITLE7": "操作"
+    },
+    "QUANTITYLIST": {
+      "TITLE1": "所有",
+      "TITLE2": "库存大于0",
+      "TITLE3": "库存为0"
+    },
+    "ITEM": {
+      "TITLE1": "规格",
+      "TITLE2": "总库存",
+      "TITLE3": "锁定库存",
+      "TITLE4": "剩余库存",
+      "TITLE5": "件",
+      "BUTTON1": "点击复制SKU",
+      "BUTTON2": "编辑",
+      "BUTTON3": "保存"
+    }
+  },
+  "ORDERS": {
+    "TITLE1": "所有",
+    "TITLE2": "未支付",
+    "TITLE3": "待发货",
+    "TITLE4": "已发货",
+    "TITLE5": "待取消",
+    "TITLE6": "已取消",
+    "TITLE7": "已完成",
+    "TITLE8": "已退款",
+    "TITLE9": "已过期",
+    "TITLE10": "可发货",
+    "TITLE11": "未送达",
+    "SUBTITLE": {
+      "TITLE1": "商品",
+      "TITLE2": "状态",
+      "TITLE3": "订单类型",
+      "TITLE4": "数量",
+      "TITLE5": "客户昵称",
+      "TITLE6": "支付方式",
+      "TITLE7": "金额"
+    },
+    "SUBTITLE1": {
+      "TITLE1": "订单类型",
+      "TITLE2": "支付方式",
+      "TITLE3": "订单创建时间",
+      "TITLE4": "到",
+      "TITLE5": "订单支付时间",
+      "TITLE6": "分类",
+      "TITLE7": "采购状态",
+      "TITLE8": "第三方平台"
+    },
+    "PLACEHOLDER": {
+      "TITLE1": "搜索",
+      "TITLE2": "开始日期",
+      "TITLE3": "结束日期",
+      "TITLE4": "选择一级分类",
+      "TITLE5": "选择二级分类",
+      "TITLE6": "选择三级分类"
+    },
+    "TYPELIST": {
+      "TITLE1": "所有",
+      "TITLE2": "普通订单",
+      "TITLE3": "砍价订单",
+      "TITLE4": "闪购订单"
+    },
+    "PAYMENTLIST": {
+      "TITLE1": "所有",
+      "TITLE2": "货到付款",
+      "TITLE3": "在线支付"
+    },
+    "SOURCINGLIST": {
+      "TITLE1": "所有",
+      "TITLE2": "未采购",
+      "TITLE3": "地址待确认",
+      "TITLE4": "缺货",
+      "TITLE5": "已采购"
+    },
+    "SEARCHTYPELIST": {
+      "TITLE1": "订单号",
+      "TITLE2": "运单号",
+      "TITLE3": "SKU",
+      "TITLE4": "客户昵称",
+      "TITLE5": "商品名字",
+      "TITLE6": "采购单号"
+    },
+    "ITEM": {
+      "TITLE1": "创建日期",
+      "TITLE2": "支付日期",
+      "TITLE3": "订单号",
+      "TITLE4": "第三方订单号",
+      "TITLE5": "总订单号",
+      "TITLE6": "查看订单详情",
+      "TITLE7": "手机号",
+      "TITLE8": "地址",
+      "TITLE9": "缺货状态",
+      "TITLE10": "采购单号",
+      "TITLE11": "备注",
+      "TITLE12": "地址备注",
+      "TITLE13": "运单号",
+      "TITLE14": "物流",
+      "TITLE15": "推荐仓库",
+      "TITLE16": "采购链接",
+      "BUTTON1": "地址待确认",
+      "BUTTON2": "确认地址",
+      "BUTTON3": "标记为缺货",
+      "BUTTON4": "查看缺货状态",
+      "BUTTON5": "标记为已采购",
+      "BUTTON6": "查看采购详情",
+      "BUTTON7": "查看详情",
+      "BUTTON8": "添加备注",
+      "BUTTON9": "编辑备注"
+    },
+    "BUTTON": {
+      "TITLE1": "创建第三方平台订单",
+      "TITLE2": "确认",
+      "TITLE3": "导出订单",
+      "TITLE4": "创建GATI捡货单"
+    },
+    "DIALOG": {
+      "TITLE1": "创建第三方平台订单",
+      "TITLE2": "第三方订单号",
+      "TITLE3": "变体SKU",
+      "TITLE4": "变体数量",
+      "TITLE5": "商品总金额(卢比)",
+      "TITLE6": "第三方平台",
+      "TITLE7": "选择第三方平台",
+      "BUTTON1": "添加SKU",
+      "BUTTON2": "保存",
+      "BUTTON3": "取消"
+    },
+    "DIALOG1": {
+      "TITLE1": "该订单地址需要客服审核验证？",
+      "BUTTON1": "不需要",
+      "BUTTON2": "需要验证"
+    },
+    "DIALOG2": {
+      "TITLE1": "标记缺货原因",
+      "BUTTON1": "保存",
+      "BUTTON2": "取消"
+    },
+    "DIALOG3": {
+      "TITLE1": "采购信息",
+      "TITLE2": "采购单号",
+      "TITLE3": "选择采购平台",
+      "TITLE4": "选择仓库",
+      "TITLE5": "选择采购账号",
+      "TITLE6": "采购价格",
+      "TITLE7": "采购链接",
+      "TITLE8": "订单号",
+      "TITLE9": "购物车订单号",
+      "BUTTON1": "保存",
+      "BUTTON2": "取消"
+    },
+    "DIALOG4": {
+      "TITLE1": "添加备注",
+      "BUTTON1": "保存",
+      "BUTTON2": "取消"
+    }
   }
 }

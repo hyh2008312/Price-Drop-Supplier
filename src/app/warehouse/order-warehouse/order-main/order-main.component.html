@@ -4,17 +4,17 @@
       <div class="sc-order__header"></div>
 
       <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
-        <mat-tab label="所有">
+        <mat-tab label="{{'ORDERS.TITLE1'|translate}}">
           <div class="md-margin-top-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="md-margin-left-2 sc__accent-dark" *ngIf="isSuperuser">
-              <button mat-raised-button color="pimary" (click)="createOrder()">创建第三方平台订单</button>
+              <button mat-raised-button color="pimary" (click)="createOrder()">{{'ORDERS.BUTTON.TITLE1'|translate}}</button>
             </div>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
               <form class="sc-product__search" [formGroup]="searchForm"
                     fxLayout="row" fxLayoutAlign="start center" >
                 <i class="material-icons">search</i>
                 <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-                       placeholder="搜索"
+                       placeholder="{{'ORDERS.PLACEHOLDER.TITLE1'|translate}}"
                        (keyup.enter)="changeProducts({index: 0})"/>
                 <div class="sc-order__search-close" fxLayout="row" fxLayoutAlign="center center"
                      *ngIf="searchKey != ''" (click)="clearSearchKey()">
@@ -25,7 +25,7 @@
                 <mat-form-field class="sc-product__product-sort">
                   <mat-select [(ngModel)]="searchType" name="sort">
                     <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item.value">
-                      {{ item.text }}
+                      {{ item.text|translate }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -33,62 +33,62 @@
             </div>
           </div>
           <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div class="md-margin-right-2">订单类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE1'|translate}}: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="typeAll" name="type" (valueChange)="typeChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of typeList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">支付类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE2'|translate}}: </div>
             <mat-form-field>
               <mat-select [ngModel]="paymentAll" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单创建时间: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}: </div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="csAll" placeholder="开始日期" (dateInput)="addEvent('csAll', $event)">
+              <input matInput [matDatepicker]="csAll" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('csAll', $event)">
               <mat-datepicker-toggle matSuffix [for]="csAll"></mat-datepicker-toggle>
               <mat-datepicker #csAll></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="ceAll" placeholder="结束日期" (dateInput)="addEvent('ceAll', $event)">
+              <input matInput [matDatepicker]="ceAll" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('ceAll', $event)">
               <mat-datepicker-toggle matSuffix [for]="ceAll"></mat-datepicker-toggle>
               <mat-datepicker #ceAll></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单支付时间: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE5'|translate}}: </div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="psAll" placeholder="开始日期" (dateInput)="addEvent('psAll', $event)">
+              <input matInput [matDatepicker]="psAll" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('psAll', $event)">
               <mat-datepicker-toggle matSuffix [for]="psAll"></mat-datepicker-toggle>
               <mat-datepicker #psAll></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="peAll" placeholder="结束日期" (dateInput)="addEvent('peAll', $event)">
+              <input matInput [matDatepicker]="peAll" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('peAll', $event)">
               <mat-datepicker-toggle matSuffix [for]="peAll"></mat-datepicker-toggle>
               <mat-datepicker #peAll></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>分类: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
-                <mat-select name="category" placeholder="选择一级分类"
+                <mat-select name="category" placeholder="{{'ORDERS.PLACEHOLDER.TITLE4'|translate}}"
                             (valueChange)="categoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -98,7 +98,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="subcategory" placeholder="选择二级分类"
+                <mat-select name="subcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE5'|translate}}"
                             (valueChange)="subCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -108,7 +108,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="thirdcategory" placeholder="选择三级分类"
+                <mat-select name="thirdcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE6'|translate}}"
                             (valueChange)="thirdCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -151,52 +151,52 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="未支付">
+        <mat-tab label="{{'ORDERS.TITLE2'|translate}}">
           <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="export()">导出订单</button>
+              <button mat-raised-button color="pimary" (click)="export()">{{'ORDERS.BUTTON.TITLE3'|translate}}</button>
             </div>
           </div>
           <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div class="md-margin-right-2">订单类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE1'|translate}}: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="typeUnpaid" name="type" (valueChange)="typeChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of typeList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text| translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">支付类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE2'|translate}}: </div>
             <mat-form-field>
               <mat-select [ngModel]="paymentUpaid" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单创建时间: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}: </div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="csUnpaid" placeholder="开始日期" (dateInput)="addEvent('csUnpaid', $event)">
+              <input matInput [matDatepicker]="csUnpaid" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('csUnpaid', $event)">
               <mat-datepicker-toggle matSuffix [for]="csUnpaid"></mat-datepicker-toggle>
               <mat-datepicker #csUnpaid></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="ceUnpaid" placeholder="结束日期" (dateInput)="addEvent('ceUnpaid', $event)">
+              <input matInput [matDatepicker]="ceUnpaid" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('ceUnpaid', $event)">
               <mat-datepicker-toggle matSuffix [for]="ceUnpaid"></mat-datepicker-toggle>
               <mat-datepicker #ceUnpaid></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>分类: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
-                <mat-select name="category" placeholder="选择一级分类"
+                <mat-select name="category" placeholder="{{'ORDERS.PLACEHOLDER.TITLE4'|translate}}"
                             (valueChange)="categoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -206,7 +206,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="subcategory" placeholder="选择二级分类"
+                <mat-select name="subcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE5'|translate}}"
                             (valueChange)="subCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -216,7 +216,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="thirdcategory" placeholder="选择三级分类"
+                <mat-select name="thirdcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE6'|translate}}"
                             (valueChange)="thirdCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -259,20 +259,20 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="待发货">
+        <mat-tab label="{{'ORDERS.TITLE3'|translate}}">
           <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="sc__accent-dark">
-              <button mat-raised-button color="pimary" (click)="export()">导出订单</button>
+              <button mat-raised-button color="pimary" (click)="export()">{{'ORDERS.BUTTON.TITLE3'|translate}}</button>
             </div>
             <div class="md-margin-left-3 sc__accent-dark" *ngIf="isSuperuser">
-              <button mat-raised-button color="pimary" (click)="createTracking()">创建GATI拣货单</button>
+              <button mat-raised-button color="pimary" (click)="createTracking()">{{'ORDERS.BUTTON.TITLE4'|translate}}</button>
             </div>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
               <form class="sc-product__search" [formGroup]="searchForm"
                     fxLayout="row" fxLayoutAlign="start center" >
                 <i class="material-icons">search</i>
                 <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-                       placeholder="搜索"
+                       placeholder="{{'ORDERS.PLACEHOLDER.TITLE1'|translate}}"
                        (keyup.enter)="changeProducts({index: 2})"/>
                 <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                      *ngIf="searchKey != ''" (click)="clearSearchKey()">
@@ -283,7 +283,7 @@
                 <mat-form-field class="sc-product__product-sort">
                   <mat-select [(ngModel)]="searchType" name="sort">
                     <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item.value">
-                      {{ item.text }}
+                      {{ item.text | translate }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -291,80 +291,80 @@
             </div>
           </div>
           <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div class="md-margin-right-2">订单类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE1'|translate}}: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="typePacking" name="type" (valueChange)="typeChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of typeList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text |translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">支付类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE2'|translate}}: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="paymentPacking" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">采购状态: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE7'|translate}}: </div>
             <mat-form-field>
               <mat-select [ngModel]="sourcingPacking" name="sourcing" (valueChange)="sourcingChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of sourcingList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text |translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div class="md-margin-right-2">第三方平台: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
-                  {{ item.name }}
+                  {{ item.name |translate}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单创建时间: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}: </div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="csPacking" placeholder="开始日期" (dateInput)="addEvent('csPacking', $event)">
+              <input matInput [matDatepicker]="csPacking" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('csPacking', $event)">
               <mat-datepicker-toggle matSuffix [for]="csPacking"></mat-datepicker-toggle>
               <mat-datepicker #csPacking></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="cePacking" placeholder="结束日期" (dateInput)="addEvent('cePacking', $event)">
+              <input matInput [matDatepicker]="cePacking" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('cePacking', $event)">
               <mat-datepicker-toggle matSuffix [for]="cePacking"></mat-datepicker-toggle>
               <mat-datepicker #cePacking></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单支付时间: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE5'|translate}}: </div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="psPacking" placeholder="开始日期" (dateInput)="addEvent('psPacking', $event)">
+              <input matInput [matDatepicker]="psPacking" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('psPacking', $event)">
               <mat-datepicker-toggle matSuffix [for]="psPacking"></mat-datepicker-toggle>
               <mat-datepicker #psPacking></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="pePacking" placeholder="结束日期" (dateInput)="addEvent('pePacking', $event)">
+              <input matInput [matDatepicker]="pePacking" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('pePacking', $event)">
               <mat-datepicker-toggle matSuffix [for]="pePacking"></mat-datepicker-toggle>
               <mat-datepicker #pePacking></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>分类: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
-                <mat-select name="category" placeholder="选择一级分类"
+                <mat-select name="category" placeholder="{{'ORDERS.PLACEHOLDER.TITLE4'|translate}}"
                             (valueChange)="categoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -374,7 +374,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="subcategory" placeholder="选择二级分类"
+                <mat-select name="subcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE5'|translate}}"
                             (valueChange)="subCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -384,7 +384,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="thirdcategory" placeholder="选择三级分类"
+                <mat-select name="thirdcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE6'|translate}}"
                             (valueChange)="thirdCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -427,17 +427,17 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="已发货">
+        <mat-tab label="{{'ORDERS.TITLE4'|translate}}">
           <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="sc__accent-dark">
-              <button mat-raised-button color="pimary" (click)="export()">导出订单</button>
+              <button mat-raised-button color="pimary" (click)="export()">{{'ORDERS.BUTTON.TITLE3'|translate}}</button>
             </div>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
               <form class="sc-product__search" [formGroup]="searchForm"
                     fxLayout="row" fxLayoutAlign="start center" >
                 <i class="material-icons">search</i>
                 <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-                       placeholder="搜索"
+                       placeholder="{{'ORDERS.PLACEHOLDER.TITLE1'|translate}}"
                        (keyup.enter)="changeProducts({index: 3})"/>
                 <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                      *ngIf="searchKey != ''" (click)="clearSearchKey()">
@@ -448,7 +448,7 @@
                 <mat-form-field class="sc-product__product-sort">
                   <mat-select [(ngModel)]="searchType" name="sort">
                     <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item.value">
-                      {{ item.text }}
+                      {{ item.text |translate }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -456,62 +456,62 @@
             </div>
           </div>
           <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div class="md-margin-right-2">订单类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE1'|translate}}: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="typeShipped" name="type" (valueChange)="typeChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of typeList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text |translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">支付类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE2'|translate}}: </div>
             <mat-form-field>
               <mat-select [ngModel]="paymentShipped" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text |translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单创建时间:</div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="csShipped" placeholder="开始日期" (dateInput)="addEvent('csShipped', $event)">
+              <input matInput [matDatepicker]="csShipped" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('csShipped', $event)">
               <mat-datepicker-toggle matSuffix [for]="csShipped"></mat-datepicker-toggle>
               <mat-datepicker #csShipped></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="ceShipped" placeholder="结束日期" (dateInput)="addEvent('ceShipped', $event)">
+              <input matInput [matDatepicker]="ceShipped" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('ceShipped', $event)">
               <mat-datepicker-toggle matSuffix [for]="ceShipped"></mat-datepicker-toggle>
               <mat-datepicker #ceShipped></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE3'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单支付时间:</div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE5'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="psShipped" placeholder="开始日期" (dateInput)="addEvent('psShipped', $event)">
+              <input matInput [matDatepicker]="psShipped" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('psShipped', $event)">
               <mat-datepicker-toggle matSuffix [for]="psShipped"></mat-datepicker-toggle>
               <mat-datepicker #psShipped></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="peShipped" placeholder="结束日期" (dateInput)="addEvent('peShipped', $event)">
+              <input matInput [matDatepicker]="peShipped" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('peShipped', $event)">
               <mat-datepicker-toggle matSuffix [for]="peShipped"></mat-datepicker-toggle>
               <mat-datepicker #peShipped></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>分类: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
-                <mat-select name="category" placeholder="选择一级分类"
+                <mat-select name="category" placeholder="{{'ORDERS.PLACEHOLDER.TITLE4'|translate}}"
                             (valueChange)="categoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -521,7 +521,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="subcategory" placeholder="选择二级分类"
+                <mat-select name="subcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE5'|translate}}"
                             (valueChange)="subCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -531,7 +531,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="thirdcategory" placeholder="选择三级分类"
+                <mat-select name="thirdcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE6'|translate}}"
                             (valueChange)="thirdCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -574,17 +574,17 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="待取消">
+        <mat-tab label="{{'ORDERS.TITLE5'|translate}}">
           <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="sc__accent-dark">
-              <button mat-raised-button color="pimary" (click)="export()">导出订单</button>
+              <button mat-raised-button color="pimary" (click)="export()">{{'ORDERS.BUTTON.TITLE3'|translate}}</button>
             </div>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
               <form class="sc-product__search" [formGroup]="searchForm"
                     fxLayout="row" fxLayoutAlign="start center" >
                 <i class="material-icons">search</i>
                 <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-                       placeholder="搜索"
+                       placeholder="{{'ORDERS.PLACEHOLDER.TITLE1'|translate}}"
                        (keyup.enter)="changeProducts({index: 4})"/>
                 <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                      *ngIf="searchKey != ''" (click)="clearSearchKey()">
@@ -595,7 +595,7 @@
                 <mat-form-field class="sc-product__product-sort">
                   <mat-select [(ngModel)]="searchType" name="sort">
                     <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item.value">
-                      {{ item.text }}
+                      {{ item.text | translate }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -603,62 +603,62 @@
             </div>
           </div>
           <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div class="md-margin-right-2">订单类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE1'|translate}}: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="typeAudit" name="type" (valueChange)="typeChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of typeList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">支付类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE2'|translate}}: </div>
             <mat-form-field>
               <mat-select [ngModel]="paymentAudit" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单创建时间:</div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="csAudit" placeholder="开始日期" (dateInput)="addEvent('csAudit', $event)">
+              <input matInput [matDatepicker]="csAudit" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('csAudit', $event)">
               <mat-datepicker-toggle matSuffix [for]="csAudit"></mat-datepicker-toggle>
               <mat-datepicker #csAudit></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="ceAudit" placeholder="结束日期" (dateInput)="addEvent('ceAudit', $event)">
+              <input matInput [matDatepicker]="ceAudit" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('ceAudit', $event)">
               <mat-datepicker-toggle matSuffix [for]="ceAudit"></mat-datepicker-toggle>
               <mat-datepicker #ceAudit></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单支付时间:</div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE5'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="psAudit" placeholder="开始日期" (dateInput)="addEvent('psAudit', $event)">
+              <input matInput [matDatepicker]="psAudit" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('psAudit', $event)">
               <mat-datepicker-toggle matSuffix [for]="psAudit"></mat-datepicker-toggle>
               <mat-datepicker #psAudit></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="peAudit" placeholder="结束日期" (dateInput)="addEvent('peAudit', $event)">
+              <input matInput [matDatepicker]="peAudit" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('peAudit', $event)">
               <mat-datepicker-toggle matSuffix [for]="peAudit"></mat-datepicker-toggle>
               <mat-datepicker #peAudit></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>分类: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
-                <mat-select name="category" placeholder="选择一级分类"
+                <mat-select name="category" placeholder="{{'ORDERS.PLACEHOLDER.TITLE4'|translate}}"
                             (valueChange)="categoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -668,7 +668,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="subcategory" placeholder="选择二级分类"
+                <mat-select name="subcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE5'|translate}}"
                             (valueChange)="subCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -678,7 +678,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="thirdcategory" placeholder="选择三级分类"
+                <mat-select name="thirdcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE6'|translate}}"
                             (valueChange)="thirdCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -721,47 +721,47 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="已取消">
+        <mat-tab label="{{'ORDERS.TITLE6'|translate}}">
           <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div class="md-margin-right-2">订单类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE1'|translate}}: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="typeCanceled" name="type" (valueChange)="typeChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of typeList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">支付类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE2'|translate}}: </div>
             <mat-form-field>
               <mat-select [ngModel]="paymentCanceled" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单创建时间:</div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="csCanceled" placeholder="开始日期" (dateInput)="addEvent('csCanceled', $event)">
+              <input matInput [matDatepicker]="csCanceled" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('csCanceled', $event)">
               <mat-datepicker-toggle matSuffix [for]="csCanceled"></mat-datepicker-toggle>
               <mat-datepicker #csCanceled></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="ceCanceled" placeholder="结束日期" (dateInput)="addEvent('ceCanceled', $event)">
+              <input matInput [matDatepicker]="ceCanceled" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('ceCanceled', $event)">
               <mat-datepicker-toggle matSuffix [for]="ceCanceled"></mat-datepicker-toggle>
               <mat-datepicker #ceCanceled></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>分类: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
-                <mat-select name="category" placeholder="选择一级分类"
+                <mat-select name="category" placeholder="{{'ORDERS.PLACEHOLDER.TITLE4'|translate}}"
                             (valueChange)="categoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -771,7 +771,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="subcategory" placeholder="选择二级分类"
+                <mat-select name="subcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE5'|translate}}"
                             (valueChange)="subCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -781,7 +781,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="thirdcategory" placeholder="选择三级分类"
+                <mat-select name="thirdcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE6'|translate}}"
                             (valueChange)="thirdCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -824,17 +824,17 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="已完成">
+        <mat-tab label="{{'ORDERS.TITLE7'|translate}}">
           <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="sc__accent-dark">
-              <button mat-raised-button color="pimary" (click)="export()">导出订单</button>
+              <button mat-raised-button color="pimary" (click)="export()">{{'ORDERS.BUTTON.TITLE3'|translate}}</button>
             </div>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
               <form class="sc-product__search" [formGroup]="searchForm"
                     fxLayout="row" fxLayoutAlign="start center" >
                 <i class="material-icons">search</i>
                 <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-                       placeholder="搜索"
+                       placeholder="{{'ORDERS.PLACEHOLDER.TITLE1'|translate}}"
                        (keyup.enter)="changeProducts({index: 6})"/>
                 <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                      *ngIf="searchKey != ''" (click)="clearSearchKey()">
@@ -845,7 +845,7 @@
                 <mat-form-field class="sc-product__product-sort">
                   <mat-select [(ngModel)]="searchType" name="sort">
                     <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item.value">
-                      {{ item.text }}
+                      {{ item.text | translate }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -853,62 +853,62 @@
             </div>
           </div>
           <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div class="md-margin-right-2">订单类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE1'|translate}}: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="typeCompleted" name="type" (valueChange)="typeChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of typeList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">支付类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE2'|translate}}: </div>
             <mat-form-field>
               <mat-select [ngModel]="paymentCompleted" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单创建时间:</div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="csCompleted" placeholder="开始日期" (dateInput)="addEvent('csCompleted', $event)">
+              <input matInput [matDatepicker]="csCompleted" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('csCompleted', $event)">
               <mat-datepicker-toggle matSuffix [for]="csCompleted"></mat-datepicker-toggle>
               <mat-datepicker #csCompleted></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="ceCompleted" placeholder="结束日期" (dateInput)="addEvent('ceCompleted', $event)">
+              <input matInput [matDatepicker]="ceCompleted" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('ceCompleted', $event)">
               <mat-datepicker-toggle matSuffix [for]="ceCompleted"></mat-datepicker-toggle>
               <mat-datepicker #ceCompleted></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单支付时间:</div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE5'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="psCompleted" placeholder="开始日期" (dateInput)="addEvent('psCompleted', $event)">
+              <input matInput [matDatepicker]="psCompleted" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('psCompleted', $event)">
               <mat-datepicker-toggle matSuffix [for]="psCompleted"></mat-datepicker-toggle>
               <mat-datepicker #psCompleted></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="peCompleted" placeholder="结束日期" (dateInput)="addEvent('peCompleted', $event)">
+              <input matInput [matDatepicker]="peCompleted" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('peCompleted', $event)">
               <mat-datepicker-toggle matSuffix [for]="peCompleted"></mat-datepicker-toggle>
               <mat-datepicker #peCompleted></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>分类: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
-                <mat-select name="category" placeholder="选择一级分类"
+                <mat-select name="category" placeholder="{{'ORDERS.PLACEHOLDER.TITLE4'|translate}}"
                             (valueChange)="categoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -918,7 +918,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="subcategory" placeholder="选择二级分类"
+                <mat-select name="subcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE5'|translate}}"
                             (valueChange)="subCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -928,7 +928,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="thirdcategory" placeholder="选择三级分类"
+                <mat-select name="thirdcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE6'|translate}}"
                             (valueChange)="thirdCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -971,64 +971,64 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="已退款">
+        <mat-tab label="{{'ORDERS.TITLE8'|translate}}">
           <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div class="md-margin-right-2">订单类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE1'|translate}}: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="typeRefund" name="type" (valueChange)="typeChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of typeList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text|translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">支付类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE2'|translate}}: </div>
             <mat-form-field>
               <mat-select [ngModel]="paymentRefund" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text|translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单创建时间:</div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="csRefunded" placeholder="开始日期" (dateInput)="addEvent('csRefunded', $event)">
+              <input matInput [matDatepicker]="csRefunded" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('csRefunded', $event)">
               <mat-datepicker-toggle matSuffix [for]="csRefunded"></mat-datepicker-toggle>
               <mat-datepicker #csRefunded></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="ceRefunded" placeholder="结束日期" (dateInput)="addEvent('ceRefunded', $event)">
+              <input matInput [matDatepicker]="ceRefunded" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('ceRefunded', $event)">
               <mat-datepicker-toggle matSuffix [for]="ceRefunded"></mat-datepicker-toggle>
               <mat-datepicker #ceRefunded></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单支付时间:</div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE5'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="psRefunded" placeholder="开始日期" (dateInput)="addEvent('psRefunded', $event)">
+              <input matInput [matDatepicker]="psRefunded" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('psRefunded', $event)">
               <mat-datepicker-toggle matSuffix [for]="psRefunded"></mat-datepicker-toggle>
               <mat-datepicker #psRefunded></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="peRefunded" placeholder="结束日期" (dateInput)="addEvent('peRefunded', $event)">
+              <input matInput [matDatepicker]="peRefunded" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('peRefunded', $event)">
               <mat-datepicker-toggle matSuffix [for]="peRefunded"></mat-datepicker-toggle>
               <mat-datepicker #peRefunded></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>分类: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
-                <mat-select name="category" placeholder="选择一级分类"
+                <mat-select name="category" placeholder="{{'ORDERS.PLACEHOLDER.TITLE4'|translate}}"
                             (valueChange)="categoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -1038,7 +1038,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="subcategory" placeholder="选择二级分类"
+                <mat-select name="subcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE5'|translate}}"
                             (valueChange)="subCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -1048,7 +1048,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="thirdcategory" placeholder="选择三级分类"
+                <mat-select name="thirdcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE6'|translate}}"
                             (valueChange)="thirdCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -1091,39 +1091,39 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="已过期">
+        <mat-tab label="{{'ORDERS.TITLE9'|translate}}">
           <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div class="md-margin-right-2">订单类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE1'|translate}}: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="typeExpired" name="type" (valueChange)="typeChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of typeList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单创建时间:</div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="csExpired" placeholder="开始日期" (dateInput)="addEvent('csExpired', $event)">
+              <input matInput [matDatepicker]="csExpired" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('csExpired', $event)">
               <mat-datepicker-toggle matSuffix [for]="csExpired"></mat-datepicker-toggle>
               <mat-datepicker #csExpired></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="ceExpired" placeholder="结束日期" (dateInput)="addEvent('ceExpired', $event)">
+              <input matInput [matDatepicker]="ceExpired" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('ceExpired', $event)">
               <mat-datepicker-toggle matSuffix [for]="ceExpired"></mat-datepicker-toggle>
               <mat-datepicker #ceExpired></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>分类: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
-                <mat-select name="category" placeholder="选择一级分类"
+                <mat-select name="category" placeholder="{{'ORDERS.PLACEHOLDER.TITLE4'|translate}}"
                             (valueChange)="categoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -1133,7 +1133,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="subcategory" placeholder="选择二级分类"
+                <mat-select name="subcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE5'|translate}}"
                             (valueChange)="subCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -1143,7 +1143,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="thirdcategory" placeholder="选择三级分类"
+                <mat-select name="thirdcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE6'|translate}}"
                             (valueChange)="thirdCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -1186,13 +1186,13 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="可发货">
+        <mat-tab label="{{'ORDERS.TITLE10'|translate}}">
           <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="sc__accent-dark">
-              <button mat-raised-button color="pimary" (click)="export()">导出订单</button>
+              <button mat-raised-button color="pimary" (click)="export()">{{'ORDERS.BUTTON.TITLE3'|translate}}</button>
             </div>
             <div class="md-margin-left-3 sc__accent-dark" *ngIf="isSuperuser">
-              <button mat-raised-button color="pimary" (click)="createTracking()">创建GATI拣货单</button>
+              <button mat-raised-button color="pimary" (click)="createTracking()">{{'ORDERS.BUTTON.TITLE4'|translate}}</button>
             </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="isLoading">
               <mat-progress-spinner [color]="color" [mode]="mode" [value]="value" [diameter]="value"></mat-progress-spinner>
@@ -1202,7 +1202,7 @@
                     fxLayout="row" fxLayoutAlign="start center" >
                 <i class="material-icons">search</i>
                 <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
-                       placeholder="搜索"
+                       placeholder="{{'ORDERS.PLACEHOLDER.TITLE1'|translate}}"
                        (keyup.enter)="changeProducts({index: 9})"/>
                 <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
                      *ngIf="searchKey != ''" (click)="clearSearchKey()">
@@ -1213,7 +1213,7 @@
                 <mat-form-field class="sc-product__product-sort">
                   <mat-select [(ngModel)]="searchType" name="sort">
                     <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item.value">
-                      {{ item.text }}
+                      {{ item.text | translate }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -1221,70 +1221,70 @@
             </div>
           </div>
           <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div class="md-margin-right-2">订单类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE1'|translate}}: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="typeNotStart" name="type" (valueChange)="typeChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of typeList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">支付类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE2'|translate}}: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="paymentNotStart" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">采购状态: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE7'|translate}}: </div>
             <mat-form-field>
               <mat-select [ngModel]="sourcingPacking" name="sourcing" (valueChange)="sourcingChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of sourcingList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单创建时间: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}: </div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="csNotStart" placeholder="开始日期" (dateInput)="addEvent('csNotStart', $event)">
+              <input matInput [matDatepicker]="csNotStart" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('csNotStart', $event)">
               <mat-datepicker-toggle matSuffix [for]="csNotStart"></mat-datepicker-toggle>
               <mat-datepicker #csNotStart></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="ceNotStart" placeholder="结束日期" (dateInput)="addEvent('ceNotStart', $event)">
+              <input matInput [matDatepicker]="ceNotStart" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('ceNotStart', $event)">
               <mat-datepicker-toggle matSuffix [for]="ceNotStart"></mat-datepicker-toggle>
               <mat-datepicker #ceNotStart></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单支付时间: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE5'|translate}}: </div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="psNotStart" placeholder="开始日期" (dateInput)="addEvent('psNotStart', $event)">
+              <input matInput [matDatepicker]="psNotStart" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('psNotStart', $event)">
               <mat-datepicker-toggle matSuffix [for]="psNotStart"></mat-datepicker-toggle>
               <mat-datepicker #psNotStart></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="peNotStart" placeholder="结束日期" (dateInput)="addEvent('peNotStart', $event)">
+              <input matInput [matDatepicker]="peNotStart" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('peNotStart', $event)">
               <mat-datepicker-toggle matSuffix [for]="peNotStart"></mat-datepicker-toggle>
               <mat-datepicker #peNotStart></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>分类: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
-                <mat-select name="category" placeholder="选择一级分类"
+                <mat-select name="category" placeholder="{{'ORDERS.PLACEHOLDER.TITLE4'|translate}}"
                             (valueChange)="categoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -1294,7 +1294,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="subcategory" placeholder="选择二级分类"
+                <mat-select name="subcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE5'|translate}}"
                             (valueChange)="subCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -1304,7 +1304,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="thirdcategory" placeholder="选择三级分类"
+                <mat-select name="thirdcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE6'|translate}}"
                             (valueChange)="thirdCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -1347,64 +1347,64 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="未送达" *ngIf="false">
+        <mat-tab label="{{'ORDERS.TITLE11'|translate}}" *ngIf="false">
           <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div class="md-margin-right-2">订单类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE1'|translate}}: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="typeUndelivered" name="type" (valueChange)="typeChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of typeList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <div class="md-margin-right-2">支付类型: </div>
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE2'|translate}}: </div>
             <mat-form-field>
               <mat-select [ngModel]="paymentUndelivered" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
-                  {{ item.text }}
+                  {{ item.text | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单创建时间:</div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="csUndelivered" placeholder="开始日期" (dateInput)="addEvent('csUndelivered', $event)">
+              <input matInput [matDatepicker]="csUndelivered" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('csUndelivered', $event)">
               <mat-datepicker-toggle matSuffix [for]="csUndelivered"></mat-datepicker-toggle>
               <mat-datepicker #csUndelivered></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="ceUndelivered" placeholder="结束日期" (dateInput)="addEvent('ceUndelivered', $event)">
+              <input matInput [matDatepicker]="ceUndelivered" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('ceUndelivered', $event)">
               <mat-datepicker-toggle matSuffix [for]="ceUndelivered"></mat-datepicker-toggle>
               <mat-datepicker #ceUndelivered></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>订单支付时间:</div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE5'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="psUndelivered" placeholder="开始日期" (dateInput)="addEvent('psUndelivered', $event)">
+              <input matInput [matDatepicker]="psUndelivered" placeholder="{{'ORDERS.PLACEHOLDER.TITLE2'|translate}}" (dateInput)="addEvent('psUndelivered', $event)">
               <mat-datepicker-toggle matSuffix [for]="psUndelivered"></mat-datepicker-toggle>
               <mat-datepicker #psUndelivered></mat-datepicker>
             </mat-form-field>
-            <div class="md-margin-left-2">到</div>
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
             <mat-form-field class="md-margin-left-2">
-              <input matInput [matDatepicker]="peUndelivered" placeholder="结束日期" (dateInput)="addEvent('peUndelivered', $event)">
+              <input matInput [matDatepicker]="peUndelivered" placeholder="{{'ORDERS.PLACEHOLDER.TITLE3'|translate}}" (dateInput)="addEvent('peUndelivered', $event)">
               <mat-datepicker-toggle matSuffix [for]="peUndelivered"></mat-datepicker-toggle>
               <mat-datepicker #peUndelivered></mat-datepicker>
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="filterDate()">确定</button>
+              <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div>分类: </div>
+            <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
               <mat-form-field fxFlex>
-                <mat-select name="category" placeholder="选择一级分类"
+                <mat-select name="category" placeholder="{{'ORDERS.PLACEHOLDER.TITLE4'|translate}}"
                             (valueChange)="categoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of categoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -1414,7 +1414,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="subCategoryList && subCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="subcategory" placeholder="选择二级分类"
+                <mat-select name="subcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE5'|translate}}"
                             (valueChange)="subCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of subCategoryList" [value]="item.id">
                     {{ item.data.name }}
@@ -1424,7 +1424,7 @@
             </div>
             <div class="md-margin-left-3" fxLayout="row" fxLayoutAlign="start center" *ngIf="thirdCategoryList && thirdCategoryList.length > 0">
               <mat-form-field fxFlex>
-                <mat-select name="thirdcategory" placeholder="选择三级分类"
+                <mat-select name="thirdcategory" placeholder="{{'ORDERS.PLACEHOLDER.TITLE6'|translate}}"
                             (valueChange)="thirdCategoryChange($event)">
                   <mat-option class="md-align-center" *ngFor="let item of thirdCategoryList" [value]="item.id">
                     {{ item.data.name }}

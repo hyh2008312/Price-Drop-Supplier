@@ -3,31 +3,31 @@
     <i class="iconfontXberts icon-ic-close"></i>
   </div>
   <div class="sc-product-dialog__title">
-    添加拣货信息
+    {{'PACKAGING.DIALOG1.TITLE1'|translate}}
   </div>
   <form class="md-margin-top-3" [formGroup]="purchaseForm" novalidate>
     <div class="xb-bold">
-      拣货单号
+      {{'PACKAGING.DIALOG1.TITLE2'|translate}}
     </div>
     <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="拣货单号" formControlName="pickNumber">
+        <input type="text" matInput placeholder=" {{'PACKAGING.DIALOG1.TITLE2'|translate}}" formControlName="pickNumber">
       </mat-form-field>
     </div>
     <div class="xb-bold">
-      运单号
+      {{'PACKAGING.DIALOG1.TITLE3'|translate}}
     </div>
     <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="运单号" formControlName="internationalTrackingNumber">
+        <input type="text" matInput placeholder="{{'PACKAGING.DIALOG1.TITLE3'|translate}}" formControlName="internationalTrackingNumber">
       </mat-form-field>
     </div>
-    <div class="xb-bold md-margin-top-2">
-      仓库
+    <div class="xb-bold">
+      {{'PACKAGING.DIALOG1.TITLE4'|translate}}
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <mat-select name="warehouse" placeholder="选择仓库" formControlName="warehouseId">
+        <mat-select name="warehouse" placeholder="{{'PACKAGING.DIALOG1.TITLE5'|translate}}" formControlName="warehouseId">
           <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
             {{ item.warehouseName }}
           </mat-option>
@@ -35,7 +35,7 @@
       </mat-form-field>
     </div>
     <div class="xb-bold md-margin-top-2">
-      拣货商品
+      {{'PACKAGING.DIALOG1.TITLE6'|translate}}
     </div>
     <div class="md-margin-top-2" formArrayName="pickInfo">
       <div fxLayout="column" *ngFor="let p of pickInfo.controls; let i = index">
@@ -44,7 +44,7 @@
             <div class="md-margin-right-2" fxFlex="30" >
               <div fxLayout="row" fxLayoutAlign="start center">
                 <mat-form-field fxFlex>
-                  <input type="text" matInput placeholder="订单号" formControlName="orderNumber">
+                  <input type="text" matInput placeholder="{{'PACKAGING.DIALOG1.TITLE7'|translate}}" formControlName="orderNumber">
                 </mat-form-field>
               </div>
 
@@ -60,7 +60,7 @@
             <div class="md-margin-right-2" fxFlex="25">
               <div class="md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
                 <mat-form-field fxFlex>
-                  <input type="number" matInput placeholder="数量" formControlName="pickQuantity">
+                  <input type="number" matInput placeholder="{{'PACKAGING.DIALOG1.TITLE8'|translate}}" formControlName="pickQuantity">
                 </mat-form-field>
               </div>
             </div>
@@ -89,7 +89,7 @@
       <button type="button" mat-raised-button color="primary" (click)="addPurchaseItem()">
         <div fxLayout="row" fxLayoutAlign="start center">
           <i class="material-icons">add</i>
-          <span class="md-margin-left-1">添加拣货商品SKU</span>
+          <span class="md-margin-left-1">{{'PACKAGING.DIALOG1.BUTTON3'|translate}}</span>
         </div>
       </button>
     </div>
@@ -98,9 +98,9 @@
     {{error}}
   </div>
   <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-raised-button color="primary" (click)="publish()">保存</button>
+    <button mat-raised-button color="primary" (click)="publish()">{{'PACKAGING.DIALOG1.BUTTON1'|translate}}</button>
     <div class="md-margin-left-2">
-      <button mat-button color="primary" (click)="close()">取消</button>
+      <button mat-button color="primary" (click)="close()">{{'PACKAGING.DIALOG1.BUTTON2'|translate}}</button>
     </div>
   </div>
 </div>

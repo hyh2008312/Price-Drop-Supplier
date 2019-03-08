@@ -873,6 +873,7 @@ export class ProductMainComponent implements OnInit {
     let start_time = this.csAll? this.csAll: null;
     let end_time = this.ceAll? this.ceAll: null;
     let filter_type = this.shopName? this.shopName: null;
+    let shop_name = this.searchCategory == 'shop' && this.searchKey && this.searchKey != ''? this.searchKey: null;
 
     this.adminService.getPdfProduct({
       category_id: this.catPublished,
@@ -880,7 +881,8 @@ export class ProductMainComponent implements OnInit {
       max_price,
       start_time,
       end_time,
-      filter_type
+      filter_type,
+      shop_name
     }).then((res) => {
       if(res && res.length > 0) {
         const ws_name = 'catalog';
@@ -1250,6 +1252,7 @@ export class ProductMainComponent implements OnInit {
         orderItem[`Image - 3 URL`] = '';
         orderItem[`Image - 4 URL`] = '';
         orderItem[`Image - 5 URL`] = '';
+        orderItem[`Supplier Name`] = item.shopName;
         for(let i = 0; i < item.images.length; i++) {
           if(i < 5) {
             const im = item.images[i];
@@ -1321,7 +1324,7 @@ export class ProductMainComponent implements OnInit {
     //
     // this.getContentTxt2(pack, wsname);
     //
-    let index = 1;
+    let index = 3;
     this.getContentTxt1(newData[index], index, newData, wsname);
 
   }
@@ -1404,7 +1407,7 @@ export class ProductMainComponent implements OnInit {
       console.log('All is done');
       return;
     }
-    if(index >= 1) {
+    if(index >= 3) {
       //新建图片
       let image = new Image();
       //解决canvas无法读取画布问题
@@ -1425,7 +1428,7 @@ export class ProductMainComponent implements OnInit {
 
   getImage(index, pixels, similar, _index, selectedIdx, newData, wsname) {
     let idx = s.findIndex((value) => {
-      if(value.spu == newData[index][1]) {
+      if(value.spu == newData[index][2]) {
         return true;
       }
     });
@@ -1553,6 +1556,8 @@ export class ProductMainComponent implements OnInit {
   resetDate() {
     this.csAll = null;
     this.ceAll = null;
+    this.psAll = null;
+    this.peAll = null;
   }
 
 }

@@ -102,11 +102,10 @@ export class ProductRankMainComponent implements OnInit {
           return true;
         }
       });
+      this.subCategoryList = [];
+      this.thirdCategoryList = [];
       if(this.categoryList[index] && this.categoryList[index].children) {
         this.subCategoryList = [...this.categoryList[index].children];
-      } else {
-        this.subCategoryList = false;
-        this.thirdCategoryList = false;
       }
       this.categoryId = $event;
       this.changeProducts({
@@ -122,10 +121,9 @@ export class ProductRankMainComponent implements OnInit {
           return true;
         }
       });
+      this.thirdCategoryList = [];
       if(this.subCategoryList[index] && this.subCategoryList[index].children) {
         this.thirdCategoryList = [...this.subCategoryList[index].children];
-      } else {
-        this.thirdCategoryList = [];
       }
     }
     this.categoryId = $event;
@@ -158,6 +156,8 @@ export class ProductRankMainComponent implements OnInit {
   resetDate() {
     this.csAll = null;
     this.ceAll = null;
+    this.psAll = null;
+    this.peAll = null;
     this.changeProducts({
       index: this.selectedIndex
     });

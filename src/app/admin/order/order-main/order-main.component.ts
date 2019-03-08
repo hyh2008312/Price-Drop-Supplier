@@ -168,7 +168,7 @@ export class OrderMainComponent implements OnInit {
   }];
 
 
-  outOfStock: any = 'Out of Stock Time';
+  outOfStock: any = 'Order Paid Time';
 
   outOfStockList: any = [{
     text: 'Out of Stock Time',

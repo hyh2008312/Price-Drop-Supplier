@@ -8,8 +8,15 @@
         </div>
       </div>
       <div class="sc-navigation__title" fxFlex>
-        供应链管理系统
+        {{ 'NAV.TITLE1' | translate }}
       </div>
+      <mat-form-field class="sc-navigation__sort">
+        <mat-select [ngModel]="selectLang" (valueChange)="changeLang($event)" >
+          <mat-option class="md-align-center" *ngFor="let lang of langArray" [value]="lang.value">
+            {{ lang.text }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </div>
   <app-warehouse-top-navigation></app-warehouse-top-navigation>

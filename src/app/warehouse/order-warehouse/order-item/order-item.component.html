@@ -1,15 +1,16 @@
 <div fxLayout="column" fxLayoutAlign="start stretch">
   <div class="sc-order__product-height" fxLayout="row" fxLayoutAlign="start center" >
     <div class="xb-bold">
-      创建日期:{{order.created | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY'}}
+      {{ 'ORDERS.ITEM.TITLE1' | translate }}:{{order.created | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY'}}
     </div>
     <div class="xb-bold md-margin-left-3" *ngIf="order.paidTime">
-      支付日期: {{order.paidTime | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY HH:mm:ss'}}
+      {{ 'ORDERS.ITEM.TITLE2' | translate }}: {{order.paidTime | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY HH:mm:ss'}}
     </div>
-    <div class="md-margin-left-3">订单号 #: {{order.number}}</div>
-    <div class="md-margin-left-3" *ngIf="order.orderSourceName">第三方订单号: {{order.orderSourceName}} - {{order.thirdPartyOrderNumber}}</div>
-    <div class="md-margin-left-3" fxFlex>{{order.sumOrderNumber? '总订单号 #:' + order.sumOrderNumber: ''}}</div>
-    <a class="sc-product__color text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/{{order.id}}" target="_blank">查看订单详情</a>
+    <div class="md-margin-left-3">{{ 'ORDERS.ITEM.TITLE3' | translate }} #: {{order.number}}</div>
+    <div class="md-margin-left-3" *ngIf="order.orderSourceName">{{ 'ORDERS.ITEM.TITLE4' | translate }}: {{order.orderSourceName}} - {{order.thirdPartyOrderNumber}}</div>
+    <div class="md-margin-left-3" *ngIf="order.sumOrderNumber">{{'ORDERS.ITEM.TITLE5'| translate }} #:</div>
+    <div fxFlex></div>
+    <a class="sc-product__color text-underline xb-bold md-margin-right-2 xb-pointer" routerLink="./detail/{{order.id}}" target="_blank">{{'ORDERS.ITEM.TITLE6'| translate }}</a>
   </div>
   <div class="sc-order__product-item-1" fxLayout="row" fxLayoutAlign="start start">
     <div fxLayout="column" fxFlex="70" fxLayoutAlign="start stretch">
@@ -71,41 +72,41 @@
       </div>
       <div *ngIf="status != 9" fxLayout="row" fxLayoutAlign="start center">
         <div class="sc__accent-dark " *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started' && !order.sourcingAddressNote">
-          <button mat-raised-button color="accent" (click)="editState()">地址待确认</button>
+          <button mat-raised-button color="accent" (click)="editState()"> {{'ORDERS.ITEM.BUTTON1'| translate }}</button>
         </div>
         <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started'">
-          <button mat-raised-button color="accent" (click)="editStock()">标记为缺货</button>
+          <button mat-raised-button color="accent" (click)="editStock()">{{'ORDERS.ITEM.BUTTON3'| translate }}</button>
         </div>
         <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started'">
-          <button mat-raised-button color="accent" (click)="editSourcing()">标记为已采购</button>
+          <button mat-raised-button color="accent" (click)="editSourcing()">{{'ORDERS.ITEM.BUTTON5'| translate }}</button>
         </div>
         <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Address Pending Confirm'">
-          <button mat-raised-button color="primary" (click)="editAddress()">确认地址</button>
+          <button mat-raised-button color="primary" (click)="editAddress()">{{'ORDERS.ITEM.BUTTON2'| translate }}</button>
         </div>
         <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Out of stock'">
-          <button mat-raised-button color="primary" (click)="editStock()">查看缺货标记</button>
+          <button mat-raised-button color="primary" (click)="editStock()">{{'ORDERS.ITEM.BUTTON4'| translate }}</button>
         </div>
         <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Out of stock'">
-          <button mat-raised-button color="accent" (click)="editSourcing()">标记为已采购</button>
+          <button mat-raised-button color="accent" (click)="editSourcing()">{{'ORDERS.ITEM.BUTTON5'| translate }}</button>
         </div>
         <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Started'">
-          <button mat-raised-button color="accent" (click)="editStock()">标记为缺货</button>
+          <button mat-raised-button color="accent" (click)="editStock()">{{'ORDERS.ITEM.BUTTON3'| translate }}</button>
         </div>
         <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Started'">
-          <button mat-raised-button color="primary" (click)="editSourcing()">查看采购详情</button>
+          <button mat-raised-button color="primary" (click)="editSourcing()">{{'ORDERS.ITEM.BUTTON6'| translate }}</button>
         </div>
         <div class="sc__accent-dark" *ngIf="order.orderStatus == 'Audit canceled'">
-          <button mat-raised-button color="accent" (click)="approveCancel()">查看详情</button>
+          <button mat-raised-button color="accent" (click)="approveCancel()">{{'ORDERS.ITEM.BUTTON7'| translate }}</button>
         </div>
         <div class="sc__accent-dark md-margin-left-1" *ngIf="order.orderStatus != 'Unpaid' && order.orderStatus != 'Canceled'">
-          <button mat-raised-button color="accent" (click)="addNote()" *ngIf="order.orderNotes == '' ">添加备注</button>
-          <button mat-raised-button color="primary" (click)="addNote()" *ngIf="order.orderNotes != ''">编辑备注</button>
+          <button mat-raised-button color="accent" (click)="addNote()" *ngIf="order.orderNotes == '' ">{{'ORDERS.ITEM.BUTTON8'| translate }}</button>
+          <button mat-raised-button color="primary" (click)="addNote()" *ngIf="order.orderNotes != ''">{{'ORDERS.ITEM.BUTTON9'| translate }}</button>
         </div>
       </div>
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        手机号
+        {{'ORDERS.ITEM.TITLE7'| translate }}
       </div>
       <div fxFlex="">
         {{order.phoneNumber}}
@@ -113,7 +114,7 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        地址
+        {{'ORDERS.ITEM.TITLE8'| translate }}
       </div>
       <div>
         {{order.address}}
@@ -121,7 +122,7 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.sourcingStatus == 'Out of stock'">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        缺货状态
+        {{'ORDERS.ITEM.TITLE9'| translate }}
       </div>
       <div>
         {{order.sourcingNote}}
@@ -129,7 +130,7 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.sourcingOrderNumber">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        采购单号
+        {{'ORDERS.ITEM.TITLE10'| translate }}
       </div>
       <div>
         {{order.sourcingOrderNumber}}
@@ -137,7 +138,7 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start"  *ngIf="order.orderNotes">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        备注
+        {{'ORDERS.ITEM.TITLE11'| translate }}
       </div>
       <div>
         {{order.orderNotes}}
@@ -145,7 +146,7 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start"  *ngIf="order.sourcingAddressNote">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        地址备注
+        {{'ORDERS.ITEM.TITLE12'| translate }}
       </div>
       <div>
         {{order.sourcingAddressNote}}
@@ -153,7 +154,7 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.shippingNumber">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        运单号
+        {{'ORDERS.ITEM.TITLE13'| translate }}
       </div>
       <div>
         {{order.shippingNumber}}
@@ -161,7 +162,7 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.shippingNumber">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        物流
+        {{'ORDERS.ITEM.TITLE14'| translate }}
       </div>
       <div>
         {{order.shippingProvider}}
@@ -169,7 +170,7 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.recommendWarehouse">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        推荐仓库
+        {{'ORDERS.ITEM.TITLE15'| translate }}
       </div>
       <div>
         {{order.recommendWarehouse.warehouseName}}
@@ -177,7 +178,7 @@
     </div>
     <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start start" *ngIf="order.purchaseUrl">
       <div class="md-dark-secondary sc-order__product-item-left" fxFlex="none">
-        采购链接
+        {{'ORDERS.ITEM.TITLE16'| translate }}
       </div>
       <a href="{{order.purchaseUrl}}" target="_blank">
         {{order.purchaseUrl}}

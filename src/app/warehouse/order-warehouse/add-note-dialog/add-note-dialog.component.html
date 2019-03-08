@@ -3,12 +3,12 @@
     <i class="iconfontXberts icon-ic-close"></i>
   </div>
   <div class="sc-order-dialog__title">
-    添加备注
+    {{'ORDERS.DIALOG4.TITLE1'|translate}}
   </div>
   <form class="md-margin-top-2" [formGroup]="noteForm" novalidate>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field fxFlex>
-        <textarea type="text" matInput  placeholder="添加备注" formControlName="notes"></textarea>
+        <textarea type="text" matInput  placeholder=" {{'ORDERS.DIALOG4.TITLE1'|translate}}" formControlName="notes"></textarea>
       </mat-form-field>
     </div>
     <div *ngIf="noteForm.get('notes').invalid && (noteForm.get('notes').dirty ||
@@ -19,9 +19,9 @@
     </div>
   </form>
   <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-raised-button color="primary" (click)="addOrderNotes()">保存</button>
+    <button mat-raised-button color="primary" (click)="addOrderNotes()">{{'ORDERS.DIALOG4.BUTTON1'|translate}}</button>
     <div class="md-margin-left-2">
-      <button mat-button color="primary" (click)="close()">取消</button>
+      <button mat-button color="primary" (click)="close()">{{'ORDERS.DIALOG4.BUTTON2'|translate}}</button>
     </div>
   </div>
 </div>

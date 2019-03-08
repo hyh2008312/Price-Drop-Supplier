@@ -46,16 +46,16 @@ export class TrackingMainComponent implements OnInit {
   searchCategory: any = 'international_tracking_number';
 
   searchList:any = [{
-    text: '运单号',
+    text: 'PACKAGING.SEARCHLIST.TITLE1',
     value: 'international_tracking_number'
   }, {
-    text: '检货单号',
+    text: 'PACKAGING.SEARCHLIST.TITLE2',
     value: 'pick_number'
   }, {
-    text: '订单号',
+    text: 'PACKAGING.SEARCHLIST.TITLE3',
     value: 'order_number'
   }, {
-    text: 'SKU',
+    text: 'PACKAGING.SEARCHLIST.TITLE4',
     value: 'sku'
   }];
 
@@ -68,30 +68,30 @@ export class TrackingMainComponent implements OnInit {
 
   btList: any = [{
     value: false,
-    text: '所有'
+    text: 'PACKAGING.BATTERYLIST.TITLE1'
   }, {
     value: '1',
-    text: '带电'
+    text: 'PACKAGING.BATTERYLIST.TITLE2'
   }, {
     value: '0',
-    text: '不带电'
+    text: 'PACKAGING.BATTERYLIST.TITLE3'
   }];
   codList: any = [{
     value: false,
-    text: '所有'
+    text: 'PACKAGING.CODLIST.TITLE1'
   }, {
     value: '1',
-    text: '是COD'
+    text: 'PACKAGING.CODLIST.TITLE2'
   }, {
     value: '0',
-    text: '不是COD'
+    text: 'PACKAGING.CODLIST.TITLE3'
   }];
   sortList: any = [{
     value: 'true',
-    text: '正序'
+    text: 'PACKAGING.SORTLIST.TITLE1'
   }, {
     value: 'false',
-    text: '逆序'
+    text: 'PACKAGING.SORTLIST.TITLE2'
   }];
 
   btAll: any = false;
@@ -801,7 +801,7 @@ export class TrackingMainComponent implements OnInit {
       this.warehouseList = [...data];
       this.warehouseList.unshift({
         id: false,
-        warehouseName: '所有'
+        warehouseName: 'PACKAGING.CODLIST.TITLE1'
       });
     });
   }

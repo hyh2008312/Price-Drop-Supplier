@@ -1,11 +1,321 @@
 {
   "NAV": {
     "TITLE1": "SUPPLY CHAIN"
-  }
+  },
   "HOME": {
-    "TITLE1": "PURCHASE ORDERS",
-    "TITLE2": "PICKUP ORDERS",
+    "TITLE1": "SOURCING",
+    "TITLE2": "PACKAGING",
     "TITLE3": "INVENTORY",
-    "TITLE4": "ORDERS"
+    "TITLE4": "ORDERS",
+    "TITLE5": "MY ACCOUNT",
+    "TITLE6": "Logout"
+  },
+  "SOURCING": {
+    "TITLE1": "All",
+    "TITLE2": "Processing",
+    "TITLE3": "Shipped",
+    "TITLE4": "Partially Delivered",
+    "TITLE5": "Delivered",
+    "TITLE6": "Wrong Item",
+    "TITLE7": "Canceled"
+  },
+  "PACKAGING": {
+    "TITLE1": "All",
+    "TITLE2": "Pending Packaging",
+    "TITLE3": "Packaging Completed",
+    "TITLE4": "Package Deleted",
+    "TITLE5": "Not Found",
+    "SUBTITLE": {
+      "TITLE1": "Package",
+      "TITLE2": "Status",
+      "TITLE3": "Tracking Number",
+      "TITLE4": "Carrier",
+      "TITLE5": "Battery",
+      "TITLE6": "COD",
+      "TITLE7": "Action"
+    },
+    "SUBTITLE1": {
+      "TITLE1": "Filter by Battery",
+      "TITLE2": "Filter by COD",
+      "TITLE3": "Sort by Created Time",
+      "TITLE4": "Filter by Warehouse",
+      "TITLE5": "You haven't published any package yet.",
+      "TITLE6": "to",
+      "TITLE7": "Filter by Packaging Time",
+      "TITLE8": "Search by",
+      "TITLE9": "Start Date",
+      "TITLE10": "End Date",
+      "TITLE11": "Filter by Created Time",
+      "BUTTON1": "Confirm",
+      "BUTTON2": "Reset",
+      "BUTTON3": "Export Excel",
+      "BUTTON4": "Export Packaging List",
+      "BUTTON5": "Export PDF",
+      "BUTTON6": "Create Package Item"
+    },
+    "SEARCHLIST": {
+      "TITLE1": "Tracking Number",
+      "TITLE2": "Packaging Number",
+      "TITLE3": "Order Number",
+      "TITLE4": "SKU"
+    },
+    "BATTERYLIST": {
+      "TITLE1": "All",
+      "TITLE2": "Contain Battery",
+      "TITLE3": "Without Battery"
+    },
+    "CODLIST": {
+      "TITLE1": "All",
+      "TITLE2": "COD",
+      "TITLE3": "Not COD"
+    },
+    "SORTLIST": {
+      "TITLE1": "Normal",
+      "TITLE2": "Reverse"
+    },
+     "ITEM": {
+        "TITLE1": "Package Number",
+        "TITLE2": "Create Time",
+        "TITLE3": "Packaging Time",
+        "TITLE4": "Warehouse",
+        "TITLE5": "SKU",
+        "TITLE6": "Order #",
+        "TITLE7": "Attributes",
+        "TITLE8": "Quantity",
+        "TITLE9": "Pending Packaging",
+        "TITLE10": "Packaging Completed",
+        "TITLE11": "Package Deleted",
+        "TITLE12": "Not Found",
+        "TITLE13": "Yes",
+        "TITLE14": "No",
+        "TITLE15": "Notes",
+        "BUTTON1": "Edit",
+        "BUTTON2": "Add Note",
+        "BUTTON3": "Complete",
+        "BUTTON4": "Not Found",
+        "BUTTON5": "Delete",
+        "BUTTON6": "Reset"
+     },
+     "DIALOG": {
+       "TITLE1": "Add Note",
+       "TITLE2": "Note",
+       "BUTTON1": "Save",
+       "BUTTON2": "Cancel"
+     },
+     "DIALOG1": {
+       "TITLE1": "Create Package Information",
+       "TITLE2": "Package Number",
+       "TITLE3": "Tracking Number",
+       "TITLE4": "Warehouse",
+       "TITLE5": "Select Warehouse",
+       "TITLE6": "Package Item",
+       "TITLE7": "Order Number",
+       "TITLE8": "Quantity",
+       "TITLE9": "Edit Package Information",
+       "BUTTON1": "Save",
+       "BUTTON2": "Cancel",
+       "BUTTON3": "Add Package Item"
+     },
+     "DIALOG2": {
+       "TITLE1": "Packaging Completed",
+       "TITLE2": "Whether to confirm packaging completed？",
+       "TITLE3": "The quantity of goods in this packaging is more than 1, please confirm if there's something missing?",
+       "TITLE4": "Is it confirmed",
+       "TITLE5": "Cancel packaging completed",
+       "TITLE6": "Is packaging completed cancel?",
+       "BUTTON1": "Confirm",
+       "BUTTON2": "Cancel"
+     },
+     "DIALOG3": {
+       "TITLE1": "Not Found",
+       "TITLE2": "Whether to confirm package item is not found？",
+       "BUTTON1": "Confirm",
+       "BUTTON2": "Cancel"
+     },
+     "DIALOG4": {
+        "TITLE1": "Confirm Delete",
+        "TITLE2": "Whether to confirm packaging deletion?",
+        "TITLE3": "Undelete",
+        "TITLE4": "Whether to cancel packaging deletion?",
+        "BUTTON1": "Confirm",
+        "BUTTON2": "Cancel"
+     }
+  },
+  "INVENTORY": {
+    "TITLE1": "Inventory Based on Warehouse",
+    "TITLE2": "Inventory Based on SKU",
+    "TITLE2": "You don't have inventory information",
+    "TITLE4": "Filter by Warehouse",
+    "TITLE5": "Search by",
+    "BUTTON1": "Export Excel",
+    "BUTTON2": "Export Excel of All Inventory",
+    "SUBTITLE": {
+      "TITLE1": "Product",
+      "TITLE2": "Warehouse",
+      "TITLE3": "SKU",
+      "TITLE4": "Total Inventory",
+      "TITLE5": "Lock Inventory",
+      "TITLE6": "Remain Inventory",
+      "TITLE7": "Action"
+    },
+    "QUANTITYLIST": {
+      "TITLE1": "All",
+      "TITLE2": "More than 0",
+      "TITLE3": "Inventory is 0"
+    },
+    "ITEM": {
+      "TITLE1": "Attributes",
+      "TITLE2": "Total Inventory",
+      "TITLE3": "Lock Inventory",
+      "TITLE4": "Remain Inventory",
+      "TITLE5": "Piece",
+      "BUTTON1": "Copy SKU",
+      "BUTTON2": "Edit",
+      "BUTTON3": "Save"
+    }
+  },
+  "ORDERS": {
+    "TITLE1": "All",
+    "TITLE2": "Unpaid",
+    "TITLE3": "Processing",
+    "TITLE4": "Shipped",
+    "TITLE5": "Pending Cancel",
+    "TITLE6": "Canceled",
+    "TITLE7": "Completed",
+    "TITLE8": "Refunded",
+    "TITLE9": "Expired",
+    "TITLE10": "Prepared",
+    "TITLE11": "Undelivered",
+    "SUBTITLE": {
+      "TITLE1": "Product",
+      "TITLE2": "Status",
+      "TITLE3": "Type",
+      "TITLE4": "Quantity",
+      "TITLE5": "Customer",
+      "TITLE6": "Payment Type",
+      "TITLE7": "Amount"
+    },
+    "SUBTITLE1": {
+      "TITLE1": "Filter by Order Type",
+      "TITLE2": "Filter by Payment Type",
+      "TITLE3": "Filter by Order Submission Time",
+      "TITLE4": "to",
+      "TITLE5": "Filter by Order Paid Time",
+      "TITLE6": "Filter by Category",
+      "TITLE7": "Filter by Sourcing Status",
+      "TITLE8": "Filter by Third Party Channel"
+    },
+    "PLACEHOLDER": {
+      "TITLE1": "Search by",
+      "TITLE2": "Start Date",
+      "TITLE3": "End Date",
+      "TITLE4": "Select a Category",
+      "TITLE5": "Select a Subcategory",
+      "TITLE6": "Select a ThirdCategory"
+    },
+    "TYPELIST": {
+      "TITLE1": "All",
+      "TITLE2": "Normal",
+      "TITLE3": "Drop",
+      "TITLE4": "Flash"
+    },
+    "PAYMENTLIST": {
+      "TITLE1": "All",
+      "TITLE2": "Cod",
+      "TITLE3": "Prepaid"
+    },
+    "SOURCINGLIST": {
+      "TITLE1": "All",
+      "TITLE2": "Pending Sourcing",
+      "TITLE3": "Address Pending Confirm",
+      "TITLE4": "Out of Stock",
+      "TITLE5": "Sourcing Completed"
+    },
+    "SEARCHTYPELIST": {
+      "TITLE1": "Order Number",
+      "TITLE2": "Tracking Number",
+      "TITLE3": "SKU",
+      "TITLE4": "Customer Name",
+      "TITLE5": "Product Name",
+      "TITLE6": "Sourcing Number"
+    },
+    "ITEM": {
+      "TITLE1": "Created Time",
+      "TITLE2": "Paid Time",
+      "TITLE3": "Order",
+      "TITLE4": "Third Party Order",
+      "TITLE5": "Sum Order",
+      "TITLE6": "View Details",
+      "TITLE7": "Phone",
+      "TITLE8": "Address",
+      "TITLE9": "Out of Stock",
+      "TITLE10": "Sourcing Number",
+      "TITLE11": "Order Notes",
+      "TITLE12": "Address Notes",
+      "TITLE13": "Tracking Number",
+      "TITLE14": "Carrier",
+      "TITLE15": "Recommended warehouse",
+      "TITLE16": "Purchase URL",
+      "BUTTON1": "Address Pending Confirm",
+      "BUTTON2": "Address Confirmed",
+      "BUTTON3": "Mark as Out of Stock",
+      "BUTTON4": "View Out of Stock",
+      "BUTTON5": "Mark as Sourcing",
+      "BUTTON6": "View Sourcing",
+      "BUTTON7": "View Detail",
+      "BUTTON8": "Add Note",
+      "BUTTON9": "Edit Note"
+    },
+    "BUTTON": {
+      "TITLE1": "Create Third Party Order",
+      "TITLE2": "Confirm",
+      "TITLE3": "Export",
+      "TITLE4": "Create GATI Tracking Number"
+    },
+    "DIALOG": {
+      "TITLE1": "Create Third Party Order",
+      "TITLE2": "Third Party Order",
+      "TITLE3": "SKU",
+      "TITLE4": "Quantity",
+      "TITLE5": "Amounts(Rs)",
+      "TITLE6": "Third Party Channel",
+      "TITLE7": "Select Third Party Channel",
+      "BUTTON1": "Add SKU",
+      "BUTTON2": "Save",
+      "BUTTON3": "Cancel"
+    },
+    "DIALOG1": {
+      "TITLE1": "Do you need customer support to verify this address? ",
+      "BUTTON1": "Cancel",
+      "BUTTON2": "Please Verify"
+    },
+    "DIALOG2": {
+      "TITLE1": "Do you need customer support to verify this address? ",
+      "BUTTON1": "Cancel",
+      "BUTTON2": "Please Verify"
+    },
+    "DIALOG2": {
+      "TITLE1": "Out of Stock",
+      "BUTTON1": "Save",
+      "BUTTON2": "Cancel"
+    },
+    "DIALOG3": {
+       "TITLE1": "Sourcing Information",
+       "TITLE2": "Sourcing Number",
+       "TITLE3": "Select Sourcing Channel",
+       "TITLE4": "Select Warehouse",
+       "TITLE5": "Select Sourcing Account No.",
+       "TITLE6": "Sourcing Price",
+       "TITLE7": "Sourcing Link",
+       "TITLE8": "Order",
+       "TITLE9": "Sum Order",
+       "BUTTON1": "Save",
+       "BUTTON2": "Cancel"
+    },
+    "DIALOG4": {
+       "TITLE1": "Add Note",
+       "BUTTON1": "Save",
+       "BUTTON2": "Cancel"
+    }
   }
 }

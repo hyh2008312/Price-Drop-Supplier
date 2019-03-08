@@ -44,7 +44,6 @@ export class TrackingItemComponent implements OnInit {
 
   ngOnInit(): void {
 
-
   }
 
   edit() {
@@ -66,11 +65,11 @@ export class TrackingItemComponent implements OnInit {
     let title = '';
     let content = '';
     if(this.product.pickStatus == 'Pending Packaging' || this.product.pickStatus == 'Packaging Completed') {
-      title = '确认删除';
-      content = '是否确认删除？';
+      title = 'PACKAGING.DIALOG4.TITLE1';
+      content = 'PACKAGING.DIALOG4.TITLE2';
     } else if(this.product.pickStatus == 'Package Deleted' || this.product.pickStatus == 'Not Found') {
-      title = '取消删除';
-      content = '是否取消删除？';
+      title = 'PACKAGING.DIALOG4.TITLE3';
+      content = 'PACKAGING.DIALOG4.TITLE4';
     }
     let dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
       data: {
@@ -93,33 +92,31 @@ export class TrackingItemComponent implements OnInit {
             event: 'delete'
           });
         }
-
       }
     });
-
   }
 
   changeStatus() {
     let title = '';
     let content = '';
-    let button = '确认';
+    let button = 'PACKAGING.DIALOG2.BUTTON1';
     let quantity = 0;
     let red = false;
     for(let item of this.product.pickVariants) {
       quantity += item.quantity;
     }
     if(this.product.pickStatus == 'Pending Packaging' || this.product.pickStatus == 'Not Found') {
-      title = '已打包出库';
+      title = 'PACKAGING.DIALOG2.TITLE1';
       if(quantity == 1) {
-        content = '是否确认已打包出库？';
+        content = 'PACKAGING.DIALOG2.TITLE2';
       } else {
-        content = '该拣货单的商品数量大于1，请确认是否遗漏？';
-        button = '已确认无误';
+        content = 'PACKAGING.DIALOG2.TITLE3';
+        button = 'PACKAGING.DIALOG2.TITLE4';
         red = true;
       }
     } else if(this.product.pickStatus == 'Packaging Completed') {
-      title = '取消打包出库';
-      content = '是否取消打包出库？';
+      title = 'PACKAGING.DIALOG2.TITLE5';
+      content = 'PACKAGING.DIALOG2.TITLE6？';
     }
     let dialogRef = this.dialog.open(ConfirmPackageDialogComponent, {
       data: {
@@ -150,8 +147,8 @@ export class TrackingItemComponent implements OnInit {
     let title = '';
     let content = '';
     if(this.product.pickStatus == 'Pending Packaging') {
-      title = '找不到产品';
-      content = '是否确认找不到产品？';
+      title = 'PACKAGING.DIALOG3.TITLE1';
+      content = 'PACKAGING.DIALOG3.TITLE2';
     }
 
     let dialogRef = this.dialog.open(ConfirmNotFoundDialogComponent, {

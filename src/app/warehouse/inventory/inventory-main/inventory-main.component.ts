@@ -27,18 +27,18 @@ export class InventoryMainComponent implements OnInit {
   searchCategory: any = 'sku';
 
   searchList:any = [{
-    text: 'SKU编号',
+    text: 'SKU',
     value: 'sku'
   }];
 
   quantityList: any = [{
-    text: '所有',
+    text: 'INVENTORY.QUANTITYLIST.TITLE1',
     value: false
   }, {
-    text: '库存大于0',
+    text: 'INVENTORY.QUANTITYLIST.TITLE2',
     value: '1'
   }, {
-    text: '库存为0',
+    text: 'INVENTORY.QUANTITYLIST.TITLE3',
     value: '0'
   }];
 
@@ -210,7 +210,7 @@ export class InventoryMainComponent implements OnInit {
       this.warehouseList = [...data];
       this.warehouseList.unshift({
         id: false,
-        warehouseName: '所有'
+        warehouseName: 'INVENTORY.QUANTITYLIST.TITLE1'
       });
     });
   }

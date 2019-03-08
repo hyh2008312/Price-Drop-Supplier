@@ -14,25 +14,25 @@ export class TopNavigationComponent implements OnInit {
 
   contents: any = [{
     id: 0,
-    text: '采购单',
+    text: "HOME.TITLE1",
     router: './home',
     isActive: false,
     staff: false
   }, {
     id: 1,
-    text: '拣货单',
+    text: "HOME.TITLE2",
     router: './tracking',
     isActive: false,
     staff: false
   }, {
     id: 2,
-    text: '库存管理',
+    text: "HOME.TITLE3",
     router: './inventory',
     isActive: false,
     staff: false
   }, {
     id: 3,
-    text: '订单管理',
+    text: "HOME.TITLE4",
     router: './order-warehouse',
     isActive: false,
     staff: true
@@ -41,7 +41,7 @@ export class TopNavigationComponent implements OnInit {
   accounts: any = [
     {
       id: 1,
-      text: '退出',
+      text: "HOME.TITLE6",
       router: '/account/login/warehouse',
       isActive: false
     }
