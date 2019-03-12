@@ -7,6 +7,12 @@
         <span class="xb-bold">EDIT PRODUCT</span>
       </div>
       <div class="md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
+        <a fxLayout="column" fxLayoutAlign="center stretch" *ngIf="sizeChartId" routerLink="/admin/sizeChart/edit/{{sizeChartId}}" target="_blank">
+          <button mat-button  color="primary" >
+            View SizeChart
+          </button>
+        </a>
+        <div class="md-margin-left-2"></div>
         <div>Status: {{productStatus}}</div>
         <div class="md-margin-left-2"></div>
         <button mat-raised-button *ngIf="productStatus == 'unpublished'" color="primary" type="button" (click)="publish()">

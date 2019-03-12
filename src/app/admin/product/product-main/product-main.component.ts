@@ -1218,65 +1218,40 @@ export class ProductMainComponent implements OnInit {
     for(let item of excel) {
       for(let i = 0; i < item.variants.length; i++) {
         let orderItem: any = {};
-        const im = item.variants[i];
-        orderItem[''] = '';
-        orderItem['User ID'] = '';
-        orderItem.SKU = im.sku;
-        orderItem['Unique Code'] = '';
-        orderItem.Brand = '';
-        orderItem['Product Title'] = item.title;
-        orderItem.MRP = parseInt((im.saleUnitPrice).toString());
-        orderItem['Selling Price'] = parseInt((im.unitPrice * 0.9).toString());
-        orderItem['Shipping Charge'] = parseInt(item.shipping?item.shipping.priceItem:0);
-        orderItem['L1'] = '';
-        orderItem['L2'] = '';
-        orderItem['L3'] = '';
-        orderItem['Color'] = '';
-        orderItem['Fabric'] = '';
-        orderItem['Type'] = wbname;
-        orderItem['Size'] = '';
-        orderItem['Chest'] = '';
-        orderItem['Length'] = '';
-        for(let em of im.attributeValues) {
-          if(em.name == 'Color') {
-            orderItem.Color = em.value;
-          }
-          if(em.name == 'Size') {
-            orderItem['Length'] = (parseInt(em.value) / 2.54).toFixed(1);
-          }
-        }
-        orderItem['Inventory'] = 500;
-        orderItem['Style'] = '';
-        orderItem['Design Type'] = '';
-        orderItem['Description'] = '';
-        orderItem[`Image - 1 URL`] = '';
-        orderItem[`Image - 2 URL`] = '';
-        orderItem[`Image - 3 URL`] = '';
-        orderItem[`Image - 4 URL`] = '';
-        orderItem[`Image - 5 URL`] = '';
-        orderItem[`Supplier Name`] = item.shopName;
+        orderItem.Category = '';
+        orderItem.Subcategory = '';
+        orderItem.Thirdcategory = '';
+        orderItem.SPU = item.spu;
+        orderItem.Title = item.title;
         for(let i = 0; i < item.images.length; i++) {
           if(i < 5) {
             const im = item.images[i];
-            orderItem[`Image - ${i+1} URL`] = im;
+            orderItem['Picture_' + i] = im;
           }
         }
-
-        for(let fm of item.productSpecification) {
-          if(fm.name == 'Material' || fm.name == 'Clothing Fabric' || fm.name == 'Dress Material') {
-            orderItem['Fabric'] = fm.content;
+        const im = item.variants[i];
+        orderItem.SKU = im.sku;
+        orderItem.MainImage = im.mainImage;
+        orderItem.Size = '';
+        orderItem.Color = '';
+        for(let em of im.attributeValues) {
+          if(em.name == 'Size') {
+            orderItem.Size = em.value;
           }
-          if(fm.name == 'Shop By Age') {
-            orderItem['Size'] = fm.content;
-          }
-          if(fm.name == 'Brand') {
-            orderItem['Brand'] = fm.content;
+          if(em.name == 'Color') {
+            orderItem.Color = em.value;
           }
         }
-        orderItem['Product Id'] = item.id;
+        orderItem.Selling_Price = parseInt((im.unitPrice * 0.9).toString());
+        orderItem.MRP = parseInt((im.saleUnitPrice).toString());
+        orderItem.Souring_Cost = parseInt(im.sourcingPrice);
+        orderItem.Supplier_Name = item.shopName;
+        for(let i = 0; i < item.productSpecification.length; i++) {
+          const im = item.productSpecification[i];
+          orderItem[im.name] = im.content;
+        }
         packing.push(orderItem);
       }
-
     }
 
     const ws: any = utils.json_to_sheet(packing);

@@ -2,5 +2,59 @@
   <div class="sc-product-dialog__close" (click)="close()" >
     <i class="iconfontXberts icon-ic-close"></i>
   </div>
-
+  <div class="sc-product-dialog__title">
+    {{'INVENTORY.TITLE6' | translate}}
+  </div>
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center" fxFlex>
+      <mat-form-field>
+        <mat-select placeholder="{{'INVENTORY.TITLE8' | translate}}" [(ngModel)]="warehouseId">
+          <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+            {{ item.warehouseName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="sc-product__search"
+          fxLayout="row" fxLayoutAlign="start center" >
+      <i class="material-icons">search</i>
+      <input type="text" [(ngModel)]="searchKey"
+             placeholder="{{'ORDERS.PLACEHOLDER.TITLE1'|translate}}"
+             (keyup.enter)="changeProducts({index: 0})"/>
+      <div class="sc-order__search-close" fxLayout="row" fxLayoutAlign="center center"
+           *ngIf="searchKey != ''" (click)="clearSearchKey()">
+        <i class="material-icons">close</i>
+      </div>
+    </div>
+    <div class="sc-product__search-margin-top unicorn-dark-theme">
+      <mat-form-field class="sc-product__product-sort">
+        <mat-select [(ngModel)]="searchType" name="sort">
+          <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item.value">
+            {{ item.text|translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="md-margin-top-2">
+    <app-warehouse-add-inventory-title [status]="0" ></app-warehouse-add-inventory-title>
+  </div>
+  <div class="sc-product__product-bg" fxLayout="column">
+    <div class="sc-product__product-list" *ngFor="let item of products;let i = index;">
+      <app-warehouse-add-inventory-item [status]="0" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-add-inventory-item>
+    </div>
+    <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
+         *ngIf="products && products.length <= 0">
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <i class="iconfontXberts icon-ic-empty"></i>
+        <div class="sc-product__product-title-1 md-margin-top-4">{{'INVENTORY.TITLE7' | translate}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="addProduct()">{{'INVENTORY.DIALOG.BUTTON1' | translate}}</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">{{'INVENTORY.DIALOG.BUTTON2' | translate}}</button>
+    </div>
+  </div>
 </div>

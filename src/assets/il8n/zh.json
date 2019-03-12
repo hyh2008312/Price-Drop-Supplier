@@ -147,8 +147,12 @@
     "TITLE3": "暂无库存信息",
     "TITLE4": "选择仓库",
     "TITLE5": "搜索",
+    "TITLE6": "退货商品入库",
+    "TITLE7": "暂无退货商品信息",
+    "TITLE8": "选择仓库",
     "BUTTON1": "导出Excel",
     "BUTTON2": "导出所有库存的Excel",
+    "BUTTON3": "退货商品入库",
     "SUBTITLE": {
       "TITLE1": "商品信息",
       "TITLE2": "仓库",
@@ -156,7 +160,8 @@
       "TITLE4": "总库存",
       "TITLE5": "锁定库存",
       "TITLE6": "剩余库存",
-      "TITLE7": "操作"
+      "TITLE7": "操作",
+      "TITLE8": "实际入库数量"
     },
     "QUANTITYLIST": {
       "TITLE1": "所有",
@@ -169,9 +174,17 @@
       "TITLE3": "锁定库存",
       "TITLE4": "剩余库存",
       "TITLE5": "件",
+      "TITLE6": "数量",
       "BUTTON1": "点击复制SKU",
       "BUTTON2": "编辑",
-      "BUTTON3": "保存"
+      "BUTTON3": "保存",
+      "BUTTON4": "确认入库",
+      "BUTTON5": "显示产品图片",
+      "BUTTON6": "隐藏产品图片"
+    },
+    "DIALOG": {
+      "BUTTON1": "保存",
+      "BUTTON2": "取消"
     }
   },
   "ORDERS": {

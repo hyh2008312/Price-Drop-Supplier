@@ -85,6 +85,8 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
 
   productStatus: any = '';
 
+  sizeChartId: any;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -179,6 +181,8 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
       }
 
       this.productStatus = data.status;
+
+      this.sizeChartId = data.productSizeId;
     });
 
     this.adminService.getCategoryList().then((value) => {

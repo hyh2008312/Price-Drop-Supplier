@@ -57,9 +57,7 @@ export class InventoryService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getAllInventoryList(): Promise<any> {
@@ -76,9 +74,7 @@ export class InventoryService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getWarehouseInventoryList(params:any): Promise<any> {
@@ -95,9 +91,7 @@ export class InventoryService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getWarehouseList(): Promise<any> {
@@ -114,9 +108,7 @@ export class InventoryService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   editInventory(params): Promise<any> {
@@ -133,9 +125,41 @@ export class InventoryService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
+  }
+
+  addInventory(params): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}/purchase/track/number/return/`;
+
+    return this.http.post(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => this.handleError(error, this));
+  }
+
+  getOrderList(params): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}purchase/track/number/return/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => this.handleError(error, this));
   }
 
   private handleError (error: Response | any, target?: any) {

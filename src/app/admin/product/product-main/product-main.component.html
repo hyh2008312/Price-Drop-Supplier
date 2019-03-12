@@ -34,7 +34,7 @@
             <button mat-raised-button color="pimary" (click)="captureScreen()">Export PDF</button>
           </div>
 
-          <label class="md-margin-left-2" *ngIf="isSuperuser" fxHide>
+          <label class="md-margin-left-2" *ngIf="isSuperuser">
             <input class="sc-product-dialog__hide" type="file" (change)="onFileChange($event)">
             <div class="sc-product-dialog__button">
               Upload</div>

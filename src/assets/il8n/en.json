@@ -144,11 +144,15 @@
   "INVENTORY": {
     "TITLE1": "Inventory Based on Warehouse",
     "TITLE2": "Inventory Based on SKU",
-    "TITLE2": "You don't have inventory information",
+    "TITLE2": "You don't have inventory information.",
     "TITLE4": "Filter by Warehouse",
     "TITLE5": "Search by",
+    "TITLE6": "Returned Order Restock",
+    "TITLE7": "You don't have return items information.",
+    "TITLE8": "Select Warehouse",
     "BUTTON1": "Export Excel",
     "BUTTON2": "Export Excel of All Inventory",
+    "BUTTON3": "Returned Order Restock",
     "SUBTITLE": {
       "TITLE1": "Product",
       "TITLE2": "Warehouse",
@@ -156,7 +160,8 @@
       "TITLE4": "Total Inventory",
       "TITLE5": "Lock Inventory",
       "TITLE6": "Remain Inventory",
-      "TITLE7": "Action"
+      "TITLE7": "Action",
+      "TITLE8": "Inventory"
     },
     "QUANTITYLIST": {
       "TITLE1": "All",
@@ -169,9 +174,17 @@
       "TITLE3": "Lock Inventory",
       "TITLE4": "Remain Inventory",
       "TITLE5": "Piece",
+      "TITLE6": "Quantity",
       "BUTTON1": "Copy SKU",
       "BUTTON2": "Edit",
-      "BUTTON3": "Save"
+      "BUTTON3": "Save",
+      "BUTTON4": "Confirm Added",
+      "BUTTON5": "Show Images",
+      "BUTTON6": "Hide Images"
+    },
+    "DIALOG": {
+      "BUTTON1": "Save",
+      "BUTTON2": "Cancel"
     }
   },
   "ORDERS": {

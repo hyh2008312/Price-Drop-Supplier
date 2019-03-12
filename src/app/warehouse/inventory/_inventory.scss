@@ -42,6 +42,13 @@
         border-radius: 2px;
         background-color: #000;
       }
+
+      &-1{
+        height: 48px;
+        background-color: #f1f1f1;
+        padding: 0 16px;
+        border-radius: 2px;
+      }
     }
 
     &-bg{
@@ -69,6 +76,11 @@
     &-width{
       width: 80px;
       margin-right: 16px;
+    }
+
+    &-width-1{
+      width: 80px;
+      text-align: center;
     }
 
     &-id{
@@ -216,7 +228,7 @@
     }
 
     &-margin-top{
-      margin-top: 10px;
+      margin-top: 11px;
     }
   }
 
@@ -422,8 +434,8 @@
 .sc-product-dialog{
 
   padding: 40px 28px;
-  max-width: 650px;
-  width: 650px;
+  max-width: 900px;
+  width: 900px;
   max-height: 650px;
   overflow-y: scroll;
   position: relative;
@@ -499,11 +511,32 @@
     border-radius: 4px;
     position: relative;
     border: 1px solid rgba(0,0,0,.12);
+    overflow: hidden;
 
     >img{
       position: absolute;
       left: 50%;
       top: 50%;
+      max-width: 100%;
+      max-height: 100%;
+      @include transform(translate(-50%, -50%));
+    }
+  }
+
+  &__image-1{
+    width: 400px;
+    height: 400px;
+    border-radius: 4px;
+    position: relative;
+    border: 1px solid rgba(0,0,0,.12);
+    overflow: hidden;
+
+    >img{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      max-width: 100%;
+      max-height: 100%;
       @include transform(translate(-50%, -50%));
     }
   }
