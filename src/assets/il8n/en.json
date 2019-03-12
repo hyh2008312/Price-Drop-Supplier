@@ -144,7 +144,7 @@
   "INVENTORY": {
     "TITLE1": "Inventory Based on Warehouse",
     "TITLE2": "Inventory Based on SKU",
-    "TITLE2": "You don't have inventory information.",
+    "TITLE3": "You don't have inventory information.",
     "TITLE4": "Filter by Warehouse",
     "TITLE5": "Search by",
     "TITLE6": "Returned Order Restock",
