@@ -70,7 +70,7 @@
         {{order.email}}
       </div>
       <div *ngIf="isSuperuser" fxLayout="row" fxLayoutAlign="start center">
-        <div class="sc__accent-dark md-margin-left-1" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started' && !order.sourcingAddressNote">
+        <div class="sc__accent-dark md-margin-left-1" *ngIf="false && (order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Not Started' && !order.sourcingAddressNote">
           <button mat-raised-button color="accent" (click)="editState()">Address Pending Confirm</button>
         </div>
         <div class="sc__accent-dark" *ngIf="(order.orderStatus == 'Paid' || order.orderStatus == 'Packing') && order.sourcingStatus == 'Address Pending Confirm'">
