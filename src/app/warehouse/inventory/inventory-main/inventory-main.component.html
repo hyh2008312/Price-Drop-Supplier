@@ -1,5 +1,13 @@
 <div class="container">
   <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
+    <div class="md-padding-bottom-2" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary" (click)="openDialog()">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <i class="material-icons">add</i>
+          <span class="md-margin-left-1">退货商品入库</span>
+        </div>
+      </button>
+    </div>
     <mat-tab-group color="primary" (selectedTabChange)="changeInventoryLists($event)" [(selectedIndex)]="selectedIndex">
       <mat-tab label="{{'INVENTORY.TITLE1'|translate}}" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">

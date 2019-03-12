@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, Inject, NgZone} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
@@ -8,7 +8,9 @@ import { InventoryService } from '../inventory.service';
 import {utils, WorkBook, write} from 'xlsx';
 
 import { saveAs } from 'file-saver';
-import {UserService} from '../../../shared/services/user/user.service';
+import { UserService } from '../../../shared/services/user/user.service';
+import { AddInventoryDialogComponent } from '../add-inventory-dialog/add-inventory-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-warehouse-inventory-main',
@@ -71,6 +73,7 @@ export class InventoryMainComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
+    private dialog: MatDialog,
     private userService: UserService
   ) {
 
@@ -302,4 +305,13 @@ export class InventoryMainComponent implements OnInit {
     this.showNav = $event;
   }
 
+  openDialog() {
+    let dialogRef = this.dialog.open(AddInventoryDialogComponent, {
+      data: {
+        isEdit: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {});
+  }
 }
