@@ -80,6 +80,8 @@ export class AddGatiPostDialogComponent implements OnInit {
         self.data.isEdit = true;
         self.error = false;
       }
+    }).catch((res) => {
+      self.error = res;
     });
   }
 
