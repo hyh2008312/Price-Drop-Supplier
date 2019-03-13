@@ -59,9 +59,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getSupplyOrderRecommendList(params:any): Promise<any> {
@@ -78,9 +76,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getIndiaStateList(): Promise<any> {
@@ -97,9 +93,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getSkuInventoryList(params:any): Promise<any> {
@@ -116,9 +110,7 @@ export class OrderService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getOrderNumberCost(params:any): Promise<any> {
@@ -135,9 +127,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
 
@@ -155,9 +145,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getReturnOrderDetail(params:any): Promise<any> {
@@ -174,9 +162,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getSupplyOrderResult(params:any): Promise<any> {
@@ -193,9 +179,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getSupplyOrderPackingResult(params:any): Promise<any> {
@@ -212,9 +196,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getSupplyShippingList(): Promise<any> {
@@ -231,9 +213,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   changeTrackingInformation(tracking:any): Promise<any> {
@@ -250,7 +230,7 @@ export class OrderService {
     return this.http.put(url, tracking, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => this.handleError(error, this));
   }
 
   changeGATITrackingInformation(tracking:any): Promise<any> {
@@ -267,9 +247,7 @@ export class OrderService {
     return this.http.put(url, tracking, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   cancelOrder(order:any): Promise<any> {
@@ -286,9 +264,7 @@ export class OrderService {
     return this.http.put(url, order, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
 
@@ -306,9 +282,7 @@ export class OrderService {
     return this.http.put(url, order, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   denyReturnOrderRequest(order:any): Promise<any> {
@@ -325,9 +299,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   authorizeReturnOrderRequest(order:any): Promise<any> {
@@ -344,9 +316,7 @@ export class OrderService {
     return this.http.put(url, order, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   refund(order:any): Promise<any> {
@@ -363,9 +333,7 @@ export class OrderService {
     return this.http.post(url, order, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   changeShippingMethod(order:any): Promise<any> {
@@ -382,9 +350,7 @@ export class OrderService {
     return this.http.put(url, order, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getShippingList(country: any): Promise<any> {
@@ -401,9 +367,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getCountryList(): Promise<any> {
@@ -420,9 +384,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getStateList(country:any): Promise<any> {
@@ -439,9 +401,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getSourcingSupplierList(): Promise<any> {
@@ -458,9 +418,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   changeOrderSourcing(params:any): Promise<any> {
@@ -476,7 +434,7 @@ export class OrderService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => this.handleError(error, this));
   }
 
   changeSourcing(params:any): Promise<any> {
@@ -492,7 +450,7 @@ export class OrderService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => this.handleError(error, this));
   }
 
   editOrderOutStock(params:any): Promise<any> {
@@ -508,7 +466,7 @@ export class OrderService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => this.handleError(error, this));
   }
 
   editAddress(params:any): Promise<any> {
@@ -524,7 +482,7 @@ export class OrderService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch(this.handleError);
+      .catch((error) => this.handleError(error, this));
   }
 
   addOrderNotes(params: any): Promise<any> {
@@ -541,9 +499,7 @@ export class OrderService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getCategoryList(): Promise<any> {
@@ -560,9 +516,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getWarehouseList() {
@@ -578,9 +532,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getChannelList() {
@@ -596,9 +548,7 @@ export class OrderService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   createOrders(params:any): Promise<any> {
@@ -615,9 +565,7 @@ export class OrderService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   changeStatus(params:any): Promise<any> {
