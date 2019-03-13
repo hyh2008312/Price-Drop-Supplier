@@ -287,10 +287,10 @@
     },
     "DIALOG": {
       "TITLE1": "Create Third Party Order",
-      "TITLE2": "Third Party Order",
+      "TITLE2": "Third Party Order Number",
       "TITLE3": "SKU",
       "TITLE4": "Quantity",
-      "TITLE5": "Amounts(Rs)",
+      "TITLE5": "Price(Rs)",
       "TITLE6": "Third Party Channel",
       "TITLE7": "Select Third Party Channel",
       "BUTTON1": "Add SKU",
