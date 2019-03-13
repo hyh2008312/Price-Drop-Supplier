@@ -90,6 +90,23 @@ export class AddOrderStockDialogComponent implements OnInit {
     });
   }
 
+  changeSourcing() {
+
+    let self = this;
+    this.orderService.changeSourcing(this.orderStockForm.value).then((data) => {
+      if(data && data.id) {
+        self.error = false;
+        self.data.isOrderStockEdit = true;
+        self.data.order = data;
+        self.close();
+      } else {
+        this.error =  data.detail;
+      }
+    }).catch((data) => {
+      this.error = data;
+    });
+  }
+
   getWarehouseList() {
     this.orderService.getWarehouseList().then((data) => {
       this.warehouseList = [...data];

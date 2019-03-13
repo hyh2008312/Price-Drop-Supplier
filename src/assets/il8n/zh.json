@@ -318,7 +318,8 @@
       "TITLE8": "订单号",
       "TITLE9": "购物车订单号",
       "BUTTON1": "保存",
-      "BUTTON2": "取消"
+      "BUTTON2": "取消",
+      "BUTTON3": "不需要采购"
     },
     "DIALOG4": {
       "TITLE1": "添加备注",

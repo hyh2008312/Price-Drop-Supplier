@@ -323,7 +323,8 @@
        "TITLE8": "Order",
        "TITLE9": "Sum Order",
        "BUTTON1": "Save",
-       "BUTTON2": "Cancel"
+       "BUTTON2": "Cancel",
+       "BUTTON3": "No Purchase Required"
     },
     "DIALOG4": {
        "TITLE1": "Add Note",
