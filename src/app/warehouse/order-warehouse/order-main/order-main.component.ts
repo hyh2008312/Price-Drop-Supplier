@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
 import { OrderService } from '../order.service';
 import { UserService } from  '../../../shared/services/user/user.service';
 
-import { utils, write, WorkBook } from 'xlsx';
+import {utils, write, WorkBook, read, WorkSheet} from 'xlsx';
 
 import { saveAs } from 'file-saver';
 import { AddGatiPostDialogComponent } from '../add-gati-post-dialog/add-gati-post-dialog.component';
@@ -18,6 +18,10 @@ import { AddOrderDialogComponent } from '../add-order-dialog/add-order-dialog.co
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+
+import { ImageUploadPreviewService } from "../../../shared/components/image-upload-preview/image-upload-preview.service";
+import { S3UploaderService } from "../../../shared/services/s3-upload/s3-upload.service";
+import { HttpEventType, HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-warehouse-order-main',
@@ -1018,6 +1022,80 @@ export class OrderMainComponent implements OnInit {
         id: false,
         name: 'ORDERS.TITLE1'
       });
+    });
+  }
+
+  onFileChange(evt: any) {
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>(evt.target);
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    const reader: FileReader = new FileReader();
+    reader.onload = (e: any) => {
+      /* read workbook */
+      const bstr: string = e.target.result;
+      const wb: WorkBook = read(bstr, {type: 'binary'});
+
+
+      this.getSheets(wb);
+
+    };
+    reader.readAsBinaryString(target.files[0]);
+  }
+
+  getSheets(wb) {
+    const wsname: string = wb.SheetNames[0];
+    const ws: WorkSheet = wb.Sheets[wsname];
+
+    /* save data */
+    const newData: any = <any[][]>(utils.sheet_to_json(ws, {header: 1}));
+
+    let orders = {};
+    for(let i = 0; i < newData.length; i++) {
+      const item = newData[i];
+      if(i > 0) {
+        if(!orders[item[0]]) {
+          orders[item[0]] = {};
+          orders[item[0]].thirdOrderNumber = item[0];
+          orders[item[0]].thirdPartyId = 3;
+          orders[item[0]].orderData = [];
+          orders[item[0]].orderData.push({
+            sku: item[4],
+            quantity: 1,
+            amount: item[7]
+          });
+        } else {
+          orders[item[0]].orderData.push({
+            sku: item[4],
+            quantity: 1,
+            amount: item[7]
+          });
+        }
+      }
+    }
+
+    let data = [];
+    for(let k in orders) {
+      data.push(orders[k]);
+    }
+
+    let index = 0;
+
+    this.createGlowRoadOrder(index, data);
+
+  }
+
+  createGlowRoadOrder(index, orders) {
+    if(index >= orders.length) {
+      console.log('All is done');
+      return;
+    }
+
+    this.orderService.createOrders(orders[index]).then((data) => {
+      index++;
+      this.createGlowRoadOrder(index, orders);
+    }).catch((res) => {
+      index++;
+      this.createGlowRoadOrder(index, orders);
     });
   }
 

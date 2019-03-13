@@ -177,14 +177,6 @@
                   </mat-form-field>
                 </div>
               </div>
-              <div [formGroupName]="i">
-                <div *ngIf="p.get('content').invalid && (p.get('content').dirty ||
-                    p.get('content').touched)" class="xb-input-error">
-                  <div *ngIf="p.get('content').hasError('required')">
-                    The Quantity field is required.
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

@@ -652,13 +652,12 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
         this.specification.push(this.fb.group({
           name: [item.name, Validators.required],
           specificationId: [item.specificationId, Validators.required],
-          content: [content, Validators.required],
+          content: [content],
           sort: [item.sort, Validators.required],
           specificationValues: [item.specificationValues?item.specificationValues.split(','):[]],
           contentList: [contentList]
         }));
       }
-
     });
   }
 
@@ -694,8 +693,6 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
         content: arr.join(',')
       });
     }
-
-
   }
 
   openSnackBar() {

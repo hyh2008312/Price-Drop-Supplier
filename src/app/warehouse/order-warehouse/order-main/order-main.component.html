@@ -9,6 +9,11 @@
             <div class="md-margin-left-2 sc__accent-dark" *ngIf="isSuperuser">
               <button mat-raised-button color="pimary" (click)="createOrder()">{{'ORDERS.BUTTON.TITLE1'|translate}}</button>
             </div>
+            <label class="md-margin-left-2" *ngIf="isSuperuser" fxHide>
+              <input class="sc-product__hide" type="file" (change)="onFileChange($event)">
+              <div class="sc-product__button">
+                Upload GrowRoad Orders</div>
+            </label>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
               <form class="sc-product__search" [formGroup]="searchForm"
                     fxLayout="row" fxLayoutAlign="start center" >

@@ -494,4 +494,18 @@
   &__color{
     color: #000;
   }
+
+  &__hide{
+    display: none;
+  }
+
+  &__button{
+    min-width: 88px;
+    line-height: 36px;
+    border-radius: 4px;
+    padding: 0 16px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+  }
 }

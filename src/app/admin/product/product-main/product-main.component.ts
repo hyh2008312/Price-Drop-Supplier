@@ -919,7 +919,7 @@ export class ProductMainComponent implements OnInit {
                 orderItem.Color = em.value;
               }
             }
-            orderItem.Selling_Price = parseInt((im.unitPrice * 0.9).toString());
+            orderItem.Selling_Price = parseInt((im.unitPrice).toString());
             orderItem.MRP = parseInt((im.saleUnitPrice).toString());
             orderItem.Souring_Cost = parseInt(im.sourcingPrice);
             orderItem.Supplier_Name = item.shopName;
@@ -1242,7 +1242,7 @@ export class ProductMainComponent implements OnInit {
             orderItem.Color = em.value;
           }
         }
-        orderItem.Selling_Price = parseInt((im.unitPrice * 0.9).toString());
+        orderItem.Selling_Price = parseInt((im.unitPrice).toString());
         orderItem.MRP = parseInt((im.saleUnitPrice).toString());
         orderItem.Souring_Cost = parseInt(im.sourcingPrice);
         orderItem.Supplier_Name = item.shopName;
