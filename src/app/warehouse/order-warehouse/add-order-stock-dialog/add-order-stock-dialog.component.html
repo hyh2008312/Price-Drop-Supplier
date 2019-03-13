@@ -80,7 +80,7 @@
   </div>
   <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
     <button mat-raised-button color="primary" *ngIf="data.order.sourcingStatus != 'Started'" (click)="changeSourcing()">{{'ORDERS.DIALOG3.BUTTON3'|translate}}</button>
-    <div class="md-margin-left-2"></div>
+    <div class="md-margin-left-2" fxFlex></div>
     <button mat-raised-button color="primary" (click)="changeOrderSourcing()">{{'ORDERS.DIALOG3.BUTTON1'|translate}}</button>
     <div class="md-margin-left-2">
       <button mat-button color="primary" (click)="close()">{{'ORDERS.DIALOG3.BUTTON2'|translate}}</button>
