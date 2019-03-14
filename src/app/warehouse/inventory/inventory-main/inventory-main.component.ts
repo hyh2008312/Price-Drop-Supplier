@@ -58,7 +58,7 @@ export class InventoryMainComponent implements OnInit {
   quantityWare: any = '1';
   inventoryWareIndex: any = 1;
 
-  warehouseId: any = false;
+  warehouseId: any = 2;
   warehouseList: any;
 
   showNav: any = false;

@@ -663,7 +663,7 @@ export class OrderMainComponent implements OnInit {
     });
   }
 
-  export(): void {
+  export() {
     const ws_name = 'SomeSheet';
     const wb: WorkBook = { SheetNames: [], Sheets: {} };
     let packing: any = [];
@@ -743,6 +743,168 @@ export class OrderMainComponent implements OnInit {
 
     saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), '订单' + new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
       '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate()) +'.xlsx');
+
+  }
+
+  exportAll() {
+
+    let status: any = '';
+    let order_type = this.typeUnpaid;
+    let cod_status = this.paymentUpaid;
+    let start_time = this.csUnpaid;
+    let end_time = this.ceUnpaid;
+    let paid_start_time = false;
+    let paid_end_time = false;
+    let sourcing_status = false;
+    let order_source_channel_id: any = null;
+    const search = this.searchKey && this.searchKey != ''? this.searchKey: null;
+    let search_type: any = null;
+    if(search) {
+      search_type = this.searchType;
+    }
+
+    switch (this.selectedIndex) {
+      case 0:
+        status = null;
+        order_type = this.typeAll;
+        cod_status = this.paymentAll;
+        start_time = this.csAll;
+        end_time = this.ceAll;
+        paid_start_time = this.psAll;
+        paid_end_time = this.peAll;
+        break;
+      case 1:
+        status = 'Unpaid';
+        break;
+      case 2:
+        status = 'Packing';
+        order_type = this.typePacking;
+        cod_status = this.paymentPacking;
+        start_time = this.csPacking;
+        end_time = this.cePacking;
+        paid_start_time = this.psPacking;
+        paid_end_time = this.pePacking;
+        sourcing_status = this.sourcingPacking;
+        order_source_channel_id = this.channelId;
+        break;
+      case 3:
+        status = 'Shipped';
+        order_type = this.typeShipped;
+        cod_status = this.paymentShipped;
+        start_time = this.csShipped;
+        end_time = this.ceShipped;
+        paid_start_time = this.psShipped;
+        paid_end_time = this.peShipped;
+        order_source_channel_id = this.channelId;
+        break;
+      case 4:
+        status = 'Audit canceled';
+        order_type = this.typeAudit;
+        cod_status = this.paymentAudit;
+        start_time = this.csAudit;
+        end_time = this.ceAudit;
+        paid_start_time = this.psAudit;
+        paid_end_time = this.peAudit;
+        break;
+      case 5:
+        status = 'Canceled';
+        order_type = this.typeCanceled;
+        cod_status = this.paymentCanceled;
+        start_time = this.csCanceled;
+        end_time = this.ceCanceled;
+        break;
+      case 6:
+        status = 'Completed';
+        order_type = this.typeCompleted;
+        cod_status = this.paymentCompleted;
+        start_time = this.csCompleted;
+        end_time = this.ceCompleted;
+        paid_start_time = this.psCompleted;
+        paid_end_time = this.peCompleted;
+        break;
+      case 7:
+        status = 'Refunded';
+        order_type = this.typeRefund;
+        cod_status = this.paymentRefund;
+        start_time = this.csRefunded;
+        end_time = this.ceRefunded;
+        paid_start_time = this.psRefunded;
+        paid_end_time = this.peRefunded;
+        break;
+      case 8:
+        status = 'Expired';
+        order_type = this.typeExpired;
+        cod_status = this.paymentExpired;
+        start_time = this.csExpired;
+        end_time = this.ceExpired;
+        break;
+      default:
+        break;
+    }
+
+    order_type = order_type? order_type: null;
+    cod_status = cod_status? cod_status: null;
+    start_time = start_time? start_time: null;
+    end_time = end_time? end_time: null;
+    paid_start_time = paid_start_time? paid_start_time: null;
+    paid_end_time = paid_end_time? paid_end_time: null;
+    sourcing_status = sourcing_status? sourcing_status: null;
+    order_source_channel_id = order_source_channel_id? order_source_channel_id: null;
+
+    let category_id = this.categoryId? this.categoryId: null;
+
+    this.orderService.getAllOrderList({
+      status,
+      search,
+      search_type,
+      order_type,
+      cod_status,
+      start_time,
+      end_time,
+      paid_start_time,
+      paid_end_time,
+      sourcing_status,
+      category_id,
+      order_source_channel_id
+    }).then((res) => {
+      const ws_name = 'SomeSheet';
+      const wb: WorkBook = { SheetNames: [], Sheets: {} };
+      let packing: any = [];
+      let excel: any = [...res];
+
+      for(let item of excel) {
+        let orderItem: any = {};
+        orderItem.orderNumber = item.number;
+        orderItem.orderStatus = item.orderStatus;
+        orderItem.codStatus = item.paymentMode == 'cod' ? 'Cod' : 'None-Cod';
+        orderItem.productTitle = item.title;
+        orderItem.sku = item.sku;
+        orderItem.quantity = item.quantity;
+        orderItem.paidTime = item.paidTime.split('T')[0];
+        orderItem.username = item.username;
+        orderItem.address = item.line3 + (item.line3 != ''? '' : ',') + item.line2 + ',' + item.line1;
+        orderItem.city = item.city;
+        orderItem.state = item.state;
+        packing.push(orderItem);
+      }
+
+      const ws: any = utils.json_to_sheet(packing);
+      wb.SheetNames.push(ws_name);
+      wb.Sheets[ws_name] = ws;
+      const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+      function s2ab(s) {
+        const buf = new ArrayBuffer(s.length);
+        const view = new Uint8Array(buf);
+        for (let i = 0; i !== s.length; ++i) {
+          view[i] = s.charCodeAt(i) & 0xFF;
+        }
+        return buf;
+      }
+
+      saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), '订单' + new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
+        '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate()) +'.xlsx');
+    });
 
   }
 

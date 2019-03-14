@@ -62,6 +62,23 @@ export class OrderService {
       .catch((error) => this.handleError(error, this));
   }
 
+  getAllOrderList(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}statistics/according/price/order/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => this.handleError(error, this));
+  }
+
   getSupplyOrderRecommendList(params:any): Promise<any> {
 
     let headers = new Headers({
@@ -546,6 +563,23 @@ export class OrderService {
     const url = `${this.baseUrl.url}order/channels/list/`;
 
     return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => this.handleError(error, this));
+  }
+
+  createOrder(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}order/third/party/create/`;
+
+    return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
       .catch((error) => this.handleError(error, this));

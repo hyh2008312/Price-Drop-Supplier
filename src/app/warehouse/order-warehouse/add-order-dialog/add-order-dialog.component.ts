@@ -51,7 +51,7 @@ export class AddOrderDialogComponent implements OnInit {
     }
 
     let self = this;
-    this.orderService.createOrders(this.trackingForm.value).then((data) => {
+    this.orderService.createOrder(this.trackingForm.value).then((data) => {
 
       if(data && data.detail) {
         self.error = data.detail;
