@@ -885,6 +885,9 @@ export class OrderMainComponent implements OnInit {
       case 2:
         this.channelId = $event;
         break;
+      case 3:
+        this.channelId = $event;
+        break;
     }
 
     this.changeProducts({
