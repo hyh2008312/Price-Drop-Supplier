@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject} from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { InventoryService } from '../inventory.service';
+import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
 
 @Component({
   selector: 'app-warehouse-add-inventory-dialog',
@@ -28,7 +29,8 @@ export class AddInventoryDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddInventoryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private inventoryService: InventoryService
+    private inventoryService: InventoryService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -39,6 +41,14 @@ export class AddInventoryDialogComponent implements OnInit {
 
   close() {
     this.dialogRef.close();
+  }
+
+  openToast(str) {
+    this.snackBar.openFromComponent(ToolTipsComponent, {
+      data: str,
+      duration: 1500,
+      verticalPosition: 'top'
+    });
   }
 
   changeProducts(event) {
@@ -76,7 +86,10 @@ export class AddInventoryDialogComponent implements OnInit {
     params.warehouseId = this.warehouseId;
     this.inventoryService.addInventory(params).then(() => {
       this.data.isEdit = true;
+      this.openToast('Successfully Saved!');
       this.close();
+    }).then(() => {
+      this.openToast('Some Error!');
     });
   }
 

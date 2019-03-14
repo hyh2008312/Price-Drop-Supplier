@@ -187,6 +187,8 @@ export class AddUploadDialogComponent implements OnInit {
       this.adminService.uploadEditedProduct({product: excel}).then(() => {
         this.data.isUpload = true;
         this.close();
+      }).catch((res) => {
+        this.error = res;
       });
 
     });

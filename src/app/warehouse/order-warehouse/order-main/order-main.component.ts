@@ -1059,7 +1059,7 @@ export class OrderMainComponent implements OnInit {
         if(!orders[item[0]]) {
           orders[item[0]] = {};
           orders[item[0]].thirdOrderNumber = item[0];
-          orders[item[0]].thirdPartyId = 2;
+          orders[item[0]].thirdPartyId = 3;
           orders[item[0]].orderData = [];
           orders[item[0]].orderData.push({
             sku: item[4],
