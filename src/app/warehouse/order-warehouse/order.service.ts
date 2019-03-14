@@ -560,7 +560,7 @@ export class OrderService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}order/third/party/create/`;
+    const url = `${this.baseUrl.url}order/batch/third/party/create/`;
 
     return this.http.post(url, params, options)
       .toPromise()

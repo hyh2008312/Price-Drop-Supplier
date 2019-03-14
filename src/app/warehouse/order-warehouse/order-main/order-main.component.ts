@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute} from '@angular/router';
-import { MatDialog } from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
@@ -18,10 +18,7 @@ import { AddOrderDialogComponent } from '../add-order-dialog/add-order-dialog.co
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
-
-import { ImageUploadPreviewService } from "../../../shared/components/image-upload-preview/image-upload-preview.service";
-import { S3UploaderService } from "../../../shared/services/s3-upload/s3-upload.service";
-import { HttpEventType, HttpResponse} from "@angular/common/http";
+import {ToolTipsComponent} from '../tool-tips/tool-tips.component';
 
 @Component({
   selector: 'app-warehouse-order-main',
@@ -186,7 +183,7 @@ export class OrderMainComponent implements OnInit {
   isSearch: boolean = false;
   searchForm: FormGroup;
 
-  searchType = 'sku';
+  searchType = 'ShippingNumber';
   searchTypeList = [{
     text: 'ORDERS.SEARCHTYPELIST.TITLE1',
     value: 'OrderNumber'
@@ -197,14 +194,17 @@ export class OrderMainComponent implements OnInit {
     text: 'ORDERS.SEARCHTYPELIST.TITLE3',
     value: 'sku'
   }, {
+    text: 'ORDERS.SEARCHTYPELIST.TITLE7',
+    value: 'third_party_order_number'
+  }, {
+    text: 'ORDERS.SEARCHTYPELIST.TITLE6',
+    value: 'sourcing_order_number'
+  }, {
     text: 'ORDERS.SEARCHTYPELIST.TITLE4',
     value: 'username'
   }, {
     text: 'ORDERS.SEARCHTYPELIST.TITLE5',
     value: 'title'
-  }, {
-    text: 'ORDERS.SEARCHTYPELIST.TITLE6',
-    value: 'sourcing_order_number'
   }];
 
   // MatPaginator Inputs
@@ -230,7 +230,8 @@ export class OrderMainComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     this.searchForm = this.fb.group({
       searchKey: ['']
@@ -399,6 +400,7 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceShipped;
         paid_start_time = this.psShipped;
         paid_end_time = this.peShipped;
+        order_source_channel_id = this.channelId;
         break;
       case 4:
         status = 'Audit canceled';
@@ -1026,6 +1028,7 @@ export class OrderMainComponent implements OnInit {
   }
 
   onFileChange(evt: any) {
+    this.isLoading = true;
     /* wire up file reader */
     const target: DataTransfer = <DataTransfer>(evt.target);
     if (target.files.length !== 1) throw new Error('Cannot use multiple files');
@@ -1056,7 +1059,7 @@ export class OrderMainComponent implements OnInit {
         if(!orders[item[0]]) {
           orders[item[0]] = {};
           orders[item[0]].thirdOrderNumber = item[0];
-          orders[item[0]].thirdPartyId = 3;
+          orders[item[0]].thirdPartyId = 2;
           orders[item[0]].orderData = [];
           orders[item[0]].orderData.push({
             sku: item[4],
@@ -1078,24 +1081,25 @@ export class OrderMainComponent implements OnInit {
       data.push(orders[k]);
     }
 
-    let index = 0;
-
-    this.createGlowRoadOrder(index, data);
+    this.createGlowRoadOrder(data);
 
   }
 
-  createGlowRoadOrder(index, orders) {
-    if(index >= orders.length) {
-      console.log('All is done');
-      return;
-    }
-
-    this.orderService.createOrders(orders[index]).then((data) => {
-      index++;
-      this.createGlowRoadOrder(index, orders);
+  createGlowRoadOrder(orders) {
+    this.orderService.createOrders({orders}).then((data) => {
+      this.isLoading = false;
+      this.openSnackBar('Successfully Saved');
     }).catch((res) => {
-      index++;
-      this.createGlowRoadOrder(index, orders);
+      this.isLoading = false;
+      this.openSnackBar('Some Error');
+    });
+  }
+
+  openSnackBar(str) {
+    this.snackBar.openFromComponent(ToolTipsComponent, {
+      data: str,
+      duration: 4000,
+      verticalPosition: 'top'
     });
   }
 

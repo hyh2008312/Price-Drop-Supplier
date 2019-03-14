@@ -250,7 +250,8 @@
       "TITLE3": "SKU",
       "TITLE4": "客户昵称",
       "TITLE5": "商品名字",
-      "TITLE6": "采购单号"
+      "TITLE6": "采购单号",
+      "TITLE7": "第三方订单号"
     },
     "ITEM": {
       "TITLE1": "创建日期",
@@ -283,7 +284,8 @@
       "TITLE1": "创建第三方平台订单",
       "TITLE2": "确认",
       "TITLE3": "导出订单",
-      "TITLE4": "创建GATI捡货单"
+      "TITLE4": "创建GATI捡货单",
+      "TITLE5": "上传GlowRoad订单"
     },
     "DIALOG": {
       "TITLE1": "创建第三方平台订单",

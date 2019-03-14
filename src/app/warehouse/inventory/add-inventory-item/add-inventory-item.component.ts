@@ -19,10 +19,7 @@ export class AddInventoryItemComponent implements OnInit {
 
   currency: string = 'INR';
   isSuperuser: boolean = false;
-  isEdit: boolean = false;
   isShow: boolean = false;
-
-
 
   constructor(
     private inventoryService: InventoryService,
@@ -47,28 +44,6 @@ export class AddInventoryItemComponent implements OnInit {
       duration: 1500,
       verticalPosition: 'top'
     });
-  }
-
-  openAddInventoryBar() {
-    this.snackBar.openFromComponent(ToolTipsComponent, {
-      data: 'Inventory Successfully Added!',
-      duration: 1500,
-      verticalPosition: 'top'
-    });
-  }
-
-  edit() {
-    if(!this.isEdit) {
-      this.inventoryService.addInventory(this.product).then((data) => {
-        this.product = data;
-        this.openAddInventoryBar();
-        this.isEdit = true;
-        this.productChange.emit({
-          event: 'edit',
-          status: true
-        });
-      });
-    }
   }
 
 }

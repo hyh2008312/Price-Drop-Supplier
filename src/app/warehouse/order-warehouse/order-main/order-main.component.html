@@ -9,10 +9,12 @@
             <div class="md-margin-left-2 sc__accent-dark" *ngIf="isSuperuser">
               <button mat-raised-button color="pimary" (click)="createOrder()">{{'ORDERS.BUTTON.TITLE1'|translate}}</button>
             </div>
-            <label class="md-margin-left-2" *ngIf="isSuperuser" fxHide>
+            <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="isLoading">
+              <mat-progress-spinner [color]="color" [mode]="mode" [value]="value" [diameter]="value"></mat-progress-spinner>
+            </div>
+            <label class="md-margin-left-2" *ngIf="isSuperuser">
               <input class="sc-product__hide" type="file" (change)="onFileChange($event)">
-              <div class="sc-product__button">
-                Upload GrowRoad Orders</div>
+              <div class="sc-product__button">{{'ORDERS.BUTTON.TITLE5'|translate}}</div>
             </label>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
               <form class="sc-product__search" [formGroup]="searchForm"
@@ -477,6 +479,16 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <div class="unicorn-dark-theme" fxLayout="row" fxLayoutAlign="start center">
+              <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
+              <mat-form-field class="md-margin-right-2">
+                <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                  <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                    {{ item.name |translate}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}:</div>

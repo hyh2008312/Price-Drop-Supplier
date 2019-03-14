@@ -250,7 +250,8 @@
       "TITLE3": "SKU",
       "TITLE4": "Customer Name",
       "TITLE5": "Product Name",
-      "TITLE6": "Sourcing Number"
+      "TITLE6": "Sourcing Number",
+      "TITLE7": "Third Party Order Number"
     },
     "ITEM": {
       "TITLE1": "Created Time",
@@ -283,7 +284,8 @@
       "TITLE1": "Create Third Party Order",
       "TITLE2": "Confirm",
       "TITLE3": "Export",
-      "TITLE4": "Create GATI Tracking Number"
+      "TITLE4": "Create GATI Tracking Number",
+      "TITLE5": "Upload GlowRoad Orders"
     },
     "DIALOG": {
       "TITLE1": "Create Third Party Order",

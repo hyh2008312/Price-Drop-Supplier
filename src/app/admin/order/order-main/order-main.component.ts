@@ -190,7 +190,7 @@ export class OrderMainComponent implements OnInit {
   isSearch: boolean = false;
   searchForm: FormGroup;
 
-  searchType = 'sku';
+  searchType = 'OrderNumber';
   searchTypeList = [{
     text: 'Order Number',
     value: 'OrderNumber'
@@ -200,6 +200,12 @@ export class OrderMainComponent implements OnInit {
   }, {
     text: 'SKU',
     value: 'sku'
+  }, {
+    text: 'Sourcing Number',
+    value: 'sourcing_order_number'
+  }, {
+    text: 'Third Party Order Number',
+    value: 'third_party_order_number'
   }, {
     text: 'User Name',
     value: 'username'
@@ -212,9 +218,6 @@ export class OrderMainComponent implements OnInit {
   }, {
     text: 'Product Name',
     value: 'title'
-  }, {
-    text: 'Sourcing Number',
-    value: 'sourcing_order_number'
   }];
 
   // MatPaginator Inputs

@@ -69,7 +69,7 @@ export class AddInventoryDialogComponent implements OnInit {
     params.content = [];
     for(let item of this.products) {
       params.content.push({
-        sku: item.sku,
+        id: item.orderId,
         quantity: item.receiveQuantity
       })
     }
