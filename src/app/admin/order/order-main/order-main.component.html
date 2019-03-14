@@ -467,10 +467,18 @@
               </mat-select>
             </mat-form-field>
             <div class="md-margin-right-2">Filter by Payment Type: </div>
-            <mat-form-field>
+            <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="paymentShipped" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
                   {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="md-margin-right-2">Filter by Third Party Channel: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name }}
                 </mat-option>
               </mat-select>
             </mat-form-field>

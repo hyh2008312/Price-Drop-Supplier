@@ -404,6 +404,7 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceShipped;
         paid_start_time = this.psShipped;
         paid_end_time = this.peShipped;
+        order_source_channel_id = this.channelId;
         break;
       case 4:
         status = 'Audit canceled';

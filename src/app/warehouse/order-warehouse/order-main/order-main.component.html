@@ -472,7 +472,7 @@
               </mat-select>
             </mat-form-field>
             <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE2'|translate}}: </div>
-            <mat-form-field>
+            <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="paymentShipped" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
                   {{ item.text |translate }}
