@@ -7,6 +7,12 @@
           <span class="md-margin-left-1">{{'INVENTORY.BUTTON3'|translate}}</span>
         </div>
       </button>
+      <div class="md-margin-left-2"></div>
+      <button mat-raised-button color="primary" (click)="openRestockDialog()">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <span class="md-margin-left-1">{{'INVENTORY.BUTTON4'|translate}}</span>
+        </div>
+      </button>
     </div>
     <mat-tab-group color="primary" (selectedTabChange)="changeInventoryLists($event)" [(selectedIndex)]="selectedIndex">
       <mat-tab label="{{'INVENTORY.TITLE1'|translate}}" >

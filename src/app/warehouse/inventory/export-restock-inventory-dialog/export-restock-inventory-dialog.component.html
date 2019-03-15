@@ -1,0 +1,37 @@
+<div class="sc-product-dialog">
+  <div class="sc-product-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-product-dialog__title">
+    {{'INVENTORY.TITLE9' | translate}}
+  </div>
+  <div class="md-margin-top-2 xb-bold">{{'INVENTORY.DIALOG.TITLE1'|translate}} </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+    <mat-form-field>
+      <input matInput [matDatepicker]="psAll" placeholder="{{'INVENTORY.DIALOG.TITLE2'|translate}}" (dateInput)="addEvent('psAll', $event)">
+      <mat-datepicker-toggle matSuffix [for]="psAll"></mat-datepicker-toggle>
+      <mat-datepicker #psAll></mat-datepicker>
+    </mat-form-field>
+    <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE4'|translate}}</div>
+    <mat-form-field class="md-margin-left-2">
+      <input matInput [matDatepicker]="peAll" placeholder="{{'INVENTORY.DIALOG.TITLE3'|translate}}" (dateInput)="addEvent('peAll', $event)">
+      <mat-datepicker-toggle matSuffix [for]="peAll"></mat-datepicker-toggle>
+      <mat-datepicker #peAll></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+    <mat-form-field>
+      <mat-select placeholder="{{'INVENTORY.TITLE8' | translate}}" [(ngModel)]="warehouseId">
+        <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
+          {{ item.warehouseName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="export()">{{'INVENTORY.DIALOG.BUTTON1' | translate}}</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">{{'INVENTORY.DIALOG.BUTTON2' | translate}}</button>
+    </div>
+  </div>
+</div>

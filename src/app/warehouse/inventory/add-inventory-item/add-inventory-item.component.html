@@ -9,17 +9,21 @@
         <div>{{'INVENTORY.ITEM.TITLE1'|translate}}: {{product.attribute}}  {{'INVENTORY.ITEM.TITLE6'|translate}}: {{product.quantity}} </div>
       </div>
     </div>
-    <div class="sc-product__product-id md-margin-right-2 sc__accent-dark" fxFlex="20"
+    <div class="sc-product__product-id md-margin-right-2 sc__accent-dark" fxFlex="15"
          fxLayout="column" fxLayoutAlign="center center">
       <div class="xb-bold md-margin-bottom-1">{{product.sku}}</div>
       <button mat-raised-button color="primary"
            ngxClipboard [cbContent]="product.sku" (cbOnSuccess)="copy($event)">{{'INVENTORY.ITEM.BUTTON1'|translate}}</button>
     </div>
-    <div class="sc-product__product-id md-margin-right-2" fxFlex="20"
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="15"
          fxLayout="row" fxLayoutAlign="center center">
       <mat-form-field class="sc-product__product-width-1">
         <input type="number" matInput [(ngModel)]="product.receiveQuantity">
       </mat-form-field>
+    </div>
+    <div class="sc-product__product-id md-margin-right-2 sc__accent-dark" fxFlex="10"
+         fxLayout="column" fxLayoutAlign="center center">
+      {{(product.restocked? 'INVENTORY.SUBTITLE.TITLE10': 'INVENTORY.SUBTITLE.TITLE11')|translate}}
     </div>
     <div class="sc-product__product-id sc__accent-dark" fxFlex="15"
          fxLayout="column" fxLayoutAlign="center stretch">

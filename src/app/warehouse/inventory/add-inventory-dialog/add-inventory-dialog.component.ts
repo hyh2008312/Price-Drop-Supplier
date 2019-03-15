@@ -88,8 +88,8 @@ export class AddInventoryDialogComponent implements OnInit {
       this.data.isEdit = true;
       this.openToast('Successfully Saved!');
       this.close();
-    }).then(() => {
-      this.openToast('Some Error!');
+    }).catch((res) => {
+      this.openToast(res);
     });
   }
 

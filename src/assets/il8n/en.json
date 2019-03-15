@@ -150,9 +150,11 @@
     "TITLE6": "Returned Order Restock",
     "TITLE7": "You don't have return items information.",
     "TITLE8": "Select Warehouse",
+    "TITLE9": "Export Restock Inventory Report",
     "BUTTON1": "Export Excel",
     "BUTTON2": "Export Excel of All Inventory",
     "BUTTON3": "Returned Order Restock",
+    "BUTTON4": "Export Restock Inventory Report",
     "SUBTITLE": {
       "TITLE1": "Product",
       "TITLE2": "Warehouse",
@@ -161,7 +163,10 @@
       "TITLE5": "Lock Inventory",
       "TITLE6": "Remain Inventory",
       "TITLE7": "Action",
-      "TITLE8": "Inventory"
+      "TITLE8": "Inventory",
+      "TITLE9": "Stock Inward",
+      "TITLE10": "Yes",
+      "TITLE11": "No"
     },
     "QUANTITYLIST": {
       "TITLE1": "All",
@@ -184,7 +189,10 @@
     },
     "DIALOG": {
       "BUTTON1": "Save",
-      "BUTTON2": "Cancel"
+      "BUTTON2": "Cancel",
+      "TITLE1": "Filter by Inward Date",
+      "TITLE2": "Start Date",
+      "TITLE3": "End Date"
     }
   },
   "ORDERS": {

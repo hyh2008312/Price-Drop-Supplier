@@ -10,6 +10,7 @@ import {utils, WorkBook, write} from 'xlsx';
 import { saveAs } from 'file-saver';
 import { UserService } from '../../../shared/services/user/user.service';
 import { AddInventoryDialogComponent } from '../add-inventory-dialog/add-inventory-dialog.component';
+import { ExportRestockInventoryDialogComponent } from '../export-restock-inventory-dialog/export-restock-inventory-dialog.component';
 import { MatDialog } from '@angular/material';
 
 @Component({
@@ -307,6 +308,16 @@ export class InventoryMainComponent implements OnInit {
 
   openDialog() {
     let dialogRef = this.dialog.open(AddInventoryDialogComponent, {
+      data: {
+        isEdit: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {});
+  }
+
+  openRestockDialog() {
+    let dialogRef = this.dialog.open(ExportRestockInventoryDialogComponent, {
       data: {
         isEdit: false
       }
