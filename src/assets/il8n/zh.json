@@ -217,7 +217,8 @@
       "TITLE5": "订单支付时间",
       "TITLE6": "分类",
       "TITLE7": "采购状态",
-      "TITLE8": "第三方平台"
+      "TITLE8": "第三方平台",
+      "TITLE9": "价格"
     },
     "PLACEHOLDER": {
       "TITLE1": "搜索",
@@ -225,7 +226,9 @@
       "TITLE3": "结束日期",
       "TITLE4": "选择一级分类",
       "TITLE5": "选择二级分类",
-      "TITLE6": "选择三级分类"
+      "TITLE6": "选择三级分类",
+      "TITLE7": "最小金额(Rs)",
+      "TITLE8": "最大金额(Rs)"
     },
     "TYPELIST": {
       "TITLE1": "所有",
@@ -286,7 +289,8 @@
       "TITLE2": "确认",
       "TITLE3": "导出订单",
       "TITLE4": "创建GATI捡货单",
-      "TITLE5": "上传GlowRoad订单"
+      "TITLE5": "上传GlowRoad订单",
+      "TITLE6": "导出所有订单"
     },
     "DIALOG": {
       "TITLE1": "创建第三方平台订单",

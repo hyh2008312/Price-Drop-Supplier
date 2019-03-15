@@ -217,7 +217,8 @@
       "TITLE5": "Filter by Order Paid Time",
       "TITLE6": "Filter by Category",
       "TITLE7": "Filter by Sourcing Status",
-      "TITLE8": "Filter by Third Party Channel"
+      "TITLE8": "Filter by Third Party Channel",
+      "TITLE9": "Filter by Price"
     },
     "PLACEHOLDER": {
       "TITLE1": "Search by",
@@ -225,7 +226,9 @@
       "TITLE3": "End Date",
       "TITLE4": "Select a Category",
       "TITLE5": "Select a Subcategory",
-      "TITLE6": "Select a ThirdCategory"
+      "TITLE6": "Select a ThirdCategory",
+      "TITLE7": "Min Price (Rs)",
+      "TITLE8": "Max Price Rs)"
     },
     "TYPELIST": {
       "TITLE1": "All",
@@ -286,7 +289,8 @@
       "TITLE2": "Confirm",
       "TITLE3": "Export",
       "TITLE4": "Create GATI Tracking Number",
-      "TITLE5": "Upload GlowRoad Orders"
+      "TITLE5": "Upload GlowRoad Orders",
+      "TITLE6": "Export All Orders"
     },
     "DIALOG": {
       "TITLE1": "Create Third Party Order",

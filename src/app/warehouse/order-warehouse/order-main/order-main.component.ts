@@ -224,6 +224,9 @@ export class OrderMainComponent implements OnInit {
   channelId: any = false;
   channelList: any;
 
+  min: any;
+  max: any;
+
   constructor(
     private orderService: OrderService,
     private userService: UserService,
@@ -339,6 +342,8 @@ export class OrderMainComponent implements OnInit {
     if(search) {
       search_type = this.searchType;
     }
+    let low_price: any = null;
+    let high_price: any = null;
 
     switch (event.index) {
       case 0:
@@ -356,6 +361,8 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceAll;
         paid_start_time = this.psAll;
         paid_end_time = this.peAll;
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 1:
         status = 'Unpaid';
@@ -366,6 +373,8 @@ export class OrderMainComponent implements OnInit {
           this.orderUnpaidIndex = 1;
         }
         page = this.orderUnpaidIndex;
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 2:
         status = 'Packing';
@@ -384,6 +393,8 @@ export class OrderMainComponent implements OnInit {
         paid_end_time = this.pePacking;
         sourcing_status = this.sourcingPacking;
         order_source_channel_id = this.channelId;
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 3:
         status = 'Shipped';
@@ -401,6 +412,8 @@ export class OrderMainComponent implements OnInit {
         paid_start_time = this.psShipped;
         paid_end_time = this.peShipped;
         order_source_channel_id = this.channelId;
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 4:
         status = 'Audit canceled';
@@ -417,6 +430,8 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceAudit;
         paid_start_time = this.psAudit;
         paid_end_time = this.peAudit;
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 5:
         status = 'Canceled';
@@ -431,6 +446,8 @@ export class OrderMainComponent implements OnInit {
         cod_status = this.paymentCanceled;
         start_time = this.csCanceled;
         end_time = this.ceCanceled;
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 6:
         status = 'Completed';
@@ -447,6 +464,8 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceCompleted;
         paid_start_time = this.psCompleted;
         paid_end_time = this.peCompleted;
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 7:
         status = 'Refunded';
@@ -463,6 +482,8 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceRefunded;
         paid_start_time = this.psRefunded;
         paid_end_time = this.peRefunded;
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 8:
         if(event.resetPage) {
@@ -477,6 +498,8 @@ export class OrderMainComponent implements OnInit {
         cod_status = this.paymentExpired;
         start_time = this.csExpired;
         end_time = this.ceExpired;
+        low_price = this.min;
+        high_price = this.max;
         break;
       // case 9:
       //   status = 'Undelivered';
@@ -517,6 +540,8 @@ export class OrderMainComponent implements OnInit {
     paid_end_time = paid_end_time? paid_end_time: null;
     sourcing_status = sourcing_status? sourcing_status: null;
     order_source_channel_id = order_source_channel_id? order_source_channel_id: null;
+    low_price = low_price? low_price: null;
+    high_price = high_price? high_price: null;
 
     let category_id = this.categoryId? this.categoryId: null;
 
@@ -535,7 +560,9 @@ export class OrderMainComponent implements OnInit {
         paid_end_time,
         sourcing_status,
         category_id,
-        order_source_channel_id
+        order_source_channel_id,
+        low_price,
+        high_price
       }).then((data) => {
         self.length = data.count;
         switch (event.index) {
@@ -762,6 +789,8 @@ export class OrderMainComponent implements OnInit {
     if(search) {
       search_type = this.searchType;
     }
+    let low_price = null;
+    let high_price = null;
 
     switch (this.selectedIndex) {
       case 0:
@@ -775,6 +804,8 @@ export class OrderMainComponent implements OnInit {
         break;
       case 1:
         status = 'Unpaid';
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 2:
         status = 'Packing';
@@ -786,6 +817,8 @@ export class OrderMainComponent implements OnInit {
         paid_end_time = this.pePacking;
         sourcing_status = this.sourcingPacking;
         order_source_channel_id = this.channelId;
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 3:
         status = 'Shipped';
@@ -796,6 +829,8 @@ export class OrderMainComponent implements OnInit {
         paid_start_time = this.psShipped;
         paid_end_time = this.peShipped;
         order_source_channel_id = this.channelId;
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 4:
         status = 'Audit canceled';
@@ -805,6 +840,8 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceAudit;
         paid_start_time = this.psAudit;
         paid_end_time = this.peAudit;
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 5:
         status = 'Canceled';
@@ -812,6 +849,8 @@ export class OrderMainComponent implements OnInit {
         cod_status = this.paymentCanceled;
         start_time = this.csCanceled;
         end_time = this.ceCanceled;
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 6:
         status = 'Completed';
@@ -821,6 +860,8 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceCompleted;
         paid_start_time = this.psCompleted;
         paid_end_time = this.peCompleted;
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 7:
         status = 'Refunded';
@@ -830,6 +871,8 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceRefunded;
         paid_start_time = this.psRefunded;
         paid_end_time = this.peRefunded;
+        low_price = this.min;
+        high_price = this.max;
         break;
       case 8:
         status = 'Expired';
@@ -837,6 +880,8 @@ export class OrderMainComponent implements OnInit {
         cod_status = this.paymentExpired;
         start_time = this.csExpired;
         end_time = this.ceExpired;
+        low_price = this.min;
+        high_price = this.max;
         break;
       default:
         break;
@@ -850,6 +895,8 @@ export class OrderMainComponent implements OnInit {
     paid_end_time = paid_end_time? paid_end_time: null;
     sourcing_status = sourcing_status? sourcing_status: null;
     order_source_channel_id = order_source_channel_id? order_source_channel_id: null;
+    low_price = low_price? low_price: null;
+    high_price = high_price? high_price: null;
 
     let category_id = this.categoryId? this.categoryId: null;
 
@@ -865,7 +912,9 @@ export class OrderMainComponent implements OnInit {
       paid_end_time,
       sourcing_status,
       category_id,
-      order_source_channel_id
+      order_source_channel_id,
+      low_price,
+      high_price
     }).then((res) => {
       const ws_name = 'SomeSheet';
       const wb: WorkBook = { SheetNames: [], Sheets: {} };
@@ -875,14 +924,15 @@ export class OrderMainComponent implements OnInit {
       for(let item of excel) {
         let orderItem: any = {};
         orderItem.orderNumber = item.number;
+        orderItem.phoneNumber = item.phoneNumber;
         orderItem.orderStatus = item.orderStatus;
         orderItem.codStatus = item.paymentMode == 'cod' ? 'Cod' : 'None-Cod';
         orderItem.productTitle = item.title;
         orderItem.sku = item.sku;
         orderItem.quantity = item.quantity;
-        orderItem.paidTime = item.paidTime.split('T')[0];
+        orderItem.paidTime = item.paidTime? item.paidTime.split('T')[0]: '';
         orderItem.username = item.username;
-        orderItem.address = item.line3 + (item.line3 != ''? '' : ',') + item.line2 + ',' + item.line1;
+        orderItem.address = item.address;
         orderItem.city = item.city;
         orderItem.state = item.state;
         packing.push(orderItem);
@@ -902,7 +952,7 @@ export class OrderMainComponent implements OnInit {
         return buf;
       }
 
-      saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), '订单' + new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
+      saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), 'orders' + new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
         '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate()) +'.xlsx');
     });
 
@@ -1074,6 +1124,13 @@ export class OrderMainComponent implements OnInit {
     }
     this.categoryId = $event;
     this.changeProducts({index: this.selectedIndex, resetPage: true});
+  }
+
+  priceChange() {
+    this.changeProducts({
+      index: this.selectedIndex,
+      resetPage: true
+    });
   }
 
   subCategoryChange($event) {

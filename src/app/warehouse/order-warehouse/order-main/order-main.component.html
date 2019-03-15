@@ -163,10 +163,8 @@
             <div class="sc__accent-dark md-margin-left-2">
               <button mat-raised-button color="pimary" (click)="export()">{{'ORDERS.BUTTON.TITLE3'|translate}}</button>
             </div>
-          </div>
-          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="sc__accent-dark md-margin-left-2">
-              <button mat-raised-button color="pimary" (click)="exportAll()">{{'ORDERS.BUTTON.TITLE3'|translate}}</button>
+              <button mat-raised-button color="pimary" (click)="exportAll()">{{'ORDERS.BUTTON.TITLE6'|translate}}</button>
             </div>
           </div>
           <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
@@ -202,6 +200,23 @@
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
               <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE9'|translate}}</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-promotion-dialog__width-1">
+                <input matInput type="number" placeholder="{{'ORDERS.PLACEHOLDER.TITLE7'|translate}}" [(ngModel)]="min">
+              </mat-form-field>
+            </div>
+            <div class="md-margin-left-2">to</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-promotion-dialog__width-1">
+                <input matInput type="number" placeholder="{{'ORDERS.PLACEHOLDER.TITLE8'|translate}}" [(ngModel)]="max">
+              </mat-form-field>
+            </div>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="priceChange()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
@@ -275,6 +290,9 @@
           <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="sc__accent-dark">
               <button mat-raised-button color="pimary" (click)="export()">{{'ORDERS.BUTTON.TITLE3'|translate}}</button>
+            </div>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="exportAll()">{{'ORDERS.BUTTON.TITLE6'|translate}}</button>
             </div>
             <div class="md-margin-left-3 sc__accent-dark" *ngIf="isSuperuser">
               <button mat-raised-button color="pimary" (click)="createTracking()">{{'ORDERS.BUTTON.TITLE4'|translate}}</button>
@@ -372,6 +390,23 @@
               <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE9'|translate}}</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-promotion-dialog__width-1">
+                <input matInput type="number" placeholder="{{'ORDERS.PLACEHOLDER.TITLE7'|translate}}" [(ngModel)]="min">
+              </mat-form-field>
+            </div>
+            <div class="md-margin-left-2">to</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-promotion-dialog__width-1">
+                <input matInput type="number" placeholder="{{'ORDERS.PLACEHOLDER.TITLE8'|translate}}" [(ngModel)]="max">
+              </mat-form-field>
+            </div>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="priceChange()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
+            </div>
+          </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
@@ -443,6 +478,9 @@
           <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="sc__accent-dark">
               <button mat-raised-button color="pimary" (click)="export()">{{'ORDERS.BUTTON.TITLE3'|translate}}</button>
+            </div>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="exportAll()">{{'ORDERS.BUTTON.TITLE6'|translate}}</button>
             </div>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
               <form class="sc-product__search" [formGroup]="searchForm"
@@ -529,6 +567,23 @@
               <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE9'|translate}}</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-promotion-dialog__width-1">
+                <input matInput type="number" placeholder="{{'ORDERS.PLACEHOLDER.TITLE7'|translate}}" [(ngModel)]="min">
+              </mat-form-field>
+            </div>
+            <div class="md-margin-left-2">to</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-promotion-dialog__width-1">
+                <input matInput type="number" placeholder="{{'ORDERS.PLACEHOLDER.TITLE8'|translate}}" [(ngModel)]="max">
+              </mat-form-field>
+            </div>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="priceChange()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
+            </div>
+          </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
@@ -600,6 +655,9 @@
           <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="sc__accent-dark">
               <button mat-raised-button color="pimary" (click)="export()">{{'ORDERS.BUTTON.TITLE3'|translate}}</button>
+            </div>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="exportAll()">{{'ORDERS.BUTTON.TITLE6'|translate}}</button>
             </div>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
               <form class="sc-product__search" [formGroup]="searchForm"
@@ -674,6 +732,23 @@
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
               <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE9'|translate}}</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-promotion-dialog__width-1">
+                <input matInput type="number" placeholder="{{'ORDERS.PLACEHOLDER.TITLE7'|translate}}" [(ngModel)]="min">
+              </mat-form-field>
+            </div>
+            <div class="md-margin-left-2">to</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-promotion-dialog__width-1">
+                <input matInput type="number" placeholder="{{'ORDERS.PLACEHOLDER.TITLE8'|translate}}" [(ngModel)]="max">
+              </mat-form-field>
+            </div>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="priceChange()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
@@ -779,6 +854,23 @@
               <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE9'|translate}}</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-promotion-dialog__width-1">
+                <input matInput type="number" placeholder="{{'ORDERS.PLACEHOLDER.TITLE7'|translate}}" [(ngModel)]="min">
+              </mat-form-field>
+            </div>
+            <div class="md-margin-left-2">to</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-promotion-dialog__width-1">
+                <input matInput type="number" placeholder="{{'ORDERS.PLACEHOLDER.TITLE8'|translate}}" [(ngModel)]="max">
+              </mat-form-field>
+            </div>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="priceChange()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
+            </div>
+          </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
@@ -850,6 +942,9 @@
           <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="sc__accent-dark">
               <button mat-raised-button color="pimary" (click)="export()">{{'ORDERS.BUTTON.TITLE3'|translate}}</button>
+            </div>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="exportAll()">{{'ORDERS.BUTTON.TITLE6'|translate}}</button>
             </div>
             <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
               <form class="sc-product__search" [formGroup]="searchForm"
@@ -924,6 +1019,23 @@
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
               <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE9'|translate}}</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-promotion-dialog__width-1">
+                <input matInput type="number" placeholder="{{'ORDERS.PLACEHOLDER.TITLE7'|translate}}" [(ngModel)]="min">
+              </mat-form-field>
+            </div>
+            <div class="md-margin-left-2">to</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-promotion-dialog__width-1">
+                <input matInput type="number" placeholder="{{'ORDERS.PLACEHOLDER.TITLE8'|translate}}" [(ngModel)]="max">
+              </mat-form-field>
+            </div>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="priceChange()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
@@ -1044,6 +1156,23 @@
             </mat-form-field>
             <div class="sc__accent-dark md-margin-left-2">
               <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE9'|translate}}</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-promotion-dialog__width-1">
+                <input matInput type="number" placeholder="{{'ORDERS.PLACEHOLDER.TITLE7'|translate}}" [(ngModel)]="min">
+              </mat-form-field>
+            </div>
+            <div class="md-margin-left-2">to</div>
+            <div class="md-margin-left-2 unicorn-dark-theme">
+              <mat-form-field class="sc-promotion-dialog__width-1">
+                <input matInput type="number" placeholder="{{'ORDERS.PLACEHOLDER.TITLE8'|translate}}" [(ngModel)]="max">
+              </mat-form-field>
+            </div>
+            <div class="sc__accent-dark md-margin-left-2">
+              <button mat-raised-button color="pimary" (click)="priceChange()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
