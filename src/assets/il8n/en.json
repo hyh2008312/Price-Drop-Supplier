@@ -190,7 +190,8 @@
     "DIALOG": {
       "BUTTON1": "Save",
       "BUTTON2": "Cancel",
-      "TITLE1": "Filter by Inward Date",
+      "BUTTON3": "Download",
+      "TITLE1": "Filter by Inwarding Date",
       "TITLE2": "Start Date",
       "TITLE3": "End Date"
     }

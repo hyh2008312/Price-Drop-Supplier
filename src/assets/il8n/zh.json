@@ -190,6 +190,7 @@
     "DIALOG": {
       "BUTTON1": "保存",
       "BUTTON2": "取消",
+      "BUTTON3": "下载",
       "TITLE1": "入库时间",
       "TITLE2": "开始时间",
       "TITLE3": "结束时间"
