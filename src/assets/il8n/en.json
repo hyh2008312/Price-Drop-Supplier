@@ -89,6 +89,7 @@
         "TITLE13": "Yes",
         "TITLE14": "No",
         "TITLE15": "Notes",
+        "TITLE16": "Sourcing",
         "BUTTON1": "Edit",
         "BUTTON2": "Add Note",
         "BUTTON3": "Complete",
@@ -299,7 +300,9 @@
       "TITLE3": "Export",
       "TITLE4": "Create GATI Tracking Number",
       "TITLE5": "Upload GlowRoad Orders",
-      "TITLE6": "Export All Orders"
+      "TITLE6": "Export All Orders",
+      "TITLE7": "Upload Meesho Orders",
+      "TITLE8": "Cancel GlowRoad Orders"
     },
     "DIALOG": {
       "TITLE1": "Create Third Party Order",

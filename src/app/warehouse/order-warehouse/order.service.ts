@@ -602,6 +602,40 @@ export class OrderService {
       .catch((error) => this.handleError(error, this));
   }
 
+  cancelOrders(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}order/batch/delete/third/party/order/`;
+
+    return this.http.post(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => this.handleError(error, this));
+  }
+
+  createMeeshoOrders(params:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}order/batch/third/party/meesho/create/`;
+
+    return this.http.post(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => this.handleError(error, this));
+  }
+
   changeStatus(params:any): Promise<any> {
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -623,7 +657,7 @@ export class OrderService {
     if (error instanceof Response) {
       if(error.status == 401) {
         if(target) {
-          target.router.navigate(['/account/login']);
+          target.router.navigate(['/account/login/warehouse']);
         }
         return Promise.reject(401);
       }

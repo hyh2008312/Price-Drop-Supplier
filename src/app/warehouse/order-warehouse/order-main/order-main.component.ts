@@ -217,6 +217,9 @@ export class OrderMainComponent implements OnInit {
   showNav: any = false;
 
   isLoading: boolean = false;
+  isGlowRoadLoading: boolean = false;
+  isMeeshoLoading: boolean = false;
+  isGlowRoadCancelLoading: boolean = false;
   color: any = 'accent';
   mode: any = 'indeterminate';
   value: any = 20;
@@ -1249,8 +1252,8 @@ export class OrderMainComponent implements OnInit {
     });
   }
 
-  onFileChange(evt: any) {
-    this.isLoading = true;
+  uploadGlowRoad(evt: any) {
+    this.isGlowRoadLoading = true;
     /* wire up file reader */
     const target: DataTransfer = <DataTransfer>(evt.target);
     if (target.files.length !== 1) throw new Error('Cannot use multiple files');
@@ -1262,6 +1265,24 @@ export class OrderMainComponent implements OnInit {
 
 
       this.getSheets(wb);
+
+    };
+    reader.readAsBinaryString(target.files[0]);
+  }
+
+  cancelGlowRoad(evt: any) {
+    this.isGlowRoadCancelLoading = true;
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>(evt.target);
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    const reader: FileReader = new FileReader();
+    reader.onload = (e: any) => {
+      /* read workbook */
+      const bstr: string = e.target.result;
+      const wb: WorkBook = read(bstr, {type: 'binary'});
+
+
+      this.getSheets2(wb);
 
     };
     reader.readAsBinaryString(target.files[0]);
@@ -1307,12 +1328,136 @@ export class OrderMainComponent implements OnInit {
 
   }
 
+  getSheets2(wb) {
+    const wsname: string = wb.SheetNames[0];
+    const ws: WorkSheet = wb.Sheets[wsname];
+
+    /* save data */
+    const newData: any = <any[][]>(utils.sheet_to_json(ws, {header: 1}));
+
+    let orders = {};
+    for(let i = 0; i < newData.length; i++) {
+      const item = newData[i];
+      if(i > 0) {
+        if(!orders[item[0]]) {
+          orders[item[0]] = {};
+          orders[item[0]].thirdOrderNumber = item[0];
+        }
+      }
+    }
+
+    let data = [];
+    for(let k in orders) {
+      data.push(k);
+    }
+
+    this.cancelGlowRoadOrder(data);
+
+  }
+
   createGlowRoadOrder(orders) {
     this.orderService.createOrders({orders}).then((data) => {
-      this.isLoading = false;
-      this.openSnackBar('Successfully Saved');
+      this.isGlowRoadLoading = false;
+      this.openSnackBar('GlowRoad orders are successfully saved');
+      this.changeProducts({
+        index: this.selectedIndex,
+        resetPage: true
+      });
     }).catch((res) => {
-      this.isLoading = false;
+      this.isGlowRoadLoading = false;
+      this.openSnackBar('Some Error');
+    });
+  }
+
+  cancelGlowRoadOrder(orders) {
+    this.orderService.cancelOrders({orders}).then((data) => {
+      this.isGlowRoadCancelLoading = false;
+      this.openSnackBar('GlowRoad orders are successfully cancelled');
+      this.changeProducts({
+        index: this.selectedIndex,
+        resetPage: true
+      });
+    }).catch((res) => {
+      this.isGlowRoadCancelLoading = false;
+      this.openSnackBar('Some Error');
+    });
+  }
+
+  uploadMeesho(evt: any) {
+    this.isMeeshoLoading = true;
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>(evt.target);
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    const reader: FileReader = new FileReader();
+    reader.onload = (e: any) => {
+      /* read workbook */
+      const bstr: string = e.target.result;
+      const wb: WorkBook = read(bstr, {type: 'binary'});
+
+
+      this.getSheets1(wb);
+
+    };
+    reader.readAsBinaryString(target.files[0]);
+  }
+
+  getSheets1(wb) {
+    const wsname: string = wb.SheetNames[0];
+    const ws: WorkSheet = wb.Sheets[wsname];
+
+    /* save data */
+    const newData: any = <any[][]>(utils.sheet_to_json(ws, {header: 1}));
+
+    let orders = {};
+    for(let i = 0; i < newData.length; i++) {
+      const item = newData[i];
+      if(i > 0) {
+        if(item[0] && item[0] != '') {
+          const thirdOrderId = item[0];
+          if(!orders[thirdOrderId]) {
+
+            orders[thirdOrderId] = {};
+            orders[thirdOrderId].thirdOrderNumber = thirdOrderId;
+            orders[thirdOrderId].thirdPartyId = 2;
+            orders[thirdOrderId].trackingNumber = item[10];
+            orders[thirdOrderId].custName = item[2];
+            orders[thirdOrderId].custAddress = item[3];
+            orders[thirdOrderId].orderData = [];
+            orders[thirdOrderId].orderData.push({
+              sku: item[5].split('_')[0],
+              quantity: parseInt(item[8]),
+              amount: item[9]
+            });
+          } else {
+            orders[thirdOrderId].orderData.push({
+              sku: item[5].split('_')[0],
+              quantity: parseInt(item[8]),
+              amount: item[9]
+            });
+          }
+        }
+      }
+    }
+
+    let data = [];
+    for(let k in orders) {
+      data.push(orders[k]);
+    }
+
+    this.createMeeshoOrder(data);
+
+  }
+
+  createMeeshoOrder(orders) {
+    this.orderService.createMeeshoOrders({orders}).then((data) => {
+      this.isMeeshoLoading = false;
+      this.openSnackBar('Meesho orders are successfully saved.');
+      this.changeProducts({
+        index: this.selectedIndex,
+        resetPage: true
+      });
+    }).catch((res) => {
+      this.isMeeshoLoading = false;
       this.openSnackBar('Some Error');
     });
   }

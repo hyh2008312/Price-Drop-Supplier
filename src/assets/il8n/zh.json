@@ -89,6 +89,7 @@
       "TITLE13": "是",
       "TITLE14": "否",
       "TITLE15": "备注",
+      "TITLE16": "订单来源",
       "BUTTON1": "编辑",
       "BUTTON2": "添加备注",
       "BUTTON3": "已拣货出库",
@@ -299,7 +300,9 @@
       "TITLE3": "导出订单",
       "TITLE4": "创建GATI捡货单",
       "TITLE5": "上传GlowRoad订单",
-      "TITLE6": "导出所有订单"
+      "TITLE6": "导出所有订单",
+      "TITLE7": "上传Meesho订单",
+      "TITLE8": "取消GlowRoad订单"
     },
     "DIALOG": {
       "TITLE1": "创建第三方平台订单",

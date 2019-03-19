@@ -1,9 +1,10 @@
 <div>
   <div class="sc-product__product-item-top" fxLayout="row" fxLayoutAlign="start center">
     <div>{{'PACKAGING.ITEM.TITLE1'|translate}}: {{product.pickNumber}}</div>
-    <div class="md-margin-left-3">{{'PACKAGING.ITEM.TITLE2'|translate}}: {{product.created | amTz:'Asia/Shanghai' | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
-    <div class="md-margin-left-3" *ngIf="product.pickStatus == 'Packaging Completed'">{{'PACKAGING.ITEM.TITLE3'|translate}}: {{product.packagingTime | amTz:'Asia/Shanghai' | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
-    <div class="md-margin-left-3" *ngIf="product.warehouseName">{{'PACKAGING.ITEM.TITLE4'|translate}}: {{product.warehouseName}}</div>
+    <div class="md-margin-left-2">{{'PACKAGING.ITEM.TITLE2'|translate}}: {{product.created | amTz:'Asia/Shanghai' | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
+    <div class="md-margin-left-2" *ngIf="product.pickStatus == 'Packaging Completed'">{{'PACKAGING.ITEM.TITLE3'|translate}}: {{product.packagingTime | amTz:'Asia/Shanghai' | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
+    <div class="md-margin-left-2" *ngIf="product.warehouseName">{{'PACKAGING.ITEM.TITLE4'|translate}}: {{product.warehouseName}}</div>
+    <div class="md-margin-left-2" *ngIf="product.pickSouringName">{{'PACKAGING.ITEM.TITLE16'|translate}}: {{product.pickSouringName}}</div>
   </div>
   <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
     <div class="md-margin-right-2" fxFlex="60" fxLayout="column" fxLayoutAlign="start stretch">
