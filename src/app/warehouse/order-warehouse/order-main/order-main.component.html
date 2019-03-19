@@ -13,19 +13,19 @@
           <input class="sc-product__hide" type="file" (change)="uploadGlowRoad($event)">
           <div class="sc-product__button">{{'ORDERS.BUTTON.TITLE5'|translate}}</div>
         </label>
-        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="isGlowRoadCancelLoading">
-          <mat-progress-spinner [color]="color" [mode]="mode" [value]="value" [diameter]="value"></mat-progress-spinner>
-        </div>
-        <label class="md-margin-left-2">
-          <input class="sc-product__hide" type="file" (change)="cancelGlowRoad($event)">
-          <div class="sc-product__button">{{'ORDERS.BUTTON.TITLE8'|translate}}</div>
-        </label>
         <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="isMeeshoLoading">
           <mat-progress-spinner [color]="color" [mode]="mode" [value]="value" [diameter]="value"></mat-progress-spinner>
         </div>
         <label class="md-margin-left-2">
           <input class="sc-product__hide" type="file" (change)="uploadMeesho($event)">
           <div class="sc-product__button">{{'ORDERS.BUTTON.TITLE7'|translate}}</div>
+        </label>
+        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="isGlowRoadCancelLoading">
+          <mat-progress-spinner [color]="color" [mode]="mode" [value]="value" [diameter]="value"></mat-progress-spinner>
+        </div>
+        <label class="md-margin-left-2">
+          <input class="sc-product__hide" type="file" (change)="cancelGlowRoad($event)">
+          <div class="sc-product__button">{{'ORDERS.BUTTON.TITLE8'|translate}}</div>
         </label>
       </div>
       <mat-tab-group color="primary" (selectedTabChange)="changeProducts($event)"  [(selectedIndex)]="selectedIndex">
