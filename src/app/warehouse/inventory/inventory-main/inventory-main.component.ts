@@ -257,39 +257,80 @@ export class InventoryMainComponent implements OnInit {
   }
 
   exportAll(): void {
-    const ws_name = '总库存清单';
+    const ws_name = 'Total Inventory Report';
     const wb: WorkBook = { SheetNames: [], Sheets: {} };
     let packing: any = [];
     let excel: any = [];
 
     this.isLoading = true;
-    this.inventoryService.getAllInventoryList().then((data) => {
-      this.isLoading = false;
+    switch (this.selectedIndex) {
+      case 0:
+        let quantity = this.quantityWare? this.quantityWare: null;
+        let warehouse_id: any = this.warehouseId? this.warehouseId: null;
+        this.inventoryService.getAllWarehouseInventoryList({
+          quantity,
+          warehouse_id
+        }).then((data) => {
+          this.isLoading = false;
 
-      excel = [...data];
+          excel = [...data];
 
-      for(let item of excel) {
-        let orderItem: any = {};
-        orderItem['标题'] = item.title;
-        orderItem['规格'] = item.attribute;
-        orderItem['SKU编号'] = item.sku;
-        orderItem['总库存'] = item.quantity;
-        orderItem['锁定库存'] = item.freezeQuantity;
-        orderItem['剩余库存'] = item.quantity - item.freezeQuantity;
-        packing.push(orderItem);
-      }
+          for(let item of excel) {
+            let orderItem: any = {};
+            orderItem['Title'] = item.title;
+            orderItem['Attribute'] = item.attribute;
+            orderItem['SKU'] = item.sku;
+            orderItem['SPU'] = item.spu;
+            orderItem['Total Inventory'] = item.quantity;
+            orderItem['Outwarding Inventory'] = item.freezeQuantity;
+            orderItem['Remaining Inventory'] = item.quantity - item.freezeQuantity;
+            packing.push(orderItem);
+          }
 
-      const ws: any = utils.json_to_sheet(packing);
-      wb.SheetNames.push(ws_name);
-      wb.Sheets[ws_name] = ws;
-      const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+          const ws: any = utils.json_to_sheet(packing);
+          wb.SheetNames.push(ws_name);
+          wb.Sheets[ws_name] = ws;
+          const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
 
-      saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), '总库存清单' +
-        new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
-        '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate())
-        + '.xlsx');
+          saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), '总库存清单' +
+            new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
+            '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate())
+            + '.xlsx');
 
-    });
+        });
+        break;
+      case 1:
+        this.inventoryService.getAllInventoryList().then((data) => {
+          this.isLoading = false;
+
+          excel = [...data];
+
+          for(let item of excel) {
+            let orderItem: any = {};
+            orderItem['Title'] = item.title;
+            orderItem['Attribute'] = item.attribute;
+            orderItem['SKU'] = item.sku;
+            orderItem['SPU'] = item.spu;
+            orderItem['Total Inventory'] = item.quantity;
+            orderItem['Outwarding Inventory'] = item.freezeQuantity;
+            orderItem['Remaining Inventory'] = item.quantity - item.freezeQuantity;
+            packing.push(orderItem);
+          }
+
+          const ws: any = utils.json_to_sheet(packing);
+          wb.SheetNames.push(ws_name);
+          wb.Sheets[ws_name] = ws;
+          const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+          saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), '总库存清单' +
+            new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
+            '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate())
+            + '.xlsx');
+
+        });
+        break;
+    }
+
 
   }
 

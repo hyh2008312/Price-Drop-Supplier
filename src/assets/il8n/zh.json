@@ -151,11 +151,11 @@
     "TITLE6": "退货商品入库",
     "TITLE7": "暂无退货商品信息",
     "TITLE8": "选择仓库",
-    "TITLE9": "导出退货入库商品报告",
+    "TITLE9": "导出入库商品报告",
     "BUTTON1": "导出Excel",
     "BUTTON2": "导出所有库存的Excel",
     "BUTTON3": "退货商品入库",
-    "BUTTON4": "导出退货入库商品报告",
+    "BUTTON4": "导出入库商品报告",
     "SUBTITLE": {
       "TITLE1": "商品信息",
       "TITLE2": "仓库",

@@ -1218,9 +1218,9 @@ export class ProductMainComponent implements OnInit {
     for(let item of excel) {
       for(let i = 0; i < item.variants.length; i++) {
         let orderItem: any = {};
-        orderItem.Category = '';
-        orderItem.Subcategory = '';
-        orderItem.Thirdcategory = '';
+        orderItem.Category = item.primaryClassification;
+        orderItem.Subcategory = item.secondaryClassification;
+        orderItem.Thirdcategory = item.thirdClassification;
         orderItem.SPU = item.spu;
         orderItem.Title = item.title;
         for(let i = 0; i < item.images.length; i++) {
