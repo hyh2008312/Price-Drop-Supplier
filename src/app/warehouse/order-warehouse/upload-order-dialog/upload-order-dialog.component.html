@@ -1,0 +1,35 @@
+<div class="sc-order-dialog">
+  <div class="sc-order-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-order-dialog__title">
+    {{'ORDERS.BUTTON.TITLE11'|translate}}
+  </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="isLoading">
+    <mat-progress-spinner [color]="color" [mode]="mode" [value]="value" [diameter]="value"></mat-progress-spinner>
+  </div>
+  <div class="md-margin-top-3" fxLayout="row wrap" fxLayoutAlign="start center">
+    <label class="md-margin-bottom-2 md-margin-right-2">
+      <input class="sc-product__hide" type="file" (change)="uploadGlowRoad($event)">
+      <div class="sc-product__button">{{'ORDERS.BUTTON.TITLE5'|translate}}</div>
+    </label>
+    <label class="md-margin-bottom-2 md-margin-right-2">
+      <input class="sc-product__hide" type="file" (change)="uploadMeesho($event)">
+      <div class="sc-product__button">{{'ORDERS.BUTTON.TITLE7'|translate}}</div>
+    </label>
+    <label class="md-margin-bottom-2 md-margin-right-2">
+      <input class="sc-product__hide" type="file" (change)="uploadChapman($event)">
+      <div class="sc-product__button">{{'ORDERS.BUTTON.TITLE9'|translate}}</div>
+    </label>
+    <label class="md-margin-bottom-2 md-margin-right-2">
+      <input class="sc-product__hide" type="file" (change)="uploadZoomtail($event)">
+      <div class="sc-product__button">{{'ORDERS.BUTTON.TITLE10'|translate}}</div>
+    </label>
+  </div>
+  <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="close()">{{'ORDERS.DIALOG.BUTTON4'|translate}}</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">{{'ORDERS.DIALOG.BUTTON3'|translate}}</button>
+    </div>
+  </div>
+</div>

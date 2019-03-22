@@ -302,7 +302,10 @@
       "TITLE5": "Upload GlowRoad Orders",
       "TITLE6": "Export All Orders",
       "TITLE7": "Upload Meesho Orders",
-      "TITLE8": "Cancel Third Party Orders"
+      "TITLE8": "Cancel Third Party Orders",
+      "TITLE9": "Upload Chapman Orders",
+      "TITLE10": "Upload Zoomtail Orders",
+      "TITLE11": "Upload Third Party Orders"
     },
     "DIALOG": {
       "TITLE1": "Create Third Party Order",
@@ -314,7 +317,8 @@
       "TITLE7": "Select Third Party Channel",
       "BUTTON1": "Add SKU",
       "BUTTON2": "Save",
-      "BUTTON3": "Cancel"
+      "BUTTON3": "Cancel",
+      "BUTTON4": "Confirm"
     },
     "DIALOG1": {
       "TITLE1": "Do you need customer support to verify this address? ",

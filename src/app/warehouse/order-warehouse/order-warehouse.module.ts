@@ -24,6 +24,7 @@ import { AddOrderOutStockDialogComponent } from './add-order-out-stock-dialog/ad
 import { AddOrderDialogComponent } from './add-order-dialog/add-order-dialog.component';
 import { ConfirmAddressDialogComponent } from './confirm-address-dialog/confirm-address-dialog.component';
 import { ConfirmEditAddressDialogComponent } from './confirm-edit-address-dialog/confirm-edit-address-dialog.component';
+import { UploadOrderDialogComponent } from './upload-order-dialog/upload-order-dialog.component';
 import { AddNoteDialogComponent } from './add-note-dialog/add-note-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
@@ -63,7 +64,8 @@ import { SharedModule } from '../../shared/shared.module';
     ConfirmAddressDialogComponent,
     ConfirmEditAddressDialogComponent,
     AddOrderDialogComponent,
-    ToolTipsComponent
+    ToolTipsComponent,
+    UploadOrderDialogComponent
   ],
   entryComponents: [
     AddTrackingInformationDialogComponent,
@@ -82,7 +84,8 @@ import { SharedModule } from '../../shared/shared.module';
     ConfirmAddressDialogComponent,
     ConfirmEditAddressDialogComponent,
     AddOrderDialogComponent,
-    ToolTipsComponent
+    ToolTipsComponent,
+    UploadOrderDialogComponent
   ],
   providers: [
     OrderService

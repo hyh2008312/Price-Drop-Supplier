@@ -2,24 +2,16 @@
   <div class="container">
     <div class="sc-order__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
       <div class="sc-order__header"></div>
-      <div class="md-margin-bottom-2" fxLayout="row" fxLayoutAlign="end center">
+      <div class="md-margin-bottom-2" fxLayout="row wrap" fxLayoutAlign="end center">
         <div class="md-margin-left-2 sc__accent-dark">
-          <button mat-raised-button color="pimary" (click)="createOrder()">{{'ORDERS.BUTTON.TITLE1'|translate}}</button>
+          <button mat-raised-button (click)="createOrder()">{{'ORDERS.BUTTON.TITLE1'|translate}}</button>
         </div>
-        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="isGlowRoadLoading">
+        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="isGlowRoadCancelLoading">
           <mat-progress-spinner [color]="color" [mode]="mode" [value]="value" [diameter]="value"></mat-progress-spinner>
         </div>
-        <label class="md-margin-left-2">
-          <input class="sc-product__hide" type="file" (change)="uploadGlowRoad($event)">
-          <div class="sc-product__button">{{'ORDERS.BUTTON.TITLE5'|translate}}</div>
-        </label>
-        <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="isMeeshoLoading">
-          <mat-progress-spinner [color]="color" [mode]="mode" [value]="value" [diameter]="value"></mat-progress-spinner>
+        <div class="md-margin-left-2 sc__accent-dark">
+          <button mat-raised-button color="accent" (click)="uploadOrders()">{{'ORDERS.BUTTON.TITLE11'|translate}}</button>
         </div>
-        <label class="md-margin-left-2">
-          <input class="sc-product__hide" type="file" (change)="uploadMeesho($event)">
-          <div class="sc-product__button">{{'ORDERS.BUTTON.TITLE7'|translate}}</div>
-        </label>
         <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="isGlowRoadCancelLoading">
           <mat-progress-spinner [color]="color" [mode]="mode" [value]="value" [diameter]="value"></mat-progress-spinner>
         </div>

@@ -302,7 +302,10 @@
       "TITLE5": "上传GlowRoad订单",
       "TITLE6": "导出所有订单",
       "TITLE7": "上传Meesho订单",
-      "TITLE8": "取消第三方订单"
+      "TITLE8": "取消第三方订单",
+      "TITLE9": "上传Chapman订单",
+      "TITLE10": "上传Zoomtail订单",
+      "TITLE11": "上传第三方订单"
     },
     "DIALOG": {
       "TITLE1": "创建第三方平台订单",
@@ -314,7 +317,8 @@
       "TITLE7": "选择第三方平台",
       "BUTTON1": "添加SKU",
       "BUTTON2": "保存",
-      "BUTTON3": "取消"
+      "BUTTON3": "取消",
+      "BUTTON4": "确定"
     },
     "DIALOG1": {
       "TITLE1": "该订单地址需要客服审核验证？",

@@ -66,11 +66,15 @@
           <label class="md-margin-left-2" *ngIf="isSuperuser" fxHide>
             <input class="sc-product-dialog__hide" type="file" (change)="onFileChange1($event)">
             <div class="sc-product-dialog__button">
-              Download Excel by SPU</div>
+              Download</div>
           </label>
 
           <div class="sc__accent-dark md-margin-left-2" *ngIf="isSuperuser">
             <button mat-raised-button color="pimary" (click)="export()">Export Excel</button>
+          </div>
+
+          <div class="sc__accent-dark md-margin-left-2" *ngIf="isSuperuser">
+            <button mat-raised-button color="pimary" (click)="exportSpecid()">Export Specid</button>
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="start center">

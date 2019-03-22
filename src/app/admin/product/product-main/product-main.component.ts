@@ -22,6 +22,7 @@ import {read, utils, WorkBook, WorkSheet, write} from 'xlsx';
 import { saveAs } from 'file-saver';
 
 import { s } from '../product';
+import { specid } from '../product-specid';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
@@ -1535,6 +1536,87 @@ export class ProductMainComponent implements OnInit {
     this.ceAll = null;
     this.psAll = null;
     this.peAll = null;
+  }
+
+  exportSpecid() {
+    const _wb: WorkBook = { SheetNames: [], Sheets: {} };
+    const wbname = `保定白沟新城乐轩箱包厂-${new Date().getTime()}`;
+    let packing: any = [];
+
+    for(let item of specid) {
+      let specs: any = [];
+      for(let em in item.specid) {
+        specs.push({
+          attribute: em,
+          specid: item.specid[em]
+        });
+      }
+      if(specs.length > item.variants) {
+        for(let i = 0; i < specs.length; i++) {
+          let itm: any = {};
+          let fm: any = item.variants[i];
+          if(i == 0) {
+            itm.spu = item.spu;
+            itm.purchase_link = item.logUrl;
+          } else {
+            itm.spu = '';
+            itm.purchase_link = '';
+          }
+          itm['1688_attribute'] = specs[i].attribute;
+          itm['1688_specid'] = specs[i].specid;
+          if(i <= item.variants.length - 1) {
+            itm.variant_id = fm.variantId;
+            itm.sku = fm.sku;
+            itm.size = fm.size;
+            itm.color = fm.color;
+            itm.sourcing_price = fm.sourcePrice;
+          }
+          itm.specid = '';
+          packing.push(itm);
+          if(i == specs.length - 1) {
+            packing.push({
+              spu: ''
+            });
+          }
+        }
+      } else {
+        for(let i = 0; i < item.variants.length; i++) {
+          let itm: any = {};
+          let fm: any = item.variants[i];
+          if(i == 0) {
+            itm.spu = item.spu;
+            itm.purchase_link = item.logUrl;
+          } else {
+            itm.spu = '';
+            itm.purchase_link = '';
+          }
+          if(i <= specs.length - 1) {
+            itm['1688_attribute'] = specs[i].attribute;
+            itm['1688_specid'] = specs[i].specid;
+          }
+          itm.variant_id = fm.variantId;
+          itm.sku = fm.sku;
+          itm.size = fm.size;
+          itm.color = fm.color;
+          itm.sourcing_price = fm.sourcePrice;
+          itm.specid = '';
+          packing.push(itm);
+          if(i == item.variants.length - 1) {
+            packing.push({
+              spu: ''
+            });
+          }
+        }
+      }
+
+    }
+
+    const ws: any = utils.json_to_sheet(packing);
+    _wb.SheetNames.push(wbname);
+    _wb.Sheets[wbname] = ws;
+    const wbout = write(_wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+    saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `${wbname}.xlsx`);
   }
 
 }
