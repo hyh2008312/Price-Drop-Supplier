@@ -1540,7 +1540,7 @@ export class ProductMainComponent implements OnInit {
 
   exportSpecid() {
     const _wb: WorkBook = { SheetNames: [], Sheets: {} };
-    const wbname = `保定白沟新城乐轩箱包厂-${new Date().getTime()}`;
+    const wbname = `义乌市隆威服装厂-${new Date().getTime()}`;
     let packing: any = [];
 
     for(let item of specid) {

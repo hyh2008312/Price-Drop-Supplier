@@ -43,7 +43,7 @@
             </form>
             <div class="sc-product__search-margin-top unicorn-dark-theme">
               <mat-form-field class="sc-product__product-sort">
-                <mat-select [(ngModel)]="searchCategory" name="sort">
+                <mat-select [(ngModel)]="searchCategory">
                   <mat-option class="md-align-center" *ngFor="let item of searchList" [value]="item">
                     {{ item }}
                   </mat-option>
@@ -54,7 +54,7 @@
         </div>
         <div fxLayout="row" fxLayoutAlign="start center">
           <div class="sc__accent-dark md-margin-left-2" *ngIf="isSuperuser">
-            <button mat-raised-button color="pimary" (click)="captureScreen()">Export PDF</button>
+            <button mat-raised-button (click)="captureScreen()">Export PDF</button>
           </div>
 
           <label class="md-margin-left-2" *ngIf="isSuperuser">
@@ -70,14 +70,14 @@
           </label>
 
           <div class="sc__accent-dark md-margin-left-2" *ngIf="isSuperuser">
-            <button mat-raised-button color="pimary" (click)="export()">Export Excel</button>
+            <button mat-raised-button (click)="export()">Export Excel</button>
           </div>
 
-          <div class="sc__accent-dark md-margin-left-2" *ngIf="isSuperuser">
-            <button mat-raised-button color="pimary" (click)="exportSpecid()">Export Specid</button>
+          <div class="sc__accent-dark md-margin-left-2" *ngIf="isSuperuser" fxHide>
+            <button mat-raised-button (click)="exportSpecid()">Export Specid</button>
           </div>
         </div>
-        <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <mat-form-field fxFlex>
               <mat-select name="category" placeholder="Select a Category"

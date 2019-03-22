@@ -719,4 +719,121 @@
       border-bottom: 1px solid rgba(0,0,0,.12);
     }
   }
+
+  &__product{
+      position: relative;
+
+      &-sort{
+        width: 140px;
+        text-align: center;
+      }
+
+      &-navigation{
+        height: 54px;
+        background-color: #f9f9f9;
+        padding: 0 16px;
+        border-radius: 2px;
+      }
+
+      &-bg{
+        padding: 0;
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      &-image{
+        width: 80px;
+        height: 80px;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-right: 16px;
+        position: relative;
+        border: 1px solid rgba(0,0,0,.12);
+
+        >img{
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          @include transform(translate(-50%, -50%));
+        }
+      }
+
+      &-width{
+        width: 400px;
+      }
+
+      &-width-1{
+        width: 100px;
+      }
+
+      &-height{
+        padding: 0 16px;
+        height: 48px;
+        background-color: #f9f9f9;
+        border-bottom: 1px solid rgba(0,0,0,.12);
+      }
+
+      &-height-1{
+        height: 116px;
+        padding: 16px 0;
+      }
+
+      &-title{
+        font-size: 14px;
+        line-height: 20px;
+        max-height: 40px;
+        overflow: hidden;
+      }
+
+      &-title-1{
+        font-size: 12px;
+        @include media();
+        color: rgba(0,0,0,.87);
+      }
+
+
+      &-title-2{
+        font-size: 14px;
+        line-height: 24px;
+        max-height: 72px;
+        overflow: hidden;
+      }
+
+      &-margin-left{
+        margin-left: 12px;
+      }
+
+      &-margin-right{
+        margin-right: 24px;
+        @include xb-sm-screen{
+          margin-right: 8px;
+        }
+      }
+
+      &-item-left{
+        width: 150px;
+      }
+
+      &-list{
+        margin-top: 16px;
+      }
+
+      &-none{
+        margin-top: 16px;
+        padding: 96px 0;
+        background-color: $whiteColor;
+        border-radius: 4px;
+        span{
+          margin-top: 16px;
+          @include media();
+        }
+        i{
+          font-size: 96px;
+          line-height: 96px;
+          color: rgba(0,0,0,.38);
+        }
+      }
+
+    }
 }
+
