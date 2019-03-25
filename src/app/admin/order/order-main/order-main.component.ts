@@ -621,7 +621,7 @@ export class OrderMainComponent implements OnInit {
       case 5:
         switch(event.event) {
           case 'reinitiate':
-            this.orderAudit.splice(event.index,1);
+            this.orderCanceled.splice(event.index,1);
             break;
         }
     }
