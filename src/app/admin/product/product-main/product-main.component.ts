@@ -83,8 +83,8 @@ export class ProductMainComponent implements OnInit {
   sortUnpublished: any = false;
   productSelected: any = false;
   productSelectedIndex = 1;
-  productDrops: any = false;
-  productDropsIndex = 1;
+  variants: any = false;
+  variantsIndex = 1;
 
   publishedSorted = 'Date';
   publishedSortList = ['Date', 'Most Views', 'Most Orders', 'Highest Conversion'];
@@ -186,7 +186,7 @@ export class ProductMainComponent implements OnInit {
           this.productDraftIndex = 1;
           break;
         case 5:
-          this.productDropsIndex = 1;
+          this.variantsIndex = 1;
           break;
         case 6:
           this.productSelectedIndex = 1;
@@ -209,7 +209,7 @@ export class ProductMainComponent implements OnInit {
           this.productDraftIndex = 1;
           break;
         case 4:
-          this.productDropsIndex = 1;
+          this.variantsIndex = 1;
           break;
       }
     }
@@ -233,7 +233,7 @@ export class ProductMainComponent implements OnInit {
         case 'draft':
           self.selectedIndex = 3;
           break;
-        case 'drops':
+        case 'variant':
           self.selectedIndex = 4;
           break;
         case 'featured':
@@ -277,7 +277,7 @@ export class ProductMainComponent implements OnInit {
           this.productDraftIndex = event.pageIndex + 1;
           break;
         case 5:
-          this.productDropsIndex = event.pageIndex + 1;
+          this.variantsIndex = event.pageIndex + 1;
           break;
         case 6:
           this.productSelectedIndex = event.pageIndex + 1;
@@ -300,7 +300,7 @@ export class ProductMainComponent implements OnInit {
           this.productDraftIndex = event.pageIndex + 1;
           break;
         case 4:
-          this.productDropsIndex = event.pageIndex + 1;
+          this.variantsIndex = event.pageIndex + 1;
           break;
       }
     }
@@ -412,14 +412,22 @@ export class ProductMainComponent implements OnInit {
         });
       } else if(event.index == 5) {
 
-        page = this.productDropsIndex;
+        page = this.variantsIndex;
         let self = this;
-        this.adminService.getDropsProductList({
+        let q = this.searchKey;
+        let qt = 'sku';
+        if(q == '') {
+          q = null;
+          qt = null;
+        }
+        this.adminService.getVariantsList({
           page: page,
-          page_size: this.pageSize
+          page_size: this.pageSize,
+          q,
+          qt
         }).then((data) => {
           self.length = data.count;
-          self.productDrops = data.results;
+          self.variants = data.results;
 
         });
       }
@@ -489,14 +497,22 @@ export class ProductMainComponent implements OnInit {
         });
       } else if(event.index == 4) {
 
-        page = this.productDropsIndex;
+        page = this.variantsIndex;
         let self = this;
+        let q = this.searchKey;
+        let qt = 'sku';
+        if(q == '') {
+          q = null;
+          qt = null;
+        }
         this.adminService.getDropsProductList({
           page: page,
-          page_size: this.pageSize
+          page_size: this.pageSize,
+          q,
+          qt
         }).then((data) => {
           self.length = data.count;
-          self.productDrops = data.results;
+          self.variants = data.results;
 
         });
       }
@@ -556,7 +572,7 @@ export class ProductMainComponent implements OnInit {
       case 5:
         switch(event.event) {
           case 'delete':
-            this.productDrops.splice(event.index,1);
+            this.variants.splice(event.index,1);
             break;
         }
         break;

@@ -3,10 +3,10 @@
     <i class="iconfontXberts icon-ic-close"></i>
   </div>
   <div class="sc-order-dialog__title">
-    确认发货地址
+    Edit Address
   </div>
   <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
-    <div>订单号 #: {{data.order.number}}</div>
+    <div>Order #: {{data.order.number}}</div>
     <div class="md-margin-left-3" fxFlex>{{data.order.sumOrderNumber? 'Sum Order #:' + data.order.sumOrderNumber: ''}}</div>
   </div>
   <form class="md-margin-top-3" [formGroup]="orderStockForm" novalidate>
@@ -55,19 +55,14 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div fxLayout="row" fxLayoutAlign="start center">
-      <mat-form-field fxFlex>
-        <input type="text" matInput placeholder="notes" formControlName="notes">
-      </mat-form-field>
-    </div>
   </form>
   <div class="xb-input-error md-margin-top-2" *ngIf="error">
     {{error}}
   </div>
   <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
-    <button mat-raised-button color="primary" (click)="changeOrderAddress()">确认</button>
+    <button mat-raised-button color="primary" (click)="changeOrderAddress()">Confirm</button>
     <div class="md-margin-left-2">
-      <button mat-button color="primary" (click)="close()">取消</button>
+      <button mat-button color="primary" (click)="close()">Cancel</button>
     </div>
   </div>
 </div>

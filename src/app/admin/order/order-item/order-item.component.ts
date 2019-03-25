@@ -4,6 +4,7 @@ import { OrderService } from '../order.service';
 import { ApproveCancelDialogComponent } from '../approve-cancel-dialog/approve-cancel-dialog.component';
 import { AddNoteDialogComponent } from '../add-note-dialog/add-note-dialog.component';
 import { AddOrderStockDialogComponent } from '../add-order-stock-dialog/add-order-stock-dialog.component';
+import { ReinitiateOrderDialogComponent } from '../reinitiate-order-dialog/reinitiate-order-dialog.component';
 import { MatDialog } from '@angular/material';
 
 import { UserService } from  '../../../shared/services/user/user.service';
@@ -112,6 +113,28 @@ export class OrderItemComponent implements OnInit {
           status: self.status,
           order: self.order,
           event: 'audit'
+        });
+      }
+    });
+  }
+
+  reinitiateOrder() {
+    let dialogRef = this.dialog.open(ReinitiateOrderDialogComponent, {
+      data: {
+        order: this.order,
+        isOrderReinitiate: false
+      }
+    });
+
+    let self = this;
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isOrderReinitiate == true) {
+        self.productChange.emit({
+          index: self.index,
+          status: self.status,
+          order: self.order,
+          event: 'reinitiate'
         });
       }
     });

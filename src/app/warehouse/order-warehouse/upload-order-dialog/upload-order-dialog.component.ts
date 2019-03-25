@@ -217,9 +217,9 @@ export class UploadOrderDialogComponent implements OnInit {
       if(i > 0) {
         if(item[0] && item[0] != '') {
           data.push({
-            sku: item[3],
-            quantity: parseInt(item[4]),
-            amount: item[8]
+            sku: item[0],
+            quantity: parseInt(item[1]),
+            amount: item[2]
           });
         }
       }

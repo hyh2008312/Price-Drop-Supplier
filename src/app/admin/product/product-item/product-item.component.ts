@@ -13,7 +13,9 @@ import { UserService } from  '../../../shared/services/user/user.service';
 export class ProductItemComponent implements OnInit {
 
   @Input() status: number = 0;
-  @Input() product: any;
+  @Input() product: any = {
+    attributeValues: []
+  };
   @Input() index: number = 0;
   @Output() productChange = new EventEmitter<any>();
 
@@ -172,43 +174,6 @@ export class ProductItemComponent implements OnInit {
     } else if(this.status == 6) {
       this.router.navigate([`./edit/${this.product.productId}`], {relativeTo: this.activatedRoute});
     }
-  }
-
-  countInventory(variants) {
-    let number = 0;
-    for (let value of variants) {
-      number += parseInt(value.stockrecord);
-    }
-    return number;
-  }
-
-  getLowestPrice(variants): any {
-    let price: any = {
-      saleUnitPrice : variants[0],
-      unitPrice : variants[0]
-    };
-
-    let unitPriceArray = [];
-
-    for(let i=0;i<variants.length;i++){
-      if(variants[i].saleUnitPrice <=  price.saleUnitPrice){
-        price.saleUnitPrice = variants[i].saleUnitPrice;
-      }
-    }
-
-    for(let value of variants) {
-      if(value.saleUnitPrice == price.saleUnitPrice) {
-        unitPriceArray.push(value.unitPrice);
-      }
-    }
-
-    for(let value of unitPriceArray) {
-      if(value <=  price.unitPrice){
-        price.unitPrice = value;
-      }
-    }
-
-    return price;
   }
 
   changeChecked($event) {

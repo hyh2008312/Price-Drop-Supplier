@@ -618,6 +618,12 @@ export class OrderMainComponent implements OnInit {
             this.orderAudit.splice(event.index,1);
             break;
         }
+      case 5:
+        switch(event.event) {
+          case 'reinitiate':
+            this.orderAudit.splice(event.index,1);
+            break;
+        }
     }
   }
 

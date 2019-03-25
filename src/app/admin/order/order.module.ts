@@ -11,6 +11,7 @@ import { OrderDetailTitleComponent } from './order-detail-title/order-detail-tit
 import { OrderDetailTrackingItemComponent } from './order-detail-tracking-item/order-detail-tracking-item.component';
 import { AddTrackingInformationDialogComponent } from './add-tracking-information-dialog/add-tracking-information-dialog.component';
 import { CancelOrderDialogComponent } from './cancel-order-dialog/cancel-order-dialog.component';
+import { ReinitiateOrderDialogComponent } from './reinitiate-order-dialog/reinitiate-order-dialog.component';
 import { CancelFulfillmentDialogComponent } from './cancel-fulfillment-dialog/cancel-fulfillment-dialog.component';
 import { DenyRequestDialogComponent } from './deny-request-dialog/deny-request-dialog.component';
 import { AuthorizeReturnDialogComponent } from './authorize-return-dialog/authorize-return-dialog.component';
@@ -55,7 +56,8 @@ import { SharedModule } from '../../shared/shared.module';
     AddOrderStockDialogComponent,
     AddNoteDialogComponent,
     ConfirmAddressDialogComponent,
-    ConfirmEditAddressDialogComponent
+    ConfirmEditAddressDialogComponent,
+    ReinitiateOrderDialogComponent
   ],
   entryComponents: [
     AddTrackingInformationDialogComponent,
@@ -70,7 +72,8 @@ import { SharedModule } from '../../shared/shared.module';
     AddOrderStockDialogComponent,
     AddNoteDialogComponent,
     ConfirmAddressDialogComponent,
-    ConfirmEditAddressDialogComponent
+    ConfirmEditAddressDialogComponent,
+    ReinitiateOrderDialogComponent
   ],
   providers: [
     OrderService

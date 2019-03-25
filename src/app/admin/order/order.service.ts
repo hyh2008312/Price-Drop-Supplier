@@ -82,6 +82,22 @@ export class OrderService {
       .catch(this.handleError);
   }
 
+  editUpdateAddress(params:any): Promise<any> {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}order/supplier/customer/update/address/${params.id}/`;
+
+    return this.http.post(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
   getSupplyOrderList(params:any): Promise<any> {
 
     let headers = new Headers({
@@ -271,6 +287,24 @@ export class OrderService {
       });
   }
 
+  reinitiateOrder(order:any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}order/order/update/status/${order.id}/`;
+
+    return this.http.put(url, order, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => {
+        this.handleError(error, this)
+      });
+  }
 
   auditCancelOrder(order:any): Promise<any> {
 
