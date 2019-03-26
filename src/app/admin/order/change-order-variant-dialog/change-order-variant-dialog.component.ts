@@ -15,6 +15,7 @@ export class ChangeOrderVariantDialogComponent implements OnInit {
   orderVariantForm : FormGroup;
   variantsList: any;
   error: any = false;
+  currency: any = 'INR';
 
   constructor(
     public dialogRef: MatDialogRef<ChangeOrderVariantDialogComponent>,

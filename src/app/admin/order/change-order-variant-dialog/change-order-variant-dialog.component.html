@@ -3,7 +3,7 @@
     <i class="iconfontXberts icon-ic-close"></i>
   </div>
   <div class="sc-order-dialog__title">
-    Order Variant
+    Change SKU For This Order
   </div>
   <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
     <div>Order #: {{data.order.number}}</div>
@@ -18,7 +18,7 @@
         <div class="sc-order__product-title" >{{data.order.lines[0].title}}</div>
         <div>
           <div>{{data.order.lines[0].attributes}}</div>
-          <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="xb-bold" fxLayout="row" fxLayoutAlign="start center">
             {{data.order.lines[0].sku}}
           </div>
         </div>
@@ -41,11 +41,11 @@
               <div fxLayout="row" fxLayoutAlign="start center">
                 <div class="md-margin-right-1" *ngFor="let item of value.attributeValues">{{item.value}}</div>
               </div>
-              <div>{{value.sku}}</div>
+              <div class="xb-bold">{{value.sku}}</div>
             </div>
           </div>
         </div>
-        <div fxFlex="20" fxLayout="column" fxLayoutAlign="center center"> {{value.unitPrice}}</div>
+        <div fxFlex="20" fxLayout="column" fxLayoutAlign="center center"> {{value.unitPrice | currency: currency: true}}</div>
       </div>
     </mat-radio-group>
     <div *ngIf="orderVariantForm.get('variantId').invalid && (orderVariantForm.get('variantId').dirty ||
