@@ -182,40 +182,6 @@ export class OrderService {
       .catch((error) => this.handleError(error, this));
   }
 
-  getSupplyOrderResult(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}order/supplier/number/detail/?${this.serializeParams(params)}`;
-
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch((error) => this.handleError(error, this));
-  }
-
-  getSupplyOrderPackingResult(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}order/supplier/query/?${this.serializeParams(params)}`;
-
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch((error) => this.handleError(error, this));
-  }
-
   getSupplyShippingList(): Promise<any> {
 
     let headers = new Headers({

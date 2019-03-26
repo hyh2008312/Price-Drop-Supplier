@@ -22,6 +22,7 @@ import { AddGatiPostDialogComponent } from './add-gati-post-dialog/add-gati-post
 import { AddOrderStockDialogComponent } from './add-order-stock-dialog/add-order-stock-dialog.component';
 import { ConfirmAddressDialogComponent } from './confirm-address-dialog/confirm-address-dialog.component';
 import { ConfirmEditAddressDialogComponent } from './confirm-edit-address-dialog/confirm-edit-address-dialog.component';
+import { ChangeOrderVariantDialogComponent } from './change-order-variant-dialog/change-order-variant-dialog.component';
 import { AddNoteDialogComponent } from './add-note-dialog/add-note-dialog.component';
 
 import { OrderService } from './order.service';
@@ -57,7 +58,8 @@ import { SharedModule } from '../../shared/shared.module';
     AddNoteDialogComponent,
     ConfirmAddressDialogComponent,
     ConfirmEditAddressDialogComponent,
-    ReinitiateOrderDialogComponent
+    ReinitiateOrderDialogComponent,
+    ChangeOrderVariantDialogComponent
   ],
   entryComponents: [
     AddTrackingInformationDialogComponent,
@@ -73,7 +75,8 @@ import { SharedModule } from '../../shared/shared.module';
     AddNoteDialogComponent,
     ConfirmAddressDialogComponent,
     ConfirmEditAddressDialogComponent,
-    ReinitiateOrderDialogComponent
+    ReinitiateOrderDialogComponent,
+    ChangeOrderVariantDialogComponent
   ],
   providers: [
     OrderService

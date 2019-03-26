@@ -3,7 +3,6 @@ import { Http, Response , Headers , RequestOptions } from '@angular/http';
 import {Router} from '@angular/router';
 
 import 'rxjs/add/operator/toPromise';
-import{ Subject, BehaviorSubject } from 'rxjs';
 
 import { BaseApi } from '../../config/app.api';
 import { AuthenticationService } from '../../shared/services/authentication/authentication.service';
@@ -619,6 +618,41 @@ export class OrderService {
       .catch((error) => {
         this.handleError(error, this)
       });
+  }
+
+  getProductVariantList(params: any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}product/variants/update/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => this.handleError(error, this));
+  }
+
+
+  changeVariant(params: any): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}order/line/update/variant/${params.id}/`;
+
+    return this.http.put(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => this.handleError(error, this));
   }
 
   private handleError (error: Response | any, target?: any) {

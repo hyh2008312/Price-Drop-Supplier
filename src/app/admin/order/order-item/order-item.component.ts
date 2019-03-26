@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material';
 import { UserService } from  '../../../shared/services/user/user.service';
 import { ConfirmEditAddressDialogComponent } from '../confirm-edit-address-dialog/confirm-edit-address-dialog.component';
 import { ConfirmAddressDialogComponent } from '../confirm-address-dialog/confirm-address-dialog.component';
+import { ChangeOrderVariantDialogComponent } from '../change-order-variant-dialog/change-order-variant-dialog.component';
 
 @Component({
   selector: 'app-order-item',
@@ -152,6 +153,23 @@ export class OrderItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(dialogRef.componentInstance.data.isNoteAdd == true) {
+        self.order = dialogRef.componentInstance.data.order;
+      }
+    });
+  }
+
+  changeSKU() {
+    let dialogRef = this.dialog.open(ChangeOrderVariantDialogComponent, {
+      data: {
+        order: this.order,
+        isVariantEdit: false
+      }
+    });
+
+    let self = this;
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isVariantEdit == true) {
         self.order = dialogRef.componentInstance.data.order;
       }
     });
