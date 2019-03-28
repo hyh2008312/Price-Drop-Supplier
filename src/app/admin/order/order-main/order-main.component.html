@@ -47,6 +47,16 @@
               </mat-select>
             </mat-form-field>
           </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">Filter by Third Party Channel: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>Filter by Order Submission Time: </div>
             <mat-form-field class="md-margin-left-2">
@@ -167,6 +177,16 @@
               <mat-select [ngModel]="paymentUpaid" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
                   {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">Filter by Third Party Channel: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -474,6 +494,8 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
+          </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="md-margin-right-2">Filter by Third Party Channel: </div>
             <mat-form-field class="md-margin-right-2">
               <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
@@ -629,6 +651,16 @@
               </mat-select>
             </mat-form-field>
           </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">Filter by Third Party Channel: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>Filter by Order Submission Time:</div>
             <mat-form-field class="md-margin-left-2">
@@ -744,6 +776,16 @@
               <mat-select [ngModel]="paymentCanceled" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
                   {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">Filter by Third Party Channel: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -877,6 +919,16 @@
               </mat-select>
             </mat-form-field>
           </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">Filter by Third Party Channel: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>Filter by Order Submission Time:</div>
             <mat-form-field class="md-margin-left-2">
@@ -996,6 +1048,16 @@
               </mat-select>
             </mat-form-field>
           </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">Filter by Third Party Channel: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>Filter by Order Submission Time:</div>
             <mat-form-field class="md-margin-left-2">
@@ -1103,6 +1165,16 @@
               <mat-select [ngModel]="typeExpired" name="type" (valueChange)="typeChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of typeList" [value]="item.value">
                   {{ item.text }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">Filter by Third Party Channel: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name }}
                 </mat-option>
               </mat-select>
             </mat-form-field>

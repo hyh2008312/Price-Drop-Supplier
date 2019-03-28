@@ -939,6 +939,7 @@ export class ProductMainComponent implements OnInit {
             orderItem.Selling_Price = parseInt((im.unitPrice).toString());
             orderItem.MRP = parseInt((im.saleUnitPrice).toString());
             orderItem.Souring_Cost = parseInt(im.sourcingPrice);
+            orderItem.China_Domestic_Shipping = parseInt(item.shipping.chinaDomesticShipping);
             orderItem.Supplier_Name = item.shopName;
             for(let i = 0; i < item.productSpecification.length; i++) {
               const im = item.productSpecification[i];
@@ -1262,6 +1263,7 @@ export class ProductMainComponent implements OnInit {
         orderItem.Selling_Price = parseInt((im.unitPrice).toString());
         orderItem.MRP = parseInt((im.saleUnitPrice).toString());
         orderItem.Souring_Cost = parseInt(im.sourcingPrice);
+        orderItem.China_Domestic_Shipping = parseInt(item.shipping.chinaDomesticShipping);
         orderItem.Supplier_Name = item.shopName;
         for(let i = 0; i < item.productSpecification.length; i++) {
           const im = item.productSpecification[i];
@@ -1556,7 +1558,7 @@ export class ProductMainComponent implements OnInit {
 
   exportSpecid() {
     const _wb: WorkBook = { SheetNames: [], Sheets: {} };
-    const wbname = `义乌市隆威服装厂-${new Date().getTime()}`;
+    const wbname = `绍兴上虞音欠玥服饰贸易有限公司-${new Date().getTime()}`;
     let packing: any = [];
 
     for(let item of specid) {
@@ -1567,8 +1569,8 @@ export class ProductMainComponent implements OnInit {
           specid: item.specid[em]
         });
       }
-      if(specs.length > item.variants) {
-        for(let i = 0; i < specs.length; i++) {
+      if(specs.length > item.variants.length) {
+        for(let i = 0; i <= specs.length - 1; i++) {
           let itm: any = {};
           let fm: any = item.variants[i];
           if(i == 0) {
@@ -1586,6 +1588,12 @@ export class ProductMainComponent implements OnInit {
             itm.size = fm.size;
             itm.color = fm.color;
             itm.sourcing_price = fm.sourcePrice;
+          } else {
+            itm.variant_id = '';
+            itm.sku = '';
+            itm.size = '';
+            itm.color = '';
+            itm.sourcing_price = '';
           }
           itm.specid = '';
           packing.push(itm);
@@ -1609,6 +1617,9 @@ export class ProductMainComponent implements OnInit {
           if(i <= specs.length - 1) {
             itm['1688_attribute'] = specs[i].attribute;
             itm['1688_specid'] = specs[i].specid;
+          } else {
+            itm['1688_attribute'] = '';
+            itm['1688_specid'] = '';
           }
           itm.variant_id = fm.variantId;
           itm.sku = fm.sku;

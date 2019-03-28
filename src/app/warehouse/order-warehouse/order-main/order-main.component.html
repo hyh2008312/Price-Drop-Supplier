@@ -64,6 +64,16 @@
               </mat-select>
             </mat-form-field>
           </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name |translate}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}: </div>
             <mat-form-field class="md-margin-left-2">
@@ -188,6 +198,16 @@
               <mat-select [ngModel]="paymentUpaid" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
                   {{ item.text | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name |translate}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -540,6 +560,16 @@
               </mat-form-field>
             </div>
           </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name |translate}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
@@ -707,6 +737,16 @@
               </mat-select>
             </mat-form-field>
           </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name |translate}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>{{'ORDERS.SUBTITLE1.TITLE3'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
@@ -861,6 +901,16 @@
               <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name |translate}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div fxLayout="row" fxLayoutAlign="start center">
             <div class="md-margin-left-2">{{'ORDERS.SUBTITLE1.TITLE9'|translate}}</div>
             <div class="md-margin-left-2 unicorn-dark-theme">
@@ -990,6 +1040,16 @@
               <mat-select [ngModel]="paymentCompleted" name="payment" (valueChange)="paymentChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of paymentList" [value]="item.value">
                   {{ item.text | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name |translate}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -1148,6 +1208,16 @@
               <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name |translate}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>{{'ORDERS.SUBTITLE1.TITLE5'|translate}}:</div>
             <mat-form-field class="md-margin-left-2">
@@ -1277,6 +1347,16 @@
               <button mat-raised-button color="pimary" (click)="filterDate()">{{'ORDERS.BUTTON.TITLE2'|translate}}</button>
             </div>
           </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name |translate}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
           <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div>{{'ORDERS.SUBTITLE1.TITLE6'|translate}}: </div>
             <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
@@ -1400,6 +1480,16 @@
               <mat-select [ngModel]="sourcingPacking" name="sourcing" (valueChange)="sourcingChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of sourcingList" [value]="item.value">
                   {{ item.text | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
+            <mat-form-field class="md-margin-right-2">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name |translate}}
                 </mat-option>
               </mat-select>
             </mat-form-field>

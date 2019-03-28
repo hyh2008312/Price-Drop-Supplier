@@ -178,7 +178,7 @@ export class OrderMainComponent implements OnInit {
     value: 'Order Paid Time'
   }];
 
-  channelId: any;
+  channelId: any = '0';
   channelList: any;
 
   sourcingPacking: any = false;
@@ -359,6 +359,7 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceAll;
         paid_start_time = this.psAll;
         paid_end_time = this.peAll;
+        order_source_channel_id = this.channelId;
         break;
       case 1:
         status = 'Unpaid';
@@ -421,6 +422,7 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceAudit;
         paid_start_time = this.psAudit;
         paid_end_time = this.peAudit;
+        order_source_channel_id = this.channelId;
         break;
       case 5:
         status = 'Canceled';
@@ -435,6 +437,7 @@ export class OrderMainComponent implements OnInit {
         cod_status = this.paymentCanceled;
         start_time = this.csCanceled;
         end_time = this.ceCanceled;
+        order_source_channel_id = this.channelId;
         break;
       case 6:
         status = 'Completed';
@@ -451,6 +454,7 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceCompleted;
         paid_start_time = this.psCompleted;
         paid_end_time = this.peCompleted;
+        order_source_channel_id = this.channelId;
         break;
       case 7:
         status = 'Refunded';
@@ -467,6 +471,7 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceRefunded;
         paid_start_time = this.psRefunded;
         paid_end_time = this.peRefunded;
+        order_source_channel_id = this.channelId;
         break;
       case 8:
         if(event.resetPage) {
@@ -481,6 +486,7 @@ export class OrderMainComponent implements OnInit {
         cod_status = this.paymentExpired;
         start_time = this.csExpired;
         end_time = this.ceExpired;
+        order_source_channel_id = this.channelId;
         break;
       case 9:
         status = 'Undelivered';
@@ -497,6 +503,7 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceUndelivered;
         paid_start_time = this.psUndelivered;
         paid_end_time = this.peUndelivered;
+        order_source_channel_id = this.channelId;
         break;
       default:
         break;
@@ -834,14 +841,7 @@ export class OrderMainComponent implements OnInit {
   }
 
   channelChange($event) {
-    switch (this.selectedIndex) {
-      case 2:
-        this.channelId = $event;
-        break;
-      case 3:
-        this.channelId = $event;
-        break;
-    }
+    this.channelId = $event;
 
     this.changeProducts({
       index: this.selectedIndex,
