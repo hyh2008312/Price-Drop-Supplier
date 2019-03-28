@@ -19,6 +19,8 @@ export class UploadOrderDialogComponent implements OnInit {
   mode: any = 'indeterminate';
   value: any = 30;
 
+  error: any;
+
   constructor(
     public dialogRef: MatDialogRef<UploadOrderDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -150,15 +152,15 @@ export class UploadOrderDialogComponent implements OnInit {
             orders[thirdOrderId].custAddress = item[3];
             orders[thirdOrderId].orderData = [];
             orders[thirdOrderId].orderData.push({
-              sku: item[5].split('_')[0],
-              quantity: parseInt(item[8]),
-              amount: item[9]
+              sku: item[6],
+              quantity: parseInt(item[9]),
+              amount: item[10]
             });
           } else {
             orders[thirdOrderId].orderData.push({
-              sku: item[5].split('_')[0],
-              quantity: parseInt(item[8]),
-              amount: item[9]
+              sku: item[6],
+              quantity: parseInt(item[9]),
+              amount: item[10]
             });
           }
         }
@@ -180,7 +182,7 @@ export class UploadOrderDialogComponent implements OnInit {
       this.isLoading = false;
       this.data.isEdit = true;
       this.openSnackBar('Meesho orders are successfully saved.');
-      this.close();
+      this.error = data.data;
     }).catch((res) => {
       this.isLoading = false;
       this.openSnackBar('Some Error');
