@@ -939,6 +939,7 @@ export class ProductMainComponent implements OnInit {
             orderItem.Selling_Price = parseInt((im.unitPrice).toString());
             orderItem.MRP = parseInt((im.saleUnitPrice).toString());
             orderItem.Souring_Cost = parseInt(im.sourcingPrice);
+            orderItem.Shipping_Cost = parseInt(item.shipping.priceItem);
             orderItem.China_Domestic_Shipping = parseInt(item.shipping.chinaDomesticShipping);
             orderItem.Supplier_Name = item.shopName;
             for(let i = 0; i < item.productSpecification.length; i++) {
@@ -1263,6 +1264,7 @@ export class ProductMainComponent implements OnInit {
         orderItem.Selling_Price = parseInt((im.unitPrice).toString());
         orderItem.MRP = parseInt((im.saleUnitPrice).toString());
         orderItem.Souring_Cost = parseInt(im.sourcingPrice);
+        orderItem.Shipping_Cost = parseInt(item.shipping.priceItem);
         orderItem.China_Domestic_Shipping = parseInt(item.shipping.chinaDomesticShipping);
         orderItem.Supplier_Name = item.shopName;
         for(let i = 0; i < item.productSpecification.length; i++) {
