@@ -147,7 +147,7 @@ export class UploadOrderDialogComponent implements OnInit {
             orders[thirdOrderId] = {};
             orders[thirdOrderId].thirdOrderNumber = thirdOrderId;
             orders[thirdOrderId].thirdPartyId = 2;
-            orders[thirdOrderId].trackingNumber = item[10];
+            orders[thirdOrderId].trackingNumber = item[11];
             orders[thirdOrderId].custName = item[2];
             orders[thirdOrderId].custAddress = item[3];
             orders[thirdOrderId].orderData = [];
