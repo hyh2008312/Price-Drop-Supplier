@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-warehouse-add-inventory-dialog',
   templateUrl: './add-location-dialog.component.html',
-  styleUrls: ['../_inventory.scss']
+  styleUrls: ['../_location.scss']
 })
 
 export class AddInventoryDialogComponent implements OnInit {
