@@ -5,7 +5,7 @@ import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-warehouse-add-inventory-dialog',
+  selector: 'app-warehouse-location-add-location-dialog',
   templateUrl: './add-location-dialog.component.html',
   styleUrls: ['../_location.scss']
 })
