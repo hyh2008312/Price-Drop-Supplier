@@ -334,6 +334,17 @@ export class InventoryMainComponent implements OnInit {
 
   }
 
+  exportNew() {
+    let quantity = this.quantityWare? this.quantityWare: null;
+    let warehouse_id: any = this.warehouseId? this.warehouseId: null;
+    this.inventoryService.download({
+      quantity,
+      warehouse_id
+    }).then((res) => {
+      window.open(res.downloadUrl);
+    }).catch((res) => {});
+  }
+
   s2ab(s) {
     const buf = new ArrayBuffer(s.length);
     const view = new Uint8Array(buf);

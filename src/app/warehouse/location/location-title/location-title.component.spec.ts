@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeImageDialogComponent } from './location-image-dialog.component';
+import { LocationTitleComponent } from './location-title.component';
 
-describe('HomeImageDialogComponent', () => {
-  let component: HomeImageDialogComponent;
-  let fixture: ComponentFixture<HomeImageDialogComponent>;
+describe('LocationTitleComponent', () => {
+  let component: LocationTitleComponent;
+  let fixture: ComponentFixture<LocationTitleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeImageDialogComponent ]
+      declarations: [ LocationTitleComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeImageDialogComponent);
+    fixture = TestBed.createComponent(LocationTitleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

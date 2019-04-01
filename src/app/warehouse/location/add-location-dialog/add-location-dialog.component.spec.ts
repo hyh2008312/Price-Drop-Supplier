@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeImageDialogComponent } from './location-image-dialog.component';
+import { AddInventoryDialogComponent } from './add-location-dialog.component';
 
-describe('HomeImageDialogComponent', () => {
-  let component: HomeImageDialogComponent;
-  let fixture: ComponentFixture<HomeImageDialogComponent>;
+describe('AddInventoryDialogComponent', () => {
+  let component: AddInventoryDialogComponent;
+  let fixture: ComponentFixture<AddInventoryDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeImageDialogComponent ]
+      declarations: [ AddInventoryDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeImageDialogComponent);
+    fixture = TestBed.createComponent(AddInventoryDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

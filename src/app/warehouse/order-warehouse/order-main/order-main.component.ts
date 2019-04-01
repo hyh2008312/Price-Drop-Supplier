@@ -365,6 +365,7 @@ export class OrderMainComponent implements OnInit {
         paid_end_time = this.peAll;
         low_price = this.min;
         high_price = this.max;
+        order_source_channel_id = this.channelId;
         break;
       case 1:
         status = 'Unpaid';
@@ -377,6 +378,7 @@ export class OrderMainComponent implements OnInit {
         page = this.orderUnpaidIndex;
         low_price = this.min;
         high_price = this.max;
+        order_source_channel_id = this.channelId;
         break;
       case 2:
         status = 'Packing';
@@ -434,6 +436,7 @@ export class OrderMainComponent implements OnInit {
         paid_end_time = this.peAudit;
         low_price = this.min;
         high_price = this.max;
+        order_source_channel_id = this.channelId;
         break;
       case 5:
         status = 'Canceled';
@@ -450,6 +453,7 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceCanceled;
         low_price = this.min;
         high_price = this.max;
+        order_source_channel_id = this.channelId;
         break;
       case 6:
         status = 'Completed';
@@ -468,6 +472,7 @@ export class OrderMainComponent implements OnInit {
         paid_end_time = this.peCompleted;
         low_price = this.min;
         high_price = this.max;
+        order_source_channel_id = this.channelId;
         break;
       case 7:
         status = 'Refunded';
@@ -486,6 +491,7 @@ export class OrderMainComponent implements OnInit {
         paid_end_time = this.peRefunded;
         low_price = this.min;
         high_price = this.max;
+        order_source_channel_id = this.channelId;
         break;
       case 8:
         if(event.resetPage) {
@@ -502,6 +508,7 @@ export class OrderMainComponent implements OnInit {
         end_time = this.ceExpired;
         low_price = this.min;
         high_price = this.max;
+        order_source_channel_id = this.channelId;
         break;
       // case 9:
       //   status = 'Undelivered';

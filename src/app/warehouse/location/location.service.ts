@@ -8,7 +8,7 @@ import { BaseApi } from '../../config/app.api';
 import { AuthenticationService } from '../../shared/services/authentication/authentication.service';
 
 @Injectable()
-export class InventoryService {
+export class LocationService {
 
   constructor( private http: Http, private baseUrl: BaseApi, private auth: AuthenticationService,
                public router: Router) { }

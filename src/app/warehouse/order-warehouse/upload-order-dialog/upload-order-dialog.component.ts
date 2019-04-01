@@ -1,4 +1,4 @@
- import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { FormBuilder } from '@angular/forms';
 
@@ -75,15 +75,15 @@ export class UploadOrderDialogComponent implements OnInit {
           orders[item[0]].thirdPartyId = 3;
           orders[item[0]].orderData = [];
           orders[item[0]].orderData.push({
-            sku: item[4],
+            sku: item[5],
             quantity: 1,
-            amount: item[7]
+            amount: item[8]
           });
         } else {
           orders[item[0]].orderData.push({
-            sku: item[4],
+            sku: item[5],
             quantity: 1,
-            amount: item[7]
+            amount: item[8]
           });
         }
       }
@@ -104,7 +104,7 @@ export class UploadOrderDialogComponent implements OnInit {
       this.isLoading = false;
       this.data.isEdit = true;
       this.openSnackBar('GlowRoad orders are successfully saved');
-      this.close();
+      this.error = data.data;
     }).catch((res) => {
       this.isLoading = false;
       this.openSnackBar('Some Error');
