@@ -6,6 +6,7 @@ import { LocationItemComponent } from './location-item/location-item.component';
 import { LocationTitleComponent } from './location-title/location-title.component';
 import { LocationTitleFixedComponent } from './location-title-fixed/location-title-fixed.component';
 import { LocationImageDialogComponent } from './location-image-dialog/location-image-dialog.component';
+import { AddLocationDialogComponent } from './add-location-dialog/add-location-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { LocationRoutingModule } from './location.routes.module';
@@ -25,11 +26,13 @@ import { LocationService } from './location.service';
     LocationTitleComponent,
     LocationImageDialogComponent,
     ToolTipsComponent,
-    LocationTitleFixedComponent
+    LocationTitleFixedComponent,
+    AddLocationDialogComponent
   ],
   entryComponents: [
     LocationImageDialogComponent,
-    ToolTipsComponent
+    ToolTipsComponent,
+    AddLocationDialogComponent
   ],
   providers: [
     LocationService

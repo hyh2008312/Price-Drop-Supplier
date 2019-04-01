@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['../_location.scss']
 })
 
-export class AddInventoryDialogComponent implements OnInit {
+export class AddLocationDialogComponent implements OnInit {
 
 
   warehouseList: any;
@@ -18,7 +18,7 @@ export class AddInventoryDialogComponent implements OnInit {
   locationForm: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<AddInventoryDialogComponent>,
+    public dialogRef: MatDialogRef<AddLocationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private inventoryService: LocationService,
     private snackBar: MatSnackBar
