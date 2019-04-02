@@ -3,7 +3,7 @@ import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
 import { InventoryService } from '../inventory.service';
 import { InventoryImageDialogComponent } from '../inventory-image-dialog/inventory-image-dialog.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import {ToolTipsComponent} from '../tool-tips/tool-tips.component';
+import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
 
 @Component({
   selector: 'app-warehouse-inventory-item',
@@ -28,10 +28,7 @@ export class InventoryItemComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {
-
-
-  }
+  ngOnInit(): void {}
 
   openLargeImage(data) {
     let dialogRef = this.dialog.open(InventoryImageDialogComponent, {

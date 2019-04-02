@@ -1296,7 +1296,6 @@ export class ProductMainComponent implements OnInit {
     const newData: any = <any[][]>(utils.sheet_to_json(ws, {header: 1}));
 
 
-    console.log(newData)
     // let pack = [];
     // for(let i = 0; i < newData.length; i++) {
     //   const item = newData[i];

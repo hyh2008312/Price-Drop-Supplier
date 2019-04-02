@@ -94,19 +94,43 @@ export class UploadOrderDialogComponent implements OnInit {
       data.push(orders[k]);
     }
 
-    this.createGlowRoadOrder(data);
+    let cutArray = [];
+    let len = Math.ceil(data.length / 50);
+    for(let i = 0; i < len; i++) {
+      if(i < len - 1) {
+        cutArray.push(data.slice(i * 50, (i + 1) * 50));
+      } else {
+        cutArray.push(data.slice(i * 50, data.length));
+      }
+    }
+    console.log(cutArray);
+
+    let i = 0;
+
+    this.createGlowRoadOrder(cutArray, i);
 
   }
 
-  createGlowRoadOrder(orders) {
-    this.isLoading = true;
-    this.orderService.createOrders({orders}).then((data) => {
+  createGlowRoadOrder(orders, i) {
+    if(i > orders.length - 1) {
       this.isLoading = false;
       this.data.isEdit = true;
-      this.openSnackBar('GlowRoad orders are successfully saved');
-      this.error = data.data;
+      this.openSnackBar('GlowRoad orders are successfully saved.');
+      return;
+    }
+    this.isLoading = true;
+    this.orderService.createOrders({orders: orders[i]}).then((data) => {
+      if(i == 0) {
+        this.error = [];
+      }
+      i++;
+      this.createGlowRoadOrder(orders, i);
+      for(let item of data.data) {
+        this.error.push(item);
+      }
     }).catch((res) => {
-      this.isLoading = false;
+      i++;
+      this.createGlowRoadOrder(orders, i);
       this.openSnackBar('Some Error');
     });
   }
@@ -172,19 +196,41 @@ export class UploadOrderDialogComponent implements OnInit {
       data.push(orders[k]);
     }
 
-    this.createMeeshoOrder(data);
+    let cutArray = [];
+    let len = Math.ceil(data.length / 50);
+    for(let i = 0; i < len; i++) {
+      if(i < len - 1) {
+        cutArray.push(data.slice(i * 50, (i + 1) * 50));
+      } else {
+        cutArray.push(data.slice(i * 50, data.length));
+      }
+    }
+
+    let i = 0;
+    this.createMeeshoOrder(cutArray, i);
 
   }
 
-  createMeeshoOrder(orders) {
-    this.isLoading = true;
-    this.orderService.createMeeshoOrders({orders}).then((data) => {
+  createMeeshoOrder(orders, i) {
+    if(i > orders.length - 1) {
       this.isLoading = false;
       this.data.isEdit = true;
       this.openSnackBar('Meesho orders are successfully saved.');
-      this.error = data.data;
+      return;
+    }
+    this.isLoading = true;
+    this.orderService.createMeeshoOrders({orders: orders[i]}).then((data) => {
+      if(i == 0) {
+        this.error = [];
+      }
+      i++;
+      this.createMeeshoOrder(orders, i);
+      for(let item of data.data) {
+        this.error.push(item);
+      }
     }).catch((res) => {
-      this.isLoading = false;
+      i++;
+      this.createMeeshoOrder(orders, i);
       this.openSnackBar('Some Error');
     });
   }
