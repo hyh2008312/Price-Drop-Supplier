@@ -305,7 +305,8 @@
       "TITLE8": "取消第三方订单",
       "TITLE9": "上传Chapman订单",
       "TITLE10": "上传Zoomtail订单",
-      "TITLE11": "上传第三方订单"
+      "TITLE11": "上传第三方订单",
+      "TITLE12": "上传Shop101订单"
     },
     "DIALOG": {
       "TITLE1": "创建第三方平台订单",

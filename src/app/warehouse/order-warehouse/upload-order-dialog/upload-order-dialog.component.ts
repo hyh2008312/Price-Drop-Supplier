@@ -4,7 +4,9 @@ import { FormBuilder } from '@angular/forms';
 
 import { OrderService } from '../order.service';
  import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
- import { read, utils, WorkBook, WorkSheet } from 'xlsx';
+ import {read, utils, WorkBook, WorkSheet, write} from 'xlsx';
+
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-warehouse-order-upload-order-dialog',
@@ -56,7 +58,22 @@ export class UploadOrderDialogComponent implements OnInit {
     reader.readAsBinaryString(target.files[0]);
   }
 
+  uploadShop101(evt: any) {
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>(evt.target);
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    const reader: FileReader = new FileReader();
+    reader.onload = (e: any) => {
+      /* read workbook */
+      const bstr: string = e.target.result;
+      const wb: WorkBook = read(bstr, {type: 'binary'});
 
+
+      this.getSheetsShop101(wb);
+
+    };
+    reader.readAsBinaryString(target.files[0]);
+  }
 
   getSheets(wb) {
     const wsname: string = wb.SheetNames[0];
@@ -103,19 +120,71 @@ export class UploadOrderDialogComponent implements OnInit {
         cutArray.push(data.slice(i * 50, data.length));
       }
     }
-    console.log(cutArray);
 
     let i = 0;
 
-    this.createGlowRoadOrder(cutArray, i);
+    this.createGlowRoadOrder(cutArray, i, 'GlowRoad');
 
   }
 
-  createGlowRoadOrder(orders, i) {
+  getSheetsShop101(wb) {
+    const wsname: string = wb.SheetNames[0];
+    const ws: WorkSheet = wb.Sheets[wsname];
+
+    /* save data */
+    const newData: any = <any[][]>(utils.sheet_to_json(ws, {header: 1}));
+
+    let orders = {};
+    for(let i = 0; i < newData.length; i++) {
+      const item = newData[i];
+      if(i > 0) {
+        if(!orders[item[0]]) {
+          orders[item[0]] = {};
+          orders[item[0]].thirdOrderNumber = item[0];
+          orders[item[0]].thirdPartyId = 1;
+          orders[item[0]].orderData = [];
+          orders[item[0]].orderData.push({
+            sku: item[5],
+            quantity: parseInt(item[2]),
+            amount: item[4]
+          });
+        } else {
+          orders[item[0]].orderData.push({
+            sku: item[5],
+            quantity: parseInt(item[2]),
+            amount: item[4]
+          });
+        }
+      }
+    }
+
+    let data = [];
+    for(let k in orders) {
+      data.push(orders[k]);
+    }
+
+    let cutArray = [];
+    let len = Math.ceil(data.length / 50);
+    for(let i = 0; i < len; i++) {
+      if(i < len - 1) {
+        cutArray.push(data.slice(i * 50, (i + 1) * 50));
+      } else {
+        cutArray.push(data.slice(i * 50, data.length));
+      }
+    }
+
+    let i = 0;
+
+    this.createGlowRoadOrder(cutArray, i, 'Shop101');
+
+  }
+
+  createGlowRoadOrder(orders, i, name) {
     if(i > orders.length - 1) {
       this.isLoading = false;
       this.data.isEdit = true;
       this.openSnackBar('GlowRoad orders are successfully saved.');
+      this.export(name);
       return;
     }
     this.isLoading = true;
@@ -124,13 +193,13 @@ export class UploadOrderDialogComponent implements OnInit {
         this.error = [];
       }
       i++;
-      this.createGlowRoadOrder(orders, i);
+      this.createGlowRoadOrder(orders, i, name);
       for(let item of data.data) {
         this.error.push(item);
       }
     }).catch((res) => {
       i++;
-      this.createGlowRoadOrder(orders, i);
+      this.createGlowRoadOrder(orders, i, name);
       this.openSnackBar('Some Error');
     });
   }
@@ -207,15 +276,16 @@ export class UploadOrderDialogComponent implements OnInit {
     }
 
     let i = 0;
-    this.createMeeshoOrder(cutArray, i);
+    this.createMeeshoOrder(cutArray, i, 'Meesho');
 
   }
 
-  createMeeshoOrder(orders, i) {
+  createMeeshoOrder(orders, i, name) {
     if(i > orders.length - 1) {
       this.isLoading = false;
       this.data.isEdit = true;
       this.openSnackBar('Meesho orders are successfully saved.');
+      this.export(name);
       return;
     }
     this.isLoading = true;
@@ -224,13 +294,13 @@ export class UploadOrderDialogComponent implements OnInit {
         this.error = [];
       }
       i++;
-      this.createMeeshoOrder(orders, i);
+      this.createMeeshoOrder(orders, i, name);
       for(let item of data.data) {
         this.error.push(item);
       }
     }).catch((res) => {
       i++;
-      this.createMeeshoOrder(orders, i);
+      this.createMeeshoOrder(orders, i, name);
       this.openSnackBar('Some Error');
     });
   }
@@ -273,22 +343,47 @@ export class UploadOrderDialogComponent implements OnInit {
       }
     }
 
-    this.createChapmanOrder(data);
+    let cutArray = [];
+    let len = Math.ceil(data.length / 50);
+    for(let i = 0; i < len; i++) {
+      if(i < len - 1) {
+        cutArray.push(data.slice(i * 50, (i + 1) * 50));
+      } else {
+        cutArray.push(data.slice(i * 50, data.length));
+      }
+    }
+
+    let i = 0;
+
+    this.createChapmanOrder(cutArray, i, 'Chapman');
 
   }
 
-  createChapmanOrder(orders) {
-    this.isLoading = true;
-    this.orderService.createChapmanOrders({
-      channelId: 5,
-      orders
-    }).then((data) => {
+  createChapmanOrder(orders, i, name) {
+    if(i > orders.length - 1) {
       this.isLoading = false;
       this.data.isEdit = true;
       this.openSnackBar('Chapman orders are successfully saved.');
-      this.close();
+      this.export(name);
+      return;
+    }
+
+    this.isLoading = true;
+    this.orderService.createChapmanOrders({
+      channelId: 5,
+      orders: orders[i]
+    }).then((data) => {
+      if(i == 0) {
+        this.error = [];
+      }
+      i++;
+      this.createChapmanOrder(orders, i, name);
+      for(let item of data.data) {
+        this.error.push(item);
+      }
     }).catch((res) => {
-      this.isLoading = false;
+      i++;
+      this.createChapmanOrder(orders, i, name);
       this.openSnackBar('Some Error');
     });
   }
@@ -330,22 +425,47 @@ export class UploadOrderDialogComponent implements OnInit {
       }
     }
 
-    this.createZoomtailOrders(data);
+    let cutArray = [];
+    let len = Math.ceil(data.length / 50);
+    for(let i = 0; i < len; i++) {
+      if(i < len - 1) {
+        cutArray.push(data.slice(i * 50, (i + 1) * 50));
+      } else {
+        cutArray.push(data.slice(i * 50, data.length));
+      }
+    }
+
+    let i = 0;
+
+    this.createZoomtailOrders(data, i, 'Zoomtail');
 
   }
 
-  createZoomtailOrders(orders) {
-    this.isLoading = true;
-    this.orderService.createZoomtailOrders({
-      channelId: 4,
-      orders
-    }).then((data) => {
+  createZoomtailOrders(orders, i, name) {
+    if(i > orders.length - 1) {
       this.isLoading = false;
       this.data.isEdit = true;
       this.openSnackBar('Zoomtail orders are successfully saved.');
-      this.close();
+      this.export(name);
+      return;
+    }
+
+    this.isLoading = true;
+    this.orderService.createZoomtailOrders({
+      channelId: 4,
+      orders: orders[i]
+    }).then((data) => {
+      if(i == 0) {
+        this.error = [];
+      }
+      i++;
+      this.createZoomtailOrders(orders, i, name);
+      for(let item of data.data) {
+        this.error.push(item);
+      }
     }).catch((res) => {
-      this.isLoading = false;
+      i++;
+      this.createZoomtailOrders(orders, i, name);
       this.openSnackBar('Some Error');
     });
   }
@@ -356,6 +476,43 @@ export class UploadOrderDialogComponent implements OnInit {
       duration: 4000,
       verticalPosition: 'top'
     });
+  }
+
+  export(name) {
+    if(!this.error || this.error.length == 0) {
+      return;
+    }
+    const ws_name = name;
+    const wb: WorkBook = { SheetNames: [], Sheets: {} };
+    let packing: any = [];
+    let excel: any = this.error;
+
+    for(let item of excel) {
+      let orderItem: any = {};
+      orderItem.third_party_order_id = item.thirdOrderNumber;
+      orderItem.sku = item.sku;
+      orderItem.reason = item.reason;
+      packing.push(orderItem);
+    }
+
+    const ws: any = utils.json_to_sheet(packing);
+    wb.SheetNames.push(ws_name);
+    wb.Sheets[ws_name] = ws;
+    const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+
+
+    saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), ws_name + new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
+      '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate()) +'.xlsx');
+
+  }
+
+  s2ab(s) {
+    const buf = new ArrayBuffer(s.length);
+    const view = new Uint8Array(buf);
+    for (let i = 0; i !== s.length; ++i) {
+      view[i] = s.charCodeAt(i) & 0xFF;
+    }
+    return buf;
   }
 
 }

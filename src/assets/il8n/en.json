@@ -305,7 +305,8 @@
       "TITLE8": "Cancel Third Party Orders",
       "TITLE9": "Upload Chapman Orders",
       "TITLE10": "Upload Zoomtail Orders",
-      "TITLE11": "Upload Third Party Orders"
+      "TITLE11": "Upload Third Party Orders",
+      "TITLE12": "Upload Shop101 Orders"
     },
     "DIALOG": {
       "TITLE1": "Create Third Party Order",

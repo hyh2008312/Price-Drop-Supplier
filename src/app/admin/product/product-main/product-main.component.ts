@@ -1559,7 +1559,7 @@ export class ProductMainComponent implements OnInit {
 
   exportSpecid() {
     const _wb: WorkBook = { SheetNames: [], Sheets: {} };
-    const wbname = `绍兴上虞音欠玥服饰贸易有限公司-${new Date().getTime()}`;
+    const wbname = `Women-Flats`;
     let packing: any = [];
 
     for(let item of specid) {

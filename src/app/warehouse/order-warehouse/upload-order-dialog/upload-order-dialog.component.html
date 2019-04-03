@@ -10,6 +10,10 @@
   </div>
   <div class="md-margin-top-3" fxLayout="row wrap" fxLayoutAlign="start center">
     <label class="md-margin-bottom-2 md-margin-right-2">
+      <input class="sc-product__hide" type="file" (change)="uploadShop101($event)">
+      <div class="sc-product__button">{{'ORDERS.BUTTON.TITLE12'|translate}}</div>
+    </label>
+    <label class="md-margin-bottom-2 md-margin-right-2">
       <input class="sc-product__hide" type="file" (change)="uploadGlowRoad($event)">
       <div class="sc-product__button">{{'ORDERS.BUTTON.TITLE5'|translate}}</div>
     </label>
