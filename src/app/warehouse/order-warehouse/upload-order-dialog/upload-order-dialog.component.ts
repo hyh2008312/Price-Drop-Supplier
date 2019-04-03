@@ -193,10 +193,10 @@ export class UploadOrderDialogComponent implements OnInit {
         this.error = [];
       }
       i++;
-      this.createGlowRoadOrder(orders, i, name);
       for(let item of data.data) {
         this.error.push(item);
       }
+      this.createGlowRoadOrder(orders, i, name);
     }).catch((res) => {
       i++;
       this.createGlowRoadOrder(orders, i, name);
@@ -284,7 +284,7 @@ export class UploadOrderDialogComponent implements OnInit {
     if(i > orders.length - 1) {
       this.isLoading = false;
       this.data.isEdit = true;
-      this.openSnackBar('Meesho orders are successfully saved.');
+      this.openSnackBar(name + ' orders are successfully saved.');
       this.export(name);
       return;
     }
@@ -294,10 +294,10 @@ export class UploadOrderDialogComponent implements OnInit {
         this.error = [];
       }
       i++;
-      this.createMeeshoOrder(orders, i, name);
       for(let item of data.data) {
         this.error.push(item);
       }
+      this.createMeeshoOrder(orders, i, name);
     }).catch((res) => {
       i++;
       this.createMeeshoOrder(orders, i, name);
@@ -377,10 +377,10 @@ export class UploadOrderDialogComponent implements OnInit {
         this.error = [];
       }
       i++;
-      this.createChapmanOrder(orders, i, name);
       for(let item of data.data) {
         this.error.push(item);
       }
+      this.createChapmanOrder(orders, i, name);
     }).catch((res) => {
       i++;
       this.createChapmanOrder(orders, i, name);
@@ -459,10 +459,10 @@ export class UploadOrderDialogComponent implements OnInit {
         this.error = [];
       }
       i++;
-      this.createZoomtailOrders(orders, i, name);
       for(let item of data.data) {
         this.error.push(item);
       }
+      this.createZoomtailOrders(orders, i, name);
     }).catch((res) => {
       i++;
       this.createZoomtailOrders(orders, i, name);
@@ -501,7 +501,7 @@ export class UploadOrderDialogComponent implements OnInit {
     const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
 
 
-    saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), ws_name + new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
+    saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), ws_name+'-Cancel-' + new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
       '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate()) +'.xlsx');
 
   }
