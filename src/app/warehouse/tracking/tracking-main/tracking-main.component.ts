@@ -55,6 +55,9 @@ export class TrackingMainComponent implements OnInit {
     text: 'PACKAGING.SEARCHLIST.TITLE3',
     value: 'order_number'
   }, {
+    text: 'PACKAGING.SEARCHLIST.TITLE5',
+    value: 'third_platform_number'
+  }, {
     text: 'PACKAGING.SEARCHLIST.TITLE4',
     value: 'sku'
   }];
@@ -138,6 +141,9 @@ export class TrackingMainComponent implements OnInit {
 
   showNav: any = false;
 
+  channelId: any = false;
+  channelList: any;
+
   constructor(
     private adminService: TrackingService,
     private userService: UserService,
@@ -148,6 +154,7 @@ export class TrackingMainComponent implements OnInit {
   ) {
 
     this.getWarehouseList();
+    this.getChannelList();
 
     this.userService.currentUser.subscribe((data) => {
       if(data) {
@@ -244,6 +251,7 @@ export class TrackingMainComponent implements OnInit {
     let is_cod: any = null;
     let is_positive_sequence: any = null;
     let warehouse_id: any = null;
+    let platform_id: any = null
 
     switch ($event.index) {
       case 0:
@@ -251,6 +259,7 @@ export class TrackingMainComponent implements OnInit {
         is_cod = this.codAll;
         is_positive_sequence = this.sortAll;
         warehouse_id = this.wbAll;
+        platform_id = this.channelId? this.channelId: null;
         break;
       case 1:
         is_battery = this.btProcessing;
@@ -261,6 +270,7 @@ export class TrackingMainComponent implements OnInit {
         create_end_time = this.ceProcessing;
         is_positive_sequence = this.sortProcessing;
         warehouse_id = this.wbProcessing;
+        platform_id = this.channelId? this.channelId: null;
         break;
       case 2:
         is_battery = this.btShipped;
@@ -271,6 +281,7 @@ export class TrackingMainComponent implements OnInit {
         packing_end_time = this.ceShipped;
         is_positive_sequence = this.sortShipped;
         warehouse_id = this.wbShipped;
+        platform_id = this.channelId? this.channelId: null;
         break;
       case 3:
         status = 'Package Deleted';
@@ -287,6 +298,7 @@ export class TrackingMainComponent implements OnInit {
         create_end_time = this.ceNotFound;
         is_positive_sequence = this.sortNotFound;
         warehouse_id = this.wbNotFound;
+        platform_id = this.channelId? this.channelId: null;
         break;
     }
 
@@ -315,7 +327,8 @@ export class TrackingMainComponent implements OnInit {
       is_battery,
       is_cod,
       is_positive_sequence,
-      warehouse_id
+      warehouse_id,
+      platform_id
     }).then((data) => {
       this.length = data.count;
       switch ($event.index) {
@@ -810,4 +823,25 @@ export class TrackingMainComponent implements OnInit {
     this.showNav = $event;
   }
 
+  getChannelList() {
+    this.adminService.getChannelList().then((data) => {
+      this.channelList = [...data];
+      this.channelList.unshift({
+        id: '0',
+        name: 'PriceDrop'
+      });
+      this.channelList.unshift({
+        id: false,
+        name: 'ORDERS.TITLE1'
+      });
+    });
+  }
+
+  channelChange($event) {
+    this.channelId = $event;
+
+    this.changePurchaseLists({
+      index: this.selectedIndex
+    });
+  }
 }

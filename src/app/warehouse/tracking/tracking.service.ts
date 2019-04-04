@@ -57,9 +57,7 @@ export class TrackingService {
     return this.http.post(url, product, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   pickEdit(product:any): Promise<any> {
@@ -76,9 +74,7 @@ export class TrackingService {
     return this.http.post(url, product, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   pickStatus(product:any): Promise<any> {
@@ -95,9 +91,7 @@ export class TrackingService {
     return this.http.post(url, product, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   pickStatusChange(product:any): Promise<any> {
@@ -114,9 +108,7 @@ export class TrackingService {
     return this.http.post(url, product, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getPickList(params:any): Promise<any> {
@@ -133,9 +125,7 @@ export class TrackingService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   pickDelete(params) {
@@ -151,9 +141,7 @@ export class TrackingService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   addNotes(params) {
@@ -169,9 +157,7 @@ export class TrackingService {
     return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
   }
 
   getWarehouseList(): Promise<any> {
@@ -187,9 +173,23 @@ export class TrackingService {
     return this.http.get(url, options)
       .toPromise()
       .then(response => response.json())
-      .catch((error) => {
-        this.handleError(error, this)
-      });
+      .catch((error) => this.handleError(error, this));
+  }
+
+  getChannelList() {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}order/channels/list/`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => this.handleError(error, this));
   }
 
   private handleError (error: Response | any, target?: any) {

@@ -71,6 +71,14 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
+            <div class="md-margin-left-2 md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name |translate}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
 
         </div>
@@ -163,6 +171,14 @@
               <mat-select [ngModel]="wbProcessing" name="warehouse" (valueChange)="warehouseChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
                   {{ item.warehouseName | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="md-margin-left-2 md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name |translate}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -289,6 +305,14 @@
               <mat-select [ngModel]="wbShipped" name="warehouse" (valueChange)="warehouseChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
                   {{ item.warehouseName| translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="md-margin-left-2 md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name |translate}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -478,6 +502,14 @@
               <mat-select [ngModel]="wbNotFound" name="warehouse" (valueChange)="warehouseChange($event)" >
                 <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
                   {{ item.warehouseName| translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="md-margin-left-2 md-margin-right-2">{{'ORDERS.SUBTITLE1.TITLE8'|translate}}: </div>
+            <mat-form-field class="sc-product__product-sort">
+              <mat-select [ngModel]="channelId" name="type" (valueChange)="channelChange($event)" >
+                <mat-option class="md-align-center" *ngFor="let item of channelList" [value]="item.id">
+                  {{ item.name |translate}}
                 </mat-option>
               </mat-select>
             </mat-form-field>

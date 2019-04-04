@@ -57,7 +57,8 @@
       "TITLE1": "Tracking Number",
       "TITLE2": "Packaging Number",
       "TITLE3": "Order Number",
-      "TITLE4": "SKU"
+      "TITLE4": "SKU",
+      "TITLE5": "Third Party Order Number"
     },
     "BATTERYLIST": {
       "TITLE1": "All",
@@ -90,6 +91,7 @@
         "TITLE14": "No",
         "TITLE15": "Notes",
         "TITLE16": "Sourcing",
+        "TITLE17": "Third Party Order #",
         "BUTTON1": "Edit",
         "BUTTON2": "Add Note",
         "BUTTON3": "Complete",

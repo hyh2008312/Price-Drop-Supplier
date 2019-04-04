@@ -20,7 +20,7 @@
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <div class="sc-product__product-list" *ngFor="let item of location;let i = index;">
-            <app-warehouse-location-item [status]="0" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-location-item>
+            <app-warehouse-location-item [status]="0" [index]="i" (productChange)="productChange($event)" [location]="item"></app-warehouse-location-item>
           </div>
           <mat-paginator [length]="length"
                          [pageIndex]="inventoryWareIndex - 1"
@@ -87,7 +87,7 @@
         </div>
         <div class="sc-product__product-bg" fxLayout="column">
           <div class="sc-product__product-list" *ngFor="let item of inventoryAll;let i = index;">
-            <app-warehouse-location-item [status]="1" [index]="i" (productChange)="productChange($event)" [product]="item"></app-warehouse-location-item>
+            <app-warehouse-location-item [status]="1" [index]="i" (productChange)="productChange($event)" [location]="item"></app-warehouse-location-item>
           </div>
           <mat-paginator [length]="length"
                          [pageIndex]="inventoryAllIndex - 1"

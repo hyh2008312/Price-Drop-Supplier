@@ -4,7 +4,7 @@
     <div class="md-margin-left-2">{{'PACKAGING.ITEM.TITLE2'|translate}}: {{product.created | amTz:'Asia/Shanghai' | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
     <div class="md-margin-left-2" *ngIf="product.pickStatus == 'Packaging Completed'">{{'PACKAGING.ITEM.TITLE3'|translate}}: {{product.packagingTime | amTz:'Asia/Shanghai' | amDateFormat:'YYYY-MM-DD HH:mm:ss'}}</div>
     <div class="md-margin-left-2" *ngIf="product.warehouseName">{{'PACKAGING.ITEM.TITLE4'|translate}}: {{product.warehouseName}}</div>
-    <div class="md-margin-left-2" *ngIf="product.thirdParty">{{'PACKAGING.ITEM.TITLE16'|translate}}: {{product.thirdParty}}{{product.thirdPartyName? '('+product.pickSouringName+')': ''}}</div>
+    <div class="md-margin-left-2" *ngIf="product.thirdParty">{{'PACKAGING.ITEM.TITLE16'|translate}}: {{product.thirdParty}}{{product.pickSouringName? '('+product.pickSouringName+')': ''}}</div>
   </div>
   <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
     <div class="md-margin-right-2" fxFlex="60" fxLayout="column" fxLayoutAlign="start stretch">
@@ -21,8 +21,11 @@
             </div>
             <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
               <div>{{'PACKAGING.ITEM.TITLE6'|translate}}: {{item.orderNumber}}</div>
-              <div class="md-margin-left-2" *ngIf="item.attribute != ''">{{'PACKAGING.ITEM.TITLE7'|translate}}: {{item.attribute}}</div>
-              <div class="md-margin-left-2 sc-product__product-red">{{'PACKAGING.ITEM.TITLE8'|translate}}: {{item.quantity}}</div>
+              <div class="md-margin-left-2" *ngIf="item.thirdPlatformNumber">{{'PACKAGING.ITEM.TITLE17'|translate}}: {{item.thirdPlatformNumber}}</div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center">
+              <div class="md-margin-right-2" *ngIf="item.attribute != ''">{{'PACKAGING.ITEM.TITLE7'|translate}}: {{item.attribute}}</div>
+              <div class="sc-product__product-red">{{'PACKAGING.ITEM.TITLE8'|translate}}: {{item.quantity}}</div>
             </div>
           </div>
         </div>

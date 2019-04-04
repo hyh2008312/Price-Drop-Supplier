@@ -54,7 +54,7 @@ export class LocationMainComponent implements OnInit {
   inventoryWare: any = false;
   inventoryWareIndex: any = 1;
 
-  warehouseId: any = 2;
+  warehouseId: any;
   warehouseList: any;
 
   showNav: any = false;
@@ -147,6 +147,11 @@ export class LocationMainComponent implements OnInit {
 
   scrollChange($event) {
     this.showNav = $event;
+  }
+
+  warehouseChange(event) {
+    this.warehouseId = event;
+    this.changeLocationLists({index: this.selectedIndex});
   }
 
 }

@@ -14,7 +14,7 @@ import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
 export class LocationItemComponent implements OnInit {
 
   @Input() status: number = 0;
-  @Input() product: any;
+  @Input() location: any;
   @Input() index: number = 0;
   @Output() productChange = new EventEmitter<any>();
 
@@ -23,7 +23,7 @@ export class LocationItemComponent implements OnInit {
   isEdit: boolean = false;
 
   constructor(
-    private inventoryService: LocationService,
+    private locationService: LocationService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {}
@@ -57,8 +57,8 @@ export class LocationItemComponent implements OnInit {
     if(!this.isEdit) {
       this.isEdit = true;
     } else {
-      this.inventoryService.editInventory(this.product).then((data) => {
-        this.product = data;
+      this.locationService.editInventory(this.location).then((data) => {
+        this.location = data;
         this.isEdit = false;
       });
     }
