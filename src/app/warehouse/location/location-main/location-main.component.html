@@ -1,6 +1,6 @@
 <div class="container">
   <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
-    <mat-tab-group color="primary" (selectedTabChange)="changeInventoryLists($event)" [(selectedIndex)]="selectedIndex">
+    <mat-tab-group color="primary" (selectedTabChange)="changeLocationLists($event)" [(selectedIndex)]="selectedIndex">
       <mat-tab label="货架管理" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="row" fxLayoutAlign="start center">
@@ -40,13 +40,6 @@
       </mat-tab>
       <mat-tab label="货架位置及变体" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
-          <mat-form-field class="sc-product__product-sort">
-            <mat-select [ngModel]="quantityAll" name="sort" (valueChange)="quantityChange($event)" >
-              <mat-option class="md-align-center" *ngFor="let item of quantityList" [value]="item.value">
-                {{ item.text | translate }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >
