@@ -1,6 +1,6 @@
 {
   "NAV": {
-    "TITLE1": "SUPPLY CHAIN"
+    "TITLE1": "Supply Chain Management System"
   },
   "HOME": {
     "TITLE1": "SOURCING",
@@ -21,12 +21,12 @@
   },
   "PACKAGING": {
     "TITLE1": "All",
-    "TITLE2": "Pending Packaging",
-    "TITLE3": "Packaging Completed",
-    "TITLE4": "Package Deleted",
-    "TITLE5": "Not Found",
+    "TITLE2": "Pending Packing",
+    "TITLE3": "Packing Completed",
+    "TITLE4": "Packing Canceled",
+    "TITLE5": "Product Not Found",
     "SUBTITLE": {
-      "TITLE1": "Package",
+      "TITLE1": "Packing List",
       "TITLE2": "Status",
       "TITLE3": "Tracking Number",
       "TITLE4": "Carrier",
@@ -39,9 +39,9 @@
       "TITLE2": "Filter by COD",
       "TITLE3": "Sort by Created Time",
       "TITLE4": "Filter by Warehouse",
-      "TITLE5": "You haven't published any package yet.",
+      "TITLE5": "There is no packing items.",
       "TITLE6": "to",
-      "TITLE7": "Filter by Packaging Time",
+      "TITLE7": "Filter by Packing Time",
       "TITLE8": "Search by",
       "TITLE9": "Start Date",
       "TITLE10": "End Date",
@@ -49,13 +49,13 @@
       "BUTTON1": "Confirm",
       "BUTTON2": "Reset",
       "BUTTON3": "Export Excel",
-      "BUTTON4": "Export Packaging List",
+      "BUTTON4": "Export Packing List",
       "BUTTON5": "Export PDF",
-      "BUTTON6": "Create Package Item"
+      "BUTTON6": "Create Packing List"
     },
     "SEARCHLIST": {
       "TITLE1": "Tracking Number",
-      "TITLE2": "Packaging Number",
+      "TITLE2": "Packing Number",
       "TITLE3": "Order Number",
       "TITLE4": "SKU",
       "TITLE5": "Third Party Order Number"
@@ -75,28 +75,28 @@
       "TITLE2": "Reverse"
     },
      "ITEM": {
-        "TITLE1": "Package Number",
+        "TITLE1": "Packing Number",
         "TITLE2": "Create Time",
-        "TITLE3": "Packaging Time",
+        "TITLE3": "Packing Time",
         "TITLE4": "Warehouse",
         "TITLE5": "SKU",
         "TITLE6": "Order #",
         "TITLE7": "Attributes",
         "TITLE8": "Quantity",
-        "TITLE9": "Pending Packaging",
-        "TITLE10": "Packaging Completed",
-        "TITLE11": "Package Deleted",
+        "TITLE9": "Pending Packing",
+        "TITLE10": "Packing Completed",
+        "TITLE11": "Packing Canceled",
         "TITLE12": "Not Found",
         "TITLE13": "Yes",
         "TITLE14": "No",
         "TITLE15": "Notes",
-        "TITLE16": "Sourcing",
+        "TITLE16": "Order Channel",
         "TITLE17": "Third Party Order #",
-        "BUTTON1": "Edit",
+        "BUTTON1": "Edit Packing",
         "BUTTON2": "Add Note",
-        "BUTTON3": "Complete",
+        "BUTTON3": "Mark as Ship",
         "BUTTON4": "Not Found",
-        "BUTTON5": "Delete",
+        "BUTTON5": "Cancel Packing",
         "BUTTON6": "Reset"
      },
      "DIALOG": {
@@ -106,42 +106,42 @@
        "BUTTON2": "Cancel"
      },
      "DIALOG1": {
-       "TITLE1": "Create Package Information",
-       "TITLE2": "Package Number",
+       "TITLE1": "Create Packing List",
+       "TITLE2": "Packing Number",
        "TITLE3": "Tracking Number",
        "TITLE4": "Warehouse",
        "TITLE5": "Select Warehouse",
-       "TITLE6": "Package Item",
+       "TITLE6": "Packing Items",
        "TITLE7": "Order Number",
        "TITLE8": "Quantity",
-       "TITLE9": "Edit Package Information",
+       "TITLE9": "Edit Packing List",
        "BUTTON1": "Save",
        "BUTTON2": "Cancel",
-       "BUTTON3": "Add Package Item"
+       "BUTTON3": "Add Packing Items"
      },
      "DIALOG2": {
-       "TITLE1": "Packaging Completed",
-       "TITLE2": "Whether to confirm packaging completed？",
-       "TITLE3": "The quantity of goods in this packaging is more than 1, please confirm if there's something missing?",
-       "TITLE4": "Is it confirmed",
+       "TITLE1": "Double Check the Quantity",
+       "TITLE2": "Please confirm your packing",
+       "TITLE3": "The quantity of SKUs in this packing list is more than 1, please double check the quantity!",
+       "TITLE4": "The Quantity is Correct",
        "TITLE5": "Cancel packaging completed",
        "TITLE6": "Is packaging completed cancel?",
        "BUTTON1": "Confirm",
-       "BUTTON2": "Cancel"
+       "BUTTON2": "Close"
      },
      "DIALOG3": {
-       "TITLE1": "Not Found",
-       "TITLE2": "Whether to confirm package item is not found？",
-       "BUTTON1": "Confirm",
-       "BUTTON2": "Cancel"
+       "TITLE1": "Product Not Found",
+       "TITLE2": "If the product cannot be found, please mark as Not Found",
+       "BUTTON1": "Mark as Not Found",
+       "BUTTON2": "Close"
      },
      "DIALOG4": {
-        "TITLE1": "Confirm Delete",
-        "TITLE2": "Whether to confirm packaging deletion?",
-        "TITLE3": "Undelete",
-        "TITLE4": "Whether to cancel packaging deletion?",
+        "TITLE1": "Packing Cancel",
+        "TITLE2": "Want to cancel this packing order?",
+        "TITLE3": "Re-initiate Packing",
+        "TITLE4": "Want to re-initiate this packing order?",
         "BUTTON1": "Confirm",
-        "BUTTON2": "Cancel"
+        "BUTTON2": "Close"
      }
   },
   "INVENTORY": {
