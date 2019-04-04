@@ -1,0 +1,24 @@
+<div>
+  <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="30"
+         fxLayout="column" fxLayoutAlign="center center">
+      <div class="xb-bold md-margin-bottom-1">{{product.sku}}</div>
+    </div>
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="30"
+         fxLayout="column" fxLayoutAlign="center center">
+      {{product.quantity}}
+    </div>
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="30"
+         fxLayout="row" fxLayoutAlign="center center">
+      {{product.quantity}}
+    </div>
+    <div class="sc-product__product-id sc__accent-dark" fxFlex="10"
+         fxLayout="column" fxLayoutAlign="center center">
+      <button mat-raised-button color="primary" *ngIf="!isEdit"
+              (click)="edit()">{{'INVENTORY.ITEM.BUTTON2'|translate}}</button>
+      <button mat-raised-button color="primary" *ngIf="isEdit"
+              (click)="edit()">{{'INVENTORY.ITEM.BUTTON3'|translate}}</button>
+    </div>
+  </div>
+</div>
+

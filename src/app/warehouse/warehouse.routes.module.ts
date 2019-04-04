@@ -20,6 +20,9 @@ const routes: Routes = [
         path: 'order-warehouse',
         loadChildren: './order-warehouse/order-warehouse.module#OrderWarehouseModule'
       }, {
+        path: 'location',
+        loadChildren: './location/location.module#LocationModule'
+      }, {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'

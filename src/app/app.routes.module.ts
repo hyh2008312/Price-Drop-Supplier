@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes} from '@angular/router';
-import { PublicGuard, ProtectedGuard } from 'ngx-auth';
+import { ProtectedGuard } from 'ngx-auth';
 
 import { AppComponent } from './app.component';
 
@@ -21,11 +21,11 @@ const routes: Routes = [
         canActivate: [ ProtectedGuard ],
         loadChildren: 'app/warehouse/warehouse.module#WarehouseModule'
       }, {
-        path: '',
-        loadChildren: 'app/landing-page/landing-page.module#LandingPageModule'
-      }, {
         path: 'about',
         loadChildren: 'app/about/about.module#AboutModule'
+      }, {
+        path: '',
+        loadChildren: 'app/landing-page/landing-page.module#LandingPageModule'
       }
     ]
   }, {
