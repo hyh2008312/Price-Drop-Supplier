@@ -97,7 +97,7 @@
         "BUTTON3": "Mark as Ship",
         "BUTTON4": "Not Found",
         "BUTTON5": "Cancel Packing",
-        "BUTTON6": "Reset"
+        "BUTTON6": "Re-initiate Packing"
      },
      "DIALOG": {
        "TITLE1": "Add Note",
