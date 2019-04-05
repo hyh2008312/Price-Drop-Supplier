@@ -10,6 +10,7 @@ import { AddNotesDialogComponent } from '../add-notes-dialog/add-notes-dialog.co
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 import { ConfirmPackageDialogComponent } from '../confirm-package-dialog/confirm-package-dialog.component';
 import { ConfirmNotFoundDialogComponent } from '../confirm-not-found-dialog/confirm-not-found-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-warehouse-tracking-item',
@@ -31,7 +32,8 @@ export class TrackingItemComponent implements OnInit {
     private adminService: TrackingService,
     private userService: UserService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private trans: TranslateService
   ) {
     this.userService.currentUser.subscribe((data) => {
       if(data) {
@@ -208,6 +210,14 @@ export class TrackingItemComponent implements OnInit {
       duration: 1500,
       verticalPosition: 'top'
     });
+  }
+
+  getLangs() {
+    if(this.trans.currentLang == 'en') {
+      return 'Asia/Kolkata';
+    } else {
+      return 'Asia/Shanghai';
+    }
   }
 
 }
