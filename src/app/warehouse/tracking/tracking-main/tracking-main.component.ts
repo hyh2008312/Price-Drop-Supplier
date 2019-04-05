@@ -626,11 +626,11 @@ export class TrackingMainComponent implements OnInit {
     for(let item of excel) {
       for( let itm of item.pickVariants) {
         let orderItem: any = {};
-        orderItem['订单号'] = itm.orderNumber;
-        orderItem['运单号'] = item.internationalTrackingNumber;
-        orderItem['物流公司'] = item.internationalCarrier;
-        orderItem['创建日期'] = item.created.split('T')[0];
-        orderItem['拣货日期'] = item.packagingTime ? item.packagingTime.split('T')[0]: '';
+        orderItem['订单号(Order Number)'] = itm.orderNumber;
+        orderItem['运单号(Tracking Number)'] = item.internationalTrackingNumber;
+        orderItem['物流公司(Carrier)'] = item.internationalCarrier;
+        orderItem['创建日期(Created Time)'] = item.created.split('T')[0];
+        orderItem['拣货日期(Packing Time)'] = item.packagingTime ? item.packagingTime.split('T')[0]: '';
         packing.push(orderItem);
       }
     }
@@ -640,7 +640,7 @@ export class TrackingMainComponent implements OnInit {
     wb.Sheets[ws_name] = ws;
     const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
 
-    saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), '拣货单号表' +
+    saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), '拣货单号表(Packing List)' +
       new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
       '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate())
       + '.xlsx');
@@ -668,16 +668,16 @@ export class TrackingMainComponent implements OnInit {
       for(let i = 0; i < item.pickVariants.length; i++) {
         const itm = item.pickVariants[i];
         let orderItem: any = {};
-        orderItem['运单号'] = item.internationalTrackingNumber;
+        orderItem['运单号(Tracking Number)'] = item.internationalTrackingNumber;
         if(i == 0) {
-          orderItem['物流公司'] = item.internationalCarrier;
-          orderItem['创建日期'] = item.created.split('T')[0];
+          orderItem['物流公司(Carrier)'] = item.internationalCarrier;
+          orderItem['创建日期(Created Time)'] = item.created.split('T')[0];
         } else {
-          orderItem['物流公司'] = '';
-          orderItem['创建日期'] = '';
+          orderItem['物流公司(Carrier)'] = '';
+          orderItem['创建日期(Created Time)'] = '';
         }
         orderItem['sku'] = itm.sku;
-        orderItem['拣货数量'] = itm.quantity;
+        orderItem['拣货数量(Quantity)'] = itm.quantity;
         packing.push(orderItem);
       }
     }
@@ -687,7 +687,7 @@ export class TrackingMainComponent implements OnInit {
     wb.Sheets[ws_name] = ws;
     const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
 
-    saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), '拣货单号表' +
+    saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), '拣货单号表(Packing List)' +
       new Date().getUTCFullYear() + '-' + (new Date().getMonth() + 1 < 10? '0' + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) +
       '-' +(new Date().getDate() < 10? '0' + new Date().getDate() : new Date().getDate())
       + '.xlsx');
