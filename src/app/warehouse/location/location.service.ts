@@ -43,7 +43,7 @@ export class LocationService {
     return array.join('&');
   }
 
-  getInventoryList(params:any): Promise<any> {
+  getLaneList(params:any): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -60,7 +60,7 @@ export class LocationService {
       .catch((error) => this.handleError(error, this));
   }
 
-  getAllInventoryList(): Promise<any> {
+  addLane(params): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -69,47 +69,14 @@ export class LocationService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}purchase/inventory/available/list/`;
+    const url = `${this.baseUrl.url}/purchase/track/number/return/`;
 
-    return this.http.get(url, options)
+    return this.http.post(url, params, options)
       .toPromise()
       .then(response => response.json())
       .catch((error) => this.handleError(error, this));
   }
 
-  getAllWarehouseInventoryList(params: any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}purchase/warehouse/new/inventory/list/?${this.serializeParams(params)}`;
-
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch((error) => this.handleError(error, this));
-  }
-
-  getWarehouseInventoryList(params:any): Promise<any> {
-
-    let headers = new Headers({
-      'Content-Type': 'application/json'
-    });
-    this.createAuthorizationHeader(headers);
-
-    let options = new RequestOptions({headers:headers});
-
-    const url = `${this.baseUrl.url}purchase/warehouse/inventory/list/?${this.serializeParams(params)}`;
-
-    return this.http.get(url, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch((error) => this.handleError(error, this));
-  }
 
   getWarehouseList(): Promise<any> {
 

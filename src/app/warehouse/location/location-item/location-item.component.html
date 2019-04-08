@@ -1,24 +1,18 @@
-<div>
-  <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
-    <div class="sc-product__product-id md-margin-right-2" fxFlex="30"
-         fxLayout="column" fxLayoutAlign="center center">
-      <div class="xb-bold md-margin-bottom-1">{{location.allPath}}</div>
-    </div>
-    <div class="sc-product__product-id md-margin-right-2" fxFlex="30"
-         fxLayout="column" fxLayoutAlign="center center">
-      {{location.storageType}}
-    </div>
-    <div class="sc-product__product-id md-margin-right-2" fxFlex="30"
-         fxLayout="row" fxLayoutAlign="center center">
-      {{location.warehouseName}}
-    </div>
-    <div class="sc-product__product-id sc__accent-dark" fxFlex="10"
-         fxLayout="column" fxLayoutAlign="center center">
-      <button mat-raised-button color="primary" *ngIf="!isEdit"
-              (click)="edit()">{{'INVENTORY.ITEM.BUTTON2'|translate}}</button>
-      <button mat-raised-button color="primary" *ngIf="isEdit"
-              (click)="edit()">{{'INVENTORY.ITEM.BUTTON3'|translate}}</button>
-    </div>
+<div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start center">
+  <div class="md-margin-right-2" fxFlex="30">
+    {{location.allPath}}
+  </div>
+  <div class="md-margin-right-2" fxFlex="30">
+    {{location.storageType}}
+  </div>
+  <div class="md-margin-right-2" fxFlex="30">
+    {{location.warehouseName}}
+  </div>
+  <div class="sc-product__product-id sc__accent-dark" fxFlex="10"
+       fxLayout="column" fxLayoutAlign="center center">
+    <button mat-raised-button color="primary" *ngIf="!isEdit"
+            (click)="edit()">{{'INVENTORY.ITEM.BUTTON2'|translate}}</button>
+    <button mat-raised-button color="primary" *ngIf="isEdit"
+            (click)="edit()">{{'INVENTORY.ITEM.BUTTON3'|translate}}</button>
   </div>
 </div>
-

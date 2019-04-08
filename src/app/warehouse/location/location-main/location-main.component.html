@@ -2,8 +2,8 @@
   <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
     <mat-tab-group color="primary" (selectedTabChange)="changeLocationLists($event)" [(selectedIndex)]="selectedIndex">
       <mat-tab label="货架管理" >
-        <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
-          <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="sc-product__container md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+          <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
             <div class="md-margin-right-2">{{'INVENTORY.TITLE4'|translate}}</div>
             <mat-form-field class="sc-product__product-sort">
               <mat-select [ngModel]="warehouseId" (valueChange)="warehouseChange($event)">
@@ -12,6 +12,14 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
+          </div>
+          <div *ngIf="warehouseId" fxLayout="row" fxLayoutAlign="end center">
+            <button mat-raised-button color="primary" (click)="createRack()">
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <i class="material-icons">add</i>
+                <span class="md-margin-left-1">创建货架</span>
+              </div>
+            </button>
           </div>
         </div>
         <div class="md-margin-top-1">
@@ -23,17 +31,17 @@
             <app-warehouse-location-item [status]="0" [index]="i" (productChange)="productChange($event)" [location]="item"></app-warehouse-location-item>
           </div>
           <mat-paginator [length]="length"
-                         [pageIndex]="inventoryWareIndex - 1"
+                         [pageIndex]="locationIndex - 1"
                          [pageSize]="pageSize"
                          [pageSizeOptions]="pageSizeOptions"
                          (page)="changePage($event)"
-                         *ngIf="inventoryWare && inventoryWare.length > 0">
+                         *ngIf="location && location.length > 0">
           </mat-paginator>
           <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
-               *ngIf="inventoryWare && inventoryWare.length <= 0">
+               *ngIf="location && location.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">
               <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-product__product-title-1 md-margin-top-4">{{'INVENTORY.TITLE3' | translate}}</div>
+              <div class="sc-product__product-title-1 md-margin-top-4">暂无货架信息</div>
             </div>
           </div>
         </div>

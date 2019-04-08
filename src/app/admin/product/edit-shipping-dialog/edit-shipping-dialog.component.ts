@@ -89,7 +89,9 @@ export class EditShippingDialogComponent implements OnInit {
       checked: index > -1? false : true,
       shippingTime: index > -1? shippingTime : '0',
       shippingTimeMin: this.data.shipping.shippingTimeMin,
-      shippingTimeMax: this.data.shipping.shippingTimeMax
+      shippingTimeMax: this.data.shipping.shippingTimeMax,
+      processingTimeMin: this.data.shipping.processingTimeMin,
+      processingTimeMax: this.data.shipping.processingTimeMax
     });
 
 

@@ -2,7 +2,7 @@ import { Component, OnInit, Inject} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { LocationService } from '../location.service';
 import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
-import { FormGroup } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-warehouse-location-add-location-dialog',
@@ -13,20 +13,33 @@ import { FormGroup } from '@angular/forms';
 export class AddLocationDialogComponent implements OnInit {
 
 
-  warehouseList: any;
-  warehouseId: any = 2;
+  lane: any;
   locationForm: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<AddLocationDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private inventoryService: LocationService,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private fb: FormBuilder
+  ) {
 
-  ngOnInit() {
-    this.getWarehouseList();
+    this.locationForm = this.fb.group({
+      warehouseId: ['', Validators.required],
+      name: ['', Validators.required],
+      type: ['Rack'],
+      newLane: [''],
+      lane: [''],
+      shelf: [''],
+      bin: ['']
+    });
+
+    this.locationForm.patchValue({
+      warehouseId: this.data.warehouseId
+    });
   }
+
+  ngOnInit() {}
 
   ngOnDestroy() {}
 
@@ -57,9 +70,18 @@ export class AddLocationDialogComponent implements OnInit {
     });
   }
 
-  getWarehouseList() {
-    this.inventoryService.getWarehouseList().then((data) => {
-      this.warehouseList = [...data];
+  getLane() {
+    this.inventoryService.getLaneList({}).then(() => {
+
+    });
+  }
+
+  addLane(event) {
+    this.inventoryService.addLane({
+      type: 'Lane',
+      name: event
+    }).then(() => {
+
     });
   }
 }

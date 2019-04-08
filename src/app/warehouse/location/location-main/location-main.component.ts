@@ -10,6 +10,8 @@ import { saveAs } from 'file-saver';
 import { UserService } from '../../../shared/services/user/user.service';
 import { MatDialog } from '@angular/material';
 
+import { AddLocationDialogComponent } from '../add-location-dialog/add-location-dialog.component';
+
 @Component({
   selector: 'app-warehouse-location-main',
   templateUrl: './location-main.component.html',
@@ -54,12 +56,14 @@ export class LocationMainComponent implements OnInit {
   inventoryWare: any = false;
   inventoryWareIndex: any = 1;
 
-  warehouseId: any;
+  warehouseId: any = false;
   warehouseList: any;
 
   showNav: any = false;
 
   lane: any;
+  Rack: any;
+  shelf: any;
 
   constructor(
     private locationService: LocationService,
@@ -139,8 +143,10 @@ export class LocationMainComponent implements OnInit {
     });
   }
 
-  getAllLocationList() {
-    this.locationService.getLocationList({}).then((data) => {
+  getAllLocationList(warehouseId) {
+    this.locationService.getLocationList({
+      warehouseId
+    }).then((data) => {
       this.lane = [...data];
     });
   }
@@ -151,7 +157,24 @@ export class LocationMainComponent implements OnInit {
 
   warehouseChange(event) {
     this.warehouseId = event;
+    this.getAllLocationList(this.warehouseId);
     this.changeLocationLists({index: this.selectedIndex});
+  }
+
+
+  createRack() {
+    let dialogRef = this.dialog.open(AddLocationDialogComponent, {
+      data: {
+        warehouseId: this.warehouseId,
+        isEdit: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+
+      }
+    });
   }
 
 }
