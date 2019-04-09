@@ -76,10 +76,10 @@ export class AddLocationDialogComponent implements OnInit {
     });
   }
 
-  addLane(event) {
+  addLane() {
     this.inventoryService.addLane({
       type: 'Lane',
-      name: event
+      name: this.locationForm.value.newLane
     }).then(() => {
 
     });
