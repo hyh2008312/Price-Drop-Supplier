@@ -13,7 +13,7 @@
     </div>
     <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field>
-        <mat-select placeholder="选择区域" [(ngModel)]="warehouseId">
+        <mat-select placeholder="选择区域" formControlName="warehouseId">
           <mat-option class="md-align-center" *ngFor="let item of lane" [value]="item.id">
             {{ item.name }}
           </mat-option>

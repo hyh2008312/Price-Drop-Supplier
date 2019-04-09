@@ -893,7 +893,7 @@ export class ProductMainComponent implements OnInit {
     let shop_name = this.searchCategory == 'shop' && this.searchKey && this.searchKey != ''? this.searchKey: null;
     let category_id = this.catPublished? this.catPublished: null;
 
-    this.adminService.getPdfProduct({
+    this.adminService.getB2CProduct({
       category_id,
       min_price,
       max_price,
@@ -902,62 +902,64 @@ export class ProductMainComponent implements OnInit {
       filter_type,
       shop_name
     }).then((res) => {
-      if(res && res.length > 0) {
-        const ws_name = 'catalog';
-        const wb: WorkBook = { SheetNames: [], Sheets: {} };
-        let packing: any = [];
-        let excel: any = [...res];
+      // if(res && res.length > 0) {
+      //   const ws_name = 'catalog';
+      //   const wb: WorkBook = { SheetNames: [], Sheets: {} };
+      //   let packing: any = [];
+      //   let excel: any = [...res];
+      //
+      //   for(let item of excel) {
+      //
+      //     for(let i = 0; i < item.variants.length; i++) {
+      //       let orderItem: any = {};
+      //       orderItem.Category = this.cateA;
+      //       orderItem.Subcategory = this.cateB;
+      //       orderItem.Thirdcategory = this.cateC;
+      //       orderItem.SPU = item.spu;
+      //       orderItem.Title = item.title;
+      //       for(let i = 0; i < item.images.length; i++) {
+      //         if(i < 5) {
+      //           const im = item.images[i];
+      //           orderItem['Picture_' + i] = im;
+      //         }
+      //       }
+      //       const im = item.variants[i];
+      //       orderItem.SKU = im.sku;
+      //       orderItem.MainImage = im.mainImage;
+      //       orderItem.Size = '';
+      //       orderItem.Color = '';
+      //       for(let em of im.attributeValues) {
+      //         if(em.name == 'Size') {
+      //           orderItem.Size = em.value;
+      //         }
+      //         if(em.name == 'Color') {
+      //           orderItem.Color = em.value;
+      //         }
+      //       }
+      //       orderItem.Selling_Price = parseInt((im.unitPrice).toString());
+      //       orderItem.MRP = parseInt((im.saleUnitPrice).toString());
+      //       orderItem.Souring_Cost = parseInt(im.sourcingPrice);
+      //       orderItem.International_Shipping = parseInt(item.shipping.priceItem);
+      //       orderItem.China_Domestic_Shipping = parseInt(item.shipping.chinaDomesticShipping);
+      //       orderItem.Supplier_Name = item.shopName;
+      //       for(let i = 0; i < item.productSpecification.length; i++) {
+      //         const im = item.productSpecification[i];
+      //         orderItem[im.name] = im.content;
+      //       }
+      //       packing.push(orderItem);
+      //     }
+      //
+      //   }
+      //
+      //   const ws: any = utils.json_to_sheet(packing);
+      //   wb.SheetNames.push(ws_name);
+      //   wb.Sheets[ws_name] = ws;
+      //   const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
+      //
+      //   saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `${this.cateA}${this.cateB? '-'+this.cateB:''}${this.cateC? '-'+this.cateC:''}.xlsx`);
+      // }
 
-        for(let item of excel) {
-
-          for(let i = 0; i < item.variants.length; i++) {
-            let orderItem: any = {};
-            orderItem.Category = this.cateA;
-            orderItem.Subcategory = this.cateB;
-            orderItem.Thirdcategory = this.cateC;
-            orderItem.SPU = item.spu;
-            orderItem.Title = item.title;
-            for(let i = 0; i < item.images.length; i++) {
-              if(i < 5) {
-                const im = item.images[i];
-                orderItem['Picture_' + i] = im;
-              }
-            }
-            const im = item.variants[i];
-            orderItem.SKU = im.sku;
-            orderItem.MainImage = im.mainImage;
-            orderItem.Size = '';
-            orderItem.Color = '';
-            for(let em of im.attributeValues) {
-              if(em.name == 'Size') {
-                orderItem.Size = em.value;
-              }
-              if(em.name == 'Color') {
-                orderItem.Color = em.value;
-              }
-            }
-            orderItem.Selling_Price = parseInt((im.unitPrice).toString());
-            orderItem.MRP = parseInt((im.saleUnitPrice).toString());
-            orderItem.Souring_Cost = parseInt(im.sourcingPrice);
-            orderItem.International_Shipping = parseInt(item.shipping.priceItem);
-            orderItem.China_Domestic_Shipping = parseInt(item.shipping.chinaDomesticShipping);
-            orderItem.Supplier_Name = item.shopName;
-            for(let i = 0; i < item.productSpecification.length; i++) {
-              const im = item.productSpecification[i];
-              orderItem[im.name] = im.content;
-            }
-            packing.push(orderItem);
-          }
-
-        }
-
-        const ws: any = utils.json_to_sheet(packing);
-        wb.SheetNames.push(ws_name);
-        wb.Sheets[ws_name] = ws;
-        const wbout = write(wb, { bookType: 'xlsx', bookSST: true, type: 'binary' });
-
-        saveAs(new Blob([this.s2ab(wbout)], { type: 'application/octet-stream' }), `${this.cateA}${this.cateB? '-'+this.cateB:''}${this.cateC? '-'+this.cateC:''}.xlsx`);
-      }
+      window.open(res.downloadUrl);
     });
 
 
@@ -1042,7 +1044,7 @@ export class ProductMainComponent implements OnInit {
       let imgHeight = canvas.height * imgWidth / canvas.width;
       let heightLeft = imgHeight;
 
-      const contentDataURL = canvas.toDataURL('image/png')
+      const contentDataURL = canvas.toDataURL('image/png');
       let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
       let position = 0;
       if(heightLeft < pageHeight) {
@@ -1127,9 +1129,10 @@ export class ProductMainComponent implements OnInit {
         }
       }
 
-      this.adminService.getPdfNewProduct({spu}).then((res) => {
-        this.getExcel(1, res, wsname, index, wb);
-      })
+      this.adminService.getB2CProductBySPU({spu}).then((res) => {
+        window.open(res.downloadUrl)
+        // this.getExcel(1, res, wsname, index, wb);
+      });
     } else {
       console.log('all is OK');
     }
@@ -1159,11 +1162,11 @@ export class ProductMainComponent implements OnInit {
       html+='<tr>';
       html += `<td style="width:550px;word-wrap:break-word;text-align: left;padding: 8px 32px; vertical-align:top;">
               <div style="max-height: 56px;font-size: 20px;line-height: 28px;overflow: hidden;">${item.title}</div></td>`;
-      html += '<td style="width:650px;height: 131px;font-size: 20px;text-align: left;" rowspan="2">'
+      html += '<td style="width:650px;height: 131px;font-size: 20px;text-align: left;" rowspan="2">';
       for(let i = 0; i < item.images.length; i++) {
         if(i < 5) {
           const im = item.images[i];
-          html += `<img style="border: 1px solid rgba(0, 0, 0, .12); border-radius: 2px; margin-left: 8px;" src="${im}" width="120" height="120">`
+          html += `<img style="border: 1px solid rgba(0, 0, 0, .12); border-radius: 2px; margin-left: 8px;" src="${im}" width="120" height="120">`;
         }
       }
       html += '</td>';
@@ -1175,7 +1178,7 @@ export class ProductMainComponent implements OnInit {
       if(number > 1 && number % 12 == 0) {
         html+= '<tr style="height: 131px;">' +
           '<td style="width:550px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: left;padding: 0 32px;">Product</td>' +
-          '<td style="width:650px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: left;padding: 0 8px;">Images</td>'
+          '<td style="width:650px;font-size: 18px;line-height: 24px;font-weight:bold;text-align: left;padding: 0 8px;">Images</td>';
         '</tr>';
       }
 
@@ -1223,7 +1226,7 @@ export class ProductMainComponent implements OnInit {
         this.getSheets(wb, idx);
       }
     }).catch((data) => {
-      console.log(data)
+      console.log(data);
     });
   }
 
