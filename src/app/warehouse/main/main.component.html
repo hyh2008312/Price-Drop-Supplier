@@ -11,7 +11,7 @@
         {{ 'NAV.TITLE1' | translate }}
       </div>
       <div class="md-margin-right-2"> {{ 'NAV.TITLE2' | translate }}</div>
-      <mat-form-field class="md-margin-right-2 sc-navigation__sort">
+      <mat-form-field class="md-margin-right-3 sc-navigation__sort">
         <mat-select [ngModel]="warehouseId" (valueChange)="warehouseChange($event)" >
           <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
             {{ item.warehouseName |translate }}
