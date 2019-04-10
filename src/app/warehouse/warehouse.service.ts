@@ -41,9 +41,31 @@ export class WarehouseService {
     return array.join('&');
   }
 
-  private handleError (error: Response | any) {
+  getWarehouseList(): Promise<any> {
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}purchase/warehouse/list/`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => this.handleError(error, this));
+  }
+
+  private handleError (error: Response | any, target?: any) {
     let errMsg: string;
     if (error instanceof Response) {
+      if(error.status == 401) {
+        if(target) {
+          target.router.navigate(['/account/login/warehouse']);
+        }
+        return Promise.reject(401);
+      }
       const body = error.json() || '';
       const err = body.error || body;
       if(err.detail) {

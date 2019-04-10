@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import { WarehouseService } from '../warehouse.service';
 import { UserService } from '../../shared/services/user/user.service';
 
 @Component({
@@ -60,7 +59,6 @@ export class TopNavigationComponent implements OnInit {
   constructor(
       private router: Router,
       private activatedRoute: ActivatedRoute,
-      private adminService: WarehouseService,
       private useService: UserService
   ) {
     this.useService.currentUser.subscribe((data) => {

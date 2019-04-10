@@ -102,7 +102,6 @@ export class TrackingMainComponent implements OnInit {
   purchaseAll: any = false;
   purchaseAllIndex: any = 1;
   sortAll: any = 'true';
-  wbAll: any = false;
   csProcessing: any;
   ceProcessing: any;
   asProcessing: any;
@@ -111,7 +110,6 @@ export class TrackingMainComponent implements OnInit {
   codProcessing: any = false;
   purchaseProccessing: any = false;
   purchaseProccessingIndex: any = 1;
-  wbProcessing: any = false;
   sortProcessing: any = 'true';
   csShipped: any;
   ceShipped: any;
@@ -119,13 +117,11 @@ export class TrackingMainComponent implements OnInit {
   aeShipped: any;
   btShipped: any = false;
   codShipped: any = false;
-  wbShipped: any = false;
   purchaseShipped: any = false;
   purchaseShippedIndex: any = 1;
   purchaseDeleted: any = false;
   purchaseDeletedIndex: any = 1;
   sortShipped: any = 'true';
-  wbDeleted: any = false;
   csNotFound: any;
   ceNotFound: any;
   asNotFound: any;
@@ -135,8 +131,8 @@ export class TrackingMainComponent implements OnInit {
   purchaseNotFound: any = false;
   purchaseNotFoundIndex: any = 1;
   sortNotFound: any = 'true';
-  wbNotFound: any = false;
 
+  warehouseId: any = false;
   warehouseList: any;
 
   showNav: any = false;
@@ -172,6 +168,30 @@ export class TrackingMainComponent implements OnInit {
 
     this.changePurchaseLists({
       index: 0
+    });
+
+    this.userService.pubWarehouse.subscribe((res) => {
+      this.warehouseId = res;
+      switch (this.selectedIndex) {
+        case 0:
+          this.purchaseAllIndex = 1;
+          break;
+        case 1:
+          this.purchaseProccessingIndex = 1;
+          break;
+        case 2:
+          this.purchaseShippedIndex = 1;
+          break;
+        case 3:
+          this.purchaseDeletedIndex = 1;
+          break;
+        case 4:
+          this.purchaseNotFoundIndex = 1;
+          break;
+      }
+      this.changePurchaseLists({
+        index: this.selectedIndex
+      });
     });
   }
 
@@ -250,15 +270,14 @@ export class TrackingMainComponent implements OnInit {
     let is_battery: any = null;
     let is_cod: any = null;
     let is_positive_sequence: any = null;
-    let warehouse_id: any = null;
-    let platform_id: any = null
+    let warehouse_id: any = this.warehouseId? this.warehouseId: null;
+    let platform_id: any = null;
 
     switch ($event.index) {
       case 0:
         is_battery = this.btAll;
         is_cod = this.codAll;
         is_positive_sequence = this.sortAll;
-        warehouse_id = this.wbAll;
         platform_id = this.channelId? this.channelId: null;
         break;
       case 1:
@@ -269,7 +288,6 @@ export class TrackingMainComponent implements OnInit {
         create_start_time = this.csProcessing;
         create_end_time = this.ceProcessing;
         is_positive_sequence = this.sortProcessing;
-        warehouse_id = this.wbProcessing;
         platform_id = this.channelId? this.channelId: null;
         break;
       case 2:
@@ -280,14 +298,12 @@ export class TrackingMainComponent implements OnInit {
         packing_start_time = this.csShipped;
         packing_end_time = this.ceShipped;
         is_positive_sequence = this.sortShipped;
-        warehouse_id = this.wbShipped;
         platform_id = this.channelId? this.channelId: null;
         break;
       case 3:
         status = 'Package Deleted';
         page = this.purchaseDeletedIndex;
         received_time = true;
-        warehouse_id = this.wbDeleted;
         break;
       case 4:
         is_battery = this.btNotFound;
@@ -297,7 +313,6 @@ export class TrackingMainComponent implements OnInit {
         create_start_time = this.csNotFound;
         create_end_time = this.ceNotFound;
         is_positive_sequence = this.sortNotFound;
-        warehouse_id = this.wbNotFound;
         platform_id = this.channelId? this.channelId: null;
         break;
     }
@@ -558,46 +573,6 @@ export class TrackingMainComponent implements OnInit {
         break;
       case 4:
         this.sortNotFound = $event;
-        this.purchaseNotFoundIndex = 1;
-        this.changePurchaseLists({
-          index: this.selectedIndex
-        });
-        break;
-    }
-  }
-
-  warehouseChange($event) {
-    switch (this.selectedIndex) {
-      case 0:
-        this.wbAll = $event;
-        this.purchaseAllIndex = 1;
-        this.changePurchaseLists({
-          index: this.selectedIndex
-        });
-        break;
-      case 1:
-        this.wbProcessing = $event;
-        this.purchaseProccessingIndex = 1;
-        this.changePurchaseLists({
-          index: this.selectedIndex
-        });
-        break;
-      case 2:
-        this.wbShipped = $event;
-        this.purchaseShippedIndex = 1;
-        this.changePurchaseLists({
-          index: this.selectedIndex
-        });
-        break;
-      case 3:
-        this.wbDeleted = $event;
-        this.purchaseShippedIndex = 1;
-        this.changePurchaseLists({
-          index: this.selectedIndex
-        });
-        break;
-      case 4:
-        this.wbNotFound = $event;
         this.purchaseNotFoundIndex = 1;
         this.changePurchaseLists({
           index: this.selectedIndex

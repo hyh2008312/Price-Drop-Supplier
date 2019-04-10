@@ -254,6 +254,20 @@ export class OrderMainComponent implements OnInit {
 
     this.getChannelList();
 
+    const maxProfit = (prices) => {
+      let n = prices.length;
+      if(n < 2) return 0;
+      let hold = new Array(n);
+      let sold = new Array(n);
+      hold[0] = -prices[0];
+      sold[0] = 0;
+      for(let i = 1; i < n; i++) {
+        hold[i] = Math.max(hold[i - 1], sold[i - 1] - prices[i]);
+        sold[i] = Math.max(sold[i - 1], hold[i - 1] + prices[i]);
+      }
+      return sold[n - 1];
+
+    };
   }
 
   onValueChanged(data) {

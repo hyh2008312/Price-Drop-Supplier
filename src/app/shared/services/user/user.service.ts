@@ -14,6 +14,7 @@ export class UserService {
   currentUser: Subject<any> = new BehaviorSubject<any>(null);
   userCategory: Subject<any> = new BehaviorSubject<any>(null);
   pubCategory: Subject<any> = new BehaviorSubject<any>(null);
+  pubWarehouse: Subject<any> = new BehaviorSubject<any>(null);
 
   constructor(
     private http: Http,
@@ -61,6 +62,10 @@ export class UserService {
 
   public addPubCategory(newCategory: any): void {
     this.pubCategory.next(newCategory);
+  }
+
+  public addPubWarehouse(pubWarehouse: any): void {
+    this.pubWarehouse.next(pubWarehouse);
   }
 
   private handleError (error: Response | any) {

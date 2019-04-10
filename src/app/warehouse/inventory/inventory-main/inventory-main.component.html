@@ -24,16 +24,6 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
-            <div class="md-margin-right-2">{{'INVENTORY.TITLE4'|translate}}</div>
-            <mat-form-field class="sc-product__product-sort">
-              <mat-select [ngModel]="warehouseId" (valueChange)="warehouseChange($event)">
-                <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
-                  {{ item.warehouseName | translate }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
                   fxLayout="row" fxLayoutAlign="start center" >

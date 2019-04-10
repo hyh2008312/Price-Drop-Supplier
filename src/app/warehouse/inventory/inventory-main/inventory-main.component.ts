@@ -97,6 +97,18 @@ export class InventoryMainComponent implements OnInit {
     this.changeInventoryLists({
       index: this.selectedIndex
     });
+
+    this.userService.pubWarehouse.subscribe((res) => {
+      this.warehouseId = res;
+      switch (this.selectedIndex) {
+        case 0:
+          this.inventoryWareIndex = 1;
+          break;
+      }
+      this.changeInventoryLists({
+        index: this.selectedIndex
+      });
+    });
   }
 
   onValueChanged(data) {

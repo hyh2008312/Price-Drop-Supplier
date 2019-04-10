@@ -69,6 +69,7 @@ export class HomeMainComponent implements OnInit {
     text: '货物问题'
   }];
 
+  warehouseId: any = false;
   warehouseList: any;
 
   processingDaysList: any = [{
@@ -104,22 +105,18 @@ export class HomeMainComponent implements OnInit {
 
   purchaseAll: any = false;
   purchaseAllIndex: any = 1;
-  wbAll: any = false;
   sortAll: any = 'true';
   purchaseProccessing: any = false;
   purchaseProccessingIndex: any = 1;
   processingDays: any = false;
   sortProcessing: any = 'true';
-  wbProcessing: any = false;
   purchaseShipped: any = false;
   purchaseShippedIndex: any = 1;
   shippedDays: any = false;
   sortShipped: any = 'false';
-  wbShipped: any = false;
 
   purchasePartiallyDelivered: any = false;
   purchasePartiallyDeliveredIndex: any = 1;
-  wbPartiallyDelivered: any = false;
   sortPartiallyDelivered: any = 'true';
   csPurchasePartiallyDelivered: any;
   cePurchasePartiallyDelivered: any;
@@ -128,7 +125,6 @@ export class HomeMainComponent implements OnInit {
 
   purchaseDelivered: any = false;
   purchaseDeliveredIndex: any = 1;
-  wbDelivered: any = false;
   sortDelivered: any = 'true';
   csPurchaseDelivered: any;
   cePurchaseDelivered: any;
@@ -137,11 +133,9 @@ export class HomeMainComponent implements OnInit {
 
   purchaseWrong: any = false;
   purchaseWrongIndex: any = 1;
-  wbWrong: any = false;
   sortWrong: any = 'true';
   purchaseCanceled: any = false;
   purchaseCanceledIndex: any = 1;
-  wbCanceled: any = false;
 
   showNav: any = false;
 
@@ -172,6 +166,36 @@ export class HomeMainComponent implements OnInit {
 
     this.changePurchaseLists({
       index: 0
+    });
+
+    this.userService.pubWarehouse.subscribe((res) => {
+      this.warehouseId = res;
+      switch (this.selectedIndex) {
+        case 0:
+          this.purchaseAllIndex = 1;
+          break;
+        case 1:
+          this.purchaseProccessingIndex = 1;
+          break;
+        case 2:
+          this.purchaseShippedIndex = 1;
+          break;
+        case 3:
+          this.purchasePartiallyDeliveredIndex = 1;
+          break;
+        case 4:
+          this.purchaseDeliveredIndex = 1;
+          break;
+        case 5:
+          this.purchaseWrongIndex = 1;
+          break;
+        case 6:
+          this.purchaseCanceledIndex = 1;
+          break;
+      }
+      this.changePurchaseLists({
+        index: this.selectedIndex
+      });
     });
   }
 
@@ -259,7 +283,7 @@ export class HomeMainComponent implements OnInit {
     let processing_days: any = null;
     let shipped_days: any = null;
     let is_positive_sequence: any = null;
-    let warehouse_id : any = null;
+    let warehouse_id : any = this.warehouseId? this.warehouseId: null;
     let start_time: any = null;
     let end_time: any = null;
 
@@ -267,7 +291,6 @@ export class HomeMainComponent implements OnInit {
       case 0:
         delivery_status = false;
         is_positive_sequence = this.sortAll? this.sortAll: null;
-        warehouse_id = this.wbAll? this.wbAll: null;
         break;
       case 1:
         status = 'Processing';
@@ -275,7 +298,6 @@ export class HomeMainComponent implements OnInit {
         delivery_status = false;
         processing_days = this.processingDays? this.processingDays: null;
         is_positive_sequence = this.sortProcessing? this.sortProcessing: null;
-        warehouse_id = this.wbProcessing? this.wbProcessing: null;
         break;
       case 2:
         status = 'Shipped';
@@ -283,14 +305,12 @@ export class HomeMainComponent implements OnInit {
         delivery_status = false;
         shipped_days = this.shippedDays? this.shippedDays: null;
         is_positive_sequence = this.sortShipped? this.sortShipped: null;
-        warehouse_id = this.wbShipped? this.wbShipped: null;
         break;
       case 3:
         status = 'Partially Delivered';
         page = this.purchasePartiallyDeliveredIndex;
         received_time = true;
         is_positive_sequence = this.sortPartiallyDelivered? this.sortPartiallyDelivered: null;
-        warehouse_id = this.wbPartiallyDelivered? this.wbPartiallyDelivered: null;
         start_time = this.csPurchasePartiallyDelivered? this.csPurchasePartiallyDelivered: null;
         end_time = this.cePurchasePartiallyDelivered? this.cePurchasePartiallyDelivered: null;
         break;
@@ -298,7 +318,6 @@ export class HomeMainComponent implements OnInit {
         status = 'Delivered';
         page = this.purchaseDeliveredIndex;
         received_time = true;
-        warehouse_id = this.wbDelivered? this.wbDelivered: null;
         is_positive_sequence = this.sortDelivered? this.sortDelivered: null;
         start_time = this.csPurchaseDelivered? this.csPurchaseDelivered: null;
         end_time = this.cePurchaseDelivered? this.cePurchaseDelivered: null;
@@ -306,14 +325,12 @@ export class HomeMainComponent implements OnInit {
       case 5:
         status = 'Wrong Item';
         page = this.purchaseWrongIndex;
-        warehouse_id = this.wbWrong? this.wbWrong: null;
         is_positive_sequence = this.sortWrong? this.sortWrong: null;
         break;
       case 6:
         status = 'Canceled';
         page = this.purchaseCanceledIndex;
         delivery_status = false;
-        warehouse_id = this.wbCanceled? this.wbCanceled: null;
         break;
     }
 
@@ -548,60 +565,6 @@ export class HomeMainComponent implements OnInit {
         this.csPurchaseDelivered = null;
         this.csPurchaseDelivered = null;
         this.csPurchaseDelivered = null;
-        this.purchaseDeliveredIndex = 1;
-        this.changePurchaseLists({
-          index: this.selectedIndex
-        });
-        break;
-    }
-  }
-
-  warehouseChange($event) {
-    switch (this.selectedIndex) {
-      case 0:
-        this.wbAll = $event;
-        this.purchaseProccessingIndex = 1;
-        this.changePurchaseLists({
-          index: this.selectedIndex
-        });
-        break;
-      case 1:
-        this.wbProcessing = $event;
-        this.purchaseProccessingIndex = 1;
-        this.changePurchaseLists({
-          index: this.selectedIndex
-        });
-        break;
-      case 2:
-        this.wbShipped = $event;
-        this.purchaseShippedIndex = 1;
-        this.changePurchaseLists({
-          index: this.selectedIndex
-        });
-        break;
-      case 3:
-        this.wbPartiallyDelivered = $event;
-        this.purchasePartiallyDeliveredIndex = 1;
-        this.changePurchaseLists({
-          index: this.selectedIndex
-        });
-        break;
-      case 4:
-        this.wbDelivered = $event;
-        this.purchaseDeliveredIndex = 1;
-        this.changePurchaseLists({
-          index: this.selectedIndex
-        });
-        break;
-      case 5:
-        this.wbWrong = $event;
-        this.purchaseWrongIndex = 1;
-        this.changePurchaseLists({
-          index: this.selectedIndex
-        });
-        break;
-      case 6:
-        this.wbCanceled = $event;
         this.purchaseDeliveredIndex = 1;
         this.changePurchaseLists({
           index: this.selectedIndex

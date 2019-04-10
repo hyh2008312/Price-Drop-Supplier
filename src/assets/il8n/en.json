@@ -1,6 +1,8 @@
 {
   "NAV": {
-    "TITLE1": "Supply Chain Management System"
+    "TITLE1": "Supply Chain Management System",
+    "TITLE2": "Warehouse",
+    "TITLE3":  "Language"
   },
   "HOME": {
     "TITLE1": "SOURCING",
