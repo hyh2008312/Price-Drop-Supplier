@@ -33,17 +33,6 @@ export class LocationMainComponent implements OnInit {
     value: 'sku'
   }];
 
-  quantityList: any = [{
-    text: 'INVENTORY.QUANTITYLIST.TITLE1',
-    value: false
-  }, {
-    text: 'INVENTORY.QUANTITYLIST.TITLE2',
-    value: '1'
-  }, {
-    text: 'INVENTORY.QUANTITYLIST.TITLE3',
-    value: '0'
-  }];
-
   // MatPaginator Inputs
   length:number = 0;
   pageSize = 50;
@@ -61,9 +50,9 @@ export class LocationMainComponent implements OnInit {
 
   showNav: any = false;
 
+  laneId: any = false;
   lane: any;
-  Rack: any;
-  shelf: any;
+  rack: any;
 
   constructor(
     private locationService: LocationService,
@@ -82,8 +71,6 @@ export class LocationMainComponent implements OnInit {
       }
     });
 
-    this.getWarehouseList();
-
     this.searchForm = this.fb.group({
       searchKey: ['']
     });
@@ -93,6 +80,22 @@ export class LocationMainComponent implements OnInit {
     this.changeLocationLists({
       index: this.selectedIndex
     });
+
+    this.userService.pubWarehouse.subscribe((res) => {
+      this.warehouseId = res;
+      switch (this.selectedIndex) {
+        case 0:
+          this.locationIndex = 1;
+          break;
+        case 1:
+          this.inventoryWareIndex = 1;
+          break;
+      }
+      this.laneId = false;
+      this.getAllLocationList(this.warehouseId);
+      this.changeLocationLists({index: this.selectedIndex});
+    });
+
   }
 
   onValueChanged(data) {
@@ -108,7 +111,7 @@ export class LocationMainComponent implements OnInit {
 
   ngOnInit():void {}
 
-  ngOnDestroy() { }
+  ngOnDestroy() {}
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
@@ -123,14 +126,14 @@ export class LocationMainComponent implements OnInit {
     switch(this.selectedIndex) {
       case 0:
         let params = {
-          warehouse_id: this.warehouseId? this.warehouseId: null
+          warehouse_id: this.warehouseId? this.warehouseId: null,
+          stock_id: this.laneId? this.laneId: null
         };
-        this.locationService.getLocationList(params).then((res) => {
+        this.locationService.getRackList(params).then((res) => {
           this.location = [...res];
         });
       break;
     }
-
   }
 
   getWarehouseList() {
@@ -144,10 +147,15 @@ export class LocationMainComponent implements OnInit {
   }
 
   getAllLocationList(warehouseId) {
-    this.locationService.getLocationList({
-      warehouseId
+    let warehouse_id = warehouseId? warehouseId: null;
+    this.locationService.getLaneList({
+      warehouse_id
     }).then((data) => {
       this.lane = [...data];
+      this.lane.unshift({
+        id: false,
+        allPath: 'PACKAGING.CODLIST.TITLE1'
+      })
     });
   }
 
@@ -155,24 +163,29 @@ export class LocationMainComponent implements OnInit {
     this.showNav = $event;
   }
 
-  warehouseChange(event) {
-    this.warehouseId = event;
-    this.getAllLocationList(this.warehouseId);
-    this.changeLocationLists({index: this.selectedIndex});
+  laneChange($event) {
+    this.laneId = $event;
+    this.changeLocationLists({
+      index: this.selectedIndex
+    });
   }
-
 
   createRack() {
     let dialogRef = this.dialog.open(AddLocationDialogComponent, {
       data: {
         warehouseId: this.warehouseId,
-        isEdit: false
+        laneList: this.lane,
+        isEdit: false,
+        isLaneEdit: false
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if(dialogRef.componentInstance.data.isEdit == true) {
-
+        this.changeLocationLists({index: this.selectedIndex});
+      }
+      if(dialogRef.componentInstance.data.isLaneEdit == true) {
+        this.getAllLocationList(this.warehouseId);
       }
     });
   }

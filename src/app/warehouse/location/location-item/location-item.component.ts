@@ -1,4 +1,4 @@
-import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
+import { Input, Output, Component, OnInit, OnChanges, EventEmitter} from '@angular/core';
 
 import { LocationService } from '../location.service';
 import { LocationImageDialogComponent } from '../location-image-dialog/location-image-dialog.component';
@@ -22,15 +22,24 @@ export class LocationItemComponent implements OnInit {
   isSuperuser: boolean = false;
   isEdit: boolean = false;
 
+  shelfQuantity: any;
+  binQuantity: any;
+
   constructor(
     private locationService: LocationService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-
+  ngOnChanges() {
+    if(!this.shelfQuantity) {
+      this.shelfQuantity = this.location.shelfQuantity;
+    }
+    if(!this.binQuantity) {
+      this.binQuantity = this.location.binQuantity;
+    }
   }
 
   openLargeImage(data) {
@@ -57,11 +66,28 @@ export class LocationItemComponent implements OnInit {
     if(!this.isEdit) {
       this.isEdit = true;
     } else {
-      this.locationService.editInventory(this.location).then((data) => {
+      this.locationService.editRack(this.location).then((data) => {
         this.location = data;
         this.isEdit = false;
       });
     }
   }
+
+  shelfPlus() {
+    this.location.shelfQuantity++;
+  }
+
+  shelfMinus() {
+    this.location.shelfQuantity--;
+  }
+
+  binPlus() {
+    this.location.binQuantity++;
+  }
+
+  binMinus() {
+    this.location.binQuantity--;
+  }
+
 
 }

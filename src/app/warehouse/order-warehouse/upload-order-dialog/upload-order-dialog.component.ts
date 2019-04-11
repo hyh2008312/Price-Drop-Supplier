@@ -183,7 +183,7 @@ export class UploadOrderDialogComponent implements OnInit {
     if(i > orders.length - 1) {
       this.isLoading = false;
       this.data.isEdit = true;
-      this.openSnackBar('GlowRoad orders are successfully saved.');
+      this.openSnackBar(name + ' orders are successfully saved.');
       this.export(name);
 
       this.orderService.formatOrder();

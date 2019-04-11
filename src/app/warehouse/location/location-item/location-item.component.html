@@ -1,18 +1,52 @@
-<div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start center">
+<div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start center" *ngIf="!isEdit">
   <div class="md-margin-right-2" fxFlex="30">
     {{location.allPath}}
   </div>
-  <div class="md-margin-right-2" fxFlex="30">
-    {{location.storageType}}
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
+    {{location.shelfQuantity}}
   </div>
-  <div class="md-margin-right-2" fxFlex="30">
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
+    {{location.binQuantity}}
+  </div>
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
     {{location.warehouseName}}
   </div>
   <div class="sc-product__product-id sc__accent-dark" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">
-    <button mat-raised-button color="primary" *ngIf="!isEdit"
+    <button mat-raised-button color="primary"
             (click)="edit()">{{'INVENTORY.ITEM.BUTTON2'|translate}}</button>
-    <button mat-raised-button color="primary" *ngIf="isEdit"
+  </div>
+</div>
+<div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start center" *ngIf="isEdit">
+  <div class="md-margin-right-2" fxFlex="30">
+    <mat-form-field>
+      <input type="text" matInput  placeholder="货柜编号" [(ngModel)]="location.allPath"/>
+    </mat-form-field>
+  </div>
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center" >
+    <div class="sc-product__product-minus" *ngIf="shelfQuantity < location.shelfQuantity" (click)="shelfMinus()">-</div>
+    <div class="sc-product__product-minus-disabled" *ngIf="shelfQuantity >= location.shelfQuantity">-</div>
+    {{location.shelfQuantity}}
+    <div class="sc-product__product-plus" (click)="shelfPlus()">+</div>
+  </div>
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
+    <div class="sc-product__product-minus" (click)="binMinus()" *ngIf="binQuantity < location.binQuantity">-</div>
+    <div class="sc-product__product-minus-disabled" *ngIf="binQuantity >= location.binQuantity">-</div>
+    {{location.binQuantity}}
+    <div class="sc-product__product-plus" (click)="binPlus()">+</div>
+  </div>
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
+    {{location.warehouseName}}
+  </div>
+  <div class="sc-product__product-id sc__accent-dark" fxFlex="10"
+       fxLayout="column" fxLayoutAlign="center center">
+    <button mat-raised-button color="accent"
             (click)="edit()">{{'INVENTORY.ITEM.BUTTON3'|translate}}</button>
   </div>
 </div>

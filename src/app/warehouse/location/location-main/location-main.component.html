@@ -4,11 +4,11 @@
       <mat-tab label="货架管理" >
         <div class="sc-product__container md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
-            <div class="md-margin-right-2">{{'INVENTORY.TITLE4'|translate}}</div>
+            <div class="md-margin-right-2">货道</div>
             <mat-form-field class="sc-product__product-sort">
-              <mat-select [ngModel]="warehouseId" (valueChange)="warehouseChange($event)">
-                <mat-option class="md-align-center" *ngFor="let item of warehouseList" [value]="item.id">
-                  {{ item.warehouseName | translate }}
+              <mat-select [ngModel]="laneId" (valueChange)="laneChange($event)">
+                <mat-option class="md-align-center" *ngFor="let item of lane" [value]="item.id">
+                  {{ item.allPath | translate }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -30,13 +30,6 @@
           <div class="sc-product__product-list" *ngFor="let item of location;let i = index;">
             <app-warehouse-location-item [status]="0" [index]="i" (productChange)="productChange($event)" [location]="item"></app-warehouse-location-item>
           </div>
-          <mat-paginator [length]="length"
-                         [pageIndex]="locationIndex - 1"
-                         [pageSize]="pageSize"
-                         [pageSizeOptions]="pageSizeOptions"
-                         (page)="changePage($event)"
-                         *ngIf="location && location.length > 0">
-          </mat-paginator>
           <div class="sc-product__product-none" fxLayout="row" fxLayoutAlign="center center"
                *ngIf="location && location.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">

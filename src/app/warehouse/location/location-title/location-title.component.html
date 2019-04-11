@@ -1,16 +1,40 @@
-<div class="sc-product__product-navigation sc-product__product-navigation-{{status}}" fxLayout="row" fxLayoutAlign="start center">
+<div class="sc-product__product-navigation sc-product__product-navigation-{{status}}" fxLayout="row" fxLayoutAlign="start center" *ngIf="status == 0">
   <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="30">
     货架编号
   </div>
-  <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="20">
+  <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
     货架层数
   </div>
-  <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="20">
+  <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
     货架位置数
   </div>
-  <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="20">
+  <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
     仓库名称
   </div>
   <div class="sc-product__product-title-1" fxFlex="10"
        fxLayout="column" fxLayoutAlign="center center">操作</div>
+</div>
+<div class="sc-product__product-navigation sc-product__product-navigation-{{status}}" fxLayout="row" fxLayoutAlign="start center" *ngIf="status == 1">
+  <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="20">
+    货位编号
+  </div>
+  <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
+    货架编号
+  </div>
+  <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
+    SKU
+  </div>
+  <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
+    数量
+  </div>
+  <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
+    入库时间
+  </div>
 </div>

@@ -52,7 +52,7 @@ export class LocationService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}purchase/inventory/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}purchase/storage/lane/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -69,7 +69,7 @@ export class LocationService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}/purchase/track/number/return/`;
+    const url = `${this.baseUrl.url}purchase/storage/lane/rack/add/`;
 
     return this.http.post(url, params, options)
       .toPromise()
@@ -95,7 +95,7 @@ export class LocationService {
       .catch((error) => this.handleError(error, this));
   }
 
-  getLocationList(params): Promise<any> {
+  getRackList(params): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'
@@ -104,7 +104,7 @@ export class LocationService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}purchase/storage/list/?${this.serializeParams(params)}`;
+    const url = `${this.baseUrl.url}purchase/storage/rack/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()
@@ -112,7 +112,7 @@ export class LocationService {
       .catch((error) => this.handleError(error, this));
   }
 
-  editInventory(params): Promise<any> {
+  editRack(params): Promise<any> {
 
     let headers = new Headers({
       'Content-Type': 'application/json'

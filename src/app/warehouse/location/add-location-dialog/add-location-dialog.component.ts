@@ -2,7 +2,7 @@ import { Component, OnInit, Inject} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { LocationService } from '../location.service';
 import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-warehouse-location-add-location-dialog',
@@ -12,9 +12,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 export class AddLocationDialogComponent implements OnInit {
 
-
-  lane: any;
   locationForm: FormGroup;
+
+  error: any;
 
   constructor(
     public dialogRef: MatDialogRef<AddLocationDialogComponent>,
@@ -26,12 +26,11 @@ export class AddLocationDialogComponent implements OnInit {
 
     this.locationForm = this.fb.group({
       warehouseId: ['', Validators.required],
-      name: ['', Validators.required],
-      type: ['Rack'],
+      rackName: ['', Validators.required],
       newLane: [''],
-      lane: [''],
-      shelf: [''],
-      bin: ['']
+      laneId: [''],
+      shelfQuantity: [''],
+      binQuantity: ['']
     });
 
     this.locationForm.patchValue({
@@ -61,7 +60,7 @@ export class AddLocationDialogComponent implements OnInit {
     if(this.locationForm.invalid) {
       return;
     }
-    this.inventoryService.addInventory(this.locationForm.value).then(() => {
+    this.inventoryService.addLane(this.locationForm.value).then(() => {
       this.data.isEdit = true;
       this.openToast('Successfully Saved!');
       this.close();
@@ -70,18 +69,20 @@ export class AddLocationDialogComponent implements OnInit {
     });
   }
 
-  getLane() {
-    this.inventoryService.getLaneList({}).then(() => {
-
-    });
-  }
-
   addLane() {
     this.inventoryService.addLane({
-      type: 'Lane',
-      name: this.locationForm.value.newLane
-    }).then(() => {
-
+      laneName: this.locationForm.value.newLane,
+      warehouseId: this.data.warehouseId
+    }).then((res) => {
+      this.error = false;
+      this.data.laneList = [...res];
+      this.data.laneList.unshift({
+        id: false,
+        allPath: 'PACKAGING.CODLIST.TITLE1'
+      });
+      this.data.isLaneEdit = true;
+    }).catch((res) => {
+      this.openToast(res);
     });
   }
 }
