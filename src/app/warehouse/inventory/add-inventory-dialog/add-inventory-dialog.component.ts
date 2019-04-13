@@ -18,6 +18,9 @@ export class AddInventoryDialogComponent implements OnInit {
   }, {
     text: 'ORDERS.SEARCHTYPELIST.TITLE2',
     value: 'track_number'
+  }, {
+    text: 'ORDERS.SEARCHTYPELIST.TITLE7',
+    value: 'third_party_order_number'
   }];
   searchKey: any;
 
