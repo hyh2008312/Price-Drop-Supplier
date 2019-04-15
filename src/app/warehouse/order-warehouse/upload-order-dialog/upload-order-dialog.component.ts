@@ -224,6 +224,24 @@ export class UploadOrderDialogComponent implements OnInit {
     reader.readAsBinaryString(target.files[0]);
   }
 
+  uploadJMDMeesho(evt: any) {
+
+    /* wire up file reader */
+    const target: DataTransfer = <DataTransfer>(evt.target);
+    if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+    const reader: FileReader = new FileReader();
+    reader.onload = (e: any) => {
+      /* read workbook */
+      const bstr: string = e.target.result;
+      const wb: WorkBook = read(bstr, {type: 'binary'});
+
+
+      this.getSheetsJMDMeesho(wb);
+
+    };
+    reader.readAsBinaryString(target.files[0]);
+  }
+
   getSheets1(wb) {
     const wsname: string = wb.SheetNames[0];
     const ws: WorkSheet = wb.Sheets[wsname];
@@ -282,7 +300,90 @@ export class UploadOrderDialogComponent implements OnInit {
 
   }
 
+  getSheetsJMDMeesho(wb) {
+    const wsname: string = wb.SheetNames[0];
+    const ws: WorkSheet = wb.Sheets[wsname];
+
+    /* save data */
+    const newData: any = <any[][]>(utils.sheet_to_json(ws, {header: 1}));
+
+    let orders = {};
+    for(let i = 0; i < newData.length; i++) {
+      const item = newData[i];
+      if(i > 0) {
+        if(item[0] && item[0] != '') {
+          const thirdOrderId = item[0];
+          if(!orders[thirdOrderId]) {
+
+            orders[thirdOrderId] = {};
+            orders[thirdOrderId].thirdOrderNumber = thirdOrderId;
+            orders[thirdOrderId].thirdPartyId = 2;
+            orders[thirdOrderId].trackingNumber = item[11];
+            orders[thirdOrderId].custName = item[2];
+            orders[thirdOrderId].custAddress = item[3];
+            orders[thirdOrderId].orderData = [];
+            orders[thirdOrderId].orderData.push({
+              sku: item[6],
+              quantity: parseInt(item[9]),
+              amount: item[10]
+            });
+          } else {
+            orders[thirdOrderId].orderData.push({
+              sku: item[6],
+              quantity: parseInt(item[9]),
+              amount: item[10]
+            });
+          }
+        }
+      }
+    }
+
+    let data = [];
+    for(let k in orders) {
+      data.push(orders[k]);
+    }
+
+    let cutArray = [];
+    let len = Math.ceil(data.length / 50);
+    for(let i = 0; i < len; i++) {
+      if(i < len - 1) {
+        cutArray.push(data.slice(i * 50, (i + 1) * 50));
+      } else {
+        cutArray.push(data.slice(i * 50, data.length));
+      }
+    }
+
+    let i = 0;
+    this.createJMDMeeshoOrder(cutArray, i, 'Meesho');
+
+  }
+
   createMeeshoOrder(orders, i, name) {
+    if(i > orders.length - 1) {
+      this.isLoading = false;
+      this.data.isEdit = true;
+      this.openSnackBar(name + ' orders are successfully saved.');
+      this.export(name);
+      return;
+    }
+    this.isLoading = true;
+    this.orderService.createMeeshoOrders({orders: orders[i]}).then((data) => {
+      if(i == 0) {
+        this.error = [];
+      }
+      i++;
+      for(let item of data.data) {
+        this.error.push(item);
+      }
+      this.createMeeshoOrder(orders, i, name);
+    }).catch((res) => {
+      i++;
+      this.createMeeshoOrder(orders, i, name);
+      this.openSnackBar('Some Error');
+    });
+  }
+
+  createJMDMeeshoOrder(orders, i, name) {
     if(i > orders.length - 1) {
       this.isLoading = false;
       this.data.isEdit = true;

@@ -30,13 +30,13 @@ export class TopNavigationComponent implements OnInit {
     isActive: false,
     staff: false
   },
-  //   {
-  //   id: 3,
-  //   text: "货位管理",
-  //   router: './location',
-  //   isActive: false,
-  //   staff: false
-  // },
+    {
+    id: 3,
+    text: "货位管理",
+    router: './location',
+    isActive: false,
+    staff: false
+  },
     {
     id: 4,
     text: "HOME.TITLE4",
