@@ -135,6 +135,11 @@ export class ProductMainComponent implements OnInit {
     text: 'Other'
   }];
 
+  isSPULoading: boolean = false;
+  color: any = 'accent';
+  mode: any = 'indeterminate';
+  value: any = 20;
+
   constructor(
     private adminService: ProductService,
     private userService: UserService,
@@ -1120,6 +1125,7 @@ export class ProductMainComponent implements OnInit {
       const newData: any = <any[][]>(utils.sheet_to_json(ws, {header: 1}));
 
       let spu = [];
+      let spus = [];
       for(let i = 0; i < newData.length; i++) {
         const item = newData[i];
         if(i > 0) {
@@ -1128,15 +1134,34 @@ export class ProductMainComponent implements OnInit {
           }
         }
       }
+      let j = 0;
+      let len = Math.ceil(spu.length / 200);
+      while(j < len) {
+        spus.push(spu.splice(0, 200));
+        j++;
+      }
 
-      this.adminService.getB2CProductBySPU({spu}).then((res) => {
-        window.open(res.downloadUrl)
-        // this.getExcel(1, res, wsname, index, wb);
-      });
+      this.isSPULoading = true;
+      this.getExportSPU(spus, 0);
+
+
     } else {
       console.log('all is OK');
     }
 
+  }
+
+  getExportSPU(spus, index) {
+    if(index >= spus.length - 1) {
+      this.isSPULoading = false;
+      return;
+    }
+    this.adminService.getB2CProductBySPU({spu:spus[index]}).then((res) => {
+      window.open(res.downloadUrl);
+      index++;
+      this.getExportSPU(spus, index);
+      // this.getExcel(1, res, wsname, index, wb);
+    });
   }
 
   getPdf1(index, res, wbname, idx, wb) {

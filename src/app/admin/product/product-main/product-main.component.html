@@ -57,6 +57,10 @@
             <button mat-raised-button (click)="captureScreen()">Export PDF</button>
           </div>
 
+          <div class="md-margin-left-2" fxLayout="row" fxLayoutAlign="center center" *ngIf="isSPULoading">
+            <mat-progress-spinner [color]="color" [mode]="mode" [value]="value" [diameter]="value"></mat-progress-spinner>
+          </div>
+
           <label class="md-margin-left-2" *ngIf="isSuperuser">
             <input class="sc-product-dialog__hide" type="file" (change)="onFileChange($event)">
             <div class="sc-product-dialog__button">
