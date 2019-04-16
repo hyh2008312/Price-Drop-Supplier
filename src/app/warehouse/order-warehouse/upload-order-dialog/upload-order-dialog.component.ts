@@ -322,15 +322,15 @@ export class UploadOrderDialogComponent implements OnInit {
             orders[thirdOrderId].custAddress = item[3];
             orders[thirdOrderId].orderData = [];
             orders[thirdOrderId].orderData.push({
-              sku: item[6],
-              quantity: parseInt(item[9]),
-              amount: item[10]
+              sku: item[4],
+              quantity: parseInt(item[7]),
+              amount: item[8]
             });
           } else {
             orders[thirdOrderId].orderData.push({
-              sku: item[6],
-              quantity: parseInt(item[9]),
-              amount: item[10]
+              sku: item[4],
+              quantity: parseInt(item[7]),
+              amount: item[8]
             });
           }
         }

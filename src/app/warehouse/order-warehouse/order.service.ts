@@ -611,7 +611,7 @@ export class OrderService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}order/batch/third/party/meesho/create/`;
+    const url = `${this.baseUrl.url}order/batch/auto/meesho/create/`;
 
     return this.http.post(url, params, options)
       .toPromise()
