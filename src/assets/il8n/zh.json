@@ -99,7 +99,8 @@
       "BUTTON3": "已拣货出库",
       "BUTTON4": "找不到产品",
       "BUTTON5": "删除",
-      "BUTTON6": "取消删除"
+      "BUTTON6": "取消删除",
+      "BUTTON7": "重新采购"
     },
     "DIALOG": {
       "TITLE1": "添加备注",
@@ -142,6 +143,15 @@
       "TITLE2": "是否确认删除?",
       "TITLE3": "取消删除",
       "TITLE4": "是否取消删除?",
+      "BUTTON1": "确认",
+      "BUTTON2": "取消"
+    },
+    "DIALOG5": {
+      "TITLE1": "更新仓库库存",
+      "TITLE2": "捡货单",
+      "TITLE3": "捡货信息",
+      "TITLE4": "捡货状态",
+      "TITLE5": "更新库存",
       "BUTTON1": "确认",
       "BUTTON2": "取消"
     }

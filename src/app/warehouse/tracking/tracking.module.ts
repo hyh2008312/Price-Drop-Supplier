@@ -13,6 +13,7 @@ import { AddNotesDialogComponent } from './add-notes-dialog/add-notes-dialog.com
 import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog/confirm-delete-dialog.component';
 import { ConfirmPackageDialogComponent } from './confirm-package-dialog/confirm-package-dialog.component';
 import { ConfirmNotFoundDialogComponent } from './confirm-not-found-dialog/confirm-not-found-dialog.component';
+import { PackingDeleteDialogComponent } from './packing-delete-dialog/packing-delete-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { TrackingRoutingModule } from './tracking.routes.module';
@@ -38,7 +39,8 @@ import { TrackingService } from './tracking.service';
     ConfirmDeleteDialogComponent,
     ConfirmPackageDialogComponent,
     ConfirmNotFoundDialogComponent,
-    TrackingTitleFixedComponent
+    TrackingTitleFixedComponent,
+    PackingDeleteDialogComponent
   ],
   entryComponents: [
     TrackingCreateDialogComponent,
@@ -48,7 +50,8 @@ import { TrackingService } from './tracking.service';
     AddNotesDialogComponent,
     ConfirmDeleteDialogComponent,
     ConfirmPackageDialogComponent,
-    ConfirmNotFoundDialogComponent
+    ConfirmNotFoundDialogComponent,
+    PackingDeleteDialogComponent
   ],
   providers: [
     TrackingService

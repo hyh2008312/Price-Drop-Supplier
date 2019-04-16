@@ -1,0 +1,68 @@
+<div class="sc-product-dialog">
+  <div class="sc-product-dialog__close" (click)="close()" >
+    <i class="iconfontXberts icon-ic-close"></i>
+  </div>
+  <div class="sc-product-dialog__title">
+    {{'PACKAGING.DIALOG5.TITLE1'|translate}}
+  </div>
+  <form class="md-margin-top-3" [formGroup]="purchaseForm" novalidate >
+    <div class="xb-bold">
+      {{'PACKAGING.DIALOG5.TITLE2'|translate}}
+    </div>
+    <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+      {{data.item.pickNumber}}
+    </div>
+    <div class="xb-bold md-margin-top-2">
+      {{'PACKAGING.DIALOG5.TITLE3'|translate}}
+    </div>
+    <div class="md-margin-top-2" formArrayName="skus">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div class="sc-product__product-title-1 md-margin-right-2" fxFlex="65" >
+          {{'PACKAGING.DIALOG5.TITLE4'|translate}}
+        </div>
+        <div class="sc-product__product-title-1" fxFlex="35">
+          {{'PACKAGING.DIALOG5.TITLE5'|translate}}
+        </div>
+      </div>
+      <div fxLayout="column" *ngFor="let p of skus.controls; let i = index">
+        <div [formGroupName]="i">
+          <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="md-margin-right-2" fxFlex="65" fxLayout="row" fxLayoutAlign="start stretch">
+              <div class="sc-product__product-image" fxFlex="none">
+                <img class="xb-pointer" [src]="p.value.mainImage">
+              </div>
+              <div class="md-margin-right-2" fxFlex fxLayout="column" fxLayoutAlign="space-between stretch">
+                <div class="sc-product__product-title md-dark-secondary" >{{p.value.title}}</div>
+                <div>
+                  <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+                    <div class="xb-bold">SKU: {{p.value.sku}}</div>
+                  </div>
+                  <div class="md-margin-top-1" fxLayout="row" fxLayoutAlign="start center">
+                    <div>Attributes: {{p.value.attribute}}</div>
+                    <div class="md-margin-left-1">Quantity: {{p.value.unitQuantity}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div fxFlex="35">
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <mat-form-field fxFlex>
+                  <input type="text" matInput formControlName="quantity">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="xb-input-error md-margin-top-2" *ngIf="error">
+    {{error}}
+  </div>
+  <div class="md-margin-top-2" fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button color="primary" (click)="publish()">{{'PACKAGING.DIALOG5.BUTTON1'|translate}}</button>
+    <div class="md-margin-left-2">
+      <button mat-button color="primary" (click)="close()">{{'PACKAGING.DIALOG5.BUTTON2'|translate}}</button>
+    </div>
+  </div>
+</div>

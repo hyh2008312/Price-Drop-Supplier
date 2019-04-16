@@ -99,7 +99,8 @@
         "BUTTON3": "Mark as Ship",
         "BUTTON4": "Not Found",
         "BUTTON5": "Cancel Packing",
-        "BUTTON6": "Re-initiate Packing"
+        "BUTTON6": "Re-initiate Packing",
+        "BUTTON7": "Assign to Sourcing"
      },
      "DIALOG": {
        "TITLE1": "Add Note",
@@ -142,6 +143,15 @@
         "TITLE2": "Want to cancel this packing order?",
         "TITLE3": "Re-initiate Packing",
         "TITLE4": "Want to re-initiate this packing order?",
+        "BUTTON1": "Confirm",
+        "BUTTON2": "Close"
+     },
+     "DIALOG5": {
+        "TITLE1": "Update Your Warehouse Inventory",
+        "TITLE2": "Packing Number",
+        "TITLE3": "Packing Information",
+        "TITLE4": "Packing List",
+        "TITLE5": "Update Inventory",
         "BUTTON1": "Confirm",
         "BUTTON2": "Close"
      }

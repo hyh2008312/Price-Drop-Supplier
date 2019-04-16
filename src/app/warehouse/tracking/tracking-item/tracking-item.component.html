@@ -71,6 +71,9 @@
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Package Deleted'"></div>
       <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Package Deleted'"
               (click)="delete()">{{'PACKAGING.ITEM.BUTTON6'|translate}}</button>
+      <div class="md-margin-top-1" *ngIf="product.warehouseId == 2 && product.pickStatus == 'Pending Packaging'"></div>
+      <button mat-raised-button color="accent" *ngIf="product.warehouseId == 2 && product.pickStatus == 'Pending Packaging'"
+              (click)="assignToChineseSourcing()">{{'PACKAGING.ITEM.BUTTON7'|translate}}</button>
     </div>
   </div>
   <div class="sc-product__product-item-bottom" *ngIf="product.notes">

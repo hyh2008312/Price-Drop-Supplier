@@ -762,6 +762,33 @@
           </div>
         </mat-tab>
         <mat-tab label="Canceled">
+          <div class="md-margin-top-2 md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
+            <div class="sc__accent-dark">
+              <button mat-raised-button color="pimary" (click)="export()">Export</button>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
+              <form class="sc-product__search" [formGroup]="searchForm"
+                    fxLayout="row" fxLayoutAlign="start center" >
+                <i class="material-icons">search</i>
+                <input type="text" formControlName="searchKey" [(ngModel)]="searchKey"
+                       placeholder="Search"
+                       (keyup.enter)="changeProducts({index: 5})"/>
+                <div class="sc-product__search-close" fxLayout="row" fxLayoutAlign="center center"
+                     *ngIf="searchKey != ''" (click)="clearSearchKey()">
+                  <i class="material-icons">close</i>
+                </div>
+              </form>
+              <div class="sc-product__search-margin-top unicorn-dark-theme">
+                <mat-form-field class="sc-product__product-sort">
+                  <mat-select [(ngModel)]="searchType" name="sort">
+                    <mat-option class="md-align-center" *ngFor="let item of searchTypeList" [value]="item.value">
+                      {{ item.text }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
           <div class="unicorn-dark-theme md-margin-left-2" fxLayout="row" fxLayoutAlign="start center">
             <div class="md-margin-right-2">Filter by Order Type: </div>
             <mat-form-field class="md-margin-right-2">

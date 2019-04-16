@@ -385,6 +385,12 @@ export class TrackingMainComponent implements OnInit {
 
   productChange(event) {
     switch(event.status) {
+      case 0:
+        switch(event.event) {
+          case 'remove':
+            this.purchaseAll.splice(event.index,1);
+            break;
+        }
       case 1:
         switch(event.event) {
           case 'delete':
@@ -392,6 +398,9 @@ export class TrackingMainComponent implements OnInit {
             break;
           case 'change':
             this.purchaseProccessing.splice(event.index,1);
+            break;
+          case 'remove':
+            this.purchaseProccessing && this.purchaseProccessing.splice(event.index,1);
             break;
         }
         break;

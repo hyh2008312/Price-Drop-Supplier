@@ -10,6 +10,7 @@ import { AddNotesDialogComponent } from '../add-notes-dialog/add-notes-dialog.co
 import { ConfirmDeleteDialogComponent } from '../confirm-delete-dialog/confirm-delete-dialog.component';
 import { ConfirmPackageDialogComponent } from '../confirm-package-dialog/confirm-package-dialog.component';
 import { ConfirmNotFoundDialogComponent } from '../confirm-not-found-dialog/confirm-not-found-dialog.component';
+import { PackingDeleteDialogComponent } from '../packing-delete-dialog/packing-delete-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -172,6 +173,27 @@ export class TrackingItemComponent implements OnInit {
           event: 'change'
         });
 
+      }
+    });
+  }
+
+  assignToChineseSourcing() {
+
+    let dialogRef = this.dialog.open(PackingDeleteDialogComponent, {
+      data: {
+        item: this.product,
+        isEdit: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        this.productChange.emit({
+          index: this.index,
+          product: this.product,
+          status: this.status,
+          event: 'remove'
+        });
       }
     });
   }

@@ -121,9 +121,9 @@ export class LocationService {
 
     let options = new RequestOptions({headers:headers});
 
-    const url = `${this.baseUrl.url}/purchase/update/warehouse/inventory/${params.id}/`;
+    const url = `${this.baseUrl.url}/purchase/storage/rack/update/${params.id}/`;
 
-    return this.http.post(url, params, options)
+    return this.http.put(url, params, options)
       .toPromise()
       .then(response => response.json())
       .catch((error) => this.handleError(error, this));
