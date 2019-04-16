@@ -1152,7 +1152,7 @@ export class ProductMainComponent implements OnInit {
   }
 
   getExportSPU(spus, index) {
-    if(index >= spus.length - 1) {
+    if(index > spus.length - 1) {
       this.isSPULoading = false;
       return;
     }
