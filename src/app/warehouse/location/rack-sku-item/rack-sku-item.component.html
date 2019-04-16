@@ -1,0 +1,21 @@
+<div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start center">
+  <div class="md-margin-right-2" fxFlex="20">
+    {{location.binNumber}}
+  </div>
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
+    {{location.rackNumber}}
+  </div>
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
+    {{location.variantSku}}
+  </div>
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
+    {{location.skuQuantity}}
+  </div>
+  <div class="md-margin-right-2" fxFlex="20"
+       fxLayout="row" fxLayoutAlign="center center">
+    {{location.created | amTz:'Asia/Kolkata' | amDateFormat:'MMMM Do, YYYY HH:mm:ss'}}
+  </div>
+</div>

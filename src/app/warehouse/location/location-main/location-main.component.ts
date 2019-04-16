@@ -31,6 +31,9 @@ export class LocationMainComponent implements OnInit {
   searchList:any = [{
     text: 'SKU',
     value: 'sku'
+  }, {
+    text: '货位编号',
+    value: 'bin_number'
   }];
 
   // MatPaginator Inputs
@@ -42,8 +45,8 @@ export class LocationMainComponent implements OnInit {
 
   location: any = false;
   locationIndex: any = 1;
-  inventoryWare: any = false;
-  inventoryWareIndex: any = 1;
+  rackSKU: any = false;
+  rackSKUIndex: any = 1;
 
   warehouseId: any = false;
   warehouseList: any;
@@ -52,7 +55,6 @@ export class LocationMainComponent implements OnInit {
 
   laneId: any = false;
   lane: any;
-  rack: any;
 
   constructor(
     private locationService: LocationService,
@@ -88,7 +90,7 @@ export class LocationMainComponent implements OnInit {
           this.locationIndex = 1;
           break;
         case 1:
-          this.inventoryWareIndex = 1;
+          this.rackSKUIndex = 1;
           break;
       }
       this.laneId = false;
@@ -132,7 +134,26 @@ export class LocationMainComponent implements OnInit {
         this.locationService.getRackList(params).then((res) => {
           this.location = [...res];
         });
-      break;
+        break;
+      case 1:
+        let page = this.rackSKUIndex;
+        let search_type = null;
+        let search = null;
+        if(this.searchKey) {
+          search_type = this.searchCategory;
+          search = this.searchKey;
+        }
+        this.locationService.getRackVariantList({
+          warehouse_id: this.warehouseId? this.warehouseId: null,
+          search_type,
+          search,
+          page,
+          page_size: this.pageSize
+        }).then((res) => {
+          this.length = res.count;
+          this.rackSKU = res.results;
+        });
+        break;
     }
   }
 

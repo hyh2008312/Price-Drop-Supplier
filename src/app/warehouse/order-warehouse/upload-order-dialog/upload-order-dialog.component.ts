@@ -318,7 +318,6 @@ export class UploadOrderDialogComponent implements OnInit {
             orders[thirdOrderId] = {};
             orders[thirdOrderId].thirdOrderNumber = thirdOrderId;
             orders[thirdOrderId].thirdPartyId = 2;
-            orders[thirdOrderId].trackingNumber = item[11];
             orders[thirdOrderId].custName = item[2];
             orders[thirdOrderId].custAddress = item[3];
             orders[thirdOrderId].orderData = [];
@@ -354,7 +353,7 @@ export class UploadOrderDialogComponent implements OnInit {
     }
 
     let i = 0;
-    this.createJMDMeeshoOrder(cutArray, i, 'Meesho');
+    this.createJMDMeeshoOrder(cutArray, i, 'JMD Meesho');
 
   }
 
@@ -392,7 +391,7 @@ export class UploadOrderDialogComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-    this.orderService.createMeeshoOrders({orders: orders[i]}).then((data) => {
+    this.orderService.createJMDMeeshoOrders({orders: orders[i]}).then((data) => {
       if(i == 0) {
         this.error = [];
       }
@@ -400,10 +399,10 @@ export class UploadOrderDialogComponent implements OnInit {
       for(let item of data.data) {
         this.error.push(item);
       }
-      this.createMeeshoOrder(orders, i, name);
+      this.createJMDMeeshoOrder(orders, i, name);
     }).catch((res) => {
       i++;
-      this.createMeeshoOrder(orders, i, name);
+      this.createJMDMeeshoOrder(orders, i, name);
       this.openSnackBar('Some Error');
     });
   }

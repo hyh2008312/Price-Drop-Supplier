@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { LocationMainComponent } from './location-main/location-main.component';
 
 import { LocationItemComponent } from './location-item/location-item.component';
+import { RackSkuItemComponent } from './rack-sku-item/rack-sku-item.component';
 import { LocationTitleComponent } from './location-title/location-title.component';
 import { LocationTitleFixedComponent } from './location-title-fixed/location-title-fixed.component';
 import { LocationImageDialogComponent } from './location-image-dialog/location-image-dialog.component';
@@ -27,7 +28,8 @@ import { LocationService } from './location.service';
     LocationImageDialogComponent,
     ToolTipsComponent,
     LocationTitleFixedComponent,
-    AddLocationDialogComponent
+    AddLocationDialogComponent,
+    RackSkuItemComponent
   ],
   entryComponents: [
     LocationImageDialogComponent,

@@ -65,8 +65,8 @@
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging'" ></div>
       <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Pending Packaging'"
               (click)="notFountStatus()">{{'PACKAGING.ITEM.BUTTON4'|translate}}</button>
-      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Packaging Completed' || product.pickStatus == 'Not Found'"></div>
-      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Packaging Completed' || product.pickStatus == 'Not Found'"
+      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Not Found'"></div>
+      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Not Found'"
               (click)="delete()">{{'PACKAGING.ITEM.BUTTON5'|translate}}</button>
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Package Deleted'"></div>
       <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Package Deleted'"

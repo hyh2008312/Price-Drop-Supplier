@@ -25,7 +25,7 @@
     "TITLE1": "所有",
     "TITLE2": "等待捡货",
     "TITLE3": "已捡货出库",
-    "TITLE4": "删除",
+    "TITLE4": "取消拣货",
     "TITLE5": "找不到产品",
     "SUBTITLE": {
       "TITLE1": "捡货单信息",
@@ -98,8 +98,8 @@
       "BUTTON2": "添加备注",
       "BUTTON3": "已拣货出库",
       "BUTTON4": "找不到产品",
-      "BUTTON5": "删除",
-      "BUTTON6": "取消删除",
+      "BUTTON5": "取消拣货",
+      "BUTTON6": "恢复拣货",
       "BUTTON7": "重新采购"
     },
     "DIALOG": {

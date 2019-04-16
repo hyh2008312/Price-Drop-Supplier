@@ -24,7 +24,7 @@
   "PACKAGING": {
     "TITLE1": "All",
     "TITLE2": "Pending Packing",
-    "TITLE3": "Packing Completed",
+    "TITLE3": "Marked as Shipped",
     "TITLE4": "Packing Canceled",
     "TITLE5": "Product Not Found",
     "SUBTITLE": {
@@ -100,7 +100,7 @@
         "BUTTON4": "Not Found",
         "BUTTON5": "Cancel Packing",
         "BUTTON6": "Re-initiate Packing",
-        "BUTTON7": "Assign to Sourcing"
+        "BUTTON7": "Source From China"
      },
      "DIALOG": {
        "TITLE1": "Add Note",
