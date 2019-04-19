@@ -1,6 +1,6 @@
 <div>
   <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
-    <div class="md-margin-right-2" fxFlex="45" fxLayout="row" fxLayoutAlign="start stretch">
+    <div class="md-margin-right-2 sc-product__product-hidden" fxFlex="40" fxLayout="row" fxLayoutAlign="start stretch">
       <div class="sc-product__product-image" fxFlex="none">
         <img class="xb-pointer" [src]="product.mainImage" (click)="openLargeImage()">
       </div>
@@ -15,11 +15,18 @@
       <button mat-raised-button color="primary"
            ngxClipboard [cbContent]="product.sku" (cbOnSuccess)="copy($event)">{{'INVENTORY.ITEM.BUTTON1'|translate}}</button>
     </div>
-    <div class="sc-product__product-id md-margin-right-2" fxFlex="15"
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="10"
          fxLayout="row" fxLayoutAlign="center center">
       <mat-form-field class="sc-product__product-width-1">
         <input type="number" matInput [(ngModel)]="product.receiveQuantity">
       </mat-form-field>
+    </div>
+    <div class="sc-product__product-id md-margin-right-2" fxFlex="10"
+         fxLayout="row" fxLayoutAlign="center center">
+      <mat-form-field class="sc-product__product-width-1" *ngIf="!product.restocked">
+        <input type="text" matInput [(ngModel)]="product.binNumber">
+      </mat-form-field>
+      <div *ngIf="product.restocked">{{product.binNumber}}</div>
     </div>
     <div class="sc-product__product-id md-margin-right-2 sc__accent-dark" fxFlex="10"
          fxLayout="column" fxLayoutAlign="center center">

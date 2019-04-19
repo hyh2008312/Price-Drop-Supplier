@@ -377,7 +377,11 @@ export class InventoryMainComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {});
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        this.changeInventoryLists({index: this.selectedIndex});
+      }
+    });
   }
 
   openRestockDialog() {

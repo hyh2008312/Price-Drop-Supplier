@@ -5,12 +5,13 @@
     "TITLE3":  "Language"
   },
   "HOME": {
-    "TITLE1": "SOURCING",
-    "TITLE2": "PACKING",
-    "TITLE3": "INVENTORY",
-    "TITLE4": "ORDERS",
-    "TITLE5": "MY ACCOUNT",
-    "TITLE6": "Logout"
+    "TITLE1": "Sourcing",
+    "TITLE2": "Packing",
+    "TITLE3": "Inventory",
+    "TITLE4": "Orders",
+    "TITLE5": "My Account",
+    "TITLE6": "Logout",
+    "TITLE7": "Rack"
   },
   "SOURCING": {
     "TITLE1": "All",
@@ -166,6 +167,7 @@
     "TITLE7": "You don't have return items information.",
     "TITLE8": "Select Warehouse",
     "TITLE9": "Export Inward Inventory Report",
+    "TITLE10": "There is no Rack/Bin information for this SKU yet. ",
     "BUTTON1": "Export Current Page‘s Inventory",
     "BUTTON2": "Export All Inventory",
     "BUTTON3": "Inward Inventory",
@@ -181,7 +183,8 @@
       "TITLE8": "Inventory",
       "TITLE9": "Stock Inward",
       "TITLE10": "Yes",
-      "TITLE11": "No"
+      "TITLE11": "No",
+      "TITLE12": "Bin No"
     },
     "QUANTITYLIST": {
       "TITLE1": "All",
@@ -200,7 +203,8 @@
       "BUTTON3": "Save",
       "BUTTON4": "Confirm Added",
       "BUTTON5": "Show Images",
-      "BUTTON6": "Hide Images"
+      "BUTTON6": "Hide Images",
+      "BUTTON7": "Outward"
     },
     "DIALOG": {
       "BUTTON1": "Save",
@@ -208,7 +212,38 @@
       "BUTTON3": "Download",
       "TITLE1": "Filter by Inwarding Date",
       "TITLE2": "Start Date",
-      "TITLE3": "End Date"
+      "TITLE3": "End Date",
+      "TITLE4": "Bin ID",
+      "TITLE5": "Rack ID",
+      "TITLE6": "Inventory",
+      "TITLE7": "Outward Quantity"
+    }
+  },
+  "RACK": {
+    "TITLE1": "Rack",
+    "TITLE2": "Inventory on Rack",
+    "TITLE3": "There's no rack yet",
+    "TITLE4": "There's no inventory yet",
+    "BUTTON1": "Create Rack",
+    "SUBTITLE": {
+      "TITLE1": "Lane",
+      "TITLE2": "Rack No",
+      "TITLE3": "Shelf Amount",
+      "TITLE4": "Bin Amount",
+      "TITLE5": "Warehouse",
+      "TITLE6": "Action",
+      "TITLE7": "Product",
+      "TITLE8": "Bin No",
+      "TITLE9": "Inventory"
+    },
+    "DIALOG": {
+      "TITLE1": "Create Rack",
+      "TITLE2": "Rack No",
+      "TITLE3": "Select Lane",
+      "TITLE4": "Add Lane",
+      "TITLE5": "Shelf Amount",
+      "TITLE6": "Bin Amount",
+      "BUTTON1": "添加"
     }
   },
   "ORDERS": {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 

@@ -314,12 +314,9 @@ export class UploadOrderDialogComponent implements OnInit {
         if(item[0] && item[0] != '') {
           const thirdOrderId = item[0];
           if(!orders[thirdOrderId]) {
-
             orders[thirdOrderId] = {};
             orders[thirdOrderId].thirdOrderNumber = thirdOrderId;
             orders[thirdOrderId].thirdPartyId = 2;
-            orders[thirdOrderId].custName = item[2];
-            orders[thirdOrderId].custAddress = item[3];
             orders[thirdOrderId].orderData = [];
             orders[thirdOrderId].orderData.push({
               sku: item[4],

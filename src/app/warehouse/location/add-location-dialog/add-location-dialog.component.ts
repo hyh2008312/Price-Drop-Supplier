@@ -80,9 +80,12 @@ export class AddLocationDialogComponent implements OnInit {
         id: false,
         allPath: 'PACKAGING.CODLIST.TITLE1'
       });
+      this.locationForm.patchValue({
+        newLane: ''
+      });
       this.data.isLaneEdit = true;
     }).catch((res) => {
-      this.openToast(res);
+      this.error = res;
     });
   }
 }

@@ -83,8 +83,9 @@ export class AddInventoryDialogComponent implements OnInit {
     for(let item of this.products) {
       params.content.push({
         id: item.orderId,
-        quantity: item.receiveQuantity
-      })
+        quantity: item.receiveQuantity,
+        binNumber: item.binNumber
+      });
     }
     params.warehouseId = this.warehouseId;
     this.inventoryService.addInventory(params).then(() => {

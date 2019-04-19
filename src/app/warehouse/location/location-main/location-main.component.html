@@ -1,10 +1,10 @@
 <div class="container">
   <div class="sc-product__product md-padding-top-2 md-padding-bottom-2 unicorn-dark-theme">
     <mat-tab-group color="primary" (selectedTabChange)="changeLocationLists($event)" [(selectedIndex)]="selectedIndex">
-      <mat-tab label="货架管理" >
+      <mat-tab label="{{'RACK.TITLE1'|translate}}" >
         <div class="sc-product__container md-margin-top-2" fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="row" fxLayoutAlign="start center" fxFlex>
-            <div class="md-margin-right-2">货道</div>
+            <div class="md-margin-right-2">{{'RACK.SUBTITLE.TITLE1'|translate}}</div>
             <mat-form-field class="sc-product__product-sort">
               <mat-select [ngModel]="laneId" (valueChange)="laneChange($event)">
                 <mat-option class="md-align-center" *ngFor="let item of lane" [value]="item.id">
@@ -13,11 +13,11 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div *ngIf="warehouseId" fxLayout="row" fxLayoutAlign="end center">
+          <div *ngIf="warehouseId == 2" fxLayout="row" fxLayoutAlign="end center">
             <button mat-raised-button color="primary" (click)="createRack()">
               <div fxLayout="row" fxLayoutAlign="start center">
                 <i class="material-icons">add</i>
-                <span class="md-margin-left-1">创建货架</span>
+                <span class="md-margin-left-1">{{'RACK.BUTTON1'|translate}}</span>
               </div>
             </button>
           </div>
@@ -34,12 +34,12 @@
                *ngIf="location && location.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">
               <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-product__product-title-1 md-margin-top-4">暂无货架信息</div>
+              <div class="sc-product__product-title-1 md-margin-top-4">{{'RACK.TITLE3'|translate}}</div>
             </div>
           </div>
         </div>
       </mat-tab>
-      <mat-tab label="货架上的变体" >
+      <mat-tab label="{{'RACK.TITLE2'|translate}}" >
         <div class="sc-product__container" fxLayout="row" fxLayoutAlign="start center">
           <div fxLayout="row" fxLayoutAlign="end center" fxFlex>
             <form class="sc-product__search" [formGroup]="searchForm"
@@ -72,6 +72,7 @@
           <div class="sc-product__product-list" *ngFor="let item of rackSKU;let i = index;">
             <app-warehouse-rack-sku-item [status]="1" [index]="i" (productChange)="productChange($event)" [location]="item"></app-warehouse-rack-sku-item>
           </div>
+          <div class="md-margin-top-2"></div>
           <mat-paginator [length]="length"
                          [pageIndex]="rackSKUIndex - 1"
                          [pageSize]="pageSize"
@@ -83,7 +84,7 @@
                *ngIf="rackSKU && rackSKU.length <= 0">
             <div fxLayout="column" fxLayoutAlign="center center">
               <i class="iconfontXberts icon-ic-empty"></i>
-              <div class="sc-product__product-title-1 md-margin-top-4">暂无库存信息</div>
+              <div class="sc-product__product-title-1 md-margin-top-4">{{'RACK.TITLE4'|translate}}</div>
             </div>
           </div>
         </div>

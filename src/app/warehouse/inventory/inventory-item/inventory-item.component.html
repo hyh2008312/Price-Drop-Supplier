@@ -1,6 +1,6 @@
 <div>
   <div class="sc-product__product-item" fxLayout="row" fxLayoutAlign="start stretch">
-    <div class="md-margin-right-2" fxFlex="40" fxLayout="row" fxLayoutAlign="start stretch">
+    <div class="md-margin-right-2 sc-product__product-hidden" fxFlex="40" fxLayout="row" fxLayoutAlign="start stretch">
       <div class="sc-product__product-image" fxFlex="none">
         <img class="xb-pointer" [src]="product.mainImage" (click)="openLargeImage(product)">
       </div>
@@ -45,6 +45,9 @@
               (click)="edit()">{{'INVENTORY.ITEM.BUTTON2'|translate}}</button>
       <button mat-raised-button color="primary" *ngIf="isEdit"
               (click)="edit()">{{'INVENTORY.ITEM.BUTTON3'|translate}}</button>
+      <div class="md-margin-top-1"></div>
+      <button mat-raised-button color="accent"
+              (click)="outward()">{{'INVENTORY.ITEM.BUTTON7'|translate}}</button>
     </div>
     <div class="sc-product__product-id sc__accent-dark" fxFlex="10" *ngIf="status == 1"
          fxLayout="column" fxLayoutAlign="center center">

@@ -2,6 +2,7 @@ import { Input, Output, Component, OnInit,EventEmitter} from '@angular/core';
 
 import { InventoryService } from '../inventory.service';
 import { InventoryImageDialogComponent } from '../inventory-image-dialog/inventory-image-dialog.component';
+import { OutwardInventoryDialogComponent } from '../outward-inventory-dialog/outward-inventory-dialog.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { ToolTipsComponent } from '../tool-tips/tool-tips.component';
 
@@ -61,4 +62,15 @@ export class InventoryItemComponent implements OnInit {
     }
   }
 
+  outward() {
+    let dialogRef = this.dialog.open(OutwardInventoryDialogComponent, {
+      data: this.product
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(dialogRef.componentInstance.data.isEdit == true) {
+        this.product = dialogRef.componentInstance.data;
+      }
+    });
+  }
 }

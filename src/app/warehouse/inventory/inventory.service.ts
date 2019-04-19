@@ -161,6 +161,22 @@ export class InventoryService {
       .then(response => response.json())
       .catch((error) => this.handleError(error, this));
   }
+  outwardInventory(params):  Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}purchase/variant/out/warehouse/${params.id}/`;
+
+    return this.http.put(url, params, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => this.handleError(error, this));
+  }
 
   getOrderList(params): Promise<any> {
 
@@ -172,6 +188,23 @@ export class InventoryService {
     let options = new RequestOptions({headers:headers});
 
     const url = `${this.baseUrl.url}purchase/track/number/return/?${this.serializeParams(params)}`;
+
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch((error) => this.handleError(error, this));
+  }
+
+  getInventoryWithBin(params): Promise<any> {
+
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    this.createAuthorizationHeader(headers);
+
+    let options = new RequestOptions({headers:headers});
+
+    const url = `${this.baseUrl.url}purchase/inventory/sku/rack/variant/list/?${this.serializeParams(params)}`;
 
     return this.http.get(url, options)
       .toPromise()

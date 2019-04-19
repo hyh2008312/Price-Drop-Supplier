@@ -3,17 +3,17 @@
     <i class="iconfontXberts icon-ic-close"></i>
   </div>
   <div class="sc-product-dialog__title">
-    创建货架
+    {{'RACK.DIALOG.TITLE1'|translate}}
   </div>
   <form class="md-margin-top-2" [formGroup]="locationForm" novalidate>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field>
-        <input type="text" matInput  placeholder="货架编号" formControlName="rackName" />
+        <input type="text" matInput  placeholder="{{'RACK.DIALOG.TITLE2'|translate}}" formControlName="rackName" />
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field>
-        <mat-select placeholder="选择货道" formControlName="laneId">
+        <mat-select placeholder="{{'RACK.DIALOG.TITLE3'|translate}}" formControlName="laneId">
           <mat-option class="md-align-center" *ngFor="let item of data.laneList" [value]="item.id">
             {{ item.allPath | translate }}
           </mat-option>
@@ -21,19 +21,22 @@
       </mat-form-field>
       <div class="md-margin-left-2 md-margin-right-2" fxLayout="row" fxLayoutAlign="start center">
         <mat-form-field>
-          <input type="text" matInput  placeholder="添加区域" formControlName="newLane"/>
+          <input type="text" matInput  placeholder="{{'RACK.DIALOG.TITLE4'|translate}}" formControlName="newLane"/>
         </mat-form-field>
       </div>
-      <button mat-raised-button color="primary" (click)="addLane()">添加</button>
+      <button mat-raised-button color="primary" (click)="addLane()">{{'RACK.DIALOG.BUTTON1'|translate}}</button>
+    </div>
+    <div *ngIf="error" class="xb-input-error">
+      {{error}}
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field>
-        <input type="number" matInput  placeholder="货架层数" formControlName="shelfQuantity" />
+        <input type="number" matInput  placeholder="{{'RACK.DIALOG.TITLE5'|translate}}" formControlName="shelfQuantity" />
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center">
       <mat-form-field>
-        <input type="number" matInput  placeholder="每层货位数" formControlName="binQuantity" />
+        <input type="number" matInput  placeholder="{{'RACK.DIALOG.TITLE6'|translate}}" formControlName="binQuantity" />
       </mat-form-field>
     </div>
   </form>

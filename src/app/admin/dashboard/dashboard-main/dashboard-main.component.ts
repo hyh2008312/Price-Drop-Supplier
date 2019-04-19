@@ -108,6 +108,61 @@ export class DashboardMainComponent implements OnInit {
     }
   };
 
+  // options: any = {
+  //   title : {
+  //     text: '不同品类的SKU占比',
+  //     x:'center',
+  //     y: '30'
+  //   },
+  //   legend: {
+  //     orient : 'vertical',
+  //     x : '50',
+  //     y : '80',
+  //     formatter: function (e) {
+  //       if(e == '4.2%') {
+  //         return 'Electronic';
+  //       } else if( e == '18.4%') {
+  //         return 'Home';
+  //       } else if( e == '27.4%') {
+  //         return 'Kids';
+  //       } else if( e == '28.6%') {
+  //         return 'Men';
+  //       } else if( e == '12.6%') {
+  //         return 'Women';
+  //       } else if( e == '17.5%') {
+  //         return 'Shoes';
+  //       } else if( e == '2.8%') {
+  //         return 'Bags';
+  //       } else if( e == '0.9%') {
+  //         return 'Beauty & Personal Care';
+  //       } else if( e == '0.4%') {
+  //         return 'Jewellery & Watches';
+  //       }
+  //     },
+  //     data:['4.2%','18.4%','27.4%','28.6%','12.6%','17.5%','2.8%','0.9%','0.4%']
+  //   },
+  //   calculable : true,
+  //   series : [
+  //     {
+  //       name:'',
+  //       type:'pie',
+  //       radius : '55%',
+  //       center: ['50%', '60%'],
+  //       data:[
+  //         {value:16778, name:'4.2%'},
+  //         {value:7289, name:'18.4%'},
+  //         {value:108515, name:'27.4%'},
+  //         {value:113216, name:'28.6%'},
+  //         {value:49662, name:'12.6%'},
+  //         {value:69223, name:'17.5%'},
+  //         {value:11072, name:'2.8%'},
+  //         {value:3454, name:'0.9%'},
+  //         {value:16215, name:'0.4%'}
+  //       ]
+  //     }
+  //   ]
+  // };
+
   options1: any;
 
   cate: any = false;
@@ -160,7 +215,7 @@ export class DashboardMainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCharts();
+    // this.getCharts();
     this.getCharts1();
     this.getDataList();
     this.getCategory();

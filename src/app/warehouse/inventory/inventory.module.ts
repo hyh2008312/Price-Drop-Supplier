@@ -10,6 +10,7 @@ import { InventoryTitleFixedComponent } from './inventory-title-fixed/inventory-
 import { InventoryImageDialogComponent } from './inventory-image-dialog/inventory-image-dialog.component';
 import { AddInventoryDialogComponent } from './add-inventory-dialog/add-inventory-dialog.component';
 import { ExportRestockInventoryDialogComponent } from './export-restock-inventory-dialog/export-restock-inventory-dialog.component';
+import { OutwardInventoryDialogComponent } from './outward-inventory-dialog/outward-inventory-dialog.component';
 import { ToolTipsComponent } from './tool-tips/tool-tips.component';
 
 import { InventoryRoutingModule } from './inventory.routes.module';
@@ -33,13 +34,15 @@ import { InventoryService } from './inventory.service';
     AddInventoryDialogComponent,
     AddInventoryItemComponent,
     AddInventoryTitleComponent,
-    ExportRestockInventoryDialogComponent
+    ExportRestockInventoryDialogComponent,
+    OutwardInventoryDialogComponent
   ],
   entryComponents: [
     InventoryImageDialogComponent,
     ToolTipsComponent,
     AddInventoryDialogComponent,
-    ExportRestockInventoryDialogComponent
+    ExportRestockInventoryDialogComponent,
+    OutwardInventoryDialogComponent
   ],
   providers: [
     InventoryService
