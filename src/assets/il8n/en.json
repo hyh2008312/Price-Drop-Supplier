@@ -220,30 +220,30 @@
     }
   },
   "RACK": {
-    "TITLE1": "Rack",
-    "TITLE2": "Inventory on Rack",
+    "TITLE1": "Rack Management",
+    "TITLE2": "Bin Management",
     "TITLE3": "There's no rack yet",
-    "TITLE4": "There's no inventory yet",
-    "BUTTON1": "Create Rack",
+    "TITLE4": "There's no bin yet",
+    "BUTTON1": "Create New Rack",
     "SUBTITLE": {
-      "TITLE1": "Lane",
-      "TITLE2": "Rack No",
+      "TITLE1": "Filter by Lane",
+      "TITLE2": "Rack ID",
       "TITLE3": "Shelf Amount",
       "TITLE4": "Bin Amount",
       "TITLE5": "Warehouse",
       "TITLE6": "Action",
       "TITLE7": "Product",
-      "TITLE8": "Bin No",
-      "TITLE9": "Inventory"
+      "TITLE8": "Bin ID",
+      "TITLE9": "Stock"
     },
     "DIALOG": {
-      "TITLE1": "Create Rack",
+      "TITLE1": "Create New Rack",
       "TITLE2": "Rack No",
-      "TITLE3": "Select Lane",
-      "TITLE4": "Add Lane",
+      "TITLE3": "Select a Lane",
+      "TITLE4": "Enter a Lane ID",
       "TITLE5": "Shelf Amount",
       "TITLE6": "Bin Amount",
-      "BUTTON1": "添加"
+      "BUTTON1": "Add New Lane"
     }
   },
   "ORDERS": {
