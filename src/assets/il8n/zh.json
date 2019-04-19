@@ -49,6 +49,7 @@
       "TITLE9": "开始日期",
       "TITLE10": "结束日期",
       "TITLE11": "创建时间",
+      "TITLE12": "订单号",
       "BUTTON1": "确定",
       "BUTTON2": "重置",
       "BUTTON3": "导出Excel",
@@ -95,7 +96,7 @@
       "TITLE15": "备注",
       "TITLE16": "订单来源",
       "TITLE17": "第三方订单号",
-      "BUTTON1": "编辑",
+      "BUTTON1": "修改面单",
       "BUTTON2": "添加备注",
       "BUTTON3": "已拣货出库",
       "BUTTON4": "找不到产品",
@@ -118,10 +119,11 @@
       "TITLE6": "捡货商品",
       "TITLE7": "订单号",
       "TITLE8": "数量",
-      "TITLE9": "编辑捡货信息",
+      "TITLE9": "修改面单",
       "BUTTON1": "保存",
       "BUTTON2": "取消",
-      "BUTTON3": "添加捡货商品"
+      "BUTTON3": "添加捡货商品",
+      "BUTTON4": "删除"
     },
     "DIALOG2": {
       "TITLE1": "已打包出库",

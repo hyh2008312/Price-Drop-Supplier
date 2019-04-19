@@ -23,6 +23,8 @@ export class UploadOrderDialogComponent implements OnInit {
 
   error: any;
 
+  headerError: any;
+
   constructor(
     public dialogRef: MatDialogRef<UploadOrderDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -249,9 +251,20 @@ export class UploadOrderDialogComponent implements OnInit {
     /* save data */
     const newData: any = <any[][]>(utils.sheet_to_json(ws, {header: 1}));
 
+    let header = ['Order ID', 'Order Date', 'Cust Name','Cust address','Product Name','SKU','vsku','Size','Product Unit Price','Qty',
+      'Final Selling Price (Incl. GST)','AWB NUMBER','Image'];
+
     let orders = {};
+    this.headerError = false;
     for(let i = 0; i < newData.length; i++) {
       const item = newData[i];
+      if(i == 0) {
+        for(let j = 0; j < header.length; j++) {
+          if(header[i].toLowerCase() != item[j].toLowerCase()) {
+            return this.headerError = `There is something wrong with the Column ${header[i]} in this template.  Pls double check! `;
+          }
+        }
+      }
       if(i > 0) {
         if(item[0] && item[0] != '') {
           const thirdOrderId = item[0];

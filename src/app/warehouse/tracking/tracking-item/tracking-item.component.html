@@ -56,8 +56,8 @@
     </div>
     <div class="sc-product__product-price sc__accent-dark md-padding-top-2 md-padding-bottom-2" fxFlex="12"
          fxLayout="column" fxLayoutAlign="center stretch">
-      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging'" (click)="edit()">{{'PACKAGING.ITEM.BUTTON1'|translate}}</button>
-      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging'" ></div>
+      <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging' && product.pickVariants.length > 1" (click)="edit()">{{'PACKAGING.ITEM.BUTTON1'|translate}}</button>
+      <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging' && product.pickVariants.length > 1" ></div>
       <button mat-raised-button color="primary" *ngIf="product.pickStatus == 'Pending Packaging'" (click)="openNotesDialog()">{{'PACKAGING.ITEM.BUTTON2'|translate}}</button>
       <div class="md-margin-top-1" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Not Found'" ></div>
       <button mat-raised-button color="accent" *ngIf="product.pickStatus == 'Pending Packaging' || product.pickStatus == 'Not Found'"

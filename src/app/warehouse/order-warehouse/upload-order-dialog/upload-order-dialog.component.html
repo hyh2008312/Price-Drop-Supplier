@@ -34,6 +34,7 @@
       <div class="sc-product__button">{{'ORDERS.BUTTON.TITLE10'|translate}}</div>
     </label>
   </div>
+  <div class="xb-input-error" *ngIf="headerError">{{headerError}}</div>
   <div class="xb-input-error" *ngFor="let item of error">{{item.thirdOrderNumber}}-{{item.sku}}-{{item.reason}}</div>
   <div class="sc-order-dialog__margin-top" fxLayout="row" fxLayoutAlign="end center">
     <button mat-raised-button color="primary" (click)="close()">{{'ORDERS.DIALOG.BUTTON4'|translate}}</button>

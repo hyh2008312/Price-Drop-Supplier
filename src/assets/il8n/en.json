@@ -49,6 +49,7 @@
       "TITLE9": "Start Date",
       "TITLE10": "End Date",
       "TITLE11": "Filter by Created Time",
+      "TITLE12": "Order ID",
       "BUTTON1": "Confirm",
       "BUTTON2": "Reset",
       "BUTTON3": "Export Excel",
@@ -118,10 +119,11 @@
        "TITLE6": "Packing Items",
        "TITLE7": "Order Number",
        "TITLE8": "Quantity",
-       "TITLE9": "Edit Packing List",
+       "TITLE9": "Edit Packing",
        "BUTTON1": "Save",
        "BUTTON2": "Cancel",
-       "BUTTON3": "Add Packing Items"
+       "BUTTON3": "Add Packing Items",
+       "BUTTON4": "删除"
      },
      "DIALOG2": {
        "TITLE1": "Double Check the Quantity",
