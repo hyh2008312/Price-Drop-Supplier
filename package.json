@@ -50,7 +50,7 @@
     "flex-layout": "^1.0.1",
     "intl": "^1.2.5",
     "jspdf": "latest",
-    "mongodb": "^2.2.30",
+    "mongodb": "^3.1.13",
     "morgan": "^1.8.2",
     "ngx-auth": "^3.0.0",
     "ngx-echarts": "^2.3.1",
