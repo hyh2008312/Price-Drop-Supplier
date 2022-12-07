@@ -46,7 +46,7 @@
     "echarts": "^4.2.0-rc.2",
     "echarts-gl": "^1.1.1",
     "enhanced-resolve": "^3.3.0",
-    "express": "^4.15.3",
+    "express": "^4.17.3",
     "flex-layout": "^1.0.1",
     "intl": "^1.2.5",
     "jspdf": "latest",
